@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extdblist>
+	<extdb extdbID="001" extdbname="DFG Nationallizenz$a href='http://www.nationallizenzen.de' class='comment' target='new'§ (*)$/§" extdblink="http://gso.gbv.de/sru/DB=1.55/?version=1.1" extdbtooltip="Monographien suchen, deren Volltexte durch DFG Nationallizenzen in Deutschland allgemein zugänglich sind." extdbhelplink="http://www.nationallizenzen.de"/>
+	<extdb extDBID="002" extdbname="DFG Nationallizenz (Artikel)$a href='http://www.nationallizenzen.de' class='comment' target='new'§ (*)$/§" extdblink="http://gso.gbv.de/sru/DB=1.54/?version=1.1" extdbtooltip="Aufsätze in wiss. Zeitschriften suchen, deren Volltexte durch DFG Nationallizenzen in Deutschland allgemein zugänglich sind." extdbhelplink="http://www.nationallizenzen.de"/>
+	<extdb extdbID="003" extdbname="GBV Verbundkatalog" extdblink="http://gso.gbv.de/sru/DB=1.55/?version=2.1" extdbtooltip="" extdbhelplink=""/>
+  <extdb extdbID="004" extdbname="OCLC WorldCat" extdblink="http://www.worldcat.org/webservices/catalog/search/opensearch?&amp;wskey=yxl6CIVEg0loBC2AzwUR7CDFvBOhqEWu5JkRvdTYnBOfoR1yGQKlE5Fj4QU7yuFWDrh50LsteuhCD1h6" extdbtooltip="WorldCat verbindet Sie mit Beständen und Dienstleistungen von über 10.000 Bibliotheken weltweit" extdbhelplink=""/>
+</extdblist>

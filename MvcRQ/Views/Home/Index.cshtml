@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>@ViewBag.Message</h2>
+<p>
+    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+</p>
+<p>
+        @using(Html.BeginForm("Index", "RQItems")){
+            @Html.TextBox("queryString", ViewData["qryStr"])
+            <input type="submit" Value="Los!" />
+        }
+        View all the @Html.ActionLink("RQItems", "Index", "RQItems")
+</p>

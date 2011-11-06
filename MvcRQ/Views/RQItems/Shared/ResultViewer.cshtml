@@ -1,0 +1,50 @@
+﻿<script type="text/javascript">
+
+    function renderHtmlList(data) {
+        $("#htmlList").html(data);
+    }
+
+    $(document).ready(function () {
+        var d = document.location.href;
+        var c = d + "?verb=rqListHTML";
+        $("#xmlUrl").val(c);
+        $("#xmlPostUrl").text(c);
+
+        $.ajax({
+            url: c,
+            type: "GET",
+            data: null,
+            dataType: "html",
+            success: function (data) {
+                renderHtmlList(data);
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+
+    function renderXmlList(data, docno) {
+        var xml = window.ActiveXObject ? data.xml : (new XMLSerializer().serializeToString(data));
+        //$("#transformResult").transform({ xmlstr: xml, xsl: "/xslt/ViewTransforms/RQ2SingleItemView.xslt" });
+        $("#" + docno).transform({ xmlstr: xml, xsl: "/xslt/ViewTransforms/RQ2SingleItemView.xslt" });
+    }
+
+    function getRQItem(docno) {
+        if ($("#" + docno).is(":empty")) {
+            $.ajax({
+                url: document.location.href + "/" + docno,
+                type: "GET",
+                data: null,
+                dataType: "xml",
+                success: function (data) {
+                    renderXmlList(data, docno);
+                }
+            });
+        }
+        $("#" + docno).toggle("slow");
+    }
+
+</script>
+
+<div id="htmlList"></div>

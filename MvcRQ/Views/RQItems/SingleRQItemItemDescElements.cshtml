@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "RQItemItemDescElements";
+}
+
+<small>@Html.RouteLink("<< RQItem", "SingleRQItem", new { rqitemId = (string)ViewContext.RouteData.Values["rqitemId"] })</small>
+
+<h2>@ViewBag.Message</h2>
+<h3>ItemDescElements</h3>
+
+<table>
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Value1</th>
+        <th>Value2</th>
+    </thead>
+    <tbody>
+        @foreach (MvcRQ.Models.ItemDescElement itemdescelement in Model)
+        {
+            <tr>
+                <td>@Html.RouteLink(itemdescelement.ID, "RQItemItemDescElements",
+                                    new
+                                    {
+                                        rqitemId = (string)ViewContext.RouteData.Values["rqitemId"],
+                                        itemdescelementId = itemdescelement.ID
+                                    })</td>
+                <td>@itemdescelement.Name</td>
+                <td>@itemdescelement.Value1</td>
+                <td>@itemdescelement.Value2</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- 
+@Html.Partial("Shared/XmlViewer")
+@Html.Partial("Shared/JsonViewer") 
+-->
