@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<stdquerylist>
+	<stdquery qryname="recent additions"
+		        qrylink="$recent$recent additions"
+		        qrytooltip="This list contains items added to the RiQuest Digital Library during the last month." />
+  <stdquery qryname="digital documents"
+              qrylink="$digital$digital documents"
+              qrytooltip="This is a list ..." />
+  <stdquery qryname="video"
+		        qrylink="$film$Video"
+		        qrytooltip="Diese Liste..." />
+	<stdquery qryname="audio"
+		        qrylink="$music$audio tapes"
+		        qrytooltip="Diese Liste..." />
+  <stdquery qryname="web link collections"
+		        qrylink=""
+		        qrytooltip="Diese Liste..." />
+  <stdquery qryname="digital collections"
+		        qrylink="$digcollection$digital collections"
+		        qrytooltip="Diese Liste..." />
+  <stdquery qryname="databases"
+					qrylink="$database$databases"
+					qrytooltip="Diese Liste..." />
+</stdquerylist>

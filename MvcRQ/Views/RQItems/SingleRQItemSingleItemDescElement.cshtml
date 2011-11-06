@@ -1,0 +1,28 @@
+﻿@model MvcRQ.Models.ItemDescElement
+           
+@{
+    ViewBag.Title = "RQItemItemDescElement";
+}
+
+<small>@Html.RouteLink("<< ItemDescElements", "RQItemItemDescElements", new { rqitemId = (string)ViewContext.RouteData.Values["rqitemId"], itemdescelementId = UrlParameter.Optional })</small>
+
+<h2>@ViewBag.Message</h2>
+<h3>ItemDescElement</h3>
+
+@using (Html.BeginForm())
+{
+    <fieldset title="RQItem ItemDescElement">
+        <p>@Html.LabelFor(itemdescelement => itemdescelement.ID): @Html.DisplayFor(itemdescelement => itemdescelement.ID)@Html.HiddenFor(itemdescelement => itemdescelement.ID)</p>
+        <p>@Html.LabelFor(itemdescelement => itemdescelement.Name): @Html.TextBoxFor(itemdescelement => itemdescelement.Name)</p>
+        <p>@Html.LabelFor(itemdescelement => itemdescelement.Value1): @Html.TextBoxFor(itemdescelement => itemdescelement.Value1)</p>
+        <p>@Html.LabelFor(itemdescelement => itemdescelement.Value2): @Html.TextBoxFor(itemdescelement => itemdescelement.Value2)</p>
+    </fieldset>
+    <input type="submit" name="verb" value="Save" /> <input type="submit" name="verb"
+        value="Delete" />
+}
+
+<p>@(ViewData["Message"] ?? "")</p>
+<!--
+@Html.Partial("Shared/XmlViewer")
+@Html.Partial("Shared/JsonViewer")
+-->

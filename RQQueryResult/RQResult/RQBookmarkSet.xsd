@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RQBookmarkSet" targetNamespace="http://tempuri.org/RQBookmarkSet.xsd" xmlns:mstns="http://tempuri.org/RQBookmarkSet.xsd" xmlns="http://tempuri.org/RQBookmarkSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RQBookmarkSet" msdata:IsDataSet="true" msdata:Locale="en-US">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Bookmarks">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" type="xs:int" />
+              <xs:element name="DocNo" type="xs:string" minOccurs="0" />
+              <xs:element name="Title" type="xs:string" minOccurs="0" />
+              <xs:element name="Authors" type="xs:string" minOccurs="0" />
+              <xs:element name="Source" type="xs:string" minOccurs="0" />
+              <xs:element name="Edition" type="xs:string" minOccurs="0" />
+              <xs:element name="ISDN" type="xs:string" minOccurs="0" />
+              <xs:element name="Coden" type="xs:string" minOccurs="0" />
+              <xs:element name="Institutions" type="xs:string" minOccurs="0" />
+              <xs:element name="Series" type="xs:string" minOccurs="0" />
+              <xs:element name="Locality" type="xs:string" minOccurs="0" />
+              <xs:element name="Publisher" type="xs:string" minOccurs="0" />
+              <xs:element name="PublTime" type="xs:string" minOccurs="0" />
+              <xs:element name="Volume" type="xs:string" minOccurs="0" />
+              <xs:element name="Issue" type="xs:string" minOccurs="0" />
+              <xs:element name="Pages" type="xs:string" minOccurs="0" />
+              <xs:element name="Language" type="xs:string" minOccurs="0" />
+              <xs:element name="Signature" type="xs:string" minOccurs="0" />
+              <xs:element name="DocTypeCode" type="xs:string" minOccurs="0" />
+              <xs:element name="DocTypeName" type="xs:string" minOccurs="0" />
+              <xs:element name="IndexTerms" type="xs:string" minOccurs="0" />
+              <xs:element name="Subjects" type="xs:string" minOccurs="0" />
+              <xs:element name="WorkType" type="xs:string" minOccurs="0" />
+              <xs:element name="AboutLocation" type="xs:string" minOccurs="0" />
+              <xs:element name="AboutTime" type="xs:string" minOccurs="0" />
+              <xs:element name="AboutPersons" type="xs:string" minOccurs="0" />
+              <xs:element name="Classification" type="xs:string" minOccurs="0" />
+              <xs:element name="Abstract" type="xs:string" minOccurs="0" />
+              <xs:element name="CreateLocation" type="xs:string" minOccurs="0" />
+              <xs:element name="CreateTime" type="xs:string" minOccurs="0" />
+              <xs:element name="Notes" type="xs:string" minOccurs="0" />
+              <xs:element name="Feld30" type="xs:string" minOccurs="0" />
+              <xs:element name="Feld31" type="xs:string" minOccurs="0" />
+              <xs:element name="Feld32" type="xs:string" minOccurs="0" />
+              <xs:element name="Feld33" type="xs:string" minOccurs="0" />
+              <xs:element name="Feld34" type="xs:string" minOccurs="0" />
+              <xs:element name="Feld35" type="xs:string" minOccurs="0" />
+              <xs:element name="notation_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="folder_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="file_Id" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Systematik">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" type="xs:int" />
+              <xs:element name="ParentID" type="xs:int" minOccurs="0" />
+              <xs:element name="DDCNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="Description" type="xs:string" minOccurs="0" />
+              <xs:element name="RegensburgSign" type="xs:string" minOccurs="0" />
+              <xs:element name="RegensburgDesc" type="xs:string" minOccurs="0" />
+              <xs:element name="SubClassCount" type="xs:short" minOccurs="0" />
+              <xs:element name="DocRefCount" type="xs:short" minOccurs="0" />
+              <xs:element name="DirRefCount" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="RQBookmarkSetKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Bookmarks" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="RQBookmarkSetKey2" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Systematik" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

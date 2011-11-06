@@ -1,0 +1,36 @@
+﻿<script type="text/javascript">
+    function renderHtmlList(data) {
+        $("#htmlViewer").html(data);
+        $("#htmlList").html(data);
+    }
+
+    $(document).ready(function () {
+        var d = document.location.href;
+        var c = d + "?verb=rqListHtml";
+        $("#xmlUrl").val(c);
+        $("#xmlPostUrl").text(c);
+
+        $.ajax({
+            url: c,
+            type: "GET",
+            data: null,
+            dataType: "html",
+            success: function (data) {
+                renderHtmlList(data);
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        });
+
+
+    });
+</script>
+
+<hr />
+<span>Der HtmlViewer zeigt die Serverseitige Transformation des RQItemSet an. verb = rqListHtml.</span>
+<textarea id="htmlViewer" name="code" class="javascript" cols="80" rows="10">
+
+</textarea>
+
+<div id="htmlList"></div>

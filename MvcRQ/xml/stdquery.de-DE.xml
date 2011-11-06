@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<stdquerylist>
+	<stdquery qryname="Neuzugänge"
+		        qrylink="$recent$Neuzugänge"
+		        qrytooltip="Diese Liste enthält alle neuen Zugänge zur RiQuest Digital Library im letzten Monat." />
+	<stdquery qryname="Digitale Dokumente"
+		        qrylink="$digital$Digitale Dokumente"
+		        qrytooltip="Diese Liste..." />
+  <stdquery qryname="Video"
+		        qrylink="$film$Video"
+		        qrytooltip="Diese Liste..." />
+  <stdquery qryname="Audio"
+		        qrylink="$music$Audio Bänder"
+		        qrytooltip="Diese Liste..." />
+  <stdquery qryname="Web Verknüpfungen"
+		        qrylink=""
+		        qrytooltip="Diese Liste..." />
+  <stdquery qryname="Digitale Sammlungen"
+		        qrylink="$digcollection$Digitale Sammlungen"
+		        qrytooltip="Diese Liste..." />
+	<stdquery qryname="Datenbanken"
+					qrylink="$database$Datenbanken"
+					qrytooltip="Diese Liste..." />
+</stdquerylist>
