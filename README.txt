@@ -21,4 +21,4 @@ It consists of the following Modules:
 - Sub-directory RQLib contains the business logic (legacy code from the existing RiQuest application).
 - RQState contains baisc functions for state management.
 
-MvcRQ is a VS 10 / .NET 4.0 application with code in VB, C#, JavaScript & JQuery. 
+MvcRQ is a VS 10 / .NET 4.0 application with code in VB, C#, JavaScript & JQuery.
