@@ -1,1 +1,1 @@
-﻿This is a description of MvcRQ
+﻿MvcRQ contains functions to generate the web user interface following MVC-design principles. 
