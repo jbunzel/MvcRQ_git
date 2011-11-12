@@ -5,6 +5,7 @@ Imports System.Xml
 'Imports Modules.RQImport
 Imports RQLib.RQDAL
 Imports RQLib.RQQueryForm
+Imports RQLib.RQConverter
 
 
 Namespace RQQueryResult
@@ -428,44 +429,64 @@ Namespace RQQueryResult
         End Function
 
 
-        Public Function ConvertTo(ByVal format As BibliographicFormats, Optional ByVal fromRecord As Integer = 1,
-                                                                        Optional ByVal maxRecords As Integer = 0,
-                                                                        Optional ByVal IncludeEmptyFields As Boolean = True,
-                                                                        Optional ByVal ListOnly As Boolean = False,
-                                                                        Optional ByVal IncludeNamespace As Boolean = False,
-                                                                        Optional ByVal IncludeSortField As Boolean = True) As XmlTextReader
+        Public Function Serialize(Optional ByVal fromRecord As Integer = 1,
+                                  Optional ByVal maxRecords As Integer = 0,
+                                  Optional ByVal IncludeEmptyFields As Boolean = True,
+                                  Optional ByVal ListOnly As Boolean = False,
+                                  Optional ByVal IncludeNamespace As Boolean = False,
+                                  Optional ByVal IncludeSortField As Boolean = True) As XmlTextReader
             Dim writer As New XmlTextWriter(New System.IO.MemoryStream, Text.Encoding.UTF8)
             Dim i As Integer
+
+            If IncludeNamespace Then
+                writer.WriteStartElement("rq:ArrayOfRQItem")
+                writer.WriteAttributeString("xmlns:rq", "http://riquest.de/formats/rq")
+            Else
+                writer.WriteStartElement("RQResultList")
+                Me._docDAL.DSName = "Systematiken"
+                Me._sysTable.WriteXml(writer, XmlWriteMode.IgnoreSchema)
+                writer.WriteStartElement("RQResultSet")
+            End If
+            For i = fromRecord - 1 To maxRecords - 1
+                Dim item As RQResultItem = Me.GetItem(i)
+
+                writer.WriteNode(item.Serialize(IncludeEmptyFields, ListOnly, IncludeNamespace, IncludeSortField), True)
+            Next
+            writer.WriteEndElement()
+            If Not (IncludeNamespace) Then writer.WriteEndElement()
+            writer.Flush()
+            writer.BaseStream.Seek(0, IO.SeekOrigin.Begin)
+            Serialize = New XmlTextReader(writer.BaseStream)
+        End Function
+
+
+        Public Function ConvertTo(ByVal format As String, Optional ByVal fromRecord As Integer = 1,
+                                                          Optional ByVal maxRecords As Integer = 0,
+                                                          Optional ByVal IncludeEmptyFields As Boolean = True,
+                                                          Optional ByVal ListOnly As Boolean = False,
+                                                          Optional ByVal IncludeNamespace As Boolean = False,
+                                                          Optional ByVal IncludeSortField As Boolean = True) As XmlTextReader
+            Dim writer As New XmlTextWriter(New System.IO.MemoryStream, Text.Encoding.UTF8)
+            'Dim i As Integer
 
             If fromRecord < 1 Then fromRecord = 1
             If fromRecord < Me.count Then
                 If (maxRecords = 0) Or (fromRecord + maxRecords > Me.count + 1) Then maxRecords = Me.count - fromRecord + 1
                 Select Case format
-                    Case BibliographicFormats.info_ofi
-                    Case BibliographicFormats.mods
-                    Case BibliographicFormats.oai_dc
-                    Case BibliographicFormats.pubmed
-                    Case BibliographicFormats.srw_dc
-                    Case BibliographicFormats.RQintern
-                        writer.WriteStartElement("RQResultList")
-                        If IncludeNamespace Then writer.WriteAttributeString("xmlns:rq", "http://www.riquest.de/formats/rq")
-                        Me._docDAL.DSName = "Systematiken"
-                        Me._sysTable.WriteXml(writer, XmlWriteMode.IgnoreSchema)
-                        writer.WriteStartElement("RQResultSet")
-                        If IncludeNamespace Then writer.WriteAttributeString("xmlns:rq", "http://www.riquest.de/formats/rq")
-                        For i = fromRecord - 1 To maxRecords - 1
-                            Dim item As RQResultItem = Me.GetItem(i)
-
-                            writer.WriteNode(item.ConvertTo(format, IncludeEmptyFields, ListOnly, IncludeNamespace, IncludeSortField), True)
-                        Next
-                        writer.WriteEndElement()
-                        writer.WriteEndElement()
+                    Case "info_ofi"
+                    Case "mods"
+                    Case "oai_dc"
+                        Return New RQ2DC(Me, ServiceType.UNAPI, fromRecord, maxRecords).GetReader()
+                    Case "pubmed"
+                    Case "srw_dc"
+                    Case Else
+                        Return Me.Serialize(fromRecord, maxRecords, IncludeEmptyFields, ListOnly, IncludeNamespace, IncludeSortField)
                 End Select
             End If
             writer.Flush()
             writer.BaseStream.Seek(0, IO.SeekOrigin.Begin)
 
-            'TESTDATEI EZEUGEN
+            'TESTDATEI(EZEUGEN)
             'Dim Doc As New XmlDocument()
 
             'Doc.Load(writer.BaseStream)

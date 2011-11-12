@@ -72,15 +72,17 @@ namespace MvcRQ.Models
             this.ItemResultSet.Find(query);
         }
 
-        public System.Xml.XmlTextReader ConvertTo(string format, int fromRecord, int toRecord)
+        public System.Xml.XmlTextReader ConvertTo(string format, int fromRecord, int maxRecord)
         {
-            switch (format)
-            {
-                case "rqListHTML":
-                    return this.ItemResultSet.ConvertTo(RQLib.Globals.BibliographicFormats.RQintern);
-                default:
-                    return null;
-            }
+            if (format == "rqListHTML" || format == "")
+                return this.ItemResultSet.ConvertTo("RQIntern", fromRecord, maxRecord);
+            else
+                return this.ItemResultSet.ConvertTo(format, fromRecord, maxRecord);
+        }
+
+        public System.Xml.XmlTextReader ConvertTo(string format)
+        {
+            return this.ConvertTo(format, 1, 0);
         }
 
         public string toHTML (string format, int fromRecord, int toRecord)
@@ -602,7 +604,7 @@ namespace MvcRQ.Models
 
         public XmlTextReader ConvertTo(string format)
         {
-            return null; // this._resultItem.ConvertTo(format);
+           return this._resultItem.ConvertTo(format);
         }
 
     }

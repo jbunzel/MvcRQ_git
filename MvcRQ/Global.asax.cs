@@ -23,14 +23,24 @@ namespace MvcRQ
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "ServiceRQItemList",
+                "{formatId}/RQItems",
+                new { controller = "RQItems", action = "RQItemList", formatId = UrlParameter.Optional });
+
+            routes.MapRoute(
+                "RQItemList",
+                "RQItems",
+                new { controller = "RQItems", action = "Index" });
+
+            routes.MapRoute(
                 "ServiceSingleRQItem",
                 "{formatId}/RQItems/{rqitemId}",
-                new { controller = "RQItems", action = "SingleRQItem", formatId = UrlParameter.Optional});
+                new { controller = "RQItems", action = "RQItemRecord", formatId = UrlParameter.Optional});
 
             routes.MapRoute(
                 "SingleRQItem",
                 "RQItems/{rqitemId}",
-                new { controller = "RQItems", action = "SingleRQItem" });
+                new { controller = "RQItems", action = "RQItemRecord" });
 
             routes.MapRoute(
                 "RQItemItemDescElements",
@@ -43,7 +53,6 @@ namespace MvcRQ
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
         }
-
 
         protected void Application_Start()
         {

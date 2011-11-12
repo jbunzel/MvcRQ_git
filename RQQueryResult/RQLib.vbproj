@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Globals.vb" />
+    <Compile Include="RQConverter\GenericConverter.vb" />
+    <Compile Include="RQConverter\RQ2DC.vb" />
     <Compile Include="RQDAL\RQBookmarkDAL.vb" />
     <Compile Include="RQDAL\RQCatalogDAL.vb" />
     <Compile Include="RQDAL\RQLuceneDBI.vb" />

@@ -13,7 +13,7 @@ namespace MvcRQ.Controllers
             ViewBag.Message = "Welcome to ASP.NET MVC!";
             ViewData["qryStr"] = "Suchbegriff eingeben";
 
-            return View();
+            return this.RedirectToAction("Index","RQItems");
         }
 
         public ActionResult About()

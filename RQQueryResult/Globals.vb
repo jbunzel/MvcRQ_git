@@ -27,15 +27,15 @@ Public Module Globals
     Public ClassCodePrefix As String = CStr(Chr(167)) + CStr(Chr(167)) + "RVK" + CStr(Chr(167)) + CStr(Chr(167)) + ":"
     'Public PageSize As Integer = -1 ' -1 = undefined
 
-    Public Enum BibliographicFormats
-        mods
-        oai_dc
-        srw_dc
-        info_ofi
-        pubmed
-        RQintern
-        unknown
-    End Enum
+    'Public Enum BibliographicFormats
+    '    mods
+    '    oai_dc
+    '    srw_dc
+    '    info_ofi
+    '    pubmed
+    '    RQintern
+    '    unknown
+    'End Enum
 
 #End Region
 

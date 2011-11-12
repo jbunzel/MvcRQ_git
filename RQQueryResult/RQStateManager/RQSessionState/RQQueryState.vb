@@ -50,7 +50,19 @@ Namespace RQStateManager.RQSessionState
             MyBase.New(ID)
         End Sub
 
-
+        ''' <summary>
+        ''' Returns the last stored RQQuery structure 
+        ''' </summary>
+        ''' <param name="QueryString">
+        ''' Query string or empty string
+        ''' </param>
+        ''' <returns>
+        ''' RQQuery structure
+        ''' </returns>
+        ''' <remarks>
+        ''' If QueryString is empty the RQQuery structure in state storage, or - if no query has been saved in state storage - a new RQQuery structure for query string "recent additions" is returned. 
+        ''' Otherwise a new RQQueryStructure for query string in parameter QueryString is returned.
+        ''' </remarks>
         Public Shared Function GetQueryState(ByVal QueryString As String) As RQQueryForm.RQquery
             If IsNothing(QueryState) Then
                 If QueryString = "" Then
