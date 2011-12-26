@@ -66,11 +66,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\RQItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RQKosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\RQItemsModel.cs" />
+    <Compile Include="Models\RQKosModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,11 +135,21 @@
     <Content Include="Images\icon_websource.gif" />
     <Content Include="Images\RQFTCollection.jpg" />
     <Content Include="README.txt" />
+    <Content Include="Scripts\dynatree-1.2.0\jquery.cookie.js" />
+    <Content Include="Scripts\dynatree-1.2.0\jquery.rqdynatree.js" />
+    <Content Include="Scripts\jquery-1.6.1.js" />
+    <Content Include="Scripts\jquery-1.6.1.min.js" />
+    <Content Include="Scripts\dynatree-1.2.0\skin-vista\icons.gif" />
+    <Content Include="Scripts\dynatree-1.2.0\skin-vista\loading.gif" />
+    <Content Include="Scripts\dynatree-1.2.0\skin-vista\ui.dynatree.css" />
+    <Content Include="Scripts\dynatree-1.2.0\skin\icons.gif" />
+    <Content Include="Scripts\dynatree-1.2.0\skin\loading.gif" />
+    <Content Include="Scripts\dynatree-1.2.0\skin\ui.dynatree.css" />
+    <Content Include="Scripts\dynatree-1.2.0\skin\vline.gif" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.5.1.js" />
-    <Content Include="Scripts\jquery-1.5.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.transform.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -183,6 +195,9 @@
     </Content>
     <Content Include="xslt\RQ2RQ.xslt" />
     <Content Include="xslt\ViewTransforms\ArrayOfRQItem_Example.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\RQ2DC1.xslt">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="xslt\ViewTransforms\RQ2SingleItemView.xslt">
@@ -238,6 +253,8 @@
     <Content Include="Views\RQItems\Shared\ListViewer.cshtml" />
     <Content Include="Views\RQItems\Shared\HtmlViewer.cshtml" />
     <Content Include="Views\RQItems\Shared\ResultViewer.cshtml" />
+    <Content Include="Views\RQKos\Index.cshtml" />
+    <Content Include="Views\RQItems\ListRQItem.cshtml" />
     <None Include="~db\RQLucene\CATALOG\segments.gen" />
     <None Include="~db\RQLucene\CATALOG\segments_1pv" />
     <None Include="~db\RQLucene\CATALOG\_us.cfs" />
@@ -261,7 +278,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49343</DevelopmentServerPort>
+          <DevelopmentServerPort>55834</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

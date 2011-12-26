@@ -11,7 +11,7 @@ Namespace RQConverter
         srw_dc
         info_ofi
         pubmed
-        RQintern
+        rq
         unknown
     End Enum
 

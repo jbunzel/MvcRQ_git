@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -75,6 +76,7 @@
     <Compile Include="RQDAL\RQCatalogDAL.vb" />
     <Compile Include="RQDAL\RQLuceneDBI.vb" />
     <Compile Include="RQDAL\RQOleDBI.vb" />
+    <Compile Include="RQKos\Classifications\Classification.vb" />
     <Compile Include="RQLucene\Indexer.vb" />
     <Compile Include="RQLucene\OleDBIndexer.vb" />
     <Compile Include="RQLucene\Searcher.vb" />
@@ -92,6 +94,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RQDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="RQKos\Classifications\ClassificationCode.vb" />
+    <Compile Include="RQKos\Classifications\ClassificationDataClient.vb" />
     <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQClassification.vb" />
     <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQDescriptionElement.vb" />
     <Compile Include="RQResult\RQResultItem.vb" />

@@ -21,32 +21,30 @@ namespace MvcRQ
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+                "ServiceSingleRQKosItem",
+                "{formatId}/RQKos/{id}",
+                new { controller = "RQKos", action = "RQKosItemRecord", formatId = UrlParameter.Optional });
+            routes.MapRoute(
+                "SingleRQKosItem",
+                "RQKos/{id}",
+                new { controller = "RQKos", action = "Index", id = UrlParameter.Optional });
             routes.MapRoute(
                 "ServiceRQItemList",
                 "{formatId}/RQItems",
                 new { controller = "RQItems", action = "RQItemList", formatId = UrlParameter.Optional });
-
             routes.MapRoute(
                 "RQItemList",
                 "RQItems",
                 new { controller = "RQItems", action = "Index" });
-
             routes.MapRoute(
                 "ServiceSingleRQItem",
                 "{formatId}/RQItems/{rqitemId}",
                 new { controller = "RQItems", action = "RQItemRecord", formatId = UrlParameter.Optional});
-
             routes.MapRoute(
                 "SingleRQItem",
                 "RQItems/{rqitemId}",
                 new { controller = "RQItems", action = "RQItemRecord" });
-
-            routes.MapRoute(
-                "RQItemItemDescElements",
-                "RQItems/{rqitemId}/ItemDescElements/{itemdescelementId}",
-                new { controller = "RQItems", action = "SingleRQItemItemDescElements", itemdescelementId = UrlParameter.Optional });
-
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters

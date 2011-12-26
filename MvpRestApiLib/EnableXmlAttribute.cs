@@ -9,7 +9,7 @@ namespace MvpRestApiLib
     public class EnableXmlAttribute : ActionFilterAttribute
     {
 
-        public string XSLTransform { get; set; }
+        public static string XSLTransform { get; set; }
 
         private readonly static string[] _xmlTypes = new string[] { "application/xml", "text/xml" };
 
@@ -31,7 +31,7 @@ namespace MvpRestApiLib
                     ContentEncoding = contentEncoding,
                     ContentType = filterContext.HttpContext.Request.ContentType,
 
-                    XSLTransform = this.XSLTransform
+                    XSLTransform = EnableXmlAttribute.XSLTransform
                 };
         }
     }

@@ -1,9 +1,4 @@
 ﻿<script type="text/javascript">
-
-    function renderHtmlList(data) {
-        $("#htmlList").html(data);
-    }
-
     $(document).ready(function () {
         var d = document.location.href;
         var c = d + "?verb=rqListHTML";
@@ -24,6 +19,10 @@
         });
     });
 
+    function renderHtmlList(data) {
+        $("#htmlList").html(data);
+    }
+
     function renderXmlList(data, docno) {
         var xml = window.ActiveXObject ? data.xml : (new XMLSerializer().serializeToString(data));
         //$("#transformResult").transform({ xmlstr: xml, xsl: "/xslt/ViewTransforms/RQ2SingleItemView.xslt" });
@@ -43,6 +42,10 @@
             });
         }
         $("#" + docno).toggle("slow");
+    }
+
+    function getRQKos(path, docno) {
+        window.location.href = "/rqkos/0?p=" + path + "&amp;d=" + docno;
     }
 
 </script>

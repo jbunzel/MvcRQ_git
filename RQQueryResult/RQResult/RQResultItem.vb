@@ -11,6 +11,7 @@ Imports RQLib.RQConverter
 
 Namespace RQQueryResult
 
+    '<Serialization.XmlRoot()> _
     Public Class RQItemDescription
 
 #Region "Private Members"
@@ -323,12 +324,16 @@ Namespace RQQueryResult
         End Property
 
 
-        Public Property Classification() As String
+        'Public Property Classification() As String
+        Public Property Classification() As RQClassification
             Get
-                Return Me.GetField("Classification")
+                'Return Me.GetField("Classification")
+                Return CType(Me._fields("Classification"), RQDescriptionElement)
             End Get
-            Set(ByVal value As String)
-                Me.SetField("Classification", value)
+            'Set(ByVal value As String)
+            Set(ByVal value As RQClassification)
+                'Me.SetField("Classification", value)
+                Me._fields("Classification") = value
             End Set
         End Property
 
@@ -762,7 +767,7 @@ Namespace RQQueryResult
                     Return New RQLib.RQConverter.RQ2DC(Me).GetReader()
                 Case "pubmed"
                 Case "srw_dc"
-                Case "RQIntern"
+                Case "rq"
                     Return Me.Serialize(IncludeEmptyFields, ListOnly, IncludeNamespace, IncludeSortField)
                 Case "unknown"
                 Case Else

@@ -12,9 +12,12 @@ using RQLib.RQQueryForm;
 
 namespace MvcRQ.Models
 {
+
     public class RQItemModel
     {
+
         public RQItemSet RQItems { get; set; }
+
 
         public RQItemModel(RQquery query)
         {
@@ -23,26 +26,33 @@ namespace MvcRQ.Models
             RQItems.Find(query);
         }
 
+
         public string toHTML(string format, int fromRecord, int toRecord)
         {
             return this.RQItems.toHTML(format, fromRecord, toRecord);
         }
+
 
         public string toHTML(string format, int fromRecord)
         {
             return this.toHTML(format, fromRecord, 0);
         }
 
+
         public string toHTML(string format)
         {
             return this.toHTML(format, 1, 0);
         }
+    
     }
+
 
     [XmlRoot]
     public class RQItemSet : System.Collections.Generic.IEnumerable<RQItem>
     {
+    
         private RQResultSet ItemResultSet;
+
 
         public int count
         {
@@ -52,38 +62,45 @@ namespace MvcRQ.Models
             }
         }
 
+
         public RQItemSet() :base()
         {
             ItemResultSet = new RQResultSet();
         }
+
 
         public void Add(RQItem item)
         {
             this.ItemResultSet.CreateItem(item._resultItem);
         }
 
+
         public RQItem GetItem(int i)
         {
             return new RQItem(ItemResultSet.GetItem(i));
         }
+
 
         public void Find(RQquery query)
         {
             this.ItemResultSet.Find(query);
         }
 
+
         public System.Xml.XmlTextReader ConvertTo(string format, int fromRecord, int maxRecord)
         {
             if (format == "rqListHTML" || format == "")
-                return this.ItemResultSet.ConvertTo("RQIntern", fromRecord, maxRecord);
+                return this.ItemResultSet.ConvertTo("rq", fromRecord, maxRecord);
             else
                 return this.ItemResultSet.ConvertTo(format, fromRecord, maxRecord);
         }
+
 
         public System.Xml.XmlTextReader ConvertTo(string format)
         {
             return this.ConvertTo(format, 1, 0);
         }
+
 
         public string toHTML (string format, int fromRecord, int toRecord)
         {
@@ -116,34 +133,42 @@ namespace MvcRQ.Models
             //return r.ReadOuterXml();
         }
  
+
         public System.Data.DataTable GetDataFieldTable()
         {
             return this.ItemResultSet.GetDataFieldTable();
         }
+
 
         public System.Collections.Generic.IEnumerator<RQItem> GetEnumerator()
         {
             return new RQItemSetEnum(this);
         }
 
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return new RQItemSetEnum(this);
         }
+    
     }
+
 
     public class RQItemSetEnum : IEnumerator<RQItem>
     {
+
         private RQItemSet _itemSet;
         private int _curIndex;
         private RQItem _curItem;
  
+
         public RQItemSetEnum( RQItemSet itemSet)
         {
             _itemSet = itemSet;
             _curIndex = -1;
             _curItem = default(RQItem);
         }
+
 
         public bool MoveNext()
         {
@@ -158,6 +183,7 @@ namespace MvcRQ.Models
             return true;
         }
 
+
         public RQItem Current
         {
             get
@@ -165,6 +191,7 @@ namespace MvcRQ.Models
                 return this._curItem;
             }
         }
+
 
         object System.Collections.IEnumerator.Current
         {
@@ -174,20 +201,25 @@ namespace MvcRQ.Models
             }
         }
 
+
         public void Reset()
         {
         }
         
+
         void IDisposable.Dispose()
         {
         }
 
     }
 
+
     [XmlRoot]
     public class RQItem
     {
+
         internal RQResultItem _resultItem {get; set; }
+
 
         [DataMember]
         public string ID
@@ -202,6 +234,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string DocNo
         {
@@ -214,6 +247,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = DocNo;
             }
         }
+
 
         [DataMember]
         public string Title
@@ -228,6 +262,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string Authors
         {
@@ -240,6 +275,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = Authors;
             }
         }
+
 
         [DataMember]
         public string Source
@@ -254,18 +290,20 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string Institutions
         {
             get
             {
-                return this._resultItem.ItemDescription.Series;
+                return this._resultItem.ItemDescription.Institutions;
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Series;
+                this._resultItem.ItemDescription.Title = Institutions;
             }
         }
+
 
         [DataMember]
         public string Series
@@ -280,6 +318,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string IndexTerms
         {
@@ -292,6 +331,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = IndexTerms;
             }
         }
+
 
         [DataMember]
         public string Subjects
@@ -306,6 +346,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string AboutPersons
         {
@@ -318,6 +359,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = AboutPersons;
             }
         }
+
 
         [DataMember]
         public string Abstract
@@ -332,6 +374,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string Edition
         {
@@ -344,6 +387,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = Edition;
             }
         }
+
 
         [DataMember]
         public string ISDN
@@ -358,6 +402,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string Coden
         {
@@ -370,6 +415,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = Coden;
             }
         }
+
 
         [DataMember]
         public string Locality
@@ -384,6 +430,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string Publisher
         {
@@ -396,6 +443,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = Publisher;
             }
         }
+
 
         [DataMember]
         public string PublTime
@@ -410,6 +458,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string Volume
         {
@@ -422,6 +471,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = Volume;
             }
         }
+
 
         [DataMember]
         public string Issue
@@ -436,6 +486,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string Pages
         {
@@ -448,6 +499,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = Pages;
             }
         }
+
 
         [DataMember]
         public string Language
@@ -462,6 +514,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string Signature
         {
@@ -474,6 +527,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = Signature;
             }
         }
+
 
         [DataMember]
         public string DocTypeCode
@@ -488,6 +542,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string DocTypeName
         {
@@ -500,6 +555,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = DocTypeName;
             }
         }
+
 
         [DataMember]
         public string WorkType
@@ -514,6 +570,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string AboutLocation
         {
@@ -526,6 +583,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = AboutLocation;
             }
         }
+
 
         [DataMember]
         public string AboutTime
@@ -540,6 +598,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string CreateLocation
         {
@@ -552,6 +611,7 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Title = CreateLocation;
             }
         }
+
 
         [DataMember]
         public string CreateTime
@@ -566,6 +626,7 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
         public string Notes
         {
@@ -579,8 +640,9 @@ namespace MvcRQ.Models
             }
         }
 
+
         [DataMember]
-        public string Classification
+        public RQLib.RQQueryResult.RQDescriptionElements.RQClassification Classification
         {
             get
             {
@@ -588,19 +650,22 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Classification;
+                this._resultItem.ItemDescription.Classification = Classification;
             }
         }
-              
+        
+      
         public RQItem()
         {
             this._resultItem = new RQResultItem();
         }
 
+
         public RQItem(RQResultItem resultItem)
         {
             this._resultItem = resultItem;
         }
+
 
         public XmlTextReader ConvertTo(string format)
         {
@@ -608,6 +673,7 @@ namespace MvcRQ.Models
         }
 
     }
+
 
     //[DataContract]
     //public class ItemDescElement
@@ -626,4 +692,5 @@ namespace MvcRQ.Models
     //    [DataMember]
     //    public double Value2 { get; set; }
     //}
+
 }

@@ -72,14 +72,18 @@ namespace MvcRQ.Controllers
         /// </returns>
         [EnableJson, EnableXml]
         [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public ActionResult Index(string verb)
+        public ActionResult Index(string verb, string query)
         {
             if (verb == "New")
                 return View("NewRQItem", new RQItem());
             else if (verb == null)
                 return View(); // This view lets the client load the default result list by a another GET http-request to RQItems with verb="rqListHTML". 
             else
-                return this.Content(GetModel("").toHTML(verb), "text/html", System.Text.Encoding.UTF8);
+            {
+                //EnableXmlAttribute.XSLTransform = "xslt/ViewTransforms/RQResultList2RQSorted.xslt";
+                //return View(GetModel(query == null ? "" : query).RQItems);
+                return this.Content(GetModel(query == null ? "" : query).toHTML(verb), "text/html", System.Text.Encoding.UTF8);
+            }
         }
 
 
@@ -93,9 +97,6 @@ namespace MvcRQ.Controllers
         /// In both cases the client is responsible to render the xml (f. e. by XSLT).
         /// Otherwise the action response is tranformed on the server according to the formatID specified. 
         /// </remarks>
-        /// <param name="rqitemId">
-        /// DocNo of RQItem to be returned.
-        /// </param>
         /// <param name="formatId">
         /// Id of desired xml format:
         /// "rq" = RQIntern format (default);
@@ -113,18 +114,24 @@ namespace MvcRQ.Controllers
         public ActionResult RQItemList(string formatId)
         {
             RQItemSet rqitemset = GetModel("").RQItems;
-            System.Xml.XmlTextReader r = rqitemset.ConvertTo(formatId);
+            if (formatId != null)
+            {
+                string xsltPath = "";
 
-            try 
-	        {
-                r.MoveToContent();
-                return this.Content(r.ReadOuterXml(), "text/xml", System.Text.Encoding.UTF8);
-	        }
-	        catch (Exception)
-	        {
-                // Occurs with empty result set for "recent additions".
-                throw;
-	        }
+                switch (formatId)
+                {
+                    //case "mods":
+                    case "oai_dc":
+                        xsltPath = "~/xslt/rq2dc1.xslt";
+                        break;
+                    //case "srw_dc":
+                    //case "info_ofi":
+                    default:  // "rq"
+                        break;
+                }
+                EnableXmlAttribute.XSLTransform = xsltPath;
+            }
+            return View("ListRQItem", rqitemset);
         }
 
 
@@ -161,13 +168,22 @@ namespace MvcRQ.Controllers
             if (rqitem == null) rqitem = GetModel("$access$" + rqitemId).RQItems.FirstOrDefault(p => p.DocNo == rqitemId); // rqitem not available by query saved in state storage  
             if (formatId != null)
             {
-                System.Xml.XmlTextReader r = rqitem.ConvertTo(formatId);
+                string xsltPath = "";
 
-                r.MoveToContent();
-                return this.Content(r.ReadOuterXml(), "text/xml", System.Text.Encoding.UTF8);
+                switch (formatId)
+                {
+                    //case "mods":
+                    case "oai_dc":
+                        xsltPath = "~/xslt/rq2dc1.xslt";
+                        break;
+                    //case "srw_dc":
+                    //case "info_ofi":
+                    default:  // "rq"
+                        break;
+                }
+                EnableXmlAttribute.XSLTransform = xsltPath;
             }
-            else
-                return View("SingleRQItem", rqitem);
+            return View("SingleRQItem", rqitem);
         }
 
 

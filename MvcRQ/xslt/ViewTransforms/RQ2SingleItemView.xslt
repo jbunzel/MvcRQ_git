@@ -181,6 +181,40 @@
   </xsl:template>
 
 
+  <xsl:template match="RQItem/Classification">
+    <xsl:apply-templates select="ClassificationCode[ClassificationSystem='rq']" />
+    <xsl:if test="ClassificationCode[ClassificationSystem='rvk']">
+      <xsl:text>RVK-Codes: </xsl:text>
+      <xsl:apply-templates select="ClassificationCode[ClassificationSystem='rvk']" />
+    </xsl:if>
+  </xsl:template>
+
+
+  <xsl:template match="ClassificationCode[ClassificationSystem='rq']">
+    <xsl:element name="a">
+      <xsl:attribute name="href">
+        <xsl:text>javascript:getRQKos(&quot;</xsl:text>
+        <xsl:value-of select="concat(ClassificationPath,'&quot;, &quot;', /RQItem/DocNo)"/>
+        <xsl:text>&quot;);</xsl:text>
+      </xsl:attribute>
+      <xsl:value-of select="concat(Notation, ' - ', ClassLabel)"/>
+      <xsl:value-of select="'; '"/>
+    </xsl:element>
+  </xsl:template>
+
+  
+  <xsl:template match="ClassificationCode[ClassificationSystem='rvk'] | ClassificationCode[ClassificationSystem='jel']">
+    <xsl:choose>
+      <xsl:when test="ClassLabel">
+        <xsl:value-of select="concat(Notation, ' - ', ClassLabel, '; ')"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="concat(Notation, '; ')"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  
   <!-- template provided with 2 typos by Jeni Tennison, 25 Feb 2001 -->
   <xsl:template name="escape-apos">
     <xsl:param name="string"/>

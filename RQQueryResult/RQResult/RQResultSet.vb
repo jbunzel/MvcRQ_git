@@ -109,7 +109,7 @@ Namespace RQQueryResult
         '    Dim xmlResultDoc As New XmlDocument
 
         '    If webImport.ContainsDocRefs() = True Then
-        '        xmlResultDoc = webImport.ConvertTo(RQConverter.BibliographicFormats.RQintern)
+        '        xmlResultDoc = webImport.ConvertTo(RQConverter.BibliographicFormats.rq)
         '        If Not IsNothing(xmlResultDoc) Then
         '            Me.ReadFrom(xmlResultDoc)
         '        End If
@@ -470,7 +470,7 @@ Namespace RQQueryResult
             'Dim i As Integer
 
             If fromRecord < 1 Then fromRecord = 1
-            If fromRecord < Me.count Then
+            If fromRecord <= Me.count Then
                 If (maxRecords = 0) Or (fromRecord + maxRecords > Me.count + 1) Then maxRecords = Me.count - fromRecord + 1
                 Select Case format
                     Case "info_ofi"

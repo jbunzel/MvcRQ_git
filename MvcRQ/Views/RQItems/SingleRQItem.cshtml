@@ -26,7 +26,5 @@
 
 @(ViewData["Message"] ?? "")
 
-<p>@Html.RouteLink("ItemDescElements", "RQItemItemDescElements", new { rqitemId = Model.ID })</p>
-
 @Html.Partial("Shared/XmlViewer")
 @Html.Partial("Shared/JsonViewer") 
