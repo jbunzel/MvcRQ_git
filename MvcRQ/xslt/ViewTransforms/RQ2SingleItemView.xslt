@@ -183,6 +183,7 @@
 
   <xsl:template match="RQItem/Classification">
     <xsl:apply-templates select="ClassificationCode[ClassificationSystem='rq']" />
+    <p/>
     <xsl:if test="ClassificationCode[ClassificationSystem='rvk']">
       <xsl:text>RVK-Codes: </xsl:text>
       <xsl:apply-templates select="ClassificationCode[ClassificationSystem='rvk']" />
@@ -193,9 +194,12 @@
   <xsl:template match="ClassificationCode[ClassificationSystem='rq']">
     <xsl:element name="a">
       <xsl:attribute name="href">
+<!--        
         <xsl:text>javascript:getRQKos(&quot;</xsl:text>
         <xsl:value-of select="concat(ClassificationPath,'&quot;, &quot;', /RQItem/DocNo)"/>
         <xsl:text>&quot;);</xsl:text>
+-->
+        <xsl:value-of select="concat('javascript:call(&quot;','rqkos/rqc_',Notation,'?d=',/RQItem/DocNo,'&quot;)')"/>
       </xsl:attribute>
       <xsl:value-of select="concat(Notation, ' - ', ClassLabel)"/>
       <xsl:value-of select="'; '"/>
@@ -204,14 +208,19 @@
 
   
   <xsl:template match="ClassificationCode[ClassificationSystem='rvk'] | ClassificationCode[ClassificationSystem='jel']">
-    <xsl:choose>
-      <xsl:when test="ClassLabel">
-        <xsl:value-of select="concat(Notation, ' - ', ClassLabel, '; ')"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="concat(Notation, '; ')"/>
-      </xsl:otherwise>
-    </xsl:choose>
+    <xsl:element name="a">
+      <xsl:attribute name="href">
+        <xsl:value-of select="ClassID"/>
+      </xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="ClassLabel">
+          <xsl:value-of select="concat(Notation, ' - ', ClassLabel, '; ')"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="concat(Notation, '; ')"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:element>
   </xsl:template>
 
   

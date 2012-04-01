@@ -1,0 +1,9 @@
+PREFIX auto: <http://dbpedia.org/resource/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT *
+WHERE 
+{ 
+  { ?x owl:sameAs auto:Mad_Cow } UNION { auto:Mad_Cow owl:sameAs ?x }
+  {GRAPH ?g { ?x a ?z }}
+}

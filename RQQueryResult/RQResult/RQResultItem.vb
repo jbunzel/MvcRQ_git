@@ -337,6 +337,17 @@ Namespace RQQueryResult
             End Set
         End Property
 
+
+        Public Property Feld31() As String
+            'Description creation date
+            Get
+                Return Me.GetField("Feld31")
+            End Get
+            Set(ByVal value As String)
+                Me.SetField("Feld31", value)
+            End Set
+        End Property
+
 #End Region
 
 
@@ -610,6 +621,19 @@ Namespace RQQueryResult
         End Sub
 
 
+        Private Sub ChangeDocDescription(ByVal fromDict As NameValueCollection)
+            Dim pis As System.Reflection.PropertyInfo() = Me._fields.GetType().GetProperties()
+            Dim pi As System.Reflection.PropertyInfo
+
+            For Each pi In pis
+                Dim value As String = fromDict(pi.Name)
+                If Not IsNothing(value) And value <> Me._fields.GetField(pi.Name) Then
+                    Me._fields.SetField(pi.Name, value)
+                    Me._fields.SetChangedFlag()
+                End If
+            Next
+        End Sub
+
 #End Region
 
 
@@ -683,6 +707,11 @@ Namespace RQQueryResult
             Me.WriteDocDescription(retval)
             Return retval
         End Function
+
+
+        Public Sub Change(ByVal fromDict As NameValueCollection)
+            Me.ChangeDocDescription(fromDict)
+        End Sub
 
 
         Public Function Serialize(Optional ByVal IncludeEmptyFields As Boolean = True,

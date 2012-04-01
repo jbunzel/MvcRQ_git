@@ -41,6 +41,20 @@ Namespace RQDAL
             End Set
         End Property
 
+
+        Public ReadOnly Property SysTable() As RQDataSet.SystematikDataTable
+            Get
+                Return CType(Me._catSet.Tables("Systematik"), RQDataSet.SystematikDataTable)
+            End Get
+        End Property
+
+
+        Public ReadOnly Property DocTable() As RQDataSet.DokumenteDataTable
+            Get
+                Return CType(Me._catSet.Tables("Dokumente"), RQDataSet.DokumenteDataTable)
+            End Get
+        End Property
+
 #End Region
 
 
@@ -50,7 +64,6 @@ Namespace RQDAL
             Me._catRQLuceneDBI = New RQLuceneDBI()
             Me._catOleDBI = New RQOleDBI()
             Me.GetCatalogFieldTable()
-
         End Sub
 
 #End Region
@@ -244,9 +257,12 @@ Namespace RQDAL
         Public Function GetRecordByID(ByRef RecordID As String, ByRef DSName As String, ByRef TableName As String, Optional ByVal ClearDataSet As Boolean = False) As DataRow
             Dim strSQL As String
 
-            If ClearDataSet = True Then Me._catSet.Clear()
-            strSQL = "SELECT * FROM " + TableName + " WHERE " + TableName + ".ID = " + RecordID
-            Me.CatalogQuery(strSQL, DSName, TableName)
+            If ClearDataSet Or Me._catSet.Tables(TableName).Rows.Count = 0 Then
+                If ClearDataSet = True Then Me._catSet.Clear()
+                strSQL = "SELECT * FROM " + TableName + " WHERE " + TableName + ".ID = " + RecordID
+                Me.CatalogQuery(strSQL, DSName, TableName)
+            End If
+            'STRANGE ERROR: If Rows(0).DirRefCount is DBNull or Nothing (depending of RQDataSet-Properties) if taken from the stored Me._catSet. It is "0" if taken from Me.CatalogQuery
             Return Me._catSet.Tables(TableName).Rows(0)
         End Function
 
@@ -267,52 +283,11 @@ Namespace RQDAL
 
 
         Public Function GetClassID(ByRef ClassCode As String) As Integer
-            Return Me.GetClassificationTable(Me.GetClassificationSQL("class", ClassCode, 0)).Rows(0).Item(0)
-
-            'Dim strSQL As String
-            'Dim strSearchArg As String = DDCNumber
-
-            'While DDCNumber.Length > 0
-            '    If ClearDataSet = True Then Me._catSet.Clear()
-            '    strSQL = "SELECT * FROM Systematik WHERE (Systematik.RegensburgSign LIKE '" + strSearchArg + "%') OR (Systematik.RegensburgSign LIKE '%; " + strSearchArg + "%') OR (Systematik.RegensburgSign LIKE '%-" + strSearchArg + "%') ORDER BY Systematik.DDCNumber ASC"
-            '    Me.CatalogQuery(strSQL, DSName, "Systematik")
-            '    If Me._catSet.Tables("Systematik").Rows.Count = 0 Then
-            '        strSearchArg = strSearchArg.Substring(0, strSearchArg.Length - 1)
-            '    Else
-            '        Dim i As Integer
-            '        Dim strClassName As String = ""
-            '        Dim strClassID As Integer = -1
-
-            '        For i = 0 To Me._catSet.Tables("Systematik").Rows.Count - 1
-            '            Dim TestLexClass As New LexicalClass(CStr(Me._catSet.Tables("Systematik").Rows(i).Item(4)))
-
-            '            If TestLexClass.IsInRange(DDCNumber) Then
-            '                If strClassName <> "" Then
-            '                    If CType(Me._catSet.Tables("Systematik").Rows(i).Item(2), String).StartsWith(strClassName) Then
-            '                        strClassName = CStr(Me._catSet.Tables("Systematik").Rows(i).Item(2))
-            '                        strClassID = CInt(Me._catSet.Tables("Systematik").Rows(i).Item(0))
-            '                    Else
-            '                        'FEHLER IN DER SYSTEMATIKTABELLE
-            '                        Return -1 '"ERROR: Inconsistency in Table 'Systematik'"
-            '                    End If
-            '                Else
-            '                    strClassName = CStr(Me._catSet.Tables("Systematik").Rows(i).Item(2))
-            '                    strClassID = CInt(Me._catSet.Tables("Systematik").Rows(i).Item(0))
-            '                End If
-            '            End If
-            '        Next
-            '        If strClassName <> "" Then
-            '            Return strClassID
-            '        Else
-            '            If strSearchArg.Length > 1 Then
-            '                strSearchArg = strSearchArg.Substring(0, strSearchArg.Length - 1)
-            '            Else
-            '                Return strClassID
-            '            End If
-            '        End If
-            '    End If
-            'End While
-            'Return -1
+            Try
+                Return Me.GetClassificationTable(Me.GetClassificationSQL("class", ClassCode, 0)).Rows(0).Item(0)
+            Catch
+                Return 0
+            End Try
         End Function
 
 

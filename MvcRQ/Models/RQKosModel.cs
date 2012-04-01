@@ -17,6 +17,8 @@ namespace MvcRQ.Models
     /// </summary>
     public class RQKosModel
     {
+        #region "public constructors"
+
         /// <summary>
         /// RQKosBranch
         /// </summary>
@@ -28,19 +30,21 @@ namespace MvcRQ.Models
         /// <param name="itemID">
         /// Valid RQKosItemId
         /// </param>
-        /// <param name="formatID">
-        /// An empty string or "dt" if model returns input for DynaTree.
+        /// <param name="serviceId">
+        /// serviceId == "dt": DynyTree API.
         /// </param>
         /// <remarks>
         /// Loads the subject class branch of major class with ID=itemID into the RQKosSet.
         /// If itemID is empty the uppermost class branch is loaded.
         /// </remarks>
-        public RQKosModel(string itemID, string formatID)
+        public RQKosModel(string itemID, string serviceId)
         {
             if (itemID == null || itemID == String.Empty) itemID = "0";
-            RQKosSet = new RQKosBranch(itemID, formatID);
+            RQKosSet = new RQKosBranch(itemID, serviceId);
             RQKosSet.Load();
         }
+
+        #endregion
     }
 
 
@@ -51,12 +55,20 @@ namespace MvcRQ.Models
     /// The collection contains a description of the major subject class at the zero position followed by descriptions of the minor subject classes (subclasses) 
     /// </remarks>
     [CollectionDataContract]
+    [XmlRoot]
+    [XmlInclude(typeof(RQKosItem))]
+    [XmlInclude(typeof(RQKosItemRQLD))]
     public class RQKosBranch : System.Collections.Generic.IEnumerable<RQKosItemTemplate>
     {
-        private SubjClassBranch classBranch;
-        private string _format;
+        #region "private members"
 
-        [DataMember]
+        private SubjClassBranch classBranch;
+        private string _service;
+
+        #endregion
+
+        #region "public properties"
+
         public SubjClassBranch ClassBranch
         {
             get
@@ -73,35 +85,71 @@ namespace MvcRQ.Models
         {
             get
             {
-                if (this._format == "dt")
+                if (this._service == "dt")
                     return this.classBranch.count > 0 ? this.classBranch.count - 1 : 0;
                 else
                     return this.classBranch.count;
             }
         }
 
+        #endregion
+
+        #region "public constructors"
+
         public RQKosBranch()
             : base()
         { }
 
-        public RQKosBranch( string majClassID, string formatID)
+        public RQKosBranch( string majClassID, string serviceId)
             : base()
         {
-            this.classBranch = new SubjClassBranch(ref majClassID);
-            this._format = formatID;
+            int numVal = -1;
+   
+            this._service = serviceId;
+            try
+            {
+                numVal = Convert.ToInt32(majClassID);
+            }
+            catch { }
+            if (numVal == -1)
+            {
+                string id = "";
+                switch (majClassID.Substring(0, 4))
+                {
+                    case "rvk_":
+                        id = majClassID.Substring(4, majClassID.Length - 4);
+                        this.classBranch = new SubjClassBranch(ref id, SubjClass.ClassificationSystems.rvk);
+                        break;
+                    case "rqc_":
+                        id = majClassID.Substring(4, majClassID.Length - 4);
+                        this.classBranch = new SubjClassBranch(ref id, SubjClass.ClassificationSystems.rq);
+                        break;
+                    default:
+                        this.classBranch = null;
+                        break;
+                }
+            }
+            else
+                this.classBranch = new SubjClassBranch(ref majClassID);
         }
+        
+#endregion
+
+        #region "public methods"
 
         public void Add(RQKosItemTemplate item)
         {
             SubjClass cl = item._class;
 
-            this.classBranch.Add(ref cl);
+            this.classBranch.Add(cl);
         }
 
         public RQKosItemTemplate GetItem(int i)
         {
-            if (this._format == "dt")
+            if (this._service == "dt")
                 return new RQKosItemDT(classBranch.get_Item(i + 1));
+            else if (this._service == "rqld")
+                return new RQKosItemRQLD(classBranch.get_Item(i));
             else
                 return new RQKosItem(classBranch.get_Item(i));
         }
@@ -120,6 +168,8 @@ namespace MvcRQ.Models
         {
             return new RQKosBranchEnum(this);
         }
+
+        #endregion
     }
 
 
@@ -128,9 +178,15 @@ namespace MvcRQ.Models
     /// </summary>
     public class RQKosBranchEnum : IEnumerator<RQKosItemTemplate>
     {
+        #region "private members"
+
         private RQKosBranch _itemSet;
         private int _curIndex;
         private RQKosItemTemplate _curItem;
+
+        #endregion
+
+        #region "public constructors"
 
         public RQKosBranchEnum(RQKosBranch kosSet)
         {
@@ -138,6 +194,10 @@ namespace MvcRQ.Models
             _curIndex = -1;
             _curItem = default(RQKosItemTemplate);
         }
+
+        #endregion
+
+        #region "public methods"
 
         public bool MoveNext()
         {
@@ -175,6 +235,8 @@ namespace MvcRQ.Models
         void IDisposable.Dispose()
         {
         }
+
+        #endregion
     }
 
 
@@ -184,62 +246,26 @@ namespace MvcRQ.Models
     [XmlRoot]
     abstract public class RQKosItemTemplate
     {
+        #region "private properties"
+
+        //internal SubjClass _class { get; set; }
         internal SubjClass _class { get; set; }
-
-
-        //[DataMember]
-        //public string ID
-        //{
-        //    get
-        //    {
-        //        return this._class.ClassID;
-        //    }
-        //    set
-        //    {
-        //        this._class.ClassID = ID;
-        //    }
-        //}
-
-
-        //[DataMember]
-        //public string ClassCode
-        //{
-        //    get
-        //    {
-        //        return this._class.ClassCode;
-        //    }
-        //    set
-        //    {
-        //        this._class.ClassCode = ClassCode;
-        //    }
-        //}
-
-
-        //[DataMember]
-        //public string ClassLongTitle
-        //{
-        //    get
-        //    {
-        //        return this._class.ClassLongTitle;
-        //    }
-        //    set
-        //    {
-        //        this._class.ClassLongTitle = ClassLongTitle;
-        //    }
-        //}
-
         
+        #endregion
+
+        #region "public constructors"
+
         public RQKosItemTemplate()
         {
             this._class = new SubjClass();
         }
 
-
         public RQKosItemTemplate(SubjClass thisClass)
         {
             this._class = thisClass;
         }
-   
+
+        #endregion
     }
 
 
@@ -247,55 +273,32 @@ namespace MvcRQ.Models
     public class RQKosItem 
         : RQKosItemTemplate
     {
+        #region "public properties"
+
         [DataMember]
-        public string ID
+        public SubjClass classification
         {
             get
             {
-                return this._class.ClassID;
+                return this._class;
             }
-            set
+            set 
             {
-                this._class.ClassID = ID;
+                this._class = classification;
             }
         }
+        
+        #endregion
 
-
-        [DataMember]
-        public string ClassCode
-        {
-            get
-            {
-                return this._class.ClassCode;
-            }
-            set
-            {
-                this._class.ClassCode = ClassCode;
-            }
-        }
-
-
-        [DataMember]
-        public string ClassLongTitle
-        {
-            get
-            {
-                return this._class.ClassLongTitle;
-            }
-            set
-            {
-                this._class.ClassLongTitle = ClassLongTitle;
-            }
-        }
-
+        #region "public constructors"
 
         public RQKosItem()
             : base() {}
-
-
+        
         public RQKosItem(SubjClass thisClass)
-            : base(thisClass) {}
+            : base(thisClass) { }
 
+        #endregion
     }
 
 
@@ -303,9 +306,14 @@ namespace MvcRQ.Models
     public class RQKosItemDT
     : RQKosItemTemplate
     {
+        #region "private members"
 
         private bool _isLazy = true;
         private string _tooltip = "";
+        
+        #endregion
+
+        #region "public properties"
 
         [DataMember]
         public string title
@@ -319,8 +327,7 @@ namespace MvcRQ.Models
                 this._class.ClassShortTitle = title;
             }
         }
-
-
+        
         [DataMember]
         public bool isFolder
         {
@@ -335,8 +342,7 @@ namespace MvcRQ.Models
             {
             }
         }
-
-
+        
         [DataMember]
         public bool isLazy
         {
@@ -349,8 +355,7 @@ namespace MvcRQ.Models
                 this._isLazy = isLazy;
             }
         }
-
-
+        
         [DataMember]
         public string key
         {
@@ -365,8 +370,7 @@ namespace MvcRQ.Models
                 this._class.ClassID = key.Substring(0, si) + key.Substring(si + 1);
             }
         }
-
-
+        
         [DataMember]
         public string unselectable
         {
@@ -381,8 +385,7 @@ namespace MvcRQ.Models
             {
             }
         }
-
-
+        
         [DataMember]
         public string tooltip
         {
@@ -407,7 +410,10 @@ namespace MvcRQ.Models
             }
         }
 
+        #endregion
 
+        #region "public constructors"
+        
         public RQKosItemDT()
             : base() { }
 
@@ -415,5 +421,49 @@ namespace MvcRQ.Models
         public RQKosItemDT(SubjClass thisClass)
             : base(thisClass) { }
 
+        #endregion
     }
+
+
+    [KnownType(typeof(RQKosItemRQLD))]
+    [KnownType(typeof(RQLib.RQLD.RQSkosGraph))]
+    public class RQKosItemRQLD
+    : RQKosItemTemplate
+    {
+        #region "private members"
+
+        #endregion
+
+        #region "public properties"
+
+        [DataMember]
+        public RQLib.RQLD.RQSkosGraph RDF
+        {
+            get
+            {
+                if ((this._class.ClassID != null) && (this._class.ClassID != "0"))
+                    return this._class.RDFGraph;
+                else
+                    return null;
+            }
+            set
+            {
+                this._class.ClassShortTitle = "test";
+            }
+        }
+
+        #endregion
+
+        #region "public constructors"
+
+        public RQKosItemRQLD()
+            : base() { }
+
+
+        public RQKosItemRQLD(SubjClass thisClass)
+            : base(thisClass) { }
+
+        #endregion
+    }
+
 }

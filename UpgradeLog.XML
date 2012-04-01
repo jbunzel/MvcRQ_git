@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="MvcRQ">
+</Property><Property Name="Projektmappendatei" Value="C:\Users\jürgen\Documents\Visual Studio 2010\Websites\MvcRQ_git\MvcRQ.sln">
+</Property><Property Name="Date" Value="Sonntag, 22. Januar 2012">
+</Property><Property Name="Time" Value="16:07:19">
+</Property></Properties><Event ErrorLevel="0" Project="dotNetRDF" Source="dotNetRDF\Libraries\core\dotNetRDF.csproj" Description="Projekt erfolgreich konvertiert">
+</Event><Event ErrorLevel="3" Project="dotNetRDF" Source="dotNetRDF\Libraries\core\dotNetRDF.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="dotNetRDF" Source="dotNetRDF\Libraries\core\dotNetRDF.csproj" Description="Überprüfung abgeschlossen: Upgrade der Projektdateien nicht erforderlich.">
+</Event></UpgradeLog>

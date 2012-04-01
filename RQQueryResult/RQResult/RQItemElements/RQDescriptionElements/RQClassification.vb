@@ -4,16 +4,13 @@ Imports RQLib.RQKos.Classifications
 
 Namespace RQQueryResult.RQDescriptionElements
 
-    '<System.Xml.Serialization.XmlInclude(GetType(ClassificationCode))> _
     Public Class RQClassification
         Inherits RQDescriptionElement
         Implements Collections.IEnumerable
 
 #Region "Private Members"
 
-        '<System.Xml.Serialization.XmlArrayItem(GetType(ClassificationCode), ElementName:="ClassificationCode")> _
-        '<System.Xml.Serialization.XmlArray(ElementName:="MyDocumentId")> _
-        Private _classCodes() As ClassificationCode = {}
+        Private _classCodes() As SubjClass = {}
 
 #End Region
 
@@ -31,11 +28,11 @@ Namespace RQQueryResult.RQDescriptionElements
         End Property
 
 
-        Public Property items() As ClassificationCode()
+        Public Property items() As SubjClass()
             Get
                 Return Me._classCodes
             End Get
-            Set(ByVal value As ClassificationCode())
+            Set(ByVal value As SubjClass())
                 Me._classCodes = value
             End Set
         End Property
@@ -67,7 +64,7 @@ Namespace RQQueryResult.RQDescriptionElements
 
             For Each c As String In Me._content.Split(splits, StringSplitOptions.RemoveEmptyEntries)
                 Array.Resize(Me._classCodes, i + 1)
-                Me._classCodes(i) = New ClassificationCode(c)
+                Me._classCodes(i) = New SubjClass(c, True) 'True indicates c is LocalName
                 i = i + 1
             Next
         End Sub
@@ -87,7 +84,7 @@ Namespace RQQueryResult.RQDescriptionElements
         End Function
 
 
-        Public Function GetItem(ByVal i As Integer) As ClassificationCode
+        Public Function GetItem(ByVal i As Integer) As SubjClass
             If i < count Then
                 If Not IsNothing(Me._classCodes(i)) Then
                     Return Me._classCodes(i)
@@ -105,37 +102,41 @@ Namespace RQQueryResult.RQDescriptionElements
 
 
         Public Overrides Sub WriteXml(ByVal writer As Xml.XmlWriter)
-            Dim cc As ClassificationCode
+            Dim cc As SubjClass
             Dim str As String = ""
 
             For Each cc In Me._classCodes
                 writer.WriteStartElement("ClassificationCode")
                 Select Case cc.ClassificationSystem
-                    Case ClassificationCode.ClassificationSystems.rq
+                    Case SubjClass.ClassificationSystems.rq
                         str = "rq"
-                    Case ClassificationCode.ClassificationSystems.rvk
+                    Case SubjClass.ClassificationSystems.rvk
                         str = "rvk"
-                    Case ClassificationCode.ClassificationSystems.jel
+                    Case SubjClass.ClassificationSystems.jel
                         str = "jel"
-                    Case ClassificationCode.ClassificationSystems.oldrq
+                    Case SubjClass.ClassificationSystems.oldrq
                         str = "oldrq"
                     Case Else
                         str = ""
                 End Select
                 writer.WriteElementString("ClassificationSystem", str)
-                writer.WriteElementString("Notation", cc.ClassNotation)
-                If cc.ClassificationSystem = ClassificationCode.ClassificationSystems.rq Then
-                    Dim cn As ClassificationCode = cc
+                writer.WriteElementString("Notation", cc.ClassCode)
+                Select Case cc.ClassificationSystem
+                    Case SubjClass.ClassificationSystems.rq
+                        Dim cn As SubjClass = cc
 
-                    writer.WriteElementString("ClassLabel", cc.ClassLabel)
-                    writer.WriteElementString("ClassAltLabel", cc.ClassAltLabel)
-                    str = ""
-                    Do
-                        str = str.Insert(0, "/" + cn.Id + "$" + cn.ClassNotation)
-                        cn = cn.GetBroaderClass()
-                    Loop Until (IsNothing(cn))
-                    writer.WriteElementString("ClassificationPath", str)
-                End If
+                        writer.WriteElementString("ClassLabel", cc.ClassShortTitle)
+                        writer.WriteElementString("ClassAltLabel", cc.ClassLongTitle)
+                        str = ""
+                        Do
+                            str = str.Insert(0, "/" + cn.ClassID + "$" + cn.ClassCode)
+                            cn = cn.GetBroaderClass()
+                        Loop Until (IsNothing(cn))
+                        writer.WriteElementString("ClassificationPath", str)
+                    Case SubjClass.ClassificationSystems.rvk
+                        writer.WriteElementString("ClassID", cc.ClassID)
+                        writer.WriteElementString("ClassLabel", cc.ClassShortTitle)
+                End Select
                 writer.WriteEndElement()
             Next
         End Sub

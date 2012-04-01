@@ -24,6 +24,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\MvcRQ.XML</DocumentationFile>
+    <DeployIisAppPath>Default Web Site/MvcRQ</DeployIisAppPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -134,6 +136,7 @@
     <Content Include="Images\icon_webfolder.gif" />
     <Content Include="Images\icon_websource.gif" />
     <Content Include="Images\RQFTCollection.jpg" />
+    <Content Include="N3Rules\test.n3" />
     <Content Include="README.txt" />
     <Content Include="Scripts\dynatree-1.2.0\jquery.cookie.js" />
     <Content Include="Scripts\dynatree-1.2.0\jquery.rqdynatree.js" />
@@ -184,7 +187,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="xml\dir.xml" />
     <Content Include="xml\extdblist.xml" />
     <Content Include="xml\IndexConfig.xml" />
@@ -194,6 +199,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="xslt\RQ2RQ.xslt" />
+    <Content Include="xslt\RQKos2RDF.xslt" />
     <Content Include="xslt\ViewTransforms\ArrayOfRQItem_Example.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -215,9 +221,17 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\dotNetRDF\Libraries\core\dotNetRDF.csproj">
+      <Project>{BFBAC159-1E60-4D03-8ACA-D34E31EB83BF}</Project>
+      <Name>dotNetRDF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvpRestApiLib\MvpRestApiLib.csproj">
       <Project>{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}</Project>
       <Name>MvpRestApiLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQLinkedData\RQLinkedData.csproj">
+      <Project>{182ED3FC-0121-4A3F-9F79-B8C5782BB755}</Project>
+      <Name>RQLinkedData</Name>
     </ProjectReference>
     <ProjectReference Include="..\RQQueryResult\RQLib.vbproj">
       <Project>{D695EAA6-B358-4C80-82AA-A0AA15EBC5D4}</Project>
@@ -238,23 +252,20 @@
     <Content Include="Views\RQItems\Shared\JsonViewer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RQItems\NewRQItem.cshtml" />
+    <Content Include="Views\RQItems\ServIndRQItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RQItems\SingleRQItem.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\RQItems\SingleRQItemItemDescElements.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\RQItems\SingleRQItemSingleItemDescElement.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\RQItems\Shared\ListViewer.cshtml" />
-    <Content Include="Views\RQItems\Shared\HtmlViewer.cshtml" />
     <Content Include="Views\RQItems\Shared\ResultViewer.cshtml" />
     <Content Include="Views\RQKos\Index.cshtml" />
-    <Content Include="Views\RQItems\ListRQItem.cshtml" />
+    <Content Include="Views\RQItems\ServListRQItem.cshtml" />
+    <Content Include="Views\RQKos\shared\JsonViewer.cshtml" />
+    <Content Include="Views\RQKos\shared\XmlViewer.cshtml" />
+    <Content Include="Views\RQKos\shared\ShelvesViewer.cshtml" />
+    <Content Include="Views\RQItems\Shared\EditViewer.cshtml" />
+    <Content Include="Views\RQKos\ServRQKos.cshtml" />
+    <Content Include="Views\RQItems\EditorTemplates\multilinetext.cshtml" />
+    <Content Include="Views\RQItems\EditorTemplates\text.cshtml" />
+    <Content Include="Views\RQItems\IndRQItem.cshtml" />
     <None Include="~db\RQLucene\CATALOG\segments.gen" />
     <None Include="~db\RQLucene\CATALOG\segments_1pv" />
     <None Include="~db\RQLucene\CATALOG\_us.cfs" />

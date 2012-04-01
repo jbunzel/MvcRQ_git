@@ -9,11 +9,12 @@
         url += $("#jsonAdditionalQueryString").val();
         return url;
     }
+
     function renderJson(data) {
         var json = JSON.stringify(data);
-        //alert("Received: \n" + json);
         $("#jsonViewer").val(json);
     }
+
     $(document).ready(function () {
         $("#jsonUrl").val(document.location.href);
         $("#jsonPostUrl").text(document.location.href);
@@ -24,7 +25,6 @@
         $("#saveJson").click(function () {
             var json = $("#jsonViewer").val();
             url = prepareForJsonCall();
-
 
             $.ajax({
                 url: url,
@@ -54,9 +54,8 @@
 </script>
 
 <hr />
-<span>Der JsonViewer zeigt die Rückgabe bei Aufruf dieser Web-Adresse mit akzeptierten Typen "text/json" oder "application/json" an.</span>
 <p>JSON received from: <input id="jsonUrl" type="text" value="" size="50" /></p>
-<textarea id="jsonViewer" name="code" class="javascript" cols="80" rows="10">
+<textarea id="jsonViewer" name="code" class="javascript" cols="120" rows="10">
 
 </textarea>
 <br />

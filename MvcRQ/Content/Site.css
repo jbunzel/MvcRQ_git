@@ -187,7 +187,7 @@ legend {
 }
 
 textarea {
-    min-height: 75px;
+    min-height: 0px;
 }
 
 input[type="text"], 
@@ -312,7 +312,7 @@ div#title {
 }
 
 .text-box {
-    width: 30em;
+    width: 100%;
 }
 
 .text-box.multi-line {
@@ -321,4 +321,86 @@ div#title {
 
 .tri-state {
     width: 6em;
+}
+
+/* My Styles
+----------------------------------------------------------*/
+
+label {
+    border: 1 solid black;
+    margin: 15px 2px 5px 0px;
+    display: inline;
+}
+
+*
+label[for=Title],
+label[for=Institutions],
+label[for=IndexTerms],
+label[for=AboutPersons] {
+    display: block;
+}
+/*
+label[for=Volume],
+label[for=DocTypeCode] {
+    display: inline-block;
+}
+*/
+
+/* hack: insert a line-break */
+label[for=AboutTime]:before,
+label[for=Notes] {
+    content: '\a';
+    white-space: pre;
+}
+
+textarea {
+    margin: 5px 5px 5px 0px;
+}
+
+.title,
+.authors,
+.source,
+.institution,
+.series,
+.indexterms,
+.subjects,
+.aboutpersons,
+.abstract {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+input[type=text] {
+    width: 250px;
+    margin: 5px 32px 5px 5px;
+} 
+
+.edition,
+.isdn,
+.coden, 
+.locality,
+.publisher,
+.publtime,
+.volume,
+.issue,
+.pages,
+.language,
+.doctypecode,
+.doctypename,
+.worktype,
+.aboutlocation,
+.abouttime,
+.classification,
+.createlocation,
+.createtime,
+.notes {
+    display: inline;
+}
+
+.volume,
+.issue,
+.pages,
+.language {
+    max-width: 160px;
 }

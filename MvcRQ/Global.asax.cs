@@ -23,24 +23,24 @@ namespace MvcRQ
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
                 "ServiceSingleRQKosItem",
-                "{formatId}/RQKos/{id}",
-                new { controller = "RQKos", action = "RQKosItemRecord", formatId = UrlParameter.Optional });
+                "{serviceId}/RQKos/{id}",
+                new { controller = "RQKos", action = "RQKosItemRecord", serviceId = UrlParameter.Optional, id = UrlParameter.Optional });
             routes.MapRoute(
                 "SingleRQKosItem",
                 "RQKos/{id}",
                 new { controller = "RQKos", action = "Index", id = UrlParameter.Optional });
             routes.MapRoute(
                 "ServiceRQItemList",
-                "{formatId}/RQItems",
-                new { controller = "RQItems", action = "RQItemList", formatId = UrlParameter.Optional });
+                "{serviceId}/RQItems",
+                new { controller = "RQItems", action = "RQItemList", serviceId = UrlParameter.Optional });
             routes.MapRoute(
                 "RQItemList",
                 "RQItems",
                 new { controller = "RQItems", action = "Index" });
             routes.MapRoute(
                 "ServiceSingleRQItem",
-                "{formatId}/RQItems/{rqitemId}",
-                new { controller = "RQItems", action = "RQItemRecord", formatId = UrlParameter.Optional});
+                "{serviceId}/RQItems/{rqitemId}",
+                new { controller = "RQItems", action = "RQItemRecord", serviceId = UrlParameter.Optional});
             routes.MapRoute(
                 "SingleRQItem",
                 "RQItems/{rqitemId}",

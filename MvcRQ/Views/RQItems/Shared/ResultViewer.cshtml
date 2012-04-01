@@ -25,14 +25,13 @@
 
     function renderXmlList(data, docno) {
         var xml = window.ActiveXObject ? data.xml : (new XMLSerializer().serializeToString(data));
-        //$("#transformResult").transform({ xmlstr: xml, xsl: "/xslt/ViewTransforms/RQ2SingleItemView.xslt" });
-        $("#" + docno).transform({ xmlstr: xml, xsl: "/xslt/ViewTransforms/RQ2SingleItemView.xslt" });
+        $("#" + docno).transform({ xmlstr: xml, xsl: document.location.href.substring(0, document.location.href.indexOf("RQItems")) + "xslt/ViewTransforms/RQ2SingleItemView.xslt" });
     }
 
     function getRQItem(docno) {
         if ($("#" + docno).is(":empty")) {
             $.ajax({
-                url: document.location.href + "/" + docno,
+                url: document.location.href + "/" + docno + "?verb=rqSingleHTML",
                 type: "GET",
                 data: null,
                 dataType: "xml",
@@ -44,10 +43,8 @@
         $("#" + docno).toggle("slow");
     }
 
-    function getRQKos(path, docno) {
-        window.location.href = "/rqkos/0?p=" + path + "&amp;d=" + docno;
+    function call(path) {
+        window.location = document.location.href.substring(0, document.location.href.indexOf("RQItems")) + path;
     }
-
 </script>
-
 <div id="htmlList"></div>

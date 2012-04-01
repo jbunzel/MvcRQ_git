@@ -520,7 +520,7 @@ Namespace Utilities
 
                 'Lookup Systematik entries for RVK classification code
                 If _ClassCodes.Count > 0 Then
-                    Dim SysQuery As New RQCatalogDAL
+                    Dim SysQuery As New RQCatalogDAL 'should be transferred to RQClassificationDataClient
                     Dim j As Integer = _ClassCodes.Count
 
                     i = 0

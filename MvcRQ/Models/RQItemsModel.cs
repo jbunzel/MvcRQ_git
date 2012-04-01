@@ -12,12 +12,9 @@ using RQLib.RQQueryForm;
 
 namespace MvcRQ.Models
 {
-
     public class RQItemModel
     {
-
         public RQItemSet RQItems { get; set; }
-
 
         public RQItemModel(RQquery query)
         {
@@ -26,33 +23,16 @@ namespace MvcRQ.Models
             RQItems.Find(query);
         }
 
-
-        public string toHTML(string format, int fromRecord, int toRecord)
+        public void Update()
         {
-            return this.RQItems.toHTML(format, fromRecord, toRecord);
+            this.RQItems.Update();
         }
-
-
-        public string toHTML(string format, int fromRecord)
-        {
-            return this.toHTML(format, fromRecord, 0);
-        }
-
-
-        public string toHTML(string format)
-        {
-            return this.toHTML(format, 1, 0);
-        }
-    
     }
-
 
     [XmlRoot]
     public class RQItemSet : System.Collections.Generic.IEnumerable<RQItem>
     {
-    
         private RQResultSet ItemResultSet;
-
 
         public int count
         {
@@ -62,30 +42,30 @@ namespace MvcRQ.Models
             }
         }
 
-
         public RQItemSet() :base()
         {
             ItemResultSet = new RQResultSet();
         }
-
 
         public void Add(RQItem item)
         {
             this.ItemResultSet.CreateItem(item._resultItem);
         }
 
-
         public RQItem GetItem(int i)
         {
             return new RQItem(ItemResultSet.GetItem(i));
         }
 
+        public void Update()
+        {
+            this.ItemResultSet.Update();
+        }
 
         public void Find(RQquery query)
         {
             this.ItemResultSet.Find(query);
         }
-
 
         public System.Xml.XmlTextReader ConvertTo(string format, int fromRecord, int maxRecord)
         {
@@ -95,72 +75,32 @@ namespace MvcRQ.Models
                 return this.ItemResultSet.ConvertTo(format, fromRecord, maxRecord);
         }
 
-
         public System.Xml.XmlTextReader ConvertTo(string format)
         {
             return this.ConvertTo(format, 1, 0);
         }
-
-
-        public string toHTML (string format, int fromRecord, int toRecord)
-        {
-            System.Xml.XmlTextReader r = this.ConvertTo(format, fromRecord, toRecord);
-
-            try{
-                var xTrf = new System.Xml.Xsl.XslCompiledTransform();
-                var mstr = new XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
-                XmlDocument doc = new XmlDocument();
-
-                r.MoveToContent();
-                xTrf.Load(HttpContext.Current.Server.MapPath("xslt/ViewTransforms/RQResultList2RQSorted.xslt"));
-                xTrf.Transform(new System.Xml.XPath.XPathDocument(r), null, mstr);
-                mstr.BaseStream.Flush();
-                mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-                doc.Load(mstr.BaseStream);
-
-                //TESTDATEI EZEUGEN
-                //doc.Save("C:/MVCTest.xml");
-                //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-
-                XmlTextReader rd =new XmlTextReader(mstr.BaseStream);
-                return doc.OuterXml;
-            }
-            catch
-            {
-                // RQItemSet ist leer
-                return "";
-            }
-            //return r.ReadOuterXml();
-        }
- 
 
         public System.Data.DataTable GetDataFieldTable()
         {
             return this.ItemResultSet.GetDataFieldTable();
         }
 
-
         public System.Collections.Generic.IEnumerator<RQItem> GetEnumerator()
         {
             return new RQItemSetEnum(this);
         }
 
-
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return new RQItemSetEnum(this);
         }
-    
     }
-
 
     public class RQItemSetEnum : IEnumerator<RQItem>
     {
-
         private RQItemSet _itemSet;
         private int _curIndex;
         private RQItem _curItem;
- 
 
         public RQItemSetEnum( RQItemSet itemSet)
         {
@@ -168,7 +108,6 @@ namespace MvcRQ.Models
             _curIndex = -1;
             _curItem = default(RQItem);
         }
-
 
         public bool MoveNext()
         {
@@ -183,7 +122,6 @@ namespace MvcRQ.Models
             return true;
         }
 
-
         public RQItem Current
         {
             get
@@ -191,7 +129,6 @@ namespace MvcRQ.Models
                 return this._curItem;
             }
         }
-
 
         object System.Collections.IEnumerator.Current
         {
@@ -201,25 +138,19 @@ namespace MvcRQ.Models
             }
         }
 
-
         public void Reset()
         {
         }
-        
 
         void IDisposable.Dispose()
         {
         }
-
     }
-
 
     [XmlRoot]
     public class RQItem
     {
-
         internal RQResultItem _resultItem {get; set; }
-
 
         [DataMember]
         public string ID
@@ -234,7 +165,6 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
         public string DocNo
         {
@@ -248,8 +178,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.MultilineText)]
         public string Title
         {
             get
@@ -262,8 +192,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.MultilineText)]
         public string Authors
         {
             get
@@ -276,8 +206,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.MultilineText)]
         public string Source
         {
             get
@@ -290,8 +220,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.MultilineText)]
         public string Institutions
         {
             get
@@ -304,8 +234,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.MultilineText)]
         public string Series
         {
             get
@@ -318,8 +248,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.MultilineText)]
         public string IndexTerms
         {
             get
@@ -332,8 +262,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.MultilineText)]
         public string Subjects
         {
             get
@@ -346,8 +276,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.MultilineText)]
         public string AboutPersons
         {
             get
@@ -360,8 +290,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.MultilineText)]
         public string Abstract
         {
             get
@@ -374,8 +304,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string Edition
         {
             get
@@ -388,8 +318,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string ISDN
         {
             get
@@ -402,8 +332,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string Coden
         {
             get
@@ -416,8 +346,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string Locality
         {
             get
@@ -430,8 +360,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string Publisher
         {
             get
@@ -444,8 +374,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string PublTime
         {
             get
@@ -458,8 +388,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string Volume
         {
             get
@@ -472,8 +402,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string Issue
         {
             get
@@ -486,8 +416,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string Pages
         {
             get
@@ -500,8 +430,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string Language
         {
             get
@@ -514,8 +444,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string Signature
         {
             get
@@ -528,8 +458,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string DocTypeCode
         {
             get
@@ -542,8 +472,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string DocTypeName
         {
             get
@@ -556,8 +486,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string WorkType
         {
             get
@@ -570,8 +500,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string AboutLocation
         {
             get
@@ -584,8 +514,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string AboutTime
         {
             get
@@ -598,8 +528,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string CreateLocation
         {
             get
@@ -612,8 +542,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string CreateTime
         {
             get
@@ -626,8 +556,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public string Notes
         {
             get
@@ -640,8 +570,8 @@ namespace MvcRQ.Models
             }
         }
 
-
         [DataMember]
+        [DataType(DataType.Text)]
         public RQLib.RQQueryResult.RQDescriptionElements.RQClassification Classification
         {
             get
@@ -653,44 +583,25 @@ namespace MvcRQ.Models
                 this._resultItem.ItemDescription.Classification = Classification;
             }
         }
-        
       
         public RQItem()
         {
             this._resultItem = new RQResultItem();
         }
 
-
         public RQItem(RQResultItem resultItem)
         {
             this._resultItem = resultItem;
         }
 
+        public void Change(System.Collections.Specialized.NameValueCollection fromFields)
+        {
+            this._resultItem.Change(fromFields);
+        }
 
         public XmlTextReader ConvertTo(string format)
         {
            return this._resultItem.ConvertTo(format);
         }
-
     }
-
-
-    //[DataContract]
-    //public class ItemDescElement
-    //{
-    //    [Required]
-    //    [DataMember]
-    //    public string ID { get; set; }
-        
-    //    [StringLength(255), Required]
-    //    [DataMember]
-    //    public string Name { get; set; }
-        
-    //    [DataMember]
-    //    public int Value1 { get; set; }
-        
-    //    [DataMember]
-    //    public double Value2 { get; set; }
-    //}
-
 }

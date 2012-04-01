@@ -32,6 +32,7 @@ Namespace RQKos.Classifications
         Private _class As SubjClass
         Private _broaderClass As ClassificationCode = Nothing
         Private _narrowerClasses() As ClassificationCode
+        Private _classPath As String = ""
 
 #End Region
 
@@ -160,45 +161,107 @@ Namespace RQKos.Classifications
             End Set
         End Property
 
+
+        Public Property ClassPath() As String
+            Get
+                If (Me._classPath = "") Then
+                    Dim cn As ClassificationCode = Me
+
+                    Do
+                        Me._classPath = Me._classPath.Insert(0, "/" + cn.Id + "$" + cn.ClassNotation)
+                        cn = cn.GetBroaderClass()
+                    Loop Until (IsNothing(cn))
+                End If
+                Return Me._classPath
+            End Get
+            Set(ByVal value As String)
+                Me._classPath = value
+            End Set
+        End Property
+
+
+        Public Property NrOfSubClasses() As Integer
+            Get
+                Return Me._class.NrOfSubClasses
+            End Get
+            Set(ByVal value As Integer)
+                Me._class.NrOfSubClasses = value
+            End Set
+        End Property
+
+
+        Public Property NrOfClassDocs() As Integer
+            Get
+                Return Me._class.NrOfClassDocs
+            End Get
+            Set(ByVal value As Integer)
+                Me._class.NrOfClassDocs = value
+            End Set
+        End Property
+
+
+        Public Property NrOfRefLinks() As Integer
+            Get
+                Return Me._class.NrOfRefLinks
+            End Get
+            Set(ByVal value As Integer)
+                Me._class.NrOfRefLinks = value
+            End Set
+        End Property
+
+
+        Public ReadOnly Property SubjectClassification() As SubjClass
+            Get
+                Return Me._class
+            End Get
+        End Property
+
+
+        Public ReadOnly Property DataClient() As ClassificationDataClient
+            Get
+                Return Me._class.ClassDataClient
+            End Get
+        End Property
+
 #End Region
 
 
 #Region "Private Methods"
 
-        Private Sub GetClassData()
-            'If Me.ClassLabel = "" Then
-            '    If IsNothing(Me._classDataClient) Then Me._classDataClient = New ClassificationDataClient()
-            '    Me.ClassLabel = Me._classDataClient.GetPrefLabel(Me.ClassificationSystem, Me.ClassNotation)
-            '    Me.ClassAltLabel = Me._classDataClient.GetAltLabel(Me.ClassificationSystem, Me.ClassNotation)
-            'End If
-        End Sub
+        'Private Sub GetClassData()
+        'If Me.ClassLabel = "" Then
+        '    If IsNothing(Me._classDataClient) Then Me._classDataClient = New ClassificationDataClient()
+        '    Me.ClassLabel = Me._classDataClient.GetPrefLabel(Me.ClassificationSystem, Me.ClassNotation)
+        '    Me.ClassAltLabel = Me._classDataClient.GetAltLabel(Me.ClassificationSystem, Me.ClassNotation)
+        'End If
+        'End Sub
 
 
-        Private Sub GetClassHierarchy()
-            Me._broaderClass = GetBroaderClass()
+        'Private Sub GetClassHierarchy()
+        '    Me._broaderClass = GetBroaderClass()
 
-            If Not IsNothing(Me._broaderClass) Then
-                Me._broaderClass.GetClassHierarchy()
-            End If
-        End Sub
-
-
-        Private Sub GetBroaderClassInformation(ByRef theClass As ClassificationCode, ByRef writer As XmlTextWriter)
-            If (Not IsNothing(theClass._broaderClass)) Then
-                writer.WriteStartElement("BroaderClass")
-                writer.WriteStartElement("class")
-                AppendClassInformation(theClass._broaderClass, writer)
-                theClass._broaderClass.GetBroaderClassInformation(theClass._broaderClass, writer)
-                writer.WriteEndElement()
-                writer.WriteEndElement()
-            End If
-        End Sub
+        '    If Not IsNothing(Me._broaderClass) Then
+        '        Me._broaderClass.GetClassHierarchy()
+        '    End If
+        'End Sub
 
 
-        Private Sub AppendClassInformation(ByRef theClass As ClassificationCode, ByRef writer As XmlTextWriter)
-            writer.WriteElementString("LocalName", theClass._localName.Replace(theClass._localNameSpace + ":", ""))
-            writer.WriteElementString("Label", theClass._class.ClassShortTitle)
-        End Sub
+        'Private Sub GetBroaderClassInformation(ByRef theClass As ClassificationCode, ByRef writer As XmlTextWriter)
+        '    If (Not IsNothing(theClass._broaderClass)) Then
+        '        writer.WriteStartElement("BroaderClass")
+        '        writer.WriteStartElement("class")
+        '        AppendClassInformation(theClass._broaderClass, writer)
+        '        theClass._broaderClass.GetBroaderClassInformation(theClass._broaderClass, writer)
+        '        writer.WriteEndElement()
+        '        writer.WriteEndElement()
+        '    End If
+        'End Sub
+
+
+        'Private Sub AppendClassInformation(ByRef theClass As ClassificationCode, ByRef writer As XmlTextWriter)
+        '    writer.WriteElementString("LocalName", theClass._localName.Replace(theClass._localNameSpace + ":", ""))
+        '    writer.WriteElementString("Label", theClass._class.ClassShortTitle)
+        'End Sub
 
 #End Region
 
@@ -210,34 +273,58 @@ Namespace RQKos.Classifications
         End Sub
 
 
+        Public Sub New(ByVal theClass As SubjClass)
+            Me._class = theClass
+        End Sub
+
+
         Public Sub New(ByVal localName As String)
             Me.New()
             Me.LocalName = localName
+            Select Case Me.ClassificationSystem
+                Case ClassificationSystems.rq
+                    Me._class.ClassDataClient = New RQClassificationDataClient()
+                Case Else
+                    Me._class.ClassDataClient = New LDClassificationDataClient()
+            End Select
         End Sub
 
 
-        Sub New(ByVal classificationSystems As ClassificationSystems)
+        Public Sub New(ByVal ID As String, ByVal classDataClient As ClassificationDataClient)
             Me.New()
-            _classSystem = classificationSystems
+            Me.Id = ID
+            Me._class.ClassDataClient = classDataClient
         End Sub
+
+
+        'Public Sub New(ByVal classificationSystems As ClassificationSystems)
+        '    Me.New()
+        '    Me._classSystem = classificationSystems
+        'End Sub
+
+
+        'Sub New(ByVal classificationSystems As ClassificationSystems, ByVal localName As String)
+        '    Me.New(classificationSystems)
+        '    Me.LocalName = localName
+        'End Sub
 
 #End Region
 
 
 #Region "Public Methods"
 
-        Public Sub Augment()
-            'If IsNothing(Me._classDataClient) Then Me._classDataClient = New ClassificationDataClient()
-            'Me.GetClassData()
-            'Me.GetClassHierarchy()
-        End Sub
+        'Public Sub Augment()
+        'If IsNothing(Me._classDataClient) Then Me._classDataClient = New ClassificationDataClient()
+        ' Me.GetClassData()
+        'Me.GetClassHierarchy()
+        'End Sub
 
 
         Public Function GetBroaderClass() As ClassificationCode
             If IsNothing(Me._broaderClass) Then
                 If Me.ParentClassID <> "-1" And Me.ParentClassID <> "0" Then
-                    Me._broaderClass = New ClassificationCode()
-                    Me._broaderClass.Id = Me.ParentClassID
+                    Me._broaderClass = New ClassificationCode(Me.ParentClassID, Me._class.ClassDataClient)
+                    'Me._broaderClass.Id = Me.ParentClassID
                 Else
                     Return Nothing
                 End If
@@ -246,22 +333,22 @@ Namespace RQKos.Classifications
         End Function
 
 
-        Public Function GetCompleteClassInformation() As XmlTextWriter
-            Dim stream As New System.IO.MemoryStream()
-            Dim writer As New XmlTextWriter(stream, System.Text.Encoding.Default)
+        'Public Function GetCompleteClassInformation() As XmlTextWriter
+        '    Dim stream As New System.IO.MemoryStream()
+        '    Dim writer As New XmlTextWriter(stream, System.Text.Encoding.Default)
 
-            Me.Augment()
-            writer.WriteStartDocument()
-            writer.WriteStartElement("Classes")
-            writer.WriteStartElement("class")
-            Me.AppendClassInformation(Me, writer)
-            Me.GetBroaderClassInformation(Me, writer)
-            writer.WriteEndElement()
-            writer.WriteEndElement()
-            writer.WriteEndDocument()
-            writer.Flush()
-            Return writer
-        End Function
+        '    Me.Augment()
+        '    writer.WriteStartDocument()
+        '    writer.WriteStartElement("Classes")
+        '    writer.WriteStartElement("class")
+        '    Me.AppendClassInformation(Me, writer)
+        '    Me.GetBroaderClassInformation(Me, writer)
+        '    writer.WriteEndElement()
+        '    writer.WriteEndElement()
+        '    writer.WriteEndDocument()
+        '    writer.Flush()
+        '    Return writer
+        'End Function
 
 #End Region
 

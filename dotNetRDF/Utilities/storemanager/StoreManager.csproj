@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5B73EE4C-D365-437B-B3DC-8D8831BF74F3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VDS.RDF.Utilities.StoreManager</RootNamespace>
+    <AssemblyName>StoreManager</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>VDS.RDF.Utilities.StoreManager.Program</StartupObject>
+    <ApplicationIcon>file-manager.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.0.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connections\BaseConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\AllegroGraphConnection.cs" />
+    <Compile Include="Connections\BaseServerConnection.cs" />
+    <Compile Include="Connections\BuiltIn\DatasetFileConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\DydraConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\FourStoreConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\FusekiConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\InMemoryConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\JosekiConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\MicrosoftAdoConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\SesameConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\SparqlGraphStoreConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\SparqlQueryConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\StardogConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\TalisConnectionDefinition.cs" />
+    <Compile Include="Connections\BuiltIn\VirtuosoConnectionDefinition.cs" />
+    <Compile Include="Connections\ConnectionAttribute.cs" />
+    <Compile Include="Connections\ConnectionDefinitionManager.cs" />
+    <Compile Include="Connections\ConnectionInfo.cs" />
+    <Compile Include="Connections\IConnectionDefinition.cs" />
+    <Compile Include="CopyMoveDialogue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyMoveDialogue.Designer.cs">
+      <DependentUpon>CopyMoveDialogue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CopyMoveRenameGraphForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyMoveRenameGraphForm.Designer.cs">
+      <DependentUpon>CopyMoveRenameGraphForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CrossThreadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StoreManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StoreManagerForm.Designer.cs">
+      <DependentUpon>StoreManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManagerForm.Designer.cs">
+      <DependentUpon>ManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskErrorTraceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskErrorTraceForm.Designer.cs">
+      <DependentUpon>TaskErrorTraceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskInformationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskInformationForm.Designer.cs">
+      <DependentUpon>TaskInformationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListViewColumnSorter.cs" />
+    <Compile Include="NewConnectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewConnectionForm.Designer.cs">
+      <DependentUpon>NewConnectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="StoreManagerForm.resx">
+      <DependentUpon>StoreManagerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManagerForm.resx">
+      <DependentUpon>ManagerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="QuickConnect.cs" />
+    <Compile Include="StartPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StartPage.Designer.cs">
+      <DependentUpon>StartPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\BaseImportTask.cs" />
+    <Compile Include="Tasks\BaseTask.cs" />
+    <Compile Include="Tasks\CopyMoveDragInfo.cs" />
+    <Compile Include="Tasks\CopyMoveRenameTask.cs" />
+    <Compile Include="Tasks\CountTriplesTask.cs" />
+    <Compile Include="Tasks\PreviewGraphTask.cs" />
+    <Compile Include="Tasks\DeleteGraphTask.cs" />
+    <Compile Include="Tasks\ExportTask.cs" />
+    <Compile Include="Tasks\ImportTasks.cs" />
+    <Compile Include="Tasks\ITask.cs" />
+    <Compile Include="Tasks\ListGraphsTasks.cs" />
+    <Compile Include="Tasks\QueryTask.cs" />
+    <Compile Include="Tasks\TaskExtensions.cs" />
+    <Compile Include="Tasks\UpdateTask.cs" />
+    <Compile Include="Tasks\ViewGraphTask.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\core\dotNetRDF.csproj">
+      <Project>{BFBAC159-1E60-4D03-8ACA-D34E31EB83BF}</Project>
+      <Name>dotNetRDF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\data.sql\dotNetRDF.Data.Sql.csproj">
+      <Project>{9E1D685E-4E8F-4A9D-B073-51FF6C8D8661}</Project>
+      <Name>dotNetRDF.Data.Sql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\data.virtuoso\dotNetRDF.Data.Virtuoso.csproj">
+      <Project>{9088435D-24F9-4D53-BE71-9A9BFBAA34EE}</Project>
+      <Name>dotNetRDF.Data.Virtuoso</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\gui.winforms\dotNetRDF.WinForms.csproj">
+      <Project>{0D1B8423-44F6-4ACE-8055-58D66E574F9D}</Project>
+      <Name>dotNetRDF.WinForms</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CopyMoveDialogue.resx">
+      <DependentUpon>CopyMoveDialogue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyMoveRenameGraphForm.resx">
+      <DependentUpon>CopyMoveRenameGraphForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskErrorTraceForm.resx">
+      <DependentUpon>TaskErrorTraceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskInformationForm.resx">
+      <DependentUpon>TaskInformationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewConnectionForm.resx">
+      <DependentUpon>NewConnectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sparql.css" />
+    <EmbeddedResource Include="StartPage.resx">
+      <DependentUpon>StartPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="database_gear.ico" />
+    <Content Include="file-manager.ico" />
+    <Content Include="folder_explore.png" />
+    <Content Include="folder_star.png" />
+    <Content Include="plugins\Store Manager Plugins.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

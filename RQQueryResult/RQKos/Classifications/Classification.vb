@@ -1,21 +1,53 @@
 ﻿Imports Microsoft.VisualBasic
+Imports RQLib.RQLD
+
 
 Namespace RQKos.Classifications
 
     Public Class SubjClass
 
+#Region "Public Enumerations"
+
+        Public Enum ClassificationSystems
+            ddc
+            rvk
+            jel
+            rq
+            oldrq
+            unkown
+        End Enum
+
+
+        'Public Enum ClassificationPredicates
+        '    alternative_label
+        '    broader_term
+        '    class_notation
+        '    narrower_term
+        '    preferred_label
+        'End Enum
+
+#End Region
+
+
 #Region "Private Members"
 
-        Private _classDataClient As ClassificationDataClient = Nothing
         Private _intClassID As Integer = -1
-        Private _intParentClassID As Integer = -1
+        Private _strClassID As String = ""
+        Private _classSystem As ClassificationSystems = ClassificationSystems.unkown
         Private _strClassCode As String = ""
         Private _strClassShortTitle As String = ""
         Private _strClassLongTitle As String = ""
-        Private _strRefRVKSet As String = ""
+        Private _localName As String = ""
+        Private _localNameSpace As String = ""
         Private _intNrOfSubClasses As Integer = -1
         Private _intNrOfDocuments As Integer = -1
         Private _intNrOfRefLinks As Integer = -1
+        Private _classPath As String = ""
+        Private _intParentClassID As Integer = -1
+        Private _broaderClass As SubjClass = Nothing
+        Private _narrowerClasses() As SubjClass
+        Private _strRefRVKSet As String = ""
+        Private _classDataClient As ClassificationDataClient = Nothing
 
 
         Private Enum ValidEnum
@@ -30,55 +62,62 @@ Namespace RQKos.Classifications
 #End Region
 
 
-#Region "Properties"
-
-        Public ReadOnly Property ClassDataClient() As ClassificationDataClient
-            Get
-                Return Me._classDataClient
-            End Get
-        End Property
-
+#Region "Public Properties"
 
         Public Property ClassID() As String
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then
-                    Me._intClassID = Me.RetrieveClassId()
+                If Me._strClassCode <> "" And Me._intClassID < 0 And Me._strClassID = "" Then Me.Read()
+                If Me._intClassID < 0 Then
+                    Return Me._strClassID
+                Else
+                    Return CStr(Me._intClassID)
                 End If
-                Return CStr(Me._intClassID)
             End Get
             Set(ByVal value As String)
-                If CInt(value) <> Me._intClassID Then
-                    Me._intClassID = CInt(value)
-                    Me._isValid = ValidEnum.undefined
-                End If
+                Try
+                    If CInt(value) <> Me._intClassID Then
+                        Me._intClassID = CInt(value)
+                        Me._isValid = ValidEnum.undefined
+                    End If
+                Catch ex As InvalidCastException
+                    If value <> Me._strClassID Then
+                        Me._strClassID = value
+                        Me._isValid = ValidEnum.undefined
+                    End If
+                End Try
             End Set
         End Property
 
 
-        Public Property ParentClassID() As String
+        Public Property ClassificationSystem() As ClassificationSystems
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then
-                    Me._intClassID = Me.RetrieveClassId()
-                End If
-                If Me.ClassID >= 0 And Me._intParentClassID < 0 Then
-                    Me.Read()
-                End If
-                Return CStr(Me._intParentClassID)
+                Return Me._classSystem
             End Get
-            Set(ByVal value As String)
-                If CInt(value) <> Me._intParentClassID Then
-                    Me._intParentClassID = CInt(value)
-                    Me._isValid = ValidEnum.undefined
-                End If
+            Set(ByVal value As ClassificationSystems)
+                Me._classSystem = value
+                Select Case value
+                    Case SubjClass.ClassificationSystems.rvk
+                        Me._localNameSpace = "§§RVK§§"
+                        If IsNothing(Me.ClassDataClient) Then Me.ClassDataClient = New LDClassificationDataClient(value)
+                    Case SubjClass.ClassificationSystems.jel
+                        Me._localNameSpace = "§§JEL§§"
+                        If IsNothing(Me.ClassDataClient) Then Me.ClassDataClient = New LDClassificationDataClient(value)
+                    Case SubjClass.ClassificationSystems.oldrq
+                        Me._localNameSpace = ""
+                        If IsNothing(Me.ClassDataClient) Then Me.ClassDataClient = New RQClassificationDataClient()
+                    Case SubjClass.ClassificationSystems.rq
+                        Me._localNameSpace = ""
+                        If IsNothing(Me.ClassDataClient) Then Me.ClassDataClient = New RQClassificationDataClient()
+                    Case Else
+                        If IsNothing(Me.ClassDataClient) Then Me.ClassDataClient = New RQClassificationDataClient()
+                End Select
             End Set
         End Property
 
 
         Public Property ClassCode() As String
             Get
-                If Me._intClassID >= 0 And Me._strClassCode = "" Then
-                    Me.Read()
-                End If
+                If Me._intClassID >= 0 And Me._strClassCode = "" Then Me.Read()
                 Return Me._strClassCode
             End Get
             Set(ByVal value As String)
@@ -90,81 +129,95 @@ Namespace RQKos.Classifications
 
         Public Property ClassShortTitle() As String
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then
-                    Me._intClassID = Me.RetrieveClassId()
-                End If
-                If Me.ClassID >= 0 And Me._strClassShortTitle = "" Then
-                    Me.Read()
-                End If
+                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
                 Return Me._strClassShortTitle
             End Get
             Set(ByVal value As String)
                 Me._strClassShortTitle = value
-                Me._isValid = ValidEnum.undefined
             End Set
         End Property
 
 
         Public Property ClassLongTitle() As String
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then
-                    Me._intClassID = Me.RetrieveClassId()
-                End If
-                If Me.ClassID >= 0 And Me._strClassLongTitle = "" Then
-                    Me.Read()
-                End If
+                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
                 Return Me._strClassLongTitle
             End Get
             Set(ByVal value As String)
                 Me._strClassLongTitle = value
-                Me._isValid = ValidEnum.undefined
             End Set
         End Property
 
 
-        Public Property RefRVKSet() As String
+        Public Property LocalName() As String
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then
-                    Me._intClassID = Me.RetrieveClassId()
+                If Me._localName = "" Then
+                    Me._localName = Me._localNameSpace
+                    If Me._localNameSpace.Length > 2 Then
+                        Me._localName += ":" + Me._strClassCode
+                    Else
+                        Me._localName += Me._strClassCode
+                    End If
                 End If
-                If Me.ClassID >= 0 And Me._strRefRVKSet = "" Then
-                    Me.Read()
-                End If
-                Return Me._strRefRVKSet
+                Return Me._localName
             End Get
             Set(ByVal value As String)
-                Me._strRefRVKSet = value
-                Me._isValid = ValidEnum.undefined
+                Me._localName = value
+                If value.IndexOf("§§") >= 0 And value.IndexOf(":") < 0 Then
+                    ' Old RQ Classification of type "§§4"
+                    LocalNameSpace = "§§"
+                    If Me.ClassCode = "" Then
+                        Me.ClassCode = value.Remove(0, 2).Trim()
+                    End If
+                Else
+                    LocalNameSpace = value.Substring(0, value.IndexOf(":") - value.IndexOf("§§"))
+                    If Me.ClassCode = "" Then
+                        If (value.IndexOf(":") - value.IndexOf("§§")) > 0 Then
+                            Me.ClassCode = value.Remove(0, value.IndexOf(":") - value.IndexOf("§§") + 1)
+                        Else
+                            Me.ClassCode = Me._localName
+                        End If
+                    End If
+                End If
             End Set
         End Property
 
 
-        Public Property RefRVKClass() As Utilities.LexicalClass
+        Public Property LocalNameSpace() As String
             Get
-                Return New Utilities.LexicalClass(RefRVKSet)
+                If Me._localNameSpace = "" Then
+                    Select Case Me.ClassificationSystem
+                        Case ClassificationSystems.rvk
+                            Me._localNameSpace = "§§RVK§§"
+                        Case ClassificationSystems.jel
+                            Me._localNameSpace = "§§JELO§§"
+                        Case ClassificationSystems.oldrq
+                            Me._localNameSpace = "§§"
+                    End Select
+                End If
+                Return Me._localNameSpace
             End Get
-            Set(ByVal value As Utilities.LexicalClass)
-                Me._strRefRVKSet = value.Expand()
-                Me._isValid = ValidEnum.undefined
+            Set(ByVal value As String)
+                Me._localNameSpace = value
+                Select Case value
+                    Case "§§RVK§§"
+                        Me.ClassificationSystem = ClassificationSystems.rvk
+                    Case "§§JEL§§"
+                        Me.ClassificationSystem = ClassificationSystems.jel
+                    Case "§§"
+                        Me.ClassificationSystem = ClassificationSystems.oldrq
+                    Case ""
+                        Me.ClassificationSystem = ClassificationSystems.rq
+                    Case Else
+                        Me.ClassificationSystem = ClassificationSystems.unkown
+                End Select
             End Set
         End Property
-
-
-        'Public ReadOnly Property OrigRefRVKClass() As String
-        '    Get
-        '       Return Me._strOrigRefRVKSet
-        '    End Get
-        'End Property
 
 
         Public Property NrOfSubClasses() As Integer
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then
-                    Me._intClassID = Me.RetrieveClassId()
-                End If
-                If Me.ClassID >= 0 And Me._intNrOfSubClasses < 0 Then
-                    Me.Read()
-                End If
+                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
                 Return Me._intNrOfSubClasses
             End Get
             Set(ByVal value As Integer)
@@ -176,12 +229,7 @@ Namespace RQKos.Classifications
 
         Public Property NrOfClassDocs() As Integer
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then
-                    Me._intClassID = Me.RetrieveClassId()
-                End If
-                If Me.ClassID >= 0 And Me._intNrOfDocuments < 0 Then
-                    Me.Read()
-                End If
+                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
                 Return Me._intNrOfDocuments
             End Get
             Set(ByVal value As Integer)
@@ -193,12 +241,7 @@ Namespace RQKos.Classifications
 
         Public Property NrOfRefLinks() As Integer
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then
-                    Me._intClassID = Me.RetrieveClassId()
-                End If
-                If Me.ClassID >= 0 And Me._intNrOfRefLinks < 0 Then
-                    Me.Read()
-                End If
+                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
                 Return Me._intNrOfRefLinks
             End Get
             Set(ByVal value As Integer)
@@ -207,24 +250,117 @@ Namespace RQKos.Classifications
             End Set
         End Property
 
+
+        Public Property ClassPath() As String
+            Get
+                If (Me._classPath = "") Then
+                    Dim cn As SubjClass = Me
+
+                    Do
+                        Me._classPath = Me._classPath.Insert(0, "/" + cn.ClassID + "$" + cn.ClassCode)
+                        cn = cn.GetBroaderClass()
+                    Loop Until (IsNothing(cn))
+                End If
+                Return Me._classPath
+            End Get
+            Set(ByVal value As String)
+                Me._classPath = value
+            End Set
+        End Property
+
+
+        Public Property ParentClassID() As String
+            Get
+                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
+                Return CStr(Me._intParentClassID)
+            End Get
+            Set(ByVal value As String)
+                If CInt(value) <> Me._intParentClassID Then
+                    Me._intParentClassID = CInt(value)
+                    Me._isValid = ValidEnum.undefined
+                End If
+            End Set
+        End Property
+
+
+        Public Property RefRVKSet() As String
+            Get
+                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
+                Return Me._strRefRVKSet
+            End Get
+            Set(ByVal value As String)
+                Me._strRefRVKSet = value
+                Me._isValid = ValidEnum.undefined
+            End Set
+        End Property
+
+
+        <System.Xml.Serialization.XmlIgnore()>
+        <System.Runtime.Serialization.IgnoreDataMember()>
+        Public Property RefRVKClass() As Utilities.LexicalClass
+            Get
+                Return New Utilities.LexicalClass(RefRVKSet)
+            End Get
+            Set(ByVal value As Utilities.LexicalClass)
+                Me._strRefRVKSet = value.Expand()
+                Me._isValid = ValidEnum.undefined
+            End Set
+        End Property
+
+
+        <System.Xml.Serialization.XmlIgnore()>
+        <System.Runtime.Serialization.IgnoreDataMember()>
+        Public Property ClassDataClient() As ClassificationDataClient
+            Get
+                Return Me._classDataClient
+            End Get
+            Set(ByVal value As ClassificationDataClient)
+                Me._classDataClient = value
+            End Set
+        End Property
+
+
+        <System.Xml.Serialization.XmlIgnore()>
+        <System.Runtime.Serialization.IgnoreDataMember()>
+        Public ReadOnly Property RDFGraph() As RQSkosGraph
+            Get
+                Try
+                    If Not IsNothing(Me.ClassDataClient.SkosGraph) Then
+                        Return Me.ClassDataClient.SkosGraph
+                    Else
+                        Return New RQSkosGraph(Me)
+                    End If
+                Catch ex As ArgumentNullException
+                    Return New RQSkosGraph(Me)
+                End Try
+            End Get
+            'Set(ByVal value As RQSkosGraph)
+            '    LDClassificationDataClient.ReadRDFGraph(value, Me)
+            'End Set
+        End Property
+
+
 #End Region
 
 
 #Region "Private Methods"
 
-        Private Function RetrieveClassId() As Integer
+        Private Function RetrieveClassId() As String
             Try
-                RetrieveClassId = CInt(Me._classDataClient.GetClassId(ClassificationCode.ClassificationSystems.rq, Me.ClassCode))
+                RetrieveClassId = Me._classDataClient.GetClassId(Me.ClassCode)
             Catch ex As Exception
-                RetrieveClassId = -1
+                RetrieveClassId = ""
             End Try
         End Function
 
 
         Private Sub Read()
-            If Me._intClassID > 0 Then
-                'no class of RQClassificationSystem has ID=0. ClassID=0 is used to retriev the outermost subjClassBranch
-                Me._classDataClient.GetClassData(ClassificationCode.ClassificationSystems.rq, Me)
+            If Me._intClassID < 0 And Me._strClassID = "" Then
+                Me.ClassID = RetrieveClassId()
+            End If
+            If Me._intClassID > 0 Or Me._strClassID <> "" Then
+                'no class of RQClassificationSystem has ID=0. ClassID=0 is used to retrieve the outermost subjClassBranch
+                Me._classDataClient.GetClassData(Me)
             End If
         End Sub
 
@@ -232,7 +368,7 @@ Namespace RQKos.Classifications
         Private Function Write() As Integer
             If Me._intClassID > 0 Then
                 'no class of RQClassificationSystem has ID=0. ClassID=0 is used to retriev the outermost subjClassBranch
-                Me._classDataClient.PutClassData(ClassificationCode.ClassificationSystems.rq, Me)
+                Me._classDataClient.PutClassData(Me)
             End If
             Return 1
         End Function
@@ -243,13 +379,40 @@ Namespace RQKos.Classifications
 #Region "Constructors"
 
         Public Sub New()
-            Me._classDataClient = New ClassificationDataClient()
+            Me._isValid = ValidEnum.undefined
         End Sub
 
 
         Public Sub New(ByRef classID As String)
+            Me.New(classID, DirectCast(Nothing, ClassificationDataClient))
+        End Sub
+
+
+        Public Sub New(ByVal classID As String, ByVal dataClient As ClassificationDataClient)
             Me.New()
-            Me.ClassID = classID
+            Me._classDataClient = dataClient
+            If classID.StartsWith("http://") Then
+                Me.ClassID = -1
+                Me._strClassID = classID
+                Me.ClassificationSystem = LDClassificationDataClient.GetClassificationSystem(classID)
+            Else
+                Me.ClassID = classID
+                Me.ClassificationSystem = ClassificationSystems.rq
+            End If
+        End Sub
+
+
+        Public Sub New(ByVal classCode As String, ByVal classSystem As SubjClass.ClassificationSystems)
+            Me.New()
+            Me.ClassCode = classCode
+            Me.ClassificationSystem = classSystem
+            Me.ClassID = Me.ClassDataClient.GetClassId(Me.ClassCode)
+        End Sub
+
+
+        Public Sub New(ByVal localName As String, ByVal isName As Boolean)
+            Me.New()
+            Me.LocalName = localName
         End Sub
 
 #End Region
@@ -258,7 +421,7 @@ Namespace RQKos.Classifications
 #Region "Public Methods"
 
         Public Sub Load()
-            If Me._intClassID <> 0 Then
+            If Me._intClassID <> 0 Or Me._strClassID <> "" Then
                 Me.Read()
             End If
         End Sub
@@ -273,21 +436,21 @@ Namespace RQKos.Classifications
 
 
         Public Function IsValid(ByRef MajClass As SubjClass) As Boolean
-            If _isValid = ValidEnum.undefined Then
+            If Me._isValid = ValidEnum.undefined Then
                 If Not MajClass.Contains(Me) Then
                     EditGlobals.Message += "<p class='smalltext'>ERROR ON SUBCLASS " + Me.ClassID + "</p><p class='smalltext'>Subclass is not contained in class or class code is invalid.</p>"
-                    _isValid = ValidEnum.invalid
+                    Me._isValid = ValidEnum.invalid
                 ElseIf (Me.NrOfSubClasses > 0) And ((Me.ClassCode = "") Or (Me.RefRVKSet = "")) Then
                     EditGlobals.Message += "<p class='smalltext'>ERROR ON SUBCLASS " + Me.ClassID + "</p><p class='smalltext'>Class containing subclasses must not be deleted.</p>"
-                    _isValid = ValidEnum.invalid
+                    Me._isValid = ValidEnum.invalid
                 ElseIf Not Me.RefRVKClass.IsValid() Then
                     EditGlobals.Message += "<p class='smalltext'>ERROR ON SUBCLASS " + Me.ClassID + "</p><p class='smalltext'>Invalid RVK class codes.</p>"
-                    _isValid = ValidEnum.invalid
+                    Me._isValid = ValidEnum.invalid
                 Else
-                    _isValid = ValidEnum.valid
+                    Me._isValid = ValidEnum.valid
                 End If
             End If
-            Return _isValid = ValidEnum.valid
+            Return Me._isValid = ValidEnum.valid
         End Function
 
 
@@ -306,6 +469,18 @@ Namespace RQKos.Classifications
 
                 Return lexClass.Contains(thisClass.RefRVKClass)
             End If
+        End Function
+
+
+        Public Function GetBroaderClass() As SubjClass
+            If IsNothing(Me._broaderClass) Then
+                If Me.ParentClassID <> "-1" And Me.ParentClassID <> "0" Then
+                    Me._broaderClass = New SubjClass(Me.ParentClassID, Me.ClassDataClient)
+                Else
+                    Return Nothing
+                End If
+            End If
+            Return Me._broaderClass
         End Function
 
 #End Region
@@ -370,6 +545,14 @@ Namespace RQKos.Classifications
         End Sub
 
 
+        Public Sub New(ByRef majClassCode As String, ByVal classSystem As SubjClass.ClassificationSystems)
+            Dim _cl As New SubjClass(majClassCode, classSystem)
+
+            _arSubjClass = New SubjClass(10) {}
+            _arSubjClass(0) = _cl
+        End Sub
+
+
         Public Sub New(ByRef majClassID As String)
             Dim _cl As New SubjClass(majClassID)
 
@@ -414,7 +597,7 @@ Namespace RQKos.Classifications
 
 #Region "Public Methods"
 
-        Public Sub Add(ByRef aSubjClass As SubjClass)
+        Public Sub Add(ByVal aSubjClass As SubjClass)
             Dim i As Integer
 
             For i = 0 To Me._arSubjClass.Length - 1
@@ -434,8 +617,16 @@ Namespace RQKos.Classifications
 
 
         Public Sub Load()
+            Dim id As String
+
             Me._arSubjClass(0).Load()
-            Me._arSubjClass(0).ClassDataClient.GetNarrowerClassData(ClassificationCode.ClassificationSystems.rq, Me._arSubjClass(0).ClassID, Me)
+            id = Me._arSubjClass(0).ClassID
+            Try
+                Me._arSubjClass(0).ClassDataClient.GetNarrowerClassData(CInt(id), Me)
+            Catch ex As InvalidCastException
+                Me._arSubjClass(0).ClassDataClient.GetNarrowerClassData(id, Me)
+            End Try
+
         End Sub
 
 
@@ -507,74 +698,7 @@ Namespace RQKos.Classifications
 
 
         Public Function UpdateDocRefs(ByRef iSuperClassDocCount As Integer) As Boolean
-            Return Me.MajorClass.ClassDataClient.UpdateDocRefs(ClassificationCode.ClassificationSystems.rq, Me, iSuperClassDocCount)
-            'Dim ResultSet As New RQQueryResult.RQResultSet
-            'Dim SuperClass As Utilities.LexicalClass = Me._arSubjClass(0).RefRVKClass
-            'Dim item As RQQueryResult.RQResultItem
-            'Dim bErr As Boolean = True
-            'Dim i As Integer
-
-            ''Zero DocRefCount for subclasses being updated
-            'For i = 1 To Me._arSubjClass.Length - 1
-            '    If Not IsNothing(Me._arSubjClass(i)) Then
-            '        Me._arSubjClass(i).NrOfClassDocs = 0
-            '        Me._arSubjClass(i).NrOfRefLinks = 0
-            '    End If
-            'Next
-            'EditGlobals.Message += "<p class='smalltext'>"
-            'ResultSet.Find(Me._arSubjClass(0).RefRVKSet)
-            'For Each item In ResultSet
-            '    Try
-            '        Dim clClassString As Utilities.ClassString = New Utilities.ClassString(item.ItemDescription.Classification.Content)
-            '        Dim bCLComplete As Boolean = False
-            '        Dim arIsInSubClass As New Collections.BitArray(clClassString.Count, False)
-            '        Dim arIsInSuperClass As New Collections.BitArray(clClassString.Count, False)
-            '        Dim arContainsClassString As New Collections.BitArray(Me._arSubjClass.Length, False)
-
-            '        For i = 0 To clClassString.Count - 1
-            '            If (clClassString.Item(i).StartsWith(Globals.ClassCodePrefix)) Then
-            '                If MajorClass.RefRVKClass.IsInRange(clClassString.Item(i).Remove(0, 8)) Then
-            '                    Dim j As Integer
-
-            '                    For j = 1 To Me._arSubjClass.Length - 1
-            '                        If Not IsNothing(Me._arSubjClass(j)) Then
-            '                            Dim SubClass As Utilities.LexicalClass = Me._arSubjClass(j).RefRVKClass
-
-            '                            If SubClass.IsInRange(clClassString.Item(i).Remove(0, 8)) Then
-            '                                arIsInSubClass(i) = True
-            '                                If Not arContainsClassString(j) = True Then
-            '                                    Me._arSubjClass(j).NrOfClassDocs += CType(1, Short)
-            '                                    If item.RQResultItemType = RQQueryResult.RQResultItem.RQItemType.bookmark Then Me._arSubjClass(j).NrOfRefLinks += CType(1, Short)
-            '                                    arContainsClassString(j) = True
-            '                                End If
-            '                                item.ItemDescription.Classification.Content = New Utilities.ClassString(item.ItemDescription.Classification.Content).CompleteClassString(clClassString.Item(i), Me._arSubjClass(j).ClassCode)
-            '                            End If
-            '                        End If
-            '                    Next
-            '                    If Not arIsInSubClass(i) Then
-            '                        arIsInSuperClass(i) = True
-            '                    End If
-            '                End If
-            '            End If
-            '        Next
-            '        For i = 0 To clClassString.Count - 1
-            '            If arIsInSuperClass(i) And Not arIsInSubClass(i) Then
-            '                iSuperClassDocCount += 1
-            '                Exit For
-            '            End If
-            '        Next
-            '    Catch ex As Exception
-            '        Dim test As String
-            '        test = ex.Message
-            '    End Try
-            'Next
-            'If ResultSet.Update() <> 0 Then
-            '    EditGlobals.Message += "Error occured on DocRefCount update for class " & Me._arSubjClass(0).ClassID & ".</br>"
-            '    bErr = False
-            'Else
-            '    EditGlobals.Message += "DocRefCounts have been updated for class " & Me._arSubjClass(0).ClassID & ".</br>"
-            'End If
-            'Return bErr
+            Return Me.MajorClass.ClassDataClient.UpdateDocRefs(Me, iSuperClassDocCount)
         End Function
 
 
@@ -734,6 +858,7 @@ Namespace RQKos.Classifications
     Public Class SubjClassManager
 
 #Region "Public Members"
+
         Public Enum Classification
             Shelf
             RVK

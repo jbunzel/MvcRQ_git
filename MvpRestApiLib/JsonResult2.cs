@@ -35,8 +35,11 @@ namespace MvpRestApiLib
             if (this.ContentEncoding != null)
                 response.ContentEncoding = this.ContentEncoding;
 
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(this.Data.GetType());
-            serializer.WriteObject(response.OutputStream, this.Data);
+            if (this.Data != null)
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(this.Data.GetType());
+                serializer.WriteObject(response.OutputStream, this.Data);
+            }
         }
     }
 }

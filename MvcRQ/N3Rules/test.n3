@@ -1,0 +1,5 @@
+﻿@prefix dct: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+{   ?x dct:isVersionOf ?y . 
+    ?x skos:prefLabel ?z .  } => { ?y skos:prefLabel ?z . } . 

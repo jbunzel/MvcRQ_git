@@ -77,6 +77,9 @@
     <Compile Include="RQDAL\RQLuceneDBI.vb" />
     <Compile Include="RQDAL\RQOleDBI.vb" />
     <Compile Include="RQKos\Classifications\Classification.vb" />
+    <Compile Include="RQKos\Classifications\LDClassificationDataClient.vb" />
+    <Compile Include="RQKos\Classifications\RQClassificationDataClient.vb" />
+    <Compile Include="RQLD\RQSkosGraph.vb" />
     <Compile Include="RQLucene\Indexer.vb" />
     <Compile Include="RQLucene\OleDBIndexer.vb" />
     <Compile Include="RQLucene\Searcher.vb" />
@@ -94,8 +97,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RQDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="RQKos\Classifications\ClassificationCode.vb" />
     <Compile Include="RQKos\Classifications\ClassificationDataClient.vb" />
+    <Compile Include="RQResult\RQDataSet.vb">
+      <DependentUpon>RQDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQClassification.vb" />
     <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQDescriptionElement.vb" />
     <Compile Include="RQResult\RQResultItem.vb" />
@@ -178,6 +183,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\dotNetRDF\Libraries\core\dotNetRDF.csproj">
+      <Project>{BFBAC159-1E60-4D03-8ACA-D34E31EB83BF}</Project>
+      <Name>dotNetRDF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQLinkedData\RQLinkedData.csproj">
+      <Project>{182ED3FC-0121-4A3F-9F79-B8C5782BB755}</Project>
+      <Name>RQLinkedData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RQState\RQState.csproj">
       <Project>{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}</Project>
       <Name>RQState</Name>
