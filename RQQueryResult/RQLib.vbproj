@@ -53,6 +53,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -85,6 +86,7 @@
     <Compile Include="RQLucene\Searcher.vb" />
     <Compile Include="RQLucene\StrandsDoc.vb" />
     <Compile Include="RQLucene\UpdateIndexer.vb" />
+    <Compile Include="RQLucene\Utilities.vb" />
     <Compile Include="RQLucene\XMLIndexer.vb" />
     <Compile Include="RQQueryForm\RQQuery.vb" />
     <Compile Include="RQResult\RQBookmarkSet.Designer.vb">
@@ -92,13 +94,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RQBookmarkSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="RQKos\Classifications\ClassificationDataClient.vb" />
     <Compile Include="RQResult\RQDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RQDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="RQKos\Classifications\ClassificationDataClient.vb" />
-    <Compile Include="RQResult\RQDataSet.vb">
       <DependentUpon>RQDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQClassification.vb" />
@@ -121,17 +120,6 @@
     </Compile>
     <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQTitle.vb" />
     <Compile Include="RQResult\RQResultSet.vb" />
-    <Compile Include="RQStateManager\Globals.vb" />
-    <Compile Include="RQStateManager\RQSessionState\cs.vb" />
-    <Compile Include="RQStateManager\RQSessionState\es.vb" />
-    <Compile Include="RQStateManager\RQSessionState\ns.vb" />
-    <Compile Include="RQStateManager\RQSessionState\qs.vb" />
-    <Compile Include="RQStateManager\RQSessionState\rd.vb" />
-    <Compile Include="RQStateManager\RQSessionState\RQClassificationState.vb" />
-    <Compile Include="RQStateManager\RQSessionState\RQEditState.vb" />
-    <Compile Include="RQStateManager\RQSessionState\RQNavigationState.vb" />
-    <Compile Include="RQStateManager\RQSessionState\RQQueryState.vb" />
-    <Compile Include="RQStateManager\RQSessionState\RQResultDocState.vb" />
     <Compile Include="Utlities\lexicalclass.vb" />
   </ItemGroup>
   <ItemGroup>

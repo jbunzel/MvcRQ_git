@@ -42,9 +42,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -57,8 +61,12 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Abstractions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -66,15 +74,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\RQItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RQKosController.cs" />
+    <Compile Include="Controllers\UserManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\RQAuthorize.cs" />
+    <Compile Include="Helpers\RQCustomModelBinders.cs" />
+    <Compile Include="Helpers\StateStorage.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\RQItemsModel.cs" />
     <Compile Include="Models\RQKosModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +121,7 @@
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\clearpixel.gif" />
     <Content Include="Images\icon_abstract.gif" />
     <Content Include="Images\icon_abstract.jpg" />
@@ -136,12 +152,10 @@
     <Content Include="Images\icon_webfolder.gif" />
     <Content Include="Images\icon_websource.gif" />
     <Content Include="Images\RQFTCollection.jpg" />
-    <Content Include="N3Rules\test.n3" />
+    <Content Include="LinkedData\N3Rules\test.n3" />
     <Content Include="README.txt" />
     <Content Include="Scripts\dynatree-1.2.0\jquery.cookie.js" />
     <Content Include="Scripts\dynatree-1.2.0\jquery.rqdynatree.js" />
-    <Content Include="Scripts\jquery-1.6.1.js" />
-    <Content Include="Scripts\jquery-1.6.1.min.js" />
     <Content Include="Scripts\dynatree-1.2.0\skin-vista\icons.gif" />
     <Content Include="Scripts\dynatree-1.2.0\skin-vista\loading.gif" />
     <Content Include="Scripts\dynatree-1.2.0\skin-vista\ui.dynatree.css" />
@@ -149,7 +163,9 @@
     <Content Include="Scripts\dynatree-1.2.0\skin\loading.gif" />
     <Content Include="Scripts\dynatree-1.2.0\skin\ui.dynatree.css" />
     <Content Include="Scripts\dynatree-1.2.0\skin\vline.gif" />
-    <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
     <Content Include="Scripts\jquery.cookie.js" />
@@ -159,7 +175,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -195,20 +213,22 @@
     <Content Include="xml\IndexConfig.xml" />
     <Content Include="xml\stdquery.de-DE.xml" />
     <Content Include="xml\stdquery.xml" />
+    <Content Include="xslt\rqi2rq.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="xslt\RQ2DC.xslt">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="xslt\RQ2RQ.xslt" />
-    <Content Include="xslt\RQKos2RDF.xslt" />
-    <Content Include="xslt\ViewTransforms\ArrayOfRQItem_Example.xml">
+    <Content Include="xslt\rqi2dc.xslt">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="xslt\RQ2DC1.xslt">
+    <Content Include="xslt\RQKos2RDF.xslt">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="xslt\ViewTransforms\RQ2SingleItemView.xslt">
+    <Content Include="xslt\ViewTransforms\RQI2SingleItemView.xslt">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="xslt\ViewTransforms\RQItemFields.xslt" />
     <Content Include="xslt\ViewTransforms\RQResultList2RQSorted.xslt">
       <SubType>Designer</SubType>
     </Content>
@@ -225,6 +245,10 @@
       <Project>{BFBAC159-1E60-4D03-8ACA-D34E31EB83BF}</Project>
       <Name>dotNetRDF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MvcRQUser\MvcRQUser.csproj">
+      <Project>{CE56D7F8-7CDB-440A-BC04-40DEC1612252}</Project>
+      <Name>MvcRQUser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvpRestApiLib\MvpRestApiLib.csproj">
       <Project>{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}</Project>
       <Name>MvpRestApiLib</Name>
@@ -236,6 +260,10 @@
     <ProjectReference Include="..\RQQueryResult\RQLib.vbproj">
       <Project>{D695EAA6-B358-4C80-82AA-A0AA15EBC5D4}</Project>
       <Name>RQLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQResources\RQResources.csproj">
+      <Project>{D569E168-0BC3-4C25-8D42-880879831975}</Project>
+      <Name>RQResources</Name>
     </ProjectReference>
     <ProjectReference Include="..\RQState\RQState.csproj">
       <Project>{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}</Project>
@@ -252,12 +280,11 @@
     <Content Include="Views\RQItems\Shared\JsonViewer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RQItems\ServIndRQItem.cshtml" />
+    <Content Include="Views\RQItems\ServRQItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\RQItems\Shared\ResultViewer.cshtml" />
     <Content Include="Views\RQKos\Index.cshtml" />
-    <Content Include="Views\RQItems\ServListRQItem.cshtml" />
     <Content Include="Views\RQKos\shared\JsonViewer.cshtml" />
     <Content Include="Views\RQKos\shared\XmlViewer.cshtml" />
     <Content Include="Views\RQKos\shared\ShelvesViewer.cshtml" />
@@ -265,12 +292,16 @@
     <Content Include="Views\RQKos\ServRQKos.cshtml" />
     <Content Include="Views\RQItems\EditorTemplates\multilinetext.cshtml" />
     <Content Include="Views\RQItems\EditorTemplates\text.cshtml" />
-    <Content Include="Views\RQItems\IndRQItem.cshtml" />
+    <None Include="LinkedData\DataSets\jel.rdf" />
+    <Content Include="Views\RQItems\EditorTemplates\rqdescriptor.cshtml" />
+    <Content Include="Views\RQItems\EditRQItem.cshtml" />
+    <Content Include="Views\RQItems\DisplRQItem.cshtml" />
+    <Content Include="Views\RQItems\Shared\DisplViewer.cshtml" />
+    <Content Include="Views\UserManager\Index.cshtml" />
     <None Include="~db\RQLucene\CATALOG\segments.gen" />
-    <None Include="~db\RQLucene\CATALOG\segments_1pv" />
-    <None Include="~db\RQLucene\CATALOG\_us.cfs" />
-    <None Include="~db\RQLucene\CATALOG\_uu.cfs" />
-    <None Include="~db\RQLucene\CATALOG\_uw.cfs" />
+    <None Include="~db\RQLucene\CATALOG\segments_2of" />
+    <None Include="~db\RQLucene\CATALOG\_1c4.cfs" />
+    <None Include="~db\RQLucene\CATALOG\_1c6.cfs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

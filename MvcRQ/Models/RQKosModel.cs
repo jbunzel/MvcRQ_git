@@ -11,7 +11,6 @@ using RQLib.RQQueryForm;
 
 namespace MvcRQ.Models
 {
-
     /// <summary>
     /// Model class for the RiQuest Knowledge Organiszation (KOS) Model
     /// </summary>
@@ -46,7 +45,6 @@ namespace MvcRQ.Models
 
         #endregion
     }
-
 
     /// <summary>
     /// A single subject classification item of the RiQuest Knowledge Organisation System (KOS)  
@@ -172,7 +170,6 @@ namespace MvcRQ.Models
         #endregion
     }
 
-
     /// <summary>
     /// Enumeration class for RQKosBranch
     /// </summary>
@@ -239,7 +236,6 @@ namespace MvcRQ.Models
         #endregion
     }
 
-
     /// <summary>
     /// Description of a single subject class
     /// </summary>
@@ -267,7 +263,6 @@ namespace MvcRQ.Models
 
         #endregion
     }
-
 
     [KnownType(typeof(RQKosItem))]
     public class RQKosItem 
@@ -300,7 +295,6 @@ namespace MvcRQ.Models
 
         #endregion
     }
-
 
     [KnownType(typeof(RQKosItemDT))]
     public class RQKosItemDT
@@ -424,7 +418,6 @@ namespace MvcRQ.Models
         #endregion
     }
 
-
     [KnownType(typeof(RQKosItemRQLD))]
     [KnownType(typeof(RQLib.RQLD.RQSkosGraph))]
     public class RQKosItemRQLD
@@ -465,5 +458,4 @@ namespace MvcRQ.Models
 
         #endregion
     }
-
 }

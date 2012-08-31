@@ -6,17 +6,18 @@ Imports System.Xml
 Imports RQLib.RQDAL
 Imports RQLib.RQQueryForm
 Imports RQLib.RQConverter
-
+Imports System.Runtime.Serialization
 
 Namespace RQQueryResult
 
+    <DataContract()> _
     Public Class RQResultSet
         Implements Collections.IEnumerable
 
 #Region "Private Variables"
 
-        Private _docDAL As New RQCatalogDAL
-        Private _bmDAL As New RQBookmarkDAL
+        Private _docDAL As RQCatalogDAL
+        Private _bmDAL As RQBookmarkDAL
         Private _docTable As RQDataSet.DokumenteDataTable
         Private _bmTable As RQBookmarkSet.BookmarksDataTable
         Private _sysTable As RQDataSet.SystematikDataTable
@@ -44,7 +45,8 @@ Namespace RQQueryResult
             End Get
         End Property
 
-
+        <DataMember()> _
+        <Xml.Serialization.XmlElement()> _
         Public ReadOnly Property items() As RQResultItem()
             Get
                 Return _items
@@ -56,12 +58,15 @@ Namespace RQQueryResult
 
 #Region "Public Constructors"
 
-        Public Sub New()
-
+        Public Sub New(Optional ByVal forEdit As Boolean = False)
+            Me._docDAL = New RQCatalogDAL()
+            If forEdit Then Me._docDAL.Mode = RQCatalogDAL.DatabaseMode.Hybrid
+            Me._bmDAL = New RQBookmarkDAL()
         End Sub
 
 
-        Public Sub New(ByVal fromResultDocList As System.Xml.XmlDocument, Optional ByRef index As Integer = 1)
+        Public Sub New(ByVal fromResultDocList As System.Xml.XmlDocument, Optional ByRef index As Integer = 1, Optional ByVal forEdit As Boolean = False)
+            Me.New(forEdit)
             If Not IsNothing(fromResultDocList.SelectNodes("//Dokument").Item(index - 1).Item("ID")) Then
                 Dim strId As String = fromResultDocList.SelectNodes("//Dokument").Item(index - 1).Item("ID").InnerText
 
@@ -117,7 +122,8 @@ Namespace RQQueryResult
         'End Sub
 
 
-        Public Sub New(ByRef ClassString As String)
+        Public Sub New(ByRef ClassString As String, Optional ByVal forEdit As Boolean = False)
+            Me.New(forEdit)
             Find(ClassString)
         End Sub
 
@@ -156,13 +162,18 @@ Namespace RQQueryResult
         End Function
 
 
-        Private Function AppendItem(ByRef item As RQResultItem) As RQResultItem
+        Private Function AppendItem(ByRef item As RQResultItem, Optional ByVal type As RQResultItem.RQItemType = RQResultItem.RQItemType.docdesc) As RQResultItem
+            Dim ni As RQResultItem = item
+
+            If (ni.RQResultItemType = RQResultItem.RQItemType.void) Then
+                ni = New RQResultItem(item, type)
+            End If
             If Not IsNothing(_items) Then
                 Array.Resize(_items, _items.Length + 1)
             Else
                 _items = New RQResultItem(0) {}
             End If
-            Me._items(Me._items.Length - 1) = item
+            Me._items(Me._items.Length - 1) = ni
             Return Me._items(Me._items.Length - 1)
         End Function
 
@@ -213,8 +224,12 @@ Namespace RQQueryResult
         'End Function
 
 
-        Public Function CreateItem(ByVal fromResultItem As RQResultItem) As RQResultItem
-            Return Me.AppendItem(fromResultItem)
+        Public Function CreateItem(ByVal fromResultItem As RQResultItem, Optional ByVal type As RQResultItem.RQItemType = RQResultItem.RQItemType.docdesc) As RQResultItem
+            Dim ni As RQResultItem = Me.AppendItem(fromResultItem, type)
+
+            ni.SetChanged()
+            ni.RQResultItemOwner = Me
+            Return ni
         End Function
 
 

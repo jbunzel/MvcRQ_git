@@ -6,6 +6,7 @@ Namespace RQKos.Classifications
 
         Protected _classSystem As SubjClass.ClassificationSystems = SubjClass.ClassificationSystems.unkown
         Protected _skosGraph As RQSkosGraph = Nothing
+        Private _LDEnabled As Boolean = False
 
 
         Public Property SkosGraph() As RQSkosGraph
@@ -24,6 +25,16 @@ Namespace RQKos.Classifications
             End Get
             Set(ByVal value As SubjClass.ClassificationSystems)
                 Me._classSystem = value
+            End Set
+        End Property
+
+
+        Public Property IsLinkedDataEnabled() As Boolean
+            Get
+                Return Me._LDEnabled
+            End Get
+            Set(ByVal value As Boolean)
+                Me._LDEnabled = value
             End Set
         End Property
 

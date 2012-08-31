@@ -17,7 +17,7 @@ namespace MvcRQ.Controllers
     /// The controller supports URLs of type 
     /// {serviceId}RQKos/{RQKosItemId}
     /// </remarks>
-    public class RQKosController : Controller
+    public class RQKosController : BaseController
     {
 
         /// <summary>

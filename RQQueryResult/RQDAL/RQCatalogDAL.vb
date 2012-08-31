@@ -9,28 +9,29 @@ Namespace RQDAL
 
     Public Class RQCatalogDAL
 
-#Region "Private Members"
+#Region "Public Members"
 
-        Private _catOleDBI As RQOleDBI
-
-        Private _catRQLuceneDBI As RQLuceneDBI
-
-        Private _catDoc As New XmlDocument()
-        Private _catSet As New RQDataSet
-
-        Private _catFieldList As New DataTable
+        Public Enum DatabaseMode
+            SearchEngine
+            RelationalDB
+            Hybrid
+        End Enum
 
 #End Region
 
 
+#Region "Private Members"
+        Private _catOleDBI As RQOleDBI
+        Private _catRQLuceneDBI As RQLuceneDBI
+        Private _catDoc As New XmlDocument()
+        Private _catSet As New RQDataSet
+        Private _catFieldList As New DataTable
+
+        Private _mode As DatabaseMode = DatabaseMode.SearchEngine
+#End Region
+
+
 #Region "Public Properties"
-
-        Public ReadOnly Property CatalogDataFields() As DataTable
-            Get
-                Return Me._catFieldList
-            End Get
-        End Property
-
 
         Public Property DSName() As String
             Get
@@ -39,6 +40,23 @@ Namespace RQDAL
             Set(ByVal value As String)
                 _catSet.DataSetName = value
             End Set
+        End Property
+
+
+        Public Property Mode() As DatabaseMode
+            Get
+                Return Me._mode
+            End Get
+            Set(ByVal value As DatabaseMode)
+                Me._mode = value
+            End Set
+        End Property
+
+
+        Public ReadOnly Property CatalogDataFields() As DataTable
+            Get
+                Return Me._catFieldList
+            End Get
         End Property
 
 
@@ -64,6 +82,12 @@ Namespace RQDAL
             Me._catRQLuceneDBI = New RQLuceneDBI()
             Me._catOleDBI = New RQOleDBI()
             Me.GetCatalogFieldTable()
+        End Sub
+
+        Public Sub New(ByVal databaseMode As DatabaseMode)
+            Me.New()
+
+            Me._mode = databaseMode
         End Sub
 
 #End Region
@@ -106,10 +130,11 @@ Namespace RQDAL
 
         Private Function GetRecordTable(ByRef Query As RQQueryForm.RQquery) As RQDataSet.DokumenteDataTable
             Me._catSet.Tables("Dokumente").Clear()
-            Me.CatalogQuery(Query, "Dokumentliste", "Dokumente")
-            'If Me._catSet.Dokumente.Count = 0 Then
-            'Me.CatalogQuery(Query.GetQueryCommand(), "Dokumentliste", "Dokumente")
-            'End If
+            If (Me._mode = DatabaseMode.SearchEngine) Then
+                Me.CatalogQuery(Query, "Dokumentliste", "Dokumente")
+            ElseIf (Me._mode = DatabaseMode.Hybrid) Or (Me._mode = DatabaseMode.RelationalDB) Then
+                Me.CatalogQuery(Query.GetQueryCommand(), "Dokumentliste", "Dokumente")
+            End If
             If Query.QuerySort <> RQQueryForm.RQquery.SortType.undefined Then
                 Me.SetSortOrder(Query.QuerySort)
             End If
@@ -351,13 +376,17 @@ Namespace RQDAL
             Dim iMaxRecNr As Integer
             Dim iMaxRecID As Integer
             Dim strNewDocNo As String = ""
+            Dim dtIdDocNoTable As DataTable
             Dim drLastRow As System.Data.DataRow
             Dim dcIDColumns As System.Data.DataColumn() = {Me._catSet.Tables("Dokumente").Columns("ID")}
             Dim dsChangeSet As System.Data.DataSet
 
-            Me.CatalogQuery("SELECT * FROM Dokumente ORDER BY ID", "RQDataSet", "Dokumente")
-            iMaxRecNr = Me._catSet.Tables("Dokumente").Rows.Count
-            drLastRow = Me._catSet.Tables("Dokumente").Rows(iMaxRecNr - 1)
+            'Me._catSet.EnforceConstraints = False
+            Me.CatalogQuery("SELECT ID, DocNo FROM Dokumente", "RQDataSet", "Dokumente")
+            Me._catSet.Tables("Dokumente").DefaultView.ApplyDefaultSort = True
+            dtIdDocNoTable = Me._catSet.Tables("Dokumente").DefaultView.ToTable()
+            iMaxRecNr = dtIdDocNoTable.Rows.Count
+            drLastRow = dtIdDocNoTable.Rows(iMaxRecNr - 1)
             iMaxRecID = System.Convert.ToInt32(drLastRow.Item("ID"))
             If CInt(drLastRow.Item("DocNo")) + 1 < 10000 Then
                 strNewDocNo = "0"
@@ -427,12 +456,17 @@ Namespace RQDAL
             dsChangeSet = Me._catSet.GetChanges()
             If Not IsNothing(dsChangeSet) Then
                 Try
-                    Me._catOleDBI.Update(dsChangeSet, "Dokumente")
-                    Me._catRQLuceneDBI.Update(dsChangeSet, "Dokumente")
+                    If (Me._mode = DatabaseMode.Hybrid) Or (Me._mode = DatabaseMode.RelationalDB) Then
+                        Me._catOleDBI.Update(dsChangeSet, "Dokumente")
+                    End If
+                    If (Me._mode = DatabaseMode.Hybrid) Or (Me._mode = DatabaseMode.SearchEngine) Then
+                        Me._catRQLuceneDBI.Update(dsChangeSet, "Dokumente")
+                    End If
                     Me._catSet.AcceptChanges()
                     Return 0
                 Catch ex As Exception
-                    Return 1
+                    Throw New ApplicationException(ex.Message, ex.InnerException)
+                    'Return 1
                 End Try
             Else
                 Return 0

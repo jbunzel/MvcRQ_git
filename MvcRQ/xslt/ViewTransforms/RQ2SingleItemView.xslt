@@ -182,11 +182,22 @@
 
 
   <xsl:template match="RQItem/Classification">
+    <xsl:text>RQC-Codes: </xsl:text>
     <xsl:apply-templates select="ClassificationCode[ClassificationSystem='rq']" />
-    <p/>
     <xsl:if test="ClassificationCode[ClassificationSystem='rvk']">
+      <br/>
       <xsl:text>RVK-Codes: </xsl:text>
       <xsl:apply-templates select="ClassificationCode[ClassificationSystem='rvk']" />
+    </xsl:if>
+    <xsl:if test="ClassificationCode[ClassificationSystem='ddc']">
+      <br/>
+      <xsl:text>DDC-Codes: </xsl:text>
+      <xsl:apply-templates select="ClassificationCode[ClassificationSystem='ddc']" />
+    </xsl:if>
+    <xsl:if test="ClassificationCode[ClassificationSystem='jel']">
+      <br/>
+      <xsl:text>JEL-Codes: </xsl:text>
+      <xsl:apply-templates select="ClassificationCode[ClassificationSystem='jel']" />
     </xsl:if>
   </xsl:template>
 
@@ -194,32 +205,72 @@
   <xsl:template match="ClassificationCode[ClassificationSystem='rq']">
     <xsl:element name="a">
       <xsl:attribute name="href">
-<!--        
-        <xsl:text>javascript:getRQKos(&quot;</xsl:text>
-        <xsl:value-of select="concat(ClassificationPath,'&quot;, &quot;', /RQItem/DocNo)"/>
-        <xsl:text>&quot;);</xsl:text>
--->
         <xsl:value-of select="concat('javascript:call(&quot;','rqkos/rqc_',Notation,'?d=',/RQItem/DocNo,'&quot;)')"/>
       </xsl:attribute>
-      <xsl:value-of select="concat(Notation, ' - ', ClassLabel)"/>
-      <xsl:value-of select="'; '"/>
+      <xsl:attribute name="title">
+        <xsl:value-of select="'Alle Dokumente in dieser Klasse'"/>
+      </xsl:attribute>
+      <xsl:value-of select="Notation"/>
     </xsl:element>
-  </xsl:template>
-
-  
-  <xsl:template match="ClassificationCode[ClassificationSystem='rvk'] | ClassificationCode[ClassificationSystem='jel']">
+    <xsl:value-of select="' - '" />
     <xsl:element name="a">
       <xsl:attribute name="href">
         <xsl:value-of select="ClassID"/>
       </xsl:attribute>
+      <xsl:attribute name="title">
+        <xsl:value-of select="'Linked Data Informationen zu dieser Klasse'"/>
+      </xsl:attribute>
+      <xsl:value-of select="ClassLabel"/>
+    </xsl:element>
+    <xsl:value-of select="'; '"/>
+  </xsl:template>
+
+  
+  <xsl:template match="ClassificationCode[ClassificationSystem='rvk'] | ClassificationCode[ClassificationSystem='jel'] | ClassificationCode[ClassificationSystem='ddc']">
+    <xsl:variable name="ID">
+      <xsl:value-of select="generate-id()"/>
+    </xsl:variable>
+    <xsl:element name="span">
+      <xsl:attribute name="id">
+        <xsl:value-of select="$ID"/>
+      </xsl:attribute>
+      <xsl:element name="a">
+        <xsl:attribute name="href">
+          <xsl:value-of select="ClassID"/>
+        </xsl:attribute>
+        <xsl:attribute name="title">
+          <xsl:value-of select="'Alle Dokumente in dieser Klasse'"/>
+        </xsl:attribute>
+        <xsl:value-of select="Notation"/>
+      </xsl:element>
+      <xsl:value-of select="' - '"/>
       <xsl:choose>
         <xsl:when test="ClassLabel">
-          <xsl:value-of select="concat(Notation, ' - ', ClassLabel, '; ')"/>
+          <xsl:element name="a">
+            <xsl:attribute name="href">
+              <xsl:value-of select="ClassID"/>
+            </xsl:attribute>
+            <xsl:attribute name="title">
+              <xsl:value-of select="'Linked Data Information zu dieser Klasse'"/>
+            </xsl:attribute>
+            <xsl:value-of select="ClassLabel"/>
+          </xsl:element>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="concat(Notation, '; ')"/>
+          <xsl:value-of select="'('"/>
+          <xsl:element name="a">
+            <xsl:attribute name="href">
+              <xsl:value-of select="concat('javascript:callAjax(&quot;','rqitems/',/RQItem/DocNo,'/Classification/',count(preceding-sibling::ClassificationCode),'&quot;, &quot;',$ID,'&quot;)')" />
+            </xsl:attribute>
+            <xsl:attribute name="title">
+              <xsl:value-of select="'Bezeichnung der Klassen-Notation suchen'"/>
+            </xsl:attribute>
+            <xsl:value-of select="'more...'"/>
+          </xsl:element>
+          <xsl:value-of select="')'"/>
         </xsl:otherwise>
       </xsl:choose>
+      <xsl:value-of select="'; '"/>
     </xsl:element>
   </xsl:template>
 

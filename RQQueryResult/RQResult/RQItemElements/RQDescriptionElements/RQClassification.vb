@@ -1,16 +1,83 @@
 ﻿Imports Microsoft.VisualBasic
 Imports RQLib.RQKos.Classifications
+Imports System.Runtime.Serialization
 
 
 Namespace RQQueryResult.RQDescriptionElements
 
+    <DataContract()>
+    <KnownType(GetType(SubjClass))> _
     Public Class RQClassification
         Inherits RQDescriptionElement
         Implements Collections.IEnumerable
 
 #Region "Private Members"
 
-        Private _classCodes() As SubjClass = {}
+        Private _classCodes As New List(Of SubjClass)(1)
+
+#End Region
+
+
+#Region "Private Methods"
+
+        Private Sub BuildContentString()
+            If Not IsNothing(Me._classCodes) Then
+                Dim i As Integer = 0
+
+                _content = ""
+                For i = 0 To Me._classCodes.Count - 1
+                    If Not IsNothing(Me._classCodes(i)) Then _content += Me._classCodes(i).LocalName + "; "
+                Next
+            End If
+        End Sub
+
+
+        Private Sub BuildClassCodeArray()
+            Dim splits() As String = {"; ", ";"}
+            Dim splitContent As String() = _content.Split(splits, StringSplitOptions.RemoveEmptyEntries)
+            Dim i As Integer = 0
+
+            Me._classCodes.Clear()
+            Me._classCodes.TrimExcess()
+            For i = 0 To splitContent.Count - 1
+                Me._classCodes.Add(New SubjClass(splitContent.ElementAt(i), True))
+                If Me.IsLinkedDataEnabled() Then
+                    Me._classCodes(i).EnableLinkedData()
+                End If
+                Me._classCodes.Capacity = i + 1
+            Next
+        End Sub
+
+
+        'Private Sub BuildClassCodeArray()
+        '    Dim splits() As String = {"; ", ";"}
+        '    Dim splitContent As String() = _content.Split(splits, StringSplitOptions.RemoveEmptyEntries)
+        '    Dim i As Integer = 0
+        '    Dim cn, co As String
+
+        '    For i = 0 To Math.Max(Me._classCodes.Count - 1, splitContent.Count - 1)
+        '        Try
+        '            cn = splitContent.ElementAt(i)
+        '            Try
+        '                co = Me._classCodes(i).LocalName
+        '            Catch ex As IndexOutOfRangeException
+        '                'Array.Resize(Me._classCodes, i + 1)
+        '                Me._classCodes.Capacity = i + 1
+        '                co = ""
+        '            End Try
+        '            If cn <> co Then
+        '                'Me._classCodes(i) = New SubjClass(cn, True) 'True indicates c is LocalName
+        '                Me._classCodes.Add(New SubjClass(cn, True))
+        '                If Me.IsLinkedDataEnabled() Then
+        '                    Me._classCodes(i).EnableLinkedData()
+        '                End If
+        '            End If
+        '        Catch ex As ArgumentOutOfRangeException
+        '            'Array.Resize(Me._classCodes, i)
+        '            Me._classCodes.Capacity = i + 1
+        '        End Try
+        '    Next
+        'End Sub
 
 #End Region
 
@@ -20,7 +87,7 @@ Namespace RQQueryResult.RQDescriptionElements
         Public ReadOnly Property count() As Integer
             Get
                 If Not IsNothing(Me._classCodes) Then
-                    Return Me._classCodes.Length
+                    Return Me._classCodes.Count
                 Else
                     Return 0
                 End If
@@ -28,22 +95,45 @@ Namespace RQQueryResult.RQDescriptionElements
         End Property
 
 
-        Public Property items() As SubjClass()
+        <DataMember()> _
+        <Xml.Serialization.XmlElement()> _
+        Public Property Dummy As String
+            Get
+                Return "DUMMY"
+            End Get
+            Set(ByVal value As String)
+
+            End Set
+        End Property
+
+
+        <DataMember()> _
+        <Xml.Serialization.XmlElement()> _
+        Public Property items As List(Of SubjClass)
             Get
                 Return Me._classCodes
             End Get
-            Set(ByVal value As SubjClass())
+            Set(ByVal value As List(Of SubjClass))
                 Me._classCodes = value
             End Set
         End Property
 
 
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public Overrides Property Content() As String
             Get
+                Me.BuildContentString()
                 Return _content
             End Get
             Set(ByVal value As String)
-                _content = value
+                Dim classString As New Utilities.ClassString(value)
+
+                value = classString.CompleteClassString()
+                If (_content <> value) Then
+                    _content = value
+                    Me.BuildClassCodeArray()
+                End If
             End Set
         End Property
 
@@ -53,20 +143,28 @@ Namespace RQQueryResult.RQDescriptionElements
 #Region "Public Constructors"
 
         Public Sub New()
+            MyBase.New()
         End Sub
 
 
-        Public Sub New(ByVal Content As String)
-            MyBase.New(Content)
+        Public Sub New(ByVal Content As String, Optional ByVal EnableLinkedData As Boolean = False)
+            MyBase.New(Content, EnableLinkedData)
 
-            Dim splits() As String = {"; ", ";"}
-            Dim i As Integer = 0
+            If Content <> "" Then
+                Dim splits() As String = {"; ", ";"}
+                Dim i As Integer = 0
 
-            For Each c As String In Me._content.Split(splits, StringSplitOptions.RemoveEmptyEntries)
-                Array.Resize(Me._classCodes, i + 1)
-                Me._classCodes(i) = New SubjClass(c, True) 'True indicates c is LocalName
-                i = i + 1
-            Next
+                For Each c As String In _content.Split(splits, StringSplitOptions.RemoveEmptyEntries)
+                    'Array.Resize(Me._classCodes, i + 1)
+                    Me._classCodes.Capacity = i + 1
+                    'Me._classCodes(i) = New SubjClass(c, True) 'True indicates c is LocalName
+                    Me._classCodes.Add(New SubjClass(c, True))
+                    If Me.IsLinkedDataEnabled() Then
+                        Me._classCodes(i).EnableLinkedData()
+                    End If
+                    i = i + 1
+                Next
+            End If
         End Sub
 
 #End Region
@@ -101,56 +199,23 @@ Namespace RQQueryResult.RQDescriptionElements
         End Sub
 
 
-        Public Overrides Sub WriteXml(ByVal writer As Xml.XmlWriter)
-            Dim cc As SubjClass
-            Dim str As String = ""
+        'Public Overrides Sub WriteXml(ByVal writer As Xml.XmlWriter)
+        '    Dim cc As SubjClass
 
-            For Each cc In Me._classCodes
-                writer.WriteStartElement("ClassificationCode")
-                Select Case cc.ClassificationSystem
-                    Case SubjClass.ClassificationSystems.rq
-                        str = "rq"
-                    Case SubjClass.ClassificationSystems.rvk
-                        str = "rvk"
-                    Case SubjClass.ClassificationSystems.jel
-                        str = "jel"
-                    Case SubjClass.ClassificationSystems.oldrq
-                        str = "oldrq"
-                    Case Else
-                        str = ""
-                End Select
-                writer.WriteElementString("ClassificationSystem", str)
-                writer.WriteElementString("Notation", cc.ClassCode)
-                Select Case cc.ClassificationSystem
-                    Case SubjClass.ClassificationSystems.rq
-                        Dim cn As SubjClass = cc
-
-                        writer.WriteElementString("ClassLabel", cc.ClassShortTitle)
-                        writer.WriteElementString("ClassAltLabel", cc.ClassLongTitle)
-                        str = ""
-                        Do
-                            str = str.Insert(0, "/" + cn.ClassID + "$" + cn.ClassCode)
-                            cn = cn.GetBroaderClass()
-                        Loop Until (IsNothing(cn))
-                        writer.WriteElementString("ClassificationPath", str)
-                    Case SubjClass.ClassificationSystems.rvk
-                        writer.WriteElementString("ClassID", cc.ClassID)
-                        writer.WriteElementString("ClassLabel", cc.ClassShortTitle)
-                End Select
-                writer.WriteEndElement()
-            Next
-        End Sub
+        '    For Each cc In Me._classCodes
+        '        cc.WriteXml(writer)
+        '    Next
+        'End Sub
 
 
-        Public Overrides Sub ReadXml(ByVal reader As Xml.XmlReader)
+        'Public Overrides Sub ReadXml(ByVal reader As Xml.XmlReader)
 
-        End Sub
+        'End Sub
 
 
-        Public Overrides Function GetSchema() As Xml.Schema.XmlSchema
-            Return Nothing
-        End Function
-
+        'Public Overrides Function GetSchema() As Xml.Schema.XmlSchema
+        '    Return Nothing
+        'End Function
 
 #End Region
 

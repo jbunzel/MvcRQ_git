@@ -113,7 +113,7 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
             return _ldbase;
         }
 
-        public void Load(string uri)
+        public virtual void Load(string uri)
         {
             this.LDGraph().Load(uri);
         }

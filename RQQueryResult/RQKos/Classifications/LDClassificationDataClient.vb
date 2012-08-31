@@ -5,15 +5,13 @@ Namespace RQKos.Classifications
     Public Class LDClassificationDataClient
         Inherits ClassificationDataClient
 
-
         Public Shared Function GetClassificationSystem(ByVal classId As String) As SubjClass.ClassificationSystems
             Return SubjClass.ClassificationSystems.rvk
         End Function
 
 
         Public Sub New(ByVal classSystem As SubjClass.ClassificationSystems)
-            'Me.ClassSystem = classSystem
-            Me.ClassSystem = SubjClass.ClassificationSystems.ddc
+            Me.ClassSystem = classSystem
             Me.SkosGraph = New RQSkosGraph(Me.ClassSystem)
         End Sub
 
@@ -26,8 +24,10 @@ Namespace RQKos.Classifications
         Public Overrides Sub GetClassData(ByRef theClass As SubjClass)
             Dim uri As String = theClass.ClassID
 
-            Me._skosGraph.Load(uri)
-            theClass.ClassShortTitle = Me._skosGraph.GetPrefLabel(theClass)
+            If Me.IsLinkedDataEnabled() Then
+                Me._skosGraph.Load(uri)
+                theClass.ClassShortTitle = Me._skosGraph.GetPrefLabel(theClass)
+            End If
         End Sub
 
 

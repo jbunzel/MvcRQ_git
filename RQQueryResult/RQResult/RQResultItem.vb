@@ -8,6 +8,8 @@ Imports RQLib.RQDAL
 'Imports RQDigitalObject
 Imports RQLib.RQQueryResult.RQDescriptionElements
 Imports RQLib.RQConverter
+Imports System.Runtime.Serialization
+
 
 Namespace RQQueryResult
 
@@ -324,15 +326,11 @@ Namespace RQQueryResult
         End Property
 
 
-        'Public Property Classification() As String
         Public Property Classification() As RQClassification
             Get
-                'Return Me.GetField("Classification")
                 Return CType(Me._fields("Classification"), RQDescriptionElement)
             End Get
-            'Set(ByVal value As String)
             Set(ByVal value As RQClassification)
-                'Me.SetField("Classification", value)
                 Me._fields("Classification") = value
             End Set
         End Property
@@ -383,7 +381,10 @@ Namespace RQQueryResult
                     Case "Title"
                         Me._fields.Add(name, New RQDescriptionElements.RQTitle(value))
                     Case "Classification"
-                        Me._fields.Add(name, New RQDescriptionElements.RQClassification(value))
+                        Me._fields.Add(name, New RQDescriptionElements.RQClassification(value, glbLinkedDataEnabled))
+                    Case "Feld31"
+                        'Create Date Field: reconvert lucene coded datetime strings to readable format
+                        Me._fields.Add(name, New RQDescriptionElement(RQLucene.Utilities.StringToDate(value)))
                     Case Else
                         Me._fields.Add(name, New RQDescriptionElement(value))
                 End Select
@@ -423,6 +424,7 @@ Namespace RQQueryResult
     End Class
 
 
+    <DataContract()> _
     Public Class RQResultItem
 
 #Region "Private Variables"
@@ -470,6 +472,8 @@ Namespace RQQueryResult
         End Property
 
 
+        <DataMember()> _
+        <Xml.Serialization.XmlElement()> _
         Public ReadOnly Property ItemDescription As RQItemDescription
             Get
                 Return Me._fields
@@ -502,6 +506,13 @@ Namespace RQQueryResult
         End Sub
 
 
+        Public Sub New(ByVal fromRQItem As RQResultItem, Optional ByVal type As RQItemType = RQItemType.docdesc)
+            Me.New(type)
+
+            Me.CopyDocDescription(fromRQItem)
+        End Sub
+
+
         'Public Sub New(ByRef resultDoc As System.Xml.XmlDocument, ByRef index As Integer)
         '    Me.New()
         '    Me.Read(resultDoc, index)
@@ -519,6 +530,8 @@ Namespace RQQueryResult
             For Each pi In pis
                 If Not IsNothing(fromItem._fields.GetField(pi.Name)) Then
                     Me._fields.SetField(pi.Name, fromItem._fields.GetField(pi.Name))
+                Else
+                    Me._fields.SetField(pi.Name, "")
                 End If
             Next
         End Sub
@@ -587,6 +600,34 @@ Namespace RQQueryResult
         End Sub
 
 
+        Private Sub ReadDocDescription(ByVal fromDict As NameValueCollection)
+            Dim pis As System.Reflection.PropertyInfo() = Me._fields.GetType().GetProperties()
+            Dim pi As System.Reflection.PropertyInfo
+
+            For Each pi In pis
+                Dim value As String = fromDict(pi.Name)
+                If Not IsNothing(value) And value <> Me._fields.GetField(pi.Name) Then
+                    Me._fields.SetField(pi.Name, value)
+                    Me._fields.SetChangedFlag()
+                End If
+            Next
+        End Sub
+
+
+        Private Sub ReadDocDescription(ByVal fromItem As RQResultItem)
+            Dim pis As System.Reflection.PropertyInfo() = Me._fields.GetType().GetProperties()
+            Dim pi As System.Reflection.PropertyInfo
+
+            For Each pi In pis
+                Dim value As String = fromItem._fields.GetField(pi.Name)
+                If Not IsNothing(value) And value <> Me._fields.GetField(pi.Name) Then
+                    Me._fields.SetField(pi.Name, value)
+                    Me._fields.SetChangedFlag()
+                End If
+            Next
+        End Sub
+
+
         Private Sub WriteDocDescription(ByRef dr As RQDataSet.DokumenteRow)
             Dim pis As System.Reflection.PropertyInfo() = Me._fields.GetType().GetProperties()
             Dim pi As System.Reflection.PropertyInfo
@@ -617,20 +658,6 @@ Namespace RQQueryResult
 
             For Each pi In pis
                 strdict.Add(pi.Name, Me._fields.GetField(pi.Name))
-            Next
-        End Sub
-
-
-        Private Sub ChangeDocDescription(ByVal fromDict As NameValueCollection)
-            Dim pis As System.Reflection.PropertyInfo() = Me._fields.GetType().GetProperties()
-            Dim pi As System.Reflection.PropertyInfo
-
-            For Each pi In pis
-                Dim value As String = fromDict(pi.Name)
-                If Not IsNothing(value) And value <> Me._fields.GetField(pi.Name) Then
-                    Me._fields.SetField(pi.Name, value)
-                    Me._fields.SetChangedFlag()
-                End If
             Next
         End Sub
 
@@ -690,6 +717,15 @@ Namespace RQQueryResult
                 Dim dr As RQDataSet.DokumenteRow = CType(row, RQDataSet.DokumenteRow)
 
                 WriteDocDescription(dr)
+                'If (dr.Feld30 = "") Then dr.SetFeld30Null()
+                'If (dr.Feld31 = "") Then dr.SetFeld31Null()
+                'If (dr.Feld32 = "") Then dr.SetFeld32Null()
+                'If (dr.Feld33 = "") Then dr.SetFeld33Null()
+                'If (dr.Feld34 = "") Then dr.SetFeld34Null()
+                'If (dr.Feld35 = "") Then dr.SetFeld35Null()
+                'If (dr.Feld36 = "") Then dr.SetFeld36Null()
+                'If (dr.Feld37 = "") Then dr.SetFeld37Null()
+                'If (dr.Feld38 = "") Then dr.SetFeld38Null()
                 row = dr
             End If
             If row.GetType.Name = "BookmarksRow" Then
@@ -710,7 +746,12 @@ Namespace RQQueryResult
 
 
         Public Sub Change(ByVal fromDict As NameValueCollection)
-            Me.ChangeDocDescription(fromDict)
+            Me.ReadDocDescription(fromDict)
+        End Sub
+
+
+        Public Sub Change(ByVal changedItem As RQResultItem)
+            Me.ReadDocDescription(changedItem)
         End Sub
 
 

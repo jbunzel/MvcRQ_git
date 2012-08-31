@@ -22,29 +22,37 @@ namespace MvcRQ
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
-                "ServiceSingleRQKosItem",
-                "{serviceId}/RQKos/{id}",
+                "ServiceRQKosItem",
+                "{serviceId}/rqkos/{id}",
                 new { controller = "RQKos", action = "RQKosItemRecord", serviceId = UrlParameter.Optional, id = UrlParameter.Optional });
             routes.MapRoute(
-                "SingleRQKosItem",
-                "RQKos/{id}",
+                "RQKosItem",
+                "rqkos/{id}",
                 new { controller = "RQKos", action = "Index", id = UrlParameter.Optional });
             routes.MapRoute(
                 "ServiceRQItemList",
-                "{serviceId}/RQItems",
-                new { controller = "RQItems", action = "RQItemList", serviceId = UrlParameter.Optional });
+                "{serviceId}/rqitems",
+                new { controller = "RQItems", action = "RQItemList"  });
             routes.MapRoute(
                 "RQItemList",
-                "RQItems",
-                new { controller = "RQItems", action = "Index" });
+                "rqitems",
+                new { controller = "RQItems", action = "RQItemList" });
             routes.MapRoute(
-                "ServiceSingleRQItem",
-                "{serviceId}/RQItems/{rqitemId}",
-                new { controller = "RQItems", action = "RQItemRecord", serviceId = UrlParameter.Optional});
+                "ServiceRQItemRecord",
+                "{serviceId}/rqitems/{rqitemId}",
+                new { controller = "RQItems", action = "RQItemRecord"});
             routes.MapRoute(
-                "SingleRQItem",
-                "RQItems/{rqitemId}",
+                "RQItemRecord",
+                "rqitems/{rqitemId}",
                 new { controller = "RQItems", action = "RQItemRecord" });
+            routes.MapRoute(
+                "RQItemSubField",
+                "rqitems/{rqitemId}/{fieldName}/{subFieldIndex}",
+                new { controller = "RQItems", action = "RQItemDescElement" });
+            routes.MapRoute(
+                "RQItemField",
+                "rqitems/{rqitemId}/{fieldName}",
+                new { controller = "RQItems", action = "RQItemDescElement" });
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
@@ -54,6 +62,8 @@ namespace MvcRQ
 
         protected void Application_Start()
         {
+            //System.Data.Entity.Database.SetInitializer(new MvcRQ.Models.SettingsDBInitializer());
+
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
@@ -64,6 +74,17 @@ namespace MvcRQ
             // This must be added to accept XML as request
             // Source: http://www.nogginbox.co.uk/blog/xml-to-asp.net-mvc-action-method
             ValueProviderFactories.Factories.Add(new XmlValueProviderFactory());
+
+            ModelBinders.Binders.DefaultBinder = new MvcRQ.Helpers.RQCustomModelBinders();
+            //ModelBinders.Binders.Add(typeof(MvcRQ.Models.RQItem), new MvcRQ.Helpers.RQCustomModelBinders());
+        }
+
+        protected void Application_AuthenticateRequest()
+        {
+            if (MvcRQUser.UserManagementController.IsTargeted())
+            {
+                MvcRQUser.UserManagementController.IsRequestAuthorized = System.Web.Security.Roles.GetRolesForUser().Contains("admin");
+            }
         }
     }
 }

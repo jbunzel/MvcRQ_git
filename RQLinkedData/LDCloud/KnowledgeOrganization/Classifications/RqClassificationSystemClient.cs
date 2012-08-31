@@ -14,7 +14,7 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
     {
         static public string GetURI(string classNotation)
         {
-            return (classNotation != "") ? "http://www.riquest.de/rqld/rqkos" + "/rqc_" + classNotation : "http://www.riquest.de/rqld/rqkos";
+            return (classNotation != "") ? "http://mvcrq.strands.de/rqld/rqkos" + "/rqc_" + classNotation : "http://mvcrq.strands.de/rqld/rqkos";
         }
         
         static public string GetPredicate(ClassificationPredicates predicate)
@@ -34,7 +34,6 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
 
         public override void Load( System.Collections.Specialized.StringDictionary nodeDictionary)
         {
-            //string subj = "http://www.riquest.de/rqld/rqkos/rqc_" + nodeDictionary["ClassCode"];
             string subj = GetURI(nodeDictionary["ClassCode"]);
 
             this.LDGraph().SetNamespace("xhv", new Uri("http://www.w3.org/1999/xhtml/vocab#"));
@@ -42,11 +41,11 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
             this.LDGraph().SetNamespace("rdf", new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#"));
             this.LDGraph().CreateTriple(subj, null, "rdf:type", null, "skos:concept", null);
             this.LDGraph().CreateTriple(subj, null, "xhv:licence", null, "http://creativecommons.org/licenses/by-nc-nd/3.0/", null);
-            this.LDGraph().CreateTriple(subj, null, "skos:inScheme", null, "http://www.riquest.de/rqld/rqkos/rqc-scheme", null);
-            if (nodeDictionary["ClassCode"] != null )  this.LDGraph().CreateTriple(subj, null, "skos:notation", null, nodeDictionary["ClassCode"], "http://www.riquest.de/rqld/rqkos/rqc-schema#Notation");
+            this.LDGraph().CreateTriple(subj, null, "skos:inScheme", null, "http://mvcrq.strands.de/rqld/rqkos/rqc-scheme", null);
+            if (nodeDictionary["ClassCode"] != null) this.LDGraph().CreateTriple(subj, null, "skos:notation", null, nodeDictionary["ClassCode"], "http://mvcrq.strands.de/rqld/rqkos/rqc-schema#Notation");
             if (nodeDictionary["ClassLongTitle"] != null) this.LDGraph().CreateTriple(subj, null, "skos:prefLabel", null, nodeDictionary["ClassLongTitle"], "de");
             if (nodeDictionary["ClassShortTitle"] != null) this.LDGraph().CreateTriple(subj, null, "skos:altLabel", null, nodeDictionary["ClassShortTitle"], "de");
-            if (nodeDictionary["Broader"] != null) this.LDGraph().CreateTriple(subj, null, "skos:broader", null, "http://www.riquest.de/rqld/rqkos/rqc_" + nodeDictionary["Broader"], null);
+            if (nodeDictionary["Broader"] != null) this.LDGraph().CreateTriple(subj, null, "skos:broader", null, "http://mvcrq.strands.de/rqld/rqkos/rqc_" + nodeDictionary["Broader"], null);
         }
 
         public override string GetPreferredLabel(string classNotation)

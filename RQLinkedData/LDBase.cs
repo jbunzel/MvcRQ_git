@@ -61,8 +61,18 @@ namespace RQLinkedData
             try
             {
                 Options.UriLoaderCaching = false;
-                //UriLoader.Load(this, new Uri(subjectUri + "/about.rdf"));
                 UriLoader.Load(this, new Uri(subjectUri));
+            }
+            catch
+            { }
+        }
+
+        public void LoadFile(string fileName)
+        {
+            try
+            {
+                Options.UriLoaderCaching = false;
+                FileLoader.Load(this, fileName);
             }
             catch
             { }

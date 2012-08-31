@@ -6,14 +6,13 @@ using System.Web.Mvc;
 
 namespace MvcRQ.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to ASP.NET MVC!";
             ViewData["qryStr"] = "Suchbegriff eingeben";
-
-            return this.RedirectToAction("Index","RQItems");
+            return this.RedirectToAction("RQItemList", "RQItems");
         }
 
         public ActionResult About()

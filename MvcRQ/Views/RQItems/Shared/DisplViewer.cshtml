@@ -1,0 +1,42 @@
+﻿@model MvcRQ.Models.RQItem
+@*@Html.ValidationSummary()*@
+@using (Html.BeginForm(Model.DocNo, "RQItems", FormMethod.Post))
+{
+    <fieldset title="RQItem Details">
+        @Html.DisplayForModel()
+        @Html.LabelFor(rqitem => rqitem.ID,"ID:")@Html.DisplayFor(rqitem => rqitem.ID)@Html.HiddenFor(rqitem => rqitem.ID)
+        @Html.LabelFor(rqitem => rqitem.DocNo,"Dok-Nr.:") @Html.DisplayFor(rqitem => rqitem.DocNo)@Html.HiddenFor(rqitem => rqitem.DocNo)
+        @Html.LabelFor(rqitem => rqitem.Title, "Titel:") @Html.DisplayFor(rqitem => rqitem.Title)
+        @Html.DisplayFor(rqitem => rqitem.Authors, new {label = "Autoren", classname = "authors"})
+        @Html.DisplayFor(rqitem => rqitem.Source, new {label = "Quelle", classname = "source"})
+        @Html.DisplayFor(rqitem => rqitem.Edition, new {label = "Ausgabe", classname = "edition"})
+        @Html.DisplayFor(rqitem => rqitem.ISDN, new {label = "ISDN", classname = "isdn"})
+        @Html.DisplayFor(rqitem => rqitem.Coden, new {label = "Coden", classname = "coden"})
+        @Html.DisplayFor(rqitem => rqitem.Institutions, new {label = "Institutionen", classname = "institution"})
+        @Html.DisplayFor(rqitem => rqitem.Series, new {label = "Reihe", classname = "series"})
+        @Html.DisplayFor(rqitem => rqitem.Locality, new {label = "Ort", classname = "locality"})
+        @Html.DisplayFor(rqitem => rqitem.Publisher, new {label = "Verlag", classname = "publisher"})
+        @Html.DisplayFor(rqitem => rqitem.PublTime, new {label = "Jahr", classname = "publtime"})
+        @Html.DisplayFor(rqitem => rqitem.Volume, new {label = "Band", classname = "volume"})
+        @Html.DisplayFor(rqitem => rqitem.Issue, new {label = "Heft", classname = "issue"})Titel
+        @Html.DisplayFor(rqitem => rqitem.Pages, new {label = "Format", classname = "pages"})
+        @Html.DisplayFor(rqitem => rqitem.Language, new {label = "Sprache", classname = "language"})
+        @Html.DisplayFor(rqitem => rqitem.DocTypeCode, new {label = "Dokumenttyp-Code", classname = "doctypecode"})
+        @Html.DisplayFor(rqitem => rqitem.DocTypeName, new {label = "Dokumenttyp", classname = "publisher"})
+        @Html.DisplayFor(rqitem => rqitem.IndexTerms, new {label = "Schlagworte", classname = "indexterms"})
+        @Html.DisplayFor(rqitem => rqitem.Subjects, new {label = "Fächer", classname = "subjects"})
+        @Html.DisplayFor(rqitem => rqitem.WorkType, new {label = "Gattung", classname = "worktype"})
+        @Html.DisplayFor(rqitem => rqitem.AboutLocation, new {label = "Ortsbezug", classname = "aboutlocation"})
+        @Html.DisplayFor(rqitem => rqitem.AboutTime, new {label = "Zeitbezug", classname = "abouttime"})
+        @Html.DisplayFor(rqitem => rqitem.AboutPersons, new {label = "Personenbezug", classname = "aboutpersons"})
+        @*@Html.DisplayFor(rqitem => rqitem.Classification, "rqdescriptor", new { label = "Klassifikation", classname = "classification" })*@
+        @Html.DisplayFor(rqitem => rqitem.ClassificationFieldContent, new {label = "Klassifikation", classname = "classification"})
+        @Html.DisplayFor(rqitem => rqitem.Abstract, new {label = "Inhaltsbeschreibung", classname = "abstract"})
+        @Html.DisplayFor(rqitem => rqitem.CreateLocation, new {label = "Entstehungsort", classname = "createlocation"})
+        @Html.DisplayFor(rqitem => rqitem.CreateTime, new {label = "Entstehungszeit", classname = "createtime"})
+        @Html.DisplayFor(rqitem => rqitem.Notes, new {label = "Fußnoten", classname = "notes"})
+    </fieldset>
+    if (ViewBag.EditButton1 != null) {<input type="submit" name="verb" value="@ViewBag.EditButton1" />}
+    if (ViewBag.EditButton2 != null) {<input type="submit" name="verb" value="@ViewBag.EditButton2" />}
+}
+@(ViewData["Message"] ?? "")

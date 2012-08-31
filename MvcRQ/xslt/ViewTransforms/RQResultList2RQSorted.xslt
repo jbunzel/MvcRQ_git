@@ -779,6 +779,8 @@
 
 
   <xsl:template match="@comment | Abstract" mode="list">
+    <xsl:param name="XID" select="''" />
+    
     <xsl:variable name="EID">
       <xsl:value-of select="generate-id()"/>
     </xsl:variable>
@@ -797,10 +799,7 @@
     <xsl:if test="string-length($abstr) > 0">
       <xsl:element name="a">
         <xsl:attribute name="href">
-          <xsl:value-of select="'#'" />
-        </xsl:attribute>
-        <xsl:attribute name="onclick">
-          <xsl:text>visibilityToggle('</xsl:text>
+          <xsl:text>javascript:visibilityToggle('</xsl:text>
           <xsl:value-of select="$EID" />
           <xsl:text>')</xsl:text>
         </xsl:attribute>
@@ -814,16 +813,18 @@
         </img>
       </xsl:element>
     </xsl:if>
-
     <xsl:apply-templates select="../Signature" mode="list"/>
- 
-    <table border="0" class="comment" cellspacing="0" cellpadding="0">
-      <xsl:apply-templates select="../Authors" mode="list" />
-      <xsl:apply-templates select="../Locality" mode="list"/>
-      <xsl:apply-templates select="../DocTypeName" mode="list"/>
-      <xsl:apply-templates select="../@type" mode="list"/>
-    </table>
-
+    <xsl:element name="span">
+      <xsl:attribute name="ID">
+        <xsl:value-of select="$XID" />
+      </xsl:attribute>
+      <table border="0" class="comment" cellspacing="0" cellpadding="0">
+        <xsl:apply-templates select="../Authors" mode="list" />
+        <xsl:apply-templates select="../Locality" mode="list"/>
+        <xsl:apply-templates select="../DocTypeName" mode="list"/>
+        <xsl:apply-templates select="../@type" mode="list"/>
+      </table>
+    </xsl:element>
     <xsl:if test="string-length($abstr) > 0">
       <xsl:element name="div">
         <xsl:attribute name="ID">
@@ -890,6 +891,10 @@
             <xsl:number level="any" count="//Dokument" />
           </xsl:otherwise>
         </xsl:choose>
+      </xsl:variable>
+
+      <xsl:variable name="EID">
+        <xsl:value-of select="generate-id()"/>
       </xsl:variable>
 
       <xsl:if test="name(preceding-sibling::*[1])='Hits' and string-length(parent::*/DDCNumber)>0">
@@ -1120,23 +1125,31 @@
                   <xsl:attribute name="href">
                     <xsl:text>javascript:getRQItem(&quot;</xsl:text>
                     <xsl:value-of select="DocNo"/>
+                    <xsl:text>&quot;, &quot;</xsl:text>
+                    <xsl:value-of select="$EID"/>
+                    <xsl:text>&quot;, &quot;</xsl:text>
+                    <xsl:value-of select="concat('o',$EID)"/>
                     <xsl:text>&quot;);</xsl:text>
                   </xsl:attribute>
                   <xsl:apply-templates select="file/@name | folder/@name | Title" mode="list"/>
                 </xsl:element>
+                <xsl:apply-templates select="file/@comment | folder/@comment | Abstract" mode="list" >
+                  <xsl:with-param name="XID" select="concat('o',$EID)" />
+                </xsl:apply-templates>
                 <xsl:element name="div">
                   <xsl:attribute name="id">
-                    <xsl:value-of select="DocNo"/>
+                    <xsl:value-of select="$EID"/>
                   </xsl:attribute>
                   <xsl:attribute name="style">
                     <xsl:text>display:none</xsl:text>
                   </xsl:attribute>
                 </xsl:element>
-                <xsl:apply-templates select="file/@comment | folder/@comment | Abstract" mode="list" />
               </td>
+<!--              
               <td>
                 <xsl:value-of select="Feld30"/>
               </td>
+-->              
             </tr>
           </table>
         </td>

@@ -24,7 +24,6 @@ namespace RQState.Components
             _id = Guid.NewGuid();
             _storageImp = new T2();
         }
-
   
         public virtual void Save()
         {

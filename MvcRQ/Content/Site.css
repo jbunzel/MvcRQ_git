@@ -391,7 +391,6 @@ input[type=text] {
 .worktype,
 .aboutlocation,
 .abouttime,
-.classification,
 .createlocation,
 .createtime,
 .notes {
@@ -403,4 +402,14 @@ input[type=text] {
 .pages,
 .language {
     max-width: 160px;
+}
+
+.classification {
+    display: inline;
+    min-width: 790px;
+    margin: 5px 32px 5px 5px;    
+}
+
+
+#loading {
 }

@@ -47,7 +47,6 @@ namespace RQState.Components.Storage
             return _storage.GetAll(type);
         }
 
-
         public void Clear()
         {
             _storage.Clear();

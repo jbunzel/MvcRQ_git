@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "RiQuest Data Service";
+}
+<small>@Html.ActionLink("<< RQItems", "Index", "RQItems")</small>
+<h2>@ViewBag.Message</h2>
+<p>
+    You have invoked the data service of the RiQuest Personal Digital Library to return @ViewBag.TextSeg0 in the @ViewBag.ServiceType format.
+</p>
+<h3>Service Description</h3>
+<p>
+    The RiQuest Data Service is an application programming interface (API). It allows remote web applications to retrieve data from the RiQuest Personal Digital Library.<br /> 
+    RQItems are descriptions (metadata) of items stored in the RiQuest Personal Digital Library.
+</p>
+<p>
+    A RiQuest Data Service URL should be called by HttpRequest with one or more of the accepted mime-types:
+</p>
+<il>
+    <li>text/xml</li>
+    <li>application/xml</li>
+    <li>text/json</li>
+    <li>application/json</li>
+</il>
+<p>     
+    The RiQuest Data Service supports the following data formats for RQItems:<br/>
+    (Only for accepted mime-types "text/xml" or "application/xml".)  
+</p>
+<il>
+    <li>oai_dc := Dublin Core / Open Archive Initiative</li>
+    <li>srw_dc := Dublin Core / Serach-Retrieve Web Service Protocol (not yet implemented)</li>
+    <li>info_ofi := Open URL Framework (not yet implemented)</li>
+    <li>mods := Metadata Object Description Scheme (not yet implemented)</li>
+    <li>rq : = RiQuest Proprietary Exchang Format</li>
+    <li>rqi : = RiQuest Internal Data Format (Standard xml-serialization of internal Data Objects)</li>
+</il>
+<p>Data Format rqi will be returned if only mime-types "text/json" or "application/json" are accepted.</p>
+<h3>Response Content</h3>
+
+<h4>XML</h4>
+<p> If this URL had been invoked with accepted mime-types "text/xml" or "application/xml" the following response would have been returned:</p>
+@Html.Partial("Shared/XmlViewer")
+@if (ViewBag.ServiceType == "rqi")
+{
+    <p>(The response to a 'post' or 'delete' request will not show up in the text areas below.)</p>
+}
+<h4>JSON</h4>
+<p> If this URL had been invoked with accepted mime-types "text/json" or "application/json" the following response would have been returned:</p>
+@Html.Partial("Shared/JsonViewer")
+@if (ViewBag.ServiceType == "rqi")
+{
+    <p>(The response to a 'post' or 'delete' request will not show up in the text areas above or below.)</p>
+}
+<h4>HTML</h4>
+<p> As You have invoked this URL with accepted mime-types "-/html" the content is also presented here as HTML for Your convenience .</p>
+@if (ViewBag.TextSeg0 == "an individual RQItem")
+{
+    @Html.Partial("Shared/DisplViewer")
+}
+else
+{
+    @Html.Partial("Shared/ResultViewer")
+}

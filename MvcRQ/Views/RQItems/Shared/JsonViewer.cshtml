@@ -1,12 +1,7 @@
 ﻿<script type="text/javascript">
     function prepareForJsonCall() {
         $("#jsonViewer").val("Posting...");
-        var url = $("#jsonUrl").val();
-        if (url.indexOf("?") < 0)
-            url += "?";
-        else
-            url += "&";
-        url += $("#jsonAdditionalQueryString").val();
+        var url = $("#jsonUrl").val() + "?" + $("#jsonAdditionalQueryString").val();
         return url;
     }
 
@@ -59,8 +54,11 @@
 
 </textarea>
 <br />
-Post to:
-<span id="jsonPostUrl"></span>?<input type="text" id="jsonAdditionalQueryString" value="" size="10" />
-<input id="saveJson" type="button" value="Post" />
-<br />
-<input id="deleteJson" type="button" value="Delete" />
+@if (ViewBag.ServiceType == "rqi")
+{
+    <span>Post to:
+    <span id="jsonPostUrl"></span>?<input type="text" id="jsonAdditionalQueryString" value="" size="10" />
+    <input id="saveJson" type="button" value="Post" />  <input id="deleteJson" type="button" value="Delete" />
+    <br />
+    (To update or delete set verb = update | delete.)</span>
+}

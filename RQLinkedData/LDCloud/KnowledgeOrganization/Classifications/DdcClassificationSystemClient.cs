@@ -14,7 +14,7 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
     {
         static public string GetURI(string classNotation)
         {
-            return (classNotation != "") ? "http://dewey.info" + "/" + "class/6/" : "http://dewey.info";
+            return (classNotation != "") ? "http://dewey.info/class/" + classNotation.Substring(0,3) + "/" : "http://dewey.info";
         }
         
         static public string GetPredicate(ClassificationPredicates predicate)

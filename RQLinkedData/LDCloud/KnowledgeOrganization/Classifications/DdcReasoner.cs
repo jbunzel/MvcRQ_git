@@ -34,7 +34,7 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
             if (rs == null)
             {
                 rs = new VDS.RDF.Query.Inference.SimpleN3RulesReasoner();
-                var ruleGraph = LoadN3(AppDomain.CurrentDomain.BaseDirectory + "N3Rules/test.n3");
+                var ruleGraph = LoadN3(AppDomain.CurrentDomain.BaseDirectory + "LinkedData/N3Rules/test.n3");
 
                 rs.Initialise(ruleGraph);
             }

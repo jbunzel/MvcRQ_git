@@ -10,22 +10,24 @@
 
     function renderXmlList(data, docno) {
         var xml = window.ActiveXObject ? data.xml : (new XMLSerializer().serializeToString(data));
-        $("#" + docno).transform({ xmlstr: xml, xsl: document.location.href.substring(0, document.location.href.toLowerCase().indexOf("rqkos")) + "xslt/ViewTransforms/RQ2SingleItemView.xslt" });
+        $("#" + docno).transform({ xmlstr: xml, xsl: document.location.href.substring(0, document.location.href.toLowerCase().indexOf("rqkos")) + "xslt/ViewTransforms/RQI2SingleItemView.xslt" });
     }
 
-    function getRQItem(docno) {
-        if ($("#" + docno).is(":empty")) {
+    function getRQItem(docno, newDomElementID, oldDomElementID) {
+        if ($("#" + newDomElementID).is(":empty")) {
+            $("#" + newDomElementID).html("<div id='loading'><img src='/images/ajax-loader.gif' alt='Please Wait' /></div>");
             $.ajax({
-                url: document.location.href.substring(0, document.location.href.toLowerCase().indexOf("rqkos")) + "RQItems/" + docno,
+                url: document.location.href.substring(0, document.location.href.toLowerCase().indexOf("rqkos")) + "RQItems/" + docno + "?verb=rqSingleHTML",
                 type: "GET",
                 data: null,
                 dataType: "xml",
                 success: function (data) {
-                    renderXmlList(data, docno);
+                    renderXmlList(data, newDomElementID);
                 }
             });
         }
-        $("#" + docno).toggle("slow");
+        $("#" + oldDomElementID).toggle();
+        $("#" + newDomElementID).toggle("slow");
     }
 
     function call(path) {
@@ -57,7 +59,7 @@
             onActivate: function (node) {
                 // A DynaTreeNode object is passed to the activation handler 
                 // Note: we also get this event, if persistence is on, and the page is reloaded. 
-                var d = document.location.href.substring(0,document.location.href.toLowerCase().indexOf("rqkos")) + encodeURI("RQItems?verb=rqListHTML&query=$class$" + node.data.key.substring(node.data.key.indexOf('$') + 1));
+                var d = document.location.href.substring(0,document.location.href.toLowerCase().indexOf("rqkos")) + encodeURI("RQItems?verb=rqListHTML&queryString=$class$" + node.data.key.substring(node.data.key.indexOf('$') + 1));
                 $.ajax({
                     url: d,
                     type: "GET",
@@ -97,6 +99,24 @@
                 // If we call activate() or makeVisible() here, then the 
                 // whole branch will be expanded now 
                 node.activate();
+            }
+        });
+    }
+
+    function renderFieldContent(data, domElementID) {
+        var xml = window.ActiveXObject ? data.xml : (new XMLSerializer().serializeToString(data));
+        $("#" + domElementID).transform({ xmlstr: xml, xsl: document.location.href.substring(0, document.location.href.indexOf("RQItems")) + "xslt/ViewTransforms/RQItemFields.xslt" });
+    }
+
+    function callAjax(path, domElementID) {
+        alert(document.location.href.substring(0, document.location.href.toLowerCase().indexOf("rqkos")) + path);
+        $.ajax({
+            url: document.location.href.substring(0, document.location.href.toLowerCase().indexOf("rqkos")) + path,
+            type: "GET",
+            data: null,
+            dataType: "xml",
+            success: function (data) {
+                renderFieldContent(data, domElementID);
             }
         });
     }

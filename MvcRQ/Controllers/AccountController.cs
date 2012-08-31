@@ -9,7 +9,7 @@ using MvcRQ.Models;
 
 namespace MvcRQ.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
 
         //

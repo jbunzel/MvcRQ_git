@@ -52,45 +52,40 @@ namespace MvpRestApiLib
                         dataType.GetCustomAttributes(typeof(DataContractAttribute), true).FirstOrDefault() != null)
                     {
                         var dSer = new DataContractSerializer(dataType);
-                        dSer.WriteObject(response.OutputStream, this.Data);
+
+                        if ((XSLTransform == null) || (XSLTransform.Length == 0))
+                            dSer.WriteObject(response.OutputStream, this.Data);
+                        else
+                        {
+                            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                            var xTrf = new System.Xml.Xsl.XslCompiledTransform();
+
+                            dSer.WriteObject(ms, this.Data);
+                            System.IO.TextReader tr = new System.IO.StringReader(Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
+                            xTrf.Load(HttpContext.Current.Server.MapPath(XSLTransform));
+                            xTrf.Transform(new System.Xml.XmlTextReader(tr), null, response.OutputStream);
+                        }
                     }
                     else
                     {
                         var xSer = new XmlSerializer(dataType);
 
                         if ((XSLTransform == null) || (XSLTransform.Length == 0))
-                        {
-                            //DEBUG PRINT DUMP
-                            //var mstr = new XmlTextWriter(new System.IO.MemoryStream(), Encoding.UTF8);
-                            
-                            //xSer.Serialize(mstr, this.Data);
-                            //mstr.BaseStream.Flush();
-                            //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-                            //var xdoc = new XmlDocument();
-                            //xdoc.Load(mstr.BaseStream);
-                            //xdoc.Save("C:/TEST.XML");
-                            
                             xSer.Serialize(response.OutputStream, this.Data);
-                        }
                         else
                         {
+                            System.IO.MemoryStream ms = new System.IO.MemoryStream();
                             var xTrf = new System.Xml.Xsl.XslCompiledTransform();
-                            var mstr = new XmlTextWriter(new System.IO.MemoryStream(), Encoding.UTF8);
+                            //var mstr = new XmlTextWriter(new System.IO.MemoryStream(), Encoding.UTF8);
 
+                            //xSer.Serialize(mstr, this.Data);
+                            xSer.Serialize(ms, this.Data);
+                            System.IO.TextReader tr = new System.IO.StringReader(Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
                             xTrf.Load(HttpContext.Current.Server.MapPath(XSLTransform));
-                            xSer.Serialize(mstr, this.Data);
-                            mstr.BaseStream.Flush();
-                            mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-                            xTrf.Transform(new System.Xml.XPath.XPathDocument(mstr.BaseStream), null, response.OutputStream);
-
-                            //DEBUG PRINT DUMP
-                            //var ostr = new XmlTextWriter(new System.IO.MemoryStream(), Encoding.UTF8);
-                            //xTrf.Transform(new System.Xml.XPath.XPathDocument(mstr.BaseStream), null, ostr);
-                            //ostr.BaseStream.Flush();
-                            //ostr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-                            //var doc = new XmlDocument();
-                            //doc.Load(ostr.BaseStream);
-                            //doc.Save("C:/Test.xml");
+                            //mstr.BaseStream.Flush();
+                            //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+                            //xTrf.Transform(new System.Xml.XPath.XPathDocument(mstr.BaseStream), null, response.OutputStream);
+                            xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), null, response.OutputStream);
                         }
                     }
                 }

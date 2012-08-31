@@ -14,6 +14,7 @@ Public Module Globals
     Public glbMyDocsPath As String = SetMyDocsPath()
     Public glbMyMusicPath As String = SetMyAudioPath()
     Public glbMyVideoPath As String = SetMyVideoPath()
+    Public glbLinkedDataEnabled As Boolean = False
 
     ''EINSTELLUNGEN LOCALHOST
     ''Public glbMyDocsPath As String = "http://" & HttpContext.Current.Request.ServerVariables("HTTP_HOST") & HttpRuntime.AppDomainAppVirtualPath & "/ItemViewer.aspx?IA=MyDocs"

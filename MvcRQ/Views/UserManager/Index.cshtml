@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "UserManagement";
+}
+
+<h2>UserManagement</h2>
+@*html markup*@
+@MvcRQUser.MyHtml.UserTableArea() @*html code for the user table*@
+@MvcRQUser.MyHtml.AddUserForm() @*html code for creating a new user account*@
+@MvcRQUser.MyHtml.ManageRolesForm() @*html code for managing roles*@
+
+@*css*@
+@MvcRQUser.MyHtml.TableCss() @*optional - basic tablesorter css styles*@
+@MvcRQUser.MyHtml.StyleCss() @*recommended - info message and some layout css styles*@
+
+@*javascript*@
+@MvcRQUser.MyHtml.UiJavascript() @*required - user interface javascript code including tablesorter, pager and user interface code*@

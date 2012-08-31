@@ -1,12 +1,7 @@
 ﻿<script type="text/javascript">
     function prepareForXmlCall() {
         $("#xmlViewer").val("Posting...");
-        var url = $("#xmlUrl").val();
-        if (url.indexOf("?") < 0)
-            url += "?";
-        else
-            url += "&";
-        url += $("#xmlAdditionalQueryString").val();
+        var url = $("#xmlUrl").val() + "?" + $("#xmlAdditionalQueryString").val();
         return url;
     }
 
@@ -48,7 +43,7 @@
         });
 
         $("#deleteXml").click(function () {
-            prepareForXmlCall();
+            prepareForXmlCall("delete");
 
             $.ajax({
                 url: document.location.href,
@@ -70,8 +65,11 @@
 
 </textarea>
 <br />
-Post to:
+@if (ViewBag.ServiceType == "rqi")
+{
+<span>Post to:
 <span id="xmlPostUrl"></span>?<input type="text" id="xmlAdditionalQueryString" value="" size="10" />
-<input id="saveXml" type="button" value="Post" />
+<input id="saveXml" type="button" value="Post" />   <input id="deleteXml" type="button" value="Delete" />
 <br />
-<input id="deleteXml" type="button" value="Delete" />
+(To update or delete set verb = update | delete.)</span>
+}

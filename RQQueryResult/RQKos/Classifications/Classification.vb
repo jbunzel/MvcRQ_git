@@ -1,10 +1,15 @@
 ﻿Imports Microsoft.VisualBasic
 Imports RQLib.RQLD
+Imports System.Xml
+Imports System.Runtime.Serialization
 
 
 Namespace RQKos.Classifications
 
+    <DataContract()> _
     Public Class SubjClass
+        'Implements Serialization.IXmlSerializable
+
 
 #Region "Public Enumerations"
 
@@ -64,6 +69,8 @@ Namespace RQKos.Classifications
 
 #Region "Public Properties"
 
+        <DataMember()> _
+        <Xml.Serialization.XmlElement()> _
         Public Property ClassID() As String
             Get
                 If Me._strClassCode <> "" And Me._intClassID < 0 And Me._strClassID = "" Then Me.Read()
@@ -89,6 +96,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <DataMember()> _
+        <Xml.Serialization.XmlElement()> _
         Public Property ClassificationSystem() As ClassificationSystems
             Get
                 Return Me._classSystem
@@ -101,6 +110,9 @@ Namespace RQKos.Classifications
                         If IsNothing(Me.ClassDataClient) Then Me.ClassDataClient = New LDClassificationDataClient(value)
                     Case SubjClass.ClassificationSystems.jel
                         Me._localNameSpace = "§§JEL§§"
+                        If IsNothing(Me.ClassDataClient) Then Me.ClassDataClient = New LDClassificationDataClient(value)
+                    Case SubjClass.ClassificationSystems.ddc
+                        Me._localNameSpace = "§§DDC§§"
                         If IsNothing(Me.ClassDataClient) Then Me.ClassDataClient = New LDClassificationDataClient(value)
                     Case SubjClass.ClassificationSystems.oldrq
                         Me._localNameSpace = ""
@@ -115,6 +127,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <DataMember()> _
+        <Xml.Serialization.XmlElement()> _
         Public Property ClassCode() As String
             Get
                 If Me._intClassID >= 0 And Me._strClassCode = "" Then Me.Read()
@@ -127,6 +141,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <DataMember()> _
+        <Xml.Serialization.XmlElement()> _
         Public Property ClassShortTitle() As String
             Get
                 If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
@@ -138,6 +154,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <DataMember()> _
+        <Xml.Serialization.XmlElement()> _
         Public Property ClassLongTitle() As String
             Get
                 If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
@@ -149,6 +167,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public Property LocalName() As String
             Get
                 If Me._localName = "" Then
@@ -183,6 +203,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public Property LocalNameSpace() As String
             Get
                 If Me._localNameSpace = "" Then
@@ -190,7 +212,9 @@ Namespace RQKos.Classifications
                         Case ClassificationSystems.rvk
                             Me._localNameSpace = "§§RVK§§"
                         Case ClassificationSystems.jel
-                            Me._localNameSpace = "§§JELO§§"
+                            Me._localNameSpace = "§§JEL§§"
+                        Case ClassificationSystems.ddc
+                            Me._localNameSpace = "§§DDC§§"
                         Case ClassificationSystems.oldrq
                             Me._localNameSpace = "§§"
                     End Select
@@ -199,11 +223,13 @@ Namespace RQKos.Classifications
             End Get
             Set(ByVal value As String)
                 Me._localNameSpace = value
-                Select Case value
+                Select Case value.ToUpper()
                     Case "§§RVK§§"
                         Me.ClassificationSystem = ClassificationSystems.rvk
                     Case "§§JEL§§"
                         Me.ClassificationSystem = ClassificationSystems.jel
+                    Case "§§DDC§§"
+                        Me.ClassificationSystem = ClassificationSystems.ddc
                     Case "§§"
                         Me.ClassificationSystem = ClassificationSystems.oldrq
                     Case ""
@@ -215,6 +241,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public Property NrOfSubClasses() As Integer
             Get
                 If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
@@ -227,6 +255,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public Property NrOfClassDocs() As Integer
             Get
                 If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
@@ -239,6 +269,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public Property NrOfRefLinks() As Integer
             Get
                 If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
@@ -251,6 +283,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <DataMember()> _
+        <Xml.Serialization.XmlElement()> _
         Public Property ClassPath() As String
             Get
                 If (Me._classPath = "") Then
@@ -269,6 +303,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public Property ParentClassID() As String
             Get
                 If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
@@ -283,6 +319,8 @@ Namespace RQKos.Classifications
         End Property
 
 
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public Property RefRVKSet() As String
             Get
                 If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
@@ -295,8 +333,8 @@ Namespace RQKos.Classifications
         End Property
 
 
-        <System.Xml.Serialization.XmlIgnore()>
-        <System.Runtime.Serialization.IgnoreDataMember()>
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public Property RefRVKClass() As Utilities.LexicalClass
             Get
                 Return New Utilities.LexicalClass(RefRVKSet)
@@ -308,8 +346,8 @@ Namespace RQKos.Classifications
         End Property
 
 
-        <System.Xml.Serialization.XmlIgnore()>
-        <System.Runtime.Serialization.IgnoreDataMember()>
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public Property ClassDataClient() As ClassificationDataClient
             Get
                 Return Me._classDataClient
@@ -320,8 +358,8 @@ Namespace RQKos.Classifications
         End Property
 
 
-        <System.Xml.Serialization.XmlIgnore()>
-        <System.Runtime.Serialization.IgnoreDataMember()>
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public ReadOnly Property RDFGraph() As RQSkosGraph
             Get
                 Try
@@ -360,7 +398,7 @@ Namespace RQKos.Classifications
             End If
             If Me._intClassID > 0 Or Me._strClassID <> "" Then
                 'no class of RQClassificationSystem has ID=0. ClassID=0 is used to retrieve the outermost subjClassBranch
-                Me._classDataClient.GetClassData(Me)
+                If Not IsNothing(Me._classDataClient) Then Me._classDataClient.GetClassData(Me)
             End If
         End Sub
 
@@ -368,7 +406,7 @@ Namespace RQKos.Classifications
         Private Function Write() As Integer
             If Me._intClassID > 0 Then
                 'no class of RQClassificationSystem has ID=0. ClassID=0 is used to retriev the outermost subjClassBranch
-                Me._classDataClient.PutClassData(Me)
+                If Not IsNothing(Me._classDataClient) Then Me._classDataClient.PutClassData(Me)
             End If
             Return 1
         End Function
@@ -482,6 +520,68 @@ Namespace RQKos.Classifications
             End If
             Return Me._broaderClass
         End Function
+
+
+        Public Sub EnableLinkedData()
+            Me.ClassDataClient.IsLinkedDataEnabled = True
+        End Sub
+
+
+        Public Sub DisableLinkedData()
+            Me.ClassDataClient.IsLinkedDataEnabled = False
+        End Sub
+
+
+        'Public Sub WriteXml(ByVal writer As Xml.XmlWriter) Implements Serialization.IXmlSerializable.WriteXml
+        '    Dim str As String = ""
+
+        '    writer.WriteStartElement("ClassificationCode")
+        '    Select Case Me.ClassificationSystem
+        '        Case SubjClass.ClassificationSystems.rq
+        '            str = "rq"
+        '        Case SubjClass.ClassificationSystems.rvk
+        '            str = "rvk"
+        '        Case SubjClass.ClassificationSystems.ddc
+        '            str = "ddc"
+        '        Case SubjClass.ClassificationSystems.jel
+        '            str = "jel"
+        '        Case SubjClass.ClassificationSystems.oldrq
+        '            str = "oldrq"
+        '        Case Else
+        '            str = ""
+        '    End Select
+        '    writer.WriteElementString("ClassificationSystem", str)
+        '    writer.WriteElementString("Notation", Me.ClassCode)
+        '    If Me.ClassShortTitle <> "" Then
+        '        If Me.ClassificationSystem = SubjClass.ClassificationSystems.rq Then
+        '            writer.WriteElementString("ClassID", "http://www.riquest.de/rqld/rqc/" + Me.ClassID)
+        '        Else
+        '            writer.WriteElementString("ClassID", Me.ClassID)
+        '        End If
+        '        writer.WriteElementString("ClassLabel", Me.ClassShortTitle)
+        '        writer.WriteElementString("ClassAltLabel", Me.ClassLongTitle)
+        '    End If
+        '    If Me.ClassificationSystem = SubjClass.ClassificationSystems.rq Then
+        '        Dim cn As SubjClass = Me
+
+        '        str = ""
+        '        Do
+        '            str = str.Insert(0, "/" + cn.ClassID + "$" + cn.ClassCode)
+        '            cn = cn.GetBroaderClass()
+        '        Loop Until (IsNothing(cn))
+        '        writer.WriteElementString("ClassificationPath", str)
+        '    End If
+        '    writer.WriteEndElement()
+        'End Sub
+
+
+        'Public Sub ReadXml(ByVal reader As Xml.XmlReader) Implements Serialization.IXmlSerializable.ReadXml
+        'End Sub
+
+
+        'Public Function GetSchema() As Xml.Schema.XmlSchema Implements Serialization.IXmlSerializable.GetSchema
+        '    Return Nothing
+        'End Function
 
 #End Region
 

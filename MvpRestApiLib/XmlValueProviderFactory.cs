@@ -35,7 +35,7 @@ namespace MvpRestApiLib
                 }
 
                 bool isArray;
-                if (uniqueKeys.Count == 1)
+                if (uniqueKeys.Count == 1) 
                 {
                     isArray = true;
                 }

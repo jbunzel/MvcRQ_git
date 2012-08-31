@@ -12,6 +12,7 @@
             <input type="submit" value="Los!" />
         }
         View all the @Html.ActionLink("RQItems", "Index", "RQItems")
+        Add new @Html.ActionLink("RQItem", "Index", "RQItems", new { verb = "New" }, null);
 </p>
 <h3>RQItem List</h3>
 @Html.Partial("~/Views/RQItems/Shared/ResultViewer.cshtml")

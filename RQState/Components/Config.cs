@@ -8,7 +8,8 @@ namespace RQState.Components
     public static class Config
     {
         private const string DEFAULT_STORAGE_DIR = @"C:/Temp/Storage/";
-        private const StorageType STORAGE_TYPE = StorageType.AppicationStorage;
+        private const StorageType STORAGE_TYPE = StorageType.CookieStorage;
+       
         public static string DirectoryStoragePath
         {
             get
@@ -17,8 +18,7 @@ namespace RQState.Components
                 return string.IsNullOrEmpty(directory) ? DEFAULT_STORAGE_DIR : directory;
             }
         }
-
-
+        
         public static StorageType StorageType
         {
             get
@@ -36,8 +36,7 @@ namespace RQState.Components
                 }
             }
         }
-
-
+        
         public static string ConnectionString
         {
             get

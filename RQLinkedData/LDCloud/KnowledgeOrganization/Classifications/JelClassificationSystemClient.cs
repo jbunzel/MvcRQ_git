@@ -14,22 +14,30 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
     {
          static public string GetURI(string classNotation)
         {
-            return (classNotation != "") ? "http://www.xxx.de" + "/" + "classNotation" : "http://www.xxx.de";
+            return (classNotation != "") ? "http://zbw.eu/beta/external_identifiers/jel" + "#" + AdaptClassNotation(classNotation) : "http://zbw.eu/beta/external_identifiers/jel";
         }
         
         static public string GetPredicate(ClassificationPredicates predicate)
         {
-            return GetPredicate(ClassificationSystems.rq, predicate);
+            return GetPredicate(ClassificationSystems.jel, predicate);
         }
         
         static public string AdaptClassNotation(string classNotation)
         {
-            return classNotation;
+            return classNotation.Substring(0,3);
         }
 
         public JelClassificationSystemClient()
             :base()
         {
+        }
+
+        public override void Load(string uri)
+        {
+            if (System.IO.File.Exists(AppDomain.CurrentDomain.BaseDirectory + "LinkedData/DataSets/jel.rdf"))
+                this.LDGraph().LoadFile(AppDomain.CurrentDomain.BaseDirectory + "LinkedData/DataSets/jel.rdf");
+            else
+                this.Load(uri);
         }
 
         public override void Load( System.Collections.Specialized.StringDictionary nodeDictionary)
@@ -50,7 +58,18 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
 
         public override string GetPreferredLabel(string classNotation)
         {
-            return "";
+            try
+            {
+                string[] res;
+
+                res = this.LDGraph().ObjectOf(JelClassificationSystemClient.GetURI(AdaptClassNotation(classNotation)), JelClassificationSystemClient.GetPredicate(ClassificationPredicates.preferred_label));
+                return res[0].Substring(res[0].IndexOf("- ") + 2);
+            }
+            catch
+            {
+                return "";
+            }
         }
+
     }
 }

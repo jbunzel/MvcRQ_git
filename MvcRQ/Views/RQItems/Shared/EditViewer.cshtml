@@ -1,6 +1,6 @@
 ﻿@model MvcRQ.Models.RQItem
-@Html.ValidationSummary()
-@using (Html.BeginForm("UpdateItem","RQItems",FormMethod.Post))
+@*@Html.ValidationSummary()*@
+@using (Html.BeginForm(Model.DocNo, "RQItems", FormMethod.Post))
 {
     <fieldset title="RQItem Details">
         @Html.LabelFor(rqitem => rqitem.ID,"ID:")@Html.DisplayFor(rqitem => rqitem.ID)@Html.HiddenFor(rqitem => rqitem.ID)
@@ -28,13 +28,14 @@
         @Html.EditorFor(rqitem => rqitem.AboutLocation, new {label = "Ortsbezug", classname = "aboutlocation"})
         @Html.EditorFor(rqitem => rqitem.AboutTime, new {label = "Zeitbezug", classname = "abouttime"})
         @Html.EditorFor(rqitem => rqitem.AboutPersons, new {label = "Personenbezug", classname = "aboutpersons"})
-   @*     @Html.EditorFor(rqitem => rqitem.Classification, new {label = "Klassifikation", classname = "classification"})
-*@        @Html.EditorFor(rqitem => rqitem.Abstract, new {label = "Inhaltsbeschreibung", classname = "abstract"})
+        @*@Html.EditorFor(rqitem => rqitem.Classification, "rqdescriptor", new { label = "Klassifikation", classname = "classification" })*@
+        @Html.EditorFor(rqitem => rqitem.ClassificationFieldContent, new {label = "Klassifikation", classname = "classification"})
+        @Html.EditorFor(rqitem => rqitem.Abstract, new {label = "Inhaltsbeschreibung", classname = "abstract"})
         @Html.EditorFor(rqitem => rqitem.CreateLocation, new {label = "Entstehungsort", classname = "createlocation"})
         @Html.EditorFor(rqitem => rqitem.CreateTime, new {label = "Entstehungszeit", classname = "createtime"})
         @Html.EditorFor(rqitem => rqitem.Notes, new {label = "Fußnoten", classname = "notes"})
     </fieldset>
-    <input type="submit" name="verb" value="Save" /> <input type="submit" name="verb"
-        value="Delete" />
+    if (ViewBag.EditButton1 != null) {<input type="submit" name="verb" value="@ViewBag.EditButton1" />}
+    if (ViewBag.EditButton2 != null) {<input type="submit" name="verb" value="@ViewBag.EditButton2" />}
 }
 @(ViewData["Message"] ?? "")

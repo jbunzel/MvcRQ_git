@@ -46,9 +46,15 @@ Namespace RQStateManager.RQSessionState
         End Property
 
 
+        Public Sub New()
+
+        End Sub
+
+
         Public Sub New(ByVal ID As Object)
             MyBase.New(ID)
         End Sub
+
 
         ''' <summary>
         ''' Returns the last stored RQQuery structure 
@@ -64,6 +70,7 @@ Namespace RQStateManager.RQSessionState
         ''' Otherwise a new RQQueryStructure for query string in parameter QueryString is returned.
         ''' </remarks>
         Public Shared Function GetQueryState(ByVal QueryString As String) As RQQueryForm.RQquery
+            QueryState = RQState.Components.StateObject(Of sm.qs, RQState.Components.Storage.ConfigurableStorage(Of sm.qs)).Get("qs")
             If IsNothing(QueryState) Then
                 If QueryString = "" Then
                     GetQueryState = New RQQueryForm.RQquery("Recent Additions", "recent")
@@ -71,14 +78,17 @@ Namespace RQStateManager.RQSessionState
                     GetQueryState = New RQQueryForm.RQquery(QueryString)
                 End If
                 QueryState = New RQStateManager.RQSessionState.RQQueryState("qs")
+                QueryState.Query = GetQueryState
+                QueryState.Save()
             Else
                 If QueryString = "" Then
                     GetQueryState = QueryState.Query
                 Else
                     GetQueryState = New RQQueryForm.RQquery(QueryString)
+                    QueryState.Query = GetQueryState
+                    QueryState.Save()
                 End If
             End If
-            QueryState.Query = GetQueryState
         End Function
 
     End Class

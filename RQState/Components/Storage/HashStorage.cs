@@ -28,8 +28,7 @@ namespace RQState.Components.Storage
                 return;
             TypeStorage.Remove(key);
         }
-
-
+        
         public List<T> GetAll(Type type)
         {
             List<T> list = new List<T>();
@@ -41,8 +40,7 @@ namespace RQState.Components.Storage
             }
             return list;
         }
-
-
+        
         public void Clear()
         {
             TypeStorage = null;

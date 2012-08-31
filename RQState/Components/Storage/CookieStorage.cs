@@ -25,7 +25,6 @@ namespace RQState.Components.Storage
             }
         }
 
-
         public void Clear()
         {
             CookieOut.Values.Clear();

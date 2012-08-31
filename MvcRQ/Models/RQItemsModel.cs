@@ -8,13 +8,29 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 
 using RQLib.RQQueryResult;
+using RQLib.RQQueryResult.RQDescriptionElements;
 using RQLib.RQQueryForm;
 
 namespace MvcRQ.Models
 {
+    [DataContract()]
     public class RQItemModel
     {
+        #region public properties
+
+        [DataMember()]
         public RQItemSet RQItems { get; set; }
+
+        #endregion
+
+        #region public constructors
+        
+        public RQItemModel(RQquery query, bool forEdit)
+        {
+            RQItems = new RQItemSet(forEdit);
+            query.QueryFieldList = RQItems.GetDataFieldTable();
+            RQItems.Find(query);
+        }
 
         public RQItemModel(RQquery query)
         {
@@ -23,16 +39,45 @@ namespace MvcRQ.Models
             RQItems.Find(query);
         }
 
+        public RQItemModel()
+        { }
+
+        #endregion
+
+        #region public methods
+
+        public RQItem Add(RQItem newItem)
+        {
+            return this.RQItems.Add(newItem);
+        }
+
         public void Update()
         {
-            this.RQItems.Update();
+            try
+            {
+                this.RQItems.Update();
+                //TODO: RQItems.Update() does not care for update of table "Systematik" (former updateClassRelations)
+	        }
+	        catch (Exception)
+	        {
+		        throw;
+	        }
         }
+
+        #endregion
     }
 
+    [DataContract()]
     [XmlRoot]
     public class RQItemSet : System.Collections.Generic.IEnumerable<RQItem>
     {
+        #region private members
+
         private RQResultSet ItemResultSet;
+
+        #endregion
+
+        #region public properties
 
         public int count
         {
@@ -42,14 +87,45 @@ namespace MvcRQ.Models
             }
         }
 
+        [DataMember]
+        [XmlElement]
+        public List<RQItem> RQItems
+        {
+            get
+            {
+                List<RQItem> li = new List<RQItem>(count);
+
+                for (int i = 0; i < count; i++ )
+                    li.Add(this.GetItem(i));
+                return li;
+            }
+
+            set
+            {
+            }
+        }
+
+        #endregion
+
+        #region public constructors
+
+        public RQItemSet(bool forEdit)
+        {
+            ItemResultSet = new RQResultSet(forEdit);
+        }
+        
         public RQItemSet() :base()
         {
             ItemResultSet = new RQResultSet();
         }
 
-        public void Add(RQItem item)
+        #endregion
+
+        #region public methods
+
+        public RQItem Add(RQItem item)
         {
-            this.ItemResultSet.CreateItem(item._resultItem);
+            return new RQItem(this.ItemResultSet.CreateItem(item._resultItem));
         }
 
         public RQItem GetItem(int i)
@@ -94,13 +170,21 @@ namespace MvcRQ.Models
         {
             return new RQItemSetEnum(this);
         }
+
+        #endregion
     }
 
     public class RQItemSetEnum : IEnumerator<RQItem>
     {
+        #region private members
+
         private RQItemSet _itemSet;
         private int _curIndex;
         private RQItem _curItem;
+
+        #endregion
+
+        #region public constructors
 
         public RQItemSetEnum( RQItemSet itemSet)
         {
@@ -108,6 +192,10 @@ namespace MvcRQ.Models
             _curIndex = -1;
             _curItem = default(RQItem);
         }
+
+        #endregion
+
+        #region public methods
 
         public bool MoveNext()
         {
@@ -145,14 +233,24 @@ namespace MvcRQ.Models
         void IDisposable.Dispose()
         {
         }
+
+        #endregion
     }
 
+    [DataContract()]
     [XmlRoot]
     public class RQItem
     {
+        #region internal members
+
         internal RQResultItem _resultItem {get; set; }
+        
+        #endregion
+
+        #region public properties
 
         [DataMember]
+        [XmlElement]
         public string ID
         {
             get
@@ -161,11 +259,12 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = ID;
+                this._resultItem.ItemDescription.ID = value;
             }
         }
 
         [DataMember]
+        [XmlElement]
         public string DocNo
         {
             get
@@ -174,12 +273,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = DocNo;
+                this._resultItem.ItemDescription.DocNo = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.MultilineText)]
+        [XmlElement]
         public string Title
         {
             get
@@ -188,12 +288,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Title;
+                this._resultItem.ItemDescription.Title = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.MultilineText)]
+        [XmlElement]
         public string Authors
         {
             get
@@ -202,12 +303,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Authors;
+                this._resultItem.ItemDescription.Authors = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.MultilineText)]
+        [XmlElement]
         public string Source
         {
             get
@@ -216,12 +318,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Source;
+                this._resultItem.ItemDescription.Source = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.MultilineText)]
+        [XmlElement]
         public string Institutions
         {
             get
@@ -230,12 +333,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Institutions;
+                this._resultItem.ItemDescription.Institutions = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.MultilineText)]
+        [XmlElement]
         public string Series
         {
             get
@@ -244,12 +348,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Series;
+                this._resultItem.ItemDescription.Series = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.MultilineText)]
+        [XmlElement]
         public string IndexTerms
         {
             get
@@ -258,12 +363,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = IndexTerms;
+                this._resultItem.ItemDescription.IndexTerms = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.MultilineText)]
+        [XmlElement]
         public string Subjects
         {
             get
@@ -272,12 +378,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Subjects;
+                this._resultItem.ItemDescription.Subjects = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.MultilineText)]
+        [XmlElement]
         public string AboutPersons
         {
             get
@@ -286,12 +393,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = AboutPersons;
+                this._resultItem.ItemDescription.AboutPersons = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.MultilineText)]
+        [XmlElement]
         public string Abstract
         {
             get
@@ -300,12 +408,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Abstract;
+                this._resultItem.ItemDescription.Abstract = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string Edition
         {
             get
@@ -314,12 +423,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Edition;
+                this._resultItem.ItemDescription.Edition = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string ISDN
         {
             get
@@ -328,12 +438,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = ISDN;
+                this._resultItem.ItemDescription.ISDN = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string Coden
         {
             get
@@ -342,12 +453,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Coden;
+                this._resultItem.ItemDescription.Coden = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string Locality
         {
             get
@@ -356,12 +468,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Locality;
+                this._resultItem.ItemDescription.Locality = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string Publisher
         {
             get
@@ -370,12 +483,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Publisher;
+                this._resultItem.ItemDescription.Publisher = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string PublTime
         {
             get
@@ -384,12 +498,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = PublTime;
+                this._resultItem.ItemDescription.PublTime = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string Volume
         {
             get
@@ -398,12 +513,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Volume;
+                this._resultItem.ItemDescription.Volume = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string Issue
         {
             get
@@ -412,12 +528,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Issue;
+                this._resultItem.ItemDescription.Issue = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string Pages
         {
             get
@@ -426,12 +543,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Pages;
+                this._resultItem.ItemDescription.Pages = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string Language
         {
             get
@@ -440,12 +558,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Language;
+                this._resultItem.ItemDescription.Language = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string Signature
         {
             get
@@ -454,12 +573,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Signature;
+                this._resultItem.ItemDescription.Signature = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string DocTypeCode
         {
             get
@@ -468,12 +588,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = DocTypeCode;
+                this._resultItem.ItemDescription.DocTypeCode = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string DocTypeName
         {
             get
@@ -482,12 +603,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = DocTypeName;
+                this._resultItem.ItemDescription.DocTypeName = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string WorkType
         {
             get
@@ -496,12 +618,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = WorkType;
+                this._resultItem.ItemDescription.WorkType = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string AboutLocation
         {
             get
@@ -510,12 +633,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = AboutLocation;
+                this._resultItem.ItemDescription.AboutLocation = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string AboutTime
         {
             get
@@ -524,12 +648,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = AboutTime;
+                this._resultItem.ItemDescription.AboutTime = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string CreateLocation
         {
             get
@@ -538,12 +663,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = CreateLocation;
+                this._resultItem.ItemDescription.CreateLocation = value;
             }
         }
 
         [DataMember]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string CreateTime
         {
             get
@@ -552,12 +678,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = CreateTime;
+                this._resultItem.ItemDescription.CreateTime = value;
             }
         }
 
-        [DataMember]
+        [DataMember()]
         [DataType(DataType.Text)]
+        [XmlElement]
         public string Notes
         {
             get
@@ -566,13 +693,13 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Title = Notes;
+                this._resultItem.ItemDescription.Notes = value;
             }
         }
 
         [DataMember]
-        [DataType(DataType.Text)]
-        public RQLib.RQQueryResult.RQDescriptionElements.RQClassification Classification
+        [XmlElement]
+        public RQClassification Classification
         {
             get
             {
@@ -580,10 +707,28 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Classification = Classification;
+                this._resultItem.ItemDescription.Classification = value;
             }
         }
-      
+
+        [DataMember]
+        [DataType(DataType.Text)]
+        public string ClassificationFieldContent
+        {
+            get
+            {
+                return this._resultItem.ItemDescription.Classification != null ? this._resultItem.ItemDescription.Classification.Content : "";
+            }
+            set
+            {
+                this._resultItem.ItemDescription.Classification = new RQClassification(value);
+            }
+        }
+
+        #endregion
+
+        #region public constructors
+
         public RQItem()
         {
             this._resultItem = new RQResultItem();
@@ -594,14 +739,68 @@ namespace MvcRQ.Models
             this._resultItem = resultItem;
         }
 
+        #endregion
+
+        #region public methods
+
         public void Change(System.Collections.Specialized.NameValueCollection fromFields)
         {
             this._resultItem.Change(fromFields);
+        }
+
+        public void Change(RQItem fromItem)
+        {
+            this._resultItem.Change(fromItem._resultItem);
         }
 
         public XmlTextReader ConvertTo(string format)
         {
            return this._resultItem.ConvertTo(format);
         }
+
+        public RQDescriptionElement GetDescriptionElement(string fieldName)
+        {
+            System.Reflection.PropertyInfo info = this._resultItem.ItemDescription.GetType().GetProperty(fieldName);
+            object o = info.GetValue(this._resultItem.ItemDescription, null);
+
+            if (o.GetType().IsSubclassOf(typeof(RQDescriptionElement)))
+                return (RQDescriptionElement) o;
+            else
+                return null;
+        }
+
+        public Object GetField(string fieldName, int subFieldIndex)
+        {
+            RQDescriptionElement de = this.GetDescriptionElement(fieldName);
+
+            if (de != null)
+            {
+                switch (de.GetType().Name)
+                {
+                    case "RQClassification":
+                        RQClassification cl = (RQClassification)de;
+
+                        if (cl.items[subFieldIndex] != null)
+                        {
+                            RQLib.RQKos.Classifications.SubjClass sc = cl.items[subFieldIndex];
+
+                            if (!cl.IsLinkedDataEnabled)
+                            {
+                                sc.EnableLinkedData();
+                                sc.Load();
+                                sc.DisableLinkedData();
+                            }
+                            return sc;
+                        }
+                        else
+                            return cl.items[cl.count - 1];
+                    default:
+                        return de;
+                }
+            }
+            return null;
+        }
+
+        #endregion
     }
 }
