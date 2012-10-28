@@ -65,6 +65,30 @@ namespace MvcRQUser
     }
 
     /// <summary>
+    /// Required: Builds javascript blocks for setting of query option .
+    /// </summary>
+    /// <returns>(required) Javascript code for generating the user interface.</returns>
+    public static IHtmlString QueryOptionsJavascript()
+    {
+        var builder = new StringBuilder();
+        builder.AppendFormat(_javascriptBlock, ScriptPack.simple_query_options_management.Replace("{controllerName}","UserSettings"));
+        //builder.AppendFormat(_javascriptBlock, ScriptPack.tablesorter_pager_min);
+        //builder.AppendFormat(_javascriptBlock, ScriptPack.simple_user_management.Replace("{controllerName}", "UserManagement"));
+        return new HtmlString(builder.ToString());
+    }
+
+    /// <summary>
+    /// Builds the checkbox selection for external database inclusion.
+    /// </summary>
+    /// <returns>User search settings html code</returns>
+    public static IHtmlString IncludeExternalDbForm()
+    {
+        string Html = ScriptPack.imclude_external_db_form;
+
+        return new HtmlString(Html);
+    }
+
+    /// <summary>
     /// (optional) Builds a table styling css block. Could be used as starting point for custom styles. Optional, put in head section.
     /// </summary>
     /// <returns>(optional) A basic css style block for the user table.</returns>

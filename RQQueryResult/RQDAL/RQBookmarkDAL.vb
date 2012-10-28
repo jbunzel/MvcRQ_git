@@ -361,7 +361,7 @@ Namespace RQDAL
             Dim objFolder As New DirectoryInfo(strPath)
             Dim objFolderItem As DirectoryInfo
             Dim objFileItem As FileInfo
-            Dim WorkFile As File
+            'Dim WorkFile As File
             Dim iIndex As Integer = 0
             Dim strTemp, strExt As String
             Dim CommItems As String()
@@ -378,11 +378,11 @@ Namespace RQDAL
                     xmlWriter.WriteAttributeString("DocNo", "D" + CStr(iItemCount))
                     iItemCount += 1
                     strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + ".gif"
-                    If WorkFile.Exists(strTemp) Then
+                    If File.Exists(strTemp) Then
                         'xmlWriter.WriteAttributeString("logo", HttpContext.Current.Server.UrlEncode(strAdr + "/" + LCase(Left(objFileItem.Name, InStrRev(objFileItem.Name, ".", -1, CompareMethod.Text) - 1)) + ".gif"))
                     End If
                     strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + ".ico"
-                    If WorkFile.Exists(strTemp) Then
+                    If File.Exists(strTemp) Then
                         'xmlWriter.WriteAttributeString("icon", HttpContext.Current.Server.UrlEncode(strAdr + "/" + LCase(Left(objFileItem.Name, InStrRev(objFileItem.Name, ".", -1, CompareMethod.Text) - 1)) + ".ico"))
                     End If
                     ExtractFileData(xmlWriter, objFileItem.FullName, objFileItem.Name)
@@ -441,7 +441,7 @@ Namespace RQDAL
                     End If
                     xmlWriter.WriteEndElement()
                 Else
-                    If WorkFile.Exists(objFolderItem.FullName + "/" + Left(objFolderItem.Name, InStrRev(objFolderItem.Name, "$$COPY$$", -1, CompareMethod.Text) - 1) + ".htm") Then
+                    If File.Exists(objFolderItem.FullName + "/" + Left(objFolderItem.Name, InStrRev(objFolderItem.Name, "$$COPY$$", -1, CompareMethod.Text) - 1) + ".htm") Then
                         If (iIndex = 0) Then
                             xmlWriter.WriteStartElement("filelist")
                             iIndex = 1
@@ -570,7 +570,7 @@ Namespace RQDAL
             xmlWriter.Flush()
             xmlInStream.Flush()
             Try
-                'xmlFileStream = New FileStream(Path.Combine(HttpRuntime.AppDomainAppPath, VLXmlPath), FileMode.Create)
+                xmlFileStream = New FileStream(Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, VLXmlPath), FileMode.Create)
                 xmlInStream.WriteTo(xmlFileStream)
                 xmlFileStream.Flush()
                 xmlFileStream.Close()

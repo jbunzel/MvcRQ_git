@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Security;
 
-namespace MvcRQUser
+namespace MvcRQUser.UserManagement
 {
   public static class AccountValidation
   {

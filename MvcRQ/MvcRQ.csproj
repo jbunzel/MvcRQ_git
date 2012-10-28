@@ -14,6 +14,7 @@
     <AssemblyName>MvcRQ</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,8 +25,29 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\MvcRQ.XML</DocumentationFile>
-    <DeployIisAppPath>Default Web Site/MvcRQ</DeployIisAppPath>
+    <DeployIisAppPath>Default Web Site/riquest</DeployIisAppPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="ApplicationServices-Bereitstellung" Order="1">
+          <Destination Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|aspnetdb.mdf%3bInitial Catalog=aspnetdb.mdf%3bIntegrated Security=True%3b" />
+          <Object Type="dbFullSql" Enabled="False">
+            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|aspnetdb.mdf%3bInitial Catalog=aspnetdb.mdf%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\ApplicationServices-Bereitstellung_SchemaAndData.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="SettingsDBContext-Bereitstellung" Order="2">
+          <Destination Path="Data Source=.\SQLEXPRESS08%3bAttachDbFilename=|DataDirectory|settings.mdf%3bInitial Catalog=settings.mdf%3bIntegrated Security=True%3b" />
+          <Object Type="dbFullSql" Enabled="False">
+            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|settings.mdf%3bInitial Catalog=settings.mdf%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\SettingsDBContext-Bereitstellung_SchemaAndData.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
+    <PackageAsSingleFile>true</PackageAsSingleFile>
+    <DesktopBuildPackageLocation>obj\Debug\Package\riquest.zip</DesktopBuildPackageLocation>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,6 +56,104 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="ApplicationServices-Bereitstellung" Order="1">
+          <Destination Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|aspnetdb.mdf%3bInitial Catalog=aspnetdb.mdf%3bIntegrated Security=True%3bUser Instance=True" />
+          <Object Type="dbFullSql">
+            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|aspnetdb.mdf%3bInitial Catalog=aspnetdb.mdf%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\ApplicationServices-Bereitstellung_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="SettingsDBContext-Bereitstellung" Order="2">
+          <Destination Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|settings.mdf%3bInitial Catalog=settings.mdf%3bIntegrated Security=True%3bUser Instance=True" />
+          <Object Type="dbFullSql" Enabled="False">
+            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|settings.mdf%3bInitial Catalog=settings.mdf%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\SettingsDBContext-Bereitstellung_SchemaAndData.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+    <DesktopBuildPackageLocation>obj\Release\Package\riquest.zip</DesktopBuildPackageLocation>
+    <DeployIisAppPath>Default Web Site/riquest</DeployIisAppPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DomainBox|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\MvcRQ.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="ApplicationServices-Bereitstellung" Order="1" xmlns="">
+          <Destination Path="Data Source=mssql.area-23.server-home.net%3bInitial Catalog=dnn_7a4111dba429d8%3bUser Id=jbunzel%3bPassword=prokyon%3b" />
+          <Object Type="dbFullSql">
+            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|aspnetdb.mdf%3bInitial Catalog=aspnetdb.mdf%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\DomainBox\AutoScripts\ApplicationServices-Bereitstellung_SchemaAndData.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="SettingsDBContext-Bereitstellung" Order="2" xmlns="">
+          <Destination Path="Data Source=mssql.area-23.server-home.net%3bInitial Catalog=dnn_7a4111dba429d8%3bUser Id=jbunzel%3bPassword=prokyon%3b" />
+          <Object Type="dbFullSql">
+            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|settings.mdf%3bInitial Catalog=settings%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\DomainBox\AutoScripts\SettingsDBContext-Bereitstellung_SchemaAndData.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
+    <NoWarn>
+    </NoWarn>
+    <WarningLevel>4</WarningLevel>
+    <PackageAsSingleFile>true</PackageAsSingleFile>
+    <DeployIisAppPath>/subdomains/mvcrq</DeployIisAppPath>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'JBCOMPUTER|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <DesktopBuildPackageLocation>obj\JBCOMPUTER\Package\riquest.zip</DesktopBuildPackageLocation>
+    <DeployIisAppPath>Default Web Site/riquest</DeployIisAppPath>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="ApplicationServices-Bereitstellung" Order="1">
+          <Destination Path="Server=JBCOMPUTER\SQLEXPRESS%3bDatabase=aspnetdb%3bIntegrated Security=SSPI" />
+          <Object Type="dbFullSql">
+            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|aspnetdb.mdf%3bInitial Catalog=aspnetdb.mdf%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\JBCOMPUTER\AutoScripts\ApplicationServices-Bereitstellung_SchemaAndData.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="SettingsDBContext-Bereitstellung" Order="2">
+          <Destination Path="Server=JBCOMPUTER\SQLEXPRESS%3bDatabase=settings%3bIntegrated Security=SSPI" />
+          <Object Type="dbFullSql">
+            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|settings.mdf%3bInitial Catalog=settings%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\JBCOMPUTER\AutoScripts\SettingsDBContext-Bereitstellung_SchemaAndData.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ECS|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\MvcRQ.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -73,26 +193,63 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\MyHtml.cs" />
+    <Compile Include="Areas\MyJsonResult.cs" />
+    <Compile Include="Areas\Scripts\ScriptPack.Designer.cs">
+      <DependentUpon>ScriptPack.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\UserManagement\Controllers\UserManagementController.cs" />
+    <Compile Include="Areas\UserManagement\Helper\AccountValidation.cs" />
+    <Compile Include="Areas\UserManagement\Helper\IUserAccountService.cs" />
+    <Compile Include="Areas\UserManagement\Helper\UserAccountService.cs" />
+    <Compile Include="Areas\UserManagement\Helper\UserManagementAuthorization.cs" />
+    <Compile Include="Areas\UserManagement\UserManagementAreaRegistration.cs" />
+    <Compile Include="Areas\UserSettings\Controllers\UserSettingsController.cs" />
+    <Compile Include="Areas\UserSettings\Helpers\IUserSettingsService.cs" />
+    <Compile Include="Areas\UserSettings\Helpers\UserSettingsService.cs" />
+    <Compile Include="Areas\UserSettings\Helpers\UserStates.cs" />
+    <Compile Include="Areas\UserSettings\Models\SettingsDBContext.cs" />
+    <Compile Include="Areas\UserSettings\Models\SettingsDBInitializer.cs" />
+    <Compile Include="Areas\UserSettings\Models\SettingsModel.cs" />
+    <Compile Include="Areas\UserSettings\UserSettingsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\RQItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RQKosController.cs" />
-    <Compile Include="Controllers\UserManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CacheManager.cs" />
     <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\RouteConstraints.cs" />
     <Compile Include="Helpers\RQAuthorize.cs" />
     <Compile Include="Helpers\RQCustomModelBinders.cs" />
     <Compile Include="Helpers\StateStorage.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\RQItemsModel.cs" />
     <Compile Include="Models\RQKosModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnetdb.mdf" />
+    <Content Include="App_Data\aspnetdb_log.ldf">
+      <DependentUpon>aspnetdb.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\settings.mdf" />
+    <Content Include="Areas\Scripts\add-user-form.html" />
+    <Content Include="Areas\Scripts\imclude-external-db-form.html" />
+    <Content Include="Areas\Scripts\jquery.tablesorter.min.js" />
+    <Content Include="Areas\Scripts\manage-roles-form.html" />
+    <Content Include="Areas\Scripts\simple-query-options-management.js" />
+    <Content Include="Areas\Scripts\simple-user-management.js" />
+    <Content Include="Areas\Scripts\style.css" />
+    <Content Include="Areas\Scripts\tablesorter-pager-min.js" />
+    <Content Include="Areas\Scripts\tablesorter-pager.js" />
+    <Content Include="Areas\Scripts\tablesorter-style.css" />
+    <Content Include="Areas\Scripts\user-table-area.html" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -152,6 +309,7 @@
     <Content Include="Images\icon_webfolder.gif" />
     <Content Include="Images\icon_websource.gif" />
     <Content Include="Images\RQFTCollection.jpg" />
+    <Content Include="InstallationDummyFile.txt" />
     <Content Include="LinkedData\N3Rules\test.n3" />
     <Content Include="README.txt" />
     <Content Include="Scripts\dynatree-1.2.0\jquery.cookie.js" />
@@ -180,9 +338,11 @@
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -209,17 +369,19 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="xml\dir.xml" />
-    <Content Include="xml\extdblist.xml" />
+    <Content Include="xml\extdblist.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="xml\IndexConfig.xml" />
     <Content Include="xml\stdquery.de-DE.xml" />
     <Content Include="xml\stdquery.xml" />
-    <Content Include="xslt\rqi2rq.xslt">
+    <Content Include="xslt\RQI2RQ.xslt">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="xslt\RQ2DC.xslt">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="xslt\rqi2dc.xslt">
+    <Content Include="xslt\RQI2DC.xslt">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="xslt\RQKos2RDF.xslt">
@@ -232,10 +394,48 @@
     <Content Include="xslt\ViewTransforms\RQResultList2RQSorted.xslt">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="xslt\MODS2RQI.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\SRUMARC2MODS.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.DomainBox.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.JBCOMPUTER.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.ECS.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
+    <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.xml" />
+    <None Include="_bin_deployableAssemblies\NuGet.Core.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Helpers.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Helpers.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.Razor.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Razor.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Administration.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Deployment.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Deployment.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.xml" />
+    <None Include="_bin_deployableAssemblies\WebMatrix.Data.dll" />
+    <None Include="_bin_deployableAssemblies\WebMatrix.Data.xml" />
+    <None Include="_bin_deployableAssemblies\WebMatrix.WebData.dll" />
+    <None Include="_bin_deployableAssemblies\WebMatrix.WebData.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
     <Content Include="~db\katalog30.mdb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Areas\UserManagement\Models\" />
+    <Folder Include="Areas\UserManagement\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -244,10 +444,6 @@
     <ProjectReference Include="..\dotNetRDF\Libraries\core\dotNetRDF.csproj">
       <Project>{BFBAC159-1E60-4D03-8ACA-D34E31EB83BF}</Project>
       <Name>dotNetRDF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MvcRQUser\MvcRQUser.csproj">
-      <Project>{CE56D7F8-7CDB-440A-BC04-40DEC1612252}</Project>
-      <Name>MvcRQUser</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvpRestApiLib\MvpRestApiLib.csproj">
       <Project>{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}</Project>
@@ -292,16 +488,33 @@
     <Content Include="Views\RQKos\ServRQKos.cshtml" />
     <Content Include="Views\RQItems\EditorTemplates\multilinetext.cshtml" />
     <Content Include="Views\RQItems\EditorTemplates\text.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Web.config" />
+    <Content Include="Areas\UserSettings\Views\Web.config" />
+    <Content Include="Areas\UserSettings\Views\UserSettings\Create.cshtml" />
+    <Content Include="Areas\UserSettings\Views\UserSettings\Index.cshtml" />
+    <Content Include="Areas\UserSettings\Views\UserSettings\Delete.cshtml" />
+    <Content Include="Areas\UserSettings\Views\UserSettings\Details.cshtml" />
+    <Content Include="Areas\UserSettings\Views\UserSettings\Edit.cshtml" />
+    <Content Include="Areas\UserSettings\Views\Shared\IncludeExternalView.cshtml" />
+    <Content Include="Areas\UserManagement\Views\UserManagement\Index.cshtml" />
+    <Content Include="Areas\UserSettings\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\UserManagement\Views\_ViewStart.cshtml" />
     <None Include="LinkedData\DataSets\jel.rdf" />
     <Content Include="Views\RQItems\EditorTemplates\rqdescriptor.cshtml" />
     <Content Include="Views\RQItems\EditRQItem.cshtml" />
     <Content Include="Views\RQItems\DisplRQItem.cshtml" />
     <Content Include="Views\RQItems\Shared\DisplViewer.cshtml" />
-    <Content Include="Views\UserManager\Index.cshtml" />
+    <Content Include="Views\RQItems\Shared\SearchBoxView.cshtml" />
     <None Include="~db\RQLucene\CATALOG\segments.gen" />
     <None Include="~db\RQLucene\CATALOG\segments_2of" />
     <None Include="~db\RQLucene\CATALOG\_1c4.cfs" />
     <None Include="~db\RQLucene\CATALOG\_1c6.cfs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Scripts\ScriptPack.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -318,12 +531,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55834</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/MvcRQ</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

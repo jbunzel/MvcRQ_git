@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.UI;
 
 
-namespace MvcRQUser
+namespace MvcRQUser.UserManagement
 {
   [UserManagementAuthorization]
   public class UserManagementController : Controller
@@ -37,10 +37,10 @@ namespace MvcRQUser
 
       using (routes.GetWriteLock())
       {
-        routes.MapRoute("SimpleUserManagementRoute",
-          "SimpleUserManagement/{action}",
+        routes.MapRoute("UserManagementRoute",
+          "UserManagement/{action}",
           new { controller = "UserManagement", action = "GetAllUsers" },
-          new string[] { "MvcRQUser" });
+          new string[] { "MvcRQUser.UserManagement" });
       }
 
     }

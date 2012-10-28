@@ -31,12 +31,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserManagement\UserManagementAreaRegistration.cs" />
+    <Compile Include="UserStates.cs" />
     <Compile Include="UserManagement\AccountValidation.cs" />
     <Compile Include="UserManagement\IUserAccountService.cs" />
     <Compile Include="MyJsonResult.cs" />
@@ -59,9 +68,17 @@
     <Compile Include="UserManagement\UserManagementController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserManagement\UserAccountService.cs" />
+    <Compile Include="UserSettings\IUserSettingsService.cs" />
+    <Compile Include="UserSettings\Models\SettingsDBContext.cs" />
+    <Compile Include="UserSettings\Models\SettingsDBInitializer.cs" />
+    <Compile Include="UserSettings\Models\SettingsModel.cs" />
+    <Compile Include="UserSettings\UserSettingsService.cs" />
+    <Compile Include="UserSettings\UserSettingsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\add-user-form.html" />
+    <Content Include="Scripts\imclude-external-db-form.html" />
+    <Content Include="Scripts\simple-query-options-management.js" />
     <Content Include="Scripts\tablesorter-pager-min.js" />
     <Content Include="Scripts\manage-roles-form.html" />
     <Content Include="Scripts\style.css" />
@@ -76,6 +93,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RQState\RQState.csproj">
+      <Project>{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}</Project>
+      <Name>RQState</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

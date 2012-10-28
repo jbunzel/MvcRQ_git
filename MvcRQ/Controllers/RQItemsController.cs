@@ -8,6 +8,7 @@ using MvpRestApiLib;
 using System.Web.UI;
 
 using RQLib.RQQueryForm;
+using MvcRQ.Areas.UserSettings;
 using MvcRQ.Helpers;
 
 namespace MvcRQ.Controllers
@@ -23,49 +24,45 @@ namespace MvcRQ.Controllers
     {
         #region private methods
 
-        /// <summary>
-        /// Returns a collection of RQItems pertainig to a given query. 
-        /// </summary>
-        /// <remarks>
-        /// A RQQuery structure is generated from the given query string. The default properties of RQQuery have to be set in advance.
-        /// The query result is retrieved from the server-side cache, if one has already been stored under the same query string 
-        /// </remarks>
-        /// <param name="queryString">
-        /// A query string input conforming to Riquest query syntax.  
-        /// </param>
-        /// Allows model records to be edited.
-        /// <param name="forEdit">
-        /// </param>
-        /// <returns>
-        /// The RQItemModel with RQItems property containing the result list. 
-        /// </returns>
-        private RQItemModel GetModel(RQquery query, bool forEdit)
+        private RQquery GetQuery(string queryString, UserState.States stateType)
         {
-            RQItemModel rqitemModel = base.HttpContext.Cache[query.QueryString.ToLower()] as RQItemModel;
+            RQquery q = StateStorage.GetQueryFromState(queryString, stateType);
 
-            if ( (rqitemModel == null) || (forEdit == true) )
+            ViewData["qryStr"] = q.QueryString;
+            return q;
+        }
+        
+        private RQquery GetQuery(string queryString)
+        {
+            UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? UserState.States.BrowseViewState : UserState.States.ListViewState;
+            return GetQuery(queryString, stateType);
+        }
+
+        private RQItemModel GetModel(string queryString, UserState.States stateType, bool forEdit)
+        {
+            RQItemModel rqitemModel = null;
+            RQquery query = this.GetQuery(queryString, stateType);
+
+            if (!forEdit) rqitemModel = CacheManager.Get<RQItemModel>(query.Id.ToString());
+            if ((rqitemModel == null) || (rqitemModel.IsEditable() != forEdit))
             {
                 if (query.QueryBookmarks == false)
                     query.QueryBookmarks = true;
                 rqitemModel = new RQItemModel(query, forEdit);
-                base.HttpContext.Cache[query.QueryString.ToLower()] = rqitemModel;
+                if (! forEdit) CacheManager.Add(query.Id.ToString(), rqitemModel);
             }
             return rqitemModel;
         }
 
-        private RQItemModel GetModel(RQquery query)
+        private RQItemModel GetModel(string queryString, UserState.States stateType)
         {
-            return GetModel(query, false);
+            return this.GetModel(queryString, stateType, false);
         }
 
-        private RQquery NewQuery(string queryString, Helpers.StateStorage.States  stateType)
+        private RQItemModel GetModel(string queryString)
         {
-            return Helpers.StateStorage.GetQueryFromState(queryString, stateType);
-        }
-
-        private RQquery GetQuery(Helpers.StateStorage.States stateType)
-        {
-            return Helpers.StateStorage.GetQueryFromState("", stateType);
+            UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? UserState.States.BrowseViewState : UserState.States.ListViewState;
+            return this.GetModel(queryString, stateType, false);
         }
 
         private string TransformModel(RQItemModel model, string format, int fromItem, int toItem)
@@ -106,7 +103,7 @@ namespace MvcRQ.Controllers
         #region public actions
 
         /// <summary>
-        /// Controller action answering GET http-requests to RQItems
+        /// Controller action answering GET http-requests for RQItems
         /// </summary>
         /// <remarks>
         /// The action reacts to URLs of type "~/RQItems" | "~/{serviceId}/RQItems".
@@ -117,7 +114,7 @@ namespace MvcRQ.Controllers
         /// Otherwise the action response is transformed to text/html on the server according to the value of parameters "verb" or "serviceId" respectively. 
         /// </remarks>
         /// <param name="verb">
-        /// null | New | rqListHTML.
+        /// null | New | QueryList | BrowseList.
         /// </param>
         /// <param name="queryString">
         /// </param>
@@ -131,15 +128,24 @@ namespace MvcRQ.Controllers
         /// "info_ofi" = OpenURL API (not yet supported);
         /// "pubmed" = API serving metadata according to the PubMed metadata scheme (not yet supported).
         /// </param>
+        /// <param name="dbname">
+        /// "rqitem" | {username} = name of the requested database as indicated by the requested url.
+        ///     Database "rqitem" contains all rqitems of all users, which may be accessed by current user.
+        ///     Database {username} contains all rqitems of the user named {username}, which may be accessed by current user. 
+        ///     
+        ///     NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.  
+        /// </param>
         /// <returns>
         /// verb == null: 
         ///     The action returns the (empty) RQItems/Index view.
         /// verb == New: 
         ///     The action returns an (empty) data entry mask to add a new RQItem.
-        /// verb == rqListHTML: 
-        ///     The action returns a collection of RQItems 
+        /// verb == QueryList | BrowseList: 
+        ///     The action returns a collection of RQItems   
         ///     as */json, */xml or text/html - the latter generated by the XSLT "RQResultList2RQSorted.xslt" - 
         ///     depending on data types specified in the GET request.
+        ///     If appropriate the query stored in ListView or BrowseView state storage is used. A new query is generated if the query strings 
+        ///     or query options differ.
         /// serviceId = rq | rqi | mods | oai_dc | srw_dc | info_ofi | pubmed: 
         ///     The action returns a collection of RQItems formatted according to the requested service API 
         ///     as */json, */xml or text/html - the latter generated by the XSLT "RQResultList2RQSorted.xslt" - 
@@ -149,7 +155,7 @@ namespace MvcRQ.Controllers
         /// </returns>
         [EnableJson, EnableXml]
         [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public ActionResult RQItemList(string verb, string queryString, string serviceId)
+        public ActionResult RQItemList(string verb, string queryString, string serviceId, string dbname)
         {
             if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "new") || (verb == RQResources.Views.Shared.SharedStrings.add)))
             {
@@ -157,12 +163,11 @@ namespace MvcRQ.Controllers
                 ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
                 return View("EditRQItem", new RQItem());
             }
-            else if (verb == "rqListHTML")
-            {
-                StateStorage.States viewState = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? StateStorage.States.BrowseViewState : StateStorage.States.ListViewState; 
-                return this.Content(TransformModel(GetModel(queryString == null ? GetQuery(viewState) : NewQuery(queryString, viewState)), verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
-            }
-            else if (serviceId != null)
+            else if ((!string.IsNullOrEmpty(verb)) && (verb.ToLower() == "querylist"))
+                return this.Content(TransformModel(GetModel(queryString, UserState.States.ListViewState), verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
+            else if ((!string.IsNullOrEmpty(verb)) && (verb.ToLower() == "browselist"))
+                return this.Content(TransformModel(GetModel(queryString, UserState.States.BrowseViewState), verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
+            else if (!string.IsNullOrEmpty(serviceId))
             {
                 ViewBag.ServiceType = serviceId;
                 ViewBag.TextSeg0 = "a list of RQItems";
@@ -186,11 +191,13 @@ namespace MvcRQ.Controllers
                     default:
                         throw new NotImplementedException("RiQuest data service not implemented for unknown format.");
                 }
-                StateStorage.States viewState = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? StateStorage.States.BrowseViewState : StateStorage.States.ListViewState;
-                return View("ServRQItem", GetModel(queryString == null ? GetQuery(viewState) : NewQuery(queryString, viewState)));
+                return View("ServRQItem", GetModel(queryString));
             }
             else
+            {
+                this.GetQuery(queryString);
                 return View("Index");
+            }
         }
 
         /// <summary>
@@ -218,20 +225,28 @@ namespace MvcRQ.Controllers
                 {
                     try
                     {
-                        RQItemModel model = GetModel(string.IsNullOrEmpty(queryString) ? GetQuery(StateStorage.States.EditState) : NewQuery(queryString, StateStorage.States.EditState), true);
+                        RQItemModel model = GetModel(queryString, UserState.States.EditState, true);
 
                         rqitem = model.Add(newRQItem);
                         model.Update();
                     }
                     catch (Exception)
                     { }
+                    CacheManager.Clear();
                     return RQItemRecord((verb == "") ? verb : "edit", rqitem.DocNo, null);
                 }
-                return View("Index");
+                else
+                {
+                    ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
+                    ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.add;
+                    return View("EditRQItem", newRQItem);
+                }
             }
+            else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "cancel") || (verb == RQResources.Views.Shared.SharedStrings.cancel)))
+                return this.RedirectToRoute("RQItemList", new { dbname = "rqitems" });
             else
             {
-                if (!string.IsNullOrEmpty(queryString)) NewQuery(queryString, (queryString.StartsWith("$class$") == true) ? Helpers.StateStorage.States.BrowseViewState : Helpers.StateStorage.States.ListViewState);
+                this.GetQuery(queryString);
                 return View("Index");
             }
         }
@@ -242,13 +257,15 @@ namespace MvcRQ.Controllers
         /// <remarks>
         /// The action reacts to URLs of type "~/{serviceId}/RQItems/{rqitemID}".
         /// The action request is filtered through the ActionFilterAttributes EnableJson and EnableXml:
-        /// If the client GET request contains dataType=application/json | text/json or dataType=application/xml | text/xml the action response is generated by class JsonResult2 or XmlResult of MvpRestApiLib.
-        /// In both cases the client is responsible to render the xml (f. e. by XSLT).
+        /// If the client GET request contains dataType=application/json | text/json or dataType=application/xml | text/xml the action response is 
+        /// generated by class JsonResult2 or XmlResult of MvpRestApiLib. In both cases the client is responsible to render the xml (f. e. by XSLT).
         /// Otherwise the action response is tranformed on the server according to the serviceId specified. 
         /// </remarks>
         /// <param name="verb">
-        /// verb == rqSingleHTML: resets serviceId to "rq".
-        /// verb == Edit: allows editing of database record.
+        /// verb == QueryItem: requests a single RQItem of a query result list.
+        /// verb == BrowseItem: requests a single RQItem of a browse result list.
+        /// verb == Edit: allows editing of a database record.
+        /// verb == Copy: allows copying of a database record.
         /// </param>
         /// <param name="serviceId">
         /// Id of desired sercive API:
@@ -264,44 +281,71 @@ namespace MvcRQ.Controllers
         /// DocNo of RQItem to be returned.
         /// </param>
         /// <returns>
-        /// The action returns the single RQItem with DocNo=rqitemID as */json, */xml response or text/html response - the latter formatted according to SingleRQItemView - depending on data types specified in the GET request.  
+        /// The action returns the single RQItem with DocNo=rqitemID as */json, */xml response or text/html response - the latter formatted according to 
+        /// SingleRQItemView - depending on data types specified in the GET request.  
         /// </returns>
         [EnableJson, EnableXml]
         [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult RQItemRecord(string verb, string rqitemId, string serviceId )
         {
-            string view = "DisplRQItem";
-            RQItem rqitem = GetModel(NewQuery("$access$" + rqitemId, Helpers.StateStorage.States.ItemViewState)).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
-
-            if (rqitem != null)
+            if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "edit")))
             {
-                if (verb == null) verb = "";
-                switch (verb.ToLower())
+                ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
+                ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.update;
+                return View("EditRQItem", this.GetModel("$access$"+rqitemId,UserState.States.EditState,true).RQItems.FirstOrDefault(p => p.DocNo == rqitemId));
+            }
+            else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "copy")))
+            {
+                RQItem newitem;
+
+                ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
+                ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.add;
+                try // try to get item to copy from cache
                 {
-                    case "rqsinglehtml":
-                        serviceId = "rqi";
-                        break;
-                    case "edit":
-                        view = "EditRQitem";
-                        ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.update;
-                        ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
-                        break;
-                    case "copy":
-                        view = "EditRQitem";
-                        ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.add;
-                        ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
-                        rqitem = new RQItem(rqitem._resultItem);
-                        rqitem.ID = "";
-                        rqitem.DocNo = "";
-                        break;
-                    default:
-                        break;
+                    newitem = new RQItem(this.GetModel("").RQItems.FirstOrDefault(p => p.DocNo == rqitemId)._resultItem);
                 }
-                if (!string.IsNullOrEmpty(serviceId))
+                catch
                 {
-                    ViewBag.ServiceType = serviceId;
-                    ViewBag.TextSeg0 = "an individual RQItem";
-                    view = "ServRQItem";
+                    try // try to get item to copy from database
+                    {
+                        newitem = new RQItem(this.GetModel("$access$" + rqitemId, UserState.States.EditState, true).RQItems.FirstOrDefault(p => p.DocNo == rqitemId)._resultItem);
+                    }
+                    catch
+                    {
+                        throw new NotImplementedException("No item to copy in database.");
+                    }
+                }
+                newitem.DocNo = "";
+                newitem.ID = "";
+                return View("EditRQItem", newitem);
+            }
+            else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "queryitem")))
+            {
+                return View("DisplRQItem", this.GetModel("",UserState.States.ListViewState).RQItems.FirstOrDefault(p => p.DocNo == rqitemId));
+            }
+            else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "browseitem")))
+            {
+                return View("DisplRQItem", this.GetModel("",UserState.States.BrowseViewState).RQItems.FirstOrDefault(p => p.DocNo == rqitemId));
+            }
+            else
+            {
+                RQItem rqitem = GetModel("$access$" + rqitemId, UserState.States.ItemViewState).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
+
+                if (rqitem != null)
+                {
+                    string view;
+
+                    if (string.IsNullOrEmpty(serviceId))
+                    {
+                        serviceId = "rqi";
+                        view = "DisplRQItem";
+                    }
+                    else
+                    {
+                        view = "ServRQItem";
+                        ViewBag.ServiceType = serviceId;
+                        ViewBag.TextSeg0 = "an individual RQItem";
+                    }
                     switch (serviceId)
                     {
                         case "mods":
@@ -322,13 +366,11 @@ namespace MvcRQ.Controllers
                         default:
                             throw new NotImplementedException("RiQuest data service not yet implemented for unknown format.");
                     }
+                    return View(view, rqitem);
                 }
                 else
-                    EnableXmlAttribute.XSLTransform = "";
-                return View(view, rqitem);
+                    throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
             }
-            else
-                throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
         }
  
         // POST /RQItems
@@ -339,31 +381,35 @@ namespace MvcRQ.Controllers
         [ActionName("RQItemRecord")]
         public ActionResult UpdateItem(string verb, string rqitemId, string serviceId, RQItem changeRQItem)
         {
-            RQItemModel model = null;
-            RQItem rqitem = null;
-
             if (!ModelState.IsValid)
                 return View();
             if ((rqitemId != null) && (rqitemId != ""))
             {
-                try
+                if ((verb.ToLower() == "cancel") || (verb == RQResources.Views.Shared.SharedStrings.cancel))
+                    return this.RedirectToRoute("RQItemList", new { dbname = "rqitems" });
+                else
                 {
-                    model = GetModel(NewQuery("$access$" + rqitemId, Helpers.StateStorage.States.ItemViewState), true);
-                    rqitem = model.RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
-                    if ((verb.ToLower() == "update") || (verb == RQResources.Views.Shared.SharedStrings.update))
-                        rqitem.Change(changeRQItem);
-                    else if ((verb.ToLower() == "new") || (verb == RQResources.Views.Shared.SharedStrings.add))
-                        rqitem = model.Add(changeRQItem);
-                    else if ((verb.ToLower() == "delete") || (verb == RQResources.Views.Shared.SharedStrings.delete))
-                    { } // not yet implemented
-                    else if ((verb.ToLower() == "cancel") || (verb == RQResources.Views.Shared.SharedStrings.cancel))
-                        verb = "";
-                    model.Update();
+                    RQItemModel model = null;
+                    RQItem rqitem = null;
+                    try
+                    {
+                        model = GetModel("$access$" + rqitemId, UserState.States.EditState, true);
+                        rqitem = model.RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
+                        if ((verb.ToLower() == "update") || (verb == RQResources.Views.Shared.SharedStrings.update))
+                            rqitem.Change(changeRQItem);
+                        else if ((verb.ToLower() == "new") || (verb == RQResources.Views.Shared.SharedStrings.add))
+                            rqitem = model.Add(changeRQItem);
+                        else if ((verb.ToLower() == "delete") || (verb == RQResources.Views.Shared.SharedStrings.delete))
+                        { } // not yet implemented
+                        CacheManager.Clear();
+                        model.Update();
+                    }
+                    catch (Exception)
+                    { };
+                    return RQItemRecord((verb == "") ? verb : "edit", rqitem.DocNo, serviceId);
                 }
-                catch (Exception)
-                {};
             }
-            return RQItemRecord((verb == "") ? verb : "edit", rqitem.DocNo, serviceId);
+            throw new NotImplementedException("No item for update specified.");
         }
 
         /// <summary>
@@ -396,13 +442,8 @@ namespace MvcRQ.Controllers
             {
                 try
                 {
-                    RQItemModel model = GetModel(GetQuery(Helpers.StateStorage.States.ItemViewState)); 
-                    RQItem rqitem = model.RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
-                    if (rqitem == null)
-                    {
-                        model = GetModel(NewQuery("$access$" + rqitemId, Helpers.StateStorage.States.ItemViewState));
-                        rqitem = model.RQItems.FirstOrDefault(p => p.DocNo == rqitemId); // rqitem not available by query saved in state storage  
-                    }
+                    RQItem rqitem = GetModel("$access$" + rqitemId, UserState.States.ItemViewState).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
+
                     return View("ServIndRQItem", rqitem.GetField(fieldName, System.Convert.ToInt16(subFieldIndex)));
                 }
                 catch (Exception)

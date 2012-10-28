@@ -7,10 +7,13 @@
     You have requested the HTML-Service of the RiQuest personal digital library. This is the catalog-view.
 </p>
 <p>
-        @using(Html.BeginForm("Index", "RQItems")){
+@*        @using(Html.BeginForm("Index", "RQItems")){
             @Html.TextBox("queryString", ViewData["qryStr"])
             <input type="submit" value="Los!" />
         }
+*@
+        @Html.Partial("~/Views/RQItems/Shared/SearchBoxView.cshtml")
+        @Html.Partial("~/Areas/UserSettings/Views/Shared/IncludeExternalView.cshtml")
         View all the @Html.ActionLink("RQItems", "Index", "RQItems")
         Add new @Html.ActionLink("RQItem", "Index", "RQItems", new { verb = "New" }, null);
 </p>

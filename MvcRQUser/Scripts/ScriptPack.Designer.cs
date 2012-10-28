@@ -87,6 +87,22 @@ namespace MvcRQUser.Scripts {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &lt;form id=&quot;include-external-db-form&quot;&gt;
+        ///&lt;fieldset&gt;
+        ///	&lt;label for=&quot;include-external&quot;&gt;
+        ///		Include External databases&lt;/label&gt;
+        ///	&lt;input id=&quot;include-external&quot; type=&quot;checkbox&quot; value=&quot;false&quot; /&gt;
+        ///&lt;/fieldset&gt;
+        ///&lt;/form&gt;
+        /// ähnelt.
+        /// </summary>
+        internal static string imclude_external_db_form {
+            get {
+                return ResourceManager.GetString("imclude_external_db_form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die /*
         ///* TableSorter 2.0 - Client-side table sorting with ease!
         ///* Version 2.0.28 Minified using http://dean.edwards.name/packer/
@@ -123,6 +139,17 @@ namespace MvcRQUser.Scripts {
         internal static string manage_roles_form {
             get {
                 return ResourceManager.GetString("manage_roles_form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die $(function () {
+        ///    alert(&quot;Erreicht!&quot;);
+        ///}); ähnelt.
+        /// </summary>
+        internal static string simple_query_options_management {
+            get {
+                return ResourceManager.GetString("simple_query_options_management", resourceCulture);
             }
         }
         

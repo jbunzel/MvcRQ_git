@@ -21,6 +21,7 @@ namespace MvcRQ
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
             routes.MapRoute(
                 "ServiceRQKosItem",
                 "{serviceId}/rqkos/{id}",
@@ -31,28 +32,40 @@ namespace MvcRQ
                 new { controller = "RQKos", action = "Index", id = UrlParameter.Optional });
             routes.MapRoute(
                 "ServiceRQItemList",
-                "{serviceId}/rqitems",
-                new { controller = "RQItems", action = "RQItemList"  });
+                "{serviceId}/{dbname}",
+                new { controller = "RQItems", action = "RQItemList" },
+                new { dbname = new MvcRQ.Helpers.IsDBName() }
+                );
             routes.MapRoute(
                 "RQItemList",
-                "rqitems",
-                new { controller = "RQItems", action = "RQItemList" });
+                "{dbname}",
+                new { controller = "RQItems", action = "RQItemList" }, 
+                new { dbname = new MvcRQ.Helpers.IsDBName() }
+                );
             routes.MapRoute(
                 "ServiceRQItemRecord",
-                "{serviceId}/rqitems/{rqitemId}",
-                new { controller = "RQItems", action = "RQItemRecord"});
+                "{serviceId}/{dbname}/{rqitemId}",
+                new { controller = "RQItems", action = "RQItemRecord" },
+                new { dbname = new MvcRQ.Helpers.IsDBName() }
+                );
             routes.MapRoute(
                 "RQItemRecord",
-                "rqitems/{rqitemId}",
-                new { controller = "RQItems", action = "RQItemRecord" });
+                "{dbname}/{rqitemId}",
+                new { controller = "RQItems", action = "RQItemRecord" },
+                new { dbname = new MvcRQ.Helpers.IsDBName() }
+                );
             routes.MapRoute(
                 "RQItemSubField",
-                "rqitems/{rqitemId}/{fieldName}/{subFieldIndex}",
-                new { controller = "RQItems", action = "RQItemDescElement" });
+                "{dbname}/{rqitemId}/{fieldName}/{subFieldIndex}",
+                new { controller = "RQItems", action = "RQItemDescElement" },
+                new { dbname = new MvcRQ.Helpers.IsDBName() }
+                );
             routes.MapRoute(
                 "RQItemField",
-                "rqitems/{rqitemId}/{fieldName}",
-                new { controller = "RQItems", action = "RQItemDescElement" });
+                "{dbname}/{rqitemId}/{fieldName}",
+                new { controller = "RQItems", action = "RQItemDescElement" },
+                new { dbname = new MvcRQ.Helpers.IsDBName() }
+                );
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
@@ -62,7 +75,7 @@ namespace MvcRQ
 
         protected void Application_Start()
         {
-            //System.Data.Entity.Database.SetInitializer(new MvcRQ.Models.SettingsDBInitializer());
+            //System.Data.Entity.Database.SetInitializer(new MvcRQ.Areas.UserSettings.Models.SettingsDBInitializer());
 
             AreaRegistration.RegisterAllAreas();
 
@@ -81,9 +94,9 @@ namespace MvcRQ
 
         protected void Application_AuthenticateRequest()
         {
-            if (MvcRQUser.UserManagementController.IsTargeted())
+            if (MvcRQ.Areas.UserManagement.Controllers.UserManagementController.IsTargeted())
             {
-                MvcRQUser.UserManagementController.IsRequestAuthorized = System.Web.Security.Roles.GetRolesForUser().Contains("admin");
+                MvcRQ.Areas.UserManagement.Controllers.UserManagementController.IsRequestAuthorized = System.Web.Security.Roles.GetRolesForUser().Contains("Administrators");
             }
         }
     }

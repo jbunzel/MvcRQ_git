@@ -18,8 +18,10 @@ Namespace RQQueryResult
 
         Private _docDAL As RQCatalogDAL
         Private _bmDAL As RQBookmarkDAL
+        Private _extDAL As RQWebServiceDAL
         Private _docTable As RQDataSet.DokumenteDataTable
         Private _bmTable As RQBookmarkSet.BookmarksDataTable
+        Private _extTable As RQDataSet.DokumenteDataTable
         Private _sysTable As RQDataSet.SystematikDataTable
         Private _items() As RQResultItem
 
@@ -62,21 +64,22 @@ Namespace RQQueryResult
             Me._docDAL = New RQCatalogDAL()
             If forEdit Then Me._docDAL.Mode = RQCatalogDAL.DatabaseMode.Hybrid
             Me._bmDAL = New RQBookmarkDAL()
+            Me._extDAL = New RQWebServiceDAL()
         End Sub
 
 
-        Public Sub New(ByVal fromResultDocList As System.Xml.XmlDocument, Optional ByRef index As Integer = 1, Optional ByVal forEdit As Boolean = False)
-            Me.New(forEdit)
-            If Not IsNothing(fromResultDocList.SelectNodes("//Dokument").Item(index - 1).Item("ID")) Then
-                Dim strId As String = fromResultDocList.SelectNodes("//Dokument").Item(index - 1).Item("ID").InnerText
+        'Public Sub New(ByVal fromResultDocList As System.Xml.XmlDocument, Optional ByRef index As Integer = 1, Optional ByVal forEdit As Boolean = False)
+        '    Me.New(forEdit)
+        '    If Not IsNothing(fromResultDocList.SelectNodes("//Dokument").Item(index - 1).Item("ID")) Then
+        '        Dim strId As String = fromResultDocList.SelectNodes("//Dokument").Item(index - 1).Item("ID").InnerText
 
-                If Not String.IsNullOrEmpty(strId) Then
-                    Me.Find(CInt(strId), True)
-                Else
-                    Me.CreateItem(fromResultDocList, index)
-                End If
-            End If
-        End Sub
+        '        If Not String.IsNullOrEmpty(strId) Then
+        '            Me.Find(CInt(strId), True)
+        '        Else
+        '            Me.CreateItem(fromResultDocList, index)
+        '        End If
+        '    End If
+        'End Sub
 
 
         'Public Sub New(ByVal fromDigitalObject As DigitalObject)
@@ -122,10 +125,10 @@ Namespace RQQueryResult
         'End Sub
 
 
-        Public Sub New(ByRef ClassString As String, Optional ByVal forEdit As Boolean = False)
-            Me.New(forEdit)
-            Find(ClassString)
-        End Sub
+        'Public Sub New(ByRef ClassString As String, Optional ByVal forEdit As Boolean = False)
+        '    Me.New(forEdit)
+        '    Find(ClassString)
+        'End Sub
 
 #End Region
 
@@ -140,6 +143,9 @@ Namespace RQQueryResult
             End If
             If Not IsNothing(_bmTable) Then
                 c += _bmTable.Rows.Count
+            End If
+            If Not IsNothing(_extTable) Then
+                c += _extTable.Rows.Count
             End If
             If c > 0 Then
                 _items = New RQResultItem(c - 1) {}
@@ -192,6 +198,11 @@ Namespace RQQueryResult
 
 #Region "Public Methods"
 
+        Public Function IsEditable() As Boolean
+            Return Me._docDAL.Mode = RQCatalogDAL.DatabaseMode.Hybrid
+        End Function
+
+
         'Create empty new item in result set
         Public Function CreateItem(Optional ByVal type As RQResultItem.RQItemType = RQResultItem.RQItemType.docdesc) As RQResultItem
             Dim ni As RQResultItem = Me.AppendItem(type)
@@ -233,60 +244,61 @@ Namespace RQQueryResult
         End Function
 
 
-        'Return items pertinent to query as an XML-document
-        Public Function GetResultDoc(ByVal Query As RQquery) As System.Xml.XmlDocument
-            'NOTE: as implemented GetItem will return nothing
+        ''Return items pertinent to query as an XML-document
+        'DEPRECIATED
+        'Public Function GetResultDoc(ByVal Query As RQquery) As System.Xml.XmlDocument
+        '    'NOTE: as implemented GetItem will return nothing
 
-            Dim xmlInStream As New System.IO.MemoryStream
-            Dim xmlWriter As New System.Xml.XmlTextWriter(xmlInStream, System.Text.Encoding.UTF8)
-            Dim xmlResult As New System.Xml.XmlDocument
+        '    Dim xmlInStream As New System.IO.MemoryStream
+        '    Dim xmlWriter As New System.Xml.XmlTextWriter(xmlInStream, System.Text.Encoding.UTF8)
+        '    Dim xmlResult As New System.Xml.XmlDocument
 
-            'retrieve classification list from table systematik of riquest database
-            Me._sysTable = Me._docDAL.GetClassification(Query)
-            ' retrieve document list from table dokumente of riquest database
-            If Query.QueryString.Length > 0 Then
-                Me._docTable = Me._docDAL.GetDocumentSet(Query)
-            End If
-            xmlWriter.WriteStartDocument()
-            xmlWriter.WriteStartElement("", "QueryResults", "")
-            Me._docDAL.DSName = "Systematiken"
-            Me._sysTable.WriteXml(xmlWriter, XmlWriteMode.IgnoreSchema)
-            xmlWriter.Flush()
-            If Not IsNothing(Me._docTable) Then
-                Me._docDAL.DSName = "Dokumentliste"
-                Me._docTable.TableName = "Dokument"
-                Me._docTable.WriteXml(xmlWriter, XmlWriteMode.IgnoreSchema)
-            End If
-            ' retrieve bookmark list from virtual library directory
-            If Query.QueryBookmarks Then
-                If Query.QueryType = RQquery.QueryTypeEnum.form _
-                Or Query.QueryType = RQquery.QueryTypeEnum.recent _
-                Or Query.QueryType = RQquery.QueryTypeEnum.browse _
-                Or Query.QueryType = RQquery.QueryTypeEnum.classification Then
-                    Me._bmTable = Me._bmDAL.GetBookmarkSet(Query, xmlWriter)
-                End If
-            End If
-            'Initialize items list
-            InitItemList()
-            ' retrieve from bibliographic web services with dokumentliste-type data output
-            If Query.QueryExternal <> "" Then
-                If Query.QueryType = RQquery.QueryTypeEnum.form Then
-                    'Dim _gl As New RQWebServiceDAL
+        '    'retrieve classification list from table systematik of riquest database
+        '    Me._sysTable = Me._docDAL.GetClassification(Query)
+        '    ' retrieve document list from table dokumente of riquest database
+        '    If Query.QueryString.Length > 0 Then
+        '        Me._docTable = Me._docDAL.GetDocumentSet(Query)
+        '    End If
+        '    xmlWriter.WriteStartDocument()
+        '    xmlWriter.WriteStartElement("", "QueryResults", "")
+        '    Me._docDAL.DSName = "Systematiken"
+        '    Me._sysTable.WriteXml(xmlWriter, XmlWriteMode.IgnoreSchema)
+        '    xmlWriter.Flush()
+        '    If Not IsNothing(Me._docTable) Then
+        '        Me._docDAL.DSName = "Dokumentliste"
+        '        Me._docTable.TableName = "Dokument"
+        '        Me._docTable.WriteXml(xmlWriter, XmlWriteMode.IgnoreSchema)
+        '    End If
+        '    ' retrieve bookmark list from virtual library directory
+        '    If Query.QueryBookmarks Then
+        '        If Query.QueryType = RQquery.QueryTypeEnum.form _
+        '        Or Query.QueryType = RQquery.QueryTypeEnum.recent _
+        '        Or Query.QueryType = RQquery.QueryTypeEnum.browse _
+        '        Or Query.QueryType = RQquery.QueryTypeEnum.classification Then
+        '            Me._bmTable = Me._bmDAL.GetBookmarkSet(Query, xmlWriter)
+        '        End If
+        '    End If
+        '    'Initialize items list
+        '    InitItemList()
+        '    ' retrieve from bibliographic web services with dokumentliste-type data output
+        '    If Query.QueryExternal <> "" Then
+        '        If Query.QueryType = RQquery.QueryTypeEnum.form Then
+        '            Dim _gl As New RQWebServiceDAL
 
-                    '_gl.GetResults(Query, CType(xmlWriter, System.Xml.XmlWriter))
-                End If
-            End If
-            xmlWriter.Flush()
-            xmlWriter.WriteEndElement()
-            xmlWriter.WriteEndDocument()
-            xmlWriter.Flush()
-            xmlInStream.Seek(0, IO.SeekOrigin.Begin)
-            xmlResult.Load(xmlInStream)
-            'xmlResult.Save(IO.Path.Combine(HttpRuntime.AppDomainAppPath, "upload/raw.xml"))
-            xmlInStream.Close()
-            xmlWriter.Close()
-            Return xmlResult
-        End Function
+        '            _gl.GetResults(Query, CType(xmlWriter, System.Xml.XmlWriter))
+        '        End If
+        '    End If
+        '    xmlWriter.Flush()
+        '    xmlWriter.WriteEndElement()
+        '    xmlWriter.WriteEndDocument()
+        '    xmlWriter.Flush()
+        '    xmlInStream.Seek(0, IO.SeekOrigin.Begin)
+        '    xmlResult.Load(xmlInStream)
+        '    'xmlResult.Save(IO.Path.Combine(HttpRuntime.AppDomainAppPath, "upload/raw.xml"))
+        '    xmlInStream.Close()
+        '    xmlWriter.Close()
+        '    Return xmlResult
+        'End Function
 
 
         'Finds items pertinent to query
@@ -311,6 +323,12 @@ Namespace RQQueryResult
                     Me._bmTable = Me._bmDAL.GetBookmarkSet(Query)
                 End If
             End If
+            ' retrieve from bibliographic web services with dokumentliste-type data output
+            If Query.QueryExternal <> "" Then
+                If Query.QueryType = RQquery.QueryTypeEnum.form Then
+                    Me._extTable = Me._extDAL.GetDocumentSet(Query)
+                End If
+            End If
             'Initialize items list
             InitItemList()
         End Sub
@@ -325,18 +343,18 @@ Namespace RQQueryResult
 
 
         'Finds single item with ID = RecordID
-        Public Sub Find(ByVal RecordID As Integer, Optional ByVal clearResultSet As Boolean = False)
-            Try
-                Dim res As DataRow = _docDAL.GetRecordByID(CStr(RecordID), "RQDataSet", "Dokumente", clearResultSet)
+        'Public Sub Find(ByVal RecordID As Integer, Optional ByVal clearResultSet As Boolean = False)
+        '    Try
+        '        Dim res As DataRow = _docDAL.GetRecordByID(CStr(RecordID), "RQDataSet", "Dokumente", clearResultSet)
 
-                If Not IsNothing(res) Then
-                    Me._docTable = Me._docDAL.GetDocumentSet()
-                    _items = New RQResultItem(_docTable.Rows.Count - 1) {}
-                End If
-            Catch ex As Exception
+        '        If Not IsNothing(res) Then
+        '            Me._docTable = Me._docDAL.GetDocumentSet()
+        '            _items = New RQResultItem(_docTable.Rows.Count - 1) {}
+        '        End If
+        '    Catch ex As Exception
 
-            End Try
-        End Sub
+        '    End Try
+        'End Sub
 
 
         Public Function GetItem(ByVal i As Integer) As RQResultItem
@@ -348,8 +366,14 @@ Namespace RQQueryResult
 
                     If i < _docTable.Rows.Count Then
                         item.Read(_docTable.Rows(i))
+                    ElseIf Not IsNothing(_bmTable) Then
+                        If i < _docTable.Rows.Count + _bmTable.Rows.Count Then
+                            item.Read(_bmTable.Rows(i - _docTable.Rows.Count))
+                        Else
+                            item.Read(_extTable.Rows(i - _docTable.Rows.Count - _bmTable.Rows.Count))
+                        End If
                     Else
-                        item.Read(_bmTable.Rows(i - _docTable.Rows.Count))
+                        item.Read(_extTable.Rows(i - _docTable.Rows.Count))
                     End If
                     item.RQResultItemOwner = Me
                     items(i) = item

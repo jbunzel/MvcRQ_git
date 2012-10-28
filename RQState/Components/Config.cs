@@ -8,7 +8,7 @@ namespace RQState.Components
     public static class Config
     {
         private const string DEFAULT_STORAGE_DIR = @"C:/Temp/Storage/";
-        private const StorageType STORAGE_TYPE = StorageType.CookieStorage;
+        private const StorageType STORAGE_TYPE = StorageType.SessionStorage;
        
         public static string DirectoryStoragePath
         {

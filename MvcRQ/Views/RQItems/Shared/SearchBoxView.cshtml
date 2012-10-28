@@ -1,0 +1,11 @@
+﻿@model string
+@{
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        OnComplete = "getResultList",
+    };
+}
+@using(Ajax.BeginForm("RQItemList","RQItems",ajaxOpts)){
+    @Html.TextBox("queryString", ViewData["qryStr"])
+    <input type="submit" value="Los!" />
+}

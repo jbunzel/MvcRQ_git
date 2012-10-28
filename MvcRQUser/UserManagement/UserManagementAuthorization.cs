@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web;
 
-namespace MvcRQUser
+namespace MvcRQUser.UserManagement
 {
   class UserManagementAuthorization : AuthorizeAttribute
   {

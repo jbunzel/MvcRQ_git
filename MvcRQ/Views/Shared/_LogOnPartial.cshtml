@@ -1,7 +1,7 @@
 ﻿@if(Request.IsAuthenticated) {
     <text>Welcome <strong>@User.Identity.Name</strong>!
-    [ @Html.ActionLink(RQResources.Views.Shared.SharedStrings.logoff, "LogOff", "Account") ]</text>
+    [ @Html.ActionLink(RQResources.Views.Shared.SharedStrings.logoff, "LogOff", "Account", new { area = ""}, new {}) ]</text>
 }
 else {
-    @:[ @Html.ActionLink(RQResources.Views.Shared.SharedStrings.logon, "LogOn", "Account") ]
+    @:[ @Html.ActionLink(RQResources.Views.Shared.SharedStrings.logon, "LogOn", "Account", new { area = ""}, new {}) ]
 }

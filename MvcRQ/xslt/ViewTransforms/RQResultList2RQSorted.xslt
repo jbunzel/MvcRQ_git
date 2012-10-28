@@ -1137,6 +1137,9 @@
                   <xsl:with-param name="XID" select="concat('o',$EID)" />
                 </xsl:apply-templates>
                 <xsl:element name="div">
+                  <xsl:attribute name="DocNo">
+                    <xsl:value-of select="DocNo"/>
+                  </xsl:attribute>
                   <xsl:attribute name="id">
                     <xsl:value-of select="$EID"/>
                   </xsl:attribute>

@@ -6,7 +6,7 @@ using System.Web.Security;
 using System.Web.Mvc;
 using System.Web;
 
-namespace MvcRQUser
+namespace MvcRQUser.UserManagement
 {
   public class UserAccountService : IUserAccountService
   {
@@ -18,6 +18,7 @@ namespace MvcRQUser
     {
 
     }
+
     public UserAccountService(MembershipProvider membershipProvider, RoleProvider roleProvider)
     {
       this._membership = membershipProvider ?? Membership.Provider;
@@ -80,27 +81,20 @@ namespace MvcRQUser
       _roleProvider.AddUsersToRoles(new string[] { user.UserName }, roles);
     }
 
-
     public void CreateRole(string roleName)
     {
       _roleProvider.CreateRole(roleName);
     }
-
 
     public bool DeleteRole(string roleName, bool throwOnPopulatedRole)
     {
       return _roleProvider.DeleteRole(roleName, throwOnPopulatedRole);
     }
 
-
     public bool UnlockUser(string userName)
     {
       return _membership.UnlockUser(userName);
     }
-
-
-
-
 
     public void AddRemoveRoleForUser(string username, string rolename, bool isInRole)
     {

@@ -46,6 +46,11 @@ namespace MvcRQ.Models
 
         #region public methods
 
+        public bool IsEditable()
+        {
+            return this.RQItems.IsEditable();
+        }
+
         public RQItem Add(RQItem newItem)
         {
             return this.RQItems.Add(newItem);
@@ -122,6 +127,11 @@ namespace MvcRQ.Models
         #endregion
 
         #region public methods
+
+        public bool IsEditable()
+        {
+            return this.ItemResultSet.IsEditable();
+        }
 
         public RQItem Add(RQItem item)
         {

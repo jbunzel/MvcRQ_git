@@ -8,7 +8,6 @@ namespace MvcRQ.Controllers
 {
     public class BaseController : Controller
     {
-
         #region protected methods
 
         protected override void ExecuteCore()
@@ -43,7 +42,7 @@ namespace MvcRQ.Controllers
             }
             base.ExecuteCore();
         }
-        
+
         protected override void OnException(ExceptionContext filterContext)
         {
             if (filterContext.HttpContext.IsCustomErrorEnabled || true)  //IsCustomErrorEnabled always false if client is localhost or client and server IPs identical. True set to override.
@@ -69,6 +68,5 @@ namespace MvcRQ.Controllers
         }
 
         #endregion
-
     }
 }

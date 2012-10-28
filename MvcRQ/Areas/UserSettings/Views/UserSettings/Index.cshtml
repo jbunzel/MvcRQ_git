@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Settings";
+}
+
+<h2>User Settings</h2>
+@*html markup*@
+@MvcRQ.Areas.MyHtml.IncludeExternalDbForm() @*html code for serach settings form*@
+@*@MvcRQUser.MyHtml.UserTableArea()*@ @*html code for the user table*@
+@*@MvcRQUser.MyHtml.AddUserForm()*@ @*html code for creating a new user account*@
+@*@MvcRQUser.MyHtml.ManageRolesForm()*@ @*html code for managing roles*@
+
+@*css*@
+@MvcRQ.Areas.MyHtml.TableCss() @*optional - basic tablesorter css styles*@
+@MvcRQ.Areas.MyHtml.StyleCss() @*recommended - info message and some layout css styles*@
+
+@*javascript*@
+@MvcRQ.Areas.MyHtml.QueryOptionsJavascript() @*required - user interface javascript code including tablesorter, pager and user interface code*@

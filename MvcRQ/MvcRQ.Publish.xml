@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
-  <publishProfile publishUrl="\\OEMCOMPUTER\wwwroot\MvcRQ" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="Default Web Site/MvcRQ" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="OEMCOMPUTER" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="False">
+  <publishProfile publishUrl="\\OEMCOMPUTER\wwwroot\MvcRQ" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="Default Web Site/MvcRQ" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="OEMCOMPUTER" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="False">
     <file relUrl="Images/icon_letters.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Scripts/MicrosoftAjax.js" publishTime="08/23/2011 14:10:02" />
     <file relUrl="Scripts/dynatree-1.2.0/jquery.rqdynatree.js" publishTime="12/08/2011 18:39:12" />
@@ -8,7 +8,7 @@
     <file relUrl="xslt/ViewTransforms/RQI2SingleItemView.xslt" publishTime="06/16/2012 16:48:31" />
     <file relUrl="Views/RQItems/EditorTemplates/multilinetext.cshtml" publishTime="03/03/2012 18:05:38" />
     <file relUrl="Images/icon_docs.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="bin/MvcRQ.XML" publishTime="07/08/2012 10:31:07" />
+    <file relUrl="Content/Site.css" publishTime="05/09/2012 11:50:13" />
     <file relUrl="xml/dir.xml" publishTime="07/08/2012 18:48:22" />
     <file relUrl="Views/Account/ChangePasswordSuccess.cshtml" publishTime="08/23/2011 14:10:02" />
     <file relUrl="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="08/23/2011 14:10:13" />
@@ -27,6 +27,7 @@
     <file relUrl="Content/themes/base/jquery.ui.all.css" publishTime="08/23/2011 14:10:12" />
     <file relUrl="bin/MvcRQ.dll" publishTime="07/08/2012 10:31:07" />
     <file relUrl="Scripts/jquery-1.5.1-vsdoc.js" publishTime="08/23/2011 14:10:10" />
+    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="08/23/2011 14:10:13" />
     <file relUrl="Views/Home/Index.cshtml" publishTime="11/12/2011 15:54:59" />
     <file relUrl="Scripts/modernizr-1.7.min.js" publishTime="08/23/2011 14:10:15" />
     <file relUrl="Images/icon_per.gif" publishTime="10/23/2011 10:42:12" />
@@ -36,6 +37,7 @@
     <file relUrl="Views/RQKos/Index.cshtml" publishTime="02/07/2012 14:25:39" />
     <file relUrl="Views/RQItems/Index.cshtml" publishTime="06/17/2012 12:45:40" />
     <file relUrl="Scripts/dynatree-1.2.0/skin/icons.gif" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="bin/MvpRestApiLib.pdb" publishTime="06/22/2012 13:03:33" />
     <file relUrl="bin/RQResources.dll" publishTime="06/22/2012 13:03:33" />
     <file relUrl="Views/Shared/_LogOnPartial.cshtml" publishTime="05/08/2012 17:02:50" />
     <file relUrl="xslt/RQ2DC.xslt" publishTime="11/12/2011 15:19:42" />
@@ -47,18 +49,20 @@
     <file relUrl="Content/themes/base/images/ui-icons_2e83ff_256x240.png" publishTime="08/23/2011 14:10:13" />
     <file relUrl="Content/themes/base/jquery.ui.tabs.css" publishTime="08/23/2011 14:10:11" />
     <file relUrl="bin/RQLib.pdb" publishTime="07/06/2012 11:29:00" />
-    <file relUrl="Scripts/jquery-ui-1.8.11.min.js" publishTime="08/23/2011 14:10:11" />
+    <file relUrl="xml/stdquery.de-DE.xml" publishTime="08/20/2010 11:48:36" />
     <file relUrl="bin/MvpRestApiLib.dll" publishTime="06/22/2012 13:03:33" />
     <file relUrl="Views/RQKos/shared/JsonViewer.cshtml" publishTime="01/21/2012 11:07:28" />
     <file relUrl="Views/RQItems/Shared/JsonViewer.cshtml" publishTime="06/24/2012 11:55:51" />
+    <file relUrl="Content/themes/base/jquery.ui.dialog.css" publishTime="08/23/2011 14:10:12" />
     <file relUrl="xml/extdblist.xml" publishTime="12/20/2009 15:51:14" />
     <file relUrl="Views/Account/Register.cshtml" publishTime="08/23/2011 14:10:03" />
     <file relUrl="Images/icon_itemview.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Images/icon_contr.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_map.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Images/clearpixel.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Images/icon_fulltext.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Global.asax" publishTime="08/23/2011 14:10:03" />
-    <file relUrl="bin/dotNetRDF.xml" publishTime="06/22/2012 13:03:31" />
+    <file relUrl="xml/IndexConfig.xml" publishTime="10/24/2010 18:24:21" />
+    <file relUrl="Scripts/MicrosoftMvcValidation.js" publishTime="08/23/2011 14:10:02" />
     <file relUrl="Web.config" publishTime="07/11/2012 16:45:42" />
     <file relUrl="Scripts/MicrosoftMvcValidation.debug.js" publishTime="08/23/2011 14:10:02" />
     <file relUrl="Images/icon_users_32px.gif" publishTime="10/23/2011 10:42:12" />
@@ -73,12 +77,12 @@
     <file relUrl="Views/RQKos/ServRQKos.cshtml" publishTime="03/18/2012 16:13:26" />
     <file relUrl="Views/RQKos/shared/ShelvesViewer.cshtml" publishTime="07/06/2012 14:42:47" />
     <file relUrl="Content/themes/base/images/ui-icons_222222_256x240.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="xml/IndexConfig.xml" publishTime="10/24/2010 18:24:21" />
     <file relUrl="Scripts/jquery.transform.js" publishTime="09/24/2011 12:54:35" />
     <file relUrl="LinkedData/N3Rules/test.n3" publishTime="03/31/2012 15:49:00" />
     <file relUrl="Images/icon_RQQueryResult_32px.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="08/23/2011 14:10:02" />
     <file relUrl="Views/RQKos/shared/XmlViewer.cshtml" publishTime="01/21/2012 11:07:28" />
+    <file relUrl="Global.asax" publishTime="08/23/2011 14:10:03" />
     <file relUrl="Views/_ViewStart.cshtml" publishTime="08/23/2011 14:10:03" />
     <file relUrl="Views/RQItems/ServListRQItem.cshtml" publishTime="02/08/2012 12:26:07" />
     <file relUrl="Content/themes/base/jquery.ui.autocomplete.css" publishTime="08/23/2011 14:10:12" />
@@ -90,15 +94,14 @@
     <file relUrl="Views/RQItems/EditorTemplates/rqdescriptor.cshtml" publishTime="05/09/2012 12:27:14" />
     <file relUrl="Views/Home/About.cshtml" publishTime="08/23/2011 14:10:03" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Views/RQItems/Shared/DisplViewer.cshtml" publishTime="06/24/2012 19:27:42" />
     <file relUrl="bin/dotNetRDF.dll" publishTime="06/22/2012 13:03:32" />
     <file relUrl="xslt/ViewTransforms/RQResultList2RQSorted.xslt" publishTime="06/17/2012 11:52:59" />
     <file relUrl="Scripts/jquery.validate-vsdoc.js" publishTime="08/23/2011 14:10:10" />
     <file relUrl="Images/icon_sound.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Content/themes/base/jquery.ui.theme.css" publishTime="08/23/2011 14:10:11" />
-    <file relUrl="Scripts/jquery.validate.min.js" publishTime="08/23/2011 14:10:10" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png" publishTime="08/23/2011 14:10:13" />
     <file relUrl="Views/Account/ChangePassword.cshtml" publishTime="08/23/2011 14:10:02" />
+    <file relUrl="bin/dotNetRDF.xml" publishTime="06/22/2012 13:03:31" />
     <file relUrl="Scripts/MicrosoftMvcAjax.js" publishTime="08/23/2011 14:10:02" />
     <file relUrl="README.txt" publishTime="11/07/2011 18:26:09" />
     <file relUrl="Views/RQItems/EditRQItem.cshtml" publishTime="07/05/2012 13:11:47" />
@@ -120,18 +123,14 @@
     <file relUrl="Images/icon_software.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Content/themes/base/jquery.ui.accordion.css" publishTime="08/23/2011 14:10:12" />
     <file relUrl="bin/RQState.pdb" publishTime="07/05/2012 18:41:14" />
-    <file relUrl="Scripts/MicrosoftMvcValidation.js" publishTime="08/23/2011 14:10:02" />
     <file relUrl="Images/icon_series.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Scripts/dynatree-1.2.0/skin-vista/ui.dynatree.css" publishTime="11/23/2011 10:07:43" />
-    <file relUrl="xslt/RQKos2RDF.xslt" publishTime="02/05/2012 17:08:26" />
-    <file relUrl="xml/stdquery.de-DE.xml" publishTime="08/20/2010 11:48:36" />
     <file relUrl="bin/RQLib.xml" publishTime="07/06/2012 11:29:00" />
     <file relUrl="Content/themes/base/jquery.ui.slider.css" publishTime="08/23/2011 14:10:11" />
     <file relUrl="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Scripts/dynatree-1.2.0/jquery.cookie.js" publishTime="12/07/2011 16:32:40" />
     <file relUrl="Content/themes/base/images/ui-icons_454545_256x240.png" publishTime="08/23/2011 14:10:13" />
     <file relUrl="Scripts/jquery-ui-1.8.11.js" publishTime="08/23/2011 14:10:11" />
-    <file relUrl="Content/Site.css" publishTime="05/09/2012 11:50:13" />
+    <file relUrl="Scripts/dynatree-1.2.0/jquery.cookie.js" publishTime="12/07/2011 16:32:40" />
     <file relUrl="Scripts/jquery.validate.unobtrusive.js" publishTime="08/23/2011 14:10:02" />
     <file relUrl="Scripts/dynatree-1.2.0/skin-vista/loading.gif" publishTime="11/23/2011 10:07:43" />
     <file relUrl="bin/de/RQResources.resources.dll" publishTime="06/22/2012 13:03:34" />
@@ -140,11 +139,12 @@
     <file relUrl="Images/RQFTCollection.jpg" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Content/themes/base/jquery.ui.button.css" publishTime="08/23/2011 14:10:12" />
     <file relUrl="bin/EntityFramework.dll" publishTime="08/23/2011 14:10:14" />
+    <file relUrl="Scripts/jquery-ui-1.8.11.min.js" publishTime="08/23/2011 14:10:11" />
     <file relUrl="Images/ajax-loader.gif" publishTime="04/26/2012 17:37:35" />
     <file relUrl="Images/icon_pictures.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="xslt/RQKos2RDF.xslt" publishTime="02/05/2012 17:08:26" />
     <file relUrl="bin/Lucene.Net.pdb" publishTime="08/27/2009 12:42:38" />
-    <file relUrl="Content/themes/base/jquery.ui.dialog.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/MvcRQ.XML" publishTime="07/08/2012 10:31:07" />
     <file relUrl="Content/themes/base/jquery.ui.progressbar.css" publishTime="08/23/2011 14:10:12" />
     <file relUrl="bin/Newtonsoft.Json.Net35.dll" publishTime="07/22/2011 15:39:02" />
     <file relUrl="bin/HtmlAgilityPack.dll" publishTime="07/07/2010 09:27:06" />
@@ -154,8 +154,8 @@
     <file relUrl="xslt/ViewTransforms/RQItemFields.xslt" publishTime="05/20/2012 17:49:42" />
     <file relUrl="Images/icon_websource.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Scripts/dynatree-1.2.0/skin-vista/icons.gif" publishTime="11/23/2011 10:07:43" />
-    <file relUrl="bin/MvpRestApiLib.pdb" publishTime="06/22/2012 13:03:33" />
-    <file relUrl="Images/icon_map.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/jquery.validate.min.js" publishTime="08/23/2011 14:10:10" />
+    <file relUrl="Views/RQItems/Shared/DisplViewer.cshtml" publishTime="06/24/2012 19:27:42" />
     <file relUrl="Scripts/modernizr-1.7.js" publishTime="08/23/2011 14:10:15" />
     <file relUrl="Views/RQItems/ServIndRQItem.cshtml" publishTime="06/24/2012 15:48:48" />
     <file relUrl="Scripts/jquery.unobtrusive-ajax.min.js" publishTime="08/23/2011 14:10:02" />
@@ -165,317 +165,625 @@
   </publishProfile>
   <publishProfile publishUrl="ftp://ftp.riquest.de/mvc.riquest.de/htdocs" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="ECS_mvc.riquest.de" publishMethod="FTP" replaceMatchingFiles="True" userName="riquest.de" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJ6OP2ZI91UW6StVlK7KfIwAAAAACAAAAAAADZgAAqAAAABAAAAAx2fRfKb+tcT2N+ffl6A+YAAAAAASAAACgAAAAEAAAAIJqsT4GLMrqe7vaBJnslXEQAAAApKYFeYjbHed5IeAGnqu0qBQAAAAlIZHcqQ7P3P5UTcadYHm6w+HlhQ==" SelectedForPublish="False">
     <file relUrl="Images/icon_letters.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/MicrosoftAjax.js" publishTime="08/23/2011 14:10:02" />
+    <file relUrl="Scripts/MicrosoftAjax.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="bin/RQResources.dll" publishTime="10/25/2012 15:34:21" />
+    <file relUrl="bin/System.Web.WebPages.dll" publishTime="01/05/2011 14:45:38" />
     <file relUrl="Scripts/dynatree-1.2.0/jquery.rqdynatree.js" publishTime="12/08/2011 18:39:12" />
-    <file relUrl="Content/themes/base/jquery.ui.datepicker.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="Images/icon_docs.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="bin/MvcRQ.XML" publishTime="02/08/2012 13:04:29" />
-    <file relUrl="xml/dir.xml" publishTime="08/14/2011 11:26:02" />
-    <file relUrl="Views/Account/ChangePasswordSuccess.cshtml" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Views/RQItems/Shared/XmlViewer.cshtml" publishTime="02/08/2012 11:02:49" />
-    <file relUrl="bin/RQLinkedData.dll" publishTime="02/05/2012 17:07:24" />
-    <file relUrl="bin/dotNetRDF.pdb" publishTime="01/24/2012 19:20:37" />
-    <file relUrl="Views/Web.config" publishTime="02/07/2012 18:06:23" />
-    <file relUrl="Content/themes/base/jquery.ui.selectable.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="Views/RQItems/Shared/ResultViewer.cshtml" publishTime="02/08/2012 10:51:01" />
-    <file relUrl="Images/icon_music.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/dynatree-1.2.0/skin/loading.gif" publishTime="11/23/2011 10:07:09" />
-    <file relUrl="Scripts/jquery.validate.js" publishTime="08/23/2011 14:10:10" />
-    <file relUrl="Views/RQItems/Shared/EditViewer.cshtml" publishTime="02/08/2012 12:19:45" />
-    <file relUrl="bin/EntityFramework.xml" publishTime="08/23/2011 14:10:14" />
-    <file relUrl="Content/themes/base/jquery.ui.all.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="bin/MvcRQ.dll" publishTime="02/08/2012 13:04:29" />
-    <file relUrl="Scripts/jquery-1.5.1-vsdoc.js" publishTime="08/23/2011 14:10:10" />
-    <file relUrl="Views/Home/Index.cshtml" publishTime="11/12/2011 15:54:59" />
-    <file relUrl="Scripts/modernizr-1.7.min.js" publishTime="08/23/2011 14:10:15" />
-    <file relUrl="Images/icon_per.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Images/icon_abstract.jpg" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/jquery-1.6.1.min.js" publishTime="12/07/2011 16:32:40" />
-    <file relUrl="Views/Shared/Error.cshtml" publishTime="02/08/2012 10:08:57" />
-    <file relUrl="Views/RQKos/Index.cshtml" publishTime="02/07/2012 14:25:39" />
-    <file relUrl="Views/RQItems/Index.cshtml" publishTime="02/08/2012 10:51:01" />
-    <file relUrl="Scripts/dynatree-1.2.0/skin/icons.gif" publishTime="11/23/2011 10:07:09" />
-    <file relUrl="Views/Shared/_LogOnPartial.cshtml" publishTime="08/23/2011 14:10:03" />
-    <file relUrl="xslt/RQ2DC.xslt" publishTime="11/12/2011 15:19:42" />
-    <file relUrl="bin/Lucene.Net.dll" publishTime="08/27/2009 12:42:38" />
-    <file relUrl="Scripts/jquery.cookie.js" publishTime="11/23/2011 10:01:22" />
-    <file relUrl="Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="xslt/ViewTransforms/ArrayOfRQItem_Example.xml" publishTime="09/23/2011 10:19:11" />
-    <file relUrl="Content/themes/base/jquery.ui.resizable.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="Scripts/MicrosoftMvcAjax.debug.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Content/themes/base/images/ui-icons_2e83ff_256x240.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Content/themes/base/jquery.ui.tabs.css" publishTime="08/23/2011 14:10:11" />
-    <file relUrl="bin/RQLib.pdb" publishTime="02/06/2012 18:17:40" />
-    <file relUrl="xml/stdquery.de-DE.xml" publishTime="08/20/2010 11:48:36" />
-    <file relUrl="bin/MvpRestApiLib.dll" publishTime="01/22/2012 16:31:10" />
-    <file relUrl="Scripts/MicrosoftMvcAjax.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Views/RQItems/Shared/JsonViewer.cshtml" publishTime="02/08/2012 11:02:49" />
-    <file relUrl="xml/extdblist.xml" publishTime="12/20/2009 15:51:14" />
-    <file relUrl="Images/icon_itemview.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Images/icon_contr.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Images/icon_map.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Images/clearpixel.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Images/icon_fulltext.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Global.asax" publishTime="08/23/2011 14:10:03" />
-    <file relUrl="bin/dotNetRDF.xml" publishTime="01/24/2012 19:20:37" />
-    <file relUrl="Web.config" publishTime="02/05/2012 17:42:40" />
-    <file relUrl="Scripts/MicrosoftMvcValidation.debug.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Images/icon_users_32px.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="xslt/RQ2DC1.xslt" publishTime="12/11/2011 18:06:51" />
-    <file relUrl="Images/icon_olr.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/jquery.unobtrusive-ajax.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="packages.config" publishTime="08/23/2011 14:10:15" />
-    <file relUrl="Images/icon_avm.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Images/icon_cfolder.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="bin/MvcRQ.pdb" publishTime="02/08/2012 13:04:29" />
-    <file relUrl="~db/katalog30.mdb" publishTime="01/31/2012 21:21:17" />
-    <file relUrl="Views/RQKos/shared/ShelvesViewer.cshtml" publishTime="02/08/2012 14:52:17" />
-    <file relUrl="Views/RQKos/shared/JsonViewer.cshtml" publishTime="01/21/2012 11:07:28" />
-    <file relUrl="Content/themes/base/images/ui-icons_222222_256x240.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="xml/IndexConfig.xml" publishTime="10/24/2010 18:24:21" />
-    <file relUrl="Scripts/jquery.transform.js" publishTime="09/24/2011 12:54:35" />
-    <file relUrl="Images/icon_RQQueryResult_32px.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Views/RQKos/shared/XmlViewer.cshtml" publishTime="01/21/2012 11:07:28" />
-    <file relUrl="bin/MvpRestApiLib.pdb" publishTime="01/22/2012 16:31:10" />
-    <file relUrl="Views/_ViewStart.cshtml" publishTime="08/23/2011 14:10:03" />
-    <file relUrl="Views/RQItems/ServListRQItem.cshtml" publishTime="02/08/2012 12:26:07" />
-    <file relUrl="Content/themes/base/jquery.ui.autocomplete.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="Images/icon_art.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="xml/stdquery.xml" publishTime="04/06/2011 10:08:15" />
-    <file relUrl="Images/icon_books.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Images/icon_webfolder.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/jquery-1.6.1.js" publishTime="12/07/2011 16:32:40" />
-    <file relUrl="Views/Home/About.cshtml" publishTime="08/23/2011 14:10:03" />
-    <file relUrl="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="bin/dotNetRDF.dll" publishTime="01/24/2012 19:20:37" />
-    <file relUrl="xslt/ViewTransforms/RQResultList2RQSorted.xslt" publishTime="10/30/2011 15:21:59" />
-    <file relUrl="Scripts/jquery.validate-vsdoc.js" publishTime="08/23/2011 14:10:10" />
-    <file relUrl="Images/icon_sound.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Content/themes/base/jquery.ui.theme.css" publishTime="08/23/2011 14:10:11" />
-    <file relUrl="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Views/Account/ChangePassword.cshtml" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="README.txt" publishTime="11/07/2011 18:26:09" />
-    <file relUrl="bin/RQLinkedData.pdb" publishTime="02/05/2012 17:07:24" />
-    <file relUrl="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="bin/RQLib.dll" publishTime="02/06/2012 18:17:40" />
-    <file relUrl="xslt/RQ2RQ.xslt" publishTime="09/20/2011 11:20:28" />
-    <file relUrl="Images/icon_abstract.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="bin/RQState.dll" publishTime="01/22/2012 16:29:44" />
-    <file relUrl="Content/themes/base/jquery.ui.core.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="Images/icon_mmedia.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Scripts/dynatree-1.2.0/skin/ui.dynatree.css" publishTime="11/23/2011 10:07:09" />
-    <file relUrl="Images/icon_hand.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Images/icon_article.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Views/Shared/_Layout.cshtml" publishTime="02/07/2012 13:56:56" />
-    <file relUrl="Images/icon_listenaudio.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Content/themes/base/images/ui-icons_cd0a0a_256x240.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Images/icon_software.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Content/themes/base/jquery.ui.accordion.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="bin/RQState.pdb" publishTime="01/22/2012 16:29:44" />
-    <file relUrl="Scripts/MicrosoftMvcValidation.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Images/icon_series.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/dynatree-1.2.0/skin-vista/ui.dynatree.css" publishTime="11/23/2011 10:07:43" />
-    <file relUrl="xslt/RQKos2RDF.xslt" publishTime="02/05/2012 17:08:26" />
-    <file relUrl="bin/RQLib.xml" publishTime="02/06/2012 18:17:40" />
-    <file relUrl="Content/themes/base/jquery.ui.slider.css" publishTime="08/23/2011 14:10:11" />
-    <file relUrl="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Scripts/dynatree-1.2.0/jquery.cookie.js" publishTime="12/07/2011 16:32:40" />
-    <file relUrl="Content/themes/base/images/ui-icons_454545_256x240.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Scripts/jquery-ui-1.8.11.js" publishTime="08/23/2011 14:10:11" />
-    <file relUrl="Content/Site.css" publishTime="01/17/2012 20:35:15" />
-    <file relUrl="Scripts/jquery.validate.unobtrusive.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Scripts/dynatree-1.2.0/skin-vista/loading.gif" publishTime="11/23/2011 10:07:43" />
-    <file relUrl="Scripts/MicrosoftAjax.debug.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Images/RQFTCollection.jpg" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Content/themes/base/jquery.ui.button.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="bin/EntityFramework.dll" publishTime="08/23/2011 14:10:14" />
-    <file relUrl="Scripts/jquery-ui-1.8.11.min.js" publishTime="08/23/2011 14:10:11" />
-    <file relUrl="Images/icon_pictures.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="bin/Lucene.Net.pdb" publishTime="08/27/2009 12:42:38" />
-    <file relUrl="Content/themes/base/jquery.ui.dialog.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="Content/themes/base/jquery.ui.progressbar.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="bin/Newtonsoft.Json.Net35.dll" publishTime="07/22/2011 15:39:02" />
-    <file relUrl="bin/HtmlAgilityPack.dll" publishTime="07/07/2010 09:27:06" />
-    <file relUrl="Images/icon_listview.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Scripts/dynatree-1.2.0/skin/vline.gif" publishTime="11/23/2011 10:07:09" />
-    <file relUrl="Images/icon_websource.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/dynatree-1.2.0/skin-vista/icons.gif" publishTime="11/23/2011 10:07:43" />
-    <file relUrl="Views/RQKos/ServRQKos.cshtml" publishTime="02/08/2012 15:21:49" />
-    <file relUrl="xslt/ViewTransforms/RQ2SingleItemView.xslt" publishTime="02/07/2012 12:24:02" />
-    <file relUrl="Scripts/jquery.validate.min.js" publishTime="08/23/2011 14:10:10" />
-    <file relUrl="Views/Account/Register.cshtml" publishTime="08/23/2011 14:10:03" />
-    <file relUrl="Scripts/modernizr-1.7.js" publishTime="08/23/2011 14:10:15" />
-    <file relUrl="Views/RQItems/ServIndRQItem.cshtml" publishTime="02/08/2012 12:26:07" />
-    <file relUrl="Scripts/jquery.unobtrusive-ajax.min.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Views/Account/LogOn.cshtml" publishTime="08/23/2011 14:10:03" />
-    <file relUrl="Content/themes/base/jquery.ui.base.css" publishTime="08/23/2011 14:10:12" />
-  </publishProfile>
-  <publishProfile publishUrl="ftp://strands.de/subdomains/mvcrq/httpdocs" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="DomainBox_mvc.riquest.net" publishMethod="FTP" replaceMatchingFiles="True" userName="strands" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJ6OP2ZI91UW6StVlK7KfIwAAAAACAAAAAAADZgAAqAAAABAAAACp6x0P7LRw3MkyuBjqGOQNAAAAAASAAACgAAAAEAAAAAHFjRtNvl2/kXl+qtXpGXQYAAAA6lZxlXYYi/B1NY0ai8w4WAE3QaEp5gsTFAAAAPvYfXJWcUvj4A+k/Eeklm+ftNM0" SelectedForPublish="True">
-    <file relUrl="Images/icon_letters.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/MicrosoftAjax.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Scripts/dynatree-1.2.0/jquery.rqdynatree.js" publishTime="12/08/2011 18:39:12" />
     <file relUrl="Content/themes/base/jquery.ui.datepicker.css" publishTime="08/23/2011 14:10:12" />
     <file relUrl="xslt/ViewTransforms/RQI2SingleItemView.xslt" publishTime="06/16/2012 16:48:31" />
+    <file relUrl="bin/System.Web.Helpers.xml" publishTime="12/19/2010 22:59:38" />
     <file relUrl="Views/RQItems/EditorTemplates/multilinetext.cshtml" publishTime="03/03/2012 18:05:38" />
     <file relUrl="Images/icon_docs.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Content/Site.css" publishTime="05/09/2012 11:50:13" />
+    <file relUrl="bin/Microsoft.Web.Infrastructure.xml" publishTime="12/20/2010 09:52:36" />
+    <file relUrl="Areas/Scripts/add-user-form.html" publishTime="10/10/2012 11:19:43" />
     <file relUrl="xml/dir.xml" publishTime="07/08/2012 18:48:22" />
     <file relUrl="Views/Account/ChangePasswordSuccess.cshtml" publishTime="08/23/2011 14:10:02" />
     <file relUrl="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="08/23/2011 14:10:13" />
     <file relUrl="Views/RQItems/Shared/XmlViewer.cshtml" publishTime="07/12/2012 16:31:45" />
-    <file relUrl="bin/RQLinkedData.dll" publishTime="08/16/2012 16:19:38" />
-    <file relUrl="bin/dotNetRDF.pdb" publishTime="07/15/2012 15:34:35" />
-    <file relUrl="Views/Web.config" publishTime="07/15/2012 18:41:38" />
+    <file relUrl="bin/RQLinkedData.dll" publishTime="10/25/2012 15:34:19" />
+    <file relUrl="bin/dotNetRDF.pdb" publishTime="10/25/2012 15:34:18" />
+    <file relUrl="Views/Web.config" publishTime="05/08/2012 15:45:49" />
     <file relUrl="Content/themes/base/jquery.ui.selectable.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="Views/RQItems/Shared/ResultViewer.cshtml" publishTime="07/14/2012 17:59:49" />
+    <file relUrl="Views/RQItems/Shared/ResultViewer.cshtml" publishTime="10/14/2012 19:00:06" />
     <file relUrl="Images/icon_music.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Views/RQKos/Index.cshtml" publishTime="02/07/2012 14:25:39" />
     <file relUrl="Scripts/dynatree-1.2.0/skin/loading.gif" publishTime="11/23/2011 10:07:09" />
-    <file relUrl="Scripts/jquery.validate.js" publishTime="08/23/2011 14:10:10" />
+    <file relUrl="Scripts/jquery.validate.js" publishTime="07/05/2012 23:30:12" />
     <file relUrl="Views/RQItems/Shared/EditViewer.cshtml" publishTime="06/24/2012 12:49:13" />
-    <file relUrl="Scripts/jquery-1.6.1.js" publishTime="12/07/2011 16:32:40" />
+    <file relUrl="bin/System.Web.Razor.xml" publishTime="12/20/2010 09:52:36" />
     <file relUrl="Content/themes/base/jquery.ui.all.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="bin/MvcRQ.dll" publishTime="08/16/2012 16:19:40" />
-    <file relUrl="Scripts/jquery-1.5.1-vsdoc.js" publishTime="08/23/2011 14:10:10" />
-    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Views/Home/Index.cshtml" publishTime="11/12/2011 15:54:59" />
-    <file relUrl="Scripts/modernizr-1.7.min.js" publishTime="08/23/2011 14:10:15" />
+    <file relUrl="bin/System.Web.WebPages.Administration.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="bin/MvcRQ.dll" publishTime="10/25/2012 15:34:26" />
+    <file relUrl="xslt/RQKos2RDF.xslt" publishTime="08/16/2012 18:35:51" />
+    <file relUrl="Views/Home/Index.cshtml" publishTime="09/29/2012 17:40:38" />
+    <file relUrl="bin/NuGet.Core.dll" publishTime="12/20/2010 12:37:28" />
+    <file relUrl="Areas/Scripts/user-table-area.html" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Areas/Scripts/manage-roles-form.html" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Scripts/modernizr-1.7.min.js" publishTime="07/05/2012 23:30:12" />
     <file relUrl="Images/icon_per.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Images/icon_abstract.jpg" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/jquery-1.6.1.min.js" publishTime="12/07/2011 16:32:40" />
+    <file relUrl="Areas/UserManagement/Views/_ViewStart.cshtml" publishTime="10/10/2012 18:22:37" />
     <file relUrl="Views/Shared/Error.cshtml" publishTime="05/08/2012 17:02:50" />
-    <file relUrl="Views/RQKos/Index.cshtml" publishTime="02/07/2012 14:25:39" />
-    <file relUrl="Views/RQItems/Index.cshtml" publishTime="06/17/2012 12:45:40" />
+    <file relUrl="Areas/UserManagement/Views/Web.config" publishTime="10/10/2012 11:10:25" />
+    <file relUrl="Views/RQItems/Index.cshtml" publishTime="10/10/2012 12:27:36" />
+    <file relUrl="Scripts/jquery-1.7.1.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Scripts/MicrosoftAjax.debug.js" publishTime="07/05/2012 23:30:12" />
     <file relUrl="Scripts/dynatree-1.2.0/skin/icons.gif" publishTime="11/23/2011 10:07:09" />
-    <file relUrl="bin/MvpRestApiLib.pdb" publishTime="08/16/2012 12:25:09" />
-    <file relUrl="bin/RQResources.dll" publishTime="07/15/2012 15:34:40" />
-    <file relUrl="Views/Shared/_LogOnPartial.cshtml" publishTime="05/08/2012 17:02:50" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Index.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Areas/Scripts/imclude-external-db-form.html" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Views/Shared/_LogOnPartial.cshtml" publishTime="10/10/2012 18:40:13" />
     <file relUrl="xslt/RQ2DC.xslt" publishTime="11/12/2011 15:19:42" />
     <file relUrl="bin/Lucene.Net.dll" publishTime="08/27/2009 12:42:38" />
     <file relUrl="Scripts/jquery.cookie.js" publishTime="11/23/2011 10:01:22" />
+    <file relUrl="bin/WebMatrix.Data.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Areas/Scripts/simple-query-options-management.js" publishTime="10/11/2012 19:09:54" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Create.cshtml" publishTime="10/10/2012 12:25:56" />
     <file relUrl="Content/themes/base/jquery.ui.resizable.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="Scripts/MicrosoftMvcAjax.debug.js" publishTime="08/23/2011 14:10:02" />
+    <file relUrl="Scripts/MicrosoftMvcAjax.debug.js" publishTime="07/05/2012 23:30:12" />
     <file relUrl="Content/themes/base/images/ui-icons_2e83ff_256x240.png" publishTime="08/23/2011 14:10:13" />
     <file relUrl="Content/themes/base/jquery.ui.tabs.css" publishTime="08/23/2011 14:10:11" />
-    <file relUrl="bin/RQLib.pdb" publishTime="08/16/2012 16:19:39" />
+    <file relUrl="Areas/Scripts/simple-user-management.js" publishTime="10/13/2012 11:29:44" />
+    <file relUrl="bin/System.Web.WebPages.xml" publishTime="12/19/2010 22:59:38" />
+    <file relUrl="bin/RQLib.pdb" publishTime="10/25/2012 15:34:24" />
     <file relUrl="xml/stdquery.de-DE.xml" publishTime="08/20/2010 11:48:36" />
-    <file relUrl="bin/MvpRestApiLib.dll" publishTime="08/16/2012 12:25:10" />
-    <file relUrl="Views/RQKos/shared/JsonViewer.cshtml" publishTime="01/21/2012 11:07:28" />
+    <file relUrl="bin/MvpRestApiLib.dll" publishTime="10/25/2012 15:34:20" />
+    <file relUrl="Scripts/MicrosoftMvcAjax.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="bin/System.Web.WebPages.Deployment.dll" publishTime="01/05/2011 14:45:38" />
     <file relUrl="Views/RQItems/Shared/JsonViewer.cshtml" publishTime="07/12/2012 17:05:50" />
     <file relUrl="Content/themes/base/jquery.ui.dialog.css" publishTime="08/23/2011 14:10:12" />
     <file relUrl="xml/extdblist.xml" publishTime="12/20/2009 15:51:14" />
+    <file relUrl="App_Data/aspnetdb_log.ldf" publishTime="10/24/2012 21:43:27" />
     <file relUrl="Views/Account/Register.cshtml" publishTime="08/23/2011 14:10:03" />
     <file relUrl="Images/icon_itemview.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Views/RQItems/ServRQItem.cshtml" publishTime="07/15/2012 21:11:16" />
     <file relUrl="Images/icon_contr.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Images/clearpixel.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Images/icon_fulltext.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Views/RQKos/shared/XmlViewer.cshtml" publishTime="08/16/2012 15:08:47" />
     <file relUrl="xml/IndexConfig.xml" publishTime="10/24/2010 18:24:21" />
-    <file relUrl="bin/dotNetRDF.xml" publishTime="07/15/2012 15:34:35" />
-    <file relUrl="Web.config" publishTime="07/15/2012 18:41:38" />
-    <file relUrl="Scripts/MicrosoftMvcValidation.debug.js" publishTime="08/23/2011 14:10:02" />
+    <file relUrl="Content/themes/base/jquery.ui.autocomplete.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/dotNetRDF.xml" publishTime="10/25/2012 15:34:17" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin/vline.gif" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="Web.config" publishTime="10/25/2012 15:35:05" />
+    <file relUrl="bin/Microsoft.Web.Infrastructure.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Scripts/MicrosoftMvcValidation.debug.js" publishTime="07/05/2012 23:30:12" />
     <file relUrl="Images/icon_users_32px.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Images/icon_olr.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/jquery.unobtrusive-ajax.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="packages.config" publishTime="08/23/2011 14:10:15" />
+    <file relUrl="Scripts/jquery.unobtrusive-ajax.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="xslt/SRUMARC2MODS.xslt" publishTime="09/22/2012 13:17:59" />
     <file relUrl="Images/icon_avm.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Images/icon_cfolder.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="bin/MvcRQ.pdb" publishTime="08/16/2012 16:19:40" />
-    <file relUrl="~db/katalog30.mdb" publishTime="07/15/2012 18:26:04" />
-    <file relUrl="Views/RQKos/ServRQKos.cshtml" publishTime="08/16/2012 15:06:19" />
-    <file relUrl="Views/RQKos/shared/ShelvesViewer.cshtml" publishTime="07/06/2012 14:42:47" />
+    <file relUrl="InstallationDummyFile.txt" publishTime="09/01/2012 14:30:55" />
+    <file relUrl="bin/MvcRQ.pdb" publishTime="10/25/2012 15:34:25" />
+    <file relUrl="~db/katalog30.mdb" publishTime="09/29/2012 16:55:07" />
+    <file relUrl="Views/RQKos/shared/ShelvesViewer.cshtml" publishTime="10/14/2012 18:56:10" />
+    <file relUrl="Views/RQKos/shared/JsonViewer.cshtml" publishTime="01/21/2012 11:07:28" />
     <file relUrl="Content/themes/base/images/ui-icons_222222_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Areas/Scripts/tablesorter-pager-min.js" publishTime="10/10/2012 11:19:43" />
     <file relUrl="Scripts/jquery.transform.js" publishTime="09/24/2011 12:54:35" />
+    <file relUrl="Areas/UserSettings/Views/_ViewStart.cshtml" publishTime="10/10/2012 18:22:22" />
+    <file relUrl="LinkedData/N3Rules/test.n3" publishTime="03/31/2012 15:49:00" />
     <file relUrl="Images/icon_RQQueryResult_32px.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Views/RQKos/shared/XmlViewer.cshtml" publishTime="08/16/2012 15:08:47" />
-    <file relUrl="Global.asax" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin-vista/loading.gif" publishTime="11/23/2011 10:07:43" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Details.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Edit.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="bin/MvpRestApiLib.pdb" publishTime="10/25/2012 15:34:20" />
     <file relUrl="Views/_ViewStart.cshtml" publishTime="08/23/2011 14:10:03" />
-    <file relUrl="Content/themes/base/jquery.ui.autocomplete.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="App_Data/settings.mdf" publishTime="10/24/2012 21:43:27" />
+    <file relUrl="Areas/UserSettings/Views/Web.config" publishTime="10/10/2012 11:52:26" />
     <file relUrl="Images/icon_art.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="bin/RQResources.pdb" publishTime="07/15/2012 15:34:40" />
+    <file relUrl="bin/RQResources.pdb" publishTime="10/25/2012 15:34:21" />
     <file relUrl="xml/stdquery.xml" publishTime="04/06/2011 10:08:15" />
     <file relUrl="Images/icon_books.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Images/icon_webfolder.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Views/RQItems/EditorTemplates/rqdescriptor.cshtml" publishTime="05/09/2012 12:27:14" />
     <file relUrl="Views/Home/About.cshtml" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="Areas/Scripts/style.css" publishTime="10/10/2012 11:19:43" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="08/23/2011 14:10:13" />
     <file relUrl="Views/RQItems/Shared/DisplViewer.cshtml" publishTime="06/24/2012 19:27:42" />
-    <file relUrl="bin/dotNetRDF.dll" publishTime="07/15/2012 15:34:36" />
-    <file relUrl="xslt/ViewTransforms/RQResultList2RQSorted.xslt" publishTime="06/17/2012 11:52:59" />
-    <file relUrl="Scripts/jquery.validate-vsdoc.js" publishTime="08/23/2011 14:10:10" />
+    <file relUrl="bin/dotNetRDF.dll" publishTime="10/25/2012 15:34:18" />
+    <file relUrl="xslt/ViewTransforms/RQResultList2RQSorted.xslt" publishTime="10/14/2012 18:06:40" />
+    <file relUrl="Scripts/jquery.validate-vsdoc.js" publishTime="07/05/2012 23:30:12" />
     <file relUrl="Images/icon_sound.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Content/themes/base/jquery.ui.theme.css" publishTime="08/23/2011 14:10:11" />
+    <file relUrl="Scripts/jquery.validate.min.js" publishTime="07/05/2012 23:30:12" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Scripts/jquery-1.7.1.js" publishTime="07/05/2012 23:30:12" />
     <file relUrl="Views/Account/ChangePassword.cshtml" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Scripts/MicrosoftMvcAjax.js" publishTime="08/23/2011 14:10:02" />
     <file relUrl="README.txt" publishTime="11/07/2011 18:26:09" />
-    <file relUrl="Views/RQItems/EditRQItem.cshtml" publishTime="07/05/2012 13:11:47" />
-    <file relUrl="bin/RQLinkedData.pdb" publishTime="08/16/2012 16:19:38" />
+    <file relUrl="Scripts/jquery-1.7.1-vsdoc.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Views/RQItems/EditRQItem.cshtml" publishTime="09/29/2012 17:49:06" />
+    <file relUrl="bin/RQLinkedData.pdb" publishTime="10/25/2012 15:34:19" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="bin/RQLib.dll" publishTime="08/16/2012 16:19:39" />
+    <file relUrl="bin/RQLib.dll" publishTime="10/25/2012 15:34:24" />
+    <file relUrl="App_Data/aspnetdb.mdf" publishTime="10/24/2012 21:43:27" />
+    <file relUrl="Images/icon_abstract.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="bin/RQState.dll" publishTime="10/25/2012 15:34:18" />
+    <file relUrl="Content/themes/base/jquery.ui.core.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="Images/icon_mmedia.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="xslt/RQI2DC.xslt" publishTime="07/15/2012 21:08:25" />
+    <file relUrl="Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin/ui.dynatree.css" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="bin/System.Web.WebPages.Razor.xml" publishTime="12/20/2010 09:52:36" />
+    <file relUrl="bin/WebMatrix.WebData.xml" publishTime="12/19/2010 22:59:38" />
+    <file relUrl="Images/icon_hand.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_article.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Global.asax" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="Views/Shared/_Layout.cshtml" publishTime="10/11/2012 19:06:51" />
+    <file relUrl="Images/icon_listenaudio.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="xslt/MODS2RQI.xslt" publishTime="09/22/2012 16:54:55" />
+    <file relUrl="Areas/UserSettings/Views/Shared/IncludeExternalView.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Images/icon_software.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="bin/WebMatrix.WebData.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Content/themes/base/jquery.ui.accordion.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/RQState.pdb" publishTime="10/25/2012 15:34:18" />
+    <file relUrl="Scripts/MicrosoftMvcValidation.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Images/icon_series.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin-vista/ui.dynatree.css" publishTime="11/23/2011 10:07:43" />
+    <file relUrl="packages.config" publishTime="09/01/2012 14:30:56" />
+    <file relUrl="bin/RQLib.xml" publishTime="10/25/2012 15:34:24" />
+    <file relUrl="bin/System.Web.Razor.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Content/themes/base/jquery.ui.slider.css" publishTime="08/23/2011 14:10:11" />
+    <file relUrl="Views/RQItems/Shared/SearchBoxView.cshtml" publishTime="09/30/2012 11:51:20" />
+    <file relUrl="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Content/themes/base/images/ui-icons_454545_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Scripts/jquery-ui-1.8.11.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/jquery.cookie.js" publishTime="12/07/2011 16:32:40" />
+    <file relUrl="Scripts/jquery.validate.unobtrusive.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Areas/Scripts/tablesorter-pager.js" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="bin/System.Web.WebPages.Razor.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Delete.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="bin/de/RQResources.resources.dll" publishTime="10/25/2012 15:34:21" />
+    <file relUrl="Areas/UserManagement/Views/UserManagement/Index.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Views/RQItems/DisplRQItem.cshtml" publishTime="09/30/2012 12:22:54" />
+    <file relUrl="bin/EntityFramework.xml" publishTime="08/23/2011 14:10:14" />
+    <file relUrl="Images/RQFTCollection.jpg" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Content/themes/base/jquery.ui.button.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/EntityFramework.dll" publishTime="08/23/2011 14:10:14" />
+    <file relUrl="Scripts/jquery-ui-1.8.11.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Images/ajax-loader.gif" publishTime="04/26/2012 17:37:35" />
+    <file relUrl="Images/icon_pictures.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="bin/Lucene.Net.pdb" publishTime="08/27/2009 12:42:38" />
+    <file relUrl="xslt/RQI2RQ.xslt" publishTime="07/15/2012 21:13:32" />
+    <file relUrl="bin/MvcRQ.XML" publishTime="10/25/2012 15:34:25" />
+    <file relUrl="Content/themes/base/jquery.ui.progressbar.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/Newtonsoft.Json.Net35.dll" publishTime="07/22/2011 15:39:02" />
+    <file relUrl="bin/HtmlAgilityPack.dll" publishTime="07/07/2010 09:27:06" />
+    <file relUrl="Areas/Scripts/jquery.tablesorter.min.js" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="bin/System.Web.Helpers.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Images/icon_listview.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="App_Data/settings.ldf" publishTime="10/24/2012 21:43:27" />
+    <file relUrl="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Content/Site.css" publishTime="05/09/2012 11:50:13" />
+    <file relUrl="xslt/ViewTransforms/RQItemFields.xslt" publishTime="05/20/2012 17:49:42" />
+    <file relUrl="Images/icon_websource.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin-vista/icons.gif" publishTime="11/23/2011 10:07:43" />
+    <file relUrl="Views/RQKos/ServRQKos.cshtml" publishTime="08/17/2012 13:14:25" />
+    <file relUrl="bin/System.Web.Mvc.dll" publishTime="01/05/2011 16:42:16" />
+    <file relUrl="Images/icon_map.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/modernizr-1.7.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Areas/Scripts/tablesorter-style.css" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="bin/WebMatrix.Data.xml" publishTime="12/19/2010 22:59:38" />
+    <file relUrl="Scripts/jquery.unobtrusive-ajax.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Views/Account/LogOn.cshtml" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="Content/themes/base/jquery.ui.base.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="Views/RQItems/EditorTemplates/text.cshtml" publishTime="03/03/2012 18:41:26" />
+    <file relUrl="bin/System.Web.WebPages.Deployment.xml" publishTime="12/20/2010 09:52:36" />
+  </publishProfile>
+  <publishProfile publishUrl="ftp://strands.de/subdomains/mvcrq/httpdocs" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="strands.de/subdomains/mvcrq" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="DomainBox_mvc.riquest.net" publishMethod="FTP" replaceMatchingFiles="True" userName="strands" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJ6OP2ZI91UW6StVlK7KfIwAAAAACAAAAAAADZgAAqAAAABAAAACp6x0P7LRw3MkyuBjqGOQNAAAAAASAAACgAAAAEAAAAAHFjRtNvl2/kXl+qtXpGXQYAAAA6lZxlXYYi/B1NY0ai8w4WAE3QaEp5gsTFAAAAPvYfXJWcUvj4A+k/Eeklm+ftNM0" SelectedForPublish="True">
+    <file relUrl="Images/icon_letters.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/MicrosoftAjax.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="bin/RQResources.dll" publishTime="10/26/2012 18:08:08" />
+    <file relUrl="bin/System.Web.WebPages.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Scripts/dynatree-1.2.0/jquery.rqdynatree.js" publishTime="12/08/2011 18:39:12" />
+    <file relUrl="Content/themes/base/images/ui-icons_cd0a0a_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Content/themes/base/jquery.ui.datepicker.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="xslt/ViewTransforms/RQI2SingleItemView.xslt" publishTime="06/16/2012 16:48:31" />
+    <file relUrl="bin/System.Web.Helpers.xml" publishTime="12/19/2010 22:59:38" />
+    <file relUrl="Views/RQItems/EditorTemplates/multilinetext.cshtml" publishTime="03/03/2012 18:05:38" />
+    <file relUrl="App_Data/ASPNETDB.MDF" publishTime="10/28/2012 13:29:03" />
+    <file relUrl="Images/icon_docs.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="bin/Microsoft.Web.Infrastructure.xml" publishTime="12/20/2010 09:52:36" />
+    <file relUrl="Areas/Scripts/add-user-form.html" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="xml/dir.xml" publishTime="07/08/2012 18:48:22" />
+    <file relUrl="Views/Account/ChangePasswordSuccess.cshtml" publishTime="08/23/2011 14:10:02" />
+    <file relUrl="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Views/RQItems/Shared/XmlViewer.cshtml" publishTime="07/12/2012 16:31:45" />
+    <file relUrl="bin/RQLinkedData.dll" publishTime="10/28/2012 13:29:03" />
+    <file relUrl="Views/Web.config" publishTime="10/26/2012 18:08:13" />
+    <file relUrl="Content/themes/base/jquery.ui.selectable.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="Views/RQItems/Shared/ResultViewer.cshtml" publishTime="10/28/2012 13:25:29" />
+    <file relUrl="Images/icon_music.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin/loading.gif" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="Scripts/jquery.validate.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Views/RQItems/Shared/EditViewer.cshtml" publishTime="06/24/2012 12:49:13" />
+    <file relUrl="bin/System.Web.Razor.xml" publishTime="12/20/2010 09:52:36" />
+    <file relUrl="Content/themes/base/jquery.ui.all.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/System.Web.WebPages.Administration.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="bin/MvcRQ.dll" publishTime="10/28/2012 13:29:05" />
+    <file relUrl="xslt/RQKos2RDF.xslt" publishTime="08/16/2012 18:35:51" />
+    <file relUrl="Views/Home/Index.cshtml" publishTime="09/29/2012 17:40:38" />
+    <file relUrl="bin/NuGet.Core.dll" publishTime="12/20/2010 12:37:28" />
+    <file relUrl="Areas/Scripts/user-table-area.html" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Areas/Scripts/manage-roles-form.html" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Scripts/modernizr-1.7.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Images/icon_per.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_abstract.jpg" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Views/Shared/Error.cshtml" publishTime="05/08/2012 17:02:50" />
+    <file relUrl="Views/RQKos/Index.cshtml" publishTime="02/07/2012 14:25:39" />
+    <file relUrl="Views/RQItems/Index.cshtml" publishTime="10/10/2012 12:27:36" />
+    <file relUrl="Scripts/jquery-1.7.1.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Scripts/MicrosoftAjax.debug.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin/icons.gif" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Index.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Areas/Scripts/imclude-external-db-form.html" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Views/Shared/_LogOnPartial.cshtml" publishTime="10/10/2012 18:40:13" />
+    <file relUrl="xslt/RQ2DC.xslt" publishTime="11/12/2011 15:19:42" />
+    <file relUrl="bin/Lucene.Net.dll" publishTime="08/27/2009 12:42:38" />
+    <file relUrl="Scripts/jquery.cookie.js" publishTime="11/23/2011 10:01:22" />
+    <file relUrl="Scripts/jquery.validate.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Areas/Scripts/simple-query-options-management.js" publishTime="10/28/2012 11:01:42" />
+    <file relUrl="Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Create.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Content/themes/base/jquery.ui.resizable.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="Scripts/MicrosoftMvcAjax.debug.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Content/themes/base/images/ui-icons_2e83ff_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Content/themes/base/jquery.ui.tabs.css" publishTime="08/23/2011 14:10:11" />
+    <file relUrl="Areas/Scripts/simple-user-management.js" publishTime="10/28/2012 10:56:22" />
+    <file relUrl="bin/System.Web.WebPages.xml" publishTime="12/19/2010 22:59:38" />
+    <file relUrl="xml/stdquery.de-DE.xml" publishTime="08/20/2010 11:48:36" />
+    <file relUrl="bin/MvpRestApiLib.dll" publishTime="10/26/2012 18:08:10" />
+    <file relUrl="Views/RQKos/shared/JsonViewer.cshtml" publishTime="01/21/2012 11:07:28" />
+    <file relUrl="bin/System.Web.WebPages.Deployment.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Views/RQItems/Shared/JsonViewer.cshtml" publishTime="07/12/2012 17:05:50" />
+    <file relUrl="xml/extdblist.xml" publishTime="12/20/2009 15:51:14" />
+    <file relUrl="App_Data/aspnetdb_log.LDF" publishTime="10/28/2012 13:29:03" />
+    <file relUrl="Views/Account/Register.cshtml" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="Images/icon_itemview.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Views/RQItems/ServRQItem.cshtml" publishTime="07/15/2012 21:11:16" />
+    <file relUrl="Images/icon_contr.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_map.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/clearpixel.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_fulltext.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Global.asax" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="Content/themes/base/jquery.ui.autocomplete.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/dotNetRDF.xml" publishTime="10/28/2012 13:29:02" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin/vline.gif" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="Images/icon_article.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Web.config" publishTime="10/28/2012 12:58:55" />
+    <file relUrl="bin/Microsoft.Web.Infrastructure.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Scripts/MicrosoftMvcValidation.debug.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Images/icon_users_32px.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_avm.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_olr.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/jquery.unobtrusive-ajax.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="xslt/SRUMARC2MODS.xslt" publishTime="09/22/2012 13:17:59" />
+    <file relUrl="Views/RQKos/shared/XmlViewer.cshtml" publishTime="08/16/2012 15:08:47" />
+    <file relUrl="Images/icon_cfolder.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="InstallationDummyFile.txt" publishTime="09/01/2012 14:30:55" />
+    <file relUrl="Content/themes/base/jquery.ui.dialog.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="~db/katalog30.mdb" publishTime="09/29/2012 16:55:07" />
+    <file relUrl="Views/RQKos/shared/ShelvesViewer.cshtml" publishTime="10/28/2012 13:25:29" />
+    <file relUrl="bin/WebMatrix.Data.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Content/themes/base/images/ui-icons_222222_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Areas/Scripts/tablesorter-pager-min.js" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Scripts/jquery.transform.js" publishTime="09/24/2011 12:54:35" />
+    <file relUrl="Areas/UserSettings/Views/_ViewStart.cshtml" publishTime="10/10/2012 18:22:22" />
+    <file relUrl="Images/icon_RQQueryResult_32px.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin-vista/loading.gif" publishTime="11/23/2011 10:07:43" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Details.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Edit.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Views/_ViewStart.cshtml" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="App_Data/settings.mdf" publishTime="10/28/2012 13:29:03" />
+    <file relUrl="Areas/UserSettings/Views/Web.config" publishTime="10/26/2012 18:08:13" />
+    <file relUrl="Images/icon_art.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="xml/stdquery.xml" publishTime="04/06/2011 10:08:15" />
+    <file relUrl="Images/icon_books.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_webfolder.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Views/RQItems/EditorTemplates/rqdescriptor.cshtml" publishTime="05/09/2012 12:27:14" />
+    <file relUrl="Views/Home/About.cshtml" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="Areas/Scripts/style.css" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="bin/dotNetRDF.dll" publishTime="10/28/2012 13:29:02" />
+    <file relUrl="xslt/ViewTransforms/RQResultList2RQSorted.xslt" publishTime="10/14/2012 18:06:40" />
+    <file relUrl="Scripts/jquery.validate-vsdoc.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Images/icon_sound.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Content/themes/base/jquery.ui.theme.css" publishTime="08/23/2011 14:10:11" />
+    <file relUrl="xml/IndexConfig.xml" publishTime="10/24/2010 18:24:21" />
+    <file relUrl="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Scripts/jquery-1.7.1.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Views/Account/ChangePassword.cshtml" publishTime="08/23/2011 14:10:02" />
+    <file relUrl="Scripts/MicrosoftMvcAjax.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="README.txt" publishTime="11/07/2011 18:26:09" />
+    <file relUrl="Scripts/jquery-1.7.1-vsdoc.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Views/RQItems/EditRQItem.cshtml" publishTime="09/29/2012 17:49:06" />
+    <file relUrl="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="bin/RQLib.dll" publishTime="10/28/2012 13:29:04" />
     <file relUrl="LinkedData/N3Rules/test.n3" publishTime="03/31/2012 15:49:00" />
     <file relUrl="Images/icon_abstract.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="bin/RQState.dll" publishTime="07/15/2012 15:34:37" />
+    <file relUrl="bin/RQState.dll" publishTime="10/26/2012 18:08:07" />
     <file relUrl="Content/themes/base/jquery.ui.core.css" publishTime="08/23/2011 14:10:12" />
     <file relUrl="Images/icon_mmedia.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="xslt/rqi2dc.xslt" publishTime="07/15/2012 21:08:25" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png" publishTime="08/23/2011 14:10:13" />
     <file relUrl="Scripts/dynatree-1.2.0/skin/ui.dynatree.css" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="bin/System.Web.WebPages.Razor.xml" publishTime="12/20/2010 09:52:36" />
+    <file relUrl="bin/WebMatrix.WebData.xml" publishTime="12/19/2010 22:59:38" />
     <file relUrl="Images/icon_hand.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Images/icon_article.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Views/Shared/_Layout.cshtml" publishTime="05/08/2012 16:31:05" />
+    <file relUrl="Areas/UserManagement/Views/_ViewStart.cshtml" publishTime="10/10/2012 18:22:37" />
+    <file relUrl="Views/Shared/_Layout.cshtml" publishTime="10/28/2012 10:54:45" />
     <file relUrl="Images/icon_listenaudio.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Content/themes/base/images/ui-icons_cd0a0a_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="xslt/MODS2RQI.xslt" publishTime="09/22/2012 16:54:55" />
+    <file relUrl="Areas/UserSettings/Views/Shared/IncludeExternalView.cshtml" publishTime="10/10/2012 12:25:56" />
     <file relUrl="Images/icon_software.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="bin/WebMatrix.WebData.dll" publishTime="01/05/2011 14:45:38" />
     <file relUrl="Content/themes/base/jquery.ui.accordion.css" publishTime="08/23/2011 14:10:12" />
-    <file relUrl="bin/RQState.pdb" publishTime="07/15/2012 15:34:37" />
-    <file relUrl="Scripts/MicrosoftMvcValidation.js" publishTime="08/23/2011 14:10:02" />
+    <file relUrl="Scripts/MicrosoftMvcValidation.js" publishTime="07/05/2012 23:30:12" />
     <file relUrl="Images/icon_series.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Scripts/dynatree-1.2.0/skin-vista/ui.dynatree.css" publishTime="11/23/2011 10:07:43" />
-    <file relUrl="bin/RQLib.xml" publishTime="08/16/2012 16:19:39" />
+    <file relUrl="packages.config" publishTime="09/01/2012 14:30:56" />
+    <file relUrl="bin/RQLib.xml" publishTime="10/28/2012 13:29:04" />
+    <file relUrl="bin/System.Web.Razor.dll" publishTime="01/05/2011 14:45:38" />
     <file relUrl="Content/themes/base/jquery.ui.slider.css" publishTime="08/23/2011 14:10:11" />
-    <file relUrl="bin/EntityFramework.xml" publishTime="08/23/2011 14:10:14" />
+    <file relUrl="Views/RQItems/Shared/SearchBoxView.cshtml" publishTime="09/30/2012 11:51:20" />
     <file relUrl="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Content/themes/base/images/ui-icons_454545_256x240.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Scripts/jquery-ui-1.8.11.js" publishTime="08/23/2011 14:10:11" />
     <file relUrl="Scripts/dynatree-1.2.0/jquery.cookie.js" publishTime="12/07/2011 16:32:40" />
-    <file relUrl="Scripts/jquery.validate.unobtrusive.js" publishTime="08/23/2011 14:10:02" />
-    <file relUrl="Scripts/dynatree-1.2.0/skin-vista/loading.gif" publishTime="11/23/2011 10:07:43" />
-    <file relUrl="bin/de/RQResources.resources.dll" publishTime="07/15/2012 15:34:41" />
-    <file relUrl="Views/RQItems/DisplRQItem.cshtml" publishTime="07/05/2012 13:11:47" />
-    <file relUrl="Scripts/MicrosoftAjax.debug.js" publishTime="08/23/2011 14:10:02" />
+    <file relUrl="Content/themes/base/images/ui-icons_454545_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Scripts/jquery-ui-1.8.11.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Content/Site.css" publishTime="05/09/2012 11:50:13" />
+    <file relUrl="Scripts/jquery.validate.unobtrusive.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Areas/Scripts/tablesorter-pager.js" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="bin/System.Web.WebPages.Razor.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Delete.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="bin/de/RQResources.resources.dll" publishTime="10/26/2012 18:08:09" />
+    <file relUrl="Areas/UserManagement/Views/UserManagement/Index.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Views/RQItems/DisplRQItem.cshtml" publishTime="09/30/2012 12:22:54" />
+    <file relUrl="bin/EntityFramework.xml" publishTime="08/23/2011 14:10:14" />
     <file relUrl="Images/RQFTCollection.jpg" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="bin/Newtonsoft.Json.Net35.dll" publishTime="07/22/2011 15:39:02" />
     <file relUrl="Content/themes/base/jquery.ui.button.css" publishTime="08/23/2011 14:10:12" />
     <file relUrl="bin/EntityFramework.dll" publishTime="08/23/2011 14:10:14" />
-    <file relUrl="Scripts/jquery-ui-1.8.11.min.js" publishTime="08/23/2011 14:10:11" />
+    <file relUrl="Scripts/jquery-ui-1.8.11.min.js" publishTime="07/05/2012 23:30:12" />
     <file relUrl="Images/ajax-loader.gif" publishTime="04/26/2012 17:37:35" />
     <file relUrl="Images/icon_pictures.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="xslt/RQKos2RDF.xslt" publishTime="08/16/2012 13:10:06" />
-    <file relUrl="bin/Lucene.Net.pdb" publishTime="08/27/2009 12:42:38" />
+    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="08/23/2011 14:10:13" />
     <file relUrl="xslt/rqi2rq.xslt" publishTime="07/15/2012 21:13:32" />
-    <file relUrl="bin/MvcRQ.XML" publishTime="08/16/2012 16:19:40" />
+    <file relUrl="bin/MvcRQ.XML" publishTime="10/28/2012 13:29:05" />
     <file relUrl="Content/themes/base/jquery.ui.progressbar.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/Newtonsoft.Json.Net35.dll" publishTime="07/22/2011 15:39:02" />
     <file relUrl="bin/HtmlAgilityPack.dll" publishTime="07/07/2010 09:27:06" />
+    <file relUrl="Areas/Scripts/jquery.tablesorter.min.js" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="bin/System.Web.Helpers.dll" publishTime="01/05/2011 14:45:38" />
     <file relUrl="Images/icon_listview.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="08/23/2011 14:10:13" />
-    <file relUrl="Scripts/dynatree-1.2.0/skin/vline.gif" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="Areas/UserManagement/Views/Web.config" publishTime="10/26/2012 18:08:13" />
     <file relUrl="xslt/ViewTransforms/RQItemFields.xslt" publishTime="05/20/2012 17:49:42" />
     <file relUrl="Images/icon_websource.gif" publishTime="10/23/2011 10:42:12" />
     <file relUrl="Scripts/dynatree-1.2.0/skin-vista/icons.gif" publishTime="11/23/2011 10:07:43" />
-    <file relUrl="Scripts/jquery.validate.min.js" publishTime="08/23/2011 14:10:10" />
-    <file relUrl="Images/icon_map.gif" publishTime="10/23/2011 10:42:12" />
-    <file relUrl="Scripts/modernizr-1.7.js" publishTime="08/23/2011 14:10:15" />
-    <file relUrl="Scripts/jquery.unobtrusive-ajax.min.js" publishTime="08/23/2011 14:10:02" />
+    <file relUrl="Views/RQKos/ServRQKos.cshtml" publishTime="08/17/2012 13:14:25" />
+    <file relUrl="bin/System.Web.Mvc.dll" publishTime="01/05/2011 16:42:16" />
+    <file relUrl="Views/RQItems/Shared/DisplViewer.cshtml" publishTime="06/24/2012 19:27:42" />
+    <file relUrl="Scripts/modernizr-1.7.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Areas/Scripts/tablesorter-style.css" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="bin/WebMatrix.Data.xml" publishTime="12/19/2010 22:59:38" />
+    <file relUrl="Scripts/jquery.unobtrusive-ajax.min.js" publishTime="07/05/2012 23:30:12" />
     <file relUrl="Views/Account/LogOn.cshtml" publishTime="08/23/2011 14:10:03" />
     <file relUrl="Content/themes/base/jquery.ui.base.css" publishTime="08/23/2011 14:10:12" />
     <file relUrl="Views/RQItems/EditorTemplates/text.cshtml" publishTime="03/03/2012 18:41:26" />
+    <file relUrl="bin/System.Web.WebPages.Deployment.xml" publishTime="12/20/2010 09:52:36" />
   </publishProfile>
-  <publishProfile publishUrl="localhost" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="Default Web Site/MvcRQ" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="False" msdeployMarkAsApp="False" profileName="LOCALHOST" publishMethod="MSDeploy" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="False" />
+  <publishProfile publishUrl="localhost" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="Default Web Site/riquest" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="LOCALHOST" publishMethod="MSDeploy" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="False" />
+  <publishProfile publishUrl="C:\inetpub\wwwroot\riquest" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="JBCOMPUTER" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="False">
+    <file relUrl="Images/icon_letters.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/MicrosoftAjax.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="bin/RQResources.dll" publishTime="10/25/2012 18:18:45" />
+    <file relUrl="bin/System.Web.WebPages.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Scripts/dynatree-1.2.0/jquery.rqdynatree.js" publishTime="12/08/2011 18:39:12" />
+    <file relUrl="Content/themes/base/jquery.ui.datepicker.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="xslt/SRUMARC2MODS.xslt" publishTime="09/22/2012 13:17:59" />
+    <file relUrl="xslt/ViewTransforms/RQI2SingleItemView.xslt" publishTime="06/16/2012 16:48:31" />
+    <file relUrl="bin/System.Web.Helpers.xml" publishTime="12/19/2010 22:59:38" />
+    <file relUrl="Views/RQItems/EditorTemplates/multilinetext.cshtml" publishTime="03/03/2012 18:05:38" />
+    <file relUrl="App_Data/aspnetdb.mdf" publishTime="10/26/2012 11:09:35" />
+    <file relUrl="Images/icon_docs.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="bin/Microsoft.Web.Infrastructure.xml" publishTime="12/20/2010 09:52:36" />
+    <file relUrl="Areas/Scripts/add-user-form.html" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="xml/dir.xml" publishTime="07/08/2012 18:48:22" />
+    <file relUrl="Views/Account/ChangePasswordSuccess.cshtml" publishTime="08/23/2011 14:10:02" />
+    <file relUrl="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Views/RQItems/Shared/XmlViewer.cshtml" publishTime="07/12/2012 16:31:45" />
+    <file relUrl="bin/RQLinkedData.dll" publishTime="10/26/2012 11:16:31" />
+    <file relUrl="bin/dotNetRDF.pdb" publishTime="10/26/2012 11:16:29" />
+    <file relUrl="Views/Web.config" publishTime="10/25/2012 18:30:41" />
+    <file relUrl="Areas/Scripts/manage-roles-form.html" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Views/RQItems/Shared/ResultViewer.cshtml" publishTime="10/14/2012 19:00:06" />
+    <file relUrl="Images/icon_music.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin/loading.gif" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="Scripts/jquery.validate.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Views/RQItems/Shared/EditViewer.cshtml" publishTime="06/24/2012 12:49:13" />
+    <file relUrl="bin/System.Web.Razor.xml" publishTime="12/20/2010 09:52:36" />
+    <file relUrl="Content/themes/base/jquery.ui.all.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/System.Web.WebPages.Administration.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="bin/System.Web.Razor.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Views/RQKos/Index.cshtml" publishTime="02/07/2012 14:25:39" />
+    <file relUrl="Views/Home/Index.cshtml" publishTime="09/29/2012 17:40:38" />
+    <file relUrl="bin/NuGet.Core.dll" publishTime="12/20/2010 12:37:28" />
+    <file relUrl="Areas/Scripts/user-table-area.html" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Areas/UserManagement/Views/_ViewStart.cshtml" publishTime="10/10/2012 18:22:37" />
+    <file relUrl="Images/icon_per.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_abstract.jpg" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Views/Shared/Error.cshtml" publishTime="05/08/2012 17:02:50" />
+    <file relUrl="Areas/UserManagement/Views/Web.config" publishTime="10/25/2012 18:30:41" />
+    <file relUrl="Views/RQItems/Index.cshtml" publishTime="10/10/2012 12:27:36" />
+    <file relUrl="xslt/MODS2RQI.xslt" publishTime="09/22/2012 16:54:55" />
+    <file relUrl="Scripts/jquery-1.7.1.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Scripts/MicrosoftAjax.debug.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin/icons.gif" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Index.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Areas/Scripts/imclude-external-db-form.html" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Views/Shared/_LogOnPartial.cshtml" publishTime="10/10/2012 18:40:13" />
+    <file relUrl="xslt/RQ2DC.xslt" publishTime="11/12/2011 15:19:42" />
+    <file relUrl="bin/Lucene.Net.dll" publishTime="08/27/2009 12:42:38" />
+    <file relUrl="Scripts/jquery.cookie.js" publishTime="11/23/2011 10:01:22" />
+    <file relUrl="bin/MvcRQ.dll" publishTime="10/26/2012 11:16:33" />
+    <file relUrl="bin/WebMatrix.Data.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Areas/Scripts/simple-query-options-management.js" publishTime="10/11/2012 19:09:54" />
+    <file relUrl="Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Content/themes/base/jquery.ui.selectable.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Create.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Content/themes/base/jquery.ui.resizable.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="Scripts/MicrosoftMvcAjax.debug.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Content/themes/base/images/ui-icons_2e83ff_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Content/themes/base/jquery.ui.tabs.css" publishTime="08/23/2011 14:10:11" />
+    <file relUrl="Areas/Scripts/simple-user-management.js" publishTime="10/13/2012 11:29:44" />
+    <file relUrl="bin/System.Web.WebPages.xml" publishTime="12/19/2010 22:59:38" />
+    <file relUrl="bin/RQLib.pdb" publishTime="10/26/2012 11:16:32" />
+    <file relUrl="Scripts/jquery-ui-1.8.11.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="bin/MvpRestApiLib.dll" publishTime="10/25/2012 18:18:45" />
+    <file relUrl="Scripts/MicrosoftMvcAjax.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="bin/System.Web.WebPages.Deployment.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Views/RQItems/Shared/JsonViewer.cshtml" publishTime="07/12/2012 17:05:50" />
+    <file relUrl="Areas/Scripts/tablesorter-pager.js" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="App_Data/aspnetdb_log.ldf" publishTime="10/26/2012 11:09:35" />
+    <file relUrl="Views/Account/Register.cshtml" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="Images/icon_itemview.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Views/RQItems/ServRQItem.cshtml" publishTime="07/15/2012 21:11:16" />
+    <file relUrl="Images/icon_contr.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/clearpixel.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_fulltext.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Views/RQKos/shared/XmlViewer.cshtml" publishTime="08/16/2012 15:08:47" />
+    <file relUrl="xml/IndexConfig.xml" publishTime="10/24/2010 18:24:21" />
+    <file relUrl="Content/themes/base/jquery.ui.autocomplete.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/dotNetRDF.xml" publishTime="10/26/2012 11:16:29" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin/vline.gif" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="Web.config" publishTime="10/26/2012 11:16:34" />
+    <file relUrl="bin/Microsoft.Web.Infrastructure.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Scripts/MicrosoftMvcValidation.debug.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Images/icon_users_32px.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_olr.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/jquery.unobtrusive-ajax.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="packages.config" publishTime="09/01/2012 14:30:56" />
+    <file relUrl="Images/icon_avm.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_cfolder.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="InstallationDummyFile.txt" publishTime="09/01/2012 14:30:55" />
+    <file relUrl="bin/MvcRQ.pdb" publishTime="10/26/2012 11:16:33" />
+    <file relUrl="~db/katalog30.mdb" publishTime="09/29/2012 16:55:07" />
+    <file relUrl="Views/RQKos/shared/ShelvesViewer.cshtml" publishTime="10/14/2012 18:56:10" />
+    <file relUrl="Views/RQKos/shared/JsonViewer.cshtml" publishTime="01/21/2012 11:07:28" />
+    <file relUrl="Content/themes/base/images/ui-icons_222222_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Areas/Scripts/tablesorter-pager-min.js" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Scripts/jquery.transform.js" publishTime="09/24/2011 12:54:35" />
+    <file relUrl="Areas/UserSettings/Views/_ViewStart.cshtml" publishTime="10/10/2012 18:22:22" />
+    <file relUrl="Images/icon_RQQueryResult_32px.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin-vista/loading.gif" publishTime="11/23/2011 10:07:43" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Details.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Edit.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="bin/MvpRestApiLib.pdb" publishTime="10/25/2012 18:18:45" />
+    <file relUrl="Views/_ViewStart.cshtml" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="App_Data/settings.mdf" publishTime="10/26/2012 11:10:43" />
+    <file relUrl="Areas/UserSettings/Views/Web.config" publishTime="10/25/2012 18:30:41" />
+    <file relUrl="Images/icon_art.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="bin/RQResources.pdb" publishTime="10/25/2012 18:18:45" />
+    <file relUrl="xml/stdquery.xml" publishTime="04/06/2011 10:08:15" />
+    <file relUrl="Images/icon_books.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_webfolder.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Views/RQItems/EditorTemplates/rqdescriptor.cshtml" publishTime="05/09/2012 12:27:14" />
+    <file relUrl="Views/Home/About.cshtml" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="Areas/Scripts/style.css" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Views/RQItems/Shared/DisplViewer.cshtml" publishTime="06/24/2012 19:27:42" />
+    <file relUrl="bin/dotNetRDF.dll" publishTime="10/26/2012 11:16:30" />
+    <file relUrl="xslt/ViewTransforms/RQResultList2RQSorted.xslt" publishTime="10/14/2012 18:06:40" />
+    <file relUrl="Scripts/jquery.validate-vsdoc.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Images/icon_sound.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Content/themes/base/jquery.ui.theme.css" publishTime="08/23/2011 14:10:11" />
+    <file relUrl="Scripts/jquery.validate.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Scripts/jquery-1.7.1.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Views/Account/ChangePassword.cshtml" publishTime="08/23/2011 14:10:02" />
+    <file relUrl="README.txt" publishTime="11/07/2011 18:26:09" />
+    <file relUrl="Scripts/jquery-1.7.1-vsdoc.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Views/RQItems/EditRQItem.cshtml" publishTime="09/29/2012 17:49:06" />
+    <file relUrl="bin/RQLinkedData.pdb" publishTime="10/26/2012 11:16:31" />
+    <file relUrl="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="bin/RQLib.dll" publishTime="10/26/2012 11:16:32" />
+    <file relUrl="LinkedData/N3Rules/test.n3" publishTime="03/31/2012 15:49:00" />
+    <file relUrl="Images/icon_abstract.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="bin/RQState.dll" publishTime="10/25/2012 18:18:42" />
+    <file relUrl="Content/themes/base/jquery.ui.core.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="Images/icon_mmedia.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="xslt/RQI2DC.xslt" publishTime="07/15/2012 21:08:25" />
+    <file relUrl="Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin/ui.dynatree.css" publishTime="11/23/2011 10:07:09" />
+    <file relUrl="bin/System.Web.WebPages.Razor.xml" publishTime="12/20/2010 09:52:36" />
+    <file relUrl="bin/WebMatrix.WebData.xml" publishTime="12/19/2010 22:59:38" />
+    <file relUrl="Images/icon_hand.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Images/icon_article.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Global.asax" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="Views/Shared/_Layout.cshtml" publishTime="10/11/2012 19:06:51" />
+    <file relUrl="Images/icon_listenaudio.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Content/themes/base/images/ui-icons_cd0a0a_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Areas/UserSettings/Views/Shared/IncludeExternalView.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Images/icon_software.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="bin/WebMatrix.WebData.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Content/themes/base/jquery.ui.accordion.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/RQState.pdb" publishTime="10/25/2012 18:18:42" />
+    <file relUrl="Scripts/MicrosoftMvcValidation.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Images/icon_series.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin-vista/ui.dynatree.css" publishTime="11/23/2011 10:07:43" />
+    <file relUrl="xslt/RQKos2RDF.xslt" publishTime="08/16/2012 18:35:51" />
+    <file relUrl="xml/stdquery.de-DE.xml" publishTime="08/20/2010 11:48:36" />
+    <file relUrl="bin/RQLib.xml" publishTime="10/26/2012 11:16:32" />
+    <file relUrl="Content/themes/base/jquery.ui.slider.css" publishTime="08/23/2011 14:10:11" />
+    <file relUrl="Views/RQItems/Shared/SearchBoxView.cshtml" publishTime="09/30/2012 11:51:20" />
+    <file relUrl="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Content/themes/base/images/ui-icons_454545_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Scripts/jquery-ui-1.8.11.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/jquery.cookie.js" publishTime="12/07/2011 16:32:40" />
+    <file relUrl="Scripts/jquery.validate.unobtrusive.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="bin/System.Web.WebPages.Razor.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Areas/UserSettings/Views/UserSettings/Delete.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="bin/de/RQResources.resources.dll" publishTime="10/25/2012 18:18:46" />
+    <file relUrl="Areas/UserManagement/Views/UserManagement/Index.cshtml" publishTime="10/10/2012 12:25:56" />
+    <file relUrl="Views/RQItems/DisplRQItem.cshtml" publishTime="09/30/2012 12:22:54" />
+    <file relUrl="bin/EntityFramework.xml" publishTime="08/23/2011 14:10:14" />
+    <file relUrl="Images/RQFTCollection.jpg" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Content/themes/base/jquery.ui.button.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/EntityFramework.dll" publishTime="08/23/2011 14:10:14" />
+    <file relUrl="xml/extdblist.xml" publishTime="12/20/2009 15:51:14" />
+    <file relUrl="Images/ajax-loader.gif" publishTime="04/26/2012 17:37:35" />
+    <file relUrl="Images/icon_pictures.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="bin/Lucene.Net.pdb" publishTime="08/27/2009 12:42:38" />
+    <file relUrl="xslt/RQI2RQ.xslt" publishTime="07/15/2012 21:13:32" />
+    <file relUrl="Content/themes/base/jquery.ui.dialog.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="Content/themes/base/jquery.ui.progressbar.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="bin/Newtonsoft.Json.Net35.dll" publishTime="07/22/2011 15:39:02" />
+    <file relUrl="bin/HtmlAgilityPack.dll" publishTime="07/07/2010 09:27:06" />
+    <file relUrl="Areas/Scripts/jquery.tablesorter.min.js" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="bin/System.Web.Helpers.dll" publishTime="01/05/2011 14:45:38" />
+    <file relUrl="Images/icon_listview.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="08/23/2011 14:10:13" />
+    <file relUrl="Content/Site.css" publishTime="05/09/2012 11:50:13" />
+    <file relUrl="xslt/ViewTransforms/RQItemFields.xslt" publishTime="05/20/2012 17:49:42" />
+    <file relUrl="Images/icon_websource.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/dynatree-1.2.0/skin-vista/icons.gif" publishTime="11/23/2011 10:07:43" />
+    <file relUrl="Views/RQKos/ServRQKos.cshtml" publishTime="08/17/2012 13:14:25" />
+    <file relUrl="bin/System.Web.Mvc.dll" publishTime="01/05/2011 16:42:16" />
+    <file relUrl="Images/icon_map.gif" publishTime="10/23/2011 10:42:12" />
+    <file relUrl="Scripts/modernizr-1.7.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Areas/Scripts/tablesorter-style.css" publishTime="10/10/2012 11:19:43" />
+    <file relUrl="bin/WebMatrix.Data.xml" publishTime="12/19/2010 22:59:38" />
+    <file relUrl="Scripts/jquery.unobtrusive-ajax.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Views/Account/LogOn.cshtml" publishTime="08/23/2011 14:10:03" />
+    <file relUrl="Content/themes/base/jquery.ui.base.css" publishTime="08/23/2011 14:10:12" />
+    <file relUrl="Scripts/modernizr-1.7.min.js" publishTime="07/05/2012 23:30:12" />
+    <file relUrl="Views/RQItems/EditorTemplates/text.cshtml" publishTime="03/03/2012 18:41:26" />
+    <file relUrl="bin/System.Web.WebPages.Deployment.xml" publishTime="12/20/2010 09:52:36" />
+  </publishProfile>
 </publishData>

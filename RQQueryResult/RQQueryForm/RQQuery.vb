@@ -7,6 +7,7 @@ Namespace RQQueryForm
 
 #Region "Private Members"
 
+        Private _id As Guid
         Private _queryString As String = ""
         Private _queryType As QueryTypeEnum = QueryTypeEnum.form
         Private _DocId As String = ""
@@ -210,6 +211,13 @@ Namespace RQQueryForm
         End Enum
 
 
+        Public ReadOnly Property Id() As Guid
+            Get
+                Return Me._id
+            End Get
+        End Property
+
+
         Public Property QueryFieldList() As DataTable
             Get
                 Return _queryFieldList
@@ -386,6 +394,7 @@ Namespace RQQueryForm
                        Optional ByVal External As String = "", _
                        Optional ByVal Bookmarks As Boolean = False, _
                        Optional ByVal SortOrder As SortType = SortType.BySubject)
+            Me._id = Guid.NewGuid()
             Me.QueryString = Query
             Me.QueryTypeString = Type
             Me.QueryFieldList = QueryFields
