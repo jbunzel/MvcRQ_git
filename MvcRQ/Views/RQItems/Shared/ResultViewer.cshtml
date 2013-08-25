@@ -1,94 +1,10 @@
-﻿<script type="text/javascript">
-    $(document).ready(function () {
-        getResultList();
-    });
+﻿<link href="@Url.Content("~/Scripts/HtmlFactoryScripts/paging-style.css")" rel="stylesheet" type="text/css" />
 
-    function getResultList() {
-        var c = cleanUrl() + "?verb=QueryList";
-        
-        $("#htmlList").fadeOut(800);
-        $.ajax({
-            url: c,
-            type: "GET",
-            data: null,
-            dataType: "html",
-            success: function (data) {
-                renderHtmlList(data);
-            },
-            error: function (xhr) {
-                alert(xhr.responseText);
-            }
-        });
-    }
-
-    function renderHtmlList(data) {
-        $("#htmlList").html(data);
-        $("#htmlList").fadeIn(400);
-    }
-
-    function renderXmlList(data, domElementID) {
-        var xml = window.ActiveXObject ? data.xml : (new XMLSerializer().serializeToString(data));
-
-        $("#" + domElementID).transform({ xmlstr: xml, xsl: HostAdress() + "/xslt/ViewTransforms/RQI2SingleItemView.xslt" });
-    }
-
-    function renderFieldContent(data, domElementID) {
-        var xml = window.ActiveXObject ? data.xml : (new XMLSerializer().serializeToString(data));
-
-        $("#" + domElementID).transform({ xmlstr: xml, xsl: HostAdress() + "/xslt/ViewTransforms/RQItemFields.xslt" });
-    }
-
-    function getRQItem(docno, newDomElementID, oldDomElementID) {
-        if ($("#" + newDomElementID).is(":empty")) {
-            $("#" + newDomElementID).html("<div id='loading'><img src='" + HostAdress() + "/images/ajax-loader.gif' alt='Please Wait' /></div>");
-            $.ajax({
-                url: cleanUrl() + "/" + docno + "?verb=QueryItem",
-                type: "GET",
-                data: null,
-                dataType: "xml",
-                success: function (data) {
-                    renderXmlList(data, newDomElementID);
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.responseText);
-                    $("#" + newDomElementID).html("");
-                }     
-            });
-        }
-        $("#" + oldDomElementID).toggle();
-        $("#" + newDomElementID).toggle("slow");
-    }
-
-    function call(path) {
-        window.location = HostAdress() + "/" + path;
-    }
-
-    function callAjax(path, domElementID) {
-        $.ajax({
-            url: path,
-            type: "GET",
-            data: null,
-            dataType: "xml",
-            success: function (data) {
-                renderFieldContent(data, domElementID);
-            }
-        });
-    }
-
-    function visibilityToggle(id) {
-        $("#" + id).slideToggle("slow");
-    }
-
-    function cleanUrl() {
-        var d = document.location.href;
-        if (d.indexOf("?") != -1) {
-            return d.substring(0, d.indexOf("?"))
-        }
-        else {
-            return d;
-        }
-    }
-
+<script src="@Url.Content("~/Scripts/HtmlFactoryScripts/result-viewer.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/HtmlFactoryScripts/rqui-helpers.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.pajinate.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    var docNo = @Html.Raw(Json.Encode(@ViewBag.docNo));
+    var getrqitemverb = @Html.Raw(Json.Encode(@ViewBag.GetRQItemVerb));
 </script>
-<div id="htmlList"></div>
- 
+<div id="htmlList" class="rq-result-box"></div>

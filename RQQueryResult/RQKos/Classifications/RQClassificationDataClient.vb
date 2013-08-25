@@ -34,6 +34,7 @@
             theClass.NrOfSubClasses = drRow.SubClassCount
             'STRANGE ERROR: If drRow.DirRefCount is DBNull or Nothing (depending of RQDataSet-Properties) if taken from a stored value in _mqQuery.GetRecordByID
             theClass.NrOfRefLinks = IIf(String.IsNullOrEmpty(drRow.DirRefCount), 0, drRow.DirRefCount)
+            theClass.SetComplete()
         End Sub
 
 

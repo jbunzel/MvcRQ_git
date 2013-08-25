@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug %28JBCOMPUTER%29|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\MvcRQ.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'test|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -15,6 +30,15 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,6 +72,9 @@
     <PackageAsSingleFile>true</PackageAsSingleFile>
     <DesktopBuildPackageLocation>obj\Debug\Package\riquest.zip</DesktopBuildPackageLocation>
     <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+    <ExcludeApp_Data>true</ExcludeApp_Data>
+    <PrecompileBeforePublish>false</PrecompileBeforePublish>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -91,7 +118,7 @@
     <PublishDatabaseSettings>
       <Objects>
         <ObjectGroup Name="ApplicationServices-Bereitstellung" Order="1" xmlns="">
-          <Destination Path="Data Source=mssql.area-23.server-home.net%3bInitial Catalog=dnn_7a4111dba429d8%3bUser Id=jbunzel%3bPassword=prokyon%3b" />
+          <Destination Path="Data Source=mssql.area-36.server-home.net%3bInitial Catalog=dnn_7a4111dba429d8%3bUser Id=juergen_bunzel%3bPassword=xaaBdG%25E6F_A" />
           <Object Type="dbFullSql">
             <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|aspnetdb.mdf%3bInitial Catalog=aspnetdb.mdf%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
             <Source Path="obj\DomainBox\AutoScripts\ApplicationServices-Bereitstellung_SchemaAndData.sql" Transacted="True" />
@@ -111,7 +138,8 @@
     <WarningLevel>4</WarningLevel>
     <PackageAsSingleFile>true</PackageAsSingleFile>
     <DeployIisAppPath>/subdomains/mvcrq</DeployIisAppPath>
-    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+    <ExcludeApp_Data>true</ExcludeApp_Data>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'JBCOMPUTER|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -160,10 +188,13 @@
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RouteDebugger">
+      <HintPath>..\packages\routedebugger.2.1.4.0\lib\net40\RouteDebugger.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -193,12 +224,28 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\DigitalObjects\Controllers\ImportController.cs" />
+    <Compile Include="Areas\DigitalObjects\Controllers\ViewerController.cs" />
+    <Compile Include="Areas\DigitalObjects\DigitalObjectsAreaRegistration.cs" />
+    <Compile Include="Areas\DigitalObjects\Helpers\DigitalObjectHelpers.cs" />
+    <Compile Include="Areas\DigitalObjects\Models\TocViewModel.cs" />
+    <Compile Include="Areas\ItemViewer\Controllers\ItemViewerController.cs" />
+    <Compile Include="Areas\ItemViewer\ItemViewerAreaRegistration.cs" />
+    <Compile Include="Areas\ItemViewer\ItemViewerHtml.cs" />
+    <Compile Include="Areas\ItemViewer\Models\AudioModel.cs" />
+    <Compile Include="Areas\ItemViewer\Models\ItemViewerModel.cs" />
+    <Compile Include="Areas\ItemViewer\Models\VideoModel.cs" />
+    <Compile Include="Areas\ItemViewer\Scripts\ScriptPack.Designer.cs" />
+    <Compile Include="Areas\LinkedDataCalls\Controllers\LinkedDataCallsController.cs" />
+    <Compile Include="Areas\LinkedDataCalls\Helpers\ILinkedDataService.cs" />
+    <Compile Include="Areas\LinkedDataCalls\Helpers\LinkedDataService.cs" />
+    <Compile Include="Areas\LinkedDataCalls\LinkedDataCallsAreaRegistration.cs" />
     <Compile Include="Areas\MyHtml.cs" />
     <Compile Include="Areas\MyJsonResult.cs" />
     <Compile Include="Areas\Scripts\ScriptPack.Designer.cs">
-      <DependentUpon>ScriptPack.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>ScriptPack.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\UserManagement\Controllers\UserManagementController.cs" />
     <Compile Include="Areas\UserManagement\Helper\AccountValidation.cs" />
@@ -222,8 +269,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AccessRightsResolver.cs" />
     <Compile Include="Helpers\CacheManager.cs" />
     <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\HtmlFactory.cs" />
     <Compile Include="Helpers\RouteConstraints.cs" />
     <Compile Include="Helpers\RQAuthorize.cs" />
     <Compile Include="Helpers\RQCustomModelBinders.cs" />
@@ -232,6 +281,11 @@
     <Compile Include="Models\RQItemsModel.cs" />
     <Compile Include="Models\RQKosModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\HtmlFactoryScripts\ScriptPack.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScriptPack.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\aspnetdb.mdf" />
@@ -239,6 +293,42 @@
       <DependentUpon>aspnetdb.mdf</DependentUpon>
     </Content>
     <Content Include="App_Data\settings.mdf" />
+    <Content Include="App_Data\settings_log.ldf">
+      <DependentUpon>settings.mdf</DependentUpon>
+    </Content>
+    <Content Include="Areas\ItemViewer\Scripts\audio_player.html" />
+    <Content Include="Areas\ItemViewer\Scripts\audio_playlist.html" />
+    <Content Include="Areas\ItemViewer\Scripts\item_viewer_bib_info.html" />
+    <Content Include="Areas\ItemViewer\Scripts\jplayer.playlist.js" />
+    <Content Include="Areas\ItemViewer\Scripts\jplayer.playlist.min.js" />
+    <Content Include="Areas\ItemViewer\Scripts\jquery.jplayer.inspector.js" />
+    <Content Include="Areas\ItemViewer\Scripts\jquery.jplayer.js" />
+    <Content Include="Areas\ItemViewer\Scripts\jquery.jplayer.min.js" />
+    <Content Include="Areas\ItemViewer\Scripts\jquery.media.js" />
+    <Content Include="Areas\ItemViewer\Scripts\jquery_audio_player.js" />
+    <Content Include="Areas\ItemViewer\Scripts\jquery_item_viewer.js" />
+    <Content Include="Areas\ItemViewer\Scripts\jquery_video_player.js" />
+    <Content Include="Areas\ItemViewer\Scripts\specialstyle.css" />
+    <Content Include="Areas\ItemViewer\Scripts\style.css" />
+    <Content Include="Areas\ItemViewer\Scripts\video_player.html" />
+    <Content Include="Areas\ItemViewer\Skins\blue.monday\jplayer.blue.monday.css" />
+    <Content Include="Areas\ItemViewer\Skins\blue.monday\jplayer.blue.monday.jpg" />
+    <Content Include="Areas\ItemViewer\Skins\blue.monday\jplayer.blue.monday.seeking.gif" />
+    <Content Include="Areas\ItemViewer\Skins\blue.monday\jplayer.blue.monday.video.play.png" />
+    <Content Include="Areas\ItemViewer\Skins\circle.skin\bgr.jpg" />
+    <Content Include="Areas\ItemViewer\Skins\circle.skin\buffer.png" />
+    <Content Include="Areas\ItemViewer\Skins\circle.skin\circle.player.css" />
+    <Content Include="Areas\ItemViewer\Skins\circle.skin\controls.jpg" />
+    <Content Include="Areas\ItemViewer\Skins\circle.skin\progress.png" />
+    <Content Include="Areas\ItemViewer\Skins\circle.skin\progress_sprite.jpg" />
+    <Content Include="Areas\ItemViewer\Skins\pink.flag\jplayer.pink.flag.css" />
+    <Content Include="Areas\ItemViewer\Skins\pink.flag\jplayer.pink.flag.jpg" />
+    <Content Include="Areas\ItemViewer\Skins\pink.flag\jplayer.pink.flag.seeking.gif" />
+    <Content Include="Areas\ItemViewer\Skins\pink.flag\jplayer.pink.flag.video.play.png" />
+    <Content Include="Content\images\main_image.png" />
+    <None Include="Content\riquest.css" />
+    <Content Include="Content\pure-0.2.0\pure-min.css" />
+    <Content Include="js\Jplayer.swf" />
     <Content Include="Areas\Scripts\add-user-form.html" />
     <Content Include="Areas\Scripts\imclude-external-db-form.html" />
     <Content Include="Areas\Scripts\jquery.tablesorter.min.js" />
@@ -250,33 +340,22 @@
     <Content Include="Areas\Scripts\tablesorter-pager.js" />
     <Content Include="Areas\Scripts\tablesorter-style.css" />
     <Content Include="Areas\Scripts\user-table-area.html" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
-    <Content Include="Content\themes\base\jquery.ui.all.css" />
-    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
-    <Content Include="Content\themes\base\jquery.ui.base.css" />
-    <Content Include="Content\themes\base\jquery.ui.button.css" />
-    <Content Include="Content\themes\base\jquery.ui.core.css" />
-    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
-    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
-    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
-    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
-    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
-    <Content Include="Content\themes\base\jquery.ui.slider.css" />
-    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
-    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\animated-overlay.gif" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\jquery-ui-1.10.1.custom.css" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\jquery-ui-1.10.1.custom.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\clearpixel.gif" />
@@ -321,18 +400,27 @@
     <Content Include="Scripts\dynatree-1.2.0\skin\loading.gif" />
     <Content Include="Scripts\dynatree-1.2.0\skin\ui.dynatree.css" />
     <Content Include="Scripts\dynatree-1.2.0\skin\vline.gif" />
+    <Content Include="Scripts\HtmlFactoryScripts\classtree-style.css" />
+    <Content Include="Scripts\HtmlFactoryScripts\edit-rqitem-style.css" />
+    <Content Include="Scripts\HtmlFactoryScripts\edit-rqitem-code.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\result-viewer.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\rqui-helpers.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.11.js" />
-    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\JQuery-UI\jquery-ui-1.10.1.custom.js" />
+    <Content Include="Scripts\JQuery-UI\jquery-ui-1.10.1.custom.min.js" />
     <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.pajinate.js" />
+    <Content Include="Scripts\jquery.pajinate.min.js" />
     <Content Include="Scripts\jquery.transform.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jsrender.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\paging-style.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -344,7 +432,6 @@
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -355,7 +442,7 @@
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
-    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="xml\_ViewStart.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
     <Content Include="Views\Account\LogOn.cshtml" />
@@ -364,7 +451,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -387,10 +473,18 @@
     <Content Include="xslt\RQKos2RDF.xslt">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="xslt\ViewTransforms\RQResultList2RQSorted_Paging.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\ViewTransforms\RQI2ShortTitleView.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="xslt\ViewTransforms\RQI2SingleItemView.xslt">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="xslt\ViewTransforms\RQItemFields.xslt" />
+    <Content Include="xslt\ViewTransforms\RQItemFields.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="xslt\ViewTransforms\RQResultList2RQSorted.xslt">
       <SubType>Designer</SubType>
     </Content>
@@ -412,6 +506,28 @@
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Web.Debug %28JBCOMPUTER%29.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Areas\LinkedDataCalls\Views\Web.config" />
+    <Content Include="Areas\ItemViewer\Views\ItemViewer\AudioPlayer.cshtml" />
+    <Content Include="Areas\ItemViewer\Views\ItemViewer\Index.cshtml" />
+    <Content Include="Areas\ItemViewer\Views\ItemViewer\VideoPlayer.cshtml" />
+    <Content Include="Areas\ItemViewer\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ItemViewer\Views\Web.config" />
+    <Content Include="Areas\ItemViewer\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\DigitalObjects\Views\Web.config" />
+    <None Include="Properties\PublishProfiles\DomainBox_mvc.riquest.net.pubxml" />
+    <None Include="Properties\PublishProfiles\ECS_mvc.riquest.de.pubxml" />
+    <None Include="Properties\PublishProfiles\JBCOMPUTER.pubxml" />
+    <None Include="Properties\PublishProfiles\LOCALHOST.pubxml" />
+    <None Include="Properties\PublishProfiles\OEMCOMPUTER.pubxml" />
+    <Content Include="Views\RQItems\ClientEditor.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\RQItems\Index.cshtml" />
+    <Content Include="Views\RQItems\Shared\ClientEditViewer.cshtml" />
+    <Content Include="Views\Account\SmallLogOn.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.xml" />
     <None Include="_bin_deployableAssemblies\NuGet.Core.dll" />
@@ -431,9 +547,15 @@
     <None Include="_bin_deployableAssemblies\WebMatrix.WebData.dll" />
     <None Include="_bin_deployableAssemblies\WebMatrix.WebData.xml" />
     <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
+    <Content Include="xslt\ViewTransforms\RQResultList2RQShelf.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="~db\katalog30.mdb" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\DigitalObjects\Views\Shared\" />
+    <Folder Include="Areas\LinkedDataCalls\Models\" />
+    <Folder Include="Areas\LinkedDataCalls\Views\Shared\" />
     <Folder Include="Areas\UserManagement\Models\" />
     <Folder Include="Areas\UserManagement\Views\Shared\" />
   </ItemGroup>
@@ -448,6 +570,10 @@
     <ProjectReference Include="..\MvpRestApiLib\MvpRestApiLib.csproj">
       <Project>{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}</Project>
       <Name>MvpRestApiLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQDigitalObjects\RQDigitalObjects.csproj">
+      <Project>{97CFD688-BBEA-47F5-90FC-718DCD1CFD71}</Project>
+      <Name>RQDigitalObjects</Name>
     </ProjectReference>
     <ProjectReference Include="..\RQLinkedData\RQLinkedData.csproj">
       <Project>{182ED3FC-0121-4A3F-9F79-B8C5782BB755}</Project>
@@ -465,9 +591,6 @@
       <Project>{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}</Project>
       <Name>RQState</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\RQItems\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\RQItems\Shared\XmlViewer.cshtml" />
@@ -511,13 +634,23 @@
     <None Include="~db\RQLucene\CATALOG\_1c6.cfs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\ItemViewer\Scripts\ScriptPack.resx" />
     <EmbeddedResource Include="Areas\Scripts\ScriptPack.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\HtmlFactoryScripts\ScriptPack.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -535,7 +668,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55834</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/MvcRQ</IISUrl>
+          <IISUrl>http://admin-pc/MvcRQ</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

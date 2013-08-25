@@ -16,6 +16,8 @@ namespace MvcRQ.Areas
     const string _styleSheetBlock = "<style type='text/css'>{0}</style>";
     const string _javascriptBlock = "<script type='text/javascript'>{0}</script>";
 
+    #region UserManagement_HTML
+    
     /// <summary>
     /// Generates the user html table code.
     /// </summary>
@@ -64,6 +66,10 @@ namespace MvcRQ.Areas
       return new HtmlString(builder.ToString());
     }
 
+#endregion
+
+    #region UserSettings_HTML
+
     /// <summary>
     /// Required: Builds javascript blocks for setting of query option .
     /// </summary>
@@ -88,6 +94,10 @@ namespace MvcRQ.Areas
         return new HtmlString(Html);
     }
 
+    #endregion
+
+    #region General_HTML
+
     /// <summary>
     /// (optional) Builds a table styling css block. Could be used as starting point for custom styles. Optional, put in head section.
     /// </summary>
@@ -110,5 +120,7 @@ namespace MvcRQ.Areas
      
       return new HtmlString(styleBlock);
     }
+
+    #endregion
   }
 }

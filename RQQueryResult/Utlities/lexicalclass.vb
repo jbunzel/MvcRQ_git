@@ -414,14 +414,16 @@ Namespace Utilities
 #Region "Constructors"
 
         Public Sub New(ByVal strClassString As String)
-            Dim ClassElements As String() = strClassString.Trim.Split(";"c)
-            Dim i As Integer
+            If Not String.IsNullOrEmpty(strClassString) Then
+                Dim ClassElements As String() = strClassString.Trim.Split(";"c)
+                Dim i As Integer
 
-            For i = 0 To ClassElements.Length - 1
-                If Not IsNothing(ClassElements(i)) And ClassElements(i).Trim.Length > 0 Then
-                    _ClassCodes.Add(ClassElements(i).Trim())
-                End If
-            Next
+                For i = 0 To ClassElements.Length - 1
+                    If Not IsNothing(ClassElements(i)) And ClassElements(i).Trim.Length > 0 Then
+                        _ClassCodes.Add(ClassElements(i).Trim())
+                    End If
+                Next
+            End If
         End Sub
 
 #End Region

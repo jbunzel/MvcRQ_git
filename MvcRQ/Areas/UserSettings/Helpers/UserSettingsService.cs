@@ -42,7 +42,7 @@ namespace MvcRQ.Areas.UserSettings
 
       protected QueryOptions GetQueryOptions()
       {
-          MembershipUser user = null; // Membership.GetUser();
+          MembershipUser user = Membership.GetUser();
           Guid ui;
           QueryOptions qo;
 
@@ -128,6 +128,11 @@ namespace MvcRQ.Areas.UserSettings
               qo.Databases.Remove(udb);
           }
           db.SaveChanges();
+      }
+
+      public ImportOptions GetImportOptions()
+      {
+          return new ImportOptions();
       }
    }
 }

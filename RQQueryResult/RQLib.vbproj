@@ -80,6 +80,22 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug %28JBCOMPUTER%29|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug %28JBCOMPUTER%29\</OutputPath>
+    <DocumentationFile>RQLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'test|AnyCPU'">
+    <OutputPath>bin\test\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Lucene.Net">
       <HintPath>..\..\rq\Bin\Lucene.Net.dll</HintPath>
@@ -116,7 +132,13 @@
     <Compile Include="RQKos\Classifications\Classification.vb" />
     <Compile Include="RQKos\Classifications\LDClassificationDataClient.vb" />
     <Compile Include="RQKos\Classifications\RQClassificationDataClient.vb" />
-    <Compile Include="RQLD\RQSkosGraph.vb" />
+    <Compile Include="RQKos\Persons\PersonDataClient.vb" />
+    <Compile Include="RQKos\Persons\LDPersonDataClient.vb" />
+    <Compile Include="RQKos\Persons\Person.vb" />
+    <Compile Include="RQKos\Persons\RQPersonDataClient.vb" />
+    <Compile Include="RQLD\RQClassificationGraph.vb" />
+    <Compile Include="RQLD\RQLDGraph.vb" />
+    <Compile Include="RQLD\RQPersonGraph.vb" />
     <Compile Include="RQLucene\Indexer.vb" />
     <Compile Include="RQLucene\OleDBIndexer.vb" />
     <Compile Include="RQLucene\Searcher.vb" />
@@ -136,7 +158,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RQDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="RQResult\RQItemElements\RQDescriptionElements\ComponentDataClient.vb" />
+    <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQAuthors.vb" />
+    <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQDescriptionComponent.vb" />
     <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQClassification.vb" />
+    <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQArrayDescriptionElement.vb" />
     <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQDescriptionElement.vb" />
     <Compile Include="RQResult\RQResultItem.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

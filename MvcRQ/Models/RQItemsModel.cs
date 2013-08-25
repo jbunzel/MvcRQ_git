@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,10 @@ using System.Runtime.Serialization;
 using RQLib.RQQueryResult;
 using RQLib.RQQueryResult.RQDescriptionElements;
 using RQLib.RQQueryForm;
+
+using MvcRQ.Helpers;
+using MvcRQ.Areas.DigitalObjects.Helpers;
+
 
 namespace MvcRQ.Models
 {
@@ -24,7 +29,7 @@ namespace MvcRQ.Models
         #endregion
 
         #region public constructors
-        
+
         public RQItemModel(RQquery query, bool forEdit)
         {
             RQItems = new RQItemSet(forEdit);
@@ -53,7 +58,17 @@ namespace MvcRQ.Models
 
         public RQItem Add(RQItem newItem)
         {
-            return this.RQItems.Add(newItem);
+            RQItem theItem = this.RQItems.Add(newItem);
+
+            try
+            {
+                if (newItem.ClassificationFieldContent != "")
+                    theItem.SetSavedFieldValue("Classification", "$$EMPTY$$");
+                if (newItem.Abstract.Substring(newItem.Abstract.IndexOf("$$TOC$$=")) != "")
+                    theItem.SetSavedFieldValue("TOC", "$$TOC$$=$$EMPTY$$");
+            }
+            catch { }
+            return theItem;
         }
 
         public void Update()
@@ -61,12 +76,11 @@ namespace MvcRQ.Models
             try
             {
                 this.RQItems.Update();
-                //TODO: RQItems.Update() does not care for update of table "Systematik" (former updateClassRelations)
 	        }
-	        catch (Exception)
+	        catch (Exception ex)
 	        {
-		        throw;
-	        }
+                throw new Exception(ex.Message, ex.InnerException);
+            }
         }
 
         #endregion
@@ -79,7 +93,29 @@ namespace MvcRQ.Models
         #region private members
 
         private RQResultSet ItemResultSet;
+        private List<RQItem> _rqitemsList = null;
 
+        #endregion
+
+        #region private methods
+
+        private void BuildRQItemList()
+        {
+            this._rqitemsList = null;
+            if (count > 0)
+            {
+                List<RQItem> li = new List<RQItem>(count);
+
+                for (int i = 0; i < count; i++)
+                {
+                    RQItem rqi = this.GetItem(i);
+
+                    if (MvcRQ.Helpers.AccessRightsResolver.HasViewAccess(rqi.AccessRights))
+                        li.Add(rqi);
+                }
+                this._rqitemsList = li;
+            }
+        }
         #endregion
 
         #region public properties
@@ -98,17 +134,39 @@ namespace MvcRQ.Models
         {
             get
             {
-                List<RQItem> li = new List<RQItem>(count);
+                if (this._rqitemsList == null)
+                    this.BuildRQItemList();
+                return this._rqitemsList;
 
-                for (int i = 0; i < count; i++ )
-                    li.Add(this.GetItem(i));
-                return li;
+                // List<RQItem> li = new List<RQItem>(count);
+
+                // for (int i = 0; i < count; i++)
+                // {
+                //     RQItem rqi = this.GetItem(i);
+
+                //     if (MvcRQ.Helpers.AccessRightsResolver.HasViewAccess(rqi.AccessRights))
+                //         li.Add(rqi);
+                // }
+                //return li;
             }
-
             set
             {
             }
         }
+
+        //[DataMember]
+        //[DataType(DataType.Text)]
+        //public string AccessRights
+        //{
+        //    get
+        //    {
+        //        return "TEST"; //MvcRQ.Helpers.AccessRightsResolver.ResolveItemAccessRights(this._resultItem.ItemDescription.Feld32);
+        //    }
+        //    set
+        //    {
+        //        this._resultItem.ItemDescription.Feld32 = value;
+        //    }
+        //}
 
         #endregion
 
@@ -118,8 +176,9 @@ namespace MvcRQ.Models
         {
             ItemResultSet = new RQResultSet(forEdit);
         }
-        
-        public RQItemSet() :base()
+
+        public RQItemSet()
+            : base()
         {
             ItemResultSet = new RQResultSet();
         }
@@ -140,17 +199,61 @@ namespace MvcRQ.Models
 
         public RQItem GetItem(int i)
         {
-            return new RQItem(ItemResultSet.GetItem(i));
+            if (this._rqitemsList == null)
+            {
+                RQResultItem t1 = ItemResultSet.GetItem(i);
+                RQItem t2 = new RQItem(ItemResultSet.GetItem(i));
+
+                return t2;
+            }
+            else
+                return this.RQItems.ElementAt(i);
+            //return new RQItem(ItemResultSet.GetItem(i));
         }
 
         public void Update()
         {
             this.ItemResultSet.Update();
+            if (this.UpdateDigitalObjectToC())
+                this.ItemResultSet.Update();
+            this.UpdateClassRelation();
+        }
+
+        public void UpdateClassRelation()
+        {
+            foreach (RQItem theItem in this.RQItems)
+                theItem.UpdateClassRelation(this.ItemResultSet);
+        }
+
+        public bool UpdateDigitalObjectToC()
+        {
+            bool result = false;
+
+            foreach (RQResultItem theItem in this.ItemResultSet)
+            {
+                var str1 = theItem.ItemDescription.Abstract;
+                var str2 = theItem.ItemDescription.Signature;
+                
+                if (result = (result || DigitalObjectHelpers.UpdateDigitalObjectDirectory(theItem.ItemDescription.DocNo, ref str1, ref str2, theItem.Write())))
+                {
+                    theItem.ItemDescription.Abstract = str1;
+                    theItem.ItemDescription.Signature = str2;
+                }
+            }
+            return result;
         }
 
         public void Find(RQquery query)
         {
-            this.ItemResultSet.Find(query);
+            try
+            {
+                this.ItemResultSet.Find(query);
+                this.BuildRQItemList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public System.Xml.XmlTextReader ConvertTo(string format, int fromRecord, int maxRecord)
@@ -196,7 +299,7 @@ namespace MvcRQ.Models
 
         #region public constructors
 
-        public RQItemSetEnum( RQItemSet itemSet)
+        public RQItemSetEnum(RQItemSet itemSet)
         {
             _itemSet = itemSet;
             _curIndex = -1;
@@ -253,8 +356,88 @@ namespace MvcRQ.Models
     {
         #region internal members
 
-        internal RQResultItem _resultItem {get; set; }
-        
+        internal RQResultItem _resultItem { get; set; }
+        internal StringDictionary _savedFieldValues = new StringDictionary();
+
+        #endregion
+
+        #region public members
+
+        public enum DisplFormat
+        {
+            single_item,
+            short_title
+        }
+
+        public enum DataFormat
+        {
+            intern,
+            dc
+        }
+
+        #endregion
+
+        #region private methods
+
+        private RQDescriptionElement GetDescriptionElement(string fieldName)
+        {
+            System.Reflection.PropertyInfo info = this._resultItem.ItemDescription.GetType().GetProperty(fieldName);
+            object o = info.GetValue(this._resultItem.ItemDescription, null);
+
+            if (o.GetType().IsSubclassOf(typeof(RQDescriptionElement)))
+                return (RQDescriptionElement)o;
+            else
+                return null;
+        }
+
+        private Object LoadLinkedData(RQDescriptionElement descriptionElement, int subFieldIndex)
+        {
+            if (descriptionElement != null)
+            {
+                switch (descriptionElement.GetType().Name)
+                {
+                    case "RQClassification":
+                        RQClassification cl = (RQClassification)descriptionElement;
+
+                        if (cl.items[subFieldIndex] != null)
+                        {
+                            RQLib.RQKos.Classifications.SubjClass sc = (RQLib.RQKos.Classifications.SubjClass)cl.items[subFieldIndex];
+
+                            if (!cl.IsLinkedDataEnabled && !sc.IsComplete)
+                            {
+                                sc.EnableLinkedData();
+                                sc.Load();
+                                sc.DisableLinkedData();
+                            }
+                            return sc;
+                        }
+                        else
+                            return null;
+                    case "RQAuthors":
+                        RQAuthors au = (RQAuthors)descriptionElement;
+
+                        if (au.items[subFieldIndex] != null)
+                        {
+                            RQLib.RQKos.Persons.Person per = (RQLib.RQKos.Persons.Person)au.items[subFieldIndex];
+
+                            if (!au.IsLinkedDataEnabled && !per.IsComplete)
+                            {
+                                per.EnableLinkedData();
+                                per.Load();
+                                per.DisableLinkedData();
+                            }
+                            return per;
+                        }
+                        else
+                            return au.items[au.count - 1];
+
+                    default:
+                        return null;
+                }
+            }
+            return null;
+        }
+
         #endregion
 
         #region public properties
@@ -302,10 +485,39 @@ namespace MvcRQ.Models
             }
         }
 
+        //[DataMember]
+        //[DataType(DataType.MultilineText)]
+        //[XmlElement]
+        //public string Authors
+        //{
+        //    get
+        //    {
+        //        return this._resultItem.ItemDescription.Authors;
+        //    }
+        //    set
+        //    {
+        //        this._resultItem.ItemDescription.Authors = value;
+        //    }
+        //}
+
         [DataMember]
         [DataType(DataType.MultilineText)]
         [XmlElement]
         public string Authors
+        {
+            get
+            {
+                return this._resultItem.ItemDescription.Authors != null ? this._resultItem.ItemDescription.Authors.Content : "";
+            }
+            set
+            {
+                this._resultItem.ItemDescription.Authors = new RQAuthors(value);
+            }
+        }
+
+        [DataMember]
+        [XmlElement]
+        public RQAuthors AuthorsEntity
         {
             get
             {
@@ -731,10 +943,32 @@ namespace MvcRQ.Models
             }
             set
             {
-                this._resultItem.ItemDescription.Classification = new RQClassification(value);
+                this._resultItem.ItemDescription.Classification = new RQClassification();
+                this._resultItem.ItemDescription.Classification.Content = value;
             }
         }
 
+        [DataMember]
+        [DataType(DataType.Text)]
+        public string AccessRights
+        {
+            get
+            {
+                String t = this._resultItem.ItemDescription.Feld32;
+
+                if (t != null) t = t.Trim();
+                if (String.IsNullOrEmpty(t))
+                {
+                    this._resultItem.ItemDescription.Feld32 = AccessRightsResolver.EncodeAccessRights(this._resultItem.IsExternalItem() ? "EXTERNAL" : "");
+                    t = this._resultItem.ItemDescription.Feld32;
+                }
+                return AccessRightsResolver.ResolveItemAccessRights(AccessRightsResolver.DecodeAccessRights(t));
+            }
+            set
+            {
+                this._resultItem.ItemDescription.Feld32 = AccessRightsResolver.EncodeAccessRights(value);
+            }
+        }
         #endregion
 
         #region public constructors
@@ -749,66 +983,165 @@ namespace MvcRQ.Models
             this._resultItem = resultItem;
         }
 
+        public RQItem(string itemId)
+        {
+            //Die Suchfunktionen sind sehr umständlich. Wünschenswert wäre: viewItem = new RQResultSet().Find("$access$"+rqitemID).GetItem(0);
+            RQResultSet rs = new RQResultSet(true); //BUG: forEdit = true, da da die Lucene-Datenbank bei Suche nach DocNr keine Treffer liefert.
+            RQquery qr = new RQquery("$access$" + itemId, "form", new System.Data.DataTable());
+
+            qr.SetDefaultQueryFields();
+            rs.Find(qr);
+            this._resultItem = rs.GetItem(0);
+        }
+
         #endregion
 
         #region public methods
 
-        public void Change(System.Collections.Specialized.NameValueCollection fromFields)
+        public void Change(NameValueCollection fromFields)
         {
             this._resultItem.Change(fromFields);
         }
 
         public void Change(RQItem fromItem)
         {
+            string fromTocStr = "";
+            string toCStr = "";
+
+            if (fromItem.ClassificationFieldContent != this.ClassificationFieldContent)
+                this._savedFieldValues.Add("Classification", this.ClassificationFieldContent);
+            if ((fromTocStr = fromItem.GetToC()) != "") {
+                // if fromItem has ToC
+                if (((toCStr = this.GetToC()) != "") && (fromTocStr != toCStr))
+                    // store old Toc if different from new
+                    this._savedFieldValues.Add("TOC", this.GetToC());
+                fromItem.Signature = DigitalObjectHelpers.UpdatePrimaryAccessLink(fromItem.ID, fromTocStr, fromItem.Signature);
+            }
             this._resultItem.Change(fromItem._resultItem);
         }
 
-        public XmlTextReader ConvertTo(string format)
+        public void UpdateClassRelation(RQResultSet theResultSet)
         {
-           return this._resultItem.ConvertTo(format);
+            string oldClass = this._savedFieldValues["Classification"];
+
+            if (!string.IsNullOrEmpty(oldClass))
+            {
+                string msg = "";
+                string newClass = this.ClassificationFieldContent;
+
+                theResultSet.UpdateClassRelation(ref oldClass, ref newClass, ref msg);
+            }
         }
 
-        public RQDescriptionElement GetDescriptionElement(string fieldName)
+        public XmlTextReader ConvertTo(string dataFormat)
         {
-            System.Reflection.PropertyInfo info = this._resultItem.ItemDescription.GetType().GetProperty(fieldName);
-            object o = info.GetValue(this._resultItem.ItemDescription, null);
-
-            if (o.GetType().IsSubclassOf(typeof(RQDescriptionElement)))
-                return (RQDescriptionElement) o;
-            else
-                return null;
+            return this._resultItem.ConvertTo(dataFormat);
         }
 
-        public Object GetField(string fieldName, int subFieldIndex)
+        public string ConvertToHTML(DisplFormat format)
+        {
+            var dSer = new System.Runtime.Serialization.DataContractSerializer(this.GetType());
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            var xTrf = new System.Xml.Xsl.XslCompiledTransform();
+            var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
+            var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
+            var doc = new System.Xml.XmlDocument();
+            string xsltName = "";
+
+            switch (format)
+            {
+                case DisplFormat.single_item:
+                    xsltName = "~/xslt/ViewTransforms/RQI2SingleItemView.xslt";
+                    break;
+                case DisplFormat.short_title:
+                    xsltName = "~/xslt/ViewTransforms/RQI2ShortTitleView.xslt";
+                    break;
+                default:
+                    xsltName = "~/xslt/ViewTransforms/RQI2SingleItemView.xslt";
+                    break;
+            }
+            dSer.WriteObject(ms, this);
+            //TESTDATEI(EZEUGEN)
+            //XmlDocument Doc = new XmlDocument();
+            //ms.Seek(0, System.IO.SeekOrigin.Begin);
+            //Doc.Load(ms);
+            //Doc.Save("C:/MVCTest.xml");
+            //ENDE TESTDATEI 
+            System.IO.TextReader tr = new System.IO.StringReader(System.Text.Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
+            xTrf.Load(HttpContext.Current.Server.MapPath(xsltName));
+            xTrfArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
+            xTrfArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
+            xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), null, mstr);
+            mstr.BaseStream.Flush();
+            mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+            doc.Load(mstr.BaseStream);
+
+            //TESTDATEI EZEUGEN
+            //doc.Save("C:/MVCTest.xml");
+            //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+
+            var rd = new System.Xml.XmlTextReader(mstr.BaseStream);
+            return doc.OuterXml;
+        }
+
+        public Object GetLinkedData(string fieldName, int subFieldIndex)
         {
             RQDescriptionElement de = this.GetDescriptionElement(fieldName);
 
-            if (de != null)
+            return LoadLinkedData(de, subFieldIndex);
+        }
+
+        public void LoadLinkedData(string fieldName)
+        {
+            RQDescriptionElement de = GetDescriptionElement(fieldName);
+            int count = 1;
+
+            if (de.GetType().BaseType == typeof(RQArrayDescriptionElement))
+                count = ((RQArrayDescriptionElement)GetDescriptionElement(fieldName)).items.Count;
+            for (int i = 0; i < count; i++)
+                this.LoadLinkedData(de, i);
+        }
+
+        public string GetToC()
+        {
+            const string token = "$$TOC$$=";
+            string toc = "";
+
+            if (this.Abstract.Contains(token))
+                toc = this.Abstract;
+            if (this.Notes.Contains(token))
+                toc = this.Notes;
+            if (!string.IsNullOrEmpty(toc))
+                return toc.Substring(toc.IndexOf(token) + token.Length);
+            else
+                return "";
+        }
+
+        public string GetSavedFieldValue(string fieldName)
+        {
+            if (this._savedFieldValues.ContainsKey(fieldName))
+                return this._savedFieldValues[fieldName];
+            else
+                return "";
+        }
+
+        public string SetSavedFieldValue(string fieldName, string savedFieldValue)
+        {
+            string result = "";
+
+            if (this._savedFieldValues.ContainsKey(fieldName))
             {
-                switch (de.GetType().Name)
-                {
-                    case "RQClassification":
-                        RQClassification cl = (RQClassification)de;
-
-                        if (cl.items[subFieldIndex] != null)
-                        {
-                            RQLib.RQKos.Classifications.SubjClass sc = cl.items[subFieldIndex];
-
-                            if (!cl.IsLinkedDataEnabled)
-                            {
-                                sc.EnableLinkedData();
-                                sc.Load();
-                                sc.DisableLinkedData();
-                            }
-                            return sc;
-                        }
-                        else
-                            return cl.items[cl.count - 1];
-                    default:
-                        return de;
-                }
+                result = this._savedFieldValues[fieldName];
+                this._savedFieldValues[fieldName] = savedFieldValue;
             }
-            return null;
+            else
+                this._savedFieldValues.Add(fieldName, savedFieldValue);
+            return result;
+        }
+
+        public static Boolean IsExternal(string docNo)
+        {
+            return RQResultItem.IsExternalItem(docNo);
         }
 
         #endregion

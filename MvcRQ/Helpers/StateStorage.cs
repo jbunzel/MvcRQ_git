@@ -38,7 +38,7 @@ namespace MvcRQ.Helpers
             if (state == null)
             {
                 if (string.IsNullOrEmpty(queryString))
-                    query = new RQquery("Recent Additions", "recent");
+                    query = new RQquery("$recent$recent additions", "recent");
                 else
                     query = new RQquery(queryString);
                 state = new ViewState(stateType); //, queryString);
@@ -55,26 +55,20 @@ namespace MvcRQ.Helpers
                     querytest = queryString.Substring(0, queryString.LastIndexOf("$")+1) + query.QueryString;
                 else
                     querytest = query.QueryString;
-                if (   (! string.IsNullOrEmpty(queryString) && querytest != queryString) 
-                    || (query.QueryExternal == "" && us.GetIncludeExternal() == true) 
-                    || (query.QueryExternal != "" && us.GetIncludeExternal() == false) )
-                {
-                    query = new RQquery(! string.IsNullOrEmpty(queryString) ? queryString : query.QueryString);
-                    query.QueryExternal = us.GetIncludeExternal() == true ? "003" : "";
-                    //((RQquery)state.query).QueryString = queryString != "" ? queryString : query.QueryString;
-                    state.query = query;
-                    //state.Save();
-                }
-                //if (string.IsNullOrEmpty(queryString))
-                //    query = new RQquery((state.queryString == "" ? "Recent Additions" : state.queryString), (state.queryString == "" ? "recent" : (stateType == UserState.States.BrowseViewState ? "browse" : "form")));
-                //else
+                //if (   (! string.IsNullOrEmpty(queryString) && querytest != queryString) 
+                //    || (query.QueryExternal == "" && us.GetIncludeExternal() == true) 
+                //    || (query.QueryExternal != "" && us.GetIncludeExternal() == false) )
                 //{
-                //    query = new RQquery(queryString);
-                //    state.queryString = queryString;
-                //    state.Save();
+                //    query = new RQquery(! string.IsNullOrEmpty(queryString) ? queryString : query.QueryString);
+                //    query.QueryExternal = us.GetIncludeExternal() == true ? "003" : "";
+                //    state.query = query;
+                //    //state.Save();
                 //}
+                if (!string.IsNullOrEmpty(queryString) && querytest != queryString)
+                    query = new RQquery(! string.IsNullOrEmpty(queryString) ? queryString : query.QueryString);
+                query.QueryExternal = us.GetIncludeExternal() == true ? "003" : "";
+                state.query = query;
             }
-            //query.QueryExternal = new MvcRQUser.UserSettings.UserSettingsService().GetIncludeExternal() == true ? "003" : "";
             return query;
         }
     }

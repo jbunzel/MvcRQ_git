@@ -12,7 +12,7 @@ namespace MvcRQ.Areas.UserManagement
 
     protected override bool AuthorizeCore(System.Web.HttpContextBase httpContext)
     {
-      return Controllers.UserManagementController.IsRequestAuthorized;
+        return Controllers.UserManagementController.IsRequestAuthorized;
     }
 
   }

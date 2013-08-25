@@ -61,6 +61,12 @@ namespace MvpRestApiLib
                             var xTrf = new System.Xml.Xsl.XslCompiledTransform();
 
                             dSer.WriteObject(ms, this.Data);
+                            //TESTDATEI(EZEUGEN)
+                            //XmlDocument Doc = new XmlDocument();
+                            //ms.Seek(0, System.IO.SeekOrigin.Begin);
+                            //Doc.Load(ms);
+                            //Doc.Save("D:/MVCTest.xml");
+                            //ENDE TESTDATEI 
                             System.IO.TextReader tr = new System.IO.StringReader(Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
                             xTrf.Load(HttpContext.Current.Server.MapPath(XSLTransform));
                             xTrf.Transform(new System.Xml.XmlTextReader(tr), null, response.OutputStream);
@@ -76,15 +82,16 @@ namespace MvpRestApiLib
                         {
                             System.IO.MemoryStream ms = new System.IO.MemoryStream();
                             var xTrf = new System.Xml.Xsl.XslCompiledTransform();
-                            //var mstr = new XmlTextWriter(new System.IO.MemoryStream(), Encoding.UTF8);
 
-                            //xSer.Serialize(mstr, this.Data);
                             xSer.Serialize(ms, this.Data);
+                            //TESTDATEI(EZEUGEN)
+                            //XmlDocument Doc = new XmlDocument();
+                            //ms.Seek(0, System.IO.SeekOrigin.Begin);
+                            //Doc.Load(ms);
+                            //Doc.Save("C:/MVCTest.xml");
+                            //ENDE TESTDATEI 
                             System.IO.TextReader tr = new System.IO.StringReader(Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
                             xTrf.Load(HttpContext.Current.Server.MapPath(XSLTransform));
-                            //mstr.BaseStream.Flush();
-                            //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-                            //xTrf.Transform(new System.Xml.XPath.XPathDocument(mstr.BaseStream), null, response.OutputStream);
                             xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), null, response.OutputStream);
                         }
                     }

@@ -84,7 +84,9 @@ namespace MvcRQ.Controllers
             if (verb == "New")
                 return View("NewRQKosItem", new RQKosItem());
             else if (verb == "dt")
+            {
                 return View("Index", GetModel(id, verb).RQKosSet);
+            }
             else
             {
                 RQKosModel model = GetModel(id);
@@ -95,10 +97,11 @@ namespace MvcRQ.Controllers
                 {
                     ViewBag.locPath = new RQLib.RQKos.Classifications.SubjClass(model.RQKosSet.GetItem(0)._class.ClassID, model.RQKosSet.GetItem(0)._class.ClassDataClient).ClassPath;
                 }
+                ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems ti the database.
+                ViewBag.GetRQItemVerb = "BrowseItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
                 return View(model.RQKosSet);
             }
         }
-        
 
         /// <summary>
         /// Controller action answering GET http-requests to a single RiQuest Knowledge Organisation System (KOS) Item.

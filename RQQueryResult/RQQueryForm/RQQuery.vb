@@ -280,7 +280,16 @@ Namespace RQQueryForm
                 End If
             End Get
             Set(ByVal value As String)
-                _queryType = Me.GetQueryTypeEnum(value)
+                '_queryType = Me.GetQueryTypeEnum(value)
+                If (_queryString.Length > 0) Then
+                    If _queryString.StartsWith("$") And _queryString.LastIndexOf("$") > 1 Then
+                        Me._queryType = Me.GetQueryTypeEnum(_queryString.Substring(1, _queryString.LastIndexOf("$") - 1))
+                    Else
+                        _queryType = Me.GetQueryTypeEnum(value)
+                    End If
+                Else
+                    _queryType = Me.GetQueryTypeEnum(value)
+                End If
             End Set
         End Property
 
@@ -298,7 +307,16 @@ Namespace RQQueryForm
                 End If
             End Get
             Set(ByVal value As QueryTypeEnum)
-                Me._queryType = value
+                'Me._queryType = value
+                If (_queryString.Length > 0) Then
+                    If _queryString.StartsWith("$") And _queryString.LastIndexOf("$") > 1 Then
+                        Me._queryType = Me.GetQueryTypeEnum(_queryString.Substring(1, _queryString.LastIndexOf("$") - 1))
+                    Else
+                        Me._queryType = value
+                    End If
+                Else
+                    Me._queryType = value
+                End If
             End Set
         End Property
 
@@ -429,7 +447,11 @@ Namespace RQQueryForm
             Select Case Syntax
                 Case QuerySyntax.SQL
                     If (Me.QueryTypeString = "tag") Then
-                        GetQueryCommand = "SELECT * FROM Dokumente WHERE (Dokumente.IndexTerms LIKE '" + Me.QueryString + ";%') OR (Dokumente.IndexTerms LIKE '%; " + Me.QueryString + ";%') OR (Dokumente.Subjects LIKE '" + Me.QueryString + ";%') OR (Dokumente.Subjects LIKE '%; " + Me.QueryString + ";%')"
+                        If String.IsNullOrEmpty(Me.QueryString) Then
+                            Throw New ArgumentOutOfRangeException("Query string missing. A query string is required for query type 'tag'.")
+                        Else
+                            GetQueryCommand = "SELECT * FROM Dokumente WHERE (Dokumente.IndexTerms LIKE '" + Me.QueryString + ";%') OR (Dokumente.IndexTerms LIKE '%; " + Me.QueryString + ";%') OR (Dokumente.Subjects LIKE '" + Me.QueryString + ";%') OR (Dokumente.Subjects LIKE '%; " + Me.QueryString + ";%')"
+                        End If
                     ElseIf (Me.QueryTypeString = "film") Then
                         GetQueryCommand = "SELECT * FROM Dokumente WHERE (Dokumente.Signature LIKE 'JB: VHS=%') or (Dokumente.Signature LIKE 'JB: DVD=%') OR (Dokumente.Signature LIKE 'JB: MyVideo=%') ORDER BY Dokumente.Signature ASC"
                     ElseIf (Me.QueryTypeString = "music") Then
@@ -445,9 +467,17 @@ Namespace RQQueryForm
                     ElseIf (Me.QueryTypeString = "digcollection") Then
                         GetQueryCommand = "SELECT * FROM Dokumente WHERE Dokumente.DocTypeName LIKE '%Digitale Dokumentsammlung%' ORDER BY Dokumente.Signature ASC"
                     ElseIf (Me.QueryTypeString = "browse") Or (Me.QueryTypeString = "class") Then
-                        GetQueryCommand = "SELECT * FROM Dokumente WHERE (Dokumente.Classification LIKE '" + Me.QueryString + ";%') OR (Dokumente.Classification LIKE '%; " + Me.QueryString + ";%')"
+                        If String.IsNullOrEmpty(Me.QueryString) Then
+                            Throw New ArgumentOutOfRangeException("Query string missing. A query string is required for query type '" + Me.QueryTypeString + "'.")
+                        Else
+                            GetQueryCommand = "SELECT * FROM Dokumente WHERE (Dokumente.Classification LIKE '" + Me.QueryString + ";%') OR (Dokumente.Classification LIKE '%; " + Me.QueryString + ";%')"
+                        End If
                     ElseIf (Me.QueryTypeString = "access") Then
-                        GetQueryCommand = "SELECT * FROM Dokumente WHERE Dokumente.DocNo LIKE '" + Me.QueryString + "%'"
+                        If Not String.IsNullOrEmpty(Me.QueryString) Then
+                            GetQueryCommand = "SELECT * FROM Dokumente WHERE Dokumente.DocNo LIKE '" + Me.QueryString + "%'"
+                        Else
+                            Throw New Exception("Query string missing. For this request a query string is mandatory.")
+                        End If
                     ElseIf (Me.QueryTypeString = "recent") Then
                         GetQueryCommand = "SELECT * FROM Dokumente WHERE Dokumente.Feld31 BETWEEN " + System.DateTime.Now.Date.AddMonths(-1).ToString("#MM-dd-yyyy#") + " AND " + System.DateTime.Now.Date.AddDays(+1).ToString("#MM-dd-yyyy#")
                     Else
@@ -455,7 +485,11 @@ Namespace RQQueryForm
                     End If
                 Case QuerySyntax.Lucene
                     If (Me.QueryTypeString = "tag") Then
-                        GetQueryCommand = "IndexTerms:" + Me.QueryString + " Subjects:" + Me.QueryString
+                        If String.IsNullOrEmpty(Me.QueryString) Then
+                            Throw New ArgumentOutOfRangeException("Query string missing. A query string is required for query type 'tag'.")
+                        Else
+                            GetQueryCommand = "IndexTerms:" + Me.QueryString + " Subjects:" + Me.QueryString
+                        End If
                     ElseIf (Me.QueryTypeString = "film") Then
                         GetQueryCommand = "Signature:VHS* OR Signature:DVD* OR Signature:MyVideo*"
                     ElseIf (Me.QueryTypeString = "music") Then
@@ -471,16 +505,36 @@ Namespace RQQueryForm
                     ElseIf (Me.QueryTypeString = "digcollection") Then
                         GetQueryCommand = "DocTypeName:'Digitale Dokumentsammlung'"
                     ElseIf (Me.QueryTypeString = "browse") Or (Me.QueryTypeString = "class") Then
-                        GetQueryCommand = "Classification:" + Me.QueryString
+                        If String.IsNullOrEmpty(Me.QueryString) Then
+                            Throw New ArgumentOutOfRangeException("Query string missing. A query string is required for query type '" + Me.QueryTypeString + "'.")
+                        Else
+                            GetQueryCommand = "Classification:" + Me.QueryString
+                        End If
                     ElseIf (Me.QueryTypeString = "access") Then
-                        GetQueryCommand = "DocNo:" + Me.QueryString
+                        If String.IsNullOrEmpty(Me.QueryString) Then
+                            Throw New ArgumentOutOfRangeException("Query string missing. A query string is required for query type 'access'.")
+                        Else
+                            GetQueryCommand = "DocNo:" + Me.QueryString
+                        End If
                     ElseIf (Me.QueryTypeString = "recent") Then
-                        GetQueryCommand = "Feld31:[" + Lucene.Net.Documents.DateField.DateToString(System.DateTime.Now.Date.AddMonths(-1)) + " TO " + Lucene.Net.Documents.DateField.DateToString(System.DateTime.Now.Date.AddDays(+1)) + "]"
+                        If String.IsNullOrEmpty(Me.QueryString) Then
+                            Throw New ArgumentOutOfRangeException("Query string missing. A query string is required for query type 'recent'.")
+                        Else
+                            GetQueryCommand = "Feld31:[" + Lucene.Net.Documents.DateField.DateToString(System.DateTime.Now.Date.AddMonths(-1)) + " TO " + Lucene.Net.Documents.DateField.DateToString(System.DateTime.Now.Date.AddDays(+1)) + "]"
+                        End If
                     Else
-                        GetQueryCommand = Me.QueryString
+                        If String.IsNullOrEmpty(Me.QueryString) Then
+                            Throw New ArgumentOutOfRangeException("Query string missing. A query string is required for this query type.")
+                        Else
+                            GetQueryCommand = Me.QueryString
+                        End If
                     End If
                 Case Else
-                    GetQueryCommand = Me.QueryString
+                        If String.IsNullOrEmpty(Me.QueryString) Then
+                            Throw New ArgumentOutOfRangeException("Query string missing. A query string is required for this query type.")
+                        Else
+                            GetQueryCommand = Me.QueryString
+                        End If
             End Select
         End Function
 

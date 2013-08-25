@@ -1,21 +1,51 @@
 ﻿@{
     ViewBag.Title = "RiQuest | Home";
 }
-
 <h2>@ViewBag.Message</h2>
-<p>
-    You have requested the HTML-Service of the RiQuest personal digital library. This is the catalog-view.
-</p>
-<p>
-@*        @using(Html.BeginForm("Index", "RQItems")){
-            @Html.TextBox("queryString", ViewData["qryStr"])
-            <input type="submit" value="Los!" />
-        }
-*@
-        @Html.Partial("~/Views/RQItems/Shared/SearchBoxView.cshtml")
-        @Html.Partial("~/Areas/UserSettings/Views/Shared/IncludeExternalView.cshtml")
-        View all the @Html.ActionLink("RQItems", "Index", "RQItems")
-        Add new @Html.ActionLink("RQItem", "Index", "RQItems", new { verb = "New" }, null);
-</p>
-<h3>RQItem List</h3>
-@Html.Partial("~/Views/RQItems/Shared/ResultViewer.cshtml")
+<div class="pure-g-r">
+    <div class="pure-u-1-5">
+        <div class="rq-sidebar rq-left-sidebar">
+            @Html.Partial("~/Views/RQItems/Shared/SearchBoxView.cshtml")
+            <div>
+                <div class="rq-settings-panel">
+                    <h3>
+                        Externe Datenbanken</h3>
+                    @Html.Partial("~/Areas/UserSettings/Views/Shared/IncludeExternalView.cshtml")
+                </div>
+                <div class="rq-settings-panel">
+                    <h3>
+                        Suchfelder</h3>
+                    <form>
+                    </form>
+                </div>
+                <div class="rq-settings-panel">
+                    <h3>
+                        Standard-Abfragen</h3>
+                    <ul>
+                        <li>@Html.ActionLink("View recent additions", "Index", "RQItems", new { queryString = "$recent$recent additions" }, null)</li>
+                        <li>@Html.ActionLink("View shelves order", "Index", "RQItems", new { queryString = "Signature: R*" }, null)</li>
+                        @if (@ViewBag.HasAddPermit)
+                        {   
+                            <li>@Html.ActionLink("Add new RQItem", "Index", "RQItems", new { verb = "New" }, null);</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pure-u-3-5">
+        <script src="@Url.Content("~/Scripts/HtmlFactoryScripts/result-viewer.js")" type="text/javascript"></script>
+        <script type="text/javascript">
+            // show default result list on startup
+            $(document).ready(function () {
+                getResultList();
+            });
+        </script>
+        @Html.Partial("~/Views/RQItems/Shared/ResultViewer.cshtml")
+    </div>
+    <div class="pure-u-1-5">
+        <div class="rq-sidebar rq-right-sidebar">
+            @Html.Partial("~/Views/Account/SmallLogOn.cshtml")
+        </div>
+    </div>
+</div>

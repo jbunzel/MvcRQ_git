@@ -34,7 +34,7 @@ function selectDatabases(e) {
     // hide any other manage roles dialog
     $(".select-databases-dialog").remove();
     var $clickedLink = $(this);
-
+    
     // ask server which roles the user is currently in and which else exist
     $.post(HostAdress() + "/{controllerName}/GetExternalDatabaseStatus", {}, function (response) {
         // on success do...
@@ -66,7 +66,7 @@ function selectDatabases(e) {
                 
                 var data = {
                     databasename: $(this).val(),
-                    included: $(this).is(":checked"),
+                    included: $(this).is(":checked")
                 };
 
                 // start adding or removing the role for the given user

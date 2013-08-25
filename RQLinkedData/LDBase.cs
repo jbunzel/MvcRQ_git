@@ -121,11 +121,32 @@ namespace RQLinkedData
                         case "fr":
                             x[2] = ((LiteralNode)t.Object).Value;
                             break;
+                        default:
+                            x[0] = ((LiteralNode)t.Object).Value;
+                            break;
                     }
                 }
                 else
                 {
                     x[i++] = t.Object.ToString();
+                    Array.Resize<string>(ref x, i + 1);
+                }
+            }
+            return x;
+        }
+
+        public string[] PredicateOf(string subjectUri)
+        {
+            string[] x = new string[] { "" };
+            System.Collections.Specialized.OrderedDictionary test = new System.Collections.Specialized.OrderedDictionary();
+            int i = 0;
+
+            foreach (Triple t in GetTriplesWithSubject(this.CreateUriNode(new Uri(subjectUri))))
+            {
+                if (!test.Contains(t.Predicate.ToString()))
+                {
+                    test.Add(t.Predicate.ToString(),"");
+                    x[i++] = t.Predicate.ToString();
                     Array.Resize<string>(ref x, i + 1);
                 }
             }

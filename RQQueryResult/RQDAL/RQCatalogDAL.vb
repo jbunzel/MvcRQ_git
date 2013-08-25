@@ -380,11 +380,11 @@ Namespace RQDAL
             Dim drLastRow As System.Data.DataRow
             Dim dcIDColumns As System.Data.DataColumn() = {Me._catSet.Tables("Dokumente").Columns("ID")}
             Dim dsChangeSet As System.Data.DataSet
+            Dim dsTotalSet As New RQLib.RQDataSet
 
-            'Me._catSet.EnforceConstraints = False
-            Me.CatalogQuery("SELECT ID, DocNo FROM Dokumente", "RQDataSet", "Dokumente")
-            Me._catSet.Tables("Dokumente").DefaultView.ApplyDefaultSort = True
-            dtIdDocNoTable = Me._catSet.Tables("Dokumente").DefaultView.ToTable()
+            Me._catOleDBI.Fill("SELECT ID, DocNo FROM Dokumente", dsTotalSet, "ALL")
+            dsTotalSet.Tables("ALL").DefaultView.ApplyDefaultSort = True
+            dtIdDocNoTable = dsTotalSet.Tables("ALL").DefaultView.ToTable()
             iMaxRecNr = dtIdDocNoTable.Rows.Count
             drLastRow = dtIdDocNoTable.Rows(iMaxRecNr - 1)
             iMaxRecID = System.Convert.ToInt32(drLastRow.Item("ID"))
@@ -399,6 +399,7 @@ Namespace RQDAL
             Me._catSet.Tables("Dokumente").Columns("ID").Unique = True
             NewRow.Item("ID") = iMaxRecID + 1
             NewRow.Item("DocNo") = strNewDocNo
+            NewRow.Item("Feld30") = "NOSORT"
             NewRow.Item("Feld31") = System.DateTime.Now
             Me._catSet.Dokumente.AddDokumenteRow(CType(NewRow, RQDataSet.DokumenteRow))
             dsChangeSet = Me._catSet.GetChanges()
@@ -415,6 +416,52 @@ Namespace RQDAL
                 Return 0
             End If
         End Function
+
+
+        'Public Function AddDokumente(ByRef NewRow As DataRow) As Integer
+        ' OUTCOMMENTED: 130716 because function modifies the underlying catSet 
+        '    Dim iMaxRecNr As Integer
+        '    Dim iMaxRecID As Integer
+        '    Dim strNewDocNo As String = ""
+        '    Dim dtIdDocNoTable As DataTable
+        '    Dim drLastRow As System.Data.DataRow
+        '    Dim dcIDColumns As System.Data.DataColumn() = {Me._catSet.Tables("Dokumente").Columns("ID")}
+        '    Dim dsChangeSet As System.Data.DataSet
+
+        '    'Me._catSet.EnforceConstraints = False
+        '    Me.CatalogQuery("SELECT ID, DocNo FROM Dokumente", "RQDataSet", "Dokumente")
+        '    Me._catSet.Tables("Dokumente").DefaultView.ApplyDefaultSort = True
+        '    dtIdDocNoTable = Me._catSet.Tables("Dokumente").DefaultView.ToTable()
+        '    iMaxRecNr = dtIdDocNoTable.Rows.Count
+        '    drLastRow = dtIdDocNoTable.Rows(iMaxRecNr - 1)
+        '    iMaxRecID = System.Convert.ToInt32(drLastRow.Item("ID"))
+        '    If CInt(drLastRow.Item("DocNo")) + 1 < 10000 Then
+        '        strNewDocNo = "0"
+        '    End If
+        '    strNewDocNo += CStr(CInt(drLastRow.Item("DocNo")) + 1)
+        '    Me._catSet.Tables("Dokumente").PrimaryKey = dcIDColumns
+        '    Me._catSet.Tables("Dokumente").Columns("ID").AutoIncrement = True
+        '    Me._catSet.Tables("Dokumente").Columns("ID").ReadOnly = True
+        '    Me._catSet.Tables("Dokumente").Columns("ID").AutoIncrementSeed = iMaxRecID + 1
+        '    Me._catSet.Tables("Dokumente").Columns("ID").Unique = True
+        '    NewRow.Item("ID") = iMaxRecID + 1
+        '    NewRow.Item("DocNo") = strNewDocNo
+        '    NewRow.Item("Feld31") = System.DateTime.Now
+        '    Me._catSet.Dokumente.AddDokumenteRow(CType(NewRow, RQDataSet.DokumenteRow))
+        '    dsChangeSet = Me._catSet.GetChanges()
+        '    If Not IsNothing(dsChangeSet) Then
+        '        Try
+        '            Me._catOleDBI.Update(dsChangeSet, "Dokumente")
+        '            Me._catRQLuceneDBI.Update(dsChangeSet, "Dokumente")
+        '            Me._catSet.AcceptChanges()
+        '            Return 0
+        '        Catch ex As Exception
+        '            Return 1
+        '        End Try
+        '    Else
+        '        Return 0
+        '    End If
+        'End Function
 
 
         Public Function AddSystematik(ByRef NewRow As DataRow) As Integer

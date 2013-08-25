@@ -36,4 +36,19 @@ namespace MvcRQ.Areas.UserSettings.Models
         public virtual int DataFieldId { get; set; }
         public virtual string Name { get; set; }
     }
+
+    public class ImportOptions
+    {
+        //Note: 'MyMusic', 'MyVideo' etc. are hard coded in xslt transforms.
+        public string AudioProjectDirectory = "D:\\Users\\jorge\\Dokumente\\Audio Projects\\Eingang";
+        public string AudioServerDirectory = "MyMusic=ArcAudioMP3/";
+        public string MusicServerDirectory = "MyMusic=ArcMusicMP3/";
+
+        public string VideoProjectDirectory = "\\\\DISKSTATION\\video";
+        public string VideoServerDirectory = "MyVideo=";
+
+        public string DocumentProjectDirectory = "\\\\DISKSTATION\\mydocs";
+        public string DocumentServerDirectory = "MyDoc=";
+
+    }
 }

@@ -8,8 +8,7 @@ Namespace RQKos.Classifications
 
     <DataContract()> _
     Public Class SubjClass
-        'Implements Serialization.IXmlSerializable
-
+        Inherits RQLib.RQQueryResult.RQDescriptionElements.RQDescriptionComponent
 
 #Region "Public Enumerations"
 
@@ -19,50 +18,32 @@ Namespace RQKos.Classifications
             jel
             rq
             oldrq
-            unkown
+            unknown
         End Enum
-
-
-        'Public Enum ClassificationPredicates
-        '    alternative_label
-        '    broader_term
-        '    class_notation
-        '    narrower_term
-        '    preferred_label
-        'End Enum
 
 #End Region
 
 
 #Region "Private Members"
 
-        Private _intClassID As Integer = -1
-        Private _strClassID As String = ""
-        Private _classSystem As ClassificationSystems = ClassificationSystems.unkown
-        Private _strClassCode As String = ""
-        Private _strClassShortTitle As String = ""
+        Private _classSystem As ClassificationSystems = ClassificationSystems.unknown
         Private _strClassLongTitle As String = ""
-        Private _localName As String = ""
-        Private _localNameSpace As String = ""
         Private _intNrOfSubClasses As Integer = -1
-        Private _intNrOfDocuments As Integer = -1
-        Private _intNrOfRefLinks As Integer = -1
         Private _classPath As String = ""
         Private _intParentClassID As Integer = -1
         Private _broaderClass As SubjClass = Nothing
         Private _narrowerClasses() As SubjClass
         Private _strRefRVKSet As String = ""
-        Private _classDataClient As ClassificationDataClient = Nothing
 
 
-        Private Enum ValidEnum
-            invalid
-            valid
-            undefined
-        End Enum
+        'Private Enum ValidEnum
+        '    invalid
+        '    valid
+        '    undefined
+        'End Enum
 
 
-        Private _isValid As ValidEnum = ValidEnum.undefined
+        'Private _isValid As ValidEnum = ValidEnum.undefined
 
 #End Region
 
@@ -73,22 +54,22 @@ Namespace RQKos.Classifications
         <Xml.Serialization.XmlElement()> _
         Public Property ClassID() As String
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 And Me._strClassID = "" Then Me.Read()
-                If Me._intClassID < 0 Then
-                    Return Me._strClassID
+                If Me._code <> "" And Me._intID < 0 And Me._strID = "" Then Me.Read()
+                If Me._intID < 0 Then
+                    Return Me._strID
                 Else
-                    Return CStr(Me._intClassID)
+                    Return CStr(Me._intID)
                 End If
             End Get
             Set(ByVal value As String)
                 Try
-                    If CInt(value) <> Me._intClassID Then
-                        Me._intClassID = CInt(value)
+                    If CInt(value) <> Me._intID Then
+                        Me._intID = CInt(value)
                         Me._isValid = ValidEnum.undefined
                     End If
                 Catch ex As InvalidCastException
-                    If value <> Me._strClassID Then
-                        Me._strClassID = value
+                    If value <> Me._strID Then
+                        Me._strID = value
                         Me._isValid = ValidEnum.undefined
                     End If
                 End Try
@@ -131,11 +112,11 @@ Namespace RQKos.Classifications
         <Xml.Serialization.XmlElement()> _
         Public Property ClassCode() As String
             Get
-                If Me._intClassID >= 0 And Me._strClassCode = "" Then Me.Read()
-                Return Me._strClassCode
+                If Me._intID >= 0 And Me._code = "" Then Me.Read()
+                Return Me._code
             End Get
             Set(ByVal value As String)
-                Me._strClassCode = value
+                Me._code = value
                 Me._isValid = ValidEnum.undefined
             End Set
         End Property
@@ -145,11 +126,11 @@ Namespace RQKos.Classifications
         <Xml.Serialization.XmlElement()> _
         Public Property ClassShortTitle() As String
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
-                Return Me._strClassShortTitle
+                If Me._code <> "" And Me._intID < 0 Then Me.Read()
+                Return Me._friendlyName
             End Get
             Set(ByVal value As String)
-                Me._strClassShortTitle = value
+                Me._friendlyName = value
             End Set
         End Property
 
@@ -158,7 +139,7 @@ Namespace RQKos.Classifications
         <Xml.Serialization.XmlElement()> _
         Public Property ClassLongTitle() As String
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
+                If Me._code <> "" And Me._intID < 0 Then Me.Read()
                 Return Me._strClassLongTitle
             End Get
             Set(ByVal value As String)
@@ -169,14 +150,14 @@ Namespace RQKos.Classifications
 
         <IgnoreDataMember()> _
         <Xml.Serialization.XmlIgnore()> _
-        Public Property LocalName() As String
+        Public Overrides Property LocalName() As String
             Get
                 If Me._localName = "" Then
                     Me._localName = Me._localNameSpace
                     If Me._localNameSpace.Length > 2 Then
-                        Me._localName += ":" + Me._strClassCode
+                        Me._localName += ":" + Me._code
                     Else
-                        Me._localName += Me._strClassCode
+                        Me._localName += Me._code
                     End If
                 End If
                 Return Me._localName
@@ -205,7 +186,7 @@ Namespace RQKos.Classifications
 
         <IgnoreDataMember()> _
         <Xml.Serialization.XmlIgnore()> _
-        Public Property LocalNameSpace() As String
+        Public Overrides Property LocalNameSpace() As String
             Get
                 If Me._localNameSpace = "" Then
                     Select Case Me.ClassificationSystem
@@ -235,7 +216,7 @@ Namespace RQKos.Classifications
                     Case ""
                         Me.ClassificationSystem = ClassificationSystems.rq
                     Case Else
-                        Me.ClassificationSystem = ClassificationSystems.unkown
+                        Me.ClassificationSystem = ClassificationSystems.unknown
                 End Select
             End Set
         End Property
@@ -245,7 +226,7 @@ Namespace RQKos.Classifications
         <Xml.Serialization.XmlIgnore()> _
         Public Property NrOfSubClasses() As Integer
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
+                If Me._code <> "" And Me._intID < 0 Then Me.Read()
                 Return Me._intNrOfSubClasses
             End Get
             Set(ByVal value As Integer)
@@ -257,9 +238,9 @@ Namespace RQKos.Classifications
 
         <IgnoreDataMember()> _
         <Xml.Serialization.XmlIgnore()> _
-        Public Property NrOfClassDocs() As Integer
+        Public Overrides Property NrOfClassDocs() As Integer
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
+                If Me._code <> "" And Me._intID < 0 Then Me.Read()
                 Return Me._intNrOfDocuments
             End Get
             Set(ByVal value As Integer)
@@ -271,9 +252,9 @@ Namespace RQKos.Classifications
 
         <IgnoreDataMember()> _
         <Xml.Serialization.XmlIgnore()> _
-        Public Property NrOfRefLinks() As Integer
+        Public Overrides Property NrOfRefLinks() As Integer
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
+                If Me._code <> "" And Me._intID < 0 Then Me.Read()
                 Return Me._intNrOfRefLinks
             End Get
             Set(ByVal value As Integer)
@@ -307,7 +288,7 @@ Namespace RQKos.Classifications
         <Xml.Serialization.XmlIgnore()> _
         Public Property ParentClassID() As String
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
+                If Me._code <> "" And Me._intID < 0 Then Me.Read()
                 Return CStr(Me._intParentClassID)
             End Get
             Set(ByVal value As String)
@@ -323,7 +304,7 @@ Namespace RQKos.Classifications
         <Xml.Serialization.XmlIgnore()> _
         Public Property RefRVKSet() As String
             Get
-                If Me._strClassCode <> "" And Me._intClassID < 0 Then Me.Read()
+                If Me._code <> "" And Me._intID < 0 Then Me.Read()
                 Return Me._strRefRVKSet
             End Get
             Set(ByVal value As String)
@@ -350,63 +331,42 @@ Namespace RQKos.Classifications
         <Xml.Serialization.XmlIgnore()> _
         Public Property ClassDataClient() As ClassificationDataClient
             Get
-                Return Me._classDataClient
+                Return Me.DataClient
             End Get
             Set(ByVal value As ClassificationDataClient)
-                Me._classDataClient = value
+                Me.DataClient = value
             End Set
         End Property
-
-
-        <IgnoreDataMember()> _
-        <Xml.Serialization.XmlIgnore()> _
-        Public ReadOnly Property RDFGraph() As RQSkosGraph
-            Get
-                Try
-                    If Not IsNothing(Me.ClassDataClient.SkosGraph) Then
-                        Return Me.ClassDataClient.SkosGraph
-                    Else
-                        Return New RQSkosGraph(Me)
-                    End If
-                Catch ex As ArgumentNullException
-                    Return New RQSkosGraph(Me)
-                End Try
-            End Get
-            'Set(ByVal value As RQSkosGraph)
-            '    LDClassificationDataClient.ReadRDFGraph(value, Me)
-            'End Set
-        End Property
-
 
 #End Region
 
 
 #Region "Private Methods"
 
-        Private Function RetrieveClassId() As String
+        Protected Overrides Function RetrieveId() As String
             Try
-                RetrieveClassId = Me._classDataClient.GetClassId(Me.ClassCode)
+                RetrieveId = CType(Me.DataClient, ClassificationDataClient).GetClassId(Me.ClassCode)
             Catch ex As Exception
-                RetrieveClassId = ""
+                RetrieveId = ""
             End Try
         End Function
 
 
-        Private Sub Read()
-            If Me._intClassID < 0 And Me._strClassID = "" Then
-                Me.ClassID = RetrieveClassId()
+        Protected Overrides Sub Read()
+            If Me._intID < 0 And Me._strID = "" Then
+                Me.ClassID = RetrieveId()
             End If
-            If Me._intClassID > 0 Or Me._strClassID <> "" Then
+            If Me._intID > 0 Or Me._strID <> "" Then
                 'no class of RQClassificationSystem has ID=0. ClassID=0 is used to retrieve the outermost subjClassBranch
-                If Not IsNothing(Me._classDataClient) Then Me._classDataClient.GetClassData(Me)
+                If Not IsNothing(Me.DataClient) Then CType(Me.DataClient, ClassificationDataClient).GetClassData(Me)
             End If
         End Sub
 
 
-        Private Function Write() As Integer
-            If Me._intClassID > 0 Then
+        Protected Overrides Function Write() As Integer
+            If Me._intID > 0 Then
                 'no class of RQClassificationSystem has ID=0. ClassID=0 is used to retriev the outermost subjClassBranch
-                If Not IsNothing(Me._classDataClient) Then Me._classDataClient.PutClassData(Me)
+                If Not IsNothing(Me.DataClient) Then CType(Me.DataClient, ClassificationDataClient).PutClassData(Me)
             End If
             Return 1
         End Function
@@ -428,10 +388,10 @@ Namespace RQKos.Classifications
 
         Public Sub New(ByVal classID As String, ByVal dataClient As ClassificationDataClient)
             Me.New()
-            Me._classDataClient = dataClient
+            Me.DataClient = dataClient
             If classID.StartsWith("http://") Then
                 Me.ClassID = -1
-                Me._strClassID = classID
+                Me._strID = classID
                 Me.ClassificationSystem = LDClassificationDataClient.GetClassificationSystem(classID)
             Else
                 Me.ClassID = classID
@@ -444,7 +404,7 @@ Namespace RQKos.Classifications
             Me.New()
             Me.ClassCode = classCode
             Me.ClassificationSystem = classSystem
-            Me.ClassID = Me.ClassDataClient.GetClassId(Me.ClassCode)
+            Me.ClassID = CType(Me.DataClient, ClassificationDataClient).GetClassId(Me.ClassCode)
         End Sub
 
 
@@ -457,21 +417,6 @@ Namespace RQKos.Classifications
 
 
 #Region "Public Methods"
-
-        Public Sub Load()
-            If Me._intClassID <> 0 Or Me._strClassID <> "" Then
-                Me.Read()
-            End If
-        End Sub
-
-
-        Public Function Save() As Integer
-            If Me._intClassID <> 0 Then
-                Return Me.Write()
-            End If
-            Return 1
-        End Function
-
 
         Public Function IsValid(ByRef MajClass As SubjClass) As Boolean
             If Me._isValid = ValidEnum.undefined Then
@@ -520,68 +465,6 @@ Namespace RQKos.Classifications
             End If
             Return Me._broaderClass
         End Function
-
-
-        Public Sub EnableLinkedData()
-            Me.ClassDataClient.IsLinkedDataEnabled = True
-        End Sub
-
-
-        Public Sub DisableLinkedData()
-            Me.ClassDataClient.IsLinkedDataEnabled = False
-        End Sub
-
-
-        'Public Sub WriteXml(ByVal writer As Xml.XmlWriter) Implements Serialization.IXmlSerializable.WriteXml
-        '    Dim str As String = ""
-
-        '    writer.WriteStartElement("ClassificationCode")
-        '    Select Case Me.ClassificationSystem
-        '        Case SubjClass.ClassificationSystems.rq
-        '            str = "rq"
-        '        Case SubjClass.ClassificationSystems.rvk
-        '            str = "rvk"
-        '        Case SubjClass.ClassificationSystems.ddc
-        '            str = "ddc"
-        '        Case SubjClass.ClassificationSystems.jel
-        '            str = "jel"
-        '        Case SubjClass.ClassificationSystems.oldrq
-        '            str = "oldrq"
-        '        Case Else
-        '            str = ""
-        '    End Select
-        '    writer.WriteElementString("ClassificationSystem", str)
-        '    writer.WriteElementString("Notation", Me.ClassCode)
-        '    If Me.ClassShortTitle <> "" Then
-        '        If Me.ClassificationSystem = SubjClass.ClassificationSystems.rq Then
-        '            writer.WriteElementString("ClassID", "http://www.riquest.de/rqld/rqc/" + Me.ClassID)
-        '        Else
-        '            writer.WriteElementString("ClassID", Me.ClassID)
-        '        End If
-        '        writer.WriteElementString("ClassLabel", Me.ClassShortTitle)
-        '        writer.WriteElementString("ClassAltLabel", Me.ClassLongTitle)
-        '    End If
-        '    If Me.ClassificationSystem = SubjClass.ClassificationSystems.rq Then
-        '        Dim cn As SubjClass = Me
-
-        '        str = ""
-        '        Do
-        '            str = str.Insert(0, "/" + cn.ClassID + "$" + cn.ClassCode)
-        '            cn = cn.GetBroaderClass()
-        '        Loop Until (IsNothing(cn))
-        '        writer.WriteElementString("ClassificationPath", str)
-        '    End If
-        '    writer.WriteEndElement()
-        'End Sub
-
-
-        'Public Sub ReadXml(ByVal reader As Xml.XmlReader) Implements Serialization.IXmlSerializable.ReadXml
-        'End Sub
-
-
-        'Public Function GetSchema() As Xml.Schema.XmlSchema Implements Serialization.IXmlSerializable.GetSchema
-        '    Return Nothing
-        'End Function
 
 #End Region
 

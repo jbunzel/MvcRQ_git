@@ -135,6 +135,9 @@
   <data name="error" xml:space="preserve">
     <value>error</value>
   </data>
+  <data name="finish" xml:space="preserve">
+    <value>Finalize</value>
+  </data>
   <data name="logoff" xml:space="preserve">
     <value>log-off</value>
   </data>
@@ -142,13 +145,19 @@
     <value>log-on</value>
   </data>
   <data name="menu1" xml:space="preserve">
-    <value>catalog</value>
+    <value>Catalogue</value>
   </data>
   <data name="menu2" xml:space="preserve">
-    <value>about</value>
+    <value>Info</value>
+  </data>
+  <data name="menu3" xml:space="preserve">
+    <value>Shelves</value>
+  </data>
+  <data name="menu4" xml:space="preserve">
+    <value>Workplace</value>
   </data>
   <data name="title" xml:space="preserve">
-    <value>RiQuest - the personal digital library</value>
+    <value>RIQUEST DIGITAL LIBRARY</value>
   </data>
   <data name="update" xml:space="preserve">
     <value>Update</value>

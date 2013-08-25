@@ -5,7 +5,9 @@
         OnComplete = "getResultList",
     };
 }
+<div>
 @using(Ajax.BeginForm("RQItemList","RQItems",ajaxOpts)){
-    @Html.TextBox("queryString", ViewData["qryStr"])
-    <input type="submit" value="Los!" />
+    @Html.TextBox("queryString", ViewData["qryStr"], new { @class = "pure-form" })
+    <button class="pure-button pure-button-primary rq-quick-button" type="submit">los!</button>
 }
+</div>

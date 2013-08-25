@@ -55,4 +55,9 @@
 *@<h4>HTML</h4>
 <p> As You have invoked the RiQuest Linked Data Service with accepted mime-types "-/html" the content is also presented here as HTML for Your convenience .</p>
 <p> If any RQItems are assigned to a RQKos Subject Classification class their descriptions will be displayed here. They are not, however, part of the RQKos Subject Classification class description.</p>
-@Html.Partial("Shared/ShelvesViewer")
+<h5>RQ Knowledge Organisation System (RQKos) / RQ Classification (RQC)</h5>
+
+@Html.Partial("~/Views/RQKos/Shared/ShelvesViewer.cshtml")
+
+<h5>RQItem List</h5>
+@Html.Partial("~/Views/RQItems/Shared/ResultViewer.cshtml")

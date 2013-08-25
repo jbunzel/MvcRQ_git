@@ -11,9 +11,8 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
     /// Zusammenfassungsbeschreibung für ClassificationSystemClient
     /// </summary>
     public class ClassificationSystemClient
+        : RQLinkedData.LDCloud.LinkedDataClient
     {
-        private LDBase _ldbase = null;
-                
         public enum ClassificationSystems
         {
             ddc,
@@ -21,7 +20,7 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
             jel,
             rq,
             oldrq,
-            unkown
+            unknown
         }
         
         public enum ClassificationPredicates
@@ -94,42 +93,14 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
             }
         }
 
-        protected virtual void Initialize()
-        {
-        }
-        
         public ClassificationSystemClient()
         {
             
         }
 
-        public LDBase LDGraph()
-        {
-            if (this._ldbase == null)
-            {
-                this._ldbase = new LDBase();
-                this.Initialize();
-            }
-            return _ldbase;
-        }
-
-        public virtual void Load(string uri)
-        {
-            this.LDGraph().Load(uri);
-        }
-
-        public virtual void Load( System.Collections.Specialized.StringDictionary nodeDictionary)
-        {
-        }
-                
         public virtual string GetPreferredLabel(string classNotation)
         {
             return "";
-        }
-
-        public void Write(System.Xml.XmlWriter writer)
-        {
-            this.LDGraph().Write(writer);
         }
     }
 }

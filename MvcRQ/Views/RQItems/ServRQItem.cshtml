@@ -57,5 +57,11 @@
 }
 else
 {
+    <script type="text/javascript">
+        // show default result list on startup
+        $(document).ready(function () {
+            getResultList();
+        });
+    </script>
     @Html.Partial("Shared/ResultViewer")
 }

@@ -56,12 +56,22 @@ Namespace RQQueryResult
         End Property
 
 
-        Public Property Authors() As String
+        'Public Property Authors() As String
+        '    Get
+        '        Return Me.GetField("Authors")
+        '    End Get
+        '    Set(ByVal value As String)
+        '        Me.SetField("Authors", value)
+        '    End Set
+        'End Property
+
+
+        Public Property Authors() As RQAuthors
             Get
-                Return Me.GetField("Authors")
+                Return CType(Me._fields("Authors"), RQAuthors)
             End Get
-            Set(ByVal value As String)
-                Me.SetField("Authors", value)
+            Set(ByVal value As RQAuthors)
+                Me._fields("Authors") = value
             End Set
         End Property
 
@@ -346,6 +356,15 @@ Namespace RQQueryResult
             End Set
         End Property
 
+
+        Public Property Feld32() As String
+            Get
+                Return Me.GetField("Feld32")
+            End Get
+            Set(ByVal value As String)
+                Me.SetField("Feld32", value)
+            End Set
+        End Property
 #End Region
 
 
@@ -380,8 +399,10 @@ Namespace RQQueryResult
                 Select Case name
                     Case "Title"
                         Me._fields.Add(name, New RQDescriptionElements.RQTitle(value))
+                    Case "Authors"
+                        Me._fields.Add(name, New RQDescriptionElements.RQAuthors(value))
                     Case "Classification"
-                        Me._fields.Add(name, New RQDescriptionElements.RQClassification(value, glbLinkedDataEnabled))
+                        Me._fields.Add(name, New RQDescriptionElements.RQClassification(value))
                     Case "Feld31"
                         'Create Date Field: reconvert lucene coded datetime strings to readable format
                         Me._fields.Add(name, New RQDescriptionElement(RQLucene.Utilities.StringToDate(value)))
@@ -851,6 +872,21 @@ Namespace RQQueryResult
         Public Sub SetChanged()
             Me._fields.SetChangedFlag()
         End Sub
+
+
+        Public Function IsExternalItem() As Boolean
+            If Not String.IsNullOrEmpty(Me.ItemDescription.DocNo) Then
+                If Not Me.ItemDescription.DocNo.StartsWith("D") Then
+                    Return CInt(Me.ItemDescription.DocNo) > RQDAL.RQWebServiceDAL.EXTERNAL_ITEM_DOCNO_OFFSET
+                End If
+            End If
+            Return False
+        End Function
+
+
+        Public Shared Function IsExternalItem(ByVal DocNo As String) As Boolean
+            Return CInt(DocNo) > RQDAL.RQWebServiceDAL.EXTERNAL_ITEM_DOCNO_OFFSET
+        End Function
 
 #End Region
 

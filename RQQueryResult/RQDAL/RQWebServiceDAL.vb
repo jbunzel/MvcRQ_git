@@ -7,6 +7,13 @@ Namespace RQDAL
 
     Public Class RQWebServiceDAL
 
+#Region "Public Members"
+
+        Public Const EXTERNAL_ITEM_DOCNO_OFFSET As Integer = 99000
+
+#End Region
+
+
 #Region "Private Members"
 
         Private Const gMaxResults As Integer = 10
@@ -151,7 +158,8 @@ Namespace RQDAL
             While DirNodes.MoveNext
                 doc.LoadXml(DirNodes.Current().OuterXml)
                 Me._xtTable.AddDokumenteRow(WriteTableRow(doc.DocumentElement(), SortCriterion))
-                CType(Me._xtTable.Rows(Me._xtTable.Count - 1), RQDataSet.DokumenteRow).DocNo = "09" + CStr(Me._xtTable.Count)
+                'CType(Me._xtTable.Rows(Me._xtTable.Count - 1), RQDataSet.DokumenteRow).DocNo = "09" + CStr(Me._xtTable.Count)
+                CType(Me._xtTable.Rows(Me._xtTable.Count - 1), RQDataSet.DokumenteRow).DocNo = CStr(EXTERNAL_ITEM_DOCNO_OFFSET + Me._xtTable.Count)
             End While
             Return Me._xtTable
         End Function

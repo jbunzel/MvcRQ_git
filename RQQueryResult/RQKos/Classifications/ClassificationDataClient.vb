@@ -3,20 +3,21 @@
 Namespace RQKos.Classifications
 
     Public MustInherit Class ClassificationDataClient
+        Inherits RQQueryResult.RQDescriptionElements.ComponentDataClient
 
-        Protected _classSystem As SubjClass.ClassificationSystems = SubjClass.ClassificationSystems.unkown
-        Protected _skosGraph As RQSkosGraph = Nothing
-        Private _LDEnabled As Boolean = False
+        Protected _classSystem As SubjClass.ClassificationSystems = SubjClass.ClassificationSystems.unknown
+        'Protected _skosGraph As RQSkosGraph = Nothing
+        'Private _LDEnabled As Boolean = False
 
 
-        Public Property SkosGraph() As RQSkosGraph
-            Get
-                Return Me._skosGraph
-            End Get
-            Set(ByVal value As RQSkosGraph)
-                Me._skosGraph = value
-            End Set
-        End Property
+        'Public Property SkosGraph() As RQSkosGraph
+        '    Get
+        '        Return Me._skosGraph
+        '    End Get
+        '    Set(ByVal value As RQSkosGraph)
+        '        Me._skosGraph = value
+        '    End Set
+        'End Property
 
 
         Public Property ClassSystem() As SubjClass.ClassificationSystems
@@ -29,14 +30,14 @@ Namespace RQKos.Classifications
         End Property
 
 
-        Public Property IsLinkedDataEnabled() As Boolean
-            Get
-                Return Me._LDEnabled
-            End Get
-            Set(ByVal value As Boolean)
-                Me._LDEnabled = value
-            End Set
-        End Property
+        'Public Property IsLinkedDataEnabled() As Boolean
+        '    Get
+        '        Return Me._LDEnabled
+        '    End Get
+        '    Set(ByVal value As Boolean)
+        '        Me._LDEnabled = value
+        '    End Set
+        'End Property
 
 
         Public MustOverride Function GetClassId(ByVal classNotation As String) As String

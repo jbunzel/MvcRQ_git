@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 using System.Web.Mvc;
 using MvcRQ.Models;
 using MvpRestApiLib;
-using System.Web.UI;
 
 using RQLib.RQQueryForm;
 using MvcRQ.Areas.UserSettings;
@@ -22,6 +22,13 @@ namespace MvcRQ.Controllers
     /// </remarks>
     public class RQItemsController : BaseController
     {
+        #region private members
+
+        bool bClientEditing = true;
+        bool bUseHttpCache = true;
+
+        #endregion
+
         #region private methods
 
         private RQquery GetQuery(string queryString, UserState.States stateType)
@@ -43,13 +50,14 @@ namespace MvcRQ.Controllers
             RQItemModel rqitemModel = null;
             RQquery query = this.GetQuery(queryString, stateType);
 
-            if (!forEdit) rqitemModel = CacheManager.Get<RQItemModel>(query.Id.ToString());
+            if (!forEdit && bUseHttpCache) rqitemModel = CacheManager.Get<RQItemModel>(query.Id.ToString());
+            if (forEdit) query.QueryExternal = "";
             if ((rqitemModel == null) || (rqitemModel.IsEditable() != forEdit))
             {
                 if (query.QueryBookmarks == false)
                     query.QueryBookmarks = true;
                 rqitemModel = new RQItemModel(query, forEdit);
-                if (! forEdit) CacheManager.Add(query.Id.ToString(), rqitemModel);
+                if (! forEdit && bUseHttpCache) CacheManager.Add(query.Id.ToString(), rqitemModel);
             }
             return rqitemModel;
         }
@@ -65,6 +73,33 @@ namespace MvcRQ.Controllers
             return this.GetModel(queryString, stateType, false);
         }
 
+        private RQItem GetRQItem(string rqitemId, UserState.States stateType, bool forEdit)
+        {
+            try // try to get item to copy from cache
+            {
+                RQItem res = this.GetModel("", stateType, forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
+
+                if (res == null) throw new Exception();
+                return res;
+            }
+            catch
+            {
+                try // try to get item to copy from database
+                {
+                    return this.GetModel("$access$" + rqitemId, stateType, forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
+                }
+                catch
+                {
+                    throw new NotImplementedException("Item with DocNo " + rqitemId + "could not be found.");
+                }
+            }
+        }
+
+        private string TransformItem (RQItem rqItem, RQItem.DisplFormat format)
+        {
+            return rqItem.ConvertToHTML(format);
+        }
+
         private string TransformModel(RQItemModel model, string format, int fromItem, int toItem)
         {
             System.Xml.XmlTextReader r = model.RQItems.ConvertTo(format, fromItem, toItem);
@@ -77,8 +112,9 @@ namespace MvcRQ.Controllers
                 var doc = new System.Xml.XmlDocument();
 
                 r.MoveToContent();
-                xTrf.Load(Server.MapPath("~/xslt/ViewTransforms/RQResultList2RQSorted.xslt"));
+                xTrf.Load(Server.MapPath("~/xslt/ViewTransforms/RQResultList2RQSorted_Paging.xslt"));
                 xTrfArg.AddParam("ApplPath", "", "http://" + Request.ServerVariables.Get("HTTP_HOST") + (Request.ApplicationPath.Equals("/") ? "" : Request.ApplicationPath));
+                xTrfArg.AddParam("MyDocsPath", "", "http://" + Request.ServerVariables.Get("HTTP_HOST") + (Request.ApplicationPath.Equals("/") ? "" : Request.ApplicationPath));
                 xTrf.Transform(new System.Xml.XPath.XPathDocument(r), xTrfArg, mstr);
                 mstr.BaseStream.Flush();
                 mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -94,7 +130,9 @@ namespace MvcRQ.Controllers
             catch
             {
                 // RQItemSet ist leer
-                return "";
+                throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
+
+                //return "";
             }
         }
         
@@ -159,9 +197,18 @@ namespace MvcRQ.Controllers
         {
             if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "new") || (verb == RQResources.Views.Shared.SharedStrings.add)))
             {
-                ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.add;
-                ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
-                return View("EditRQItem", new RQItem());
+                ViewBag.Title = "RiQuest | Add";
+                ViewBag.Header = "Neues Dokument";
+                if (bClientEditing)
+                {
+                    return View("ClientEditor");
+                }
+                else
+                {
+                    ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.add;
+                    ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
+                    return View("EditRQItem", new RQItem());
+                }
             }
             else if ((!string.IsNullOrEmpty(verb)) && (verb.ToLower() == "querylist"))
                 return this.Content(TransformModel(GetModel(queryString, UserState.States.ListViewState), verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
@@ -196,6 +243,9 @@ namespace MvcRQ.Controllers
             else
             {
                 this.GetQuery(queryString);
+                ViewBag.docNo = HttpContext.Request.QueryString.Get("d") != null ? HttpContext.Request.QueryString.Get("d") : "";
+                ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems ti the database.
+                ViewBag.GetRQItemVerb = "QueryItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
                 return View("Index");
             }
         }
@@ -225,21 +275,51 @@ namespace MvcRQ.Controllers
                 {
                     try
                     {
-                        RQItemModel model = GetModel(queryString, UserState.States.EditState, true);
+                        RQItemModel model = GetModel("$recent$recent additions", UserState.States.EditState, true);
 
                         rqitem = model.Add(newRQItem);
                         model.Update();
                     }
-                    catch (Exception)
-                    { }
+                    catch (Exception ex)
+                    {
+                        string message = "Add operation failed. ";
+                        Exception iex = ex;
+
+                        while (iex != null)
+                        {
+                            if (!string.IsNullOrEmpty(iex.Message))
+                                message += "\n - " + iex.Message;
+                            iex = iex.InnerException;
+                        }
+                        throw new Exception(message);
+                    }
                     CacheManager.Clear();
-                    return RQItemRecord((verb == "") ? verb : "edit", rqitem.DocNo, null);
+                    if (bClientEditing)
+                    {
+                    }
+                    else
+                    {
+                        ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.finish;
+                        ViewBag.EditButton3 = RQResources.Views.Shared.SharedStrings.copy;
+                        ViewBag.EditButton3Link = "/RQItems/" + rqitem.DocNo + "?verb=copy";
+                        ViewBag.EditButton4 = RQResources.Views.Shared.SharedStrings.add;
+                        ViewBag.EditButton4Link = "/RQItems?verb=new";
+                    }
+                    return RQItemRecord((verb == "") ? verb : "edititem", rqitem.DocNo, null);
                 }
                 else
                 {
-                    ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
-                    ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.add;
-                    return View("EditRQItem", newRQItem);
+                    if (bClientEditing) 
+                    {
+                        ViewBag.RQItemId = "";
+                        return View("ClientEditor");
+                    }
+                    else
+                    {
+                        ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.add;
+                        ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
+                        return View("EditRQItem", newRQItem);
+                    }
                 }
             }
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "cancel") || (verb == RQResources.Views.Shared.SharedStrings.cancel)))
@@ -247,10 +327,12 @@ namespace MvcRQ.Controllers
             else
             {
                 this.GetQuery(queryString);
+                ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems ti the database.
+                ViewBag.GetRQItemVerb = "QueryItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
                 return View("Index");
             }
         }
-        
+
         /// <summary>
         /// Controller action answering GET http-requests to {serviceId}/RQItems/{rqitemID}.
         /// </summary>
@@ -288,88 +370,110 @@ namespace MvcRQ.Controllers
         [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult RQItemRecord(string verb, string rqitemId, string serviceId )
         {
+            RQItem rqitem = null;
+            string view = "";
+
             if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "edit")))
             {
-                ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
-                ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.update;
-                return View("EditRQItem", this.GetModel("$access$"+rqitemId,UserState.States.EditState,true).RQItems.FirstOrDefault(p => p.DocNo == rqitemId));
+                ViewBag.Title = "RiQuest | Edit";
+                ViewBag.Header = "Dokument editieren";
+                if (bClientEditing) 
+                {
+                    ViewBag.RQItemId = rqitemId;
+                    return View("ClientEditor");                
+                }
+                else
+                {
+                    ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.update;
+                    ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
+                    view = "EditRQItem";
+                    rqitem = this.GetRQItem(rqitemId, UserState.States.EditState, true);
+                }
             }
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "copy")))
             {
-                RQItem newitem;
-
-                ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
-                ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.add;
-                try // try to get item to copy from cache
+                ViewBag.Title = "RiQuest | Copy";
+                ViewBag.Header = "Dokument kopieren";
+                if (bClientEditing)
                 {
-                    newitem = new RQItem(this.GetModel("").RQItems.FirstOrDefault(p => p.DocNo == rqitemId)._resultItem);
+                    ViewBag.RQItemId = rqitemId;
+                    return View("ClientEditor");
                 }
-                catch
+                else
                 {
-                    try // try to get item to copy from database
-                    {
-                        newitem = new RQItem(this.GetModel("$access$" + rqitemId, UserState.States.EditState, true).RQItems.FirstOrDefault(p => p.DocNo == rqitemId)._resultItem);
-                    }
-                    catch
-                    {
-                        throw new NotImplementedException("No item to copy in database.");
-                    }
+                    ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.add;
+                    ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
+                    rqitem = new RQItem(this.GetRQItem(rqitemId, (RQItem.IsExternal(rqitemId) ? UserState.States.ListViewState : UserState.States.EditState), true)._resultItem);
+                    rqitem.DocNo = "";
+                    rqitem.ID = "";
+                    view = "EditRQItem";
                 }
-                newitem.DocNo = "";
-                newitem.ID = "";
-                return View("EditRQItem", newitem);
             }
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "queryitem")))
             {
-                return View("DisplRQItem", this.GetModel("",UserState.States.ListViewState).RQItems.FirstOrDefault(p => p.DocNo == rqitemId));
+                rqitem = this.GetRQItem(rqitemId, UserState.States.ListViewState, false);
+                if (HttpContext.Request.AcceptTypes.Contains("text/html"))
+                    return this.Content(TransformItem(rqitem, RQItem.DisplFormat.single_item), "text/html", System.Text.Encoding.UTF8);
+                else
+                    view = "DisplRQItem";
             }
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "browseitem")))
             {
-                return View("DisplRQItem", this.GetModel("",UserState.States.BrowseViewState).RQItems.FirstOrDefault(p => p.DocNo == rqitemId));
+                rqitem = this.GetRQItem(rqitemId, UserState.States.BrowseViewState, false);
+                if (HttpContext.Request.AcceptTypes.Contains("text/html"))
+                    return this.Content(TransformItem(rqitem, RQItem.DisplFormat.single_item), "text/html", System.Text.Encoding.UTF8);
+                else
+                    view = "DisplRQItem";
+            }
+            else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "edititem")))
+            {
+                view = "EditRQItem";
+                rqitem = this.GetRQItem(rqitemId, (RQItem.IsExternal(rqitemId) ? UserState.States.ListViewState : UserState.States.EditState), RQItem.IsExternal(rqitemId) ? false : true);
             }
             else
             {
-                RQItem rqitem = GetModel("$access$" + rqitemId, UserState.States.ItemViewState).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
-
-                if (rqitem != null)
+                rqitem = this.GetRQItem(rqitemId, UserState.States.ItemViewState, false);
+                if (string.IsNullOrEmpty(serviceId))
                 {
-                    string view;
-
-                    if (string.IsNullOrEmpty(serviceId))
-                    {
-                        serviceId = "rqi";
-                        view = "DisplRQItem";
-                    }
-                    else
-                    {
-                        view = "ServRQItem";
-                        ViewBag.ServiceType = serviceId;
-                        ViewBag.TextSeg0 = "an individual RQItem";
-                    }
-                    switch (serviceId)
-                    {
-                        case "mods":
-                            throw new NotImplementedException("RiQuest data service not yet implemented for mods format.");
-                        case "oai_dc":
-                            EnableXmlAttribute.XSLTransform = "~/xslt/rqi2dc.xslt";
-                            break;
-                        case "srw_dc":
-                            throw new NotImplementedException("RiQuest data service not yet implemented for srw_dc format.");
-                        case "info_ofi":
-                            throw new NotImplementedException("RiQuest data service not yet implemented for info_ofi format.");
-                        case "rqi":
-                            EnableXmlAttribute.XSLTransform = "";
-                            break;
-                        case "rq":
-                            EnableXmlAttribute.XSLTransform = "~/xslt/rqi2rq.xslt";
-                            break;
-                        default:
-                            throw new NotImplementedException("RiQuest data service not yet implemented for unknown format.");
-                    }
-                    return View(view, rqitem);
+                    serviceId = "rqi";
+                    view = "DisplRQItem";
                 }
                 else
-                    throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
+                {
+                    view = "ServRQItem";
+                    ViewBag.ServiceType = serviceId;
+                    ViewBag.TextSeg0 = "an individual RQItem";
+                }
+                switch (serviceId)
+                {
+                    case "mods":
+                        throw new NotImplementedException("RiQuest data service not yet implemented for mods format.");
+                    case "oai_dc":
+                        EnableXmlAttribute.XSLTransform = "~/xslt/rqi2dc.xslt";
+                        break;
+                    case "srw_dc":
+                        throw new NotImplementedException("RiQuest data service not yet implemented for srw_dc format.");
+                    case "info_ofi":
+                        throw new NotImplementedException("RiQuest data service not yet implemented for info_ofi format.");
+                    case "rqi":
+                        EnableXmlAttribute.XSLTransform = "";
+                        break;
+                    case "rq":
+                        EnableXmlAttribute.XSLTransform = "~/xslt/rqi2rq.xslt";
+                        break;
+                    default:
+                        throw new NotImplementedException("RiQuest data service not yet implemented for unknown format.");
+                }
+            }
+            if (rqitem == null)
+                throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
+            else
+            {
+                bool bClassificationLinkedData = true;
+
+                if (bClassificationLinkedData == true)
+                    rqitem.LoadLinkedData("Classification");
+                return View(view, rqitem);
             }
         }
  
@@ -387,6 +491,10 @@ namespace MvcRQ.Controllers
             {
                 if ((verb.ToLower() == "cancel") || (verb == RQResources.Views.Shared.SharedStrings.cancel))
                     return this.RedirectToRoute("RQItemList", new { dbname = "rqitems" });
+                else if ((verb.ToLower() == "finalize") || (verb == RQResources.Views.Shared.SharedStrings.finish))
+                {
+                    return this.RedirectToRoute("RQItemList", new { dbname = "rqitems" });
+                }
                 else
                 {
                     RQItemModel model = null;
@@ -401,12 +509,31 @@ namespace MvcRQ.Controllers
                             rqitem = model.Add(changeRQItem);
                         else if ((verb.ToLower() == "delete") || (verb == RQResources.Views.Shared.SharedStrings.delete))
                         { } // not yet implemented
-                        CacheManager.Clear();
                         model.Update();
                     }
-                    catch (Exception)
-                    { };
-                    return RQItemRecord((verb == "") ? verb : "edit", rqitem.DocNo, serviceId);
+                    catch (Exception ex)
+                    {
+                        string message = "Update operation failed. ";
+                        Exception iex = ex;
+
+                        while (iex != null)
+                        {
+                            if (!string.IsNullOrEmpty(iex.Message))
+                                message += "\n - " + iex.Message;
+                            iex = iex.InnerException;
+                        }
+                        throw new Exception(message);
+                    };
+                    CacheManager.Clear();
+                    ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.finish;
+                    if (AccessRightsResolver.HasAddAccess())
+                    {
+                        ViewBag.EditButton3 = RQResources.Views.Shared.SharedStrings.copy;
+                        ViewBag.EditButton3Link = "/RQItems/" + rqitem.DocNo + "?verb=copy";
+                        ViewBag.EditButton4 = RQResources.Views.Shared.SharedStrings.add;
+                        ViewBag.EditButton4Link = "/RQItems?verb=new";
+                    }
+                    return RQItemRecord((verb == "") ? verb : "edititem", rqitem.DocNo, serviceId);
                 }
             }
             throw new NotImplementedException("No item for update specified.");
@@ -444,7 +571,7 @@ namespace MvcRQ.Controllers
                 {
                     RQItem rqitem = GetModel("$access$" + rqitemId, UserState.States.ItemViewState).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
 
-                    return View("ServIndRQItem", rqitem.GetField(fieldName, System.Convert.ToInt16(subFieldIndex)));
+                    return View("ServIndRQItem", rqitem.GetLinkedData(fieldName, System.Convert.ToInt16(subFieldIndex)));
                 }
                 catch (Exception)
                 {

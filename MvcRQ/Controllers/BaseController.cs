@@ -40,6 +40,7 @@ namespace MvcRQ.Controllers
 
                 Guid gu = (Guid)System.Web.Security.Membership.GetUser().ProviderUserKey;
             }
+            MvpRestApiLib.EnableXmlAttribute.XSLTransform = ""; // Essential, because old string values may have survived in memory. 
             base.ExecuteCore();
         }
 
@@ -51,11 +52,22 @@ namespace MvcRQ.Controllers
                 // If this is an ajax request, return the exception in the response            
                 if (filterContext.HttpContext.Request.IsAjaxRequest())
                 {
-                    filterContext.HttpContext.Response.StatusCode = 500;
-                    var json = new JsonResult();
-                    json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;   //SICHERHEITSPROBLEM: s. http://haacked.com/archive/2009/06/25/json-hijacking.aspx
-                    json.Data = filterContext.Exception.Message; // +filterContext.Exception.StackTrace;
-                    json.ExecuteResult(this.ControllerContext);
+                    //if (HttpContext.Response.ContentType == "text/html")
+                    //{
+                    //    filterContext.HttpContext.Response.StatusCode = 500;
+                    //    var json = new JsonResult();
+                    //    json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;   //SICHERHEITSPROBLEM: s. http://haacked.com/archive/2009/06/25/json-hijacking.aspx
+                    //    json.Data = HttpUtility.UrlEncode(filterContext.Exception.Message); // +filterContext.Exception.StackTrace;
+                    //    json.ExecuteResult(this.ControllerContext);
+                    //}
+                    //else
+                    //{
+                        filterContext.HttpContext.Response.StatusCode = 500;
+                        var json = new JsonResult();
+                        json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;   //SICHERHEITSPROBLEM: s. http://haacked.com/archive/2009/06/25/json-hijacking.aspx
+                        json.Data = HttpUtility.UrlEncode(filterContext.Exception.Message); // +filterContext.Exception.StackTrace;
+                        json.ExecuteResult(this.ControllerContext);
+                    //}
                 }
                 else
                 {

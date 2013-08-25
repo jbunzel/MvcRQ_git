@@ -595,6 +595,7 @@
   
   <xsl:template match="Signature[(string(.) !='') and (string(.) != ' ')]" mode="list">
     <xsl:variable name="IdNr" select="../ID" />
+    <xsl:variable name="DocNo" select="../DocNo" />
     <xsl:variable name="Signatures">
       <xsl:call-template name="ParseSubFields">
         <xsl:with-param name="FieldSubString" select="concat(.,';')" />
@@ -610,7 +611,10 @@
           <a>
             <xsl:attribute name="href">
               <xsl:call-template name = "escape-apos">
+<!--                
                 <xsl:with-param name = "string" select = "concat($MyDocsPath,'/',substring-after(.,'MyDoc='),'&amp;TI=', $ShortTitle)" />
+-->                
+                <xsl:with-param name = "string" select = "concat($ApplPath,'/ItemViewer/', $DocNo, '?itemAdress=MyDocs/', substring-after(.,'MyDoc='))" />
               </xsl:call-template>
             </xsl:attribute>
             <xsl:attribute name="target">
@@ -630,7 +634,11 @@
           <a>
             <xsl:attribute name="href">
               <xsl:call-template name = "escape-apos">
+<!--                
                 <xsl:with-param name = "string" select = "concat($MyVideoPath,'/',substring-after(.,'MyVideo='),'/VIDEO_TS/VIDEO_TS.IFO','&amp;TI=', $ShortTitle)" />
+                <xsl:with-param name = "string" select = "concat($ApplPath,'/itemViewer/', $DocNo, '?itemAdress=MyVideo/', substring-after(.,'MyVideo='),'/VIDEO_TS/VIDEO_TS.IFO')" />
+-->                
+                <xsl:with-param name = "string" select = "concat($ApplPath,'/itemViewer/', $DocNo, '?itemAdress=MyVideo/', substring-after(.,'MyVideo='))" />
               </xsl:call-template>
             </xsl:attribute>
             <xsl:attribute name="target">
@@ -650,7 +658,10 @@
           <a>
             <xsl:attribute name="href">
               <xsl:call-template name = "escape-apos">
+<!--
                 <xsl:with-param name = "string" select = "concat($MyMusicPath,'/',substring-after(.,'MyMusic='),'&amp;TI=', $ShortTitle)" />
+-->
+                <xsl:with-param name = "string" select = "concat($ApplPath,'/ItemViewer/', $DocNo, '?itemAdress=MyMusic/', substring-after(.,'MyMusic='))" />
               </xsl:call-template>
             </xsl:attribute>
             <xsl:attribute name="target">

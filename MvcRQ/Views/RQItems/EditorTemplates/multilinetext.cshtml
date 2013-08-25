@@ -1,7 +1,8 @@
 ﻿@model System.String
 @if (ViewData["label"] != null)
 {
-    @Html.LabelFor(model => model, ViewData["label"].ToString())
+    @*@Html.LabelFor(model => model, ViewData["label"].ToString())*@
+    <label for="@ViewData["label"].ToString()" class="editor-label">@ViewData["label"].ToString()</label>
 }
 else
 { 

@@ -419,7 +419,7 @@ namespace MvcRQ.Models
     }
 
     [KnownType(typeof(RQKosItemRQLD))]
-    [KnownType(typeof(RQLib.RQLD.RQSkosGraph))]
+    [KnownType(typeof(RQLib.RQLD.RQClassificationGraph))]
     public class RQKosItemRQLD
     : RQKosItemTemplate
     {
@@ -430,7 +430,7 @@ namespace MvcRQ.Models
         #region "public properties"
 
         [DataMember]
-        public RQLib.RQLD.RQSkosGraph RDF
+        public RQLib.RQLD.RQClassificationGraph RDF
         {
             get
             {

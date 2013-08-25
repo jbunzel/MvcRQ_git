@@ -6,11 +6,11 @@
 */
 (function($) { 
 	$.transform = function(o) {
-		var createXmlObj = function(data) {
-			if($.browser.msie) {
+	    var createXmlObj = function (data) {
+	        if ($.browser.msie) {
 				var x = $("<xml>")[0];
 				x.loadXML(data);
-				return x;
+	            return x;
 			} else {
 				var parser = new DOMParser();
 				return parser.parseFromString(data,"text/xml");
@@ -67,7 +67,8 @@
 		};
 		
 		var replaceref = function(val, o) {
-			o.c.xsl = o.c.xsl?o.c.xsl:"";
+		    o.c.xsl = o.c.xsl ? o.c.xsl : "";
+		   
 			var c = location.protocol == "file:" && $.browser.msie ? "\\" : "/";
 			var path1 = location.protocol + c + c + location.host;
 			var path2 = location.pathname.substring(0,location.pathname.lastIndexOf(c) + 1) + o.c.xsl.substring(0,o.c.xsl.lastIndexOf("/") + 1);
@@ -94,7 +95,7 @@
 			}
 		};
 		
-		var checkReady = function(o) {
+		var checkReady = function (o) {
 			if((o.c.xslstr || o.c.xslobj) && (o.c.xmlstr || o.c.xmlobj)) {
 				var fail = false;
 				var tel = $("<div>");
@@ -115,7 +116,7 @@
 				o.c.xmlobj = o.c.xmlobj ? o.c.xmlobj : createXmlObj(o.c.xmlstr);
 				
 				var fixref,addparams;
-				if($.browser.msie) {
+				if ($.browser.msie) {
 				    try {					
 						
 						fixref = function(ref,xObj) {
@@ -311,9 +312,9 @@
 		}
 	};
 	
-	$.fn.transform = function(o) {
-		return this.each(function() {
-			o = o ? o : {};
+	$.fn.transform = function (o) {
+	    return this.each(function () {
+	        o = o ? o : {};
 			o.el = this;
 			var t = new $.transform(o);
 		});

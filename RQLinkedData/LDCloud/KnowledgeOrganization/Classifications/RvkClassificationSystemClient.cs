@@ -14,7 +14,7 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
     {
         static public string GetURI(string classNotation)
         {
-            return (classNotation != "") ? "http://data.bib.uni-mannheim.de/data/rvk" + "/" + ClassificationSystemClient.AdaptClassNotation(ClassificationSystems.rvk, classNotation) + "/about.rdf" : "http://data.bib.uni-mannheim.de/data/rvk";
+            return (classNotation != "") ? "http://data.bib.uni-mannheim.de/data/rvk" + "/" + ClassificationSystemClient.AdaptClassNotation(ClassificationSystems.rvk, classNotation) : "http://data.bib.uni-mannheim.de/data/rvk";
         }
         
         static public string GetPredicate(ClassificationPredicates predicate)
@@ -52,7 +52,18 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Classifications
 
         public override string GetPreferredLabel(string classNotation)
         {
-            return "";
+            try
+            {
+                string[] res;
+
+                //DdcReasoner.rs.Apply(this.LDGraph());
+                res = this.LDGraph().ObjectOf(RvkClassificationSystemClient.GetURI(classNotation), RvkClassificationSystemClient.GetPredicate(ClassificationPredicates.preferred_label));
+                return res[0];
+            }
+            catch
+            {
+                return "";
+            }
         }
     }
 }

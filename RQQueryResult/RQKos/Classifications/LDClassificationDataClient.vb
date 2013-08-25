@@ -1,4 +1,5 @@
 ﻿Imports RQLib.RQLD
+Imports RQLib.RQQueryResult.RQDescriptionElements
 
 Namespace RQKos.Classifications
 
@@ -12,21 +13,22 @@ Namespace RQKos.Classifications
 
         Public Sub New(ByVal classSystem As SubjClass.ClassificationSystems)
             Me.ClassSystem = classSystem
-            Me.SkosGraph = New RQSkosGraph(Me.ClassSystem)
+            Me.LDGraph = New RQClassificationGraph(Me.ClassSystem)
         End Sub
 
 
         Public Overrides Function GetClassId(ByVal classNotation As String) As String
-            Return Me.SkosGraph.GetUri(Me._classSystem, classNotation)
+            Return CType(Me.LDGraph, RQClassificationGraph).GetUri(Me._classSystem, classNotation)
         End Function
 
 
-        Public Overrides Sub GetClassData(ByRef theClass As SubjClass)
+        Public Overrides Sub GetClassData(ByRef theClass As SubjClass) 'SubjClass)
             Dim uri As String = theClass.ClassID
 
             If Me.IsLinkedDataEnabled() Then
-                Me._skosGraph.Load(uri)
-                theClass.ClassShortTitle = Me._skosGraph.GetPrefLabel(theClass)
+                CType(Me.LDGraph, RQClassificationGraph).Load(uri)
+                theClass.ClassShortTitle = CType(Me.LDGraph, RQClassificationGraph).GetPrefLabel(theClass)
+                theClass.SetComplete()
             End If
         End Sub
 

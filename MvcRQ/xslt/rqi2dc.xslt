@@ -4,11 +4,12 @@
 	xmlns:b="http://schemas.datacontract.org/2004/07/RQLib.RQKos.Classifications"
 	xmlns:a="http://schemas.datacontract.org/2004/07/RQLib.RQQueryResult.RQDescriptionElements"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:srw_dc="info:srw/schema/1/dc-schema"
+	xmlns:srw_dc="info:srw/schema/1/dc-v1.1"  
 	xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt"
   exclude-result-prefixes="rqi b a msxsl">
-<!-- 
+  
+  <!-- 
 This stylesheet transforms RQIntern (rqi) version 0.1 records and collections of records to simple Dublin Core (DC) records 
 		
 The stylesheet will transform a collection of RQIntern (rqi) 0.1 records into simple Dublin Core (DC)
@@ -32,7 +33,7 @@ Revision 0.0	yyyy-mm-dd <jbunzel@riquest.de>
 Version 0.1	2010-07-12 Jürgen Bunzel <jbunzel@riquest.de>
 
 -->
-
+  
 	<xsl:output method="xml" indent="yes"/>
 	
 	<xsl:param name="interface" select="'UNAPI'"/>
