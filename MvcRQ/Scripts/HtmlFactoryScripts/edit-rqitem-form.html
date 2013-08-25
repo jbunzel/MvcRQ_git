@@ -1,0 +1,100 @@
+﻿<style>
+    .edit-form {
+        position: relative;
+    }
+</style>
+<div class="rq-ajax-wait" style="display: none"></div>
+<form id="EditForm" class="edit-form pure-form">
+<fieldset>
+	<legend>Eingabemaske</legend>
+        <span class="editor-label">
+            <label for="ID">ID: </label><span id="idval"></span>
+            <label for="DocNo">Dok-Nr.: </label><span id="doknrval"></span>
+        </span>
+		<span class="editor-label"><label for="Title">Titel</label></span>
+		<span class="editor-field"><textarea class="title" cols="20" id="Title" name="Title" rows="2"></textarea></span>
+		<span class="editor-label"><label for="Authors">Autoren</label></span>
+		<span class="editor-field"><textarea class="authors" cols="20" id="Authors" name="Authors" rows="2"></textarea></span>
+		<span class="editor-label"><label for="Source">Quelle</label></span>
+        <span class="editor-field"><textarea class="source" cols="20" id="Source" name="Source" rows="2"></textarea></span>
+		<span class="editor-label"><label for="Edition">Ausgabe</label></span>
+		<span class="editor-field"><input class="edition" id="Edition" name="Edition" type="text" /></span>
+        <span class="editor-label"><label for="ISDN">IDNR</label></span>
+        <span class="editor-field"><input class="isdn" id="ISDN" name="Isdn" type="text" /></span>
+        <span class="editor-label"><label for="Coden">Coden</label></span>
+        <span class="editor-field"><input class="coden" id="Coden" name="Coden" type="text" /></span>
+        <span class="editor-label"><label for="Institutions">Institutionen</label></span>
+        <span class="editor-field"><textarea class="institutions" cols="20" id="Institutions" name="Institutions" rows="2" ></textarea></span>
+        <span class="editor-label"><label for="Series">Reihe</label></span>
+        <span class="editor-field"><textarea class="series" cols="20" id="Series" name="Series" rows="2" ></textarea></span>
+        <span class="editor-label"><label for="Locality">Ort</label></span>
+        <span class="editor-field"><input class="locality" id="Locality" name="Locality" type="text" /></span>
+        <span class="editor-label"><label for="Publisher">Verlag</label></span>
+        <span class="editor-field"><input class="publisher" id="Publisher" name="Publisher" type="text" /></span>
+        <span class="editor-label"><label for="PublTime">Jahr</label></span>
+        <span class="editor-field"><input class="publtime" id="PublTime" name="PublTime" type="text" /></span>
+        <span class="editor-label"><label for="Volume">Band</label></span>
+        <span class="editor-field"><input class="volume" id="Volume" name="Volume" type="text" /></span>
+        <span class="editor-label"><label for="Issue">Heft</label></span>
+        <span class="editor-field"><input class="issue" id="Issue" name="Issue" type="text" /></span>
+        <span class="editor-label"><label for="Pages">Paginierung</label></span>
+        <span class="editor-field"><input class="pages" id="Pages" name="Pages" type="text" /></span>
+        <span class="editor-label"><label for="Toc">Inhaltsverzeichnis</label></span>        
+        <input type="button" value="attach object" id="tocAttach" />
+        <div  class="toc" id="Toc" title="Table of content">
+            <ol id="tocList" />
+            <script id="tocTemplate" type="text/x-jsrender"> 
+                <li>
+                    <span class="editor-field"><input class="tocitemname" type="text" value="{{>name}}"/></span>
+                    <span class="editor-field"><input class="tocitemposition" type="text" value="{{>position}}"/></span>
+                    <span class="editor-field"><input class="tocitemadress" type="text" value="{{>adress}}"/></span>
+                </li>
+            </script>
+        </div>        
+        <span class="editor-label"><label for="Language">Sprache</label></span>
+        <span class="editor-field"><input class="language" id="Language" name="Language" type="text" /></span>
+        <span class="editor-label"><label for="Signature">Standort</label></span>
+        <span class="editor-field"><input class="signature" id="Signature" name="Signature" type="text" /></span>
+        <span class="editor-label"><label for="DocTypeCode">Dokument-Typ-Code</label></span>
+        <span class="editor-field"><input class="doctypecode" id="DocTypeCode" name="DocTypeCode" type="text" /></span>
+        <span class="editor-label"><label for="DocTypeName">Dokument-Typ</label></span>
+        <span class="editor-field"><input class="doctypename" id="DocTypeName" name="DocTypeName" type="text" /></span>
+        <span class="editor-label"><label for="IndexTerms">Schlagworte</label></span>
+        <span class="editor-field"><textarea class="indexterms" cols="20" id="IndexTerms" name="IndexTerms" rows="3"></textarea></span>
+        <span class="editor-label"><label for="Subjects">Fachbezug</label></span>
+        <span class="editor-field"><textarea class="subjects" cols="20" id="Subjects" name="Subjects" rows="2" ></textarea></span>
+        <span class="editor-label"><label for="WorkType">Werk-Typ</label></span>
+        <span class="editor-field"><input class="worktype" id="WorkType" name="WorkType" type="text" /></span>
+        <span class="editor-label"><label for="AboutLocation">Ortsbezug</label></span>
+        <span class="editor-field"><input class="aboutLocation" id="AboutLocation" name="AboutLocation" type="text" /></span>
+        <span class="editor-label"><label for="AboutTime">Zeitbezug</label></span>
+        <span class="editor-field"><input class="abouttime" id="AboutTime" name="AboutTime" type="text" /></span>
+        <span class="editor-label"><label for="AboutPersons">Personenbezug</label></span>
+        <span class="editor-field"><textarea class="aboutpersons" cols="20" id="AboutPersons" name="AboutPersons" rows="1"></textarea> </span>
+        <span class="editor-label"><label for="ClassificationFieldContent">Klassifikation</label></span>
+        <span class="editor-field"><input class="classificationfieldcontent" id="ClassificationFieldContent" name="ClassificationFieldContent" type="text" /></span>
+        <span class="editor-label"><label for="Abstract">Inhaltsangabe</label></span>
+        <span class="editor-field"><textarea class="abstract" cols="20" id="Abstract" name="Abstract" rows="4" ></textarea></span>
+        <span class="editor-label"><label for="CreateLocation">Entstehungsort</label></span>
+        <span class="editor-field"><input class="createlocation" id="CreateLocation" name="CreateLocation" type="text" /></span>
+        <span class="editor-label"><label for="CreateTime">Entstehungszeit</label></span>
+        <span class="editor-field"><input class="createtime" id="CreateTime" name="CreateTime" type="text" /></span>
+        <span class="editor-label"><label for="Notes">Fußnoten</label></span>
+        <span class="editor-field"><input class="notes" id="Notes" name="Notes" type="text" /></span>
+	<br class="clear" />
+	<input type="submit" value="Add Item" id="btn-submit-item" /><input type="button" value="Reset" id="btn-reset" onclick="reset()" /><input type="button" value="Cancel" id="btn-cancel" onclick="cancel()" />
+</fieldset>
+</form>
+<div id="EditDialog" class="edit-dialog" hidden="true">
+</div>
+<div id="AttachTocDialog" class="attach-toc-dialog" hidden="true">
+    <p class="instruction">Geben Sie den Typ des digitalen Objekts und den Namen des Unterverzeichnisses ein, in dem das digitale Objekt gespeichert ist.<br/>Das Unterverzeicnhis muss in dem für die Eingangsbearbeitung des betreffenden Objekt-Typs ausgewählten Verzeichnis liegen (s. Auswahl von Optionen).<br />Sie müssen für dieses Verzeichnis Schreibrechte besitzen.</p>
+    <span class="editor-label"><label for="ObjAdress">Adresse</label></span>
+    <span class="editor-field"><input class="objadress" id="ObjAdress" name="ObjAdress" type="text" /></span>
+    <span class="editor-label"><label>Typ</label></span>
+    <form class="digital-object-type editor-field" id="DigitalObjectType" action="" method="get">
+        <input type="radio" name="DigitalObjectType" id="Text Audio (mp3)" value="mp3Text"  />Text-Tonaufzeichnung (MP3)<br/>
+        <input type="radio" name="DigitalObjectType" id="Music Audio (mp3)" value="mp3Music" />Musik-Tonaufzeichnung (MP3)<br/>
+        <input type="radio" name="DigitalObjectType" id="Video (m4v)" value="m4vVideo">Bildaufzeichnung (M4V)<br /> 
+    </form>
+</div>

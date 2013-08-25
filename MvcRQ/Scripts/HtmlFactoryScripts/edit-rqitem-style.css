@@ -1,0 +1,126 @@
+﻿/* edit-viewer styles*/
+.edit-form {
+    background-color: transparent;
+}
+
+.edit-dialog,
+.attach-toc-dialog {
+    display: none;
+}
+
+label {
+    margin: 15px 2px 5px 0px;
+    display: inline;
+}
+
+label[for=Title],
+label[for=Institutions],
+label[for=IndexTerms],
+label[for=AboutPersons] {
+    display: block;
+}
+/*
+label[for=Volume],
+label[for=DocTypeCode] {
+    display: inline-block;
+}
+*/
+
+/* hack: insert a line-break */
+label[for=AboutTime]:before,
+label[for=Coden]:before,
+label[for=Institutions],
+label[for=Notes],
+label[for=Toc]:before {
+    content: '\a';
+    white-space: pre;
+}
+
+.pure-form input[type=text] {
+    width: 200px;
+    margin: 5px 32px 5px 5px;
+    font-size: 1em;
+    font-family: "Courier New";
+} 
+
+textarea,
+.pure-form textarea {
+    margin: 5px 5px 5px 0px;
+    font-size: 1em;
+    font-family: "Courier New";
+}
+
+.title,
+.authors,
+.source,
+.institutions,
+.series,
+.indexterms,
+.subjects,
+.aboutpersons,
+.abstract {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.edition,
+.isdn,
+.coden, 
+.locality,
+.publisher,
+.publtime,
+.volume,
+.issue,
+.pages,
+.language,
+.doctypecode,
+.doctypename,
+.worktype,
+.aboutlocation,
+.abouttime,
+.createlocation,
+.createtime,
+.notes {
+    display: inline;
+}
+
+.volume,
+.issue,
+.pages,
+.language {
+    max-width: 160px;
+}
+
+.classification {
+    display: inline;
+    min-width: 790px;
+    margin: 5px 32px 5px 5px;    
+}
+
+#loading {
+}
+
+#toc {
+    display: none;
+}
+    
+.Toc {
+    border: 1px solid #ccc; 
+    margin: 5px 5px 5px 0px;
+    overflow: auto;
+}
+
+#tocAttach {
+    display: inline;       
+}
+    
+.tocitemname,
+.tocitemadress,
+.objadress { 
+    min-width: 350px;  
+}
+    
+.tocitemposition { 
+    max-width: 20px;  
+}

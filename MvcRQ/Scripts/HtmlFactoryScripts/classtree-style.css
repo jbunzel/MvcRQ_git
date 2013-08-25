@@ -1,0 +1,13 @@
+﻿rq-classtree-sidebar {
+}
+
+ul.dynatree-container {
+    background-color: rgb(255, 255, 245);
+    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
+    overflow: auto;
+}
+
+span.dynatree-node a {
+    font-size: 0.8em;
+
+}

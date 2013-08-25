@@ -19,6 +19,6 @@ It consists of the following Modules:
 - Sub-directory MvcRQ.Tests contains Unit Tests (presently not used).
 - Sub-directory MVPRestApiLib contains base functions of the truly restful api (adapted code from the Al Zabir article).
 - Sub-directory RQLib contains the business logic (legacy code from the existing RiQuest application).
-- RQState contains baisc functions for state management.
+- RQState contains basic functions for state management.
 
-MvcRQ is a VS 10 / .NET 4.0 application with code in VB, C#, JavaScript & JQuery.
+MvcRQ is a VS 12 / .NET 4.0 application with code in VB, C#, JavaScript & JQuery.
