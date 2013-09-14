@@ -6,18 +6,17 @@
 // Copyright (c) 2010, Wes Nolte (http://wesnolte.com)
 // Licensed under the MIT License (MIT-LICENSE.txt)
 // http://www.opensource.org/licenses/mit-license.php
-// Created: 2010-04-16 | Updated: 2010-04-26
-//
+// Created: 2010-04-16 | Updated: 2010-04-26 | Extensions: 2013-09-12 (Segement Selector J.B.)
+//  
 /*******************************************************************************************/
 
     $.fn.pajinate = function(options){
         // Set some state information
         var current_page = 'current_page';
 		var items_per_page = 'items_per_page';
-		
 		var meta;
-	
-		// Setup default option values
+
+        // Setup default option values
 		var defaults = {
 			item_container_id : '.content',
 			items_per_page : 10,			
@@ -48,8 +47,8 @@
         var jquery_ui_default_class = options.jquery_ui ? options.jquery_ui_default : '';
         var jquery_ui_active_class = options.jquery_ui ? options.jquery_ui_active : '';
         var jquery_ui_disabled_class = options.jquery_ui ? options.jquery_ui_disabled : '';
-	
-		return this.each(function(){
+
+        return this.each(function () {
 			$page_container = $(this);
 			$item_container = $(this).find(options.item_container_id);
 			$items = $page_container.find(options.item_container_id).children();
@@ -163,8 +162,7 @@
 				e.preventDefault();
 				showPrevPage($(this));
 			});
-			
-			
+						
 			// Event handler for 'Next' link
 			$page_container.find('.next_link').click(function(e){
 				e.preventDefault();				
@@ -175,7 +173,34 @@
 			$page_container.find('.page_link').click(function(e){
 				e.preventDefault();
 				gotopage($(this).attr('longdesc'));
-			});			
+			});
+			
+            // Extensions: 2013-09-12 (Segement Selector J.B.)
+            // Multiple event handlers must not be registered
+			$(".result_segments").off("change");
+
+            // Extensions: 2013-09-12 (Segement Selector J.B.)
+            // Register an event handler for changed dropdown selection 
+			$(".result_segments").change(function (e) {
+			    var new_page = parseInt((parseInt($("select option:selected").attr("value")) / options.items_per_page));
+			    var curr_page = parseInt(meta.data(current_page));
+			    
+			    e.preventDefault();
+			    if (curr_page > new_page) {
+			        movePageNumbersRight($(".first_link"), new_page);
+			        changepage(new_page);
+			    }
+			    if (curr_page < new_page) {
+			        movePageNumbersLeft($(".last_link"), new_page);
+			        changepage(new_page);
+			    }
+			    //TODO: 02.01 In Ergebnisliste zum aktuellen RQItem scrollen (z.B. auf das 1. RQItem des gewählten Segments)
+			    //var pos = parseInt($("select option:selected").attr("value"));
+			    //var scrollPos = $("ul.content li:eq(" + pos + ") span").position().top;
+			    //gotopage(parseInt((parseInt($("select option:selected").attr("value")) / options.items_per_page)));
+			    //$(".content-box").animate({ scrollTop: scrollPos });
+			    //alert($("ul.content li:eq(" + pos + ") span").position().top;
+			});
 			
 			// Goto the required page
 			gotopage(parseInt(options.start_page));
@@ -209,9 +234,24 @@
 			}
 				
 		};
+
+        // Extensions: 2013-09-12 (Segement Selector J.B.)
+        // Adjustment of segment selector added 
+		function gotopage(page_num) {
+		    changepage(page_num);
+		    // Set selected item of segment selector dropdown-box to segment of the topmost item displayed in content box  
+		    $('select option').each(function () {
+		        if ($(this).val() <= page_num * options.items_per_page) {
+
+		            $(this).prop('selected', true);
+		            return;
+		        }
+		    });
+		};
 			
-		function gotopage(page_num){
-			
+        // Extensions: 2013-09-12 (Segement Selector J.B.)
+        // Former gotopage function renamed
+		function changepage(page_num) {
 			var ipp = parseInt(meta.data(items_per_page));
 			
 			var isLastPage = false;
@@ -262,7 +302,7 @@
 			
 		} 
 		
-		function movePageNumbersRight(e, new_p){
+		function movePageNumbersRight(e, new_p) {
 			var new_page = new_p;
 			
 			var $current_active_link = $(e).siblings('.active_page');

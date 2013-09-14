@@ -1,51 +1,81 @@
 ﻿@{
     ViewBag.Title = "RiQuest | Home";
 }
-<h2>@ViewBag.Message</h2>
+
 <div class="pure-g-r">
-    <div class="pure-u-1-5">
-        <div class="rq-sidebar rq-left-sidebar">
-            @Html.Partial("~/Views/RQItems/Shared/SearchBoxView.cshtml")
-            <div>
-                <div class="rq-settings-panel">
-                    <h3>
-                        Externe Datenbanken</h3>
-                    @Html.Partial("~/Areas/UserSettings/Views/Shared/IncludeExternalView.cshtml")
+    <div class="pure-u-4-5">
+        <div class="pure-g-r">
+            <div class="pure-u-1-6">
+                <div class="rq-sidebar rq-left-sidebar">
+                    <div id="rq-settings-panel">
+                        @Html.Partial("~/Views/Account/SmallLogOn.cshtml")
+                    </div>
                 </div>
-                <div class="rq-settings-panel">
-                    <h3>
-                        Suchfelder</h3>
-                    <form>
-                    </form>
-                </div>
-                <div class="rq-settings-panel">
-                    <h3>
-                        Standard-Abfragen</h3>
-                    <ul>
-                        <li>@Html.ActionLink("View recent additions", "Index", "RQItems", new { queryString = "$recent$recent additions" }, null)</li>
-                        <li>@Html.ActionLink("View shelves order", "Index", "RQItems", new { queryString = "Signature: R*" }, null)</li>
-                        @if (@ViewBag.HasAddPermit)
-                        {   
-                            <li>@Html.ActionLink("Add new RQItem", "Index", "RQItems", new { verb = "New" }, null);</li>
-                        }
-                    </ul>
-                </div>
+            </div>
+            <div class="pure-u-5-6">
+                <script src="@Url.Content("~/Scripts/HtmlFactoryScripts/result-viewer.js")" type="text/javascript"></script>
+                <script type="text/javascript">
+                    // show default result list on startup
+                    $(document).ready(function () {
+                        resizeToWindowHeight();
+                        getResultList();
+                    });
+                </script>
+                @Html.Partial("~/Views/RQItems/Shared/ResultViewer.cshtml")
             </div>
         </div>
     </div>
-    <div class="pure-u-3-5">
-        <script src="@Url.Content("~/Scripts/HtmlFactoryScripts/result-viewer.js")" type="text/javascript"></script>
-        <script type="text/javascript">
-            // show default result list on startup
-            $(document).ready(function () {
-                getResultList();
-            });
-        </script>
-        @Html.Partial("~/Views/RQItems/Shared/ResultViewer.cshtml")
-    </div>
     <div class="pure-u-1-5">
-        <div class="rq-sidebar rq-right-sidebar">
-            @Html.Partial("~/Views/Account/SmallLogOn.cshtml")
+        <div class="pure-g-r">
+            <div class="pure-u-4-5">
+                <div class="rq-sidebar rq-right-sidebar">
+                    @Html.Partial("~/Views/RQItems/Shared/SearchBoxView.cshtml")
+                    <div>
+                        <div class="rq-settings-panel">
+                            <h3>
+                                Externe Datenbanken</h3>
+                            @Html.Partial("~/Areas/UserSettings/Views/Shared/IncludeExternalView.cshtml")
+                        </div>
+                        <div class="rq-settings-panel">
+                            <h3>
+                                Suchfelder</h3>
+                            <form>
+                            </form>
+                        </div>
+                        <div class="rq-settings-panel">
+                            <h3>
+                                Standard-Abfragen</h3>
+                            <ul>
+                                <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_recent_additions, "Index", "RQItems", new { queryString = "$recent$" + RQResources.Views.Shared.SharedStrings.sq_recent_additions }, null)</li>
+                                <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_digital_documents, "Index", "RQItems", new { queryString = "$digital$" + RQResources.Views.Shared.SharedStrings.sq_digital_documents }, null)</li>
+                                <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_video_documents, "Index", "RQItems", new { queryString = "$film$" + RQResources.Views.Shared.SharedStrings.sq_video_documents }, null)</li>
+                                <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_digital_video, "Index", "RQItems", new { queryString = "$digitalfilm$" + RQResources.Views.Shared.SharedStrings.sq_digital_video }, null)</li>
+                                <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_audio_documents, "Index", "RQItems", new { queryString = "$music$" + RQResources.Views.Shared.SharedStrings.sq_audio_documents }, null)</li>
+                                <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_digital_audio, "Index", "RQItems", new { queryString = "$digitalmusic$" + RQResources.Views.Shared.SharedStrings.sq_digital_audio }, null)</li>
+                                <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_bookmarks, "Index", "RQItems", new { queryString = "" }, null)</li>
+                                <li>@Html.ActionLink("View shelves order", "Index", "RQItems", new { queryString = "Signature: R*" }, null)</li>
+                                @if (@ViewBag.HasAddPermit)
+                                {   
+                                    <li>@Html.ActionLink("Add new RQItem", "Index", "RQItems", new { verb = "New" }, null);</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" pure-u-1-5">
+                <div class="rq-sidebar rq-right-sidebar rq-banner"></div>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="rq-instructions">
+                <div class="rq-instructions">
+                    <a href="">Home</a> <span class="accent">&nbsp;|&nbsp;</span>
+				    <a href="">Terms</a> <span class="accent">&nbsp;|&nbsp;</span>
+				    <a href="">Privacy</a> <span class="accent"></a><br />
+                </div>
+  				<span id="copyright" class="smallcomment">Copyright 2002-2013 by <a href="http://www.jbunzel.de/jb/">Jürgen Bunzel</a></span>
+            </div>
         </div>
     </div>
 </div>

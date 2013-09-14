@@ -1,4 +1,5 @@
-﻿rq-classtree-sidebar {
+﻿.rq-classtree-sidebar {
+    margin-left: 2px;
 }
 
 ul.dynatree-container {
@@ -9,5 +10,4 @@ ul.dynatree-container {
 
 span.dynatree-node a {
     font-size: 0.8em;
-
 }

@@ -2,38 +2,88 @@
 var $win = $(window); //jquery win object
 var dimensions = [$win.width(), $win.height()]; //initial dimensions
 
-$(window).resize(function () { //on window resize...
-    if (!myInterval) //if the interval is not set,
-    {
-        myInterval = setInterval(function () { //initialize it
-            //and check to see if the dimenions have changed or remained the same
-            if (dimensions[0] === $win.width() && dimensions[1] === $win.height()) {   //if they are the same, then we are no longer resizing the window
-                clearInterval(myInterval); //deactivate the interval
-                myInterval = false; //use it as a flag
-
-                //doStuff(); //call your callback function
-                resizeToWindow();
-            }
-            else {
-                dimensions[0] = $win.width(); //else keep the new dimensions
-                dimensions[1] = $win.height();
-            }
-        }, 64);  //and perform a check every 64ms
-    }
-
+$(function () {
+    $(window).on("debouncedresize", function (event) {
+        dimensions[0] = $win.width(); //else keep the new dimensions
+        dimensions[1] = $win.height();
+        resizeToWindowHeight();
+    });
 });
 
-function resizeToWindow() {
-    $(".content-box, .rq-result-box").css("min-height", (dimensions[1] - 220) + "px");
-    $(".rq-sidebar, .rq-left-sidebar, .content-box, .rq-result-box").css("max-height", (dimensions[1] - 220) + "px");
+function resizeToWindowHeight() {
+    var height = dimensions[1] - 60;
+    var nav = $("#nav").outerHeight(true);
+    var footer = $("#footer").outerHeight(true);
+    var page_navigation = $(".page_navigation").outerHeight(true);
+    
+    $("#content").css("min-height", height + "px");
+    $(".content-box").css("max-height", (height - nav) + "px");
+    $(".content-box").css("min-height", (height - nav) + "px");
+    $(".rq-result-box .container").css("max-height", (height - nav + page_navigation) + "px");
+    $(".rq-result-box .container").css("min-height", (height - nav + page_navigation) + "px");
+    $(".rq-sidebar, .rq-left-sidebar, .rq-right-sidebar").css("max-height", (height - nav - footer) + "px");
+    $(".rq-sidebar, .rq-left-sidebar, .rq-right-sidebar").css("min-height", (height - nav - footer) + "px");
 };
+
+/*
+ * debouncedresize: special jQuery event that happens once after a window resize
+ *
+ * latest version and complete README available on Github:
+ * https://github.com/louisremi/jquery-smartresize
+ *
+ * Copyright 2012 @louis_remi
+ * Licensed under the MIT license.
+ *
+ * This saved you an hour of work? 
+ * Send me music http://www.amazon.co.uk/wishlist/HNTU0468LQON
+ */
+(function ($) {
+
+
+    var $event = $.event,
+        $special,
+        resizeTimeout;
+
+
+    $special = $event.special.debouncedresize = {
+        setup: function () {
+            $(this).on("resize", $special.handler);
+        },
+        teardown: function () {
+            $(this).off("resize", $special.handler);
+        },
+        handler: function (event, execAsap) {
+            // Save the context
+            var context = this,
+                args = arguments,
+                dispatch = function () {
+                    // set correct event type
+                    event.type = "debouncedresize";
+                    $event.dispatch.apply(context, args);
+                };
+
+
+            if (resizeTimeout) {
+                clearTimeout(resizeTimeout);
+            }
+
+
+            execAsap ?
+                dispatch() :
+                resizeTimeout = setTimeout(dispatch, $special.threshold);
+        },
+        threshold: 150
+    };
+
+
+})(jQuery);
 
 function ajaxLoadingIndicator(el) {
     this.init = function () {
         $('.rq-ajax-wait').css("width", $(el).width() - 7);
         $('.rq-ajax-wait').css("height", $(el).height());
-        $('.rq-ajax-wait').css("top", $(el).offset().top + 5);
-        $('.rq-ajax-wait').css("left", $(el).offset().left + 7);
+        //$('.rq-ajax-wait').css("top", $(el).offset().top + 5);
+        //$('.rq-ajax-wait').css("left", $(el).offset().left + 7);
         $('.rq-ajax-wait').fadeIn(800);
     }
 

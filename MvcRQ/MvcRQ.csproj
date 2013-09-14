@@ -328,6 +328,14 @@
     <Content Include="Content\images\main_image.png" />
     <None Include="Content\riquest.css" />
     <Content Include="Content\pure-0.2.0\pure-min.css" />
+    <Content Include="Content\themes\Images\tabseparator.gif" />
+    <Content Include="Images\banner.png" />
+    <Content Include="Images\banner1.jpg" />
+    <Content Include="Images\banner2.gif" />
+    <Content Include="Images\banner3.png" />
+    <Content Include="Images\Banner4.png" />
+    <Content Include="Images\bluepixel.gif" />
+    <Content Include="Images\selpixel.gif" />
     <Content Include="js\Jplayer.swf" />
     <Content Include="Areas\Scripts\add-user-form.html" />
     <Content Include="Areas\Scripts\imclude-external-db-form.html" />
@@ -450,7 +458,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>

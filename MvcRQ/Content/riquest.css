@@ -3,13 +3,14 @@
 /*------------*/
 body {
     background-color: Silver;
-    font-size: .85em;
+    /*font-size: .7em;*/
+    font-size: 100.01%;
     font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
     /* to center content horizontally*/
     margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
-    width: 90%;
+    width: 98%;
     color: Gray;
 }
 
@@ -46,12 +47,20 @@ fieldset {
 /*--------------*/
 /* layout rules */
 /*--------------*/
-#content {
-    background-color: rgb(255, 255, 245);
-    padding: 0.5em;
+#nav {
+    /*border: 1px solid blue;*/
 }
 
+#content {
+    background-color: rgb(255, 255, 245);
+    padding-bottom: 15px;
+    /*border: 1px solid green;*/
+} 
+
 #footer {
+    vertical-align: bottom;
+    margin-left: 15px;
+    /*border: 1px solid red;*/
 }
 
 #main {
@@ -67,28 +76,31 @@ fieldset {
 .rq-instructions {
     font-size: 1em;
     display: block;
-    text-align: right;
+    text-align: center;
     margin: 10px;
     color: black;
 }
 
-#footer .rq-instructions {
-    font-size: 0.8em;
-}
-
-.rq-main-image img {
-    display: none;
+#footer .rq-instructions,
+#copyright {
+    font-size: 0.9em;
 }
 
 .rq-menu {
     background-color: rgb(255, 255, 245) !important;
     color: Gray;
     font-family: Garamond;
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-weight: bold;
     line-height: 1.3em;
-    text-align: center;
+    text-align: right;
     vertical-align: top;
+    /*border: 1px solid red;*/
+    /*width: inherit;*/
+}
+
+.rq-menu ul {
+    padding-right: 5px;    
 }
 
 .rq-menu li a {
@@ -96,45 +108,131 @@ fieldset {
     padding-top: 0px;
     text-decoration: none;
     color: #797979;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-.rq-menu li a:hover {
+.rq-menu li img {
+    background: url("../content/themes/images/tabseparator.gif") no-repeat;
+    height: 30px;
+    width: 3px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.rq-menu li a:hover,
+.rq-menu li a:active,
+.pure-menu li a:focus {
     background-color: rgb(255, 255, 245);
-    color: #c22a09; 
-}
-
-.rq-menu a:visited {
-    color: inherit;
+    color: Silver;
+    outline-style: none;
 }
 
 .rq-menu .pure-menu-heading {
     display: inline;
 }
 
+.rq-logo {
+    margin-bottom: 10px;
+    /*margin-top: 10px;*/
+    font-weight: bold;
+    /*border: 1px solid red;*/
+    /*width: inherit;*/
+}
+
+.rq-logo span,
+.rq-logo h1,
+.rq-logo h2 {
+    font-family: Garamond;
+    font-style: italic;
+    color: #797979;
+    line-height: 130%;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline;
+    /*border: 1px solid green;*/
+    height: auto;
+}
+
+.rq-logo h1 {
+    font-size: 32pt;
+    padding-left: 15px;
+}
+
+.rq-logo h2 {
+    font-size: 20pt;
+}
+
 .rq-quick-button {
-    padding-left: 0.3em;
-    padding-right: 0.3em;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 1px;
+    padding-bottom: 1px;
     background-color: #c22a09; 
 }
 
-.rq-resultbox,
 .rq-sidebar {
-    padding: 5px 5px 5px 5px;
-    max-height: 700px;
     overflow: auto;
+    /*border: 1px solid red;*/
 }
 
-.rq-right-sidebar,
-.rq-left-sidebar {
-    margin-left: 15px;
-}
-
-.rq-resultbox {
-    min-height: 700px;
+.rq-result-box {
+    background-color: green !important;
 }
 
 .content-box { 
+    background-color: red;
     border-top: 1px solid silver;
+}
+
+.rq-right-sidebar {
+    margin-left: 15px;
+}
+
+.rq-sidebar input[type="text"],
+.rq-sidebar input[type="password"] {
+    width: 80%;
+    margin-bottom: 5px;
+}
+
+.rq-left-sidebar {
+   margin-left: 15px;
+   /*border: 1px solid blue;*/
+}
+
+.rq-settings-panel {
+    font-size: 0.9em;
+}
+
+.rq-settings-panel ul {
+    /*border: 1px solid blue;*/
+    padding-left: 15px;
+    margin-top: 5px;
+}
+
+.rq-settings-panel h3 {
+    margin-bottom: 0px;
+}
+
+.rq-small-logon {
+    /*border: 1px solid red;*/
+}
+
+.rq-small-logon label {
+    font-size: 0.9em;
+} 
+
+.rq-banner {
+    background-image: url("../images/banner4.png");
+    background-size: 100%;
+    min-height: 700px;
+    margin-right: 15%;
+    margin-left: 0px;
+}
+
+.rqbanner img {
+    width: 1px;
+    height: 100px;
 }
     
 
@@ -143,12 +241,12 @@ fieldset {
 /*-------------*/
 /* style for overlay element used by function ajaxLoader in module ( s.f. rqui-helpers.js) */
 .rq-ajax-wait {
-    background: url("../images/ajax-loader.gif") no-repeat center center transparent;
+    background: url("../images/ajax-loader.gif") no-repeat center transparent;
     opacity: 0.7;
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: beige;
+    background-color: Beige;
     top: 0px;
     left: 0px;
     z-index: 9999;

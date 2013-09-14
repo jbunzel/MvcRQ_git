@@ -9,7 +9,7 @@
 }
 
 label {
-    margin: 15px 2px 5px 0px;
+    font-size: 1.3em !important;
     display: inline;
 }
 
@@ -27,10 +27,17 @@ label[for=DocTypeCode] {
 */
 
 /* hack: insert a line-break */
+label[for=Titel]:before,
 label[for=AboutTime]:before,
+label[for=Institutionen]:before,
+label[for=Schlagworte]:before,
 label[for=Coden]:before,
-label[for=Institutions],
-label[for=Notes],
+label[for=Dokumenttyp-Code]:before,
+label[for=Personenbezug]:before,
+label[for=Zeitbezug]:before,
+label[for=Fußnoten]:before,
+label[for=Notes]:before,
+label[for=Band]:before,
 label[for=Toc]:before {
     content: '\a';
     white-space: pre;
@@ -39,14 +46,14 @@ label[for=Toc]:before {
 .pure-form input[type=text] {
     width: 200px;
     margin: 5px 32px 5px 5px;
-    font-size: 1em;
+    font-size: 1.2em;
     font-family: "Courier New";
 } 
 
 textarea,
 .pure-form textarea {
     margin: 5px 5px 5px 0px;
-    font-size: 1em;
+    font-size: 1.2em;
     font-family: "Courier New";
 }
 

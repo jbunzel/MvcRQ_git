@@ -1,6 +1,6 @@
 ﻿function getResultList() {
     var c = cleanUrl() + "?verb=QueryList";
-    var fd = new ajaxLoadingIndicator(".rq-result-box");
+    var fd = new ajaxLoadingIndicator("#html");
     
     $.ajax({
         url: c,
@@ -15,7 +15,7 @@
                 }, 1)
             };
             fd.remove();
-            resizeToWindow();
+            resizeToWindowHeight();
         },
         error: function (xhr) {
             _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
@@ -30,7 +30,14 @@ function getOldRQItem(docno) {
 }
 
 function renderHtmlList(data) {
-    $("#htmlList").html(data);
+    var optionsValues = "";
+   
+    $(".content-box").html(data);
+    $(".category").each(function () {
+        optionsValues += '<option value="'+$(this).attr("pos") + '">' + $(this).text() + '</option>';
+    });
+    $('#segmentSelector').html(optionsValues);
+    $(".result_segments").show();
     $('#paging_container').pajinate({
         nav_label_first: '<<',
         nav_label_last: '>>',
@@ -39,6 +46,7 @@ function renderHtmlList(data) {
         num_page_links_to_display: 5,
         items_per_page: 15
     });
+    resizeToWindowHeight();
 }
 
 function renderHtml(data, domElementID) {
@@ -109,7 +117,6 @@ function renderFieldContent(data, domElementID) {
 function getRQItem(docno, newDomElementID, oldDomElementID) {
     if ($("#" + newDomElementID).is(":empty")) {
         acceptedType = "html" // set xml for client transformation to html (does not work in  MSIE Version >= 10 : local $.browser.msie ? "html" : "xml";)
-        
         $("#" + newDomElementID).html("<div id='loading'><img src='" + HostAdress() + "/images/ajax-loader.gif' alt='Please Wait' /></div>");
         $.ajax({
             url: HostAdress() + "/RQItems/" + docno + "?verb=" + getrqitemverb,

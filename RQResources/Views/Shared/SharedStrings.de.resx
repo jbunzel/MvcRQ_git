@@ -138,6 +138,9 @@
   <data name="finish" xml:space="preserve">
     <value>Fertigstellen</value>
   </data>
+  <data name="include_external" xml:space="preserve">
+    <value>Einschließen</value>
+  </data>
   <data name="logoff" xml:space="preserve">
     <value>Abmelden</value>
   </data>
@@ -148,7 +151,7 @@
     <value>Katalog</value>
   </data>
   <data name="menu2" xml:space="preserve">
-    <value>Info</value>
+    <value>Über</value>
   </data>
   <data name="menu3" xml:space="preserve">
     <value>Magazin</value>
@@ -156,8 +159,38 @@
   <data name="menu4" xml:space="preserve">
     <value>Arbeitsplatz</value>
   </data>
+  <data name="menu5" xml:space="preserve">
+    <value>Nachrichten</value>
+  </data>
+  <data name="select_databases" xml:space="preserve">
+    <value>Datenbanken auswählen</value>
+  </data>
+  <data name="sq_audio_documents" xml:space="preserve">
+    <value>Audio-Aufnahmen </value>
+  </data>
+  <data name="sq_bookmarks" xml:space="preserve">
+    <value>Web-Verknüpfungen </value>
+  </data>
+  <data name="sq_digital_audio" xml:space="preserve">
+    <value>Digitale Audio-Aufnahmen</value>
+  </data>
+  <data name="sq_digital_documents" xml:space="preserve">
+    <value>Digitale Dokumente</value>
+  </data>
+  <data name="sq_digital_video" xml:space="preserve">
+    <value>Digitale Video-Aufnahmen</value>
+  </data>
+  <data name="sq_recent_additions" xml:space="preserve">
+    <value>Neuzugänge</value>
+  </data>
+  <data name="sq_video_documents" xml:space="preserve">
+    <value>Video-Aufnahmen</value>
+  </data>
+  <data name="subtitle" xml:space="preserve">
+    <value>die personale digitale Bibliothek</value>
+  </data>
   <data name="title" xml:space="preserve">
-    <value>RIQUEST DIGITALE BIBLIOTHEK</value>
+    <value>RiQuest</value>
   </data>
   <data name="update" xml:space="preserve">
     <value>Aktualisieren</value>

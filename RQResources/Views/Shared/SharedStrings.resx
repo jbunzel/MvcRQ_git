@@ -138,6 +138,9 @@
   <data name="finish" xml:space="preserve">
     <value>Finalize</value>
   </data>
+  <data name="include_external" xml:space="preserve">
+    <value>Include</value>
+  </data>
   <data name="logoff" xml:space="preserve">
     <value>log-off</value>
   </data>
@@ -148,7 +151,7 @@
     <value>Catalogue</value>
   </data>
   <data name="menu2" xml:space="preserve">
-    <value>Info</value>
+    <value>About</value>
   </data>
   <data name="menu3" xml:space="preserve">
     <value>Shelves</value>
@@ -156,8 +159,38 @@
   <data name="menu4" xml:space="preserve">
     <value>Workplace</value>
   </data>
+  <data name="menu5" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="select_databases" xml:space="preserve">
+    <value>Select databases</value>
+  </data>
+  <data name="sq_audio_documents" xml:space="preserve">
+    <value>Audio Recordings</value>
+  </data>
+  <data name="sq_bookmarks" xml:space="preserve">
+    <value>Weblinks</value>
+  </data>
+  <data name="sq_digital_audio" xml:space="preserve">
+    <value>Digital Audio</value>
+  </data>
+  <data name="sq_digital_documents" xml:space="preserve">
+    <value>Digital Documents</value>
+  </data>
+  <data name="sq_digital_video" xml:space="preserve">
+    <value>Digital Video</value>
+  </data>
+  <data name="sq_recent_additions" xml:space="preserve">
+    <value>Recent Additions</value>
+  </data>
+  <data name="sq_video_documents" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="subtitle" xml:space="preserve">
+    <value>the personal digital library</value>
+  </data>
   <data name="title" xml:space="preserve">
-    <value>RIQUEST DIGITAL LIBRARY</value>
+    <value>RiQuest</value>
   </data>
   <data name="update" xml:space="preserve">
     <value>Update</value>

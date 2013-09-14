@@ -1,13 +1,14 @@
-
-#paging_container{
+#paging_container {
   	height: 100%;
     width: 100%;
     background-color: transparent;	
 }
 
 .page_navigation , .alt_page_navigation{
-	padding-bottom: 10px;
+    padding-top: 6px;
+	padding-bottom: 5px;
     text-align: right;
+    min-height: 20px;
 }
 
 .page_navigation a, .alt_page_navigation a{
@@ -20,6 +21,33 @@
 	background-color: Lightgray;
 }
 
+.paging_info {
+    /*border: 1px solid green;*/
+    margin-top: 4px;
+    float: left;
+}
+
+.info_text {
+    font-family: Tahoma;
+	font-size: 12px;
+    letter-spacing: normal;
+    display: inline;
+    float: left;
+    padding-top: 3px;
+    padding-left: 3px;
+    /*border: 1px solid red;*/
+}
+
+.result_segments {
+    padding-left: 20px;
+}
+
+.result_segments select {
+    background-color: beige;
+    width: 200px;
+    letter-spacing: normal;
+}
+
 .active_page{
 	background-color: white !important;
 	color: black !important;
@@ -30,19 +58,14 @@
 }
 
 .content-box {
-    max-height: 700px;
-    min-height: 700px;
     background-color: transparent;
     overflow: auto;
 }
 
 .container{
-    max-width: 98%;
 	float: left;
-	margin: 5px 5px 5px 5px;
-	padding: 5px;
-	background-color: Beige !important;
-    border: 2px solid silver;
+	background-color: rgb(255, 255, 235) !important;
+    border: 1px solid silver;
 }
 
 li{
@@ -57,10 +80,3 @@ li{
 	padding: 5px
 }
 
-.info_text {
-    font-family: Tahoma;
-	font-size: 12px;
-    letter-spacing: normal;
-    display: inline;
-    float: left;
-}

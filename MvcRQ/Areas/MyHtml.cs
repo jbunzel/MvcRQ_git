@@ -91,6 +91,8 @@ namespace MvcRQ.Areas
     {
         string Html = ScriptPack.imclude_external_db_form;
 
+        Html = Html.Replace("{include-external}", RQResources.Views.Shared.SharedStrings.include_external);
+        Html = Html.Replace("{select-databases}", RQResources.Views.Shared.SharedStrings.select_databases);
         return new HtmlString(Html);
     }
 

@@ -8,10 +8,8 @@ ul.dynatree-container
 	white-space: nowrap;
 	padding: 3px;
 	margin: 0; /* issue 201 */
-
 	background-color: white;
-	border: 1px dotted gray;
-
+	/*border: 1px dotted gray;*/
 	overflow: auto;
 }
 

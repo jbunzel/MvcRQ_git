@@ -867,19 +867,23 @@
 
 
   <xsl:template match="/">
-      <div id="paging_container" class="pure-g-r container">
+<!--
+    <div id="paging_container" class="pure-g-r container">
         <div class="rq-ajax-wait" style="display: none"></div>
         <div class="info_text"></div>
         <div class ="pure-u-1 page_navigation"></div>
         <div class="pure-u-1 content-box">
+-->
           <ul class="content">
             <xsl:apply-templates select="//Systematiken"/>
             <!--
-      <xsl:apply-templates select="/QueryResults/extDBList"/>
--->
+              <xsl:apply-templates select="/QueryResults/extDBList"/>
+            -->
           </ul>
+<!--    
         </div>
       </div>
+-->      
 </xsl:template>
 
   
@@ -917,16 +921,22 @@
 
       <li>
         <xsl:if test="name(preceding-sibling::*[1])='Hits' and string-length(parent::*/DDCNumber)>0">
-          <span class="category">
-              <A>
-                <xsl:attribute name="name">
-                  <xsl:value-of select="parent::*/DDCNumber" />
-                </xsl:attribute>
+          <span class="category" pos="position()">
+            <xsl:attribute name="class">
+              <xsl:text>category</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="pos">
+              <xsl:value-of select="position() - 1"/>
+            </xsl:attribute>
+            <A>
+              <xsl:attribute name="name">
                 <xsl:value-of select="parent::*/DDCNumber" />
-              </A>
-              <xsl:text> - </xsl:text>
-              <xsl:value-of select="parent::*/Description" />
-            </span>
+              </xsl:attribute>
+              <xsl:value-of select="parent::*/DDCNumber" />
+            </A>
+            <xsl:text> - </xsl:text>
+            <xsl:value-of select="parent::*/Description" />
+          </span>
         </xsl:if>
         <table class="itemlist">
           <tr>
