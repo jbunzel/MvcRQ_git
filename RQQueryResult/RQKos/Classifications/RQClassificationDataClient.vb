@@ -38,7 +38,7 @@
         End Sub
 
 
-        Public Overrides Sub PutClassData(ByRef theClass As SubjClass)
+        Public Overrides Function PutClassData(ByRef theClass As SubjClass) As Boolean
             Dim _mqQuery = New RQDAL.RQCatalogDAL
             Dim drRow As RQDataSet.SystematikRow
 
@@ -46,12 +46,13 @@
             drRow.ParentID = theClass.ParentClassID
             drRow.DDCNumber = theClass.ClassCode
             drRow.Description = theClass.ClassShortTitle
-            drRow.RegensburgDesc = theClass.ClassLongTitle
+            drRow.RegensburgDesc = IIf(IsNothing(theClass.ClassLongTitle) Or theClass.ClassLongTitle = "", "-", theClass.ClassLongTitle)
             drRow.RegensburgSign = theClass.RefRVKSet
             drRow.DocRefCount = theClass.NrOfClassDocs
             drRow.SubClassCount = theClass.NrOfSubClasses
             drRow.DirRefCount = theClass.NrOfRefLinks
-        End Sub
+            Return _mqQuery.UpdateSystematik()
+        End Function
 
 
         Public Overrides Sub GetNarrowerClassData(ByVal majClassId As Integer, ByRef classBranch As SubjClassBranch)
@@ -83,74 +84,172 @@
         End Sub
 
 
-        Public Overrides Function UpdateDocRefs(ByRef classBranch As SubjClassBranch, Optional ByVal iSuperClassDocCount As Integer = 0) As Boolean
-            Dim ResultSet As New RQQueryResult.RQResultSet
-            Dim SuperClass As Utilities.LexicalClass = classBranch.MajorClass.RefRVKClass 'Me._arSubjClass(0).RefRVKClass
+        Public Overrides Function UpdateDocRefs(ByRef classBranch As SubjClassBranch, ByRef iMajorClassDocCount As Integer, ByRef iMajorClassRefCount As Integer) As Boolean
+            Dim ResultSet As New RQQueryResult.RQResultSet(True)
             Dim item As RQQueryResult.RQResultItem
             Dim bErr As Boolean = True
             Dim i As Integer
 
             'Zero DocRefCount for subclasses being updated
-            For i = 1 To classBranch.count - 1 'Me._arSubjClass.Length - 1
-                If Not IsNothing(classBranch.Item(i)) Then 'Me._arSubjClass(i)) Then
+            For i = 1 To classBranch.count - 1
+                If Not IsNothing(classBranch.Item(i)) Then
                     classBranch.Item(i).NrOfClassDocs = 0
                     classBranch.Item(i).NrOfRefLinks = 0
                 End If
             Next
             EditGlobals.Message += "<p class='smalltext'>"
-            ResultSet.Find(classBranch.MajorClass.RefRVKSet) 'Me._arSubjClass(0).RefRVKSet)
+            ResultSet.Find(classBranch.MajorClass.RefRVKSet)
             For Each item In ResultSet
-                Try
-                    Dim clClassString As Utilities.ClassString = New Utilities.ClassString(item.ItemDescription.Classification.Content)
-                    Dim bCLComplete As Boolean = False
-                    Dim arIsInSubClass As New Collections.BitArray(clClassString.Count, False)
-                    Dim arIsInSuperClass As New Collections.BitArray(clClassString.Count, False)
-                    Dim arContainsClassString As New Collections.BitArray(classBranch.count, False) 'Me._arSubjClass.Length, False)
+                Dim bChanged As Boolean = False
+                Dim strWorkClassString As String = item.ItemDescription.Classification.Content
+                Dim clClassString As Utilities.ClassString = New Utilities.ClassString(strWorkClassString)
+                Dim bHasNoMinorClassCodes As Boolean = True
+                Dim bHasMajorClassCodes As Boolean = False
+                Dim arHasAClassStringIn As New Collections.BitArray(classBranch.count, False)
+                Dim arIsMajorClassCode As New Collections.BitArray(clClassString.Count, False)
 
+                Try
                     For i = 0 To clClassString.Count - 1
+                        Dim arHasThisClassStringIn As New Collections.BitArray(classBranch.count, False)
+
                         If (clClassString.Item(i).StartsWith(Globals.ClassCodePrefix)) Then
                             If classBranch.MajorClass.RefRVKClass.IsInRange(clClassString.Item(i).Remove(0, 8)) Then
                                 Dim j As Integer
 
-                                For j = 1 To classBranch.count - 1 'Me._arSubjClass.Length - 1
-                                    If Not IsNothing(classBranch.Item(j)) Then 'Me._arSubjClass(j)) Then
-                                        Dim SubClass As Utilities.LexicalClass = classBranch.Item(j).RefRVKClass 'Me._arSubjClass(j).RefRVKClass
+                                For j = 1 To classBranch.count - 1
+                                    If Not IsNothing(classBranch.Item(j)) Then
+                                        Dim SubClass As Utilities.LexicalClass = classBranch.Item(j).RefRVKClass
 
                                         If SubClass.IsInRange(clClassString.Item(i).Remove(0, 8)) Then
-                                            arIsInSubClass(i) = True
-                                            If Not arContainsClassString(j) = True Then
-                                                classBranch.Item(j).NrOfClassDocs += CType(1, Short) 'Me._arSubjClass(j).NrOfClassDocs += CType(1, Short)
-                                                If item.RQResultItemType = RQQueryResult.RQResultItem.RQItemType.bookmark Then classBranch.Item(j).NrOfRefLinks += CType(1, Short)
-                                                arContainsClassString(j) = True
+                                            If Not arHasAClassStringIn(j) = True Then
+                                                If item.RQResultItemType = RQQueryResult.RQResultItem.RQItemType.bookmark Then
+                                                    classBranch.Item(j).NrOfRefLinks += CType(1, Short)
+                                                Else
+                                                    classBranch.Item(j).NrOfClassDocs += CType(1, Short)
+                                                End If
+                                                arHasAClassStringIn(j) = True
+                                                bHasNoMinorClassCodes = False
                                             End If
-                                            item.ItemDescription.Classification.Content = New Utilities.ClassString(item.ItemDescription.Classification.Content).CompleteClassString(clClassString.Item(i), classBranch.Item(j).ClassCode)
+                                            arHasThisClassStringIn(j) = True
+                                            strWorkClassString = New Utilities.ClassString(strWorkClassString).CompleteClassString(clClassString.Item(i), classBranch.Item(j).ClassCode)
+                                            bChanged = True
+                                        Else
+                                            arIsMajorClassCode(i) = True 'clClassString.Item(i) gehört entweder zu einer anderen Minorklasse oder zur Majorklasse. Letzteres wird angenommen 
                                         End If
                                     End If
                                 Next
-                                If Not arIsInSubClass(i) Then
-                                    arIsInSuperClass(i) = True
+                            End If
+                        End If
+                        If arIsMajorClassCode(i) Then
+                            For j = 1 To classBranch.count - 1 'Teste, ob clClassString.Item(i) zu einer anderen Minorklasse gehört. Wenn ja, gehört es nicht zur Majorklasse
+                                arIsMajorClassCode(i) = arIsMajorClassCode(i) And (Not arHasThisClassStringIn(j))
+                            Next
+                            If arIsMajorClassCode(i) Then 'Vervollständige den clClassString mit dem ClassCode der Majorklasse 
+                                Dim bToDo = True
+
+                                If Not IsNothing(clClassString.Item(i - 1)) Then bToDo = clClassString.Item(i - 1) <> classBranch.MajorClass.ClassCode
+                                If bToDo Then
+                                    strWorkClassString = New Utilities.ClassString(strWorkClassString).CompleteClassString(clClassString.Item(i), classBranch.MajorClass.ClassCode)
+                                    bChanged = True
                                 End If
                             End If
                         End If
                     Next
-                    For i = 0 To clClassString.Count - 1
-                        If arIsInSuperClass(i) And Not arIsInSubClass(i) Then
-                            iSuperClassDocCount += 1
-                            Exit For
-                        End If
-                    Next
+                    If bChanged Then
+                        Dim clWorkItemCopy As New RQQueryResult.RQResultItem(item)
+
+                        clWorkItemCopy.ItemDescription.Classification = New RQLib.RQQueryResult.RQDescriptionElements.RQClassification(strWorkClassString)
+                        item.ItemDescription.Classification.ClassEditMode(True) 'set to prevent class completion with old classification data when item is changed
+                        item.Change(clWorkItemCopy)
+                        item.ItemDescription.Classification.ClassEditMode(False)
+                    End If
                 Catch ex As Exception
-                    Dim test As String
-                    test = ex.Message
                 End Try
+                For i = 0 To clClassString.Count - 1
+                    bHasMajorClassCodes = bHasMajorClassCodes Or arIsMajorClassCode(i)
+                Next
+                If bHasNoMinorClassCodes Or bHasMajorClassCodes Then
+                    If item.RQResultItemType = RQQueryResult.RQResultItem.RQItemType.bookmark Then
+                        iMajorClassRefCount += 1
+                    Else
+                        iMajorClassDocCount += 1
+                    End If
+                End If
             Next
             If ResultSet.Update() <> 0 Then
-                EditGlobals.Message += "Error occured on DocRefCount update for class " & classBranch.MajorClass.ClassID & ".</br>" 'Me._arSubjClass(0).ClassID & ".</br>"
+                EditGlobals.Message += "Error occured on DocRefCount update for class " & classBranch.MajorClass.ClassID & ".</br>"
                 bErr = False
             Else
-                EditGlobals.Message += "DocRefCounts have been updated for class " & classBranch.MajorClass.ClassID & ".</br>" 'Me._arSubjClass(0).ClassID & ".</br>"
+                EditGlobals.Message += "DocRefCounts have been updated for class " & classBranch.MajorClass.ClassID & ".</br>"
             End If
             Return bErr
+        End Function
+
+
+        Public Overrides Function Update(ByRef classBranch As SubjClassBranch) As Boolean
+            Dim retVal As Boolean = False
+            Dim iSuperClassDocCount As Integer = 0
+            Dim iSuperClassRefCount As Integer = 0
+
+            If Me.UpdateDocRefs(classBranch, iSuperClassDocCount, iSuperClassRefCount) = True Then
+                Dim i As Integer = 0
+                Dim mqQuery As New RQDAL.RQCatalogDAL
+                Dim drTable As RQDataSet.SystematikDataTable = CType(mqQuery.GetRecordByParentID(classBranch.MajorClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable)
+
+                If Not drTable Is Nothing Then
+                    For i = 1 To classBranch.count - 1
+                        If Not IsNothing(classBranch.Item(i)) Then
+                            If i > drTable.Rows.Count Then
+                                Dim drRow As RQDataSet.SystematikRow = CType(mqQuery.NewRow("RQDataSet", "Systematik"), RQDataSet.SystematikRow)
+
+                                drTable.Rows.Add(drRow)
+                                drRow.ParentID = classBranch.MajorClassID
+                                drRow.DocRefCount = classBranch.Item(i).NrOfClassDocs
+                                drRow.DirRefCount = classBranch.Item(i).NrOfRefLinks
+                                drRow.SubClassCount = 0
+                            End If
+                            If classBranch.Item(i).ClassCode = "" Or classBranch.Item(i).RefRVKSet = "" Then
+                                drTable.Item(i - 1).Delete()
+                            Else
+                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DDCNumber = classBranch.Item(i).ClassCode
+                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).Description = classBranch.Item(i).ClassShortTitle
+                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).RegensburgDesc = IIf(IsNothing(classBranch.Item(i).ClassLongTitle) Or classBranch.Item(i).ClassLongTitle = "", "-", classBranch.Item(i).ClassLongTitle)
+                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).RegensburgSign = classBranch.Item(i).RefRVKSet
+                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DocRefCount = classBranch.Item(i).NrOfClassDocs
+                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DirRefCount = classBranch.Item(i).NrOfRefLinks
+                            End If
+                        End If
+                    Next
+                    'Update SubClassCount parameter of base class
+                    classBranch.MajorClass.NrOfSubClasses = CShort(drTable.Count)
+                    classBranch.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
+                    classBranch.MajorClass.NrOfRefLinks = CShort(iSuperClassRefCount)
+                    retVal = mqQuery.UpdateSystematik() And Me.PutClassData(classBranch.MajorClass)
+                End If
+            End If
+            Return retVal
+            'If bErr = False Then
+            '    'Update SubClassCount parameter of base class 
+            '    classBranch.MajorClass.NrOfSubClasses = CShort(NewSubClassCount)
+            '    classBranch.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
+            '    If classBranch.MajorClass.Save <> 0 Then
+            '        EditGlobals.AddHint("Error occured on superclass update.", "")
+            '    End If
+            '    EditGlobals.AddHint("Classification codes have been updated.", "")
+            'Else
+            '    EditGlobals.AddHint("Error occured on update of classification codes.", "")
+            'End If
+            'For i = 1 To classBranch.count - 1
+            '    If Not IsNothing(classBranch.Item(i)) Then
+            '        If classBranch.Item(i).NrOfSubClasses <> 0 Then
+            '            Dim SubClassBranch As New SubjClassBranch(classBranch.Item(i).ClassID)
+
+            '            SubClassBranch.Load()
+            '            SubClassBranch.Update()
+            '        End If
+            '    End If
+            'Next
+            'End If
         End Function
 
 #End Region

@@ -1,0 +1,30 @@
+﻿<script type="text/javascript">
+    function lucNew() { var url = '@Url.Action("New", "Lucene")'; Post(url); }
+    function lucDelete() { var url = '@Url.Action("Delete", "Lucene")'; Post(url); }
+    function lucUpdate() { var url = '@Url.Action("Update", "Lucene")'; Post(url); }
+    function lucOptimize() { var url = '@Url.Action("Optimize", "Lucene")'; Post(url); }
+
+    function Post(url) {
+        var fd = new ajaxLoadingIndicator("#html");
+
+        $.post(url, null,
+                function (data) {
+                    fd.remove();
+                    _myHelper.showMessage(data, "success");
+                }).fail(function (xhr) {
+                    fd.remove();
+                    _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
+                });
+    }
+</script> 
+<div class="rq-ajax-wait" style="display: none"></div>
+<ul class="standard-searches">
+    @if(ViewBag.HasAdminPermit == "true") {
+        <li>@Html.ActionLink(MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_reindex, "New", "Lucene", new { area = "DataManagement" }, new { title = MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_reindex_title, onClick="lucNew(); return false;"  })</li>
+        <li>@Html.ActionLink(MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_optimize, "Optimize", "Lucene", new {area = "DataManagement"}, new { title = MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_optimize_title, onClick="lucOptimize(); return false;" })</li>
+    }
+    else {
+        <li>@Html.ActionLink(MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_reindex, "New", "Lucene", new { area = "DataManagement" }, new { title = MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_reindex_title, disabled="true"  })</li>
+        <li>@Html.ActionLink(MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_optimize, "Optimize", "Lucene", new {area = "DataManagement"}, new { title = MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_optimize_title, disabled="true" })</li>
+    }        
+</ul>

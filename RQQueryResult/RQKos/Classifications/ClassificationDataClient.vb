@@ -46,7 +46,7 @@ Namespace RQKos.Classifications
         Public MustOverride Sub GetClassData(ByRef theClass As SubjClass)
 
 
-        Public MustOverride Sub PutClassData(ByRef theClass As SubjClass)
+        Public MustOverride Function PutClassData(ByRef theClass As SubjClass) As Boolean
 
 
         Public MustOverride Sub GetNarrowerClassData(ByVal majClassId As Integer, ByRef classBranch As SubjClassBranch)
@@ -55,7 +55,10 @@ Namespace RQKos.Classifications
         Public MustOverride Sub GetNarrowerClassData(ByVal majClassId As String, ByRef classBranch As SubjClassBranch)
 
 
-        Public MustOverride Function UpdateDocRefs(ByRef classBranch As SubjClassBranch, Optional ByVal iSuperClassDocCount As Integer = 0) As Boolean
+        Public MustOverride Function UpdateDocRefs(ByRef classBranch As SubjClassBranch, ByRef iSuperClassDocCount As Integer, ByRef iSuperClassRefCount As Integer) As Boolean
+
+
+        Public MustOverride Function Update(ByRef classBranch As SubjClassBranch) As Boolean
 
     End Class
 

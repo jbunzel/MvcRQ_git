@@ -12,17 +12,23 @@ using RQLib.RQQueryForm;
 namespace MvcRQ.Models
 {
     /// <summary>
-    /// Model class for the RiQuest Knowledge Organiszation (KOS) Model
+    /// Model class to present the RiQuest Knowledge Organiszation (RqKOS) 
     /// </summary>
+    [DataContract]
     public class RQKosModel
     {
-        #region "public constructors"
+        #region "public properties"
 
         /// <summary>
         /// RQKosBranch
         /// </summary>
+        [DataMember]
         public RQKosBranch RQKosSet { get; set; }
-        
+
+        #endregion
+
+        #region "public constructors"
+
         /// <summary>
         /// Constructor of RQKosModel
         /// </summary>
@@ -47,13 +53,187 @@ namespace MvcRQ.Models
     }
 
     /// <summary>
+    /// Model class to edit the RiQuest Knowledge Organization (RqKOS)
+    /// </summary>
+    public class RQKosEditModel
+    {
+        #region private members
+
+        private System.Collections.Generic.List<RQKosBranch> _mClassBranches = null;
+        private RQKosBranch.RQKosBranchStatus _mEditStatus;
+        private string _mEditClassID = "";
+
+        #endregion
+
+        #region private methods
+
+        private void Clear()
+        {
+            if (this._mClassBranches != null)
+                for (var i=0; i < this._mClassBranches.Count; i++)
+                    if (this._mClassBranches[i] != null)
+                    {
+                        this._mClassBranches[i].ClassBranch.Clear();
+                        this._mClassBranches[i] = null;
+                    }
+        }    
+
+        private SubjClassBranch Find(string majClassID)
+        {
+            for (var i = 0; i < this._mClassBranches.Count; i++)
+            {
+                if (this._mClassBranches[i] != null)
+                    if (this._mClassBranches[i].ClassBranch.MajorClassID == majClassID)
+                        return this._mClassBranches[i].ClassBranch;
+            }
+
+            SubjClassBranch cb = new SubjClassBranch(ref majClassID);
+
+            cb.Load();
+            for (var i = 0; i < this._mClassBranches.Count; i++)
+            {
+                if (this._mClassBranches[i] == null)
+                {
+                    this._mClassBranches[i] = new RQKosBranch(cb);
+                    return cb;
+                }
+            }
+            this._mClassBranches.Add(new RQKosBranch(cb));
+            return cb;
+        }
+
+        #endregion
+
+        #region public properties
+
+        public RQKosBranch RQKosEditSet
+        {
+            get
+            {
+                return new RQKosBranch(this.Find(this._mEditClassID));
+            }
+        }
+
+        public RQKosBranch.RQKosBranchStatus RQKosEditStatus
+        {
+            get
+            {
+                return _mEditStatus;
+            }
+        }
+
+        #endregion
+
+        #region public constructors
+
+        public RQKosEditModel()
+        {
+            this.Clear();
+            _mClassBranches = new System.Collections.Generic.List<RQKosBranch>();
+        }
+
+        public RQKosEditModel(IEnumerable<RQKosTransfer> RQKosTransferBranch)
+            :this()
+        {
+            RQKosBranch cb = new RQKosBranch(RQKosTransferBranch);
+
+            this._mEditClassID = cb.ClassBranch.MajorClassID;
+            this._mClassBranches.Add(cb);
+        }
+
+        public RQKosEditModel(string itemID)
+            :this()
+        {
+            RQKosBranch cb = null;
+
+            if (itemID == null || itemID == String.Empty) itemID = "0";
+            cb = new RQKosBranch(itemID, "");
+            cb.Load();
+            this._mEditClassID = cb.ClassBranch.MajorClassID;
+            this._mClassBranches.Add(cb);
+        }
+
+        #endregion
+
+        #region public methods
+
+        public bool IsCompatible()
+        {
+            SubjClassBranch editCB = this.Find(this._mEditClassID);
+            RQKosBranch oldCB = new RQKosBranch(this._mEditClassID,"");
+            bool retVal = true;
+ 
+            oldCB.Load();
+            for (var i = 1; i < editCB.count; i++)
+            {
+                if (oldCB.ClassBranch.get_Item(i + 1) != null)
+                {
+                    SubjClass sc = editCB.get_Item(i);
+
+                    if ((sc.NrOfSubClasses > 0) && (sc.RefRVKSet != oldCB.ClassBranch.get_Item(i + 1).RefRVKSet))
+                    {
+                        if (!this.Find(sc.ClassID).IsFeasableWith(ref sc))
+                            retVal = retVal && false;
+                    }
+                }
+            }
+            return retVal;
+        }
+
+        public RQKosBranch.RQKosBranchStatus IsValid()
+        {
+            SubjClassBranch editCB = this.Find(this._mEditClassID);
+            bool retValue = false;
+            
+            if (editCB.IsValid())
+                retValue = true;
+            if (retValue = this.IsCompatible() ? retValue && true : false)
+                return _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = true, message = "Class mapping is consistent!", hints = RQLib.EditGlobals.ReadHints() };
+            else
+                return _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = false, message = "Consistency errors in class mapping!", hints = RQLib.EditGlobals.ReadHints() };
+        }
+
+        public RQKosBranch AppendClass()
+        {
+            SubjClassBranch editCB = this.Find(this._mEditClassID);
+            SubjClass newSC = new SubjClass();
+
+            newSC.ClassificationSystem = SubjClass.ClassificationSystems.rq;
+            newSC.NrOfClassDocs = 0;
+            newSC.NrOfRefLinks = 0;
+            newSC.NrOfSubClasses = 0;
+            newSC.ParentClassID = this._mEditClassID;
+            editCB.Add(newSC);
+            return this.RQKosEditSet;
+        }
+
+        public bool Update()
+        {
+            bool retValue = false;
+            SubjClassBranch editCB = this.Find(this._mEditClassID);
+            
+            if (editCB.IsValid())
+                retValue = true;
+            if (retValue = this.IsCompatible() ? retValue && true : false)
+            {
+                _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = true, message = "Class mapping is consistent!", hints = RQLib.EditGlobals.ReadHints() };
+                editCB.Update();
+            }
+            else
+                _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = false, message = "Consistency errors in class mapping!", hints = RQLib.EditGlobals.ReadHints() };
+            return retValue;
+        }
+
+        #endregion
+    }
+
+    /// <summary>
     /// A single subject classification item of the RiQuest Knowledge Organisation System (KOS)  
     /// </summary>
     /// <remarks>
     /// The collection contains a description of the major subject class at the zero position followed by descriptions of the minor subject classes (subclasses) 
     /// </remarks>
     [CollectionDataContract]
-    [XmlRoot]
     [XmlInclude(typeof(RQKosItem))]
     [XmlInclude(typeof(RQKosItemRQLD))]
     public class RQKosBranch : System.Collections.Generic.IEnumerable<RQKosItemTemplate>
@@ -62,6 +242,21 @@ namespace MvcRQ.Models
 
         private SubjClassBranch classBranch;
         private string _service;
+
+        #endregion
+
+        #region "public members"
+
+        [DataContract]
+        public struct RQKosBranchStatus
+        {
+            [DataMember]
+            public bool isSuccess;
+            [DataMember]
+            public string message;
+            [DataMember]
+            public RQLib.EditGlobals.Hint[] hints;
+        }
 
         #endregion
 
@@ -78,7 +273,7 @@ namespace MvcRQ.Models
                 this.classBranch = ClassBranch;
             }
         }
-        
+
         public int count
         {
             get
@@ -86,7 +281,7 @@ namespace MvcRQ.Models
                 if (this._service == "dt")
                     return this.classBranch.count > 0 ? this.classBranch.count - 1 : 0;
                 else
-                    return this.classBranch.count;
+                    return (this.classBranch != null) ? this.classBranch.count : 0;
             }
         }
 
@@ -98,11 +293,11 @@ namespace MvcRQ.Models
             : base()
         { }
 
-        public RQKosBranch( string majClassID, string serviceId)
+        public RQKosBranch(string majClassID, string serviceId)
             : base()
         {
             int numVal = -1;
-   
+
             this._service = serviceId;
             try
             {
@@ -130,8 +325,36 @@ namespace MvcRQ.Models
             else
                 this.classBranch = new SubjClassBranch(ref majClassID);
         }
-        
-#endregion
+
+        public RQKosBranch(IEnumerable<RQKosTransfer> newRQKosBranch)
+            : base()
+        {
+            SubjClass[] classArray = new SubjClass[newRQKosBranch.Count()];
+
+            for (int i = 0; i < newRQKosBranch.Count(); i++)
+            {
+                classArray[i] = new SubjClass();
+                classArray[i].ClassCode = newRQKosBranch.ElementAt(i).ClassCode;
+                classArray[i].ClassID = newRQKosBranch.ElementAt(i).ClassID;
+                classArray[i].ClassShortTitle = newRQKosBranch.ElementAt(i).ClassName;
+                classArray[i].ClassLongTitle = newRQKosBranch.ElementAt(i).ClassTitle;
+                classArray[i].NrOfRefLinks = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfDocuments);
+                classArray[i].NrOfSubClasses = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfSubclasses);
+                classArray[i].ParentClassID = newRQKosBranch.ElementAt(i).ParentID;
+                classArray[i].RefRVKSet = newRQKosBranch.ElementAt(i).RVKClassCodes;
+                classArray[i].RefRVKClass = new RQLib.Utilities.LexicalClass(newRQKosBranch.ElementAt(i).RVKClassCodes);
+                classArray[i].ClassDataClient = new RQClassificationDataClient();
+            }
+            this.classBranch = new SubjClassBranch(classArray);
+        }
+
+        public RQKosBranch(SubjClassBranch subjClassBranch)
+            : base()
+        {
+            this.classBranch = subjClassBranch;
+        }
+
+        #endregion
 
         #region "public methods"
 
@@ -139,6 +362,9 @@ namespace MvcRQ.Models
         {
             SubjClass cl = item._class;
 
+            cl.NrOfRefLinks = 0;
+            cl.NrOfSubClasses = 0;
+            cl.ParentClassID = this.classBranch.MajorClassID;
             this.classBranch.Add(cl);
         }
 
@@ -152,9 +378,29 @@ namespace MvcRQ.Models
                 return new RQKosItem(classBranch.get_Item(i));
         }
 
+        //public RQKosBranchStatus CheckConsistency()
+        //{
+        //    string majClassId = this.classBranch.get_Item(0).ClassID;
+        //    SubjClassManager sclm = new SubjClassManager();
+
+        //    if (SubjClassManager.IsValid(this.classBranch))
+        //        return new RQKosBranchStatus() { isSuccess = true, message = "Mapping is consistent!", hints = RQLib.EditGlobals.ReadHints() };
+        //    else
+        //        return new RQKosBranchStatus() { isSuccess = false, message = "Consistency Errors", hints = RQLib.EditGlobals.ReadHints() };
+        //}
+
         public void Load()
         {
             this.classBranch.Load();
+            if (this.classBranch.MajorClassID == "0")
+            {
+                SubjClass sc = this.classBranch.get_Item(0);
+
+                sc.ClassCode = "NULL";
+                sc.ClassShortTitle = "RQ Classification";
+                sc.NrOfSubClasses = 15;
+                sc.NrOfRefLinks = 0;
+            }
         }
 
         public System.Collections.Generic.IEnumerator<RQKosItemTemplate> GetEnumerator()
@@ -237,16 +483,56 @@ namespace MvcRQ.Models
     }
 
     /// <summary>
+    /// Helper Class to bind json input from browser to class RQKOSBranch
+    /// Circumvention of problems arising by direct binding json to RQKosBranch
+    /// </summary>
+    public class RQKosTransfer
+    {
+        #region "public properties"
+
+        [DataMember]
+        public string ClassID { get; set; }
+
+        [DataMember]
+        public string ClassCode { get; set; }
+
+        [DataMember]
+        public string ParentID { get; set; }
+
+        [DataMember]
+        public string ClassName { get; set; }
+
+        [DataMember]
+        public string ClassTitle { get; set; }
+
+        [DataMember]
+        public string RVKClassCodes { get; set; }
+
+        [DataMember]
+        public string NrOfSubclasses { get; set; }
+
+        [DataMember]
+        public string NrOfDocuments { get; set; }
+
+        #endregion
+
+        #region "public constructors"
+
+        public RQKosTransfer() { }
+
+        #endregion
+    }
+
+    /// <summary>
     /// Description of a single subject class
     /// </summary>
-    [XmlRoot]
     abstract public class RQKosItemTemplate
     {
         #region "private properties"
 
         //internal SubjClass _class { get; set; }
         internal SubjClass _class { get; set; }
-        
+
         #endregion
 
         #region "public constructors"
@@ -264,38 +550,148 @@ namespace MvcRQ.Models
         #endregion
     }
 
+    /// <summary>
+    /// Description of a single subject class in editor variant
+    /// </summary>
     [KnownType(typeof(RQKosItem))]
-    public class RQKosItem 
+    public class RQKosItem
         : RQKosItemTemplate
     {
         #region "public properties"
 
+        //[DataMember]
+        //public SubjClass classification
+        //{
+        //    get
+        //    {
+        //        return this._class;
+        //    }
+        //    set 
+        //    {
+        //        this._class = classification;
+        //    }
+        //}
+
         [DataMember]
-        public SubjClass classification
+        public string ClassID
         {
             get
             {
-                return this._class;
+                return this._class.ClassID;
             }
-            set 
+            set
             {
-                this._class = classification;
+                this._class.ClassID = ClassID;
             }
         }
-        
+
+        [DataMember]
+        public string ClassCode
+        {
+            get
+            {
+                return this._class.ClassCode;
+            }
+            set
+            {
+                this._class.ClassCode = ClassCode;
+            }
+        }
+
+        [DataMember]
+        public string ParentID
+        {
+            get
+            {
+                return this._class.ParentClassID;
+            }
+            set
+            {
+                this._class.ParentClassID = ParentID;
+            }
+        }
+
+        [DataMember]
+        public string ClassName
+        {
+            get
+            {
+                return this._class.ClassShortTitle;
+            }
+            set
+            {
+                this._class.ClassShortTitle = ClassName;
+            }
+        }
+
+        [DataMember]
+        public string ClassTitle
+        {
+            get
+            {
+                return this._class.ClassLongTitle;
+            }
+            set
+            {
+                this._class.ClassLongTitle = ClassTitle;
+            }
+        }
+
+        [DataMember]
+        public string RVKClassCodes
+        {
+            get
+            {
+                return this._class.RefRVKSet;
+            }
+            set
+            {
+                this._class.RefRVKSet = RVKClassCodes;
+            }
+        }
+
+        [DataMember]
+        public string NrOfSubclasses
+        {
+            get
+            {
+                return this._class.NrOfSubClasses.ToString();
+            }
+            set
+            {
+                this._class.NrOfSubClasses = int.Parse(NrOfSubclasses);
+            }
+        }
+
+        [DataMember]
+        public string NrOfDocuments
+        {
+            get
+            {
+                return this._class.NrOfClassDocs.ToString();
+            }
+            set
+            {
+                this._class.NrOfClassDocs = int.Parse(NrOfDocuments);
+            }
+        }
+
         #endregion
 
         #region "public constructors"
 
         public RQKosItem()
-            : base() {}
-        
+            : base() { }
+
         public RQKosItem(SubjClass thisClass)
             : base(thisClass) { }
 
         #endregion
     }
 
+    /// <summary>
+    /// Description of a single subject class in DynaTree variant
+    /// </summary>
     [KnownType(typeof(RQKosItemDT))]
     public class RQKosItemDT
     : RQKosItemTemplate
@@ -304,7 +700,7 @@ namespace MvcRQ.Models
 
         private bool _isLazy = true;
         private string _tooltip = "";
-        
+
         #endregion
 
         #region "public properties"
@@ -321,7 +717,7 @@ namespace MvcRQ.Models
                 this._class.ClassShortTitle = title;
             }
         }
-        
+
         [DataMember]
         public bool isFolder
         {
@@ -336,7 +732,7 @@ namespace MvcRQ.Models
             {
             }
         }
-        
+
         [DataMember]
         public bool isLazy
         {
@@ -349,7 +745,7 @@ namespace MvcRQ.Models
                 this._isLazy = isLazy;
             }
         }
-        
+
         [DataMember]
         public string key
         {
@@ -364,7 +760,7 @@ namespace MvcRQ.Models
                 this._class.ClassID = key.Substring(0, si) + key.Substring(si + 1);
             }
         }
-        
+
         [DataMember]
         public string unselectable
         {
@@ -379,7 +775,7 @@ namespace MvcRQ.Models
             {
             }
         }
-        
+
         [DataMember]
         public string tooltip
         {
@@ -395,7 +791,7 @@ namespace MvcRQ.Models
                     if (this._class.NrOfClassDocs + this._class.NrOfRefLinks == 1)
                         this._tooltip += " - show 1 document";
                     else
-                        this._tooltip += " - show " + Convert.ToString(this._class.NrOfClassDocs + this._class.NrOfRefLinks) + " documents"; 
+                        this._tooltip += " - show " + Convert.ToString(this._class.NrOfClassDocs) + " documents, " + Convert.ToString(this._class.NrOfRefLinks) + " bookmarks";
                 return this._tooltip;
             }
             set
@@ -407,7 +803,7 @@ namespace MvcRQ.Models
         #endregion
 
         #region "public constructors"
-        
+
         public RQKosItemDT()
             : base() { }
 
@@ -418,6 +814,9 @@ namespace MvcRQ.Models
         #endregion
     }
 
+    /// <summary>
+    /// Description of a single subject class in semantic web linked data variant
+    /// </summary>
     [KnownType(typeof(RQKosItemRQLD))]
     [KnownType(typeof(RQLib.RQLD.RQClassificationGraph))]
     public class RQKosItemRQLD

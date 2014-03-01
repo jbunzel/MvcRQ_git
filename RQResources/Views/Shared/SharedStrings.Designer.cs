@@ -133,7 +133,43 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die log-off ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die External Databases ähnelt.
+        /// </summary>
+        public static string include_external_h {
+            get {
+                return ResourceManager.GetString("include_external_h", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Home ähnelt.
+        /// </summary>
+        public static string link_home {
+            get {
+                return ResourceManager.GetString("link_home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Privacy ähnelt.
+        /// </summary>
+        public static string link_privacy {
+            get {
+                return ResourceManager.GetString("link_privacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Terms ähnelt.
+        /// </summary>
+        public static string link_terms {
+            get {
+                return ResourceManager.GetString("link_terms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die logoff ähnelt.
         /// </summary>
         public static string logoff {
             get {
@@ -142,7 +178,7 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die log-on ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die logon ähnelt.
         /// </summary>
         public static string logon {
             get {
@@ -192,6 +228,15 @@ namespace RQResources.Views.Shared {
         public static string menu5 {
             get {
                 return ResourceManager.GetString("menu5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Query Fields ähnelt.
+        /// </summary>
+        public static string query_fields_h {
+            get {
+                return ResourceManager.GetString("query_fields_h", resourceCulture);
             }
         }
         
@@ -246,6 +291,15 @@ namespace RQResources.Views.Shared {
         public static string sq_digital_video {
             get {
                 return ResourceManager.GetString("sq_digital_video", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Standard Queries ähnelt.
+        /// </summary>
+        public static string sq_h {
+            get {
+                return ResourceManager.GetString("sq_h", resourceCulture);
             }
         }
         

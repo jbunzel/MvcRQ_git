@@ -25,7 +25,7 @@ function EditForm() {
 
     function getItem() {
         var url = HostAdress() + "/RQItems/" + itemId + "?verb=" + "edititem";
-        var fd = new ajaxLoadingIndicator(".edit-form");
+        var fd = new ajaxLoadingIndicator("#html");
 
         $.ajax({ dataType: "json",
             url: url,
@@ -59,7 +59,7 @@ function EditForm() {
     function submitItem(e) {
         var json = JSON.stringify(Form2Data());
         var url = HostAdress() + "/RQItems/" + ((verb == "edit") ? itemId : "") + "?verb=" + ((verb == "edit") ? "update" : "new");
-        var fd = new ajaxLoadingIndicator(".edit-form"); 
+        var fd = new ajaxLoadingIndicator("#html"); 
         
         $.ajax({
             url: url,

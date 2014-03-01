@@ -60,6 +60,10 @@ Namespace Utilities
             Else
                 UpperBound = ClassRange(0).Trim()
             End If
+            If Not LexicalLowerOrEqual(LowerBound, UpperBound) Then
+                LowerBound = Nothing
+                UpperBound = Nothing
+            End If
         End Sub
 
 #End Region
@@ -94,6 +98,13 @@ Namespace Utilities
         End Function
 
 
+        ''' <summary>
+        ''' Tests whether strings starting with str1 are lexically greater or equal than strings starting with str2. 
+        ''' </summary>
+        ''' <param name="str1">defines the class of strings starting with str1</param>
+        ''' <param name="str2">defines the class of strings starting with str2</param>
+        ''' <returns>true iff all strings defined by str1 are lexically greater or equal to strings defined by str2</returns>
+        ''' <remarks></remarks>
         Public Function LexicalGreaterOrEqual(ByVal str1 As String, ByVal str2 As String) As Boolean
             Dim b As Boolean = True
 
@@ -121,6 +132,13 @@ Namespace Utilities
         End Function
 
 
+        ''' <summary>
+        ''' Tests whether strings starting with str1 are lexically lower or equal than strings starting with str2. 
+        ''' </summary>
+        ''' <param name="str1">defines the class of strings starting with str1</param>
+        ''' <param name="str2">defines the class of strings starting with str2</param>
+        ''' <returns>true iff all strings defined by str1 are lexically lower or equal to strings defined by str2</returns>
+        ''' <remarks></remarks>
         Public Function LexicalLowerOrEqual(ByVal str1 As String, ByVal str2 As String) As Boolean
             Dim b As Boolean = True
 
@@ -148,56 +166,69 @@ Namespace Utilities
         End Function
 
 
+        ''' <summary>
+        ''' Expands all hyphens from the definition of this lexical class. 
+        ''' </summary>
+        ''' <param name="Junktor">A string which delimits the elements of the returned string sequence.</param>
+        ''' <param name="Prefix">A string prepended to each element of the returned string sequence.</param>
+        ''' <param name="Postfix">A string appended to each element of the returned string sequence.</param>
+        ''' <returns>A sequence of start-strings to all possible strings contained in this lexical class.</returns>
+        ''' <remarks></remarks>
         Public Function Expand(Optional ByVal Junktor As String = ";", Optional ByVal Prefix As String = "", Optional ByVal Postfix As String = "") As String
             Dim strExpand As String = _Min + Postfix
             Dim strAdd As String = _Min
             Dim i As Integer = 0
             Dim j As Integer = strAdd.Length - 1
-            Dim z As Integer
+            Dim a, z As Integer
 
             If _Min <> _Max Then
-                While strAdd.Chars(i) = _Max.Chars(i)
+                While strAdd.Chars(i) = _Max.Chars(i) 'Bestimme den Index (i + 1) der ersten abweichenden Ziffer in _Min und _Max (Abweichziffer)
                     If i < Min(strAdd.Length - 1, _Max.Length - 1) Then i = i + 1 Else Exit While
                 End While
-                While j >= i + 1
-                    If Char.ToUpper(strAdd.Chars(j)) < "Z"c Or strAdd.Chars(j) < "9"c Then
-                        Dim k As Integer
+                While j >= i + 1 'Falls _Min länger ist, als der mit _Max übereinstimmende Anfangsabschnitt, setze die aktuelle Ziffer von der letzten Ziffer von _Min bis herunter zur Abweichziffer 
+                    z = Asc("9"c)                                        'Bestimme, ob die numerische
+                    If Char.IsLetter(strAdd.Chars(j)) Then z = Asc("Z"c) 'oder alphanumerische Maximumziffer anzuwenden ist 
+                    If Char.ToUpper(strAdd.Chars(j)) < Chr(z) Then '"Z"c Or strAdd.Chars(j) < "9"c Then 'Falls die aktuelle Ziffer nicht die Maximumziffer ist
+                        a = Asc("0"c)                                       'Bestimme, ob die numerische
+                        If Char.IsLetter(strAdd.Chars(j)) Then a = Asc("A"c) 'oder alphanumerische Minimumziffer anzuwenden ist
+                        If Char.ToUpper(strAdd.Chars(j)) > Chr(a) Then
+                            Dim k As Integer
 
-                        z = Asc("9"c)
-                        If Char.IsLetter(strAdd.Chars(j)) Then z = Asc("Z"c)
-                        For k = Asc(strAdd.Chars(j)) + 1 To z
-                            strAdd = strAdd.Substring(0, j) + Chr(k)
+                            For k = Asc(strAdd.Chars(j)) + 1 To z                'Zähle vom nächsthöheren Wert der aktuellen Ziffer bis zur Maximumziffer hoch, 
+                                strAdd = strAdd.Substring(0, j) + Chr(k)         'ersetze diesen Wert als letzte Ziffer des Arbeitsstrings 
+                                strExpand += Junktor + Prefix + strAdd + Postfix 'und füge diesen als neuen expandierten String an
+                            Next
+                        Else
+                            strAdd = strAdd.Substring(0, j)
                             strExpand += Junktor + Prefix + strAdd + Postfix
-                        Next
+                        End If
                     End If
                     j = j - 1
                 End While
-                strAdd = strAdd.Substring(0, j)
-                z = Asc(_Min.Chars(i)) + 1
-                While z <= Asc(_Max.Chars(i))   'has been <, which did not work for number ranges; now, the max of alpha ranges is doubled in expand!
+                strAdd = strAdd.Substring(0, j) 'Setze den Arbeitsstring auf den übereinstimmenden Anfangsabschnitt von _Min und _Max                              
+                z = Asc(_Min.Chars(i)) + 1      '    
+                j = i + 1
+                While z <= Asc(_Max.Chars(i))   'has been reset to <=, because < was definitely wrong.
                     strAdd = strAdd.Substring(0, i) + Chr(z)
-                    strExpand += Junktor + Prefix + strAdd + Postfix
+                    If LexicalLowerOrEqual(strAdd, _Max.Substring(0, j)) Then strExpand += Junktor + Prefix + strAdd + Postfix
                     z = z + 1
                 End While
-                j = i + 1
                 If j <= _Max.Length - 1 Then
                     While (j <= _Max.Length - 1)
                         If (Char.ToUpper(_Max.Chars(j)) <> "Z"c) And (_Max.Chars(j) <> "9"c) Then
                             Dim k As Integer
 
-                            z = Asc("0"c)
-                            If Char.IsLetter(_Max.Chars(j)) Then z = Asc("A"c)
-                            For k = z To Asc(_Max.Chars(j))
+                            a = Asc("0"c)
+                            If Char.IsLetter(_Max.Chars(j)) Then a = Asc("A"c)
+                            For k = a To Asc(_Max.Chars(j))
                                 strAdd = _Max.Substring(0, j) + Chr(k)
-                                strExpand += Junktor + Prefix + strAdd + Postfix
+                                If LexicalLowerOrEqual(strAdd, _Max.Substring(0, j)) Then strExpand += Junktor + Prefix + strAdd + Postfix
                             Next
                         End If
                         j = j + 1
                     End While
-                Else
-                    strExpand += Junktor + Prefix + _Max + Postfix
                 End If
-                i = _Max.Length - 1
+                If LexicalLowerOrEqual(strAdd, _Max.Substring(0, j)) Then strExpand += Junktor + Prefix + _Max + Postfix
             End If
             Return Prefix + strExpand
         End Function

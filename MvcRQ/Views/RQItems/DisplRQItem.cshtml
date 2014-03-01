@@ -1,10 +1,61 @@
 ﻿@{
     ViewBag.Title = "RiQuest | Home";
 }
-
-<h2>@ViewBag.Message</h2>
-<p>
-    You have requested the HTML-Service of the RiQuest personal digital library. This is the catalog-view to show a single RiQuest item.
-</p>
-<h3>RQItem Display</h3>
-@Html.Partial("~/Views/RQItems/Shared/DisplViewer.cshtml")
+<div class="pure-g-r">
+    <div class="pure-u-4-5">
+        <div class="pure-g-r">
+            <div class="pure-u-1-6">
+                <div class="rq-sidebar rq-left-sidebar">
+                    <div id="rq-settings-panel">
+                        @Html.Partial("~/Views/Account/SmallLogOn.cshtml")
+                    </div>
+                </div>
+            </div>
+            <div class="pure-u-5-6">
+                <script type="text/javascript">
+                    // show default result list on startup
+                    $(document).ready(function () {
+                        resizeToWindowHeight();
+                    //    getResultList();
+                    });
+                </script>
+                @Html.Partial("~/Views/RQItems/Shared/DisplViewer.cshtml")
+            </div>
+        </div>
+    </div>
+    <div class="pure-u-1-5">
+        <div class="pure-g-r">
+            <div class="pure-u-4-5">
+                <div class="rq-sidebar rq-right-sidebar">
+                    @Html.Partial("~/Views/RQItems/Shared/SearchBoxView.cshtml")
+                    <div class="rq-settings-panel">
+                        <h3>@RQResources.Views.Shared.SharedStrings.include_external_h</h3>
+                        @Html.Partial("~/Areas/UserSettings/Views/Shared/IncludeExternalView.cshtml")
+                    </div>
+                    <div class="rq-settings-panel">
+                        <h3>@RQResources.Views.Shared.SharedStrings.query_fields_h</h3>
+                        <form>
+                        </form>
+                    </div>
+                    <div class="rq-settings-panel">
+                        <h3>@RQResources.Views.Shared.SharedStrings.sq_h</h3>
+                        @Html.Partial("~/Views/RQItems/Shared/StandardSearchesView.cshtml")
+                    </div>
+                </div>
+            </div>
+            <div class=" pure-u-1-5">
+                <div class="rq-sidebar rq-right-sidebar rq-banner"></div>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="rq-instructions">
+                <div class="rq-instructions">
+                    <a href="">@RQResources.Views.Shared.SharedStrings.link_home</a> <span class="accent">&nbsp;|&nbsp;</span>
+				    <a href="">@RQResources.Views.Shared.SharedStrings.link_terms</a> <span class="accent">&nbsp;|&nbsp;</span>
+				    <a href="">@RQResources.Views.Shared.SharedStrings.link_privacy</a> <span class="accent"></a><br />
+                </div>
+  				<span id="copyright" class="smallcomment">Copyright 2002-2013 by <a href="http://www.jbunzel.de/jb/">Jürgen Bunzel</a></span>
+            </div>
+        </div>
+    </div>
+</div>

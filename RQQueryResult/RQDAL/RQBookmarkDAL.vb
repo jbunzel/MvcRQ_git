@@ -269,18 +269,17 @@ Namespace RQDAL
 
 
         Private Function ReadCommFile(ByVal strTemp As String, ByRef LastCommItems As String()) As String()
-            Try
-                Dim objStream As New StreamReader(strTemp, System.Text.Encoding.Default)
-
-                strTemp = objStream.ReadToEnd
-            Catch ex As Exception
-                strTemp = ""
-            End Try
-
             Dim iDx As Integer
             Dim CommItems As Array = Array.CreateInstance(GetType(String), 20)
             Dim i As Integer = 1
 
+            If File.Exists(strTemp) Then
+                Dim objStream As New StreamReader(strTemp, System.Text.Encoding.Default)
+
+                strTemp = objStream.ReadToEnd
+            Else
+                strTemp = ""
+            End If
             iDx = InStr(strTemp, "$$CODE$$=")
             If (iDx <> 0) And InStr(strTemp, Globals.ClassCodePrefix) <> 0 Then
                 iDx = iDx + Len("$$CODE$$=")
@@ -361,52 +360,54 @@ Namespace RQDAL
             Dim objFolder As New DirectoryInfo(strPath)
             Dim objFolderItem As DirectoryInfo
             Dim objFileItem As FileInfo
-            'Dim WorkFile As File
             Dim iIndex As Integer = 0
-            Dim strTemp, strExt As String
+            'Dim strTemp, strExt As String
+            Dim strTemp As String
             Dim CommItems As String()
 
-            For Each objFileItem In objFolder.GetFiles()
-                strTemp = objFileItem.Name
-                strExt = LCase(Right(strTemp, Len(strTemp) - InStrRev(strTemp, ".", -1, CompareMethod.Text)))
-                If strExt = "url" Then
-                    If (iIndex = 0) Then
-                        xmlWriter.WriteStartElement("filelist")
-                        iIndex = 1
-                    End If
-                    xmlWriter.WriteStartElement("file")
-                    xmlWriter.WriteAttributeString("DocNo", "D" + CStr(iItemCount))
-                    iItemCount += 1
-                    strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + ".gif"
-                    If File.Exists(strTemp) Then
-                        'xmlWriter.WriteAttributeString("logo", HttpContext.Current.Server.UrlEncode(strAdr + "/" + LCase(Left(objFileItem.Name, InStrRev(objFileItem.Name, ".", -1, CompareMethod.Text) - 1)) + ".gif"))
-                    End If
-                    strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + ".ico"
-                    If File.Exists(strTemp) Then
-                        'xmlWriter.WriteAttributeString("icon", HttpContext.Current.Server.UrlEncode(strAdr + "/" + LCase(Left(objFileItem.Name, InStrRev(objFileItem.Name, ".", -1, CompareMethod.Text) - 1)) + ".ico"))
-                    End If
-                    ExtractFileData(xmlWriter, objFileItem.FullName, objFileItem.Name)
-                    xmlWriter.WriteAttributeString("DateChanged", objFileItem.LastWriteTime.Date.ToString("yyyyMMdd"))
-                    strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + "$$COMM$$.txt"
-                    CommItems = ReadCommFile(strTemp, LastCommItems)
-                    If Not IsNothing(CommItems) Then
-                        If CommItems.Length > 0 Then
-                            xmlWriter.WriteAttributeString("comment", CommItems(0))
-                        End If
-                        If CommItems.Length > 1 Then
-                            Dim i As Integer
-
-                            For i = 1 To CommItems.Length - 1
-                                If Not IsNothing(CommItems(i)) Then
-                                    If CommItems(i).Length() > 0 Then
-                                        xmlWriter.WriteElementString("notation", CommItems(i))
-                                    End If
-                                End If
-                            Next
-                        End If
-                    End If
-                    xmlWriter.WriteEndElement()
+            For Each objFileItem In objFolder.GetFiles("*.url")
+                'strTemp = objFileItem.Name
+                'strExt = LCase(Right(strTemp, Len(strTemp) - InStrRev(strTemp, ".", -1, CompareMethod.Text)))
+                'If strExt = "url" Then
+                If (iIndex = 0) Then
+                    xmlWriter.WriteStartElement("filelist")
+                    iIndex = 1
                 End If
+                xmlWriter.WriteStartElement("file")
+                xmlWriter.WriteAttributeString("DocNo", "D" + CStr(iItemCount))
+                iItemCount += 1
+                'strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + ".gif"
+                'If File.Exists(strTemp) Then
+                'xmlWriter.WriteAttributeString("logo", HttpContext.Current.Server.UrlEncode(strAdr + "/" + LCase(Left(objFileItem.Name, InStrRev(objFileItem.Name, ".", -1, CompareMethod.Text) - 1)) + ".gif"))
+                'End If
+                'strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + ".ico"
+                'If File.Exists(strTemp) Then
+                'xmlWriter.WriteAttributeString("icon", HttpContext.Current.Server.UrlEncode(strAdr + "/" + LCase(Left(objFileItem.Name, InStrRev(objFileItem.Name, ".", -1, CompareMethod.Text) - 1)) + ".ico"))
+                'End If
+                ExtractFileData(xmlWriter, objFileItem.FullName, objFileItem.Name)
+                xmlWriter.WriteAttributeString("DateChanged", objFileItem.LastWriteTime.Date.ToString("yyyyMMdd"))
+                strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + "$$COMM$$.txt"
+                CommItems = ReadCommFile(strTemp, LastCommItems)
+                If Not IsNothing(CommItems) Then
+                    If CommItems.Length > 0 Then
+                        xmlWriter.WriteAttributeString("comment", CommItems(0))
+                    End If
+                    If CommItems.Length > 1 Then
+                        Dim i As Integer
+
+                        For i = 1 To CommItems.Length - 1
+                            If Not IsNothing(CommItems(i)) Then
+                                If CommItems(i).Length() > 0 Then
+                                    xmlWriter.WriteElementString("notation", CommItems(i))
+                                End If
+                            Else
+                                Exit For
+                            End If
+                        Next
+                    End If
+                End If
+                xmlWriter.WriteEndElement()
+                'End If
             Next
             For Each objFolderItem In objFolder.GetDirectories()
                 If InStr(1, objFolderItem.Name, "$COPY$", CompareMethod.Text) = 0 Then
@@ -432,6 +433,8 @@ Namespace RQDAL
                                     If CommItems(i).Length() > 0 Then
                                         xmlWriter.WriteElementString("notation", CommItems(i))
                                     End If
+                                Else
+                                    Exit For
                                 End If
                             Next
                         End If
@@ -477,6 +480,127 @@ Namespace RQDAL
                 xmlWriter.WriteEndElement()
             End If
         End Sub
+
+        'Private Sub TraverseFolder(ByRef xmlWriter As System.Xml.XmlTextWriter, ByRef strPath As String, ByRef strAdr As String, ByVal iLevel As Integer, ByVal iMaxLevel As Integer, Optional ByRef iItemCount As Integer = 0, Optional ByRef LastCommItems As String() = Nothing)
+        '    Dim objFolder As New DirectoryInfo(strPath)
+        '    Dim objFolderItem As DirectoryInfo
+        '    Dim objFileItem As FileInfo
+        '    'Dim WorkFile As File
+        '    Dim iIndex As Integer = 0
+        '    Dim strTemp, strExt As String
+        '    Dim CommItems As String()
+
+        '    For Each objFileItem In objFolder.GetFiles()
+        '        strTemp = objFileItem.Name
+        '        strExt = LCase(Right(strTemp, Len(strTemp) - InStrRev(strTemp, ".", -1, CompareMethod.Text)))
+        '        If strExt = "url" Then
+        '            If (iIndex = 0) Then
+        '                xmlWriter.WriteStartElement("filelist")
+        '                iIndex = 1
+        '            End If
+        '            xmlWriter.WriteStartElement("file")
+        '            xmlWriter.WriteAttributeString("DocNo", "D" + CStr(iItemCount))
+        '            iItemCount += 1
+        '            strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + ".gif"
+        '            If File.Exists(strTemp) Then
+        '                'xmlWriter.WriteAttributeString("logo", HttpContext.Current.Server.UrlEncode(strAdr + "/" + LCase(Left(objFileItem.Name, InStrRev(objFileItem.Name, ".", -1, CompareMethod.Text) - 1)) + ".gif"))
+        '            End If
+        '            strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + ".ico"
+        '            If File.Exists(strTemp) Then
+        '                'xmlWriter.WriteAttributeString("icon", HttpContext.Current.Server.UrlEncode(strAdr + "/" + LCase(Left(objFileItem.Name, InStrRev(objFileItem.Name, ".", -1, CompareMethod.Text) - 1)) + ".ico"))
+        '            End If
+        '            ExtractFileData(xmlWriter, objFileItem.FullName, objFileItem.Name)
+        '            xmlWriter.WriteAttributeString("DateChanged", objFileItem.LastWriteTime.Date.ToString("yyyyMMdd"))
+        '            strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + "$$COMM$$.txt"
+        '            CommItems = ReadCommFile(strTemp, LastCommItems)
+        '            If Not IsNothing(CommItems) Then
+        '                If CommItems.Length > 0 Then
+        '                    xmlWriter.WriteAttributeString("comment", CommItems(0))
+        '                End If
+        '                If CommItems.Length > 1 Then
+        '                    Dim i As Integer
+
+        '                    For i = 1 To CommItems.Length - 1
+        '                        If Not IsNothing(CommItems(i)) Then
+        '                            If CommItems(i).Length() > 0 Then
+        '                                xmlWriter.WriteElementString("notation", CommItems(i))
+        '                            End If
+        '                        End If
+        '                    Next
+        '                End If
+        '            End If
+        '            xmlWriter.WriteEndElement()
+        '        End If
+        '    Next
+        '    For Each objFolderItem In objFolder.GetDirectories()
+        '        If InStr(1, objFolderItem.Name, "$COPY$", CompareMethod.Text) = 0 Then
+        '            xmlWriter.WriteStartElement("folder")
+        '            xmlWriter.WriteAttributeString("DocNo", "D" + CStr(iItemCount))
+        '            iItemCount += 1
+        '            xmlWriter.WriteAttributeString("name", objFolderItem.Name)
+        '            xmlWriter.WriteAttributeString("level", CStr(iLevel))
+        '            'xmlWriter.WriteAttributeString("link", HttpContext.Current.Server.UrlEncode(strAdr + "/" + objFolderItem.Name))
+        '            xmlWriter.WriteAttributeString("type", "folder")
+        '            xmlWriter.WriteAttributeString("DateChanged", objFolderItem.LastWriteTime.Date.ToString("yyyyMMdd"))
+        '            strTemp = LCase(objFolderItem.FullName) + "$$COMM$$.txt"
+        '            CommItems = ReadCommFile(strTemp, LastCommItems)
+        '            If Not IsNothing(CommItems) Then
+        '                If CommItems.Length > 0 Then
+        '                    xmlWriter.WriteAttributeString("comment", CommItems(0))
+        '                End If
+        '                If CommItems.Length > 1 Then
+        '                    Dim i As Integer
+
+        '                    For i = 1 To CommItems.Length - 1
+        '                        If Not IsNothing(CommItems(i)) Then
+        '                            If CommItems(i).Length() > 0 Then
+        '                                xmlWriter.WriteElementString("notation", CommItems(i))
+        '                            End If
+        '                        End If
+        '                    Next
+        '                End If
+        '            End If
+        '            If iLevel < iMaxLevel Then
+        '                TraverseFolder(xmlWriter, strPath + "\" + objFolderItem.Name + "\", strAdr + "/" + objFolderItem.Name, iLevel + 1, iMaxLevel, iItemCount, CommItems)
+        '            End If
+        '            xmlWriter.WriteEndElement()
+        '        Else
+        '            If File.Exists(objFolderItem.FullName + "/" + Left(objFolderItem.Name, InStrRev(objFolderItem.Name, "$$COPY$$", -1, CompareMethod.Text) - 1) + ".htm") Then
+        '                If (iIndex = 0) Then
+        '                    xmlWriter.WriteStartElement("filelist")
+        '                    iIndex = 1
+        '                End If
+        '                xmlWriter.WriteStartElement("file")
+        '                xmlWriter.WriteAttributeString("DocNo", "D" + CStr(iItemCount))
+        '                iItemCount += 1
+        '                ExtractFileData(xmlWriter, objFolderItem.FullName + "/" + Left(objFolderItem.Name, InStrRev(objFolderItem.Name, "$$COPY$$", -1, CompareMethod.Text) - 1) + ".htm", Left(objFolderItem.Name, InStrRev(objFolderItem.Name, "$$COPY$$", -1, CompareMethod.Text) - 1) + ".htm")
+        '                xmlWriter.WriteAttributeString("DateChanged", objFolderItem.LastWriteTime.Date.ToString("yyyyMMdd"))
+        '                strTemp = objFolderItem.FullName + "/" + Left(objFolderItem.Name, InStrRev(objFolderItem.Name, "$$COPY$$", -1, CompareMethod.Text) - 1) + "$$COMM$$.txt"
+        '                CommItems = ReadCommFile(strTemp, LastCommItems)
+        '                If Not IsNothing(CommItems) Then
+        '                    If CommItems.Length > 0 Then
+        '                        xmlWriter.WriteAttributeString("comment", CommItems(0))
+        '                    End If
+        '                    If CommItems.Length > 1 Then
+        '                        Dim i As Integer
+
+        '                        For i = 1 To CommItems.Length - 1
+        '                            If Not IsNothing(CommItems(i)) Then
+        '                                If CommItems(i).Length() > 0 Then
+        '                                    xmlWriter.WriteElementString("notation", CommItems(i))
+        '                                End If
+        '                            End If
+        '                        Next
+        '                    End If
+        '                End If
+        '                xmlWriter.WriteEndElement()
+        '            End If
+        '        End If
+        '    Next
+        '    If (iIndex = 1) Then
+        '        xmlWriter.WriteEndElement()
+        '    End If
+        'End Sub
 
 #End Region
 

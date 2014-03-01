@@ -321,7 +321,7 @@ Namespace RQKos.Classifications
                 Return New Utilities.LexicalClass(RefRVKSet)
             End Get
             Set(ByVal value As Utilities.LexicalClass)
-                Me._strRefRVKSet = value.Expand()
+                'Me._strRefRVKSet = value.Expand()
                 Me._isValid = ValidEnum.undefined
             End Set
         End Property
@@ -356,7 +356,7 @@ Namespace RQKos.Classifications
             If Me._intID < 0 And Me._strID = "" Then
                 Me.ClassID = RetrieveId()
             End If
-            If Me._intID > 0 Or Me._strID <> "" Then
+            If Me._intID <> 0 Or Me._strID <> "" Then
                 'no class of RQClassificationSystem has ID=0. ClassID=0 is used to retrieve the outermost subjClassBranch
                 If Not IsNothing(Me.DataClient) Then CType(Me.DataClient, ClassificationDataClient).GetClassData(Me)
             End If
@@ -421,13 +421,13 @@ Namespace RQKos.Classifications
         Public Function IsValid(ByRef MajClass As SubjClass) As Boolean
             If Me._isValid = ValidEnum.undefined Then
                 If Not MajClass.Contains(Me) Then
-                    EditGlobals.Message += "<p class='smalltext'>ERROR ON SUBCLASS " + Me.ClassID + "</p><p class='smalltext'>Subclass is not contained in class or class code is invalid.</p>"
+                    EditGlobals.AddHint("Error in subclass " + Me.ClassID + " / " + Me.ClassShortTitle, "Subclass " + Me.ClassID + " / " + Me.ClassShortTitle + " is not contained in class " + MajClass.ClassID + " / " + MajClass.ClassShortTitle + " or has invalid class code.")
                     Me._isValid = ValidEnum.invalid
                 ElseIf (Me.NrOfSubClasses > 0) And ((Me.ClassCode = "") Or (Me.RefRVKSet = "")) Then
-                    EditGlobals.Message += "<p class='smalltext'>ERROR ON SUBCLASS " + Me.ClassID + "</p><p class='smalltext'>Class containing subclasses must not be deleted.</p>"
+                    EditGlobals.AddHint("Error in subclass " + Me.ClassID + " / " + Me.ClassShortTitle, "Classes containing subclasses must not be deleted.")
                     Me._isValid = ValidEnum.invalid
                 ElseIf Not Me.RefRVKClass.IsValid() Then
-                    EditGlobals.Message += "<p class='smalltext'>ERROR ON SUBCLASS " + Me.ClassID + "</p><p class='smalltext'>Invalid RVK class codes.</p>"
+                    EditGlobals.AddHint("Eror in subclass " + Me.ClassID + " / " + Me.ClassShortTitle, "RVK class codes are invalid.")
                     Me._isValid = ValidEnum.invalid
                 Else
                     Me._isValid = ValidEnum.valid
@@ -566,7 +566,7 @@ Namespace RQKos.Classifications
                 cb.ParentClassID = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).ParentID
                 cb.ClassCode = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).DDCNumber
                 cb.ClassShortTitle = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).Description
-                cb.ClassLongTitle = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).RegensburgDesc
+                cb.ClassLongTitle = "" 'CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).RegensburgDesc
                 cb.RefRVKSet = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).RegensburgSign
                 cb.NrOfSubClasses = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).SubClassCount
                 cb.NrOfClassDocs = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).DocRefCount
@@ -586,11 +586,13 @@ Namespace RQKos.Classifications
             For i = 0 To Me._arSubjClass.Length - 1
                 If IsNothing(Me._arSubjClass(i)) Then
                     Me._arSubjClass(i) = aSubjClass
+                    'Me._arSubjClass(0).NrOfSubClasses = Me._arSubjClass(0).NrOfSubClasses + 1
                     Exit Sub
                 End If
             Next
             System.Array.Resize(Me._arSubjClass, i + 11)
             Me._arSubjClass(i) = aSubjClass
+            'Me._arSubjClass(0).NrOfSubClasses = Me._arSubjClass(0).NrOfSubClasses + 1
         End Sub
 
 
@@ -614,74 +616,75 @@ Namespace RQKos.Classifications
 
 
         Public Sub Update()
-            'Should be transferred to ClassificationDataClient
-            Dim NewSubClassCount As Integer = 0
-            Dim mqQuery As New RQDAL.RQCatalogDAL
-            Dim drTable As RQDataSet.SystematikDataTable
-            Dim bErr As Boolean = True
-            Dim iSuperClassDocCount As Integer = 0
-            Dim i As Integer = 0
+            Me.MajorClass.ClassDataClient.Update(Me)
+            ''Should be transferred to ClassificationDataClient
+            'Dim NewSubClassCount As Integer = 0
+            'Dim mqQuery As New RQDAL.RQCatalogDAL
+            'Dim drTable As RQDataSet.SystematikDataTable
+            'Dim bErr As Boolean = True
+            'Dim iSuperClassDocCount As Integer = 0
+            'Dim i As Integer = 0
 
-            If Me.UpdateDocRefs(iSuperClassDocCount) = True Then
-                drTable = CType(mqQuery.GetRecordByParentID(Me.MajorClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable)
-                If Not drTable Is Nothing Then
-                    For i = 1 To Me._arSubjClass.Length - 1
-                        If Not IsNothing(Me._arSubjClass(i)) Then
-                            If i > drTable.Rows.Count Then
-                                Dim drRow As RQDataSet.SystematikRow = CType(mqQuery.NewRow("RQDataSet", "Systematik"), RQDataSet.SystematikRow)
+            'If Me.UpdateDocRefs(iSuperClassDocCount) = True Then
+            '    drTable = CType(mqQuery.GetRecordByParentID(Me.MajorClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable)
+            '    If Not drTable Is Nothing Then
+            '        For i = 1 To Me._arSubjClass.Length - 1
+            '            If Not IsNothing(Me._arSubjClass(i)) Then
+            '                If i > drTable.Rows.Count Then
+            '                    Dim drRow As RQDataSet.SystematikRow = CType(mqQuery.NewRow("RQDataSet", "Systematik"), RQDataSet.SystematikRow)
 
-                                drTable.Rows.Add(drRow)
-                                drRow.ParentID = Me.MajorClassID
-                                drRow.DocRefCount = Me._arSubjClass(i).NrOfClassDocs
-                                drRow.DirRefCount = Me._arSubjClass(i).NrOfRefLinks
-                                drRow.SubClassCount = 0
-                            End If
-                            If Me._arSubjClass(i).ClassCode = "" Or Me._arSubjClass(i).RefRVKSet = "" Then
-                                drTable.Item(i - 1).Delete()
-                            Else
-                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DDCNumber = Me._arSubjClass(i).ClassCode
-                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).Description = Me._arSubjClass(i).ClassShortTitle
-                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).RegensburgDesc = Me._arSubjClass(i).ClassLongTitle
-                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).RegensburgSign = Me._arSubjClass(i).RefRVKSet
-                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DocRefCount = Me._arSubjClass(i).NrOfClassDocs
-                                CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DirRefCount = Me._arSubjClass(i).NrOfRefLinks
-                            End If
-                        End If
-                    Next
-                    If mqQuery.UpdateSystematik() <> 0 Then
-                        EditGlobals.Message += "Error occured on subclass update.</br>"
-                    Else
-                        bErr = False
-                        NewSubClassCount = drTable.Count
-                    End If
-                End If
-                If bErr = False Then
-                    'Update SubClassCount parameter of base class 
-                    Me.MajorClass.NrOfSubClasses = CShort(NewSubClassCount)
-                    Me.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
-                    If Me.MajorClass.Save <> 0 Then
-                        EditGlobals.Message += "Error occured on superclass update.</br>"
-                    End If
-                    EditGlobals.Message += "Classification codes have been updated.</br>"
-                Else
-                    EditGlobals.Message += "Error occured on update of classification codes.</br>"
-                End If
-                For i = 1 To Me._arSubjClass.Length - 1
-                    If Not IsNothing(Me._arSubjClass(i)) Then
-                        If Me._arSubjClass(i).NrOfSubClasses <> 0 Then
-                            Dim SubClassBranch As New SubjClassBranch(Me._arSubjClass(i).ClassID)
+            '                    drTable.Rows.Add(drRow)
+            '                    drRow.ParentID = Me.MajorClassID
+            '                    drRow.DocRefCount = Me._arSubjClass(i).NrOfClassDocs
+            '                    drRow.DirRefCount = Me._arSubjClass(i).NrOfRefLinks
+            '                    drRow.SubClassCount = 0
+            '                End If
+            '                If Me._arSubjClass(i).ClassCode = "" Or Me._arSubjClass(i).RefRVKSet = "" Then
+            '                    drTable.Item(i - 1).Delete()
+            '                Else
+            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DDCNumber = Me._arSubjClass(i).ClassCode
+            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).Description = Me._arSubjClass(i).ClassShortTitle
+            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).RegensburgDesc = Me._arSubjClass(i).ClassLongTitle
+            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).RegensburgSign = Me._arSubjClass(i).RefRVKSet
+            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DocRefCount = Me._arSubjClass(i).NrOfClassDocs
+            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DirRefCount = Me._arSubjClass(i).NrOfRefLinks
+            '                End If
+            '            End If
+            '        Next
+            '        If mqQuery.UpdateSystematik() <> 0 Then
+            '            EditGlobals.AddHint("Error occured on subclass update.", "")
+            '        Else
+            '            bErr = False
+            '            NewSubClassCount = drTable.Count
+            '        End If
+            '    End If
+            '    If bErr = False Then
+            '        'Update SubClassCount parameter of base class 
+            '        Me.MajorClass.NrOfSubClasses = CShort(NewSubClassCount)
+            '        Me.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
+            '        If Me.MajorClass.Save <> 0 Then
+            '            EditGlobals.AddHint("Error occured on superclass update.", "")
+            '        End If
+            '        EditGlobals.AddHint("Classification codes have been updated.", "")
+            '    Else
+            '        EditGlobals.AddHint("Error occured on update of classification codes.", "")
+            '    End If
+            '    For i = 1 To Me._arSubjClass.Length - 1
+            '        If Not IsNothing(Me._arSubjClass(i)) Then
+            '            If Me._arSubjClass(i).NrOfSubClasses <> 0 Then
+            '                Dim SubClassBranch As New SubjClassBranch(Me._arSubjClass(i).ClassID)
 
-                            SubClassBranch.Load()
-                            SubClassBranch.Update()
-                        End If
-                    End If
-                Next
-            End If
+            '                SubClassBranch.Load()
+            '                SubClassBranch.Update()
+            '            End If
+            '        End If
+            '    Next
+            'End If
         End Sub
 
 
-        Public Function UpdateDocRefs(ByRef iSuperClassDocCount As Integer) As Boolean
-            Return Me.MajorClass.ClassDataClient.UpdateDocRefs(Me, iSuperClassDocCount)
+        Public Function UpdateDocRefs(ByRef iSuperClassDocCount As Integer, ByRef iSuperClassRefCount As Integer) As Boolean
+            Return Me.MajorClass.ClassDataClient.UpdateDocRefs(Me, iSuperClassDocCount, iSuperClassRefCount)
         End Function
 
 
@@ -723,31 +726,29 @@ Namespace RQKos.Classifications
             For i = 1 To Me._arSubjClass.Length - 1
                 If Not IsNothing(Me._arSubjClass(i)) Then
                     Dim MinClass As SubjClass = Me._arSubjClass(i)
+                    Dim j As Integer
+
+                    For j = i + 1 To Me._arSubjClass.Length - 1
+                        If Not IsNothing(Me._arSubjClass(j)) Then
+                            Dim FirstMinClass As SubjClass = Me._arSubjClass(i)
+                            Dim SecndMinClass As SubjClass = Me._arSubjClass(j)
+
+                            If FirstMinClass.ClassCode = SecndMinClass.ClassCode Then
+                                EditGlobals.AddHint("Error in actual class branch.", "Class Codes must not be equal for subclass " + FirstMinClass.ClassCode + " / " + FirstMinClass.ClassShortTitle + " and subclass " + SecndMinClass.ClassCode + " / " + SecndMinClass.ClassShortTitle)
+                                RetValue = RetValue And False
+                            End If
+                            If FirstMinClass.Intersects(SecndMinClass) Then
+                                EditGlobals.AddHint("Error in actual class branch.", "Subclass " + FirstMinClass.ClassCode + " / " + FirstMinClass.ClassShortTitle + " intersects subclass " + SecndMinClass.ClassCode + " / " + SecndMinClass.ClassShortTitle)
+                                RetValue = RetValue And False
+                            End If
+                        End If
+                    Next
 
                     RetValue = RetValue And MinClass.IsValid(MajClass)
                 End If
             Next
             If RetValue = True Then
-                For i = 1 To Me._arSubjClass.Length - 1
-                    If Not IsNothing(Me._arSubjClass(i)) Then
-                        Dim j As Integer
-
-                        For j = i + 1 To Me._arSubjClass.Length - 1
-                            If Not IsNothing(Me._arSubjClass(j)) Then
-                                Dim FirstMinClass As SubjClass = Me._arSubjClass(i)
-                                Dim SecndMinClass As SubjClass = Me._arSubjClass(j)
-
-                                If FirstMinClass.Intersects(SecndMinClass) Then
-                                    EditGlobals.Message += "<p class='smalltext'>SUBCLASS " + FirstMinClass.ClassCode + " INTERSECTS SUBCLASS " + SecndMinClass.ClassCode + "</p>"
-                                    RetValue = False
-                                End If
-                            End If
-                        Next
-                    End If
-                Next
-                If RetValue = True Then
-                    EditGlobals.Message += "<p class='comment'>Class branch is consistent.</p>"
-                End If
+                'EditGlobals.AddHint("Class branch is consistent.", "")
             End If
             Return RetValue
         End Function
@@ -755,6 +756,7 @@ Namespace RQKos.Classifications
 
         Public Function IsFeasableWith(ByRef newMajClass As SubjClass) As Boolean
             Dim i As Integer
+            Dim r As Boolean = True
 
             If Me._arSubjClass.Length > 1 Then
                 For i = 1 To Me._arSubjClass.Length - 1
@@ -762,16 +764,15 @@ Namespace RQKos.Classifications
 
                     If Not IsNothing(ocl) Then
                         If Not newMajClass.Contains(ocl) Then
-                            EditGlobals.Message += "<p class='comment'>ERROR on SubClass " & newMajClass.ClassID & " <p/>"
-                            EditGlobals.Message += "<p class='comment'>New definition range is not consistent with definition range of existing subclasses.<p/>"
-                            Return False
+                            EditGlobals.AddHint("Error in SubClass " & newMajClass.ClassID + " / " + newMajClass.ClassShortTitle, "Definition range of Class " + newMajClass.ClassCode + " " + newMajClass.ClassShortTitle + " is not consistent with definition range of existing subclass " + ocl.ClassCode + " " + ocl.ClassShortTitle + ".")
+                            r = r And False
                         End If
                     End If
                 Next
             Else
-                Return False
+                r = False
             End If
-            Return True
+            Return r
         End Function
 
 
@@ -973,19 +974,25 @@ Namespace RQKos.Classifications
                 cb.ParentClassID = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).ParentID
                 cb.ClassCode = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).DDCNumber
                 cb.ClassShortTitle = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).Description
-                cb.ClassLongTitle = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).RegensburgDesc
+                cb.ClassLongTitle = "" 'CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).RegensburgDesc
                 cb.RefRVKSet = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).RegensburgSign
-                If CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).SubClassCount > 0 _
-                    And (clb.Item(i + 1).RefRVKSet <> cb.RefRVKSet) Then
-                    If Not Find(cb.ClassID).IsFeasableWith(cb) Then
-                        cb.RefRVKSet = clb.Item(i + 1).RefRVKSet
-                        RetValue = False
-                    End If
-                End If
+                'If CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).SubClassCount > 0 _
+                '    And (clb.Item(i + 1).RefRVKSet <> cb.RefRVKSet) Then
+                '    If Not Find(cb.ClassID).IsFeasableWith(cb) Then
+                '        cb.RefRVKSet = clb.Item(i + 1).RefRVKSet
+                '        RetValue = False
+                '    End If
+                'End If
                 cb.NrOfSubClasses = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).SubClassCount
                 cb.NrOfClassDocs = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).DocRefCount
                 cb.NrOfRefLinks = CInt(CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).DirRefCount)
                 If Not IsNothing(clb.Item(i + 1)) Then
+                    If CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).SubClassCount > 0 And (clb.Item(i + 1).RefRVKSet <> cb.RefRVKSet) Then
+                        If Not Find(cb.ClassID).IsFeasableWith(cb) Then
+                            cb.RefRVKSet = clb.Item(i + 1).RefRVKSet
+                            RetValue = False
+                        End If
+                    End If
                     clb.Item(i + 1) = cb
                 Else
                     clb.Add(cb)
@@ -1009,8 +1016,8 @@ Namespace RQKos.Classifications
 
 
         'Appends an empty minor subject class with optional classId=minClassId to the branch of the major subject class with classID=majClassId 
-        Public Shared Sub InsertMinorClass(ByRef majClassID As String, Optional ByRef minClassID As String = "")
-            Dim cb As SubjClassBranch
+        Public Shared Function InsertMinorClass(ByRef majClassID As String) As SubjClassBranch
+            Dim cb As SubjClassBranch = Nothing
 
             For Each cb In _mClassBranches
                 If Not IsNothing(cb) Then
@@ -1020,7 +1027,8 @@ Namespace RQKos.Classifications
                     End If
                 End If
             Next
-        End Sub
+            Return cb
+        End Function
 
 
         Public Shared Function GetParentClassID(ByRef majClassID As String) As String
@@ -1059,6 +1067,15 @@ Namespace RQKos.Classifications
                 Return True
             End If
             Return False
+        End Function
+
+
+        Public Shared Function IsValid(ByVal testClassBranch As SubjClassBranch) As Boolean
+            'If testClassBranch.IsValid Then
+            '    Return True
+            'End If
+            'Return False
+            Return IsValid(testClassBranch.MajorClassID, testClassBranch.GetSubClassTable())
         End Function
 
 #End Region

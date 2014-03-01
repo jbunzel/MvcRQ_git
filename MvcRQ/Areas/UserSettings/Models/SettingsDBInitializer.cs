@@ -6,7 +6,7 @@ using System.Web.Security;
 
 namespace MvcRQ.Areas.UserSettings.Models
 {
-    public class SettingsDBInitializer : System.Data.Entity.DropCreateDatabaseAlways<SettingsDBContext>
+    public class SettingsDBInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SettingsDBContext>
     {
         protected override void Seed(SettingsDBContext context)
         {

@@ -1,0 +1,67 @@
+﻿@using RQDigitalObjects
+@model MvcRQ.Models.RQKosBranch
+@*@Html.ValidationSummary()*@
+<style>
+    .edit-form {
+        position: relative;
+    }
+</style>
+<div class="rq-ajax-wait" style="display: none"></div>
+<form id="EditForm" class="edit-form pure-form">
+    <fieldset>
+        <label for="ClassID" class="editor-label">ClassID: </label><span class="editor-value classid">@Model.ClassBranch.get_Item(0).ClassID</span>
+        <label for="ClassCode" class="editor-label">ClassCode: </label><span class="editor-value classcode">@Model.ClassBranch.get_Item(0).ClassCode</span>
+        <label for="ParentID" class="editor-label">ParentID: </label><span class="editor-value parentid">@Model.ClassBranch.get_Item(0).ParentClassID</span>
+        <label for="ClassName" class="editor-label">ClassName: </label><span class="editor-value classname">@Model.ClassBranch.get_Item(0).ClassShortTitle</span>
+        <label for="ClassTitle" class="editor-label">ClassTitle: </label><span class="editor-value classtitle">@Model.ClassBranch.get_Item(0).ClassLongTitle</span>
+        <label for="RVKClassCodes" class="editor-label">RVKClassCodes: </label><span class="editor-value rvkclasscodes">@Model.ClassBranch.get_Item(0).RefRVKSet</span>
+        <label for="NrOfSubclasses" class="editor-label"># of Subclasses: </label><span class="editor-value nrofsubclasses">@Model.ClassBranch.get_Item(0).NrOfSubClasses</span>
+        <label for="NrOfDocuments" class="editor-label"># of Documents: </label><span class="editor-value nrofdocuments">@Model.ClassBranch.get_Item(0).NrOfClassDocs</span>
+      	<br class="clear" />
+    	<input type="button" value="Submit" id="btn-submit" /><input type="button" value="Check Validity" id="btn-check" /><input type="button" value="Add Subclass" id="btn-add" /><input type="button" value="Goto Superclass" id="btn-up" />
+    </fieldset>
+</form>
+
+<div id="accordion">
+    @for(var i=1; i < Model.ClassBranch.count; i++)
+    {    
+        string id1 = "EditSubForm" + i;
+        string id2 = "btn-down" + i;
+        string id3 = "ClassID" + i;
+        string id4 = "classname" + i;
+                
+        <h1><span id="@id3" class="editor-value">@Model.ClassBranch.get_Item(i).ClassID</span><span class="editor-value classname">@Model.ClassBranch.get_Item(i).ClassShortTitle</span>
+    </h1>
+        <div>
+            <form id="@id1" class="edit-form pure-form">
+                <fieldset>
+                    <label for="ParentID" class="editor-label">ParentID: </label><span class="editor-value parentid">@Model.ClassBranch.get_Item(i).ParentClassID</span>
+                    <label for="ClassName" class="editor-label">Class Name: </label><input type="text" id="@id4" class="editor-value classname" value="@Model.ClassBranch.get_Item(i).ClassShortTitle" />
+                    @*@Html.EditorFor(RQKosBranch => RQKosBranch.ClassBranch.get_Item(i).ClassShortTitle, "text", new { labelfor = "ClassName", label="Class Name:", classname = "editor-value classname" })*@
+                    @Html.EditorFor(RQKosBranch => RQKosBranch.ClassBranch.get_Item(i).ClassCode, "text", new { labelfor = "ClassCode", label= "Class Code:", classname = "editor-value classcode" })
+                    @Html.EditorFor(RQKosBranch => RQKosBranch.ClassBranch.get_Item(i).RefRVKSet, "multilinetext", new { labelfor = "RVKClassCodes", label = "RVKClassCodes:", classname = "editor-value rvkclasscodes" })
+                    <label for="NrofSubclasses" class="editor-label"># of Subclasses: </label><span class="editor-value nrofsubclasses">@Model.ClassBranch.get_Item(i).NrOfSubClasses</span>
+                    <label for="NrofDocuments" class="editor-label"># of Documents: </label><span class="editor-value nrofdocuments">@Model.ClassBranch.get_Item(i).NrOfClassDocs</span>
+                    <input type="button" value="Goto Subclasses" id="@id2" />
+                </fieldset>
+            </form>
+        </div>
+    }
+</div>
+<div id="EditDialog" class="edit-dialog" hidden></div>
+<div class="extra-class-template" hidden>
+    <h1><span id="ClassID§§NEW-ID§§" class="editor-value"></span><span class="editor-value classname"></span></h1> 
+    <div>
+        <form id="EditSubForm§§NEW-ID§§" class="edit-form pure-form">
+            <fieldset>
+                <label for="ParentID" class="editor-label">ParentID: </label><span class="editor-value parentid"></span>
+                <label class="editor-label" for="ClassName">Class Name:</label><input type="text" id="classname§§NEW-ID§§" class="editor-value classname"   value="">
+                <label class="editor-label" for="ClassCode">Class Code:</label><input name="ClassCode" class="editor-value classcode" id="ClassCode" type="text" value="">
+                <label class="editor-label" for="RVKClassCodes">RVKClassCodes:</label><textarea name="RefRVKSet" class="editor-value rvkclasscodes" id="RefRVKSet" rows="2" cols="20"></textarea>
+                <label for="NrofSubclasses" class="editor-label"># of Subclasses: </label><span class="editor-value nrofsubclasses"></span>
+                <label for="NrofDocuments" class="editor-label"># of Documents: </label><span class="editor-value nrofdocuments"></span>
+                <input type="button" value="Goto Subclasses" id="btn-down§§NEW-ID§§" />
+            </fieldset>
+        </form>
+    </div>
+</div> 

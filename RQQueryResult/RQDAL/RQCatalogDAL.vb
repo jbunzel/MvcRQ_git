@@ -138,6 +138,7 @@ Namespace RQDAL
             If Query.QuerySort <> RQQueryForm.RQquery.SortType.undefined Then
                 Me.SetSortOrder(Query.QuerySort)
             End If
+            'Me._catSet.AcceptChanges()
             Return Me._catSet.Tables("Dokumente")
         End Function
 
@@ -392,11 +393,11 @@ Namespace RQDAL
                 strNewDocNo = "0"
             End If
             strNewDocNo += CStr(CInt(drLastRow.Item("DocNo")) + 1)
-            Me._catSet.Tables("Dokumente").PrimaryKey = dcIDColumns
-            Me._catSet.Tables("Dokumente").Columns("ID").AutoIncrement = True
-            Me._catSet.Tables("Dokumente").Columns("ID").ReadOnly = True
-            Me._catSet.Tables("Dokumente").Columns("ID").AutoIncrementSeed = iMaxRecID + 1
-            Me._catSet.Tables("Dokumente").Columns("ID").Unique = True
+            'Me._catSet.Tables("Dokumente").PrimaryKey = dcIDColumns
+            'Me._catSet.Tables("Dokumente").Columns("ID").AutoIncrement = True
+            'Me._catSet.Tables("Dokumente").Columns("ID").ReadOnly = True
+            'Me._catSet.Tables("Dokumente").Columns("ID").AutoIncrementSeed = iMaxRecID + 1
+            'Me._catSet.Tables("Dokumente").Columns("ID").Unique = True
             NewRow.Item("ID") = iMaxRecID + 1
             NewRow.Item("DocNo") = strNewDocNo
             NewRow.Item("Feld30") = "NOSORT"
@@ -406,8 +407,8 @@ Namespace RQDAL
             If Not IsNothing(dsChangeSet) Then
                 Try
                     Me._catOleDBI.Update(dsChangeSet, "Dokumente")
-                    Me._catRQLuceneDBI.Update(dsChangeSet, "Dokumente")
-                    Me._catSet.AcceptChanges()
+                    Me._catRQLuceneDBI.Add(dsChangeSet, "Dokumente")
+                    Me._catSet.Tables("Dokumente").AcceptChanges()
                     Return 0
                 Catch ex As Exception
                     Return 1
@@ -486,7 +487,7 @@ Namespace RQDAL
             If Not IsNothing(dsChangeSet) Then
                 Try
                     Me._catOleDBI.Update(dsChangeSet, "Systematik")
-                    Me._catSet.AcceptChanges()
+                    Me._catSet.Tables("Systematik").AcceptChanges()
                     Return 0
                 Catch ex As Exception
                     Return 1
@@ -509,7 +510,7 @@ Namespace RQDAL
                     If (Me._mode = DatabaseMode.Hybrid) Or (Me._mode = DatabaseMode.SearchEngine) Then
                         Me._catRQLuceneDBI.Update(dsChangeSet, "Dokumente")
                     End If
-                    Me._catSet.AcceptChanges()
+                    Me._catSet.Tables("Dokumente").AcceptChanges()
                     Return 0
                 Catch ex As Exception
                     Throw New ApplicationException(ex.Message, ex.InnerException)
@@ -528,7 +529,7 @@ Namespace RQDAL
             If Not IsNothing(dsChangeSet) Then
                 Try
                     Me._catOleDBI.Update(dsChangeSet, "Systematik")
-                    Me._catSet.AcceptChanges()
+                    Me._catSet.Tables("Systematik").AcceptChanges()
                     Return 0
                 Catch ex As Exception
                     Return 1
@@ -607,7 +608,7 @@ Namespace RQDAL
                     If Not IsNothing(dsChangeSet) Then
                         Try
                             Me._catOleDBI.Test(dsChangeSet, "Systematik")
-                            Me._catSet.AcceptChanges()
+                            Me._catSet.Tables("Systematik").AcceptChanges()
                             Message += "<tr><td class='instructions' colspan='3'>Storage OK</td></tr>"
                         Catch ex As Exception
                             Message += "<tr><td class='instructions' colspan='3'>Storage ERROR</td></tr>"

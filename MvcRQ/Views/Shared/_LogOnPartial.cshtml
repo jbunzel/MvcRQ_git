@@ -1,7 +1,0 @@
-﻿@if(Request.IsAuthenticated) {
-    <text>Welcome <strong>@User.Identity.Name</strong>! <br class="accent"><br />
-    @Html.ActionLink(RQResources.Views.Shared.SharedStrings.logoff, "LogOff", "Account", new { area = ""}, new {})</text>
-}
-else {
-    @:@Html.ActionLink(RQResources.Views.Shared.SharedStrings.logon, "LogOn", "Account", new { area = ""}, new {})  <span class="accent">&nbsp;|&nbsp;</span> @Html.ActionLink("Register", "Register")
-}

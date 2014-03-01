@@ -14,6 +14,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'test|AnyCPU'">
     <OutputPath>bin\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -188,6 +191,9 @@
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="RouteDebugger">
       <HintPath>..\packages\routedebugger.2.1.4.0\lib\net40\RouteDebugger.dll</HintPath>
     </Reference>
@@ -224,6 +230,19 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\DataManagement\Controllers\BookmarksController.cs" />
+    <Compile Include="Areas\DataManagement\Controllers\LuceneController.cs" />
+    <Compile Include="Areas\DataManagement\DataManagementAreaRegistration.cs" />
+    <Compile Include="Areas\DataManagement\Resources\DataManagement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataManagement.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\DataManagement\Resources\DataManagement.de.Designer.cs">
+      <DependentUpon>DataManagement.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Areas\DigitalObjects\Controllers\ImportController.cs" />
     <Compile Include="Areas\DigitalObjects\Controllers\ViewerController.cs" />
     <Compile Include="Areas\DigitalObjects\DigitalObjectsAreaRegistration.cs" />
@@ -273,6 +292,7 @@
     <Compile Include="Helpers\CacheManager.cs" />
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\HtmlFactory.cs" />
+    <Compile Include="Helpers\TransformHelper.cs" />
     <Compile Include="Helpers\RouteConstraints.cs" />
     <Compile Include="Helpers\RQAuthorize.cs" />
     <Compile Include="Helpers\RQCustomModelBinders.cs" />
@@ -325,7 +345,50 @@
     <Content Include="Areas\ItemViewer\Skins\pink.flag\jplayer.pink.flag.jpg" />
     <Content Include="Areas\ItemViewer\Skins\pink.flag\jplayer.pink.flag.seeking.gif" />
     <Content Include="Areas\ItemViewer\Skins\pink.flag\jplayer.pink.flag.video.play.png" />
+    <Content Include="Content\font-awesome-4.0.3\css\font-awesome.css" />
+    <Content Include="Content\font-awesome-4.0.3\css\font-awesome.min.css" />
+    <Content Include="Content\font-awesome-4.0.3\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\images\main_image.png" />
+    <Content Include="Areas\ItemViewer\Views\ItemViewer\AudioPlayer.cshtml" />
+    <Content Include="Areas\ItemViewer\Views\ItemViewer\Index.cshtml" />
+    <Content Include="Areas\ItemViewer\Views\ItemViewer\VideoPlayer.cshtml" />
+    <Content Include="Areas\ItemViewer\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\DataManagement\Views\Web.config" />
+    <Content Include="Areas\DataManagement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\DataManagement\Views\Lucene\Index.cshtml" />
+    <Content Include="Areas\DataManagement\Views\Shared\LuceneFunctionList.cshtml" />
+    <Content Include="Areas\DataManagement\Views\Bookmarks\Index.cshtml" />
+    <Content Include="Areas\DataManagement\Views\Bookmarks\BookmarksFunctionList.cshtml" />
+    <Content Include="Content\font-awesome-4.0.3\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\font-awesome-4.0.3\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\font-awesome-4.0.3\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\font-awesome-4.0.3\fonts\FontAwesome.otf" />
+    <Content Include="Content\font-awesome-4.0.3\less\bordered-pulled.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\core.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\fixed-width.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\font-awesome.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\icons.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\larger.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\list.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\mixins.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\path.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\rotated-flipped.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\spinning.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\stacked.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\variables.less" />
+    <Content Include="Content\font-awesome-4.0.3\scss\font-awesome.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_bordered-pulled.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_core.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_fixed-width.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_icons.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_larger.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_list.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_mixins.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_path.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_rotated-flipped.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_spinning.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_stacked.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_variables.scss" />
     <None Include="Content\riquest.css" />
     <Content Include="Content\pure-0.2.0\pure-min.css" />
     <Content Include="Content\themes\Images\tabseparator.gif" />
@@ -335,6 +398,10 @@
     <Content Include="Images\banner3.png" />
     <Content Include="Images\Banner4.png" />
     <Content Include="Images\bluepixel.gif" />
+    <Content Include="Images\RQEXCollection.jpg" />
+    <Content Include="Images\RQNLCollection.jpg" />
+    <Content Include="Images\RQOACollection.jpg" />
+    <Content Include="Images\RQOVCollection.jpg" />
     <Content Include="Images\selpixel.gif" />
     <Content Include="js\Jplayer.swf" />
     <Content Include="Areas\Scripts\add-user-form.html" />
@@ -411,8 +478,12 @@
     <Content Include="Scripts\HtmlFactoryScripts\classtree-style.css" />
     <Content Include="Scripts\HtmlFactoryScripts\edit-rqitem-style.css" />
     <Content Include="Scripts\HtmlFactoryScripts\edit-rqitem-code.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\edit-rqkos-code.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\edit-rqkos-style.css" />
     <Content Include="Scripts\HtmlFactoryScripts\result-viewer.js" />
     <Content Include="Scripts\HtmlFactoryScripts\rqui-helpers.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\search-box.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\standard-searches.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -453,7 +524,6 @@
     <Content Include="xml\_ViewStart.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
-    <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -465,7 +535,9 @@
     <Content Include="xml\extdblist.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="xml\IndexConfig.xml" />
+    <Content Include="xml\IndexConfig.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="xml\stdquery.de-DE.xml" />
     <Content Include="xml\stdquery.xml" />
     <Content Include="xslt\RQI2RQ.xslt">
@@ -517,10 +589,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\LinkedDataCalls\Views\Web.config" />
-    <Content Include="Areas\ItemViewer\Views\ItemViewer\AudioPlayer.cshtml" />
-    <Content Include="Areas\ItemViewer\Views\ItemViewer\Index.cshtml" />
-    <Content Include="Areas\ItemViewer\Views\ItemViewer\VideoPlayer.cshtml" />
-    <Content Include="Areas\ItemViewer\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\ItemViewer\Views\Web.config" />
     <Content Include="Areas\ItemViewer\Views\_ViewStart.cshtml" />
     <Content Include="Areas\DigitalObjects\Views\Web.config" />
@@ -535,6 +603,13 @@
     <Content Include="Views\RQItems\Index.cshtml" />
     <Content Include="Views\RQItems\Shared\ClientEditViewer.cshtml" />
     <Content Include="Views\Account\SmallLogOn.cshtml" />
+    <Content Include="Views\RQItems\Shared\StandardSearchesView.cshtml" />
+    <Content Include="Views\RQItems\Shared\DisplViewer.cshtml" />
+    <Content Include="Views\RQKos\ClientRQKosEditor.cshtml" />
+    <Content Include="Views\RQKos\shared\ClientRQKosEditViewer.cshtml" />
+    <Content Include="Views\RQKos\EditorTemplates\multilinetext.cshtml" />
+    <Content Include="Views\RQKos\EditorTemplates\rqdescriptor.cshtml" />
+    <Content Include="Views\RQKos\EditorTemplates\text.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.xml" />
     <None Include="_bin_deployableAssemblies\NuGet.Core.dll" />
@@ -554,12 +629,13 @@
     <None Include="_bin_deployableAssemblies\WebMatrix.WebData.dll" />
     <None Include="_bin_deployableAssemblies\WebMatrix.WebData.xml" />
     <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
-    <Content Include="xslt\ViewTransforms\RQResultList2RQShelf.xslt">
+    <Content Include="xml\shelves.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="~db\katalog30.mdb" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\DataManagement\Models\" />
     <Folder Include="Areas\DigitalObjects\Views\Shared\" />
     <Folder Include="Areas\LinkedDataCalls\Models\" />
     <Folder Include="Areas\LinkedDataCalls\Views\Shared\" />
@@ -632,8 +708,6 @@
     <None Include="LinkedData\DataSets\jel.rdf" />
     <Content Include="Views\RQItems\EditorTemplates\rqdescriptor.cshtml" />
     <Content Include="Views\RQItems\EditRQItem.cshtml" />
-    <Content Include="Views\RQItems\DisplRQItem.cshtml" />
-    <Content Include="Views\RQItems\Shared\DisplViewer.cshtml" />
     <Content Include="Views\RQItems\Shared\SearchBoxView.cshtml" />
     <None Include="~db\RQLucene\CATALOG\segments.gen" />
     <None Include="~db\RQLucene\CATALOG\segments_2of" />
@@ -641,6 +715,14 @@
     <None Include="~db\RQLucene\CATALOG\_1c6.cfs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\DataManagement\Resources\DataManagement.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataManagement.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\DataManagement\Resources\DataManagement.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataManagement.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ItemViewer\Scripts\ScriptPack.resx" />
     <EmbeddedResource Include="Areas\Scripts\ScriptPack.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -671,7 +753,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55834</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

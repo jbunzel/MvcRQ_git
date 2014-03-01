@@ -11,6 +11,13 @@ Namespace RQQueryResult.RQDescriptionElements
         Inherits RQArrayDescriptionElement
         Implements Collections.IEnumerable
 
+#Region "Private Members"
+
+        Private _classEditMode As Boolean = False
+
+#End Region
+
+
 #Region "Public Properties"
 
         <IgnoreDataMember()> _
@@ -23,7 +30,7 @@ Namespace RQQueryResult.RQDescriptionElements
             Set(ByVal value As String)
                 Dim classString As New Utilities.ClassString(value)
 
-                value = classString.CompleteClassString()
+                If Not Me._classEditMode Then value = classString.CompleteClassString()
                 If (_content <> value) Then
                     _content = value
                     Me.BuildClassCodeArray()
@@ -58,13 +65,19 @@ Namespace RQQueryResult.RQDescriptionElements
 #End Region
 
 
-#Region "Public Methods"
+#Region "Public Override Methods"
 
         Public Overrides Function SyntaxCheck(ByRef message As String) As Boolean
             Return True
         End Function
 
+#End Region
 
+#Region "Public Methods"
+
+        Public Sub ClassEditMode(ByVal switch As Boolean)
+            Me._classEditMode = switch
+        End Sub
 
 #End Region
 

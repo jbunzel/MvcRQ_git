@@ -73,5 +73,43 @@ End Module
 
 Public Module EditGlobals
     Public Message As String = ""
+
+
+    Public Structure Hint
+        Public HintId As String
+        Public HintTitle As String
+        Public HintMessage As String
+        Private _p1 As Integer
+
+        Public Sub New(ByVal id As String, ByVal title As String, ByVal message As String)
+            HintId = id
+            HintTitle = title
+            HintMessage = message
+        End Sub
+    End Structure
+
+
+    Private Hints() As Hint = Nothing
+
+
+    Public Sub AddHint(ByVal title As String, ByVal message As String)
+        If (IsNothing(Hints)) Then
+            Hints = {New Hint("1", "", "")}
+        End If
+        If (Hints.ElementAt(Hints.Length - 1).HintMessage.Length > 0) Or (Hints.ElementAt(Hints.Length - 1).HintTitle.Length > 0) Then
+            ReDim Preserve Hints(Hints.Length)
+        End If
+        Hints.SetValue(New Hint(CStr(Hints.Length), title, message), Hints.Length - 1)
+    End Sub
+
+
+    Public Function ReadHints() As Hint()
+        Dim ret() As Hint = Hints
+
+        ReDim Hints(0)
+        Hints = Nothing
+        Return ret
+    End Function
+
 End Module
 

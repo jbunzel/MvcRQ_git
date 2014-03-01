@@ -1,17 +1,17 @@
 ﻿<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"
-  xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:mo="http://www.loc.gov/mods/v3">
-	<!--
+  xmlns:msxsl="urn:schemas-microsoft-com:xslt" 
+  xmlns:mo="http://www.loc.gov/mods/v3">
+<!--
 	Transforms raw data delivered from NewMetaQuery.DoMetaSearch into RQResult Format
 	Sort Order: by shelf
   Modification a: All signatures not only the first are evaluated.
 	-->
 
-
+<!--
 	<xsl:include href="RQTransExtDB.xslt" />
-
+-->
 
 	<xsl:param name="classname" select="''"/>
-
 
 	<xsl:template name="substring-before-last">
 		<xsl:param name="sourcestring"/>
@@ -77,7 +77,7 @@
 		<xsl:param name="DocNodeSet" select="''"/>
 		<xsl:param name="ShelfType" select="''" />
 
-		<xsl:for-each select="/QueryResults/Systematiken/Systematik">
+		<xsl:for-each select="/RQResultList/Systematiken/Systematik">
 			<xsl:sort select="DDCNumber"/>
 
 			<xsl:variable name="class" select="DDCNumber"/>
@@ -193,28 +193,30 @@
 	<xsl:template name="GetShelves">
 
 		<xsl:call-template name="SortItemsByClass">
-			<xsl:with-param name="DocNodeSet" select="/QueryResults/Dokumentliste/Dokument[contains(Signature, 'BU=R01')]" />
+			<xsl:with-param name="DocNodeSet" select="/RQResultList/RQResultSet/RQItem[contains(Signature, 'BU=R01')]" />
 			<xsl:with-param name="ShelfType" select="'Hauptregal'" />
 		</xsl:call-template>
 
 		<xsl:call-template name="SortItemsByClass">
-			<xsl:with-param name="DocNodeSet" select="/QueryResults/Dokumentliste/Dokument[contains(Signature, 'BU=R02')]" />
+			<xsl:with-param name="DocNodeSet" select="/RQResultList/RQResultSet/RQItem[contains(Signature, 'BU=R02')]" />
 			<xsl:with-param name="ShelfType" select="'Biographien'" />
 		</xsl:call-template>
 
 		<xsl:call-template name="SortItemsByClass">
-			<xsl:with-param name="DocNodeSet" select="/QueryResults/Dokumentliste/Dokument[contains(Signature, 'BU=R03')]" />
+			<xsl:with-param name="DocNodeSet" select="/RQResultList/RQResultSet/RQItem[contains(Signature, 'BU=R03')]" />
 			<xsl:with-param name="ShelfType" select="'Belletristik'" />
 		</xsl:call-template>
 
 		<xsl:call-template name="SortItemsByClass">
-			<xsl:with-param name="DocNodeSet" select="/QueryResults/Dokumentliste/Dokument[contains(Signature, 'BU=') and not(contains(Signature, 'BU=R01')) and not(contains(Signature, 'BU=R02')) and not(contains(Signature, 'BU=R03'))]" />
+			<xsl:with-param name="DocNodeSet" select="/RQResultList/RQResultSet/RQItem[contains(Signature, 'BU=') and not(contains(Signature, 'BU=R01')) and not(contains(Signature, 'BU=R02')) and not(contains(Signature, 'BU=R03'))]" />
 			<xsl:with-param name="ShelfType" select="'Unbearbeitet'" />
 		</xsl:call-template>
 
-    <xsl:variable name="docs" select="/QueryResults/Dokumentliste/Dokument" />
+    <xsl:variable name="docs" select="/RQResultList/RQResultSet/RQItem" />
 
-    <xsl:for-each select="document('shelves.xml')/shelves/tag">
+    <xsl:variable name="shelvesDesc" select="document('../../xml/shelves.xml')" />
+    
+    <xsl:for-each select="$shelvesDesc//tag">
 
       <xsl:variable name="ShelfID" select="concat(string(@name), @delimiter)" />
 
@@ -248,9 +250,9 @@
 
 
 	<xsl:template match="/">
-		<Dokumentliste>
-			<xsl:call-template name="GetShelves" />
-		</Dokumentliste>
+    <ul class="content">
+      <xsl:call-template name="GetShelves" />
+		</ul>
 	</xsl:template>
 
 </xsl:stylesheet>

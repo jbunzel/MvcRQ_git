@@ -1,22 +1,11 @@
 ﻿@model MvcRQ.Areas.ItemViewer.Models.ItemViewerModel
-@*css*@
-@MvcRQ.Areas.ItemViewer.ItemViewerHtml.SpecialCss() @*optional - basic tablesorter css styles*@
-@MvcRQ.Areas.ItemViewer.ItemViewerHtml.StyleCss() @*recommended - info message and some layout css styles*@
 @*javascript*@
-<script src="@Url.Content("~/Scripts/HtmlFactoryScripts/rqui-helpers.js")" type="text/javascript"></script>
 @MvcRQ.Areas.ItemViewer.ItemViewerHtml.ItemViewerJavascript() @*required - user interface javascript code including tablesorter, pager and user interface code*@
 @{
-    ViewBag.Title = "Item Viewer";
+    ViewBag.Title = "RiQuest | Document Viewer";
 }
-<h2>Item Viewer</h2>
 <script type="text/javascript">
     var docNo = @Html.Raw(Json.Encode(@ViewBag.DocNo));
     var docAdr = @Html.Raw(Json.Encode(@ViewBag.DocAdr));
 </script>
-<div id="bib_info_area">
-    @(new HtmlString(Model.BibInfo()))    
-</div>
-@*html markup*@
-@MvcRQ.Areas.ItemViewer.ItemViewerHtml.ItemBibInfo() @*html code for bibliographic information*@
-
-
+@MvcRQ.Areas.ItemViewer.ItemViewerHtml.ItemBibInfo()

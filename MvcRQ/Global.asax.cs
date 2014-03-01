@@ -23,13 +23,13 @@ namespace MvcRQ
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "ServiceRQKosItem",
+                "ServiceRQKosBranch",
                 "{serviceId}/rqkos/{id}",
-                new { controller = "RQKos", action = "RQKosItemRecord", serviceId = UrlParameter.Optional, id = UrlParameter.Optional });
+                new { controller = "RQKos", action = "ServiceRQKosBranch", serviceId = UrlParameter.Optional, id = UrlParameter.Optional });
             routes.MapRoute(
-                "RQKosItem",
+                "RQKosBranch",
                 "rqkos/{id}",
-                new { controller = "RQKos", action = "Index", id = UrlParameter.Optional });
+                new { controller = "RQKos", action = "RQKosBranch", id = UrlParameter.Optional });
             routes.MapRoute(
                 "ServiceRQItemList",
                 "{serviceId}/{dbname}",

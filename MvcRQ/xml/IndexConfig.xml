@@ -21,7 +21,7 @@
   </index>
   <index name="ProjectA" indexType="OLEDBIndexer" indexFolderUrl="~/~db/RQLucene/CATALOG">
     <!-- Your connection string & Select statement goes here -->
-    <selectCommandText connectionString="Provider=Microsoft.Jet.OLEDB.4.0; Data Source='C:\Users\jürgen\Documents\Visual Studio 2010\Websites\rq\~db\katalog30.mdb';User Id=admin;Password=''">SELECT * FROM Dokumente</selectCommandText>
+    <selectCommandText connectionString="Provider=Microsoft.Jet.OLEDB.4.0; Data Source='D:\Users\Jorge\Dokumente\Visual Studio 2012\Projects\MvcRQ_git\MvcRQ\~db\katalog30.mdb';User Id=admin;Password=''">SELECT * FROM Dokumente</selectCommandText>
     <fields>
       <field name="ID" isStored="true" isIndexed="true" isTokenised="false" />
       <field name="DocNo" isStored="true" isIndexed="true" isTokenised="false" />

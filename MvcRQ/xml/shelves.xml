@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<shelves>
+  <tag name="ZSS" text="Zeitungen, Zeitschriften" delimiter="="/>
+  <tag name="MyDoc" text="Digitale Dokumente" delimiter="="/>
+  <tag name="MyVideo" text="Digitale Videos" delimiter="="/>
+  <tag name="DVD" text="Digital Versatile Disks" delimiter="="/>
+  <tag name="VHS" text="Videokassetten" delimiter="="/>
+  <tag name="MyMusic" text="Digitale Audios" delimiter="="/>
+  <tag name="CDC" text="Audio-Kompaktkassette" delimiter="="/>
+  <tag name="TB" text="Tonbänder" delimiter="="/>
+  <tag name="TB2" text="Tonbänder (mittlere Formate)" delimiter="="/>
+  <tag name="TBC" text="Tonbandkassetten" delimiter="="/>
+  <tag name="LP" text="Langspielplatten" delimiter="="/>
+  <tag name="LPD" text="Langspielplatten (Tracks)" delimiter="="/>
+  <tag name="SW" text="Software" delimiter="="/>
+  <tag name="CDR" text="CD-ROM" delimiter="="/>
+  <tag name="DSK" text="Computerdiskette" delimiter="="/>
+  <tag name="KA" text="Landkarten" delimiter="="/>
+  <tag name="LO" text="Leitz-Ordner" delimiter="="/>
+  <tag name="SK" text="Skripte" delimiter="="/>
+  <tag name="MyURN" text="Externe Online-Dokumente" delimiter="="/>
+  <tag name="URL" text="Externe Online-Dokumente" delimiter="="/>
+  <tag name="SIG" text="Externe Bibliotheksbestände" delimiter="="/>
+  <tag name="DFG" text="Bürostandort" delimiter="="/>
+  <tag name="REG" text="Bürostandort" delimiter="="/>
+  <tag name="HP" text="Bürostandort" delimiter="="/>
+  <tag name="JB" text="Bürostandort" delimiter="="/>
+  <tag name="extern" text="Externe Online-Dokumente" delimiter=": "/>
+</shelves>

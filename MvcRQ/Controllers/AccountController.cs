@@ -12,6 +12,13 @@ namespace MvcRQ.Controllers
     public class AccountController : BaseController
     {
 
+        private ActionResult RedirectAdr (string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/") && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                return Redirect(returnUrl);
+            else
+                return RedirectToAction("Index", "Home");
+        }
         //
         // GET: /Account/LogOn
 
@@ -31,15 +38,16 @@ namespace MvcRQ.Controllers
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    return this.RedirectAdr(returnUrl);
+                    //if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                    //    && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                    //{
+                    //    return Redirect(returnUrl);
+                    //}
+                    //else
+                    //{
+                    //    return RedirectToAction("Index", "Home");
+                    //}
                 }
                 else
                 {
@@ -54,11 +62,11 @@ namespace MvcRQ.Controllers
         //
         // GET: /Account/LogOff
 
-        public ActionResult LogOff()
+        public ActionResult LogOff(string returnUrl )
         {
             FormsAuthentication.SignOut();
-
-            return RedirectToAction("Index", "Home");
+            return this.RedirectAdr(returnUrl);
+            //return RedirectToAction("Index", "Home");
         }
 
         //

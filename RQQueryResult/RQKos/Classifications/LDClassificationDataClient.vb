@@ -33,7 +33,7 @@ Namespace RQKos.Classifications
         End Sub
 
 
-        Public Overrides Sub PutClassData(ByRef theClass As SubjClass)
+        Public Overrides Function PutClassData(ByRef theClass As SubjClass) As Boolean
             'Dim mqQuery As New RQDAL.RQCatalogDAL
             'Dim drRow As RQDataSet.SystematikRow
 
@@ -46,7 +46,8 @@ Namespace RQKos.Classifications
             'drRow.DocRefCount = theClass.NrOfClassDocs
             'drRow.SubClassCount = theClass.NrOfSubClasses
             'drRow.DirRefCount = theClass.NrOfRefLinks
-        End Sub
+            Return False
+        End Function
 
 
         Public Overrides Sub GetNarrowerClassData(ByVal majClassId As Integer, ByRef classBranch As SubjClassBranch)
@@ -59,7 +60,12 @@ Namespace RQKos.Classifications
         End Sub
 
 
-        Public Overrides Function UpdateDocRefs(ByRef classBranch As SubjClassBranch, Optional ByVal iSuperClassDocCount As Integer = 0) As Boolean
+        Public Overrides Function UpdateDocRefs(ByRef classBranch As SubjClassBranch, ByRef iSuperClassDocCount As Integer, ByRef iSuperClassRefCount As Integer) As Boolean
+            Return False
+        End Function
+
+
+        Public Overrides Function Update(ByRef classBranch As SubjClassBranch) As Boolean
             Return False
         End Function
 

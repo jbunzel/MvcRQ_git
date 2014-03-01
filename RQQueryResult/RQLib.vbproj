@@ -127,6 +127,7 @@
     <Compile Include="RQDAL\RQBookmarkDAL.vb" />
     <Compile Include="RQDAL\RQCatalogDAL.vb" />
     <Compile Include="RQDAL\RQLuceneDBI.vb" />
+    <Compile Include="RQDAL\RQLuceneIndexer\OleDBIndexer.vb" />
     <Compile Include="RQDAL\RQOleDBI.vb" />
     <Compile Include="RQDAL\RQWebServiceDAL.vb" />
     <Compile Include="RQKos\Classifications\Classification.vb" />
@@ -140,12 +141,10 @@
     <Compile Include="RQLD\RQLDGraph.vb" />
     <Compile Include="RQLD\RQPersonGraph.vb" />
     <Compile Include="RQLucene\Indexer.vb" />
-    <Compile Include="RQLucene\OleDBIndexer.vb" />
     <Compile Include="RQLucene\Searcher.vb" />
     <Compile Include="RQLucene\StrandsDoc.vb" />
-    <Compile Include="RQLucene\UpdateIndexer.vb" />
+    <Compile Include="RQDAL\RQLuceneIndexer\UpdateIndexer.vb" />
     <Compile Include="RQLucene\Utilities.vb" />
-    <Compile Include="RQLucene\XMLIndexer.vb" />
     <Compile Include="RQQueryForm\RQQuery.vb" />
     <Compile Include="RQResult\RQBookmarkSet.Designer.vb">
       <AutoGen>True</AutoGen>

@@ -346,6 +346,17 @@ Namespace RQQueryResult
         End Property
 
 
+        Public Property Feld30() As String
+            'SortField
+            Get
+                Return Me.GetField("Feld30")
+            End Get
+            Set(ByVal value As String)
+                Me.SetField("Feld30", value)
+            End Set
+        End Property
+
+
         Public Property Feld31() As String
             'Description creation date
             Get
@@ -693,14 +704,14 @@ Namespace RQQueryResult
 
                 Me._type = RQItemType.docdesc
                 Me.ReadDocDescription(dr)
-                Me._sortField = dr.Feld30.ToString()
+                Me._sortField = Me._fields.Feld30 'dr.Feld30.ToString()
             End If
             If fromRow.GetType.Name = "BookmarksRow" Then
                 Dim br As RQBookmarkSet.BookmarksRow = CType(fromRow, RQBookmarkSet.BookmarksRow)
 
                 Me._type = RQItemType.bookmark
                 Me.ReadDocDescription(br)
-                Me._sortField = br.Feld30.ToString()
+                Me._sortField = Me._fields.Feld30 'br.Feld30.ToString()
             End If
         End Sub
 
@@ -738,6 +749,8 @@ Namespace RQQueryResult
                 Dim dr As RQDataSet.DokumenteRow = CType(row, RQDataSet.DokumenteRow)
 
                 WriteDocDescription(dr)
+                'If dr.Feld30 = "" Then dr.Feld30 = "NOSORT"
+                'If dr.Feld31 = "" Then dr.Feld31 = System.DateTime.Now
                 'If (dr.Feld30 = "") Then dr.SetFeld30Null()
                 'If (dr.Feld31 = "") Then dr.SetFeld31Null()
                 'If (dr.Feld32 = "") Then dr.SetFeld32Null()

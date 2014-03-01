@@ -47,7 +47,7 @@ namespace MvcRQ.Helpers
             return accessRights == "EXTERNAL" ? "EXTITEM_AR_CODE" : "DBITEM_AR_CODE";
         }
 
-        public static bool HasAddAccess()
+        public static bool HasAdminAccess()
         {
             string[] roles = GetUserRoles();
 
@@ -56,7 +56,17 @@ namespace MvcRQ.Helpers
             else
                 return false;
         }
-        
+
+        public static bool HasEditAccess()
+        {
+            return HasAdminAccess();
+        }
+
+        public static bool HasAddAccess()
+        {
+            return HasAdminAccess();
+        }
+
         public static bool HasViewAccess(string accessRights)
         {
             return true;

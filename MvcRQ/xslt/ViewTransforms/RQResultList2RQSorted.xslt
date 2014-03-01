@@ -928,7 +928,7 @@
         <td>
           <table class="itemlist">
             <tr>
-              <td class="fieldname" align="left" valign="top" width="30px">
+              <td class="rq-fieldname" align="left" valign="top" width="30px">
                 <xsl:value-of select="$ListNr" />
               </td>
               <td align="center" valign="top" width="35px">

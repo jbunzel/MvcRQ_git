@@ -141,11 +141,23 @@
   <data name="include_external" xml:space="preserve">
     <value>Include</value>
   </data>
+  <data name="include_external_h" xml:space="preserve">
+    <value>External Databases</value>
+  </data>
+  <data name="link_home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="link_privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="link_terms" xml:space="preserve">
+    <value>Terms</value>
+  </data>
   <data name="logoff" xml:space="preserve">
-    <value>log-off</value>
+    <value>logoff</value>
   </data>
   <data name="logon" xml:space="preserve">
-    <value>log-on</value>
+    <value>logon</value>
   </data>
   <data name="menu1" xml:space="preserve">
     <value>Catalogue</value>
@@ -161,6 +173,9 @@
   </data>
   <data name="menu5" xml:space="preserve">
     <value>News</value>
+  </data>
+  <data name="query_fields_h" xml:space="preserve">
+    <value>Query Fields</value>
   </data>
   <data name="select_databases" xml:space="preserve">
     <value>Select databases</value>
@@ -179,6 +194,9 @@
   </data>
   <data name="sq_digital_video" xml:space="preserve">
     <value>Digital Video</value>
+  </data>
+  <data name="sq_h" xml:space="preserve">
+    <value>Standard Queries</value>
   </data>
   <data name="sq_recent_additions" xml:space="preserve">
     <value>Recent Additions</value>

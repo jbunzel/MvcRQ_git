@@ -1,26 +1,6 @@
 ﻿function getResultList() {
-    var c = cleanUrl() + "?verb=QueryList";
-    var fd = new ajaxLoadingIndicator("#html");
-    
-    $.ajax({
-        url: c,
-        type: "GET",
-        data: null,
-        dataType: "html",
-        success: function (data) {
-            renderHtmlList(data);
-            if (docNo != "") {
-                setTimeout(function () {
-                    getOldRQItem(docNo);
-                }, 1)
-            };
-            fd.remove();
-            resizeToWindowHeight();
-        },
-        error: function (xhr) {
-            _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
-        }
-    });
+    //callAjax_ResultList(cleanUrl() + "?verb=QueryList");
+    callAjax_ResultList(HostAdress() + "/rqitems?verb=QueryList");
 }
 
 function getOldRQItem(docno) {
@@ -55,7 +35,7 @@ function renderHtml(data, domElementID) {
 
 function renderXmlList(data, domElementID) {
     var xml = window.ActiveXObject ? data.xml : (new XMLSerializer().serializeToString(data));
-    
+
     $("#" + domElementID).transform({
         xmlstr: xml, 
         xsl: HostAdress() + "/xslt/ViewTransforms/RQI2SingleItemView.xslt", 
@@ -64,7 +44,6 @@ function renderXmlList(data, domElementID) {
  }
 
 function selectPredicates(e) {
-    alert("TEST");
     // hide any other select-database-dialog
     $(".select-databases-dialog").remove();
     var $clickedLink = $(this);
@@ -157,6 +136,31 @@ function callAjax(path, domElementID) {
     });
 }
 
+function callAjax_ResultList(targetUrl) {
+    var fd = new ajaxLoadingIndicator("#html");
+    
+    $.ajax({
+        url: targetUrl,
+        type: "GET",
+        data: null,
+        dataType: "html",
+        success: function (data) {
+            renderHtmlList(data);
+            if (docNo != "") {
+                setTimeout(function () {
+                    getOldRQItem(docNo);
+                }, 1)
+            };
+            fd.remove();
+            resizeToWindowHeight();
+        },
+        error: function (xhr) {
+            fd.remove();
+            _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
+        }
+    });
+}
+
 function visibilityToggle(id) {
     $("#" + id).slideToggle("slow");
 }
@@ -169,4 +173,64 @@ function cleanUrl() {
     else {
         return d;
     }
+}
+
+var thumbNail;
+
+function checkAvail(id, isbn) {
+    thumbNail = id;
+    var jsonScript = document.getElementById("jsonScript");
+    if (jsonScript) {
+        jsonScript.parentNode.removeChild(jsonScript);
+    }
+    var scriptElement = document.createElement("script");
+    scriptElement.setAttribute("id", "jsonScript");
+    scriptElement.setAttribute("src","http://books.google.com/books?bibkeys=" + escape(isbn) + "&jscmd=viewapi&callback=showThumbNail");
+    //scriptElement.setAttribute("src", "https://openlibrary.org/api/books?bibkeys=" + escape(isbn) + "&jscmd=viewapi&callback=showThumbNail");
+    scriptElement.setAttribute("type", "text/javascript");
+    document.documentElement.firstChild.appendChild(scriptElement);
+}
+
+function showThumbNail(booksInfo) {
+    var divList = document.getElementsByName(thumbNail);
+    var div;
+
+    if (divList.length > 1) {
+        div = divList[divList.length - 1];
+        div.id = thumbNail + Math.floor((Math.random() * 100) + 1);
+    }
+    else {
+        div = document.getElementById(thumbNail);
+        if (div.firstChild) div.removeChild(div.firstChild);
+    }
+
+    var mainDiv = document.createElement("div");
+
+    for (i in booksInfo) {
+        var book = booksInfo[i];
+        if ((book.preview != "noview") || (book.thumbnail_url)) {
+            var thumbnailDiv = document.createElement("div");
+
+            thumbnailDiv.className = "thumbnail";
+
+            var a = document.createElement("a");
+
+            a.href = book.info_url;
+            a.target = "_new";
+            if (book.thumbnail_url) {
+                var img = document.createElement("img");
+
+                img.src = book.thumbnail_url;
+                if (book.preview == "noview")
+                    thumbnailDiv.appendChild(img);
+                else
+                    a.appendChild(img);
+            }
+            if (book.preview != "noview")
+                thumbnailDiv.appendChild(a);
+            mainDiv.appendChild(thumbnailDiv);
+            break;
+        }
+    }
+    div.appendChild(mainDiv);
 }

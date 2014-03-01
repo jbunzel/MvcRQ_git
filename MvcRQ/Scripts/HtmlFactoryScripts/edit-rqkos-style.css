@@ -1,0 +1,149 @@
+﻿/* edit-viewer styles*/
+#EditForm {
+    border: 1px solid gray;
+    margin-bottom: 8px;
+    padding: 5px 5px 5px 5px;
+}
+
+.edit-form,
+.edit-subform {
+    background-color: transparent;
+}
+
+#accordion div {
+    border: 2px dashed gray;
+    margin: 5px 5px 5px 5px;
+}
+
+.editor-label,
+.editor-value {
+    margin-right: 10px;
+    font-family: Verdana, Arial, sans-serif !important;
+    /*font-size: .8em !important;*/
+    display: inline;
+}
+
+/* hack: insert a line-break */
+label[for=ClassID]:before,
+/*label[for=ClassCode]:before,*/
+label[for=ParentID]:before,
+/*label[for=ClassName]:before,*/
+label[for=ClassTitle]:before,
+label[for=RVKClassCodes]:before,
+label[for=NrOfSubclasses]:before {
+    content: '\a';
+    white-space: pre;
+}
+
+h1 label[for=ClassTitle]:before,
+h1 label[for=ClassName]:before {
+    content: '';
+}
+
+input[type=button],
+input[type=submit] {
+    margin: 5px 5px 5px 5px;
+}
+
+input[type=button]:hover,
+input[type=submit]:hover {
+    background-color: gray;
+}
+
+input[type=button]:disabled,
+input[type=submit]:disabled {
+    background-color: lightgray;
+    color:GrayText;
+}
+
+input[type=text] {
+    width: 30%;
+    margin: 5px 32px 5px 5px;
+    padding: 5px 5px 5px 5px;
+    font-size: .8em !important;
+    font-family: "Courier New" !important;
+} 
+
+textarea,
+.pure-form textarea {
+    margin: 5px 5px 5px 0px;
+    font-size: .8em !important;
+    font-family: "Courier New" !important;
+    width: 100%;
+    height: 80px;
+}
+
+.classname,
+.authors,
+.source,
+.institutions,
+.series,
+.indexterms,
+.subjects,
+.aboutpersons,
+.abstract {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+h1 .classname,
+.edition,
+.isdn,
+.coden, 
+.locality,
+.publisher,
+.publtime,
+.volume,
+.issue,
+.pages,
+.language,
+.doctypecode,
+.doctypename,
+.worktype,
+.aboutlocation,
+.abouttime,
+.createlocation,
+.createtime,
+.notes {
+    display: inline;
+}
+
+.volume,
+.issue,
+.pages,
+.language {
+    max-width: 160px;
+}
+
+.classification {
+    display: inline;
+    min-width: 790px;
+    margin: 5px 32px 5px 5px;    
+}
+
+#loading {
+}
+
+#simple-user-info {
+  padding: 15px 0;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  position: relative;
+  color: #00529B;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  filter: alpha(opacity=95); /* IE */ 
+  -moz-opacity: 0.95;  /*Mozilla*/ 
+  opacity: 0.95;  /*Opera*/ 
+}
+
+#simple-user-info.error {
+  background-color: Yellow;
+}
+
+#simple-user-info.success {
+  background-color: Lime;
+}

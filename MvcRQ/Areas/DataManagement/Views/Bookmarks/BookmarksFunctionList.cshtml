@@ -1,0 +1,25 @@
+﻿<script type="text/javascript">
+    function bookNew() { var url = '@Url.Action("New", "Bookmarks")'; Post(url); }
+
+    function Post(url) {
+        var fd = new ajaxLoadingIndicator("#html");
+
+        $.post(url, null,
+                function (data) {
+                    fd.remove();
+                    _myHelper.showMessage(data, "success");
+                }).fail(function (xhr) {
+                    fd.remove();
+                    _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
+                });
+    }
+</script> 
+<div class="rq-ajax-wait" style="display: none"></div>
+<ul class="standard-searches">
+    @if(ViewBag.HasAdminPermit == "true") {
+        <li>@Html.ActionLink(MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_bookmarks_reindex, "New", "Bookmarks", new { area = "DataManagement" }, new { title = MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_bookmarks_reindex_title, onClick="bookNew(); return false;"  })</li>
+    }
+    else {
+        <li>@Html.ActionLink(MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_bookmarks_reindex, "New", "Bookmarks", new { area = "DataManagement" }, new { title = MvcRQ.Areas.DataManagement.Resources.DataManagement.dm_bookmarks_reindex_title, disabled="true"  })</li>
+    }        
+</ul>

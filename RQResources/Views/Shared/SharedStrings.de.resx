@@ -141,6 +141,18 @@
   <data name="include_external" xml:space="preserve">
     <value>Einschließen</value>
   </data>
+  <data name="include_external_h" xml:space="preserve">
+    <value>Externe Datenbanken</value>
+  </data>
+  <data name="link_home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="link_privacy" xml:space="preserve">
+    <value>Schutz</value>
+  </data>
+  <data name="link_terms" xml:space="preserve">
+    <value>Nutzung</value>
+  </data>
   <data name="logoff" xml:space="preserve">
     <value>Abmelden</value>
   </data>
@@ -151,7 +163,7 @@
     <value>Katalog</value>
   </data>
   <data name="menu2" xml:space="preserve">
-    <value>Über</value>
+    <value>Info</value>
   </data>
   <data name="menu3" xml:space="preserve">
     <value>Magazin</value>
@@ -161,6 +173,9 @@
   </data>
   <data name="menu5" xml:space="preserve">
     <value>Nachrichten</value>
+  </data>
+  <data name="query_fields_h" xml:space="preserve">
+    <value>Suchfelder</value>
   </data>
   <data name="select_databases" xml:space="preserve">
     <value>Datenbanken auswählen</value>
@@ -179,6 +194,9 @@
   </data>
   <data name="sq_digital_video" xml:space="preserve">
     <value>Digitale Video-Aufnahmen</value>
+  </data>
+  <data name="sq_h" xml:space="preserve">
+    <value>Standard Abfragen</value>
   </data>
   <data name="sq_recent_additions" xml:space="preserve">
     <value>Neuzugänge</value>

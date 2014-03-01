@@ -3,13 +3,12 @@
 });
 
 function renderItemContent() {
-    var test = Modernizr.audio.ogg;
+    var w = $('#viewer_area').width();
+    var h = $('#viewport').height();
 
-    test = Modernizr.audio.mp3;
-    test = Modernizr.video.h264;
     $('#viewer_area').media({
-        width: 900,
-        height: 650,
+        width: w,
+        height: h,
         autoplay: true,
         src: docAdr,
         attrs: { attr1: 'attrValue1', attr2: 'attrValue2' },  // object/embed attrs 
@@ -26,16 +25,24 @@ function renderBibInfo(data) {
 }
 
 function getRQItem(docno) {
-    if ($("#bib_info_area").is(":empty")) {
+    if ($("#bib_info_area").is(":empty")) { // not empty if content has been already written by Index.cshtml 
+        var acceptedType = "html" // set json for client transformation to html
+
         $("#bib_info_area").html("<div id='loading'><img src='" + HostAdress() + "/images/ajax-loader.gif' alt='Please Wait' /></div>");
         $.ajax({
             url: HostAdress() + "/RQItems/" + docno,
             type: "GET",
             data: null,
-            dataType: "json",
+            dataType: "html",
             success: function (data) {
-                renderBibInfo(data);
-                renderItemContent();
+                if (acceptedType == "json") {
+                    renderBibInfo(data);
+                    renderItemContent();
+                }
+                else {
+                    $("#bib_info_area").html(data);
+                    renderItemContent();
+                }
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '));
@@ -46,3 +53,4 @@ function getRQItem(docno) {
     else
         renderItemContent();
 }
+

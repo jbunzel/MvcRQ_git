@@ -15,7 +15,6 @@ using RQLib.RQQueryForm;
 using MvcRQ.Helpers;
 using MvcRQ.Areas.DigitalObjects.Helpers;
 
-
 namespace MvcRQ.Models
 {
     [DataContract()]
@@ -30,22 +29,21 @@ namespace MvcRQ.Models
 
         #region public constructors
 
+        public RQItemModel() : this(false) {}
+
+        public RQItemModel(bool forEdit) : this(null, forEdit) {}
+
+        public RQItemModel(RQquery query) : this(query, false) {}
+
         public RQItemModel(RQquery query, bool forEdit)
         {
             RQItems = new RQItemSet(forEdit);
-            query.QueryFieldList = RQItems.GetDataFieldTable();
-            RQItems.Find(query);
+            if (query != null)
+            {
+                query.QueryFieldList = RQItems.GetDataFieldTable();
+                RQItems.Find(query);
+            }
         }
-
-        public RQItemModel(RQquery query)
-        {
-            RQItems = new RQItemSet();
-            query.QueryFieldList = RQItems.GetDataFieldTable();
-            RQItems.Find(query);
-        }
-
-        public RQItemModel()
-        { }
 
         #endregion
 
@@ -405,9 +403,15 @@ namespace MvcRQ.Models
 
                             if (!cl.IsLinkedDataEnabled && !sc.IsComplete)
                             {
-                                sc.EnableLinkedData();
-                                sc.Load();
-                                sc.DisableLinkedData();
+                                try
+                                {
+                                    sc.EnableLinkedData();
+                                    sc.Load();
+                                    sc.DisableLinkedData();
+                                }
+                                catch {
+                                    sc.DisableLinkedData();
+                                }
                             }
                             return sc;
                         }
@@ -919,6 +923,21 @@ namespace MvcRQ.Models
             }
         }
 
+        [DataMember()]
+        [DataType(DataType.Text)]
+        [XmlElement]
+        public string SortField
+        {
+            get
+            {
+                return this._resultItem.ItemDescription.Feld30;
+            }
+            set
+            {
+                this._resultItem.ItemDescription.Feld30 = value;
+            }
+        }
+
         [DataMember]
         [XmlElement]
         public RQClassification Classification
@@ -1044,6 +1063,7 @@ namespace MvcRQ.Models
             System.IO.MemoryStream ms = new System.IO.MemoryStream();
             var xTrf = new System.Xml.Xsl.XslCompiledTransform();
             var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
+            var xSet = new System.Xml.Xsl.XsltSettings(true, true);
             var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
             var doc = new System.Xml.XmlDocument();
             string xsltName = "";
@@ -1068,19 +1088,18 @@ namespace MvcRQ.Models
             //Doc.Save("C:/MVCTest.xml");
             //ENDE TESTDATEI 
             System.IO.TextReader tr = new System.IO.StringReader(System.Text.Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
-            xTrf.Load(HttpContext.Current.Server.MapPath(xsltName));
-            xTrfArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
-            xTrfArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
-            xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), null, mstr);
+            xTrf.Load(HttpContext.Current.Server.MapPath(xsltName),xSet, new XmlUrlResolver());
+            xTrfArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
+            xTrfArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
+            xTrfArg.AddExtensionObject("urn:TransformHelper", new TransformHelper.TransformUtils());
+            xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), xTrfArg, mstr);
             mstr.BaseStream.Flush();
             mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
             doc.Load(mstr.BaseStream);
-
             //TESTDATEI EZEUGEN
             //doc.Save("C:/MVCTest.xml");
             //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-
-            var rd = new System.Xml.XmlTextReader(mstr.BaseStream);
+            //var rd = new System.Xml.XmlTextReader(mstr.BaseStream);
             return doc.OuterXml;
         }
 

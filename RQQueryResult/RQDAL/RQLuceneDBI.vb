@@ -8,7 +8,7 @@ Imports Lucene.Net.Search
 Imports Lucene.Net.Index
 
 Imports RQLib.RQQueryForm
-Imports RQLib.RQLucene
+Imports RQLib.RQDAL.RQLuceneIndexer
 
 
 Namespace RQDAL
@@ -28,17 +28,74 @@ Namespace RQDAL
 
 #Region "Private Methods"
 
-        Private Sub IndexFiles()
-            Dim i As Integer = 0
-            Dim indexType As String = IndexConfigNodes(i).SelectSingleNode("@indexType").Value
-            Dim indexer As RQLucene.Indexer
+        'Private Sub IndexFiles()
+        '    Dim i As Integer = 0
+        '    Dim indexType As String = IndexConfigNodes(i).SelectSingleNode("@indexType").Value
+        '    Dim indexer As RQLucene.Indexer
 
-            If (indexType = "XMLIndexer") Then
-                indexer = New RQLucene.XMLIndexer(IndexConfigNodes(i))
-            Else
-                indexer = New RQLucene.OleDBIndexer(IndexConfigNodes(i))
-                indexer.Generate()
-            End If
+        '    If (indexType = "XMLIndexer") Then
+        '        indexer = New RQLucene.XMLIndexer(IndexConfigNodes(i))
+        '    Else
+        '        indexer = New RQLucene.OleDBIndexer(IndexConfigNodes(i))
+        '        indexer.Generate()
+        '    End If
+        'End Sub
+
+
+        Private Sub IndexFiles(Optional ByVal Optimize As Boolean = False, Optional ByVal CreateIndex As Boolean = False)
+            Try
+                Dim indexType As String = IndexConfigNodes(0).SelectSingleNode("@indexType").Value
+                Dim indexer As New OleDBIndexer(IndexConfigNodes(0))
+
+                If (indexType = "OLEDBIndexer") Then
+                    indexer.Open(CreateIndex)
+                    indexer.Reindex()
+                    indexer.Close(Optimize)
+                End If
+            Catch ex As System.Data.OleDb.OleDbException
+                Throw New Exception("Invalid path to OLE database!", ex)
+            Catch ex As Lucene.Net.Store.LockObtainFailedException
+                Throw New Exception("Lucene database locked!", ex)
+            Catch ex As Exception
+                Throw New Exception(ex.Message, ex)
+            End Try
+        End Sub
+
+
+        Private Sub OptimizeSegments()
+            Try
+                Dim indexType As String = IndexConfigNodes(0).SelectSingleNode("@indexType").Value
+                Dim indexer As New OleDBIndexer(IndexConfigNodes(0))
+
+                If (indexType = "OLEDBIndexer") Then
+                    indexer.Open()
+                    indexer.Close(True)
+                End If
+            Catch ex As System.Data.OleDb.OleDbException
+                Throw New Exception("Invalid path to OLE database!", ex)
+            Catch ex As Lucene.Net.Store.LockObtainFailedException
+                Throw New Exception("Lucene database locked!", ex)
+            Catch ex As Exception
+                Throw New Exception(ex.Message, ex)
+            End Try
+        End Sub
+
+
+
+        Private Sub UpdateFiles(ByRef dataSet As DataSet, ByVal srcTable As String, ByVal changeType As UpdateIndexer.ChangeType)
+            Dim item As DataRow
+            Dim updater As New UpdateIndexer(IndexConfigNodes(0))
+            'Dim searcher As New RQLucene.Searcher(IndexConfigNodes(0), dataSet.Tables(srcTable))
+
+            updater.Open()
+            Select Case srcTable
+                Case "Dokumente"
+                    For Each item In dataSet.Tables(srcTable).Rows
+                        updater.UpdateIndex(CType(item, RQDataSet.DokumenteRow), UpdateIndexer.ChangeType.Change, UpdateIndexer.DocType.Dokumente)
+                    Next
+                Case Else
+            End Select
+            updater.Close(True)
         End Sub
 
 #End Region
@@ -67,36 +124,22 @@ Namespace RQDAL
 
 
         Public Sub Update(ByRef dataSet As DataSet, ByVal srcTable As String)
-            Dim item As DataRow
+            Me.UpdateFiles(dataSet, srcTable, UpdateIndexer.ChangeType.Change)
+        End Sub
 
-            Select Case srcTable
-                Case "Dokumente"
-                    For Each item In dataSet.Tables(srcTable).Rows
-                        Dim row As RQDataSet.DokumenteRow = CType(item, RQDataSet.DokumenteRow)
-                        Dim searcher As New RQLucene.Searcher(IndexConfigNodes(0), dataSet.Tables(srcTable))
-                        Dim t As Term = New Term("ID", row.ID)
-                        Dim q As Lucene.Net.Search.Query = New TermQuery(t)
-                        Dim d As Hits = searcher.search(q)
 
-                        Select Case d.Length
-                            Case 1
-                                'Dokument ändern
-                                If d.Doc(0).GetField("ID").StringValue() = row.ID Then
-                                    Dim updater As New UpdateIndexer(IndexConfigNodes(0))
+        Public Sub Add(ByRef dataSet As DataSet, ByVal srcTable As String)
+            Me.UpdateFiles(dataSet, srcTable, UpdateIndexer.ChangeType.Add)
+        End Sub
 
-                                    updater.UpdateIndex(row, UpdateIndexer.ChangeType.Change, UpdateIndexer.DocType.Dokumente)
-                                End If
-                            Case 0
-                                'Dokument hinzufügen
-                                Dim updater As New RQLucene.UpdateIndexer(IndexConfigNodes(0))
 
-                                updater.UpdateIndex(row, UpdateIndexer.ChangeType.Add, UpdateIndexer.DocType.Dokumente)
-                            Case Else
-                                'KONSISTENZFEHLER DATENBANK
-                        End Select
-                    Next
-                Case Else
-            End Select
+        Public Sub Reindex()
+            IndexFiles(True, True)
+        End Sub
+
+
+        Public Sub Optimize()
+            OptimizeSegments()
         End Sub
 
 #End Region

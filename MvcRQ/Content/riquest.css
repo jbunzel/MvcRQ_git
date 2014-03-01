@@ -17,12 +17,20 @@ body {
 a:link,
 a:visited,
 a:active {
-    color: #c22a09;
+    color: Gray;
+    font-weight: bold;
     text-decoration: none;
+    cursor: pointer;
 }
 
 a:hover {
-    color: #797979;
+    color: lightgray;
+}
+
+a[disabled="true"],
+a:hover[disabled="true"] {
+    cursor:default;
+    color: gray;
 }
 
 h1, h2, h3, h4, h5 {
@@ -90,7 +98,7 @@ fieldset {
     background-color: rgb(255, 255, 245) !important;
     color: Gray;
     font-family: Garamond;
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: bold;
     line-height: 1.3em;
     text-align: right;
@@ -185,6 +193,77 @@ fieldset {
     border-top: 1px solid silver;
 }
 
+.category {
+    font-family: Garamond;
+    font-size: 14pt;
+    font-style: italic;
+    color: #a52a2a;
+    line-height: 2em;
+}
+
+.itemlist {
+    /*margin-top: 5px;
+    margin-bottom: 10px;*/
+    font-family: Georgia;
+    font-size: 10pt;
+}
+
+.itemlist .comment {
+     margin-top: 0.2em;
+     margin-bottom: 0.5em;
+}
+
+.singleitem {
+    line-height: 1.1em;
+}
+
+.display-label,
+.singleitem .rq-fieldname {
+    font-family: Verdana;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #005770;
+    padding-right: 10px;
+}
+
+.display-field,
+.singleitem .rq-fieldvalue {
+    font-family: Arial;
+    font-size: 8pt;
+    font-weight: bold;
+    letter-spacing: normal;
+    color: black;
+}
+
+.singleitem .rq-castfielname,
+.singleitem .rq-castfieldvalue {
+    font-family: Arial;
+    font-size: 8pt;
+    letter-spacing: normal;
+    color: #818100;
+    padding-left: 15px;
+}
+
+.singleitem .rq-castfieldvalue {
+    padding-left: 30px;
+}
+
+.singleitem .comment,
+.itemlist .comment {
+    font-family: Arial;
+    font-size: 8pt;
+    color: gray;
+}
+
+.rq-action-bar a {
+    color: teal;
+    font-size: 8pt;
+}
+
+.rq-action-bar a:hover {
+    color: grey;
+}
+
 .rq-right-sidebar {
     margin-left: 15px;
 }
@@ -214,12 +293,18 @@ fieldset {
     margin-bottom: 0px;
 }
 
-.rq-small-logon {
-    /*border: 1px solid red;*/
-}
-
 .rq-small-logon label {
     font-size: 0.9em;
+}
+
+.rq-small-logon > .disabled label,
+.rq-small-logon input:disabled {
+    opacity: 0.3;
+}
+
+.rq-small-logon input[type='submit'],
+.rq-small-logon a {
+    font-size: 8pt;
 } 
 
 .rq-banner {
@@ -234,7 +319,6 @@ fieldset {
     width: 1px;
     height: 100px;
 }
-    
 
 /*-------------*/
 /* state rules */

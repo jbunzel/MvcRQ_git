@@ -1,42 +1,20 @@
-﻿#simple-user-info {
-  padding: 15px 0;
-  text-align: center;
-  background-repeat: no-repeat;
-  background-position: 10px center;
-  position: relative;
-  color: #00529B;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  filter: alpha(opacity=95); /* IE */
-  -moz-opacity: 0.95; /* Mozilla */
-  opacity: 0.95; /* Opera */
-}
-#simple-user-info.error {
-  background-color: Yellow;
-}
-#simple-user-info.success {
-  background-color: Lime;
+﻿#viewer_area {
+    min-width: 95%;
+    margin: 5px 5px 5px 5px;
 }
 
-
-#add-user-form, #manage-roles-form {
-  display: inline-block;
+.bibinfo {
+    font-family: 'Courier New';
+    line-height: 1.5em;
+    margin: 10px 10px 10px 10px;
+}
+#viewport .pure-u-2-3 {
+    min-height: 100%;
 }
 
-.select-databases-dialog,
-.manage-roles-dialog {
- background-color: #CCCCCC;
-    border: 1px solid #5C87B2;
-    display: block;
-    min-height: 50px;
-    min-width: 100px;
-    padding: 1em;
-    position: absolute;
-}
-ul.role-list{
-  padding-left:0;
-}
-ul.role-list li{
-  list-style-type:none;
-}
+.jp-audio {
+    display: table;
+    margin: 0 auto;
+}
+
+

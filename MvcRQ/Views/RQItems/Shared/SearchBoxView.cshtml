@@ -1,13 +1,5 @@
-﻿@model string
-@{
-    AjaxOptions ajaxOpts = new AjaxOptions
-    {
-        OnComplete = "getResultList",
-    };
-}
-<div>
-@using(Ajax.BeginForm("RQItemList","RQItems",ajaxOpts)){
-    @Html.TextBox("queryString", ViewData["qryStr"], new { @class = "pure-form" })
+﻿<script src="@Url.Content("~/Scripts/HtmlFactoryScripts/search-box.js")" type="text/javascript"></script>
+<form class="pure-form search-box">
+    <input type="text" id="queryString" value="@ViewData["qryStr"]" />
     <button class="pure-button pure-button-primary rq-quick-button" type="submit">los!</button>
-}
-</div>
+</form>
