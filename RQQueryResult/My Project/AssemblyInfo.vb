@@ -9,10 +9,10 @@ Imports System.Runtime.InteropServices
 ' Die Werte der Assemblyattribute überprüfen
 
 <Assembly: AssemblyTitle("RQQueryResult")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Microsoft")> 
-<Assembly: AssemblyProduct("RQQueryResult")> 
-<Assembly: AssemblyCopyright("Copyright © Microsoft 2011")> 
+<Assembly: AssemblyDescription("Business logic class library for Riquest Digital Library")> 
+<Assembly: AssemblyCompany("riquest.de")> 
+<Assembly: AssemblyProduct("RQLib")> 
+<Assembly: AssemblyCopyright("Copyright © Jürgen Bunzel, 2011 - 2014")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' übernehmen, indem Sie "*" eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("0.2.0.0")> 
+<Assembly: AssemblyFileVersion("0.2.0.0")> 

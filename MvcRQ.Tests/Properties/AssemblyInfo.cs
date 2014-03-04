@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MvcRQ.Tests")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("RiQuest Digital Library MVC3 Testsuite")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("riquest.de")]
 [assembly: AssemblyProduct("MvcRQ.Tests")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
+[assembly: AssemblyCopyright("Copyright © Jürgen Bunzel, 2011 - 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.0.0.0")]
+[assembly: AssemblyFileVersion("0.0.0.0")]

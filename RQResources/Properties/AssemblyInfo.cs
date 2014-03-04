@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
 [assembly: AssemblyTitle("RQResources")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Resources class library for RiQuest Digital Library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("riquest.de")]
 [assembly: AssemblyProduct("RQResources")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
+[assembly: AssemblyCopyright("Copyright © Jürgen Bunzel, 2012 - 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.2.0.0")]
+[assembly: AssemblyFileVersion("0.2.0.0")]
