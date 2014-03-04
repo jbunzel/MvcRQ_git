@@ -34,8 +34,9 @@
     <OutputPath>bin\test\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IdSharp">
-      <HintPath>..\..\..\Websites\rq\Bin\IdSharp.dll</HintPath>
+    <Reference Include="IdSharp, Version=0.0.0.2, Culture=neutral, PublicKeyToken=afbb2fbe078d3406, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\IdSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
