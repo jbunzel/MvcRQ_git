@@ -34,8 +34,9 @@
     <OutputPath>bin\test\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IdSharp">
-      <HintPath>..\..\..\Websites\rq\Bin\IdSharp.dll</HintPath>
+    <Reference Include="IdSharp, Version=0.0.0.2, Culture=neutral, PublicKeyToken=afbb2fbe078d3406, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\IdSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,7 +57,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructuredDigitalObject.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="lib\IdSharp.dll" />
+    <Content Include="lib\IdSharp.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
