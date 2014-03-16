@@ -523,6 +523,7 @@
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="xml\dir.xml" />
     <Content Include="xml\_ViewStart.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
@@ -533,7 +534,6 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="xml\dir.xml" />
     <Content Include="xml\extdblist.xml">
       <SubType>Designer</SubType>
     </Content>

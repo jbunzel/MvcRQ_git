@@ -29,6 +29,8 @@ Namespace RQQueryForm
 
         Private Function GetQueryTypeString(ByVal qryType As QueryTypeEnum) As String
             Select Case qryType
+                Case QueryTypeEnum.bookmarks
+                    Return "bookmarks"
                 Case QueryTypeEnum.access
                     Return "access"
                 Case QueryTypeEnum.browse
@@ -64,6 +66,8 @@ Namespace RQQueryForm
 
         Private Function GetQueryTypeEnum(ByVal qryType As String) As QueryTypeEnum
             Select Case qryType
+                Case "bookmarks"
+                    Return QueryTypeEnum.bookmarks
                 Case "access"
                     Return QueryTypeEnum.access
                 Case "browse"
@@ -183,6 +187,7 @@ Namespace RQQueryForm
 
         Public Enum QueryTypeEnum
             undefined
+            bookmarks
             classification
             tag
             film
