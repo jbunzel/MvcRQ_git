@@ -211,6 +211,7 @@ Namespace RQDAL
 
 
         Private Function GetQueryPath(ByRef QueryString As String, ByRef QueryType As String, ByRef QueryTermList As ArrayList, ByRef QueryLogic As String, ByRef QueryFields As DataTable) As String
+            'Todo: Work on testoutput
             Dim XPathString As String = "/directory/folder"
 
             If QueryTermList.Count > 0 And QueryFields.Rows.Count > 0 Then
@@ -263,6 +264,8 @@ Namespace RQDAL
                 XPathString = "//file[@DateChanged > '" + System.DateTime.Now.Date.AddMonths(-1).ToString("yyyyMMdd") + "']"
             ElseIf QueryType = "browse" Or QueryType = "class" Then
                 XPathString = GetQueryPathFromClassCode(QueryString)
+            ElseIf QueryType = "bookmarks" Then
+                XPathString = "/directory/folder | /directory/folder/filelist/file"
             End If
             Return XPathString
         End Function
@@ -327,27 +330,22 @@ Namespace RQDAL
                     Dim objStream As New StreamReader(strPath)
 
                     iDX = 0
-                    While (iDX = 0)
+                    While (iDX = 0 And Not objStream.EndOfStream)
                         strTemp = objStream.ReadLine
                         strTemp.Trim()
-                        iDX = InStr(strTemp, "[InternetShortcut]")
+                        iDX = InStr(strTemp, "URL=")
                     End While
-                    strTemp = objStream.ReadLine
-                    strTemp.Trim()
+                    If iDX > 0 Then
+                        'KORREKTURPROZEDUR
+                        'Die Prozedur ist erforderlich um fehlerhafte url. Dateien zu bereinigen,
+                        'die Zeilen nur mit LF und Dateiende mit #00 abschließen. 
+                        Dim ch() As Char = CType(strTemp, Char())
 
-                    'KORREKTURPROZEDUR
-                    'Die Prozedur ist erforderlich um fehlerhafte url. Dateien zu bereinigen,
-                    'die Zeilen nur mit LF und Dateiende mit #00 abschließen. 
-                    Dim ch() As Char = CType(strTemp, Char())
-
-                    While ch(strTemp.Length() - 1) = vbNullChar
-                        strTemp = strTemp.Substring(0, strTemp.Length() - 1)
-                    End While
-                    'ENDE KORREKTURPROZEDUR
-
-                    iDX = InStr(strTemp, "URL=") + 4
-                    If iDX > 4 Then
-                        strTemp = Mid(strTemp, iDX, Len(strTemp) - iDX + 1)
+                        While ch(strTemp.Length() - 1) = vbNullChar
+                            strTemp = strTemp.Substring(0, strTemp.Length() - 1)
+                        End While
+                        'ENDE KORREKTURPROZEDUR
+                        strTemp = Mid(strTemp, iDX + 4, Len(strTemp) - iDX - 3)
                         xmlWriter.WriteAttributeString("link", strTemp)
                     End If
                 Case Else
@@ -416,7 +414,7 @@ Namespace RQDAL
                     iItemCount += 1
                     xmlWriter.WriteAttributeString("name", objFolderItem.Name)
                     xmlWriter.WriteAttributeString("level", CStr(iLevel))
-                    'xmlWriter.WriteAttributeString("link", HttpContext.Current.Server.UrlEncode(strAdr + "/" + objFolderItem.Name))
+                    xmlWriter.WriteAttributeString("link", Web.HttpContext.Current.Server.UrlEncode(strAdr + "/" + objFolderItem.Name))
                     xmlWriter.WriteAttributeString("type", "folder")
                     xmlWriter.WriteAttributeString("DateChanged", objFolderItem.LastWriteTime.Date.ToString("yyyyMMdd"))
                     strTemp = LCase(objFolderItem.FullName) + "$$COMM$$.txt"
@@ -734,7 +732,7 @@ Namespace RQDAL
                 Next
             End If
             Try
-                '_bmDoc.Save(HttpContext.Current.Server.MapPath("~/xml/dir.xml"))
+                _bmDoc.Save(Web.HttpContext.Current.Server.MapPath("~/xml/dir.xml"))
                 Return 0
             Catch ex As Exception
                 Return (ex.GetHashCode)
