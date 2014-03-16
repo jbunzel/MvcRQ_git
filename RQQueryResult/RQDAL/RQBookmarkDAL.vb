@@ -211,7 +211,6 @@ Namespace RQDAL
 
 
         Private Function GetQueryPath(ByRef QueryString As String, ByRef QueryType As String, ByRef QueryTermList As ArrayList, ByRef QueryLogic As String, ByRef QueryFields As DataTable) As String
-            'Todo: Work on testoutput
             Dim XPathString As String = "/directory/folder"
 
             If QueryTermList.Count > 0 And QueryFields.Rows.Count > 0 Then
