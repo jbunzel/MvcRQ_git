@@ -75,7 +75,7 @@ namespace MvcRQ
 
         protected void Application_Start()
         {
-            //System.Data.Entity.Database.SetInitializer(new MvcRQ.Areas.UserSettings.Models.SettingsDBInitializer());
+            System.Data.Entity.Database.SetInitializer(new MvcRQ.Areas.UserSettings.Models.SettingsDBInitializer());
 
             AreaRegistration.RegisterAllAreas();
 
