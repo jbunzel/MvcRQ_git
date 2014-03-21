@@ -340,13 +340,15 @@ Namespace RQQueryResult
             Me._sysTable = Me._docDAL.GetClassification(Query, iParentClassID)
             ' retrieve document list from table dokumente of riquest database
             'If Query.QueryString.Length > 0 Then
-            Me._docTable = Me._docDAL.GetDocumentSet(Query)
-            'End If
+            If Not (Query.QueryType = RQquery.QueryTypeEnum.bookmarks) Then
+                Me._docTable = Me._docDAL.GetDocumentSet(Query)
+            End If
             ' retrieve bookmark list from virtual library directory
             If Query.QueryBookmarks Then
                 If Query.QueryType = RQquery.QueryTypeEnum.form _
                 Or Query.QueryType = RQquery.QueryTypeEnum.recent _
                 Or Query.QueryType = RQquery.QueryTypeEnum.browse _
+                Or Query.QueryType = RQquery.QueryTypeEnum.bookmarks _
                 Or Query.QueryType = RQquery.QueryTypeEnum.classification Then
                     Me._bmTable = Me._bmDAL.GetBookmarkSet(Query)
                 End If
@@ -395,16 +397,24 @@ Namespace RQQueryResult
                 Else
                     Dim item As New RQResultItem()
 
-                    If i < _docTable.Rows.Count Then
-                        item.Read(_docTable.Rows(i))
-                    ElseIf Not IsNothing(_bmTable) Then
-                        If i < _docTable.Rows.Count + _bmTable.Rows.Count Then
-                            item.Read(_bmTable.Rows(i - _docTable.Rows.Count))
+                    If Not IsNothing(_docTable) Then
+                        If i < _docTable.Rows.Count Then
+                            item.Read(_docTable.Rows(i))
+                        ElseIf Not IsNothing(_bmTable) Then
+                            If i < _docTable.Rows.Count + _bmTable.Rows.Count Then
+                                item.Read(_bmTable.Rows(i - _docTable.Rows.Count))
+                            Else
+                                item.Read(_extTable.Rows(i - _docTable.Rows.Count - _bmTable.Rows.Count))
+                            End If
                         Else
-                            item.Read(_extTable.Rows(i - _docTable.Rows.Count - _bmTable.Rows.Count))
+                            item.Read(_extTable.Rows(i - _docTable.Rows.Count))
                         End If
-                    Else
-                        item.Read(_extTable.Rows(i - _docTable.Rows.Count))
+                    ElseIf Not IsNothing(_bmTable) Then
+                        If i < _bmTable.Rows.Count Then
+                            item.Read(_bmTable.Rows(i))
+                        Else
+                            Return Nothing
+                        End If
                     End If
                     item.RQResultItemOwner = Me
                     items(i) = item
