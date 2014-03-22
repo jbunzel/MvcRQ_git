@@ -1,0 +1,149 @@
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+02.00	Version 0.2																											begonnen: 140102
+
+02.01		Ergebnisanzeige
+02.011			In Ergebnisliste zum aktuellen RQItem scrollen (z.B. auf das 1. RQItem des gewählten Segments)
+				(muss in jquery.pajinate.js eingebaut werden)
+02.012			Detailanzeige einschalten falls nur 1 Element in Ergebnisliste
+02.013			Ergebnisanzeige auf die für den Benutzer freigegebenen Dokumente beschränken
+02.0131				Variante A: Benutzerrechte beim Dokumentretrieval berücksichtigen
+02.0132				Variante B: Benutzerrechte beim Aufbau der ResultList berücksichtigen
+					(im Kontext von 01.12 zunächst verworfen)						
+
+02.02		RSS-Viewer einbinden			
+
+02.03		Semantic Web Interface									
+02.031			Semantic Web Personen-Information 
+				(abgebrochen: s. Brecht, Kalendergeschichten (Links unbeabsichtigt gelöscht))	
+
+02.04		LEER
+
+02.05		Exception-Management
+02.051			Überarbeiten und vereinheitlichen
+02.052			Fehlermeldungen (Farbe, Position)
+
+02.06		JQuery Nutzer-Interface-Funktionen
+02.061			PRÜFEN: Ajax Global Event Handlers für Standard UI-Elemente bei Ajax Calls 
+				(Fade-Out, Fehlermeldungen etc.) 
+
+02.07		ItemViewer (Dokument, Video, Audio, Bild)									
+02.071			Aktuellen Track-Titel bei Audio & Video-Playern anzeigen
+02.072			ItemViewer in die DigitalObjects-Area verlagern.
+02.073			Bild-Betrachter							
+02.074			Video-DVD für HTML5 konvertieren
+
+02.08		SQLEXPRESS Server aufsetzen
+02.081			Speicherung der Benutzereinstellungen überprüfen				
+02.082			Auf den Web-Servern (DomainBox, ESC; QualityHosting)
+
+02.09		Editier- & Importfunktionen vervollständigen						
+02.091			Editier- & Importrechte eine Benutzers in der Ergebnisanzeige freischalten	
+02.0911				Zugriffsrechte mit dem Dokument abspeichern 		
+02.0912				Alle Nutzerrollen implementieren (setzt voraus 02.00)
+02.092			Client-Side Editierfunktonen verbessern							
+02.0921				Benutzeroptionen für Rücksprungvarianten
+02.093			Elementare Editier- & Importfunktionen testen 
+02.0931				Import der Weblinks überprüfen
+02.0932                         Bearbeitung von hierarchischen MP3-Digitalen-Objekten. 
+02.0933				Eingangsbearbeitung der MP3-Digitalen-Objekten in die DigitalObjects-Area verlagern.
+02.0934				Import von PDF-Verzeichnissen (mit automatischer Titelerkennung)
+02.094			Editieren des Klassifikationsbaums
+
+02.10		Buch-Cover über Library of Congress-IDs suchen
+
+02.11		Lokalisierung
+02.111			Lokalisierung der Autorisierungsmodule (Attribute in AccountModels.cs)						
+				
+02.12		Editor für Klassifikationstabelle																				begonnen: 140102
+02.121			Check- & Add-Funktionalität für ClassBranch-Editor															begonnnn: 140102	erledigt: 140120
+02.122			Elementare Submit-Funktionalität für ClassBranch-Editor														begonnen: 140102	erledigt: 140126
+02.123			Submit-Funktionalität auf Unterklassen ausdehnen		
+02.124			Löschen von Unterklassen
+02.125			Veränderungen von Bookmarks in DIR.XML
+02.126			Tabelle Systematik anpassen (Philosophiegeschichte entspr. tats. Aufstellung auf KA setzen)	
+
+02.13		Bugs 0.1 beseitigen
+02.131			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.
+02.132			§§RVK§§:... wird nicht in rq_c-Klassifikationscode umgesetzt (Konnex zu 99.01?)
+02.133			In der Lucene-Datenbank sind Suchen nach ID oder DocNr nicht möglich (s.a. Konstruktor RQItem(itemId)).
+02.134			Kein-Treffer-Fehlermeldung wird remote nicht angezeigt.
+02.135 			Kein-Treffer-Fehlermeldungen erscheinen in API-Seiten als doppelte Alert-Box.		
+02.136			Lokal & remote verschwindet der Ajax-Wait-Indikator nicht.
+02.137			IM IE10 werden XML-Resultate bei Web-Services nicht angezeigt. 
+02.138			Falscher SQL-Connection-String in IndexConfig.xml.
+02.139			Server-Fehler bei Edition von Adorno "Aufarbeitung der Vergangenheit"
+
+02.14		ISSUE: KRITISCHE FEHLER
+02.141			Neuzugänge im bookmark-index erscheinen nicht in der Ergebnisliste.											begonnen: 140316	erledigt: 140316
+
+02.99		Sicherung & Veröffentlichung																					begonnen: 131229	erledigt: 
+02.991			Version 0.2.0.0 auf www.riquest.de							(intermediate)									begonnen: 131229	erledigt: 131229
+02.992			Version 0.2.1.0 auf github.com/jbunzel/MvcRQ master 		(intermediate)									begonnen: 140301	erledigt: 140301
+02.993			Version 0.2.1.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen: 140304	erledigt: 140304
+02.999			Version 0.2.X.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			
+01.00	Version 0.1 
+
+01.01		Bugs 0.0 beseitigen																								erledigt: 131120
+01.019			UND-Suche funktioniert nicht (wegen 01.024)																	erledigt: 130819
+01.020			Lucene-Segmentdateien replizieren extrem stark																erledigt: 131120 
+	
+01.02		Gestaltung der Nutzeroberfläche																					erledigt: 131203
+01.021			Layout																										erledigt: 130910
+01.022			Selektor für Ergebnis-Segmente einfügen.																	erledigt: 130910
+01.0221				Seiten-Nummern-Leiste bei Segment-Selektion anpassen.													erledigt: 130912
+01.023			Ergebnisanzeige (Listen- & Einzelanzeige)																	erledigt: 131011
+01.0231				Einzelanzeige AUtoren & Institutionen																	erledigt: 130915
+01.0232				Einzelanzeige Signaturen																				erledigt: 131011   
+01.0233				Einzelanzeige CSS-Formatierung																			erledigt: 131011
+01.024			Formularsuche & Standard-Suchen über Ajax realisieren.														erledigt: 130915
+01.025			Buch-Cover einbinden																						erledigt: 131203		
+
+01.04		ItemViewer (Dokument, Video, Audio, Bild) Layout & CSS-Formatierung												erledigt: 131011
+
+01.05		Sortiervarianten einfügen																						erledigt: 131207
+01.051			Sortierung nach Buchregalen																					erledigt: 131207
+
+01.06		Lucene-Suchmaschine																								erledigt: 131126
+01.061			IndexWriter & Optimierung nicht bei jedem einzelnen Dokument-Update aufrufen								erledigt: 131119
+01.062			elementares Suchmaschinen-Management (Index, Optimieren) für Lucene											erledigt: 131126
+
+01.07		Import der Weblinks installierenen																				erledigt: 121204
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+00.00   Version 0.0 (Transfer auf MVC)																						erledigt: 130629
+
+00.01		Editier-  & Importfunktionen vervollständigen																	erledigt: 130125
+00.011			Editier- & Importrechte eine Benutzers in der Ergebnisanzeige freischalten									erledigt: 130125
+00.0111				Basisfunktionalitäten der Einzelanzeige	(Edit - Copy - Delete)											erledigt: 130106
+00.0112				Basisfunktionalität der Listenanzeige (New)																erledigt: 130125			
+00.012			Client-Side Editierfunktonen implementieren																	erledigt: 130629
+00.0121				Anzeige der Masken für Edit, Copy, New																	erledigt: 130224
+00.0122				jQuery-Templates bzw. jQuery-Forms für Client-Side Masken mit JSON										erledigt: 130629	
+00.0123				Speichern der erfassten Daten & Fehlermeldungen															erledigt: 130315						
+00.0124				Ablaufsteuerung & Rücksprungvarianten																	erledigt: 130323
+00.0125				Erfassungsmasken vervollständigen																		erledigt: 130323
+00.0126				Sicherung & Konsistenzprüfung eingegebener Daten														erledigt: 130629
+00.013			Elementare Editier- & Importfunktionen testen 																erledigt: 130629
+00.0131				Edit, Copy, New überprüfen																				erledigt: 130323	
+00.0132				Einspielen von einfachen MP3-Digitalen-Objekten															erledigt: 130629
+
+00.02		SQLEXPRESS Server aufsetzen: Speicherung der Benutzereinstellungen überprüfen									erledigt: 130207				
+00.021			In der Visual Studio Entwicklungsumgebung																	erledigt: 130207
+00.022			Im Intranet																									erledigt: 130629
+
+00.03		ItemViewer (Dokument, Video, Audio, Bild)																		erledigt: 130520
+00.031			Grundfunktionen:																							erledigt: 130520
+00.0311				Dokument-Betrachter (PDF)																				erledigt: 130520
+00.0312				Audio-Abspieler (JPlayer)																				erledigt: 130520
+00.0313				Video-Abspieler (JPlayer)																				erledigt: 130520
+
+00.04		JQuery Nutzer-Interface-Funktionen																				erledigt: 130324
+00.041			Fade-Out bei Wartezeiten auf Ajax-Ergebnisse																erledigt: 130324
+
+00.05		Bugs entfernen																									erledigt: 130323	
+00.051			Beim Kopieren werden die rqc-Klassifikationscodes nicht erzeugt												erledigt: 130323
