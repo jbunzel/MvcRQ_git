@@ -64,15 +64,16 @@
 02.126			Tabelle Systematik anpassen (Philosophiegeschichte entspr. tats. Aufstellung auf KA setzen)	
 
 02.13		Bugs 0.1 beseitigen
-02.131			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.
-02.132			§§RVK§§:... wird nicht in rq_c-Klassifikationscode umgesetzt (Konnex zu 99.01?)
-02.133			In der Lucene-Datenbank sind Suchen nach ID oder DocNr nicht möglich (s.a. Konstruktor RQItem(itemId)).
-02.134			Kein-Treffer-Fehlermeldung wird remote nicht angezeigt.
-02.135 			Kein-Treffer-Fehlermeldungen erscheinen in API-Seiten als doppelte Alert-Box.		
-02.136			Lokal & remote verschwindet der Ajax-Wait-Indikator nicht.
-02.137			IM IE10 werden XML-Resultate bei Web-Services nicht angezeigt. 
-02.138			Falscher SQL-Connection-String in IndexConfig.xml.
-02.139			Server-Fehler bei Edition von Adorno "Aufarbeitung der Vergangenheit"
+02.1301			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.
+02.1302			§§RVK§§:... wird nicht in rq_c-Klassifikationscode umgesetzt (Konnex zu 99.01?)
+02.1303			In der Lucene-Datenbank sind Suchen nach ID oder DocNr nicht möglich (s.a. Konstruktor RQItem(itemId)).
+02.1304			Kein-Treffer-Fehlermeldung wird remote nicht angezeigt.
+02.1305 			Kein-Treffer-Fehlermeldungen erscheinen in API-Seiten als doppelte Alert-Box.		
+02.1306			Lokal & remote verschwindet der Ajax-Wait-Indikator nicht.
+02.1307			IM IE10 werden XML-Resultate bei Web-Services nicht angezeigt. 
+02.1308			Falscher SQL-Connection-String in IndexConfig.xml.
+02.1309			Server-Fehler bei Edition von Adorno "Aufarbeitung der Vergangenheit"
+02.1310			Fehlerhafter Öffnungszustand eines vorher geöffneten DynaTree-Knotens beim Wiederaufruf der Seite. 
 
 02.14		ISSUE: KRITISCHE FEHLER
 02.141			Neuzugänge im bookmark-index erscheinen nicht in der Ergebnisliste.											begonnen: 140316	erledigt: 140316
