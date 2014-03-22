@@ -224,6 +224,16 @@ namespace MvcRQ.Models
             return retValue;
         }
 
+        public bool Delete()
+        {
+            bool retValue = false;
+            SubjClassBranch editCB = this.Find(this._mEditClassID);
+
+            _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = false, message = "Consistency errors in class mapping!", hints = RQLib.EditGlobals.ReadHints() };
+            return retValue;
+        }
+
+
         #endregion
     }
 

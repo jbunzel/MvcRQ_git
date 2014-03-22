@@ -617,69 +617,6 @@ Namespace RQKos.Classifications
 
         Public Sub Update()
             Me.MajorClass.ClassDataClient.Update(Me)
-            ''Should be transferred to ClassificationDataClient
-            'Dim NewSubClassCount As Integer = 0
-            'Dim mqQuery As New RQDAL.RQCatalogDAL
-            'Dim drTable As RQDataSet.SystematikDataTable
-            'Dim bErr As Boolean = True
-            'Dim iSuperClassDocCount As Integer = 0
-            'Dim i As Integer = 0
-
-            'If Me.UpdateDocRefs(iSuperClassDocCount) = True Then
-            '    drTable = CType(mqQuery.GetRecordByParentID(Me.MajorClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable)
-            '    If Not drTable Is Nothing Then
-            '        For i = 1 To Me._arSubjClass.Length - 1
-            '            If Not IsNothing(Me._arSubjClass(i)) Then
-            '                If i > drTable.Rows.Count Then
-            '                    Dim drRow As RQDataSet.SystematikRow = CType(mqQuery.NewRow("RQDataSet", "Systematik"), RQDataSet.SystematikRow)
-
-            '                    drTable.Rows.Add(drRow)
-            '                    drRow.ParentID = Me.MajorClassID
-            '                    drRow.DocRefCount = Me._arSubjClass(i).NrOfClassDocs
-            '                    drRow.DirRefCount = Me._arSubjClass(i).NrOfRefLinks
-            '                    drRow.SubClassCount = 0
-            '                End If
-            '                If Me._arSubjClass(i).ClassCode = "" Or Me._arSubjClass(i).RefRVKSet = "" Then
-            '                    drTable.Item(i - 1).Delete()
-            '                Else
-            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DDCNumber = Me._arSubjClass(i).ClassCode
-            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).Description = Me._arSubjClass(i).ClassShortTitle
-            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).RegensburgDesc = Me._arSubjClass(i).ClassLongTitle
-            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).RegensburgSign = Me._arSubjClass(i).RefRVKSet
-            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DocRefCount = Me._arSubjClass(i).NrOfClassDocs
-            '                    CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).DirRefCount = Me._arSubjClass(i).NrOfRefLinks
-            '                End If
-            '            End If
-            '        Next
-            '        If mqQuery.UpdateSystematik() <> 0 Then
-            '            EditGlobals.AddHint("Error occured on subclass update.", "")
-            '        Else
-            '            bErr = False
-            '            NewSubClassCount = drTable.Count
-            '        End If
-            '    End If
-            '    If bErr = False Then
-            '        'Update SubClassCount parameter of base class 
-            '        Me.MajorClass.NrOfSubClasses = CShort(NewSubClassCount)
-            '        Me.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
-            '        If Me.MajorClass.Save <> 0 Then
-            '            EditGlobals.AddHint("Error occured on superclass update.", "")
-            '        End If
-            '        EditGlobals.AddHint("Classification codes have been updated.", "")
-            '    Else
-            '        EditGlobals.AddHint("Error occured on update of classification codes.", "")
-            '    End If
-            '    For i = 1 To Me._arSubjClass.Length - 1
-            '        If Not IsNothing(Me._arSubjClass(i)) Then
-            '            If Me._arSubjClass(i).NrOfSubClasses <> 0 Then
-            '                Dim SubClassBranch As New SubjClassBranch(Me._arSubjClass(i).ClassID)
-
-            '                SubClassBranch.Load()
-            '                SubClassBranch.Update()
-            '            End If
-            '        End If
-            '    Next
-            'End If
         End Sub
 
 

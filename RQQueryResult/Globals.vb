@@ -104,6 +104,9 @@ Public Module EditGlobals
 
 
     Public Function ReadHints() As Hint()
+        If IsNothing(Hints) Then
+            AddHint("Hint", "No message available for this event.")
+        End If
         Dim ret() As Hint = Hints
 
         ReDim Hints(0)

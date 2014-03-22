@@ -52,6 +52,7 @@ function EditForm() {
             $('#btn-check').click(this.check);
             $('#btn-add').click(this.add);
             $('#btn-up').click(this.up);
+            $('#btn-del').click(this.delete);
             if (parseInt($('#EditForm .parentid').html()) < 0)
                 $('#btn-up').attr('disabled', 'disabled');
             for (var i = 1; i <= NrOfSubforms; i++) {
@@ -63,6 +64,57 @@ function EditForm() {
                 });
             }
         }
+    }
+
+    /* Deletes the item */
+    this.delete = function (e) {
+        var json = JSON.stringify(EditForm2Data());
+        var url = HostAdress() + '/rqkos/' + $('.classid').html() + '?verb=delete';
+        var fd = new ajaxLoadingIndicator('#html');
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'json',
+            data: json,
+            contentType: 'application/json; charset=utf-8',
+            success: function (data, textStatus, jqXHR) {
+                if (data.isSuccess == false) {
+                    var msgHtml = HintListHtml(data.hints, data.hints.length);
+
+                    _myHelper.processServerResponse(data, null, function () {
+                        $('#EditDialog').html('<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><span id="edit-dialog-message">Die Klassifikationstranche konnte nicht gelöscht werden !</span></p>' + '<p>' + msgHtml + '</p>');
+                        $(function () {
+                            fd.remove();
+                            $('#EditDialog').dialog({
+                                title: 'Inkonsistente Konkordanz!',
+                                width: 600,
+                                resizable: false,
+                                modal: true,
+                                buttons: {
+                                    Überarbeiten: function () {
+                                        $(this).dialog('close');
+                                    },
+                                    Rückgängig: function () {
+                                        $(this).dialog('close');
+                                    }
+                                }
+                            });
+                        });
+                    });
+                }
+                else {
+                    Data2EditForm(data);
+                    fd.remove();
+                    _myHelper.showSuccess('Klassendefinition und Mapping erfolgreich gespeichert');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                fd.remove();
+                _myHelper.processServerResponse(jqXHR, null, null);
+            }
+        });
+        return true;
     }
 
     /* Submits the item to server if all data fields are valid */
@@ -105,7 +157,7 @@ function EditForm() {
                 else {
                     Data2EditForm(data);
                     fd.remove();
-                    _myHelper.showSuccess('Klassendefinition und Mapping erforlgreich gespeichert');
+                    _myHelper.showSuccess('Klassendefinition und Mapping erfolgreich gespeichert');
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

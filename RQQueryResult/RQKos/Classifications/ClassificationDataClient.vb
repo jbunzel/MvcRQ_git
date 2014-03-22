@@ -60,6 +60,9 @@ Namespace RQKos.Classifications
 
         Public MustOverride Function Update(ByRef classBranch As SubjClassBranch) As Boolean
 
+
+        Public MustOverride Function Delete(ByRef classBranch As SubjClassBranch) As Boolean
+
     End Class
 
 End Namespace

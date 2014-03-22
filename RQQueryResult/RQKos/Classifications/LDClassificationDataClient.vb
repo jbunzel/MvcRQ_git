@@ -70,6 +70,10 @@ Namespace RQKos.Classifications
         End Function
 
 
+        Public Overrides Function Delete(ByRef classBranch As SubjClassBranch) As Boolean
+            Return False
+        End Function
+
         'Public Shared Function WriteRDFGraph(ByVal theClassification As SubjClass) As RQSkosGraph
         '    Return New RQSkosGraph(theClassification)
         'End Function

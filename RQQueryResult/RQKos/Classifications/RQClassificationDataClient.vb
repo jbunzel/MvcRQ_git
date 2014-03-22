@@ -252,6 +252,12 @@
             'End If
         End Function
 
+
+        Public Overrides Function Delete(ByRef classBranch As SubjClassBranch) As Boolean
+            Return False
+        End Function
+
+
 #End Region
 
 
