@@ -620,6 +620,11 @@ Namespace RQKos.Classifications
         End Sub
 
 
+        Public Sub Delete()
+            Me.MajorClass.ClassDataClient.Delete(Me)
+        End Sub
+
+
         Public Function UpdateDocRefs(ByRef iSuperClassDocCount As Integer, ByRef iSuperClassRefCount As Integer) As Boolean
             Return Me.MajorClass.ClassDataClient.UpdateDocRefs(Me, iSuperClassDocCount, iSuperClassRefCount)
         End Function

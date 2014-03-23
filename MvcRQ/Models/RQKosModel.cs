@@ -229,10 +229,15 @@ namespace MvcRQ.Models
             bool retValue = false;
             SubjClassBranch editCB = this.Find(this._mEditClassID);
 
-            _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = false, message = "Consistency errors in class mapping!", hints = RQLib.EditGlobals.ReadHints() };
+            try {
+                _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = false, message = "Consistency errors in class mapping!", hints = RQLib.EditGlobals.ReadHints() };
+                editCB.Delete();
+            }
+            catch {
+                retValue = false;
+            }
             return retValue;
         }
-
 
         #endregion
     }
