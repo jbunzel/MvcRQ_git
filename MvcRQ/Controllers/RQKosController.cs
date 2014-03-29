@@ -229,7 +229,7 @@ namespace MvcRQ.Controllers
                     return View("ClientRQKosEditor", editModel.RQKosEditStatus);
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "delete")))
                 if (editModel.Delete())
-                    return View("ClientRQKosEditor", editModel.RQKosEditSet);
+                    return View("ClientRQKosEditor", new RQKosEditModel(editModel.RQKosEditSet.GetItem(0)._class.ParentClassID));
                 else
                     return View("ClientRQKosEditor", editModel.RQKosEditStatus);
             else

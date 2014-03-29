@@ -18,7 +18,7 @@
         <label for="NrOfSubclasses" class="editor-label"># of Subclasses: </label><span class="editor-value nrofsubclasses">@Model.ClassBranch.get_Item(0).NrOfSubClasses</span>
         <label for="NrOfDocuments" class="editor-label"># of Documents: </label><span class="editor-value nrofdocuments">@Model.ClassBranch.get_Item(0).NrOfClassDocs</span>
       	<br class="clear" />
-    	<input type="button" value="Submit" id="btn-submit" /><input type="button" value="Check Validity" id="btn-check" /><input type="button" value="Add Subclass" id="btn-add" /><input type="button" value="Goto Superclass" id="btn-up" />
+    	<input type="button" value="Submit" id="btn-submit" /><input type="button" value="Check Validity" id="btn-check" /><input type="button" value="Add Subclass" id="btn-add" /><input type="button" value="Goto Superclass" id="btn-up" /><input type="button" name="delete" value="Löschen" id="btn-del" />
     </fieldset>
 </form>
 
@@ -29,7 +29,6 @@
         string id2 = "btn-down" + i;
         string id3 = "ClassID" + i;
         string id4 = "classname" + i;
-        string id5 = "btn-del" + i;
                 
         <h1><span id="@id3" class="editor-value">@Model.ClassBranch.get_Item(i).ClassID</span><span class="editor-value classname">@Model.ClassBranch.get_Item(i).ClassShortTitle</span>
     </h1>
@@ -43,7 +42,7 @@
                     @Html.EditorFor(RQKosBranch => RQKosBranch.ClassBranch.get_Item(i).RefRVKSet, "multilinetext", new { labelfor = "RVKClassCodes", label = "RVKClassCodes:", classname = "editor-value rvkclasscodes" })
                     <label for="NrofSubclasses" class="editor-label"># of Subclasses: </label><span class="editor-value nrofsubclasses">@Model.ClassBranch.get_Item(i).NrOfSubClasses</span>
                     <label for="NrofDocuments" class="editor-label"># of Documents: </label><span class="editor-value nrofdocuments">@Model.ClassBranch.get_Item(i).NrOfClassDocs</span>
-                    <input type="button" value="Goto Subclasses" id="@id2" /><input type="button" value="Delete" id="@id5" />
+                    <input type="button" value="Goto Subclasses" id="@id2" />
                 </fieldset>
             </form>
         </div>

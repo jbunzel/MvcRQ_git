@@ -615,14 +615,14 @@ Namespace RQKos.Classifications
         End Sub
 
 
-        Public Sub Update()
-            Me.MajorClass.ClassDataClient.Update(Me)
-        End Sub
+        Public Function Update() As Boolean
+            Return Me.MajorClass.ClassDataClient.Update(Me)
+        End Function
 
 
-        Public Sub Delete()
-            Me.MajorClass.ClassDataClient.Delete(Me)
-        End Sub
+        Public Function Delete() As Boolean
+            Return Me.MajorClass.ClassDataClient.Delete(Me)
+        End Function
 
 
         Public Function UpdateDocRefs(ByRef iSuperClassDocCount As Integer, ByRef iSuperClassRefCount As Integer) As Boolean

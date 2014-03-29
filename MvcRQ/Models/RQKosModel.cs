@@ -212,15 +212,11 @@ namespace MvcRQ.Models
             bool retValue = false;
             SubjClassBranch editCB = this.Find(this._mEditClassID);
             
-            if (editCB.IsValid())
-                retValue = true;
-            if (retValue = this.IsCompatible() ? retValue && true : false)
-            {
-                _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = true, message = "Class mapping is consistent!", hints = RQLib.EditGlobals.ReadHints() };
-                editCB.Update();
-            }
-            else
-                _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = false, message = "Consistency errors in class mapping!", hints = RQLib.EditGlobals.ReadHints() };
+            retValue = editCB.IsValid();
+            if (retValue = retValue && (this.IsCompatible() ? retValue && true : false))
+                retValue = retValue && editCB.Update();
+            if (!retValue)
+                _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = false, message = "Bei der Aktualisierung der Unterklassen ist ein Fehler aufgetreten.", hints = RQLib.EditGlobals.ReadHints() };
             return retValue;
         }
 
@@ -229,13 +225,10 @@ namespace MvcRQ.Models
             bool retValue = false;
             SubjClassBranch editCB = this.Find(this._mEditClassID);
 
-            try {
-                _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = false, message = "Consistency errors in class mapping!", hints = RQLib.EditGlobals.ReadHints() };
-                editCB.Delete();
-            }
-            catch {
-                retValue = false;
-            }
+            if (retValue = editCB.Delete())
+                this._mEditClassID = editCB.MajorClass.ParentClassID;
+            else
+                _mEditStatus = new RQKosBranch.RQKosBranchStatus() { isSuccess = false, message = "Beim Löschen der Unterklassen ist ein Fehler aufgetreten.", hints = RQLib.EditGlobals.ReadHints() };
             return retValue;
         }
 

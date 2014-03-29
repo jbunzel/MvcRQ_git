@@ -11,6 +11,47 @@
 #End Region
 
 
+#Region "Private Methods"
+        Public Function DeleteSubClass(ByRef classBranch As SubjClassBranch, Index As Integer) As Boolean
+            Dim retVal = False
+
+            If Not IsNothing(classBranch.Item(Index)) Then
+                Dim mqQuery As New RQDAL.RQCatalogDAL
+                Dim drTable As RQDataSet.SystematikDataTable = CType(mqQuery.GetRecordByParentID(classBranch.MajorClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable)
+
+                drTable.Item(Index - 1).Delete()
+                retVal = (mqQuery.UpdateSystematik() = 0)
+            End If
+            Return retVal
+        End Function
+
+
+        Public Function DeleteSubBranches(ByRef classBranch As SubjClassBranch) As Boolean
+            Dim i As Integer = 0
+            Dim retVal As Boolean = False
+            Dim mqQuery As New RQDAL.RQCatalogDAL
+            Dim drTable As RQDataSet.SystematikDataTable = CType(mqQuery.GetRecordByParentID(classBranch.MajorClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable)
+
+            If Not drTable Is Nothing Then
+                For i = 1 To classBranch.count - 1
+                    If Not IsNothing(classBranch.Item(i)) Then
+                        If classBranch.Item(i).NrOfSubClasses > 0 Then
+                            Dim subClassBranch As New Classifications.SubjClassBranch(classBranch.Item(i).ClassID)
+
+                            DeleteSubBranches(subClassBranch)
+                        End If
+                        drTable.Item(i - 1).Delete()
+                        classBranch.Item(i) = Nothing
+                    End If
+                Next
+                retVal = (mqQuery.UpdateSystematik() = 0)
+            End If
+            Return retVal
+        End Function
+
+#End Region
+
+
 #Region "Public Method Overrides"
 
         Public Overrides Function GetClassId(ByVal classNotation As String) As String
@@ -48,10 +89,10 @@
             drRow.Description = theClass.ClassShortTitle
             drRow.RegensburgDesc = IIf(IsNothing(theClass.ClassLongTitle) Or theClass.ClassLongTitle = "", "-", theClass.ClassLongTitle)
             drRow.RegensburgSign = theClass.RefRVKSet
-            drRow.DocRefCount = theClass.NrOfClassDocs
             drRow.SubClassCount = theClass.NrOfSubClasses
+            drRow.DocRefCount = theClass.NrOfClassDocs
             drRow.DirRefCount = theClass.NrOfRefLinks
-            Return _mqQuery.UpdateSystematik()
+            Return Not _mqQuery.UpdateSystematik()
         End Function
 
 
@@ -228,33 +269,44 @@
                 End If
             End If
             Return retVal
-            'If bErr = False Then
-            '    'Update SubClassCount parameter of base class 
-            '    classBranch.MajorClass.NrOfSubClasses = CShort(NewSubClassCount)
-            '    classBranch.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
-            '    If classBranch.MajorClass.Save <> 0 Then
-            '        EditGlobals.AddHint("Error occured on superclass update.", "")
-            '    End If
-            '    EditGlobals.AddHint("Classification codes have been updated.", "")
-            'Else
-            '    EditGlobals.AddHint("Error occured on update of classification codes.", "")
-            'End If
-            'For i = 1 To classBranch.count - 1
-            '    If Not IsNothing(classBranch.Item(i)) Then
-            '        If classBranch.Item(i).NrOfSubClasses <> 0 Then
-            '            Dim SubClassBranch As New SubjClassBranch(classBranch.Item(i).ClassID)
-
-            '            SubClassBranch.Load()
-            '            SubClassBranch.Update()
-            '        End If
-            '    End If
-            'Next
-            'End If
         End Function
 
 
+        ''' <summary>
+        ''' TODO: Aktuell in Bearbeitung. Fehlerbehandlung vereinheitlichen
+        ''' </summary>
+        ''' <param name="classBranch"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
         Public Overrides Function Delete(ByRef classBranch As SubjClassBranch) As Boolean
-            Return False
+            Dim retVal As Boolean = False
+            Dim iSuperClassDocCount As Integer = 0
+            Dim iSuperClassRefCount As Integer = 0
+            Dim clSuperClassBranch As New SubjClassBranch(classBranch.Item(0).ParentClassID)
+
+            retVal = Me.DeleteSubBranches(classBranch)
+            If (retVal) Then
+                EditGlobals.AddHint("OK    ", "Unterklassen wurden gelöscht.")
+                classBranch = clSuperClassBranch
+                classBranch.Load()
+                If (Me.UpdateDocRefs(classBranch, iSuperClassDocCount, iSuperClassRefCount)) Then
+                    EditGlobals.AddHint("OK    ", "Dokumente und Bookmarks wurden neu zugeordnet.")
+                    classBranch.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
+                    classBranch.MajorClass.NrOfRefLinks = CShort(iSuperClassRefCount)
+                    If (Me.PutClassData(classBranch.MajorClass)) Then
+                        EditGlobals.AddHint("OK    ", "Daten der Hauptklasse wurden aktualisiert.")
+                    Else
+                        retVal = False
+                        EditGlobals.AddHint("FEHLER", "Daten der Hauptklasse konnten nicht aktualisiert werden.")
+                    End If
+                Else
+                    retVal = False
+                    EditGlobals.AddHint("FEHLER", "Dokumente und Bookmarks konnten nicht neu zugeordnet werden.")
+                End If
+            Else
+                EditGlobals.AddHint("FEHLER", "Unterklassen konnten nicht gelöscht werden.")
+            End If
+            Return retVal
         End Function
 
 

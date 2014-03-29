@@ -52,14 +52,12 @@ function EditForm() {
             $('#btn-check').click(this.check);
             $('#btn-add').click(this.add);
             $('#btn-up').click(this.up);
+            $('#btn-del').click(this.delete);
             if (parseInt($('#EditForm .parentid').html()) < 0)
                 $('#btn-up').attr('disabled', 'disabled');
             for (var i = 1; i <= NrOfSubforms; i++) {
                 $('#btn-down' + i).click(function (event) {
                     down(event.target.id.substr(8)); //extract subform index appended to 'btn-down';
-                });
-                $('#btn-del' + i).click(function (event) {
-                    del(event.target.id.substr(7)); //extract subform index appended to 'btn-del';
                 });
                 $('#EditSubForm' + i + ' .classname').keyup(function (event) {
                     $('#ClassID' + event.target.id.substr(9) + " + span").html($(this).val());
@@ -205,121 +203,122 @@ function EditForm() {
         return true;
     }
 
+    this.delete = function () {
+        $('#DeleteDialog').dialog({
+            modal: true,
+            buttons: {
+                'JA': function () {
+                    $(this).dialog('close');
+                    var json = JSON.stringify(EditForm2Data());
+                    var url = HostAdress() + '/rqkos/' + $('.classid').html() + '?verb=delete';
+                    var fd = new ajaxLoadingIndicator('#html');
+
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: json,
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data, textStatus, jqXHR) {
+                            debugger;
+                            if (data.isSuccess == false) {
+                                var msgHtml = HintListHtml(data.hints, data.hints.length);
+
+                                _myHelper.processServerResponse(data, null, function () {
+                                    $('#EditDialog').html('<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><span id="edit-dialog-message">Die Klassifikationstranche konnte nicht gelöscht werden !</span></p>' + '<p>' + msgHtml + '</p>');
+                                    $(function () {
+                                        fd.remove();
+                                        $('#EditDialog').dialog({
+                                            title: 'Inkonsistente Konkordanz!',
+                                            width: 600,
+                                            resizable: false,
+                                            modal: true,
+                                            buttons: {
+                                                Überarbeiten: function () {
+                                                    $(this).dialog('close');
+                                                },
+                                                Rückgängig: function () {
+                                                    $(this).dialog('close');
+                                                }
+                                            }
+                                        });
+                                    });
+                                });
+                            }
+                            else {
+                                Data2EditForm(data);
+                                fd.remove();
+                                _myHelper.showSuccess('Klassendefinition und Mapping erfolgreich gespeichert');
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            fd.remove();
+                            _myHelper.processServerResponse(jqXHR, null, null);
+                        }
+                    });
+                    return true;
+                },
+                'NEIN': function () {
+                    $(this).dialog("close");
+                }
+            }
+        }).prev().find('.ui-dialog-titlebar-close').hide();
+    }
+
     this.up = function () {
         rqkosId = $('.parentid').html();
         window.open(HostAdress()+ '/RQKos/' + rqkosId + '?verb=' + 'edit', '_self');
     }
+}
 
-    function Data2EditForm(data) {
-        saveData = data;
-        reset();
+function Data2EditForm(data) {
+    saveData = data;
+    reset();
+}
+
+function HintListHtml(hints, count) {
+    var retStr = '<ul class="message-box">'
+
+    for (var i = 0; i < count; i++) {
+        retStr += '<li>' + hints[i].HintTitle + ': ' + hints[i].HintMessage + '</li>';
     }
+    retStr += '</ul>';
+    return retStr;
+}
 
-    function HintListHtml(hints, count) {
-        var retStr = '<ul class="message-box">'
+function EditForm2Data() {
+    var s = parseInt($('#EditForm .nrofsubclasses').html());
+    var ret = new Object();
+    var scl = new Array(s);
+    var cl = new Object;
 
-        for (var i = 0; i < count; i++) {
-            retStr += '<li>' + hints[i].HintTitle + ': ' + hints[i].HintMessage + '</li>';
-        }
-        retStr += '</ul>';
-        return retStr;
+    cl.ClassID = $('#EditForm .classid').html();
+    cl.ClassCode = $('#EditForm .classcode').html();
+    cl.ParentID = $('#EditForm .parentid').html();
+    cl.ClassName = $('#EditForm .classname').html();
+    cl.ClassTitle = $('#EditForm .classtitle').html();
+    cl.RVKClassCodes = $('#EditForm .rvkclasscodes').html();
+    cl.NrOfSubclasses = $('#EditForm .nrofsubclasses').html();
+    cl.NrOfDocuments = $('#EditForm .nrofdocuments').html();
+    scl[0] = cl;
+    for (var i = 1; i <= s; i++) {
+        cl = new Object();
+        cl.ClassID = $('#ClassID' + i).html();
+        cl.ClassCode = $('#EditSubForm' + i + ' .classcode').val();
+        cl.ParentID = $('#EditSubForm' + i + ' .parentid').html();
+        cl.ClassName = $('#EditSubForm' + i + ' .classname').val();
+        cl.ClassTitle = $('#EditSubForm' + i + ' .classtitle').html();
+        cl.RVKClassCodes = $('#EditSubForm' + i + ' .rvkclasscodes').val();
+        cl.NrOfSubclasses = $('#EditSubForm' + i + ' .nrofsubclasses').html();
+        cl.NrOfDocuments = $('#EditSubForm' + i + ' .nrofdocuments').html();
+        scl[i] = cl;
     }
-    
-    function EditForm2Data() {
-        var s = parseInt($('#EditForm .nrofsubclasses').html());
-        var ret = new Object();
-        var scl = new Array(s);
-        var cl = new Object;
-
-        cl.ClassID = $('#EditForm .classid').html();
-        cl.ClassCode = $('#EditForm .classcode').html();
-        cl.ParentID = $('#EditForm .parentid').html();
-        cl.ClassName = $('#EditForm .classname').html();
-        cl.ClassTitle = $('#EditForm .classtitle').html();
-        cl.RVKClassCodes = $('#EditForm .rvkclasscodes').html();
-        cl.NrOfSubclasses = $('#EditForm .nrofsubclasses').html();
-        cl.NrOfDocuments = $('#EditForm .nrofdocuments').html();
-        scl[0] = cl;
-        for (var i = 1; i <= s; i++) {
-            cl = new Object();
-            cl.ClassID = $('#ClassID' + i).html();
-            cl.ClassCode = $('#EditSubForm' + i + ' .classcode').val();
-            cl.ParentID = $('#EditSubForm' + i + ' .parentid').html();
-            cl.ClassName = $('#EditSubForm' + i + ' .classname').val();
-            cl.ClassTitle = $('#EditSubForm' + i + ' .classtitle').html();
-            cl.RVKClassCodes = $('#EditSubForm' + i + ' .rvkclasscodes').val();
-            cl.NrOfSubclasses = $('#EditSubForm' + i + ' .nrofsubclasses').html();
-            cl.NrOfDocuments = $('#EditSubForm' + i + ' .nrofdocuments').html();
-            scl[i] = cl;
-        }
-        return scl;
-    }
+    return scl;
 }
 
 function down(index) {
     rqkosId = $('#ClassID' + index).html();
     window.open(HostAdress() + '/RQKos/' + rqkosId + '?verb=' + 'edit', '_self');
-}
-
-function del(index) {
-    $('#DeleteDialog').dialog({
-        modal: true,
-        buttons: {
-            'JA' : function(){
-                $(this).dialog('close');
-                var json = "";
-                var url = HostAdress() + '/rqkos/' + $('.classid').html() + '?verb=delete' + index;
-                var fd = new ajaxLoadingIndicator('#html');
-
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    dataType: 'json',
-                    data: json,
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (data, textStatus, jqXHR) {
-                        if (data.isSuccess == false) {
-                            var msgHtml = HintListHtml(data.hints, data.hints.length);
-
-                            _myHelper.processServerResponse(data, null, function () {
-                                $('#EditDialog').html('<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><span id="edit-dialog-message">Die Klassifikationstranche konnte nicht gelöscht werden !</span></p>' + '<p>' + msgHtml + '</p>');
-                                $(function () {
-                                    fd.remove();
-                                    $('#EditDialog').dialog({
-                                        title: 'Inkonsistente Konkordanz!',
-                                        width: 600,
-                                        resizable: false,
-                                        modal: true,
-                                        buttons: {
-                                            Überarbeiten: function () {
-                                                $(this).dialog('close');
-                                            },
-                                            Rückgängig: function () {
-                                                $(this).dialog('close');
-                                            }
-                                        }
-                                    });
-                                });
-                            });
-                        }
-                        else {
-                            Data2EditForm(data);
-                            fd.remove();
-                            _myHelper.showSuccess('Klassendefinition und Mapping erfolgreich gespeichert');
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        fd.remove();
-                        _myHelper.processServerResponse(jqXHR, null, null);
-                    }
-                });
-                return true;
-            },
-            'NEIN': function() {
-                $(this).dialog("close");
-            }
-        }
-    }).prev().find('.ui-dialog-titlebar-close').hide();
 }
 
 function GetClassTemplateHtml() {
