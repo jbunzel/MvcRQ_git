@@ -17,9 +17,14 @@
 
             If Not IsNothing(classBranch.Item(Index)) Then
                 Dim mqQuery As New RQDAL.RQCatalogDAL
-                Dim drTable As RQDataSet.SystematikDataTable = CType(mqQuery.GetRecordByParentID(classBranch.MajorClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable)
+                Dim drTable As RQDataSet.SystematikDataTable = CType(mqQuery.GetRecordByParentID(classBranch.MajorClass.ParentClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable)
 
-                drTable.Item(Index - 1).Delete()
+                For i = 0 To drTable.Rows.Count - 1
+                    If drTable.Item(i).ID = classBranch.Item(Index).ClassID Then
+                        drTable.Item(i).Delete()
+                        Exit For
+                    End If
+                Next
                 retVal = (mqQuery.UpdateSystematik() = 0)
             End If
             Return retVal
@@ -273,11 +278,17 @@
 
 
         ''' <summary>
-        ''' TODO: Aktuell in Bearbeitung. Fehlerbehandlung vereinheitlichen
+        ''' Deletes a given class branch with major class and all subclasses
         ''' </summary>
-        ''' <param name="classBranch"></param>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
+        ''' <param name="classBranch">
+        ''' Class branch to delete
+        ''' </param>
+        ''' <returns>
+        ''' True if function was executed without error.
+        ''' </returns>
+        ''' <remarks>
+        ''' If errors occured hints are written to the Hints structore of RQLIb module EditGlobals.
+        '''</remarks>
         Public Overrides Function Delete(ByRef classBranch As SubjClassBranch) As Boolean
             Dim retVal As Boolean = False
             Dim iSuperClassDocCount As Integer = 0
@@ -286,25 +297,32 @@
 
             retVal = Me.DeleteSubBranches(classBranch)
             If (retVal) Then
-                EditGlobals.AddHint("OK    ", "Unterklassen wurden gelöscht.")
-                classBranch = clSuperClassBranch
-                classBranch.Load()
-                If (Me.UpdateDocRefs(classBranch, iSuperClassDocCount, iSuperClassRefCount)) Then
-                    EditGlobals.AddHint("OK    ", "Dokumente und Bookmarks wurden neu zugeordnet.")
-                    classBranch.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
-                    classBranch.MajorClass.NrOfRefLinks = CShort(iSuperClassRefCount)
-                    If (Me.PutClassData(classBranch.MajorClass)) Then
-                        EditGlobals.AddHint("OK    ", "Daten der Hauptklasse wurden aktualisiert.")
+                EditGlobals.AddHint("OK    ", "Unterklassen von " + classBranch.Item(0).ClassShortTitle + " wurden gelöscht.")
+                retVal = Me.DeleteSubClass(classBranch, 0)
+                If (retVal) Then
+                    EditGlobals.AddHint("OK    ", "Klasse " + classBranch.Item(0).ClassShortTitle + " wurde gelöscht.")
+                    classBranch = clSuperClassBranch
+                    classBranch.Load()
+                    classBranch.MajorClass.NrOfSubClasses += -1
+                    If (Me.UpdateDocRefs(classBranch, iSuperClassDocCount, iSuperClassRefCount)) Then
+                        EditGlobals.AddHint("OK    ", "Dokumente und Bookmarks wurden neu zugeordnet.")
+                        classBranch.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
+                        classBranch.MajorClass.NrOfRefLinks = CShort(iSuperClassRefCount)
+                        If (Me.PutClassData(classBranch.MajorClass)) Then
+                            EditGlobals.AddHint("OK    ", "Daten der Klasse " + classBranch.Item(0).ClassShortTitle + " wurden aktualisiert.")
+                        Else
+                            retVal = False
+                            EditGlobals.AddHint("FEHLER", "Daten der Klasse " + classBranch.Item(0).ClassShortTitle + " konnten nicht aktualisiert werden.")
+                        End If
                     Else
                         retVal = False
-                        EditGlobals.AddHint("FEHLER", "Daten der Hauptklasse konnten nicht aktualisiert werden.")
+                        EditGlobals.AddHint("FEHLER", "Dokumente und Bookmarks konnten nicht neu zugeordnet werden.")
                     End If
                 Else
-                    retVal = False
-                    EditGlobals.AddHint("FEHLER", "Dokumente und Bookmarks konnten nicht neu zugeordnet werden.")
+                    EditGlobals.AddHint("FEHLER", "Klasse " + classBranch.Item(0).ClassShortTitle + " konnte nicht gelöscht werden.")
                 End If
             Else
-                EditGlobals.AddHint("FEHLER", "Unterklassen konnten nicht gelöscht werden.")
+                EditGlobals.AddHint("FEHLER", "Unterklassen von " + classBranch.Item(0).ClassShortTitle + " konnten nicht gelöscht werden.")
             End If
             Return retVal
         End Function

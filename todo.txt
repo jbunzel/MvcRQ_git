@@ -89,63 +89,63 @@
 			
 01.00	Version 0.1 
 
-01.01		Bugs 0.0 beseitigen																								erledigt: 131120
-01.019			UND-Suche funktioniert nicht (wegen 01.024)																	erledigt: 130819
-01.020			Lucene-Segmentdateien replizieren extrem stark																erledigt: 131120 
+01.01		Bugs 0.0 beseitigen																													erledigt: 131120
+01.019			UND-Suche funktioniert nicht (wegen 01.024)																						erledigt: 130819
+01.020			Lucene-Segmentdateien replizieren extrem stark																					erledigt: 131120 
 	
-01.02		Gestaltung der Nutzeroberfläche																					erledigt: 131203
-01.021			Layout																										erledigt: 130910
-01.022			Selektor für Ergebnis-Segmente einfügen.																	erledigt: 130910
-01.0221				Seiten-Nummern-Leiste bei Segment-Selektion anpassen.													erledigt: 130912
-01.023			Ergebnisanzeige (Listen- & Einzelanzeige)																	erledigt: 131011
-01.0231				Einzelanzeige AUtoren & Institutionen																	erledigt: 130915
-01.0232				Einzelanzeige Signaturen																				erledigt: 131011   
-01.0233				Einzelanzeige CSS-Formatierung																			erledigt: 131011
-01.024			Formularsuche & Standard-Suchen über Ajax realisieren.														erledigt: 130915
-01.025			Buch-Cover einbinden																						erledigt: 131203		
+01.02		Gestaltung der Nutzeroberfläche																										erledigt: 131203
+01.021			Layout																															erledigt: 130910
+01.022			Selektor für Ergebnis-Segmente einfügen.																						erledigt: 130910
+01.0221				Seiten-Nummern-Leiste bei Segment-Selektion anpassen.																		erledigt: 130912
+01.023			Ergebnisanzeige (Listen- & Einzelanzeige)																						erledigt: 131011
+01.0231				Einzelanzeige AUtoren & Institutionen																						erledigt: 130915
+01.0232				Einzelanzeige Signaturen																									erledigt: 131011   
+01.0233				Einzelanzeige CSS-Formatierung																								erledigt: 131011
+01.024			Formularsuche & Standard-Suchen über Ajax realisieren.																			erledigt: 130915
+01.025			Buch-Cover einbinden																											erledigt: 131203		
 
-01.04		ItemViewer (Dokument, Video, Audio, Bild) Layout & CSS-Formatierung												erledigt: 131011
+01.04		ItemViewer (Dokument, Video, Audio, Bild) Layout & CSS-Formatierung																	erledigt: 131011
 
-01.05		Sortiervarianten einfügen																						erledigt: 131207
-01.051			Sortierung nach Buchregalen																					erledigt: 131207
+01.05		Sortiervarianten einfügen																											erledigt: 131207
+01.051			Sortierung nach Buchregalen																										erledigt: 131207
 
-01.06		Lucene-Suchmaschine																								erledigt: 131126
-01.061			IndexWriter & Optimierung nicht bei jedem einzelnen Dokument-Update aufrufen								erledigt: 131119
-01.062			elementares Suchmaschinen-Management (Index, Optimieren) für Lucene											erledigt: 131126
+01.06		Lucene-Suchmaschine																													erledigt: 131126
+01.061			IndexWriter & Optimierung nicht bei jedem einzelnen Dokument-Update aufrufen													erledigt: 131119
+01.062			elementares Suchmaschinen-Management (Index, Optimieren) für Lucene																erledigt: 131126
 
-01.07		Import der Weblinks installierenen																				erledigt: 121204
+01.07		Import der Weblinks installierenen																									erledigt: 121204
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-00.00   Version 0.0 (Transfer auf MVC)																						erledigt: 130629
+00.00   Version 0.0 (Transfer auf MVC)																											erledigt: 130629
 
-00.01		Editier-  & Importfunktionen vervollständigen																	erledigt: 130125
-00.011			Editier- & Importrechte eine Benutzers in der Ergebnisanzeige freischalten									erledigt: 130125
-00.0111				Basisfunktionalitäten der Einzelanzeige	(Edit - Copy - Delete)											erledigt: 130106
-00.0112				Basisfunktionalität der Listenanzeige (New)																erledigt: 130125			
-00.012			Client-Side Editierfunktonen implementieren																	erledigt: 130629
-00.0121				Anzeige der Masken für Edit, Copy, New																	erledigt: 130224
-00.0122				jQuery-Templates bzw. jQuery-Forms für Client-Side Masken mit JSON										erledigt: 130629	
-00.0123				Speichern der erfassten Daten & Fehlermeldungen															erledigt: 130315						
-00.0124				Ablaufsteuerung & Rücksprungvarianten																	erledigt: 130323
-00.0125				Erfassungsmasken vervollständigen																		erledigt: 130323
-00.0126				Sicherung & Konsistenzprüfung eingegebener Daten														erledigt: 130629
-00.013			Elementare Editier- & Importfunktionen testen 																erledigt: 130629
-00.0131				Edit, Copy, New überprüfen																				erledigt: 130323	
-00.0132				Einspielen von einfachen MP3-Digitalen-Objekten															erledigt: 130629
+00.01		Editier-  & Importfunktionen vervollständigen																						erledigt: 130125
+00.011			Editier- & Importrechte eine Benutzers in der Ergebnisanzeige freischalten														erledigt: 130125
+00.0111				Basisfunktionalitäten der Einzelanzeige	(Edit - Copy - Delete)																erledigt: 130106
+00.0112				Basisfunktionalität der Listenanzeige (New)																					erledigt: 130125			
+00.012			Client-Side Editierfunktonen implementieren																						erledigt: 130629
+00.0121				Anzeige der Masken für Edit, Copy, New																						erledigt: 130224
+00.0122				jQuery-Templates bzw. jQuery-Forms für Client-Side Masken mit JSON															erledigt: 130629	
+00.0123				Speichern der erfassten Daten & Fehlermeldungen																				erledigt: 130315						
+00.0124				Ablaufsteuerung & Rücksprungvarianten																						erledigt: 130323
+00.0125				Erfassungsmasken vervollständigen																							erledigt: 130323
+00.0126				Sicherung & Konsistenzprüfung eingegebener Daten																			erledigt: 130629
+00.013			Elementare Editier- & Importfunktionen testen 																					erledigt: 130629
+00.0131				Edit, Copy, New überprüfen																									erledigt: 130323	
+00.0132				Einspielen von einfachen MP3-Digitalen-Objekten																				erledigt: 130629
 
-00.02		SQLEXPRESS Server aufsetzen: Speicherung der Benutzereinstellungen überprüfen									erledigt: 130207				
-00.021			In der Visual Studio Entwicklungsumgebung																	erledigt: 130207
-00.022			Im Intranet																									erledigt: 130629
+00.02		SQLEXPRESS Server aufsetzen: Speicherung der Benutzereinstellungen überprüfen														erledigt: 130207				
+00.021			In der Visual Studio Entwicklungsumgebung																						erledigt: 130207
+00.022			Im Intranet																														erledigt: 130629
 
-00.03		ItemViewer (Dokument, Video, Audio, Bild)																		erledigt: 130520
-00.031			Grundfunktionen:																							erledigt: 130520
-00.0311				Dokument-Betrachter (PDF)																				erledigt: 130520
-00.0312				Audio-Abspieler (JPlayer)																				erledigt: 130520
-00.0313				Video-Abspieler (JPlayer)																				erledigt: 130520
+00.03		ItemViewer (Dokument, Video, Audio, Bild)																							erledigt: 130520
+00.031			Grundfunktionen:																												erledigt: 130520
+00.0311				Dokument-Betrachter (PDF)																									erledigt: 130520
+00.0312				Audio-Abspieler (JPlayer)																									erledigt: 130520
+00.0313				Video-Abspieler (JPlayer)																									erledigt: 130520
 
-00.04		JQuery Nutzer-Interface-Funktionen																				erledigt: 130324
-00.041			Fade-Out bei Wartezeiten auf Ajax-Ergebnisse																erledigt: 130324
+00.04		JQuery Nutzer-Interface-Funktionen																									erledigt: 130324
+00.041			Fade-Out bei Wartezeiten auf Ajax-Ergebnisse																					erledigt: 130324
 
-00.05		Bugs entfernen																									erledigt: 130323	
-00.051			Beim Kopieren werden die rqc-Klassifikationscodes nicht erzeugt												erledigt: 130323
+00.05		Bugs entfernen																														erledigt: 130323	
+00.051			Beim Kopieren werden die rqc-Klassifikationscodes nicht erzeugt																	erledigt: 130323

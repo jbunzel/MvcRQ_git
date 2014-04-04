@@ -220,7 +220,6 @@ function EditForm() {
                         data: json,
                         contentType: 'application/json; charset=utf-8',
                         success: function (data, textStatus, jqXHR) {
-                            debugger;
                             if (data.isSuccess == false) {
                                 var msgHtml = HintListHtml(data.hints, data.hints.length);
 
@@ -246,9 +245,9 @@ function EditForm() {
                                 });
                             }
                             else {
-                                Data2EditForm(data);
                                 fd.remove();
                                 _myHelper.showSuccess('Klassendefinition und Mapping erfolgreich gespeichert');
+                                up();
                             }
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
@@ -316,6 +315,11 @@ function EditForm2Data() {
     return scl;
 }
 
+function up() {
+    rqkosId = $('.parentid').html();
+    window.open(HostAdress() + '/RQKos/' + rqkosId + '?verb=' + 'edit', '_self');
+}
+
 function down(index) {
     rqkosId = $('#ClassID' + index).html();
     window.open(HostAdress() + '/RQKos/' + rqkosId + '?verb=' + 'edit', '_self');
@@ -363,119 +367,3 @@ function reset() {
         $('#EditSubForm' + i + ' .nrofdocuments').html(saveData[i].NrOfDocuments);
     }
 }
-
-//function displayTOC(strWithToc) {
-//    var toc = strWithToc.substr(strWithToc.indexOf('$$TOC$$=') + '$$TOC$$='.length) + ' ';
-//    var tocItemList = [];
-//    var index = 1;
-
-//    while (toc != '')
-//    {
-//        var p1 = toc.indexOf('MyMusic=');
-
-//        if (p1 == -1) p1 = toc.indexOf('MyVideo=');
-//        if (p1 == -1) p1 = toc.indexOf('MyDoc='); 
-//        if (p1 != -1) {
-//            var p2 = toc.indexOf('; ') != -1 ? toc.indexOf('; ') : -1;
-//            var l = ('; ').length;
-
-//            tocItemList.push({
-//                position: index++,
-//                name: toc.substring(0, p1),
-//                adress: toc.substring(p1, p2)
-//            });
-//            toc = toc.substr(p2 + l);
-//        }
-//        else {
-//            toc = '';
-//        }
-//    }
-//    $('.toc').css('display', 'block');
-//    $('#tocAttach').prop('value', 'detach object').attr('title', 'Not yet implemented.').attr('disabled', true);
-//    //$('#tocList').html($('#tocTemplate').render(tocItemList));
-//    $('#tocList').html(compiledTemplate.render(tocItemList));
-//    return strWithToc.substring(0,strWithToc.indexOf('$$TOC$$='));
-//}
-
-//function hideTOC() {
-//    $('.toc').css('display', 'none');
-//    $('#tocAttach').prop('value', 'attach object').attr('title', 'Attach a digital object to this item.').attr('disabled', false);
-//    $('#tocList').html();
-//}
-
-//function readTOC() {
-//    if ($('.toc').css('display') == 'block') {
-//        var tocStr = '';
-//        var tocItemList = [];
-
-//        $('#tocList li').each(function (index) {
-//            tocItemList.push({
-//                position: $(this).find('.tocitemposition')[0].value,
-//                name: $(this).find('.tocitemname')[0].value,
-//                adress: $(this).find('.tocitemadress')[0].value
-//            });
-//        });
-//        tocItemList.sort(function (a, b) {
-//            return a.position-b.position;
-//        });
-//        for (var i = 0; i < tocItemList.length; i++) {
-//            var str = '';
-            
-//            str = tocItemList[i].name + tocItemList[i].adress;
-//            if (str != '')
-//                tocStr += str + '; '
-//        }  
-//        return (tocStr != '') ? '$$TOC$$=' + tocStr : tocStr;
-//    }
-//    else   
-//        return '';
-//}
-
-//function attachTOC(e) {
-//    $('#AttachTocDialog').dialog({ title: 'Attach Digital Object',
-//        width: 600,
-//        resizable: false,
-//        modal: true,
-//        buttons: {
-//            OK: function () {
-//                $(this).dialog('close');
-
-//                var adr = $('#ObjAdress').attr('value');
-//                var type = $('form input[name=DigitalObjectType]:checked').val()
-//                var url = HostAdress() + '/DigitalObjects/Viewer/TableOfContent/' + adr + '?verb=' + type;
-
-//                //debugger;
-//                $.ajax({
-//                    url: url,
-//                    type: 'GET',
-//                    dataType: 'json',
-//                    success: function (data) {
-//                        //debugger;
-//                        displayTOC(data.toc);
-//                    },
-//                    error: function (response) {
-//                        //debugger;
-//                        _myHelper.processServerResponse(response, null, function () {
-//                            $('#edit-dialog').html('<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><span id="edit-dialog-message">Das digitale Objekt konnte nicht gefunden oder nicht ausgewertet werden.</span></p>');
-//                            $(function () {
-//                                $('#edit-dialog').dialog({ title: 'Schwerwiegender Fehler !',
-//                                    width: 600,
-//                                    resizable: false,
-//                                    modal: true,
-//                                    buttons: {
-//                                        OK: function () {
-//                                            $(this).dialog('close');
-//                                        }
-//                                    }
-//                                });
-//                            });
-//                        });
-//                    }
-//                });
-//            },
-//            Cancel: function () {
-//                $(this).dialog('close');
-//            }
-//        }
-//    });
-//}
