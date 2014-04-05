@@ -11,6 +11,52 @@
 #End Region
 
 
+#Region "Private Methods"
+        Public Function DeleteSubClass(ByRef classBranch As SubjClassBranch, Index As Integer) As Boolean
+            Dim retVal = False
+
+            If Not IsNothing(classBranch.Item(Index)) Then
+                Dim mqQuery As New RQDAL.RQCatalogDAL
+                Dim drTable As RQDataSet.SystematikDataTable = CType(mqQuery.GetRecordByParentID(classBranch.MajorClass.ParentClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable)
+
+                For i = 0 To drTable.Rows.Count - 1
+                    If drTable.Item(i).ID = classBranch.Item(Index).ClassID Then
+                        drTable.Item(i).Delete()
+                        Exit For
+                    End If
+                Next
+                retVal = (mqQuery.UpdateSystematik() = 0)
+            End If
+            Return retVal
+        End Function
+
+
+        Public Function DeleteSubBranches(ByRef classBranch As SubjClassBranch) As Boolean
+            Dim i As Integer = 0
+            Dim retVal As Boolean = False
+            Dim mqQuery As New RQDAL.RQCatalogDAL
+            Dim drTable As RQDataSet.SystematikDataTable = CType(mqQuery.GetRecordByParentID(classBranch.MajorClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable)
+
+            If Not drTable Is Nothing Then
+                For i = 1 To classBranch.count - 1
+                    If Not IsNothing(classBranch.Item(i)) Then
+                        If classBranch.Item(i).NrOfSubClasses > 0 Then
+                            Dim subClassBranch As New Classifications.SubjClassBranch(classBranch.Item(i).ClassID)
+
+                            DeleteSubBranches(subClassBranch)
+                        End If
+                        drTable.Item(i - 1).Delete()
+                        classBranch.Item(i) = Nothing
+                    End If
+                Next
+                retVal = (mqQuery.UpdateSystematik() = 0)
+            End If
+            Return retVal
+        End Function
+
+#End Region
+
+
 #Region "Public Method Overrides"
 
         Public Overrides Function GetClassId(ByVal classNotation As String) As String
@@ -48,10 +94,10 @@
             drRow.Description = theClass.ClassShortTitle
             drRow.RegensburgDesc = IIf(IsNothing(theClass.ClassLongTitle) Or theClass.ClassLongTitle = "", "-", theClass.ClassLongTitle)
             drRow.RegensburgSign = theClass.RefRVKSet
-            drRow.DocRefCount = theClass.NrOfClassDocs
             drRow.SubClassCount = theClass.NrOfSubClasses
+            drRow.DocRefCount = theClass.NrOfClassDocs
             drRow.DirRefCount = theClass.NrOfRefLinks
-            Return _mqQuery.UpdateSystematik()
+            Return Not _mqQuery.UpdateSystematik()
         End Function
 
 
@@ -224,33 +270,63 @@
                     classBranch.MajorClass.NrOfSubClasses = CShort(drTable.Count)
                     classBranch.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
                     classBranch.MajorClass.NrOfRefLinks = CShort(iSuperClassRefCount)
-                    retVal = mqQuery.UpdateSystematik() And Me.PutClassData(classBranch.MajorClass)
+                    retVal = (Not mqQuery.UpdateSystematik()) And Me.PutClassData(classBranch.MajorClass)
                 End If
             End If
             Return retVal
-            'If bErr = False Then
-            '    'Update SubClassCount parameter of base class 
-            '    classBranch.MajorClass.NrOfSubClasses = CShort(NewSubClassCount)
-            '    classBranch.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
-            '    If classBranch.MajorClass.Save <> 0 Then
-            '        EditGlobals.AddHint("Error occured on superclass update.", "")
-            '    End If
-            '    EditGlobals.AddHint("Classification codes have been updated.", "")
-            'Else
-            '    EditGlobals.AddHint("Error occured on update of classification codes.", "")
-            'End If
-            'For i = 1 To classBranch.count - 1
-            '    If Not IsNothing(classBranch.Item(i)) Then
-            '        If classBranch.Item(i).NrOfSubClasses <> 0 Then
-            '            Dim SubClassBranch As New SubjClassBranch(classBranch.Item(i).ClassID)
-
-            '            SubClassBranch.Load()
-            '            SubClassBranch.Update()
-            '        End If
-            '    End If
-            'Next
-            'End If
         End Function
+
+
+        ''' <summary>
+        ''' Deletes a given class branch with major class and all subclasses
+        ''' </summary>
+        ''' <param name="classBranch">
+        ''' Class branch to delete
+        ''' </param>
+        ''' <returns>
+        ''' True if function was executed without error.
+        ''' </returns>
+        ''' <remarks>
+        ''' If errors occured hints are written to the Hints structore of RQLIb module EditGlobals.
+        '''</remarks>
+        Public Overrides Function Delete(ByRef classBranch As SubjClassBranch) As Boolean
+            Dim retVal As Boolean = False
+            Dim iSuperClassDocCount As Integer = 0
+            Dim iSuperClassRefCount As Integer = 0
+            Dim clSuperClassBranch As New SubjClassBranch(classBranch.Item(0).ParentClassID)
+
+            retVal = Me.DeleteSubBranches(classBranch)
+            If (retVal) Then
+                EditGlobals.AddHint("OK    ", "Unterklassen von " + classBranch.Item(0).ClassShortTitle + " wurden gelöscht.")
+                retVal = Me.DeleteSubClass(classBranch, 0)
+                If (retVal) Then
+                    EditGlobals.AddHint("OK    ", "Klasse " + classBranch.Item(0).ClassShortTitle + " wurde gelöscht.")
+                    classBranch = clSuperClassBranch
+                    classBranch.Load()
+                    classBranch.MajorClass.NrOfSubClasses += -1
+                    If (Me.UpdateDocRefs(classBranch, iSuperClassDocCount, iSuperClassRefCount)) Then
+                        EditGlobals.AddHint("OK    ", "Dokumente und Bookmarks wurden neu zugeordnet.")
+                        classBranch.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
+                        classBranch.MajorClass.NrOfRefLinks = CShort(iSuperClassRefCount)
+                        If (Me.PutClassData(classBranch.MajorClass)) Then
+                            EditGlobals.AddHint("OK    ", "Daten der Klasse " + classBranch.Item(0).ClassShortTitle + " wurden aktualisiert.")
+                        Else
+                            retVal = False
+                            EditGlobals.AddHint("FEHLER", "Daten der Klasse " + classBranch.Item(0).ClassShortTitle + " konnten nicht aktualisiert werden.")
+                        End If
+                    Else
+                        retVal = False
+                        EditGlobals.AddHint("FEHLER", "Dokumente und Bookmarks konnten nicht neu zugeordnet werden.")
+                    End If
+                Else
+                    EditGlobals.AddHint("FEHLER", "Klasse " + classBranch.Item(0).ClassShortTitle + " konnte nicht gelöscht werden.")
+                End If
+            Else
+                EditGlobals.AddHint("FEHLER", "Unterklassen von " + classBranch.Item(0).ClassShortTitle + " konnten nicht gelöscht werden.")
+            End If
+            Return retVal
+        End Function
+
 
 #End Region
 

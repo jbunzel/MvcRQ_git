@@ -5,7 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		README.txt = README.txt
-		..\..\..\Dokumente\Software Development Projects\ASP.Net Projects\MvcRQ_git\Aufgaben\todo.txt = ..\..\..\Dokumente\Software Development Projects\ASP.Net Projects\MvcRQ_git\Aufgaben\todo.txt
+		todo.txt = todo.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcRQ", "MvcRQ\MvcRQ.csproj", "{38E21C0E-05D3-4BF1-8890-3DBA7AAF69C8}"
@@ -73,6 +73,7 @@ Global
 		{38E21C0E-05D3-4BF1-8890-3DBA7AAF69C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38E21C0E-05D3-4BF1-8890-3DBA7AAF69C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38E21C0E-05D3-4BF1-8890-3DBA7AAF69C8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{38E21C0E-05D3-4BF1-8890-3DBA7AAF69C8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{38E21C0E-05D3-4BF1-8890-3DBA7AAF69C8}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{38E21C0E-05D3-4BF1-8890-3DBA7AAF69C8}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{38E21C0E-05D3-4BF1-8890-3DBA7AAF69C8}.DomainBox|Any CPU.ActiveCfg = DomainBox|Any CPU
@@ -106,6 +107,7 @@ Global
 		{748B295B-67E7-4FC7-93FD-6C9897E85017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{748B295B-67E7-4FC7-93FD-6C9897E85017}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{748B295B-67E7-4FC7-93FD-6C9897E85017}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{748B295B-67E7-4FC7-93FD-6C9897E85017}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{748B295B-67E7-4FC7-93FD-6C9897E85017}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{748B295B-67E7-4FC7-93FD-6C9897E85017}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{748B295B-67E7-4FC7-93FD-6C9897E85017}.DomainBox|Any CPU.ActiveCfg = DomainBox|Any CPU
@@ -139,6 +141,7 @@ Global
 		{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}.DomainBox|Any CPU.ActiveCfg = DomainBox|Any CPU
@@ -172,6 +175,7 @@ Global
 		{D695EAA6-B358-4C80-82AA-A0AA15EBC5D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D695EAA6-B358-4C80-82AA-A0AA15EBC5D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D695EAA6-B358-4C80-82AA-A0AA15EBC5D4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D695EAA6-B358-4C80-82AA-A0AA15EBC5D4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{D695EAA6-B358-4C80-82AA-A0AA15EBC5D4}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{D695EAA6-B358-4C80-82AA-A0AA15EBC5D4}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{D695EAA6-B358-4C80-82AA-A0AA15EBC5D4}.DomainBox|Any CPU.ActiveCfg = DomainBox|Any CPU
@@ -205,6 +209,7 @@ Global
 		{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}.DomainBox|Any CPU.ActiveCfg = DomainBox|Any CPU
@@ -238,6 +243,7 @@ Global
 		{182ED3FC-0121-4A3F-9F79-B8C5782BB755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{182ED3FC-0121-4A3F-9F79-B8C5782BB755}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{182ED3FC-0121-4A3F-9F79-B8C5782BB755}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{182ED3FC-0121-4A3F-9F79-B8C5782BB755}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{182ED3FC-0121-4A3F-9F79-B8C5782BB755}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{182ED3FC-0121-4A3F-9F79-B8C5782BB755}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{182ED3FC-0121-4A3F-9F79-B8C5782BB755}.DomainBox|Any CPU.ActiveCfg = DomainBox|Any CPU
