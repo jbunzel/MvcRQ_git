@@ -270,7 +270,7 @@
                     classBranch.MajorClass.NrOfSubClasses = CShort(drTable.Count)
                     classBranch.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
                     classBranch.MajorClass.NrOfRefLinks = CShort(iSuperClassRefCount)
-                    retVal = mqQuery.UpdateSystematik() And Me.PutClassData(classBranch.MajorClass)
+                    retVal = (Not mqQuery.UpdateSystematik()) And Me.PutClassData(classBranch.MajorClass)
                 End If
             End If
             Return retVal

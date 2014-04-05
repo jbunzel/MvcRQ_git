@@ -59,9 +59,10 @@
 02.121			Check- & Add-Funktionalität für ClassBranch-Editor															begonnnn: 140102	erledigt: 140120
 02.122			Elementare Submit-Funktionalität für ClassBranch-Editor														begonnen: 140102	erledigt: 140126
 02.123			Submit-Funktionalität auf Unterklassen ausdehnen		
-02.124			Löschen von Unterklassen																					begonnen: 140322	erledigt:
+02.124			Löschen von Unterklassen																					begonnen: 140322	erledigt: 140405	
 02.125			Veränderungen von Bookmarks in DIR.XML
 02.126			Tabelle Systematik anpassen (Philosophiegeschichte entspr. tats. Aufstellung auf KA setzen)	
+02.127			Unterklassen im DynaTree nach Klassen-Code sortieren
 
 02.13		Bugs 0.1 beseitigen
 02.1301			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.
