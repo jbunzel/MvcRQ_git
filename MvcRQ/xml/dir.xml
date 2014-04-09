@@ -1391,11 +1391,11 @@
     <notation>AA1</notation>
     <notation>§§RVK§§:AA09900</notation>
     <filelist>
-      <file DocNo="D198" name="London Review of Books" type="url" link="http://www.lrb.co.uk/" DateChanged="20020702" comment="&#xD;&#xA;The London Review of Books has been dedicated to carrying on the tradition of the English essay. In this respect, it is not very different from one of the great 19th-century periodicals. It gives its contributors the space and freedom to develop their ideas at length and in depth. ">
+      <file DocNo="D198" name="London Review of Books" type="url" link="http://www.lrb.co.uk/" DateChanged="20020702" comment="&#xD;&#xA;The London Review of Books has been dedicated to carrying on the tradition of the English essay. In this respect, it is not very different from one of the great 19th-century periodicals. It gives its contributors the space and freedom to develop their ideas at length and in depth. " Feld30="AA09900;">
         <notation>AA1</notation>
         <notation>§§RVK§§:AA09900</notation>
       </file>
-      <file DocNo="D199" name="PDF-Magazines" type="url" link="http://www.pdf-mags.com/index.php" DateChanged="20080528" comment="&#xD;&#xA;Here you find links and information about nearly 175 free &#xD;&#xA;PDF mags from all over the world with main focus on art, design, illustration and culture...&#xD;&#xA;">
+      <file DocNo="D199" name="PDF-Magazines" type="url" link="http://www.pdf-mags.com/index.php" DateChanged="20080528" comment="&#xD;&#xA;Here you find links and information about nearly 175 free &#xD;&#xA;PDF mags from all over the world with main focus on art, design, illustration and culture...&#xD;&#xA;" Feld30="AZ80000;AC95000;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ80000</notation>
         <notation>AA5</notation>
@@ -1405,7 +1405,7 @@
         <notation>MLC</notation>
         <notation>§§RVK§§:AN37400</notation>
       </file>
-      <file DocNo="D201" name="The New York Review of Books" type="url" link="http://www.nybooks.com/" DateChanged="20020702" comment=" but most articles can be purchased on a pay per view basis for $ 4.&#xD;&#xA;&#xD;&#xA;">
+      <file DocNo="D201" name="The New York Review of Books" type="url" link="http://www.nybooks.com/" DateChanged="20020702" comment=" but most articles can be purchased on a pay per view basis for $ 4.&#xD;&#xA;&#xD;&#xA;" Feld30="AA09900;">
         <notation>AA1</notation>
         <notation>§§RVK§§:AA09900</notation>
       </file>
@@ -1777,25 +1777,25 @@
       <file DocNo="D318" name="Zoological Record Archive 1864 - 2006" type="url" link="https://proxy.nationallizenzen.de/login?url=http://gateway.ovid.com/autologin.html" DateChanged="20070522" comment="" />
     </filelist>
   </folder>
-  <folder DocNo="D319" name="Dictionaries &amp; Encyclopedias" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fDictionaries+%26+Encyclopedias" type="folder" DateChanged="20121111" comment="">
+  <folder DocNo="D319" name="Dictionaries &amp; Encyclopedias" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fDictionaries+%26+Encyclopedias" type="folder" DateChanged="20121111" comment="" Feld30="AE50000;AH10000;">
     <notation>AE</notation>
     <notation>§§RVK§§:AE50000</notation>
     <notation>AH</notation>
     <notation>§§RVK§§:AH10000</notation>
     <filelist>
-      <file DocNo="D320" name="Bartleby.com" type="url" link="http://www.bartleby.com/reference/" DateChanged="20030912" comment="&#xD;&#xA;Bartleby.com combines the best of both contemporary and classic reference works into the most comprehensive public reference library ever published on the web. &#xD;&#xA;  &#xD;&#xA;">
+      <file DocNo="D320" name="Bartleby.com" type="url" link="http://www.bartleby.com/reference/" DateChanged="20030912" comment="&#xD;&#xA;Bartleby.com combines the best of both contemporary and classic reference works into the most comprehensive public reference library ever published on the web. &#xD;&#xA;  &#xD;&#xA;" Feld30="AE50000;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE50000</notation>
       </file>
-      <file DocNo="D321" name="Duden online" type="url" link="http://www.duden.de/" DateChanged="20110719" comment="&#xD;&#xA;Das DUDEN Rechtschreibwörterbuch und die DUDEN Sprachhilfen im Internet.&#xD;&#xA;Schlagworte: Rechtschreibung, Deutsch, deutsche Sprache, Wörterbuch, ">
+      <file DocNo="D321" name="Duden online" type="url" link="http://www.duden.de/" DateChanged="20110719" comment="&#xD;&#xA;Das DUDEN Rechtschreibwörterbuch und die DUDEN Sprachhilfen im Internet.&#xD;&#xA;Schlagworte: Rechtschreibung, Deutsch, deutsche Sprache, Wörterbuch, " Feld30="AH11012;">
         <notation>AH</notation>
         <notation>§§RVK§§:AH11012</notation>
       </file>
-      <file DocNo="D322" name="Encyclopedia.com" type="url" link="http://www.encyclopedia.com/" DateChanged="20041029" comment="&#xD;&#xA;Encyclopedia.com, the Internet's premiere free encyclopedia, provides users with more than 57,000 frequently updated articles from the Columbia Encyclopedia, Sixth Edition. Each article is enhanced with links to newspaper and magazine articles as well as pictures and maps - all provided by eLibrary.">
+      <file DocNo="D322" name="Encyclopedia.com" type="url" link="http://www.encyclopedia.com/" DateChanged="20041029" comment="&#xD;&#xA;Encyclopedia.com, the Internet's premiere free encyclopedia, provides users with more than 57,000 frequently updated articles from the Columbia Encyclopedia, Sixth Edition. Each article is enhanced with links to newspaper and magazine articles as well as pictures and maps - all provided by eLibrary." Feld30="AE50000;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE50000</notation>
       </file>
-      <file DocNo="D323" name="Online Wörterbuch für die Sprache Deutsch" type="url" link="http://www.canoo.net/index.html" DateChanged="20051028" comment="&#xD;&#xA;Deutsche Grammatik, Online Wörterbuch zur Rechtschreibung, Flexion und Wortbildung für die Sprache Deutsch. Dieser Suchdienst umfasst Spezialwörterbücher für die Rechtschreibung, Flexion, Wortbildung und Morphologie sowie das Deutsch-Englische Übersetzungswörterbuch von LEO. &#xD;&#xA;Die deutschen Spezialwörterbücher basieren auf dem Morphologischen Wörterbuch von Canoo mit über 250'000 Einträgen und rund 3 Millionen Wortformen. &#xD;&#xA;">
+      <file DocNo="D323" name="Online Wörterbuch für die Sprache Deutsch" type="url" link="http://www.canoo.net/index.html" DateChanged="20051028" comment="&#xD;&#xA;Deutsche Grammatik, Online Wörterbuch zur Rechtschreibung, Flexion und Wortbildung für die Sprache Deutsch. Dieser Suchdienst umfasst Spezialwörterbücher für die Rechtschreibung, Flexion, Wortbildung und Morphologie sowie das Deutsch-Englische Übersetzungswörterbuch von LEO. &#xD;&#xA;Die deutschen Spezialwörterbücher basieren auf dem Morphologischen Wörterbuch von Canoo mit über 250'000 Einträgen und rund 3 Millionen Wortformen. &#xD;&#xA;" Feld30="AH11038;AH16110;GB1490;GB1578;GB1494;">
         <notation>AH</notation>
         <notation>§§RVK§§:AH11038</notation>
         <notation>AH</notation>
@@ -1807,7 +1807,7 @@
         <notation>HI0</notation>
         <notation>§§RVK§§:GB1494</notation>
       </file>
-      <file DocNo="D324" name="PONS.eu" type="url" link="http://www.pons.eu/dict/search" DateChanged="20090127" comment="&#xD;&#xA;Pons - das Online Wörterbuch. Über 3,5 Mio Wörter. Sprachen Englisch, Französisch, Spanisch, Italienisch, Polnisch.&#xD;&#xA;Schlagworte: Wörterbuch, Dictionary, Fremdsprachen, Übersetzung,  ">
+      <file DocNo="D324" name="PONS.eu" type="url" link="http://www.pons.eu/dict/search" DateChanged="20090127" comment="&#xD;&#xA;Pons - das Online Wörterbuch. Über 3,5 Mio Wörter. Sprachen Englisch, Französisch, Spanisch, Italienisch, Polnisch.&#xD;&#xA;Schlagworte: Wörterbuch, Dictionary, Fremdsprachen, Übersetzung,  " Feld30="AH11000;AH16110;AH20110;AH24110;AH21110;AH33110;">
         <notation>AH</notation>
         <notation>§§RVK§§:AH11000</notation>
         <notation>AH</notation>
@@ -1821,15 +1821,15 @@
         <notation>AH</notation>
         <notation>§§RVK§§:AH33110</notation>
       </file>
-      <file DocNo="D325" name="Wikipedia" type="url" link="http://de.wikipedia.org/wiki/Hauptseite" DateChanged="20051001" comment="&#xD;&#xA;Wikipedia is a multilingual project to create a complete and accurate free content encyclopedia. It started in January 2001 and is currently (2003/12) working on 187482 articles in the English version.">
+      <file DocNo="D325" name="Wikipedia" type="url" link="http://de.wikipedia.org/wiki/Hauptseite" DateChanged="20051001" comment="&#xD;&#xA;Wikipedia is a multilingual project to create a complete and accurate free content encyclopedia. It started in January 2001 and is currently (2003/12) working on 187482 articles in the English version." Feld30="AE50000;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE50000</notation>
       </file>
-      <file DocNo="D326" name="WordReference.com" type="url" link="http://www.wordreference.com/" DateChanged="20030912" comment="&#xD;&#xA;WordReference can be used in two ways.  First, as free online dictionaries, based on the the Collins Dictionaries from HarperCollins.There are four multilingual translation dictionaries and one extremely big English dictionary:&#xD;&#xA;&#xD;&#xA; - Spanish English Dictionary&#xD;&#xA; - French English Dictionary&#xD;&#xA; - Italian English Dictionary&#xD;&#xA; - German English Dictionary&#xD;&#xA; - The Collins English Dictionary&#xD;&#xA;&#xD;&#xA;The English Spanish dictionary alone has over 160,000 words with more than 230,000 translations. Secondly, WordReference can be used as a browser add-on tool.">
+      <file DocNo="D326" name="WordReference.com" type="url" link="http://www.wordreference.com/" DateChanged="20030912" comment="&#xD;&#xA;WordReference can be used in two ways.  First, as free online dictionaries, based on the the Collins Dictionaries from HarperCollins.There are four multilingual translation dictionaries and one extremely big English dictionary:&#xD;&#xA;&#xD;&#xA; - Spanish English Dictionary&#xD;&#xA; - French English Dictionary&#xD;&#xA; - Italian English Dictionary&#xD;&#xA; - German English Dictionary&#xD;&#xA; - The Collins English Dictionary&#xD;&#xA;&#xD;&#xA;The English Spanish dictionary alone has over 160,000 words with more than 230,000 translations. Secondly, WordReference can be used as a browser add-on tool." Feld30="AH10000;">
         <notation>AH</notation>
         <notation>§§RVK§§:AH10000</notation>
       </file>
-      <file DocNo="D327" name="www.bildwoerterbuch.com" type="url" link="http://www.bildwoerterbuch.com/" DateChanged="20090127" comment="&#xD;&#xA;Mehr als 6000 Bilder in 17 Themenbereichen mit Deutschen und Englischen Bezeichnungen.&#xD;&#xA;Schlagworte: Wörterbuch, Dictionary, Fremdsprachen, Übersetzung, Bildwörterbuch  ">
+      <file DocNo="D327" name="www.bildwoerterbuch.com" type="url" link="http://www.bildwoerterbuch.com/" DateChanged="20090127" comment="&#xD;&#xA;Mehr als 6000 Bilder in 17 Themenbereichen mit Deutschen und Englischen Bezeichnungen.&#xD;&#xA;Schlagworte: Wörterbuch, Dictionary, Fremdsprachen, Übersetzung, Bildwörterbuch  " Feld30="AH11016;AH16110;AH20110;AH24110;AH21110;AH33110;">
         <notation>AH</notation>
         <notation>§§RVK§§:AH11016</notation>
         <notation>AH</notation>
@@ -1843,7 +1843,7 @@
         <notation>AH</notation>
         <notation>§§RVK§§:AH33110</notation>
       </file>
-      <file DocNo="D328" name="Wörterbuch-Portal" type="url" link="http://www.woerterbuch-portal.de/" DateChanged="20090127" comment="&#xD;&#xA;Das Wörterbuch-Portal ist eine Sammlung von Links zu wissenschaftlichen Wörterbuchprojekten, &#xD;&#xA;ein Suchwerkzeug für digitalisierte wissenschaftliche Wörterbücher und &#xD;&#xA;eine Übersicht über die Leistungen der deutschen Wissenschaftsakademien im Bereich der historischen Lexikographie. Es wird betrieben von der Berlin-Brandenburgischen Akademie der Wissenschaften und der Heidelberger Akademie der Wissenschaften. ">
+      <file DocNo="D328" name="Wörterbuch-Portal" type="url" link="http://www.woerterbuch-portal.de/" DateChanged="20090127" comment="&#xD;&#xA;Das Wörterbuch-Portal ist eine Sammlung von Links zu wissenschaftlichen Wörterbuchprojekten, &#xD;&#xA;ein Suchwerkzeug für digitalisierte wissenschaftliche Wörterbücher und &#xD;&#xA;eine Übersicht über die Leistungen der deutschen Wissenschaftsakademien im Bereich der historischen Lexikographie. Es wird betrieben von der Berlin-Brandenburgischen Akademie der Wissenschaften und der Heidelberger Akademie der Wissenschaften. " Feld30="AH11000;AH16110;GB1490;">
         <notation>AH</notation>
         <notation>§§RVK§§:AH11000</notation>
         <notation>AH</notation>
@@ -1853,11 +1853,11 @@
       </file>
     </filelist>
   </folder>
-  <folder DocNo="D329" name="Digital Archive Collections" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fDigital+Archive+Collections" type="folder" DateChanged="20121111" comment="">
+  <folder DocNo="D329" name="Digital Archive Collections" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fDigital+Archive+Collections" type="folder" DateChanged="20121111" comment="" Feld30="AC95000;">
     <notation>AA5</notation>
     <notation>§§RVK§§:AC95000</notation>
     <filelist>
-      <file DocNo="D330" name="Internet Archive" type="url" link="http://www1.archive.org/index.php" DateChanged="20030920" comment="&#xD;&#xA;The Internet Archive is building a digital library of Internet sites and other cultural artifacts in digital form. Like a paper library, it provides free access to researchers, historians, scholars, and the general public.">
+      <file DocNo="D330" name="Internet Archive" type="url" link="http://www1.archive.org/index.php" DateChanged="20030920" comment="&#xD;&#xA;The Internet Archive is building a digital library of Internet sites and other cultural artifacts in digital form. Like a paper library, it provides free access to researchers, historians, scholars, and the general public." Feld30="AC95000;ST205;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
         <notation>DR20</notation>
@@ -2067,15 +2067,15 @@
     <notation>AA5</notation>
     <notation>§§RVK§§:AC95000</notation>
     <filelist>
-      <file DocNo="D358" name="ANNO - AustriaN Newspapers Online" type="url" link="http://anno.onb.ac.at/anno.htm" DateChanged="20080712" comment="&#xD;&#xA;ANNO ist der virtuelle Zeitungslesesaal der Österreichischen Nationalbibliothek.&#xD;&#xA;Hier kann in historischen österreichischen Zeitungen und Zeitschriften online geblättert und gelesen werden.&#xD;&#xA;Schlagworte: Zeitung, Tageszeitung, digitle Zeitungsbibliothek, Zeitungsdigitalisierung, Österreich, &#xD;&#xA;">
+      <file DocNo="D358" name="ANNO - AustriaN Newspapers Online" type="url" link="http://anno.onb.ac.at/anno.htm" DateChanged="20080712" comment="&#xD;&#xA;ANNO ist der virtuelle Zeitungslesesaal der Österreichischen Nationalbibliothek.&#xD;&#xA;Hier kann in historischen österreichischen Zeitungen und Zeitschriften online geblättert und gelesen werden.&#xD;&#xA;Schlagworte: Zeitung, Tageszeitung, digitle Zeitungsbibliothek, Zeitungsdigitalisierung, Österreich, &#xD;&#xA;" Feld30="AZ90000;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ90000</notation>
       </file>
-      <file DocNo="D359" name="Bartleby" type="url" link="http://www.bartleby.com/" DateChanged="20031228" comment="&#xD;&#xA;The preeminent Internet publisher of literature, reference and verse providing students, researchers and the intellectually curious with unlimited access to books and information on the web, free of charge.">
+      <file DocNo="D359" name="Bartleby" type="url" link="http://www.bartleby.com/" DateChanged="20031228" comment="&#xD;&#xA;The preeminent Internet publisher of literature, reference and verse providing students, researchers and the intellectually curious with unlimited access to books and information on the web, free of charge." Feld30="AC95830;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95830</notation>
       </file>
-      <file DocNo="D360" name="Bibliotheca Augustana" type="url" link="http://www.fh-augsburg.de/~harsch/gallica/Chronologie/18siecle/LaMettrie/met_intr.html" DateChanged="20020419" comment="&#xD;&#xA;A small but precious collection of digitized texts. Free access. ">
+      <file DocNo="D360" name="Bibliotheca Augustana" type="url" link="http://www.fh-augsburg.de/~harsch/gallica/Chronologie/18siecle/LaMettrie/met_intr.html" DateChanged="20020419" comment="&#xD;&#xA;A small but precious collection of digitized texts. Free access. " Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
@@ -2099,19 +2099,19 @@
         <notation>MLC</notation>
         <notation>§§RVK§§:AN78950</notation>
       </file>
-      <file DocNo="D363" name="Doktus.de" type="url" link="http://www.doktus.de/" DateChanged="20080109" comment="&#xD;&#xA;Doktus ist die neue Dokumentenplattform im Internet. Nutzer können hier alle erdenklichen Dokumente suchen, eigene Dateien hoch laden und anderen zugänglich machen. Dabei reichen die bisher eingestellten Dokumente von Skripten und Probeklausuren über Bewerbungen und Dokumentenvordrucke bis hin zu selbst geschriebenen Texten.&#xD;&#xA;&#xD;&#xA;">
+      <file DocNo="D363" name="Doktus.de" type="url" link="http://www.doktus.de/" DateChanged="20080109" comment="&#xD;&#xA;Doktus ist die neue Dokumentenplattform im Internet. Nutzer können hier alle erdenklichen Dokumente suchen, eigene Dateien hoch laden und anderen zugänglich machen. Dabei reichen die bisher eingestellten Dokumente von Skripten und Probeklausuren über Bewerbungen und Dokumentenvordrucke bis hin zu selbst geschriebenen Texten.&#xD;&#xA;&#xD;&#xA;" Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D364" name="eBooks@Adelaide Free Web Books, Online" type="url" link="http://etext.library.adelaide.edu.au/" DateChanged="20031227" comment="&#xD;&#xA;The collection includes more than 500 classic works of Literature, Philosophy, Science, and History. Each work has been carefully formatted for maximum readability either on screen or when printed. Works can be read online, or downloaded for offline reading.">
+      <file DocNo="D364" name="eBooks@Adelaide Free Web Books, Online" type="url" link="http://etext.library.adelaide.edu.au/" DateChanged="20031227" comment="&#xD;&#xA;The collection includes more than 500 classic works of Literature, Philosophy, Science, and History. Each work has been carefully formatted for maximum readability either on screen or when printed. Works can be read online, or downloaded for offline reading." Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D365" name="eScholarship Editions" type="url" link="http://content.cdlib.org/escholarship/" DateChanged="20071021" comment="&#xD;&#xA;The eScholarship Editions project is managed by the eScholarship program at the California Digital Library. As one of the University of California libraries, the CDL supports the assembly and creative use of the world's scholarship and knowledge for the UC libraries and the communities they serve. The eScholarship program facilitates innovation and experimentation in the production and dissemination of scholarly works. More than 1,400 electronic editions of academic books have been published online at the eScholarship Editions web site. All eScholarship Editions are available for free to UC faculty, staff, and students. Additionally, more than 25 percent of the books are available for free to the public.">
+      <file DocNo="D365" name="eScholarship Editions" type="url" link="http://content.cdlib.org/escholarship/" DateChanged="20071021" comment="&#xD;&#xA;The eScholarship Editions project is managed by the eScholarship program at the California Digital Library. As one of the University of California libraries, the CDL supports the assembly and creative use of the world's scholarship and knowledge for the UC libraries and the communities they serve. The eScholarship program facilitates innovation and experimentation in the production and dissemination of scholarly works. More than 1,400 electronic editions of academic books have been published online at the eScholarship Editions web site. All eScholarship Editions are available for free to UC faculty, staff, and students. Additionally, more than 25 percent of the books are available for free to the public." Feld30="AC95830;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95830</notation>
       </file>
-      <file DocNo="D366" name="Europeana" type="url" link="http://www.europeana.eu/" DateChanged="20070429" comment="&#xD;&#xA;Europeana est un prototype de bibliothèque en ligne développé par la Bibliothèque nationale de France, dans le cadre du projet de Bibliothèque numérique européenne. Europeana rassemble environ 12 000 documents libres de droits issus des collections de la BnF, de la Bibliothèque Nationale Széchényi de Hongrie et de la Bibliothèque nationale du Portugal. Chercher, Consulter, Personnaliser : Europeana offre une large gamme d'outils et de services pour faire une recherche sur ou dans un livre, lire, imprimer ou télécharger des documents, créer sa propre bibliothèque personnelle.">
+      <file DocNo="D366" name="Europeana" type="url" link="http://www.europeana.eu/" DateChanged="20070429" comment="&#xD;&#xA;Europeana est un prototype de bibliothèque en ligne développé par la Bibliothèque nationale de France, dans le cadre du projet de Bibliothèque numérique européenne. Europeana rassemble environ 12 000 documents libres de droits issus des collections de la BnF, de la Bibliothèque Nationale Széchényi de Hongrie et de la Bibliothèque nationale du Portugal. Chercher, Consulter, Personnaliser : Europeana offre une large gamme d'outils et de services pour faire une recherche sur ou dans un livre, lire, imprimer ou télécharger des documents, créer sa propre bibliothèque personnelle." Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
@@ -2121,23 +2121,23 @@
         <notation>MLC</notation>
         <notation>§§RVK§§:AN78950</notation>
       </file>
-      <file DocNo="D368" name="Ingenta" type="url" link="http://www.ingenta.com/" DateChanged="20020901" comment="&#xD;&#xA;Ingenta is a Web infomediary for academic and professional online content. They offer a powerful Web resource of about 13 Mio. journal articles and 27.00 publications. Unfortunately, unconscionable pay per view prices are loaded onto users without institutional access licenses. The information industry hangs on to its bad habit to destroy its own markets and disembowel the publicly financed research institutions, instead.">
+      <file DocNo="D368" name="Ingenta" type="url" link="http://www.ingenta.com/" DateChanged="20020901" comment="&#xD;&#xA;Ingenta is a Web infomediary for academic and professional online content. They offer a powerful Web resource of about 13 Mio. journal articles and 27.00 publications. Unfortunately, unconscionable pay per view prices are loaded onto users without institutional access licenses. The information industry hangs on to its bad habit to destroy its own markets and disembowel the publicly financed research institutions, instead." Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D369" name="Internet Public Library Books" type="url" link="http://www.ipl.org/div/books/" DateChanged="20030920" comment="&#xD;&#xA;The IPL Books Collection (formerly known as Online Texts) contains over 20,000 titles that can be browsed by author, by title, or by Dewey Decimal Classification.">
+      <file DocNo="D369" name="Internet Public Library Books" type="url" link="http://www.ipl.org/div/books/" DateChanged="20030920" comment="&#xD;&#xA;The IPL Books Collection (formerly known as Online Texts) contains over 20,000 titles that can be browsed by author, by title, or by Dewey Decimal Classification." Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D370" name="johnstonia" type="url" link="http://www.mala.bc.ca/~johnstoi/" DateChanged="20040201" comment="&#xD;&#xA;This is the home page of Ian Johnston, a retired instructor (now a Research Associate) at Malaspina University-College, Nanaimo, British Columbia, Canada.  It is designed to provide curricular material for various courses in literature and Liberal Studies. The site contains a considerable collection of e-text classics and is under continual construction. &#xD;&#xA;">
+      <file DocNo="D370" name="johnstonia" type="url" link="http://www.mala.bc.ca/~johnstoi/" DateChanged="20040201" comment="&#xD;&#xA;This is the home page of Ian Johnston, a retired instructor (now a Research Associate) at Malaspina University-College, Nanaimo, British Columbia, Canada.  It is designed to provide curricular material for various courses in literature and Liberal Studies. The site contains a considerable collection of e-text classics and is under continual construction. &#xD;&#xA;" Feld30="AC11000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC11000</notation>
       </file>
-      <file DocNo="D371" name="Les collections numérisées de la Bibliothèque municipale de Lyon" type="url" link="http://www.bm-lyon.fr/trouver/basesdedonnees/Collections-numeriques.htm" DateChanged="20070708" comment="&#xD;&#xA;La bibliothèque municipale de Lyon met à votre disposition des outils de recherche pour découvrir la richesse de ses collections patrimoniales et régionales : soit 30 000 images prêtes à voir issues des fonds anciens et régionaux (estampes, affiches, photographies, enluminures...) et 150 000 références d'articles de presse sur la région. Pour chacune un itinéraire de découverte permet d'avoir un aperçu de la collection. &#xD;&#xA; &#xD;&#xA; &#xD;&#xA;">
+      <file DocNo="D371" name="Les collections numérisées de la Bibliothèque municipale de Lyon" type="url" link="http://www.bm-lyon.fr/trouver/basesdedonnees/Collections-numeriques.htm" DateChanged="20070708" comment="&#xD;&#xA;La bibliothèque municipale de Lyon met à votre disposition des outils de recherche pour découvrir la richesse de ses collections patrimoniales et régionales : soit 30 000 images prêtes à voir issues des fonds anciens et régionaux (estampes, affiches, photographies, enluminures...) et 150 000 références d'articles de presse sur la région. Pour chacune un itinéraire de découverte permet d'avoir un aperçu de la collection. &#xD;&#xA; &#xD;&#xA; &#xD;&#xA;" Feld30="AC95357;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95357</notation>
       </file>
-      <file DocNo="D372" name="Library of Economics" type="url" link="http://www.econlib.org/" DateChanged="20070204" comment="&#xD;&#xA;The Library of Economics and Liberty is dedicated to advancing the study of economics, markets, and liberty. It offers a unique combination of resources for students, teachers, researchers, and aficionados of economic thought. The website is provided by Liberty Fund, Inc., a private, educational foundation established to encourage the study of the ideal of a society of free and responsible individuals. The site features: Authoritative editions of classics in economics, and related works in history, political theory and philosophy - Featured columns and articles - Links to the most commonly-used economics data bases - Reading lists and annotated bibliographies organized by topic.">
+      <file DocNo="D372" name="Library of Economics" type="url" link="http://www.econlib.org/" DateChanged="20070204" comment="&#xD;&#xA;The Library of Economics and Liberty is dedicated to advancing the study of economics, markets, and liberty. It offers a unique combination of resources for students, teachers, researchers, and aficionados of economic thought. The website is provided by Liberty Fund, Inc., a private, educational foundation established to encourage the study of the ideal of a society of free and responsible individuals. The site features: Authoritative editions of classics in economics, and related works in history, political theory and philosophy - Featured columns and articles - Links to the most commonly-used economics data bases - Reading lists and annotated bibliographies organized by topic." Feld30="QB800;QA10000;AC95000;">
         <notation>LA</notation>
         <notation>§§RVK§§:QB800</notation>
         <notation>LA</notation>
@@ -2145,31 +2145,31 @@
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D373" name="netLibrary" type="url" link="http://www.netlibrary.com/Gateway.aspx" DateChanged="20040421" comment="">
+      <file DocNo="D373" name="netLibrary" type="url" link="http://www.netlibrary.com/Gateway.aspx" DateChanged="20040421" comment="" Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D374" name="PaperC" type="url" link="http://paperc.de/" DateChanged="20101027" comment="&#xD;&#xA;PaperC ist die Online-Plattform für Fachbücher. Man findet dort zahlreiche Fachbücher renommierter Fachverlage. Alle Bücher auf PaperC kann man innerhalb eines Zeitlimits kostenlos lesen – von der ersten bis zur letzten Seite. Texte von PaperC können, wenn man sie kauft, auch absgepeichert, ausgedruckt, in einer individuellen Online-Bibliothek gesammelt und mit Notizen und Markierungen versehen werden.&#xD;&#xA;Schlagworte: Digitale Bibliothek, Fachbuch, Online-Buchhandlung&#xD;&#xA;&#xD;&#xA;">
+      <file DocNo="D374" name="PaperC" type="url" link="http://paperc.de/" DateChanged="20101027" comment="&#xD;&#xA;PaperC ist die Online-Plattform für Fachbücher. Man findet dort zahlreiche Fachbücher renommierter Fachverlage. Alle Bücher auf PaperC kann man innerhalb eines Zeitlimits kostenlos lesen – von der ersten bis zur letzten Seite. Texte von PaperC können, wenn man sie kauft, auch absgepeichert, ausgedruckt, in einer individuellen Online-Bibliothek gesammelt und mit Notizen und Markierungen versehen werden.&#xD;&#xA;Schlagworte: Digitale Bibliothek, Fachbuch, Online-Buchhandlung&#xD;&#xA;&#xD;&#xA;" Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D375" name="Project Gutenberg" type="url" link="http://gutenberg.net/" DateChanged="20021226" comment="&#xD;&#xA;Project Gutenberg is the Internet's oldest producer of free electronic books. Now, more than thirty years later, Project Gutenberg has the following figures (as of November 8th 2002): 203 New eBooks released during October 2002, 1975 New eBooks produced in 2002 (they were 1240 in 2001) for a total of 6267 Total Project Gutenberg eBooks. 119 eBooks have been posted so far by Project Gutenberg of Australia.&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;">
+      <file DocNo="D375" name="Project Gutenberg" type="url" link="http://gutenberg.net/" DateChanged="20021226" comment="&#xD;&#xA;Project Gutenberg is the Internet's oldest producer of free electronic books. Now, more than thirty years later, Project Gutenberg has the following figures (as of November 8th 2002): 203 New eBooks released during October 2002, 1975 New eBooks produced in 2002 (they were 1240 in 2001) for a total of 6267 Total Project Gutenberg eBooks. 119 eBooks have been posted so far by Project Gutenberg of Australia.&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D376" name="Projekt Gutenberg-DE" type="url" link="http://gutenberg.spiegel.de/" DateChanged="20050702" comment="&#xD;&#xA;Das Projekt Gutenberg-DE stellt seit über zehn Jahren kostenlos für jeden Literatur ins Internet. 1994 als Freizeitprojekt begonnen, hat es sich zur größten Online-Literatursammlung deutscher Sprache entwickelt. Bis heute sind mehrere zehntausend Arbeitsstunden für das Projekt vom Gutenberg-Team aufgebracht worden. &#xD;&#xA;">
+      <file DocNo="D376" name="Projekt Gutenberg-DE" type="url" link="http://gutenberg.spiegel.de/" DateChanged="20050702" comment="&#xD;&#xA;Das Projekt Gutenberg-DE stellt seit über zehn Jahren kostenlos für jeden Literatur ins Internet. 1994 als Freizeitprojekt begonnen, hat es sich zur größten Online-Literatursammlung deutscher Sprache entwickelt. Bis heute sind mehrere zehntausend Arbeitsstunden für das Projekt vom Gutenberg-Team aufgebracht worden. &#xD;&#xA;" Feld30="AC95080;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95080</notation>
       </file>
-      <file DocNo="D377" name="Questia" type="url" link="http://www.questia.com/Index.jsp" DateChanged="20011026" comment="&#xD;&#xA;A commercial Online Library (the world's largest, in it's own view) of books and journal articles. I did not test it, yet.">
+      <file DocNo="D377" name="Questia" type="url" link="http://www.questia.com/Index.jsp" DateChanged="20011026" comment="&#xD;&#xA;A commercial Online Library (the world's largest, in it's own view) of books and journal articles. I did not test it, yet." Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D378" name="Renascence Editions" type="url" link="http://darkwing.uoregon.edu/~rbear/ren.htm" DateChanged="20020407" comment="&#xD;&#xA;An online repository of works printed in English between the years 1477 and 1799 maintained by the University of Oregon. It contains about 160 titles.">
+      <file DocNo="D378" name="Renascence Editions" type="url" link="http://darkwing.uoregon.edu/~rbear/ren.htm" DateChanged="20020407" comment="&#xD;&#xA;An online repository of works printed in English between the years 1477 and 1799 maintained by the University of Oregon. It contains about 160 titles." Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D379" name="SB Berlin Digitale Zeitungsbibliothek" type="url" link="http://digital-b.staatsbibliothek-berlin.de/digitale_bibliothek/digital.php?gruppe=zeitung" DateChanged="20080712" comment="&#xD;&#xA;Dies ist der virtuelle Zeitungslesesaal der Staatsbibliothek zu Berlin preußischer Kulturbesitz. Hier kann in historischen deutschen Zeitungen mit Hilfe des DFG-Viewers online geblättert und gelesen werden.&#xD;&#xA;Schlagworte: Zeitung, Tageszeitung, digitle Zeitungsbibliothek, Zeitungsdigitalisierung, Deutschland, &#xD;&#xA;">
+      <file DocNo="D379" name="SB Berlin Digitale Zeitungsbibliothek" type="url" link="http://digital-b.staatsbibliothek-berlin.de/digitale_bibliothek/digital.php?gruppe=zeitung" DateChanged="20080712" comment="&#xD;&#xA;Dies ist der virtuelle Zeitungslesesaal der Staatsbibliothek zu Berlin preußischer Kulturbesitz. Hier kann in historischen deutschen Zeitungen mit Hilfe des DFG-Viewers online geblättert und gelesen werden.&#xD;&#xA;Schlagworte: Zeitung, Tageszeitung, digitle Zeitungsbibliothek, Zeitungsdigitalisierung, Deutschland, &#xD;&#xA;" Feld30="AZ90000;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ90000</notation>
       </file>
@@ -2183,23 +2183,23 @@
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D381" name="The Literature Network" type="url" link="http://www.online-literature.com/" DateChanged="20040616" comment="&#xD;&#xA;The Literature Network offers searchable online classic literature, poems, and quotes,essays &amp; summaries for the student, educator, or enthusiast. To find the work you're looking for start by looking through the author index. Currently they have over 300 full books and over 1000 short stories and poems by over 90 authors. The quotations database has over 8500 quotes. ">
+      <file DocNo="D381" name="The Literature Network" type="url" link="http://www.online-literature.com/" DateChanged="20040616" comment="&#xD;&#xA;The Literature Network offers searchable online classic literature, poems, and quotes,essays &amp; summaries for the student, educator, or enthusiast. To find the work you're looking for start by looking through the author index. Currently they have over 300 full books and over 1000 short stories and poems by over 90 authors. The quotations database has over 8500 quotes. " Feld30="AC11000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC11000</notation>
       </file>
-      <file DocNo="D382" name="The National Academies Press" type="url" link="http://www.nap.edu/" DateChanged="20040619" comment="&#xD;&#xA;The National Academies Press (NAP) was created by the National Academies to publish the reports issued by the National Academy of Sciences, the National Academy of Engineering, the Institute of Medicine, and the National Research Council, all operating under a charter granted by the Congress of the United States. NAP publishes over 200 books a year on a wide range of topics in science, engineering, and health. A considerable fraction of these publications are offered for online reading in this web page. ">
+      <file DocNo="D382" name="The National Academies Press" type="url" link="http://www.nap.edu/" DateChanged="20040619" comment="&#xD;&#xA;The National Academies Press (NAP) was created by the National Academies to publish the reports issued by the National Academy of Sciences, the National Academy of Engineering, the Institute of Medicine, and the National Research Council, all operating under a charter granted by the Congress of the United States. NAP publishes over 200 books a year on a wide range of topics in science, engineering, and health. A considerable fraction of these publications are offered for online reading in this web page. " Feld30="AC13000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC13000</notation>
       </file>
-      <file DocNo="D383" name="The Online Books Page" type="url" link="http://onlinebooks.library.upenn.edu/" DateChanged="20020419" comment="">
+      <file DocNo="D383" name="The Online Books Page" type="url" link="http://onlinebooks.library.upenn.edu/" DateChanged="20020419" comment="" Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D384" name="Universal Digital Library" type="url" link="http://www.ulib.org/index.html" DateChanged="20080121" comment="&#xD;&#xA;The mission is to create a Universal Library which will foster creativity and free access to all human knowledge. As a first step in realizing this mission, it is proposed to create the Universal Library with a free-to-read, searchable collection of one million books, available to everyone over the Internet. Within 10 years, it is expected that the collection will grow to 10 Million books.">
+      <file DocNo="D384" name="Universal Digital Library" type="url" link="http://www.ulib.org/index.html" DateChanged="20080121" comment="&#xD;&#xA;The mission is to create a Universal Library which will foster creativity and free access to all human knowledge. As a first step in realizing this mission, it is proposed to create the Universal Library with a free-to-read, searchable collection of one million books, available to everyone over the Internet. Within 10 years, it is expected that the collection will grow to 10 Million books." Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
-      <file DocNo="D385" name="Zeno.org" type="url" link="http://www.zeno.org/" DateChanged="20080109" comment="&#xD;&#xA;Zeno.org ist eine umfassende Bibliothek lexikalischer, wissenschaftlicher und literarischer Texte in deutscher Sprache. Dabei stehen alle Texte in Volltext und sehr viele Texte zudem als Faksimiles zur Verfügung. Den Einstieg in die Bibliothek bietet die Seite Bibliothek, die via Link von jeder einzelnen Seite erreichbar ist. Innerhalb der Bibliothek sind die Werke verschiedenen Fachgebieten zugeordnet, die auf der Einstiegsseite durchgeblättert oder durchsucht werden können. &#xD;&#xA;&#xD;&#xA;">
+      <file DocNo="D385" name="Zeno.org" type="url" link="http://www.zeno.org/" DateChanged="20080109" comment="&#xD;&#xA;Zeno.org ist eine umfassende Bibliothek lexikalischer, wissenschaftlicher und literarischer Texte in deutscher Sprache. Dabei stehen alle Texte in Volltext und sehr viele Texte zudem als Faksimiles zur Verfügung. Den Einstieg in die Bibliothek bietet die Seite Bibliothek, die via Link von jeder einzelnen Seite erreichbar ist. Innerhalb der Bibliothek sind die Werke verschiedenen Fachgebieten zugeordnet, die auf der Einstiegsseite durchgeblättert oder durchsucht werden können. &#xD;&#xA;&#xD;&#xA;" Feld30="AC95000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC95000</notation>
       </file>
@@ -3199,7 +3199,7 @@
     <notation>AE</notation>
     <notation>§§RVK§§:AE76000</notation>
     <filelist>
-      <file DocNo="D576" name="berlin.de - Veranstaltungskalender" type="url" link="http://www.berlin.de/tickets/suche/az-orte.php/veranstaltungen/" DateChanged="20100806" comment="&#xD;&#xA;Umfassende Datenbank Recherche im Veranstaltungskalender Berlin.&#xD;&#xA;Schlagworte: Veranstaltungsprogramm, Filmprogramm, Theaterprogramm, Opernprogramm, Literaturveranstaltungen, Museum, Ausstellungsprogramm, Berlin.">
+      <file DocNo="D576" name="berlin.de - Veranstaltungskalender" type="url" link="http://www.berlin.de/tickets/suche/az-orte.php/veranstaltungen/" DateChanged="20100806" comment="&#xD;&#xA;Umfassende Datenbank Recherche im Veranstaltungskalender Berlin.&#xD;&#xA;Schlagworte: Veranstaltungsprogramm, Filmprogramm, Theaterprogramm, Opernprogramm, Literaturveranstaltungen, Museum, Ausstellungsprogramm, Berlin." Feld30="AE76170;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE76170</notation>
       </file>
@@ -3208,29 +3208,29 @@
         <notation>MLB</notation>
         <notation>§§RVK§§:AP57100</notation>
       </file>
-      <file DocNo="D578" name="kultiversum" type="url" link="http://www.kultiversum.de/" DateChanged="20100426" comment="&#xD;&#xA;Internetforum diverser Kulturzeitschriften zu den Themen Theater, Oper, Tanz, Literatur, Musik">
+      <file DocNo="D578" name="kultiversum" type="url" link="http://www.kultiversum.de/" DateChanged="20100426" comment="&#xD;&#xA;Internetforum diverser Kulturzeitschriften zu den Themen Theater, Oper, Tanz, Literatur, Musik" Feld30="AZ40000;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ40000</notation>
       </file>
-      <file DocNo="D579" name="Kunstsalon eV Köln" type="url" link="http://www.kunstsalon.de/index.php" DateChanged="20100415" comment="&#xD;&#xA;Der KunstSalon ist eine Kölner Privatinitiative zur Förderung von Kunst und Kultur. Seit 1994 setzt sich der KunstSalon e.V. als gemeinnütziger Verein dafür ein, möglichst viele Menschen an die verschiedenen Künste heran zu führen, in der besonderen Atmosphäre eines aufwändig renovierten Fabriklofts die Künste zu genießen und sie in unterschiedlichsten Projekten zu fördern. All dies geschieht im Rahmen unserer monatlichen jours fixes, aber auch in zahlreichen Sonderveranstaltungen.&#xD;&#xA;schlagworte: Köln, Kultur, Musik, schauspiel, Theater, Oper, Film, Veranstaltungskalender ">
+      <file DocNo="D579" name="Kunstsalon eV Köln" type="url" link="http://www.kunstsalon.de/index.php" DateChanged="20100415" comment="&#xD;&#xA;Der KunstSalon ist eine Kölner Privatinitiative zur Förderung von Kunst und Kultur. Seit 1994 setzt sich der KunstSalon e.V. als gemeinnütziger Verein dafür ein, möglichst viele Menschen an die verschiedenen Künste heran zu führen, in der besonderen Atmosphäre eines aufwändig renovierten Fabriklofts die Künste zu genießen und sie in unterschiedlichsten Projekten zu fördern. All dies geschieht im Rahmen unserer monatlichen jours fixes, aber auch in zahlreichen Sonderveranstaltungen.&#xD;&#xA;schlagworte: Köln, Kultur, Musik, schauspiel, Theater, Oper, Film, Veranstaltungskalender " Feld30="AE76151;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE76151</notation>
       </file>
-      <file DocNo="D580" name="Literaturhaus Köln" type="url" link="http://www.literaturhaus-koeln.de/" DateChanged="20100825" comment="&#xD;&#xA;Das literarische veranstaltungsprogramm des Kulturhauses Köln.&#xD;&#xA;schlagworte: Köln, Kultur, Litertur, Veranstaltungskalender">
+      <file DocNo="D580" name="Literaturhaus Köln" type="url" link="http://www.literaturhaus-koeln.de/" DateChanged="20100825" comment="&#xD;&#xA;Das literarische veranstaltungsprogramm des Kulturhauses Köln.&#xD;&#xA;schlagworte: Köln, Kultur, Litertur, Veranstaltungskalender" Feld30="AE76151;EC1000;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE76151</notation>
         <notation>HC</notation>
         <notation>§§RVK§§:EC1000</notation>
       </file>
-      <file DocNo="D581" name="popula.de" type="url" link="http://www.popula.de/" DateChanged="20100119" comment="&#xD;&#xA;Veranstaltungskalender für Deutschland realisiert durch ein soziales Internetzwerk.&#xD;&#xA;Schlagworte: Veranstaltungsprogramm, Filmprogramm, Theaterprogramm, Opernprogramm, Literaturveranstaltungen, Museum, Ausstellungsprogramm, Deutschland">
+      <file DocNo="D581" name="popula.de" type="url" link="http://www.popula.de/" DateChanged="20100119" comment="&#xD;&#xA;Veranstaltungskalender für Deutschland realisiert durch ein soziales Internetzwerk.&#xD;&#xA;Schlagworte: Veranstaltungsprogramm, Filmprogramm, Theaterprogramm, Opernprogramm, Literaturveranstaltungen, Museum, Ausstellungsprogramm, Deutschland" Feld30="AE76100;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE76100</notation>
       </file>
-      <file DocNo="D582" name="Tageskalender  Koeln" type="url" link="http://www.koeln.de/koeln/was_ist_los/tageskalender" DateChanged="20090216" comment="">
+      <file DocNo="D582" name="Tageskalender  Koeln" type="url" link="http://www.koeln.de/koeln/was_ist_los/tageskalender" DateChanged="20090216" comment="" Feld30="AE76000;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE76000</notation>
       </file>
-      <file DocNo="D583" name="WAS.WANN.WO." type="url" link="http://www.ksta.de/html/service/tageskalender/index.php?ref=ks" DateChanged="20090216" comment="&#xD;&#xA;Die Termine des Kölner Stadtanzeiger scheinen inzwischen einen einigermaßen umfassenden Überblick über Veranstaltungen in Köln zu geben.  &#xD;&#xA;Schlagworte: Veranstaltungsprogramm, Filmprogramm, Theaterprogramm, Opernprogramm, Literaturveranstaltungen, Museum, Ausstellungsprogramm, Köln.&#xD;&#xA;">
+      <file DocNo="D583" name="WAS.WANN.WO." type="url" link="http://www.ksta.de/html/service/tageskalender/index.php?ref=ks" DateChanged="20090216" comment="&#xD;&#xA;Die Termine des Kölner Stadtanzeiger scheinen inzwischen einen einigermaßen umfassenden Überblick über Veranstaltungen in Köln zu geben.  &#xD;&#xA;Schlagworte: Veranstaltungsprogramm, Filmprogramm, Theaterprogramm, Opernprogramm, Literaturveranstaltungen, Museum, Ausstellungsprogramm, Köln.&#xD;&#xA;" Feld30="AE76151;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE76151</notation>
       </file>
@@ -5238,50 +5238,50 @@
           <notation>§§RVK§§:EC1400</notation>
         </folder>
       </folder>
-      <folder DocNo="D1051" name="naturkundliche Ausstellungen" level="1" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fEvents+%26+Veranstaltungen%2fnaturkundliche+Ausstellungen" type="folder" DateChanged="20121111" comment="">
+      <folder DocNo="D1051" name="naturkundliche Ausstellungen" level="1" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fEvents+%26+Veranstaltungen%2fnaturkundliche+Ausstellungen" type="folder" DateChanged="20121111" comment="" Feld30="AE76000;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE76000</notation>
-        <folder DocNo="D1052" name="beendet" level="2" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fEvents+%26+Veranstaltungen%2fnaturkundliche+Ausstellungen%2fbeendet" type="folder" DateChanged="20140209" comment="">
+        <folder DocNo="D1052" name="beendet" level="2" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fEvents+%26+Veranstaltungen%2fnaturkundliche+Ausstellungen%2fbeendet" type="folder" DateChanged="20140209" comment="" Feld30="AE76000;">
           <notation>AE</notation>
           <notation>§§RVK§§:AE76000</notation>
           <filelist>
-            <file DocNo="D1053" name="X100405 Bonn Deutsches Museum Durchmusterungen" type="url" link="http://www.deutsches-museum.de/bonn/ausstellungen/ausstellungen-2009/durchmusterungen/" DateChanged="20091201" comment="">
+            <file DocNo="D1053" name="X100405 Bonn Deutsches Museum Durchmusterungen" type="url" link="http://www.deutsches-museum.de/bonn/ausstellungen/ausstellungen-2009/durchmusterungen/" DateChanged="20091201" comment="" Feld30="AE76000;">
               <notation>AE</notation>
               <notation>§§RVK§§:AE76000</notation>
             </file>
-            <file DocNo="D1054" name="X101017 Bonn Museum König MenschMikrobe" type="url" link="http://www.zfmk.de/web/Museum/Sonderausstellung/2010/201007_MenschMikrobe/index.de.html" DateChanged="20100927" comment="">
+            <file DocNo="D1054" name="X101017 Bonn Museum König MenschMikrobe" type="url" link="http://www.zfmk.de/web/Museum/Sonderausstellung/2010/201007_MenschMikrobe/index.de.html" DateChanged="20100927" comment="" Feld30="AE76000;">
               <notation>AE</notation>
               <notation>§§RVK§§:AE76000</notation>
             </file>
-            <file DocNo="D1055" name="X110109 Berlin Gropiusbau WeltWissen" type="url" link="http://www.weltwissen-berlin.de/index.php/neuigkeiten-liste-starseite.html" DateChanged="20101004" comment="">
+            <file DocNo="D1055" name="X110109 Berlin Gropiusbau WeltWissen" type="url" link="http://www.weltwissen-berlin.de/index.php/neuigkeiten-liste-starseite.html" DateChanged="20101004" comment="" Feld30="AE76000;">
               <notation>AE</notation>
               <notation>§§RVK§§:AE76000</notation>
             </file>
-            <file DocNo="D1056" name="X110130 Berlin Botanisches Museum Humboldts Grüne Erben" type="url" link="http://www.bgbm.org/bgbm/museum/expo/2010/default.htm" DateChanged="20100808" comment="">
+            <file DocNo="D1056" name="X110130 Berlin Botanisches Museum Humboldts Grüne Erben" type="url" link="http://www.bgbm.org/bgbm/museum/expo/2010/default.htm" DateChanged="20100808" comment="" Feld30="AE76000;">
               <notation>AE</notation>
               <notation>§§RVK§§:AE76000</notation>
             </file>
-            <file DocNo="D1057" name="X140202 Kopenhagen Arctis" type="url" link="http://arktis.louisiana.dk/Arktis-en.html" DateChanged="20131110" comment="">
+            <file DocNo="D1057" name="X140202 Kopenhagen Arctis" type="url" link="http://arktis.louisiana.dk/Arktis-en.html" DateChanged="20131110" comment="" Feld30="AE76000;">
               <notation>AE</notation>
               <notation>§§RVK§§:AE76000</notation>
             </file>
           </filelist>
         </folder>
-        <folder DocNo="D1058" name="besucht" level="2" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fEvents+%26+Veranstaltungen%2fnaturkundliche+Ausstellungen%2fbesucht" type="folder" DateChanged="20121111" comment="">
+        <folder DocNo="D1058" name="besucht" level="2" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fEvents+%26+Veranstaltungen%2fnaturkundliche+Ausstellungen%2fbesucht" type="folder" DateChanged="20121111" comment="" Feld30="AE76000;">
           <notation>AE</notation>
           <notation>§§RVK§§:AE76000</notation>
           <filelist>
-            <file DocNo="D1059" name="B100124 Bonn Museum König Darwin und die Entstehung der Arten" type="url" link="http://www.zfmk.de/web/Museum/Sonderausstellung/2009/200902_Darwin/index.de.html" DateChanged="20090509" comment="">
+            <file DocNo="D1059" name="B100124 Bonn Museum König Darwin und die Entstehung der Arten" type="url" link="http://www.zfmk.de/web/Museum/Sonderausstellung/2009/200902_Darwin/index.de.html" DateChanged="20090509" comment="" Feld30="AE76000;">
               <notation>AE</notation>
               <notation>§§RVK§§:AE76000</notation>
             </file>
           </filelist>
         </folder>
-        <folder DocNo="D1060" name="laufend" level="2" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fEvents+%26+Veranstaltungen%2fnaturkundliche+Ausstellungen%2flaufend" type="folder" DateChanged="20140209" comment="">
+        <folder DocNo="D1060" name="laufend" level="2" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fEvents+%26+Veranstaltungen%2fnaturkundliche+Ausstellungen%2flaufend" type="folder" DateChanged="20140209" comment="" Feld30="AE76000;">
           <notation>AE</notation>
           <notation>§§RVK§§:AE76000</notation>
           <filelist>
-            <file DocNo="D1061" name="140824 Bonn Deutsches Museum Wolfgang Paul Teilchenfänger" type="url" link="http://www.deutsches-museum.de/bonn/ausstellungen/ausstellungen-2013/wolfgang-paul/" DateChanged="20131208" comment="">
+            <file DocNo="D1061" name="140824 Bonn Deutsches Museum Wolfgang Paul Teilchenfänger" type="url" link="http://www.deutsches-museum.de/bonn/ausstellungen/ausstellungen-2013/wolfgang-paul/" DateChanged="20131208" comment="" Feld30="AE76000;">
               <notation>AE</notation>
               <notation>§§RVK§§:AE76000</notation>
             </file>
@@ -5810,7 +5810,7 @@
         <notation>CA</notation>
         <notation>§§RVK§§:TB5000</notation>
       </file>
-      <file DocNo="D1162" name="Concilium medii aevi" type="url" link="http://cma.gbv.de/z/pages" DateChanged="20070104" comment="&#xD;&#xA;1998 als erste Online-Zeitschrift für Mittelalterforschung gegründet, hat sich Concilium medii aevi inzwischen zu einem international anerkannten interdisziplinären Forum für Mediävistik und Forschung&#xD;&#xA;zur Frühen Neuzeit entwickelt. Die Beiträge und Rezensionen kommen aus Geschichtswissenschaft,Kunstgeschichte, Archäologie und weiteren Fächern. ">
+      <file DocNo="D1162" name="Concilium medii aevi" type="url" link="http://cma.gbv.de/z/pages" DateChanged="20070104" comment="&#xD;&#xA;1998 als erste Online-Zeitschrift für Mittelalterforschung gegründet, hat sich Concilium medii aevi inzwischen zu einem international anerkannten interdisziplinären Forum für Mediävistik und Forschung&#xD;&#xA;zur Frühen Neuzeit entwickelt. Die Beiträge und Rezensionen kommen aus Geschichtswissenschaft,Kunstgeschichte, Archäologie und weiteren Fächern. " Feld30="AZ10000;FA;LD3000;NA3500;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ10000</notation>
         <notation>HG</notation>
@@ -5828,11 +5828,11 @@
         <notation>DR90</notation>
         <notation>§§RVK§§:ST680</notation>
       </file>
-      <file DocNo="D1164" name="Edge" type="url" link="http://www.edge.org/" DateChanged="20040604" comment="&#xD;&#xA;Edge is the home(page) of The Reality Club on the Internet on Edge. The Reality Club encourages people who can take the materials of the culture in the arts, literature, and science and put them together in their own way. We live in a mass-produced culture where many people, even many established cultural arbiters limit themselves to secondhand ideas, thoughts, and opinions. The Reality Club consists of individuals who create their own reality and do not accept an ersatz, appropriated reality. Our members are out there doing it rather than talking about and analyzing the people who are doing it. The Reality Club is different from The Algonquin, The Apostles, The Bloomsbury Group, or The Club, but it offers the same quality of intellectual adventure. Perhaps the closest resemblance is to the early nineteenth-century Lunar Society of Birmingham, an informal club of the leading cultural figures of the new industrial age — James Watt, Erasmus Darwin, Josiah Wedgewood, Joseph Priestly, Benjamin Franklin. In a similar fashion, The Reality Club is an attempt to gather together those who are exploring the themes of the post-industrial age.">
+      <file DocNo="D1164" name="Edge" type="url" link="http://www.edge.org/" DateChanged="20040604" comment="&#xD;&#xA;Edge is the home(page) of The Reality Club on the Internet on Edge. The Reality Club encourages people who can take the materials of the culture in the arts, literature, and science and put them together in their own way. We live in a mass-produced culture where many people, even many established cultural arbiters limit themselves to secondhand ideas, thoughts, and opinions. The Reality Club consists of individuals who create their own reality and do not accept an ersatz, appropriated reality. Our members are out there doing it rather than talking about and analyzing the people who are doing it. The Reality Club is different from The Algonquin, The Apostles, The Bloomsbury Group, or The Club, but it offers the same quality of intellectual adventure. Perhaps the closest resemblance is to the early nineteenth-century Lunar Society of Birmingham, an informal club of the leading cultural figures of the new industrial age — James Watt, Erasmus Darwin, Josiah Wedgewood, Joseph Priestly, Benjamin Franklin. In a similar fashion, The Reality Club is an attempt to gather together those who are exploring the themes of the post-industrial age." Feld30="AZ10000;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ10000</notation>
       </file>
-      <file DocNo="D1165" name="EurekAlert!" type="url" link="http://www.eurekalert.org/" DateChanged="20060420" comment="&#xD;&#xA;EurekAlert! is an online, global news service operated by AAAS, the science society. EurekAlert! provides a central place through which universities, medical centers, journals, government agencies, corporations and other organizations engaged in research can bring their news to the media. EurekAlert! also offers its news and resources to the public. EurekAlert! features news and resources focused on all areas of science, medicine and technology. ">
+      <file DocNo="D1165" name="EurekAlert!" type="url" link="http://www.eurekalert.org/" DateChanged="20060420" comment="&#xD;&#xA;EurekAlert! is an online, global news service operated by AAAS, the science society. EurekAlert! provides a central place through which universities, medical centers, journals, government agencies, corporations and other organizations engaged in research can bring their news to the media. EurekAlert! also offers its news and resources to the public. EurekAlert! features news and resources focused on all areas of science, medicine and technology. " Feld30="AZ10000;TA1230;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ10000</notation>
         <notation>CA</notation>
@@ -5850,37 +5850,37 @@
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ10000</notation>
       </file>
-      <file DocNo="D1168" name="Nature Archive" type="url" link="http://www.nature.com/nature/archive/" DateChanged="20080113" comment="&#xD;&#xA;Archiv der Wisenschaftszeitschrift Nature von 1849 bis zur Gegenwart. Kostenpflichtiger Zugang. Ab Mitte 2008 freier persönlicher Zugang für Personen mit ständigem Wohnsitz in Deutschland über Nationallizenz der Deutschen Forschungsgemeinschaft - DFG.">
+      <file DocNo="D1168" name="Nature Archive" type="url" link="http://www.nature.com/nature/archive/" DateChanged="20080113" comment="&#xD;&#xA;Archiv der Wisenschaftszeitschrift Nature von 1849 bis zur Gegenwart. Kostenpflichtiger Zugang. Ab Mitte 2008 freier persönlicher Zugang für Personen mit ständigem Wohnsitz in Deutschland über Nationallizenz der Deutschen Forschungsgemeinschaft - DFG." Feld30="AZ10000;TA1230;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ10000</notation>
         <notation>CA</notation>
         <notation>§§RVK§§:TA1230</notation>
       </file>
-      <file DocNo="D1169" name="Nature Precedings" type="url" link="http://precedings.nature.com/" DateChanged="20080703" comment="&#xD;&#xA;Nature Precedings is a place for researchers to share pre-publication research, unpublished manuscripts, presentations, posters, white papers, technical papers, supplementary findings, and other scientific documents. Submissions are screened by our professional curation team for relevance and quality, but are not subjected to peer review. We welcome high-quality contributions from biology, medicine (except clinical trials), chemistry and the earth sciences. ">
+      <file DocNo="D1169" name="Nature Precedings" type="url" link="http://precedings.nature.com/" DateChanged="20080703" comment="&#xD;&#xA;Nature Precedings is a place for researchers to share pre-publication research, unpublished manuscripts, presentations, posters, white papers, technical papers, supplementary findings, and other scientific documents. Submissions are screened by our professional curation team for relevance and quality, but are not subjected to peer review. We welcome high-quality contributions from biology, medicine (except clinical trials), chemistry and the earth sciences. " Feld30="AZ10000;TA1230;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ10000</notation>
         <notation>CA</notation>
         <notation>§§RVK§§:TA1230</notation>
       </file>
-      <file DocNo="D1170" name="Nature Publishing Group" type="url" link="http://www.nature.com/index.html" DateChanged="20061001" comment="&#xD;&#xA;Nature Publishing Group (NPG) is the scientific publishing arm of Macmillan Publishers Ltd, combining the excellence of: Nature, Nature research journals, Nature Reviews, Nature Clinical Practice journals and NPG academic journals, to provide the world's premier information resource for the basic biological and physical sciences. ">
+      <file DocNo="D1170" name="Nature Publishing Group" type="url" link="http://www.nature.com/index.html" DateChanged="20061001" comment="&#xD;&#xA;Nature Publishing Group (NPG) is the scientific publishing arm of Macmillan Publishers Ltd, combining the excellence of: Nature, Nature research journals, Nature Reviews, Nature Clinical Practice journals and NPG academic journals, to provide the world's premier information resource for the basic biological and physical sciences. " Feld30="AZ10000;TA1230;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ10000</notation>
         <notation>CA</notation>
         <notation>§§RVK§§:TA1230</notation>
       </file>
-      <file DocNo="D1171" name="PLoS ONE" type="url" link="http://www.plosone.org/home.action" DateChanged="20070115" comment="&#xD;&#xA;PLoS ONE (eISSN-1932-6203) is an international, peer-reviewed, open-access, online publication from the Public Library of Science (PLoS). PLoS ONE welcomes reports on primary research from any scientific discipline.">
+      <file DocNo="D1171" name="PLoS ONE" type="url" link="http://www.plosone.org/home.action" DateChanged="20070115" comment="&#xD;&#xA;PLoS ONE (eISSN-1932-6203) is an international, peer-reviewed, open-access, online publication from the Public Library of Science (PLoS). PLoS ONE welcomes reports on primary research from any scientific discipline." Feld30="AZ10000;TA1230;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ10000</notation>
         <notation>CA</notation>
         <notation>§§RVK§§:TA1230</notation>
       </file>
-      <file DocNo="D1172" name="Science Magazine" type="url" link="http://www.sciencemag.org/" DateChanged="19990615" comment="&#xD;&#xA;Science is a major science journal covering all areas of natural &amp; life sciences and technology. It is published by the American Association for the Advancement of Sience (AAAS)">
+      <file DocNo="D1172" name="Science Magazine" type="url" link="http://www.sciencemag.org/" DateChanged="19990615" comment="&#xD;&#xA;Science is a major science journal covering all areas of natural &amp; life sciences and technology. It is published by the American Association for the Advancement of Sience (AAAS)" Feld30="AZ10000;TA1230;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ10000</notation>
         <notation>CA</notation>
         <notation>§§RVK§§:TA1230</notation>
       </file>
-      <file DocNo="D1173" name="TED Talks" type="url" link="http://www.ted.com/tedtalks/tedtalksplayer.cfm?key=hans_rosling" DateChanged="20110809" comment="&#xD;&#xA;TED was born in 1984 out of the observation of a powerful convergence between Technology, Entertainment and Design. The first TED included demos of the newly released Macintosh computer and Sony compact disc, while mathematician Benoit Mandelbrot demonstrated how to map coastlines with his newly discovered fractals and AI guru Marvin Minsky outlined his powerful new model of the mind. TED has been held regularly in Monterey, California, ever since, attracting a growing and influential audience from many different disciplines united by their curiosity, open-mindedness, a desire to think outside the box. Meanwhile the roster of speakers broadened to include scientists, philosophers, musicians, religious leaders, environmentalists and many others.">
+      <file DocNo="D1173" name="TED Talks" type="url" link="http://www.ted.com/tedtalks/tedtalksplayer.cfm?key=hans_rosling" DateChanged="20110809" comment="&#xD;&#xA;TED was born in 1984 out of the observation of a powerful convergence between Technology, Entertainment and Design. The first TED included demos of the newly released Macintosh computer and Sony compact disc, while mathematician Benoit Mandelbrot demonstrated how to map coastlines with his newly discovered fractals and AI guru Marvin Minsky outlined his powerful new model of the mind. TED has been held regularly in Monterey, California, ever since, attracting a growing and influential audience from many different disciplines united by their curiosity, open-mindedness, a desire to think outside the box. Meanwhile the roster of speakers broadened to include scientists, philosophers, musicians, religious leaders, environmentalists and many others." Feld30="AZ10000;">
         <notation>AZ</notation>
         <notation>§§RVK§§:AZ10000</notation>
       </file>
@@ -6028,7 +6028,7 @@
         <notation>O</notation>
         <notation>§§RVK§§:RB10909</notation>
       </file>
-      <file DocNo="D1195" name="Farbdiaarchiv" type="url" link="http://www.zi.fotothek.org/" DateChanged="20070517" comment="&#xD;&#xA;Das &quot;Farbdiaarchiv zur Wand- und Deckenmalerei&quot; enthält 39.000 digitalisierte Aufnahmen von bedeutenden Freskenzyklen und Wanddekorationen in Kirchen, Klöstern, Schlössern und anderen Profanbauten in den Ländern Deutschland, Österreich, Polen und Rußland (Ost- und Westpreußen) und Tschechien (Böhmen und Nordmähren). Unsachgemäße Lagerung und Projektion der Diapositive in den vergangenen fünf Jahrzehnten haben zu empfindlichen Farbverlusten geführt. Dennoch bleibt das Farbdiaarchiv eine unersetzbare Bildquelle zur Geschichte der mitteleuropäischen Wand- und Deckenmalerei, da in ihm eine Vielzahl zerstörter oder beschädigter Kunstwerke, häufig in erstaunlichem Detailreichtum, für Forschung, Bildung und Denkmalpflege überliefert ist.">
+      <file DocNo="D1195" name="Farbdiaarchiv" type="url" link="http://www.zi.fotothek.org/" DateChanged="20070517" comment="&#xD;&#xA;Das &quot;Farbdiaarchiv zur Wand- und Deckenmalerei&quot; enthält 39.000 digitalisierte Aufnahmen von bedeutenden Freskenzyklen und Wanddekorationen in Kirchen, Klöstern, Schlössern und anderen Profanbauten in den Ländern Deutschland, Österreich, Polen und Rußland (Ost- und Westpreußen) und Tschechien (Böhmen und Nordmähren). Unsachgemäße Lagerung und Projektion der Diapositive in den vergangenen fünf Jahrzehnten haben zu empfindlichen Farbverlusten geführt. Dennoch bleibt das Farbdiaarchiv eine unersetzbare Bildquelle zur Geschichte der mitteleuropäischen Wand- und Deckenmalerei, da in ihm eine Vielzahl zerstörter oder beschädigter Kunstwerke, häufig in erstaunlichem Detailreichtum, für Forschung, Bildung und Denkmalpflege überliefert ist." Feld30="LH98250;LH70220;LK83220;LL25220;LL50220;LO74310;LO80410;AC88478;AC88100;">
         <notation>FO</notation>
         <notation>§§RVK§§:LH98250</notation>
         <notation>FG</notation>
@@ -6340,19 +6340,19 @@
     <notation>AA1</notation>
     <notation>§§RVK§§:AA30000</notation>
     <filelist>
-      <file DocNo="D1230" name="AllesKlar - Deutsches Webverzeichnis" type="url" link="http://www.allesklar.de/" DateChanged="20000311" comment="">
+      <file DocNo="D1230" name="AllesKlar - Deutsches Webverzeichnis" type="url" link="http://www.allesklar.de/" DateChanged="20000311" comment="" Feld30="AA30000;">
         <notation>AA1</notation>
         <notation>§§RVK§§:AA30000</notation>
       </file>
-      <file DocNo="D1231" name="AllTheWeb.com" type="url" link="http://www.alltheweb.com/" DateChanged="20020103" comment="">
+      <file DocNo="D1231" name="AllTheWeb.com" type="url" link="http://www.alltheweb.com/" DateChanged="20020103" comment="" Feld30="AA30000;">
         <notation>AA1</notation>
         <notation>§§RVK§§:AA30000</notation>
       </file>
-      <file DocNo="D1232" name="Google Scholar" type="url" link="http://scholar.google.com/" DateChanged="20041119" comment="&#xD;&#xA;Google Scholar enables you to search specifically for scholarly literature, including peer-reviewed papers, theses, books, preprints, abstracts and technical reports from all broad areas of research. Use Google Scholar to find articles from a wide variety of academic publishers, professional societies, preprint repositories and universities, as well as scholarly articles available across the web.">
+      <file DocNo="D1232" name="Google Scholar" type="url" link="http://scholar.google.com/" DateChanged="20041119" comment="&#xD;&#xA;Google Scholar enables you to search specifically for scholarly literature, including peer-reviewed papers, theses, books, preprints, abstracts and technical reports from all broad areas of research. Use Google Scholar to find articles from a wide variety of academic publishers, professional societies, preprint repositories and universities, as well as scholarly articles available across the web." Feld30="AA50000;">
         <notation>AA1</notation>
         <notation>§§RVK§§:AA50000</notation>
       </file>
-      <file DocNo="D1233" name="Live Search academics" type="url" link="http://search.live.com/results.aspx?q=&amp;scope=academic&amp;FORM=BCBB" DateChanged="20070715" comment="&#xD;&#xA;Search for scholarly journal articles, conference proceedings, dissertations and academic books. Microsoft Live Search academics offers export of citations, biomedical content, books, theses and dissertations">
+      <file DocNo="D1233" name="Live Search academics" type="url" link="http://search.live.com/results.aspx?q=&amp;scope=academic&amp;FORM=BCBB" DateChanged="20070715" comment="&#xD;&#xA;Search for scholarly journal articles, conference proceedings, dissertations and academic books. Microsoft Live Search academics offers export of citations, biomedical content, books, theses and dissertations" Feld30="AA50000;">
         <notation>AA1</notation>
         <notation>§§RVK§§:AA50000</notation>
       </file>
@@ -6465,7 +6465,7 @@
       </file>
     </filelist>
   </folder>
-  <folder DocNo="D1256" name="Introductory Physics" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fIntroductory+Physics" type="folder" DateChanged="20121111" comment="&#xD;&#xA;">
+  <folder DocNo="D1256" name="Introductory Physics" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fIntroductory+Physics" type="folder" DateChanged="20121111" comment="&#xD;&#xA;" Feld30="UC200;">
     <notation>CKB1</notation>
     <notation>§§RVK§§:UC200</notation>
     <filelist>
@@ -6475,7 +6475,7 @@
         <notation>BY</notation>
         <notation>§§RVK§§:SM700</notation>
       </file>
-      <file DocNo="D1258" name="Center for History of Physics - American Institute of Physics" type="url" link="http://www.aip.org/history/" DateChanged="20070722" comment="&#xD;&#xA;The American Institute of Physics (AIP) Center for History of Physics works to to preserve and make known the historical record of modern physics and allied sciences. Through documentation, archival collections and educational initiatives, the Center ensures that the heritage of modern physics is safeguarded and its story accurately told. The webpage offers audivisual collections, photographs, documents related to famous physicists of the 20th century, like Nils Bohr, Werner Heisenberg, Erwin Schrödinger, Marie Curie, Emilio Segré, ...">
+      <file DocNo="D1258" name="Center for History of Physics - American Institute of Physics" type="url" link="http://www.aip.org/history/" DateChanged="20070722" comment="&#xD;&#xA;The American Institute of Physics (AIP) Center for History of Physics works to to preserve and make known the historical record of modern physics and allied sciences. Through documentation, archival collections and educational initiatives, the Center ensures that the heritage of modern physics is safeguarded and its story accurately told. The webpage offers audivisual collections, photographs, documents related to famous physicists of the 20th century, like Nils Bohr, Werner Heisenberg, Erwin Schrödinger, Marie Curie, Emilio Segré, ..." Feld30="UB2380;AC91830;">
         <notation>CKB2</notation>
         <notation>§§RVK§§:UB2380</notation>
         <notation>AA5</notation>
@@ -6566,15 +6566,15 @@
       </file>
     </filelist>
   </folder>
-  <folder DocNo="D1275" name="Knowledge Reference" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fKnowledge+Reference" type="folder" DateChanged="20121111" comment="">
+  <folder DocNo="D1275" name="Knowledge Reference" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fKnowledge+Reference" type="folder" DateChanged="20121111" comment="" Feld30="AE50000;">
     <notation>AE</notation>
     <notation>§§RVK§§:AE50000</notation>
     <filelist>
-      <file DocNo="D1276" name="Fathom" type="url" link="http://www.fathom.com/index.html" DateChanged="20000630" comment="&#xD;&#xA;is a center of online-learning run by the British and American Libraries and Universities. Fathom offers online courses and other resources for online learning including free seminars, lectures, articles and reference from the world's most trusted sources of knowledge. ">
+      <file DocNo="D1276" name="Fathom" type="url" link="http://www.fathom.com/index.html" DateChanged="20000630" comment="&#xD;&#xA;is a center of online-learning run by the British and American Libraries and Universities. Fathom offers online courses and other resources for online learning including free seminars, lectures, articles and reference from the world's most trusted sources of knowledge. " Feld30="AE50000;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE50000</notation>
       </file>
-      <file DocNo="D1277" name="wer-weiss-was" type="url" link="http://www.wer-weiss-was.de/content/start.shtml" DateChanged="20040527" comment="&#xD;&#xA;wer-weiss-was ist ein kostenloses Netzwerk zum Austausch von Wissen. Hier kann man Fachleute aller Bereiche finden und um Rat fragen. Wer-weiss-was basiert auf Gegenseitigkeit: Man registriert sich als Benutzer und stellt sein eigenes Wissen zur Verfügung. Dafür helfen andere Fachleute bei den eigenen Fragen.">
+      <file DocNo="D1277" name="wer-weiss-was" type="url" link="http://www.wer-weiss-was.de/content/start.shtml" DateChanged="20040527" comment="&#xD;&#xA;wer-weiss-was ist ein kostenloses Netzwerk zum Austausch von Wissen. Hier kann man Fachleute aller Bereiche finden und um Rat fragen. Wer-weiss-was basiert auf Gegenseitigkeit: Man registriert sich als Benutzer und stellt sein eigenes Wissen zur Verfügung. Dafür helfen andere Fachleute bei den eigenen Fragen." Feld30="AE50000;">
         <notation>AE</notation>
         <notation>§§RVK§§:AE50000</notation>
       </file>
@@ -6626,18 +6626,18 @@
         <notation>MLC</notation>
         <notation>§§RVK§§:AN75900</notation>
       </file>
-      <file DocNo="D1287" name="BSZ - FabiO - Fachbibliographien und Online-Datenbanken" type="url" link="https://wiki.bsz-bw.de/doku.php?id=linksammlungen:fabio:start" DateChanged="20110809" comment="&#xD;&#xA;Web-Link Sammlung des Südwestdeutschen Bibliotheksverbundes.">
+      <file DocNo="D1287" name="BSZ - FabiO - Fachbibliographien und Online-Datenbanken" type="url" link="https://wiki.bsz-bw.de/doku.php?id=linksammlungen:fabio:start" DateChanged="20110809" comment="&#xD;&#xA;Web-Link Sammlung des Südwestdeutschen Bibliotheksverbundes." Feld30="AA20000;">
         <notation>AA1</notation>
         <notation>§§RVK§§:AA20000</notation>
       </file>
-      <file DocNo="D1288" name="David Rumsey Historical Map Collection" type="url" link="http://www.davidrumsey.com/" DateChanged="20090619" comment="&#xD;&#xA;The David Rumsey Collection was started nearly 20 years ago, and focuses primarily on cartography of the Americas from the 18th and 19th centuries, but also has maps of the World, Asia, Africa, Europe, and Oceania. The collection includes atlases, globes, school geographies, books, maritime charts, and a variety of separate maps, including pocket, wall, children's and manuscript.&#xD;&#xA;schlagworte: Karte, Landkarte, Atlas, historische Karte, Seekarte,&#xD;&#xA;">
+      <file DocNo="D1288" name="David Rumsey Historical Map Collection" type="url" link="http://www.davidrumsey.com/" DateChanged="20090619" comment="&#xD;&#xA;The David Rumsey Collection was started nearly 20 years ago, and focuses primarily on cartography of the Americas from the 18th and 19th centuries, but also has maps of the World, Asia, Africa, Europe, and Oceania. The collection includes atlases, globes, school geographies, books, maritime charts, and a variety of separate maps, including pocket, wall, children's and manuscript.&#xD;&#xA;schlagworte: Karte, Landkarte, Atlas, historische Karte, Seekarte,&#xD;&#xA;" Feld30="ZI9790;AC86000;">
         <notation>§§RVK§§RB10217</notation>
         <notation>DI</notation>
         <notation>§§RVK§§:ZI9790</notation>
         <notation>AA5</notation>
         <notation>§§RVK§§:AC86000</notation>
       </file>
-      <file DocNo="D1289" name="Deutsches Textarchiv (DTA)" type="url" link="http://www.deutschestextarchiv.de/" DateChanged="20091008" comment=" &#xD;&#xA;Das Projekt Deutsches Textarchiv (DTA) der Berlin-Brandenburgischen Akademie der Wissenschaften (BBAW) hat sich zum Ziel gesetzt, einen disziplinübergreifenden Kernbestand deutschsprachiger Texte aus der Zeit von ca. 1650 bis 1900 nach den Erstausgaben zu digitalisieren und als linguistisch annotiertes Volltextcorpus im Internet bereitzustellen. Das Projekt wird durch die Deutsche Forschungsgemeinschaft (DFG) gefördert&#xD;&#xA;Schlagworte: Textkorpus, Textcorpus, Corpus, Textkorpora, digitale Bibliothek, Volltextsammlung, ">
+      <file DocNo="D1289" name="Deutsches Textarchiv (DTA)" type="url" link="http://www.deutschestextarchiv.de/" DateChanged="20091008" comment=" &#xD;&#xA;Das Projekt Deutsches Textarchiv (DTA) der Berlin-Brandenburgischen Akademie der Wissenschaften (BBAW) hat sich zum Ziel gesetzt, einen disziplinübergreifenden Kernbestand deutschsprachiger Texte aus der Zeit von ca. 1650 bis 1900 nach den Erstausgaben zu digitalisieren und als linguistisch annotiertes Volltextcorpus im Internet bereitzustellen. Das Projekt wird durch die Deutsche Forschungsgemeinschaft (DFG) gefördert&#xD;&#xA;Schlagworte: Textkorpus, Textcorpus, Corpus, Textkorpora, digitale Bibliothek, Volltextsammlung, " Feld30="GE6701;AA20000;">
         <notation>HI5A</notation>
         <notation>§§RVK§§:GE6701</notation>
         <notation>AA1</notation>
@@ -6669,11 +6669,11 @@
         <notation>MLC</notation>
         <notation>§§RVK§§:AN75900</notation>
       </file>
-      <file DocNo="D1294" name="HighBeam Research" type="url" link="http://www.highbeam.com/library/index.asp" DateChanged="20041029" comment=" and reference sources. In addition HighBeam Executives provides free access to information on more than 20 million business executives, managers and employees from more than one million organizations (public and private companies and non-profit organizations).">
+      <file DocNo="D1294" name="HighBeam Research" type="url" link="http://www.highbeam.com/library/index.asp" DateChanged="20041029" comment=" and reference sources. In addition HighBeam Executives provides free access to information on more than 20 million business executives, managers and employees from more than one million organizations (public and private companies and non-profit organizations)." Feld30="AA20000;">
         <notation>AA1</notation>
         <notation>§§RVK§§:AA20000</notation>
       </file>
-      <file DocNo="D1295" name="Homepage Christian Kirsch Media Page" type="url" link="http://www.christian-kirsch.de/amk/index.html" DateChanged="20040802" comment="&#xD;&#xA;Im Automatisierten Medienkatalog (AMK) finden Sie ca. 3300 Videoaufnahmen (Spielfilme und Dokumentationen), ca. 800 Tonträger (Musik- und Literaturtonträger) sowie ca. 1000 Printmaterialien (Bücher und Zeitschriften). Die Videoaufnahmen umfassen bekannte Spielfilme, TV-Serien und Dokumentationen, schwerpunktmäßig aus dem Bereich Reisen und Geschichte. Die Tonträger sind schwerpunktmäßig CDs aus dem Bereich der Pop-Musik und Literatur-Tonträger. Die Printmaterialien (hauptsächlich Bücher, wenige Zeitschriften) stammen aus verschiedenen Gebieten, schwerpunktmäßig Geisteswissenschaften, Belletristik und Reiseliteratur.&#xD;&#xA;&#xD;&#xA;">
+      <file DocNo="D1295" name="Homepage Christian Kirsch Media Page" type="url" link="http://www.christian-kirsch.de/amk/index.html" DateChanged="20040802" comment="&#xD;&#xA;Im Automatisierten Medienkatalog (AMK) finden Sie ca. 3300 Videoaufnahmen (Spielfilme und Dokumentationen), ca. 800 Tonträger (Musik- und Literaturtonträger) sowie ca. 1000 Printmaterialien (Bücher und Zeitschriften). Die Videoaufnahmen umfassen bekannte Spielfilme, TV-Serien und Dokumentationen, schwerpunktmäßig aus dem Bereich Reisen und Geschichte. Die Tonträger sind schwerpunktmäßig CDs aus dem Bereich der Pop-Musik und Literatur-Tonträger. Die Printmaterialien (hauptsächlich Bücher, wenige Zeitschriften) stammen aus verschiedenen Gebieten, schwerpunktmäßig Geisteswissenschaften, Belletristik und Reiseliteratur.&#xD;&#xA;&#xD;&#xA;" Feld30="AA20000;">
         <notation>AA1</notation>
         <notation>§§RVK§§:AA20000</notation>
       </file>
@@ -6689,7 +6689,7 @@
         <notation>MLC</notation>
         <notation>§§RVK§§:AN75900</notation>
       </file>
-      <file DocNo="D1298" name="Library and Archival Exhibitions on the Web" type="url" link="http://www.sil.si.edu/SILPublications/Online-Exhibitions/CF/oe_search3.cfm" DateChanged="20130513" comment="&#xD;&#xA;This site features links to online exhibitions that have been created by libraries, archives, and historical societies, as well as to museum online exhibitions with a significant focus on library and archival materials. The scope is international and multi-lingual.&#xD;&#xA;&#xD;&#xA;">
+      <file DocNo="D1298" name="Library and Archival Exhibitions on the Web" type="url" link="http://www.sil.si.edu/SILPublications/Online-Exhibitions/CF/oe_search3.cfm" DateChanged="20130513" comment="&#xD;&#xA;This site features links to online exhibitions that have been created by libraries, archives, and historical societies, as well as to museum online exhibitions with a significant focus on library and archival materials. The scope is international and multi-lingual.&#xD;&#xA;&#xD;&#xA;" Feld30="AC47000;">
         <notation>AA5</notation>
         <notation>§§RVK§§:AC47000</notation>
       </file>
@@ -6741,11 +6741,11 @@
         <notation>OU</notation>
         <notation>§§RVK§§:RP80000</notation>
       </file>
-      <file DocNo="D1306" name="Virtuelle Allgemeinbibliothek" type="url" link="http://www.virtuelleallgemeinbibliothek.de/index.html" DateChanged="20031214" comment="&#xD;&#xA;Ingrid Strauch betreut die Virtuelle Allgemeinbibliothek (VAB). Sie beinhaltet Hinweise auf Texte, Textsammlungen, Datenbanken und Verzeichnisse, die längerfristig auf Nachfrage stoßen.&#xD;&#xA;In den VAB-Notizen findet man in kurzer Form Hinweise auf Quellen, die aktuelle Themen aufgreifen, aber nicht auf Dauer in die VAB aufgenommen werden. ">
+      <file DocNo="D1306" name="Virtuelle Allgemeinbibliothek" type="url" link="http://www.virtuelleallgemeinbibliothek.de/index.html" DateChanged="20031214" comment="&#xD;&#xA;Ingrid Strauch betreut die Virtuelle Allgemeinbibliothek (VAB). Sie beinhaltet Hinweise auf Texte, Textsammlungen, Datenbanken und Verzeichnisse, die längerfristig auf Nachfrage stoßen.&#xD;&#xA;In den VAB-Notizen findet man in kurzer Form Hinweise auf Quellen, die aktuelle Themen aufgreifen, aber nicht auf Dauer in die VAB aufgenommen werden. " Feld30="AA20000;">
         <notation>AA1</notation>
         <notation>§§RVK§§:AA20000</notation>
       </file>
-      <file DocNo="D1307" name="Werke Friedrichs des Großen" type="url" link="http://www.friedrich.uni-trier.de/de/" DateChanged="20110809" comment="">
+      <file DocNo="D1307" name="Werke Friedrichs des Großen" type="url" link="http://www.friedrich.uni-trier.de/de/" DateChanged="20110809" comment="" Feld30="AA20000;">
         <notation>AA1</notation>
         <notation>§§RVK§§:AA20000</notation>
       </file>
@@ -7995,11 +7995,11 @@
     <folder DocNo="D1531" name="2 Media" level="1" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fReference%2f2+Media" type="folder" DateChanged="20121111" comment="" Feld30="ZZ99999">
       <folder DocNo="D1532" name="News, Newsstations &amp; Newspapers" level="2" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fReference%2f2+Media%2fNews%2c+Newsstations+%26+Newspapers" type="folder" DateChanged="20130619" comment="" Feld30="ZZ99999">
         <filelist>
-          <file DocNo="D1533" name="Archivsuche SPIEGEL ONLINE" type="url" link="http://wissen.spiegel.de/wissen/start/home.html" DateChanged="20080214" comment="&#xD;&#xA;Hier findet man mehr als 650.000 Artikel seit 1947 aus den Quellen der SPIEGEL-Gruppe.&#xD;&#xA;Schalgworte: Magazin, Wochenzeitschrift, Zeitschrift, Deutschland, Archiv.">
+          <file DocNo="D1533" name="Archivsuche SPIEGEL ONLINE" type="url" link="http://wissen.spiegel.de/wissen/start/home.html" DateChanged="20080214" comment="&#xD;&#xA;Hier findet man mehr als 650.000 Artikel seit 1947 aus den Quellen der SPIEGEL-Gruppe.&#xD;&#xA;Schalgworte: Magazin, Wochenzeitschrift, Zeitschrift, Deutschland, Archiv." Feld30="AZ90000;">
             <notation>AZ</notation>
             <notation>§§RVK§§:AZ90000</notation>
           </file>
-          <file DocNo="D1534" name="FAZ.NET - Aktuell" type="url" link="http://www.faz.net/s/homepage.html" DateChanged="20030511" comment="&#xD;&#xA;Online Angebot der Frankfurter Allgemeinen Zeitung.&#xD;&#xA;Schlagworte: Tageszeitung, Deutschland, Archiv.">
+          <file DocNo="D1534" name="FAZ.NET - Aktuell" type="url" link="http://www.faz.net/s/homepage.html" DateChanged="20030511" comment="&#xD;&#xA;Online Angebot der Frankfurter Allgemeinen Zeitung.&#xD;&#xA;Schlagworte: Tageszeitung, Deutschland, Archiv." Feld30="AZ90000;">
             <notation>AZ</notation>
             <notation>§§RVK§§:AZ90000</notation>
           </file>
@@ -8013,19 +8013,19 @@
             <notation>MLW</notation>
             <notation>§§RVK§§:AP95200</notation>
           </file>
-          <file DocNo="D1537" name="Kölner Stadtanzeiger" type="url" link="http://www.ksta.de/servlet/ContentServer%3fpagename=ksta%252Fshortcut%252F" DateChanged="20020928" comment=" es ist auch danach.&#xD;&#xA;Schlagworte: Tageszeitung, Deutschland.&#xD;&#xA;">
+          <file DocNo="D1537" name="Kölner Stadtanzeiger" type="url" link="http://www.ksta.de/servlet/ContentServer%3fpagename=ksta%252Fshortcut%252F" DateChanged="20020928" comment=" es ist auch danach.&#xD;&#xA;Schlagworte: Tageszeitung, Deutschland.&#xD;&#xA;" Feld30="AZ90000;">
             <notation>AZ</notation>
             <notation>§§RVK§§:AZ90000</notation>
           </file>
-          <file DocNo="D1538" name="Netzzeitung" type="url" link="http://www.netzeitung.de/" DateChanged="20040725" comment="&#xD;&#xA;Die Netzeitung ist mit ihrer Vollredaktion die erste deutsche Tageszeitung, die nur im Internet erscheint und damit weder den Traditionen eines eingeführten Printtitels noch den Interessen eines Verlages, insbesondere dessen Marketingzielen, verpflichtet ist. &#xD;&#xA;Schlagworte: Tageszeitung, Internet.&#xD;&#xA;">
+          <file DocNo="D1538" name="Netzzeitung" type="url" link="http://www.netzeitung.de/" DateChanged="20040725" comment="&#xD;&#xA;Die Netzeitung ist mit ihrer Vollredaktion die erste deutsche Tageszeitung, die nur im Internet erscheint und damit weder den Traditionen eines eingeführten Printtitels noch den Interessen eines Verlages, insbesondere dessen Marketingzielen, verpflichtet ist. &#xD;&#xA;Schlagworte: Tageszeitung, Internet.&#xD;&#xA;" Feld30="AZ90000;">
             <notation>AZ</notation>
             <notation>§§RVK§§:AZ90000</notation>
           </file>
-          <file DocNo="D1539" name="Neue Zürcher Zeitung" type="url" link="http://www.nzz.ch/" DateChanged="20080214" comment="&#xD;&#xA;Online Ausgabe der Neuen Zürcher Zeitung&#xD;&#xA;Sschlagworte: Tageszeitung, Schweiz.">
+          <file DocNo="D1539" name="Neue Zürcher Zeitung" type="url" link="http://www.nzz.ch/" DateChanged="20080214" comment="&#xD;&#xA;Online Ausgabe der Neuen Zürcher Zeitung&#xD;&#xA;Sschlagworte: Tageszeitung, Schweiz." Feld30="AZ90000;">
             <notation>AZ</notation>
             <notation>§§RVK§§:AZ90000</notation>
           </file>
-          <file DocNo="D1540" name="New York Times" type="url" link="http://www.nytimes.com/" DateChanged="20080323" comment="&#xD;&#xA;Aktuelle Online-Ausgabe und Textarchiv zu den Zeitungsartikeln aus alten Ausgaben New York Times.&#xD;&#xA;Schlagworte: Tageszeitung, Vereinigte Staaten, USA, New York, Archiv.&#xD;&#xA;">
+          <file DocNo="D1540" name="New York Times" type="url" link="http://www.nytimes.com/" DateChanged="20080323" comment="&#xD;&#xA;Aktuelle Online-Ausgabe und Textarchiv zu den Zeitungsartikeln aus alten Ausgaben New York Times.&#xD;&#xA;Schlagworte: Tageszeitung, Vereinigte Staaten, USA, New York, Archiv.&#xD;&#xA;" Feld30="AZ90000;">
             <notation>AZ</notation>
             <notation>§§RVK§§:AZ90000</notation>
           </file>
@@ -8037,11 +8037,11 @@
             <notation>MLE</notation>
             <notation>§§RVK§§:AP24820</notation>
           </file>
-          <file DocNo="D1542" name="sueddeutsche.de" type="url" link="http://www.sueddeutsche.de/" DateChanged="20011226" comment="&#xD;&#xA;Die Netzausgabe der Süddeutschen Zeitung&#xD;&#xA;Schalgworte: Tageszeitung, Deutschland.">
+          <file DocNo="D1542" name="sueddeutsche.de" type="url" link="http://www.sueddeutsche.de/" DateChanged="20011226" comment="&#xD;&#xA;Die Netzausgabe der Süddeutschen Zeitung&#xD;&#xA;Schalgworte: Tageszeitung, Deutschland." Feld30="AZ90000;">
             <notation>AZ</notation>
             <notation>§§RVK§§:AZ90000</notation>
           </file>
-          <file DocNo="D1543" name="Süddeutsche Zeitung Archiv" type="url" link="http://www.sz-archiv.de/szaboreg.html" DateChanged="20080121" comment="&#xD;&#xA;Das Textarchiv zu den in der allen Ausgaben und Beilagen der Süddeutschen Zeitung in den letzten 2 Jahren veröffentlichten Artikel.&#xD;&#xA;Schlagworte: Tageszeitung, Deutschland, Archiv.&#xD;&#xA;">
+          <file DocNo="D1543" name="Süddeutsche Zeitung Archiv" type="url" link="http://www.sz-archiv.de/szaboreg.html" DateChanged="20080121" comment="&#xD;&#xA;Das Textarchiv zu den in der allen Ausgaben und Beilagen der Süddeutschen Zeitung in den letzten 2 Jahren veröffentlichten Artikel.&#xD;&#xA;Schlagworte: Tageszeitung, Deutschland, Archiv.&#xD;&#xA;" Feld30="AZ90000;">
             <notation>AZ</notation>
             <notation>§§RVK§§:AZ90000</notation>
           </file>

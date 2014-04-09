@@ -337,23 +337,48 @@ namespace MvcRQ.Models
         public RQKosBranch(IEnumerable<RQKosTransfer> newRQKosBranch)
             : base()
         {
-            SubjClass[] classArray = new SubjClass[newRQKosBranch.Count()];
+            //SubjClass[] classArray = new SubjClass[newRQKosBranch.Count()];
+
+            //for (int i = 0; i < newRQKosBranch.Count(); i++)
+            //{
+            //    classArray[i] = new SubjClass();
+            //    classArray[i].ClassCode = newRQKosBranch.ElementAt(i).ClassCode;
+            //    classArray[i].ClassID = newRQKosBranch.ElementAt(i).ClassID;
+            //    classArray[i].ClassShortTitle = newRQKosBranch.ElementAt(i).ClassName;
+            //    classArray[i].ClassLongTitle = newRQKosBranch.ElementAt(i).ClassTitle;
+            //    classArray[i].NrOfRefLinks = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfDocuments);
+            //    classArray[i].NrOfSubClasses = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfSubclasses);
+            //    classArray[i].ParentClassID = newRQKosBranch.ElementAt(i).ParentID;
+            //    classArray[i].RefRVKSet = newRQKosBranch.ElementAt(i).RVKClassCodes;
+            //    classArray[i].RefRVKClass = newRQKosBranch.ElementAt(i).RVKClassCodes != null ? new RQLib.Utilities.LexicalClass(newRQKosBranch.ElementAt(i).RVKClassCodes) : null;
+            //    classArray[i].ClassDataClient = new RQClassificationDataClient();
+            //}
+            //this.classBranch = new SubjClassBranch(classArray);
+
+            List<SubjClass> classArray = new List<SubjClass>();
 
             for (int i = 0; i < newRQKosBranch.Count(); i++)
             {
-                classArray[i] = new SubjClass();
-                classArray[i].ClassCode = newRQKosBranch.ElementAt(i).ClassCode;
-                classArray[i].ClassID = newRQKosBranch.ElementAt(i).ClassID;
-                classArray[i].ClassShortTitle = newRQKosBranch.ElementAt(i).ClassName;
-                classArray[i].ClassLongTitle = newRQKosBranch.ElementAt(i).ClassTitle;
-                classArray[i].NrOfRefLinks = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfDocuments);
-                classArray[i].NrOfSubClasses = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfSubclasses);
-                classArray[i].ParentClassID = newRQKosBranch.ElementAt(i).ParentID;
-                classArray[i].RefRVKSet = newRQKosBranch.ElementAt(i).RVKClassCodes;
-                classArray[i].RefRVKClass = new RQLib.Utilities.LexicalClass(newRQKosBranch.ElementAt(i).RVKClassCodes);
-                classArray[i].ClassDataClient = new RQClassificationDataClient();
+                if ((!string.IsNullOrEmpty(newRQKosBranch.ElementAt(i).ClassCode))
+                    && (!string.IsNullOrEmpty(newRQKosBranch.ElementAt(i).ClassName))
+                    && (!string.IsNullOrEmpty(newRQKosBranch.ElementAt(i).RVKClassCodes)))
+                {
+                    SubjClass sc = new SubjClass();
+
+                    sc.ClassCode = newRQKosBranch.ElementAt(i).ClassCode;
+                    sc.ClassID = newRQKosBranch.ElementAt(i).ClassID;
+                    sc.ClassShortTitle = newRQKosBranch.ElementAt(i).ClassName;
+                    sc.ClassLongTitle = newRQKosBranch.ElementAt(i).ClassTitle;
+                    sc.NrOfRefLinks = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfDocuments);
+                    sc.NrOfSubClasses = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfSubclasses);
+                    sc.ParentClassID = newRQKosBranch.ElementAt(i).ParentID;
+                    sc.RefRVKSet = newRQKosBranch.ElementAt(i).RVKClassCodes;
+                    sc.RefRVKClass = newRQKosBranch.ElementAt(i).RVKClassCodes != null ? new RQLib.Utilities.LexicalClass(newRQKosBranch.ElementAt(i).RVKClassCodes) : null;
+                    sc.ClassDataClient = new RQClassificationDataClient();
+                    classArray.Add(sc);
+                }
             }
-            this.classBranch = new SubjClassBranch(classArray);
+            this.classBranch = new SubjClassBranch(classArray.ToArray());
         }
 
         public RQKosBranch(SubjClassBranch subjClassBranch)
