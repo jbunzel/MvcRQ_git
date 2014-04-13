@@ -17,7 +17,8 @@
 02.031			Semantic Web Personen-Information 
 				(abgebrochen: s. Brecht, Kalendergeschichten (Links unbeabsichtigt gelöscht))	
 
-02.04		LEER
+02.04		Shelves-View (RQKos)
+02.041			Beim Rücksprung (z. B. von Katalog-) auf Shelves-View den vorherigen Klassifikations-Ast entfalten.
 
 02.05		Exception-Management
 02.051			Überarbeiten und vereinheitlichen
@@ -53,7 +54,8 @@
 02.10		Buch-Cover über Library of Congress-IDs suchen
 
 02.11		Lokalisierung
-02.111			Lokalisierung der Autorisierungsmodule (Attribute in AccountModels.cs)						
+02.111			Lokalisierung der Autorisierungsmodule (Attribute in AccountModels.cs)
+02.112			RQLib-Modul lokalisieren (vor allem Fehlermeldungen)						
 				
 02.12		Editor für Klassifikationstabelle																				begonnen: 140102
 02.121			Check- & Add-Funktionalität für ClassBranch-Editor															begonnnn: 140102	erledigt: 140120
@@ -62,7 +64,7 @@
 02.124			Löschen von Unterklassen																					begonnen: 140322	erledigt: 140405	
 02.125			Veränderungen von Bookmarks in DIR.XML
 02.126			Tabelle Systematik anpassen (Philosophiegeschichte entspr. tats. Aufstellung auf KA setzen)	
-02.127			Unterklassen im DynaTree nach Klassen-Code sortieren
+02.127			Unterklassen im DynaTree nach Klassen-Code sortieren														begonnen: 140409	erledigt: 140412
 
 02.13		Bugs 0.1 beseitigen
 02.1301			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.

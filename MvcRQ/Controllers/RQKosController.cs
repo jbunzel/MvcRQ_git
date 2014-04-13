@@ -125,20 +125,23 @@ namespace MvcRQ.Controllers
                 return View("ClientRQKosEditor", new RQKosEditModel(id).RQKosEditSet);
             }
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "dt")))
-            {
                 return View("Index", GetModel(id, verb).RQKosSet);
-            }
             else
             {
                 RQKosModel model = GetModel(id);
 
                 ViewBag.locPath = HttpContext.Request.QueryString.Get("p");
                 ViewBag.docNo = HttpContext.Request.QueryString.Get("d");
-                if ((ViewBag.locPath == null) || (ViewBag.locPath == ""))
-                {
+                if (string.IsNullOrEmpty(ViewBag.locPath) && string.IsNullOrEmpty(ViewBag.docNo))
+                    if (HttpContext.Request.Cookies.Get("dynatree-active") != null)
+                    {
+                        string cc = HttpUtility.UrlDecode(HttpContext.Request.Cookies.Get("dynatree-active").Value);
+                        if (! string.IsNullOrEmpty(cc))
+                            model = GetModel(cc.Substring(0, cc.IndexOf('$')));
+                    }
+                if (string.IsNullOrEmpty(ViewBag.locPath))
                     ViewBag.locPath = new RQLib.RQKos.Classifications.SubjClass(model.RQKosSet.GetItem(0)._class.ClassID, model.RQKosSet.GetItem(0)._class.ClassDataClient).ClassPath;
-                }
-                ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems ti the database.
+                ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems to the database.
                 ViewBag.GetRQItemVerb = "BrowseItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
                 return View("Index", model.RQKosSet);
             }
