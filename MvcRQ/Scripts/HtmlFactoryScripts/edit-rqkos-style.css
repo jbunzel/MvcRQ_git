@@ -56,6 +56,11 @@ input[type=submit]:disabled {
     color:GrayText;
 }
 
+input[name=delete],
+input[name=delete]:hover {
+    background-color: crimson;    
+} 
+
 input[type=text] {
     width: 30%;
     margin: 5px 32px 5px 5px;

@@ -104,6 +104,9 @@ Public Module EditGlobals
 
 
     Public Function ReadHints() As Hint()
+        If IsNothing(Hints) Then
+            AddHint("Hinweis", "Zu dem aufgetretenen Ereignis sind keine Hinweise verfügbar.")
+        End If
         Dim ret() As Hint = Hints
 
         ReDim Hints(0)

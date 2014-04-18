@@ -205,6 +205,7 @@ namespace MvcRQ.Controllers
 
         /// <summary>
         /// Controller action answering POST http-requests transfering a single RiQuest Knowledge Organisation System (KOS) Item.
+        /// TODO: Aktuell in Berarbeitung: Fehlerhaft Anzeige nach delete. 
         /// </summary>
         /// <param name="verb"></param>
         /// <param name="id"></param>
@@ -224,6 +225,11 @@ namespace MvcRQ.Controllers
                 return View("ClientRQKosEditor", editModel.AppendClass());
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "update")))
                 if (editModel.Update())
+                    return View("ClientRQKosEditor", editModel.RQKosEditSet);
+                else
+                    return View("ClientRQKosEditor", editModel.RQKosEditStatus);
+            else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "delete")))
+                if (editModel.Delete())
                     return View("ClientRQKosEditor", editModel.RQKosEditSet);
                 else
                     return View("ClientRQKosEditor", editModel.RQKosEditStatus);
