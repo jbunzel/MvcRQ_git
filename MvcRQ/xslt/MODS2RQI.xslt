@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:mo="http://www.loc.gov/mods/v3" xmlns:rq="http://www.riquest.de/rq/">
+<xsl:stylesheet version="1.0"
+	xmlns:zs="http://www.loc.gov/zing/srw/"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+	xmlns:mo="http://www.loc.gov/mods/v3" 
+	xmlns:rq="http://www.riquest.de/rq/">
 
 
 	<xsl:template name="get-number">
@@ -98,7 +102,17 @@
 		</xsl:element>
 		<xsl:element name="Authors">
 			<xsl:for-each select="mo:name[@type='personal']">
-				<xsl:value-of select="mo:namePart" />
+          <xsl:choose>
+            <xsl:when test="mo:namePart[@type='family']">
+              <xsl:value-of select="mo:namePart[@type='family']" />
+              <xsl:if test="mo:namePart[@type='given']">
+                <xsl:value-of select="concat(', ', mo:namePart[@type='given'])" />
+              </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="mo:namePart" />
+            </xsl:otherwise>
+          </xsl:choose>
 				<xsl:if test="mo:role/mo:roleTerm[@type='text']">
           <xsl:if test="mo:role/mo:roleTerm != 'creator'">
             <xsl:value-of select="concat( ' {', mo:role/mo:roleTerm, '}')" />
@@ -279,7 +293,17 @@
 		</xsl:element>
 		<xsl:element name="AboutPersons">
 			<xsl:for-each select="mo:subject/mo:name[@type='personal']">
-				<xsl:value-of select="mo:namePart" />
+        <xsl:choose>
+          <xsl:when test="mo:namePart[@type='family']">
+            <xsl:value-of select="mo:namePart[@type='family']" />
+            <xsl:if test="mo:namePart[@type='given']">
+              <xsl:value-of select="concat(', ', mo:namePart[@type='given'])" />
+            </xsl:if>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="mo:namePart" />
+          </xsl:otherwise>
+        </xsl:choose>  
 				<xsl:if test="mo:role/mo:roleTerm[@type='text']">
 					<xsl:value-of select="concat( ' {', mo:role/mo:roleTerm, '}')" />
 				</xsl:if>
@@ -321,7 +345,7 @@
   
 
 	<xsl:template name="getMODScollection">
-		<xsl:if test="mo:modsCollection">
+		<xsl:if test="//zs:records">
 			<Systematik>
 <!--        
 				<Description>
@@ -339,7 +363,7 @@
           />
 				</Hits>
 -->        
-				<xsl:for-each select="mo:modsCollection/mo:mods">
+				<xsl:for-each select="//zs:record/zs:recordData/mo:mods">
 					<xsl:element name="Dokument">
 						<xsl:call-template name="parseMODSdoc" />
 					</xsl:element>
