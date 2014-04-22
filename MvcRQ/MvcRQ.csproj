@@ -636,8 +636,8 @@
     </Content>
     <Content Include="~db\katalog30.mdb" />
     <Content Include="~db\RQLucene\CATALOG\segments.gen" />
-    <Content Include="~db\RQLucene\CATALOG\segments_2r" />
-    <Content Include="~db\RQLucene\CATALOG\_1c.cfs" />
+    <Content Include="~db\RQLucene\CATALOG\segments_37" />
+    <Content Include="~db\RQLucene\CATALOG\_1k.cfs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\DataManagement\Models\" />
