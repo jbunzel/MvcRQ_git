@@ -17,8 +17,7 @@
 02.031			Semantic Web Personen-Information 
 				(abgebrochen: s. Brecht, Kalendergeschichten (Links unbeabsichtigt gelöscht))	
 
-02.04		Shelves-View (RQKos)
-02.041			Beim Rücksprung (z. B. von Katalog-) auf Shelves-View den vorherigen Klassifikations-Ast entfalten.
+02.04		LEER
 
 02.05		Exception-Management
 02.051			Überarbeiten und vereinheitlichen
@@ -77,7 +76,8 @@
 02.1308			Falscher SQL-Connection-String in IndexConfig.xml.
 02.1309			Server-Fehler bei Edition von Adorno "Aufarbeitung der Vergangenheit"
 02.1310			Fehlerhafter Öffnungszustand eines vorher geöffneten DynaTree-Knotens beim Wiederaufruf der Seite.
-02.1311			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten. 
+02.1311			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten.
+02.1312			Fehler beim Switch zwischen einzelnem RQItem im Katalog-View & dem korrespondierenden Shelves-View 
 
 02.14		ISSUE: KRITISCHE FEHLER
 02.141			Neuzugänge im bookmark-index erscheinen nicht in der Ergebnisliste.											begonnen: 140316	erledigt: 140316
