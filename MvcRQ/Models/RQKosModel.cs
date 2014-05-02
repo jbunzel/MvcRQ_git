@@ -166,11 +166,11 @@ namespace MvcRQ.Models
             oldCB.Load();
             for (var i = 1; i < editCB.count; i++)
             {
-                if (oldCB.ClassBranch.get_Item(i + 1) != null)
+                if (oldCB.ClassBranch.get_Item(i) != null)
                 {
                     SubjClass sc = editCB.get_Item(i);
 
-                    if ((sc.NrOfSubClasses > 0) && (sc.RefRVKSet != oldCB.ClassBranch.get_Item(i + 1).RefRVKSet))
+                    if ((sc.NrOfSubClasses > 0) && (sc.RefRVKSet != oldCB.ClassBranch.get_Item(i).RefRVKSet))
                     {
                         if (!this.Find(sc.ClassID).IsFeasableWith(ref sc))
                             retVal = retVal && false;
@@ -431,6 +431,7 @@ namespace MvcRQ.Models
 
                 sc.ClassCode = "NULL";
                 sc.ClassShortTitle = "RQ Classification";
+                sc.RefRVKSet = "A-Z";
                 sc.NrOfSubClasses = 15;
                 sc.NrOfRefLinks = 0;
             }
