@@ -391,6 +391,7 @@
     <Content Include="Content\font-awesome-4.0.3\scss\_spinning.scss" />
     <Content Include="Content\font-awesome-4.0.3\scss\_stacked.scss" />
     <Content Include="Content\font-awesome-4.0.3\scss\_variables.scss" />
+    <Content Include="~db\RQLucene\katalog30.mdb" />
     <None Include="Content\riquest.css" />
     <Content Include="Content\pure-0.2.0\pure-min.css" />
     <Content Include="Content\themes\Images\tabseparator.gif" />
@@ -635,10 +636,9 @@
     <Content Include="xml\shelves.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="~db\katalog30.mdb" />
     <Content Include="~db\RQLucene\CATALOG\segments.gen" />
-    <Content Include="~db\RQLucene\CATALOG\segments_2r" />
-    <Content Include="~db\RQLucene\CATALOG\_1c.cfs" />
+    <Content Include="~db\RQLucene\CATALOG\segments_ib" />
+    <Content Include="~db\RQLucene\CATALOG\_94.cfs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\DataManagement\Models\" />

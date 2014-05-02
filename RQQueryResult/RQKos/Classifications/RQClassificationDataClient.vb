@@ -261,17 +261,22 @@
                             CType(drTable.Rows(i - 1), RQDataSet.SystematikRow).SubClassCount = classBranch.Item(i).NrOfSubClasses
                         End If
                     Next
-                    'Update SubClassCount parameter of base class
                     classBranch.MajorClass.NrOfSubClasses = CShort(drTable.Count)
                     classBranch.MajorClass.NrOfClassDocs = CShort(iSuperClassDocCount)
                     classBranch.MajorClass.NrOfRefLinks = CShort(iSuperClassRefCount)
-                    retVal = (Not mqQuery.UpdateSystematik()) And Me.PutClassData(classBranch.MajorClass)
+                    retVal = Not mqQuery.UpdateSystematik()
+                    If classBranch.MajorClass.ClassCode <> "NULL" Then retVal = retVal And Me.PutClassData(classBranch.MajorClass) 'Update SubClassCount parameter of base class if not root class
                     If retVal = True Then
                         EditGlobals.AddHint("OK    ", "Der Klassifikationsstrang '" + classBranch.Item(0).ClassShortTitle + "' wurde aktualisiert.")
 
                         For i = 1 To classBranch.count - 1
                             If Not IsNothing(classBranch.Item(i)) Then
-                                If classBranch.Item(i).NrOfSubClasses > 0 Then Update(New SubjClassBranch(classBranch.Item(i), CType(New RQDAL.RQCatalogDAL().GetRecordByParentID(classBranch.Item(i).ClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable)))
+                                If classBranch.Item(i).NrOfSubClasses > 0 Then
+                                    Dim subClassBranch = New SubjClassBranch(classBranch.Item(i), CType(New RQDAL.RQCatalogDAL().GetRecordByParentID(classBranch.Item(i).ClassID, "RQDataSet", "Systematik", True), RQDataSet.SystematikDataTable))
+
+                                    subClassBranch.ChangeSubClassCodes()
+                                    Update(subClassBranch)
+                                End If
                             End If
                         Next
                     Else
