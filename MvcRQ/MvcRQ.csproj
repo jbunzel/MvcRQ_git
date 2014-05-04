@@ -391,7 +391,7 @@
     <Content Include="Content\font-awesome-4.0.3\scss\_spinning.scss" />
     <Content Include="Content\font-awesome-4.0.3\scss\_stacked.scss" />
     <Content Include="Content\font-awesome-4.0.3\scss\_variables.scss" />
-    <Content Include="~db\RQLucene\katalog30.mdb" />
+    <Content Include="~db\katalog30.mdb" />
     <None Include="Content\riquest.css" />
     <Content Include="Content\pure-0.2.0\pure-min.css" />
     <Content Include="Content\themes\Images\tabseparator.gif" />

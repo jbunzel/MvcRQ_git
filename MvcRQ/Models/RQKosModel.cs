@@ -772,7 +772,10 @@ namespace MvcRQ.Models
         {
             get
             {
-                return this._isLazy;
+                if (this._class.NrOfSubClasses > 0)
+                    return this._isLazy;
+                else
+                    return false;
             }
             set
             {
