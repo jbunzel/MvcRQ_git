@@ -185,17 +185,16 @@ Namespace RQDAL
             Dim xmlIn As System.Xml.XmlReader = Nothing
             Dim ms1 As New MemoryStream()
 
-            If Query.QueryExternal = "001" Then xmlIn = GetXMLContent("http://gso.gbv.de/sru/DB=1.50/?version=1.1&operation=searchRetrieve&query=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&maximumRecords=100&recordSchema=marc21")
-            If Query.QueryExternal = "002" Then xmlIn = GetXMLContent("http://gso.gbv.de/sru/DB=1.55/?version=1.1&operation=searchRetrieve&query=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&maximumRecords=100&recordSchema=marc21")
-            If Query.QueryExternal = "003" Then xmlIn = GetXMLContent("http://gso.gbv.de/sru/DB=2.1/?version=1.1&operation=searchRetrieve&query=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&maximumRecords=100&recordSchema=marc21")
-            If Query.QueryExternal = "004" Then xmlIn = GetXMLContent("http://worldcat.org/webservices/catalog/search/opensearch?q=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&format=atom&cformat=all&start=0&count=100&wskey=yxl6CIVEg0loBC2AzwUR7CDFvBOhqEWu5JkRvdTYnBOfoR1yGQKlE5Fj4QU7yuFWDrh50LsteuhCD1h6")
+            If Query.QueryExternal = "001" Then xmlIn = GetXMLContent("http://sru.gbv.de/natliz?version=1.1&operation=searchRetrieve&query=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&maximumRecords=100&recordSchema=mods")
+            If Query.QueryExternal = "002" Then xmlIn = GetXMLContent("http://sru.gbv.de/natlizzss?version=1.1&operation=searchRetrieve&query=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&maximumRecords=100&recordSchema=mods")
+            If Query.QueryExternal = "003" Then xmlIn = GetXMLContent("http://sru.gbv.de/gvk?version=1.1&operation=searchRetrieve&query=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&maximumRecords=100&recordSchema=mods")
+            If Query.QueryExternal = "004" Then xmlIn = GetXMLContent("http://sru.gbv.de/econis?version=1.1&operation=searchRetrieve&query=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&maximumRecords=100&recordSchema=mods")
+            If Query.QueryExternal = "005" Then xmlIn = GetXMLContent("http://sru.gbv.de/zdbdb?version=1.1&operation=searchRetrieve&query=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&maximumRecords=100&recordSchema=mods")
+            If Query.QueryExternal = "006" Then xmlIn = GetXMLContent("http://worldcat.org/webservices/catalog/search/opensearch?q=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&format=atom&cformat=all&start=0&count=100&wskey=yxl6CIVEg0loBC2AzwUR7CDFvBOhqEWu5JkRvdTYnBOfoR1yGQKlE5Fj4QU7yuFWDrh50LsteuhCD1h6")
             Try
                 xslSettings.EnableScript = False
-                xslResultTransform.Load(Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "xslt/SRUMARC2MODS.xslt"), xslSettings, Nothing)
-                xslResultTransform.Transform(xmlIn, xslTransformArgs, ms1)
                 xslResultTransform.Load(Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "xslt/MODS2RQI.xslt"), xslSettings, Nothing)
-                ms1.Seek(0, IO.SeekOrigin.Begin)
-                xslResultTransform.Transform(New Xml.XmlTextReader(ms1), xslTransformArgs, OutXml)
+                xslResultTransform.Transform(xmlIn, xslTransformArgs, OutXml)
             Catch ex As Exception
             End Try
         End Sub

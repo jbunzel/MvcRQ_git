@@ -24,9 +24,12 @@ namespace MvcRQ.Areas.ItemViewer.Controllers
             ViewBag.DocNo = rqitemId;
             if (itemAdress.StartsWith("MyDocs") )
             {
-                ItemViewerModel theModel = new ItemViewerModel(rqitemId,"http://mydocs.strands.de/" + itemAdress);
-                //ItemViewerModel theModel = new ItemViewerModel(rqitemId, "http://" + System.Web.HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + "/" + itemAdress);
-                
+                ItemViewerModel theModel;
+
+                if ((System.Web.HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST").ToLower() == "localhost") || (System.Web.HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST").ToLower() == "admin-pc"))
+                    theModel = new ItemViewerModel(rqitemId, "http://" + System.Web.HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + "/" + itemAdress);
+                else
+                    theModel = new ItemViewerModel(rqitemId,"http://mydocs.strands.de/" + itemAdress);
                 ViewBag.DocAdr = (theModel.Count() > 0 ) ? theModel.itemAdress : "UNDEFINED";
                 return View(theModel);        
             }
