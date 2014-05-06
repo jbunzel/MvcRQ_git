@@ -772,7 +772,10 @@ namespace MvcRQ.Models
         {
             get
             {
-                return this._isLazy;
+                if (this._class.NrOfSubClasses > 0)
+                    return this._isLazy;
+                else
+                    return false;
             }
             set
             {
@@ -795,15 +798,30 @@ namespace MvcRQ.Models
             }
         }
 
+        //[DataMember]
+        //public bool unselectable
+        //{
+        //    get
+        //    {
+        //        if (this._class.NrOfSubClasses > 0)//(this._class.NrOfClassDocs + this._class.NrOfRefLinks > 0)
+        //            return false;
+        //        else
+        //            return false;
+        //    }
+        //    set
+        //    {
+        //    }
+        //}
+
         [DataMember]
-        public string unselectable
+        public string mode
         {
             get
             {
                 if (this._class.NrOfClassDocs + this._class.NrOfRefLinks > 0)
-                    return "false";
+                    return "TESTMODE";
                 else
-                    return "true";
+                    return "TESTMODE";
             }
             set
             {

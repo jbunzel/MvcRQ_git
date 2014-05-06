@@ -27,8 +27,8 @@
 /*************************************************************************
  * Modifications by Jürgen Bunzel 2011 (jquery.rqdynatree.js)
  * $Revision: 2011-12-08 18:38:00$
- * definition of event type changed in functions reloadChildren, appendAjax
- * to enable structured node keys with substructure separation tag '$'.
+ * definition of event type ("nodeLoaded.dynatree.") changed in functions reloadChildren, 
+ * appendAjax to enable structured node keys with substructure separation tag '$'.
  */
 
 var _canLog = true;

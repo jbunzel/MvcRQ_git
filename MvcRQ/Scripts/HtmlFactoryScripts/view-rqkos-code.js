@@ -53,7 +53,7 @@ $(function () {
                 url: urlbase + "/" + node.data.key.substring(0, node.data.key.indexOf('$')) + "?verb=dt",
                 data: {
                     "key": node.data.key.substring(0, node.data.key.indexOf('$')), // Optional url arguments 
-                    "mode": "all"
+                    mode: "all"
                 },
                 success: function (node) {
                     SortChildren(node);
@@ -81,6 +81,18 @@ function SortChildren(node) {
         b = b.data.key.substr(b.data.key.indexOf('$') + 1).toLowerCase();
         return a > b ? 1 : a < b ? -1 : 0;
     }, false);
+}
+
+function EditActiveNode() {
+    var node = $("#tree").dynatree("getActiveNode");
+
+    if (node) {
+        var path = 'rqkos/rqc_' + node.data.key.substr(node.data.key.indexOf('$') + 1).toLowerCase() + '?verb=edit';
+
+        window.open(HostAdress() + "/" + path, "_self");
+    }
+    else
+        alert("Sie haben im Klassifikationsbaum noch keine Klasse ausgewählt!");
 }
 
 function ExpandPath(keyPath) {

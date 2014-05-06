@@ -77,22 +77,10 @@ fieldset {
 /*--------------*/
 /* module rules */
 /*--------------*/
-.rq-diagnostics {
-    display: none;
-}
 
-.rq-instructions {
-    font-size: 1em;
-    display: block;
-    text-align: center;
-    margin: 10px;
-    color: black;
-}
-
-#footer .rq-instructions,
-#copyright {
-    font-size: 0.9em;
-}
+/*--------------*/
+/*    menus     */
+/*--------------*/
 
 .rq-menu {
     background-color: rgb(255, 255, 245) !important;
@@ -140,6 +128,10 @@ fieldset {
     display: inline;
 }
 
+/*--------------*/
+/*    logos     */
+/*--------------*/
+
 .rq-logo {
     margin-bottom: 10px;
     /*margin-top: 10px;*/
@@ -171,6 +163,10 @@ fieldset {
     font-size: 20pt;
 }
 
+/*--------------*/
+/*   buttons    */
+/*--------------*/
+
 .rq-quick-button {
     padding-left: 2px;
     padding-right: 2px;
@@ -179,19 +175,9 @@ fieldset {
     background-color: #c22a09; 
 }
 
-.rq-sidebar {
-    overflow: auto;
-    /*border: 1px solid red;*/
-}
-
-.rq-result-box {
-    background-color: green !important;
-}
-
-.content-box { 
-    background-color: red;
-    border-top: 1px solid silver;
-}
+/*--------------*/
+/* result lists */
+/*--------------*/
 
 .category {
     font-family: Garamond;
@@ -264,6 +250,53 @@ fieldset {
     color: grey;
 }
 
+/*--------------*/
+/* box displays */
+/*--------------*/
+
+.rq-diagnostics {
+    color: darkred;
+    font-size: 0.7em;
+    display: none;
+}
+
+.rq-instructions {
+    font-size: 1em;
+    display: block;
+    text-align: center;
+    margin: 10px;
+    color: black;
+}
+
+#footer .rq-instructions,
+#copyright {
+    font-size: 0.85em;
+}
+
+.rq-box {
+    font-size: 0.85em;
+    margin-left: 15px;
+}
+
+.rq-box h1 {
+    font-size: 0.9em;
+    margin-left: 5px;
+}
+
+.rq-result-box {
+    background-color: green !important;
+}
+
+.content-box { 
+    background-color: red;
+    border-top: 1px solid silver;
+}
+
+.rq-sidebar {
+    overflow: auto;
+    /*border: 1px solid red;*/
+}
+
 .rq-right-sidebar {
     margin-left: 15px;
 }
@@ -280,7 +313,7 @@ fieldset {
 }
 
 .rq-settings-panel {
-    font-size: 0.9em;
+    font-size: 0.85em;
 }
 
 .rq-settings-panel ul {
@@ -290,6 +323,7 @@ fieldset {
 }
 
 .rq-settings-panel h3 {
+    font-size: 0.95em;
     margin-bottom: 0px;
 }
 

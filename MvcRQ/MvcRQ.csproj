@@ -391,7 +391,18 @@
     <Content Include="Content\font-awesome-4.0.3\scss\_spinning.scss" />
     <Content Include="Content\font-awesome-4.0.3\scss\_stacked.scss" />
     <Content Include="Content\font-awesome-4.0.3\scss\_variables.scss" />
-    <Content Include="~db\RQLucene\katalog30.mdb" />
+    <Content Include="Scripts\dynatree-1.2.5\jquery.dynatree.js" />
+    <Content Include="Scripts\dynatree-1.2.5\jquery.dynatree.min.js" />
+    <Content Include="Scripts\dynatree-1.2.5\skin-vista\icons.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\jquery.rqdynatree.js" />
+    <Content Include="Scripts\dynatree-1.2.5\skin-vista\loading.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\skin-vista\ui.dynatree.css" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\icons-rtl.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\icons.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\loading.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\ui.dynatree.css" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\vline-rtl.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\vline.gif" />
     <None Include="Content\riquest.css" />
     <Content Include="Content\pure-0.2.0\pure-min.css" />
     <Content Include="Content\themes\Images\tabseparator.gif" />
@@ -636,9 +647,10 @@
     <Content Include="xml\shelves.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="~db\katalog30.mdb" />
     <Content Include="~db\RQLucene\CATALOG\segments.gen" />
-    <Content Include="~db\RQLucene\CATALOG\segments_ib" />
-    <Content Include="~db\RQLucene\CATALOG\_94.cfs" />
+    <Content Include="~db\RQLucene\CATALOG\segments_ir" />
+    <Content Include="~db\RQLucene\CATALOG\_9c.cfs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\DataManagement\Models\" />

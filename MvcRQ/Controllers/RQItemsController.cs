@@ -570,7 +570,7 @@ namespace MvcRQ.Controllers
                         return RQItemRecord((verb == "") ? verb : "edititem", rqitem.DocNo, serviceId);
                     }
                     else
-                        throw new System.AccessViolationException("Not authorized for this function!");
+                        throw new System.AccessViolationException(RQResources.Views.Shared.SharedStrings.err_not_authorized);
                 }
             }
             throw new NotImplementedException("No item for update specified.");
