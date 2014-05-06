@@ -81,11 +81,13 @@
 
 02.14		ISSUE: KRITISCHE FEHLER
 02.141			Neuzugänge im bookmark-index erscheinen nicht in der Ergebnisliste.											begonnen: 140316	erledigt: 140316
+02.142			Verknüpfung von SingleItemView zur Systematik-Klasse funktioniert nicht mehr.								begonnen: 140506	erledigt: 140506
 
 02.99		Sicherung & Veröffentlichung																					begonnen: 131229	erledigt: 
 02.991			Version 0.2.0.0 auf www.riquest.de							(intermediate)									begonnen: 131229	erledigt: 131229
 02.992			Version 0.2.1.0 auf github.com/jbunzel/MvcRQ master 		(intermediate)									begonnen: 140301	erledigt: 140301
 02.993			Version 0.2.1.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen: 140304	erledigt: 140304
+02.994			Version 0.2.2.0 auf github.com/jbunzel/MvcRQ:git.git master													begonnen: 140505	erledigt: 140505
 02.999			Version 0.2.X.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

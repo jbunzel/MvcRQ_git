@@ -5,6 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		README.txt = README.txt
+		todo.txt = todo.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcRQ", "MvcRQ\MvcRQ.csproj", "{38E21C0E-05D3-4BF1-8890-3DBA7AAF69C8}"

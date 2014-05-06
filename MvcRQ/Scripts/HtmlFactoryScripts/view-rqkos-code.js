@@ -66,10 +66,8 @@ $(function () {
             getRQItemList(node);
         },
         onPostInit: function (isReloading, isError) {
-           if (isReloading == true) {
-                this.reactivate();
-                ExpandPath(locPath);
-           }
+               this.reactivate();
+               ExpandPath(locPath);
         },
         persist: true
     });
