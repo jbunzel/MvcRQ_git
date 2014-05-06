@@ -57,6 +57,11 @@ namespace MvcRQ.Helpers
                 return false;
         }
 
+        public static bool HasKosEditAccess()
+        {
+            return HasAdminAccess();
+        }
+
         public static bool HasEditAccess()
         {
             return HasAdminAccess();

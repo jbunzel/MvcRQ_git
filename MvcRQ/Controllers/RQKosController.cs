@@ -119,26 +119,36 @@ namespace MvcRQ.Controllers
         [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult RQKosBranch(string id, string verb)
         {
+            if (MvcRQ.Helpers.AccessRightsResolver.HasAddAccess())
+                ViewBag.AccessRights = "EDITOR";
             if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "edit")))
             {
-                ViewBag.RQKosId = id;
-                return View("ClientRQKosEditor", new RQKosEditModel(id).RQKosEditSet);
+                if (ViewBag.AccessRights == "EDITOR")
+                {
+                    ViewBag.RQKosId = id;
+                    return View("ClientRQKosEditor", new RQKosEditModel(id).RQKosEditSet);
+                }
+                else
+                    throw new System.AccessViolationException(RQResources.Views.Shared.SharedStrings.err_not_authorized);
             }
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "dt")))
-            {
                 return View("Index", GetModel(id, verb).RQKosSet);
-            }
             else
             {
                 RQKosModel model = GetModel(id);
 
                 ViewBag.locPath = HttpContext.Request.QueryString.Get("p");
                 ViewBag.docNo = HttpContext.Request.QueryString.Get("d");
-                if ((ViewBag.locPath == null) || (ViewBag.locPath == ""))
-                {
+                if (string.IsNullOrEmpty(ViewBag.locPath) && string.IsNullOrEmpty(ViewBag.docNo))
+                    if (HttpContext.Request.Cookies.Get("dynatree-active") != null)
+                    {
+                        string cc = HttpUtility.UrlDecode(HttpContext.Request.Cookies.Get("dynatree-active").Value);
+                        if (!string.IsNullOrEmpty(cc))
+                            model = GetModel(cc.Substring(0, cc.IndexOf('$')));
+                    }
+                if (string.IsNullOrEmpty(ViewBag.locPath))
                     ViewBag.locPath = new RQLib.RQKos.Classifications.SubjClass(model.RQKosSet.GetItem(0)._class.ClassID, model.RQKosSet.GetItem(0)._class.ClassDataClient).ClassPath;
-                }
-                ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems ti the database.
+                ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems to the database.
                 ViewBag.GetRQItemVerb = "BrowseItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
                 return View("Index", model.RQKosSet);
             }
@@ -217,24 +227,29 @@ namespace MvcRQ.Controllers
         [ActionName("RQKosBranch")]
         public ActionResult UpdateRQKosBranch(string id, string verb, IEnumerable<RQKosTransfer> RQKosTransferBranch)
         {
-            RQKosEditModel editModel = new RQKosEditModel(RQKosTransferBranch);
+            if (MvcRQ.Helpers.AccessRightsResolver.HasAddAccess())
+            {
+                RQKosEditModel editModel = new RQKosEditModel(RQKosTransferBranch);
 
-            if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "check")))
-                return View(editModel.IsValid());
-            else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "new")))
-                return View("ClientRQKosEditor", editModel.AppendClass());
-            else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "update")))
-                if (editModel.Update())
-                    return View("ClientRQKosEditor", editModel.RQKosEditSet);
+                if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "check")))
+                    return View(editModel.IsValid());
+                else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "new")))
+                    return View("ClientRQKosEditor", editModel.AppendClass());
+                else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "update")))
+                    if (editModel.Update())
+                        return View("ClientRQKosEditor", editModel.RQKosEditSet);
+                    else
+                        return View("ClientRQKosEditor", editModel.RQKosEditStatus);
+                else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "delete")))
+                    if (editModel.Delete())
+                        return View("ClientRQKosEditor", editModel.RQKosEditSet);
+                    else
+                        return View("ClientRQKosEditor", editModel.RQKosEditStatus);
                 else
-                    return View("ClientRQKosEditor", editModel.RQKosEditStatus);
-            else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "delete")))
-                if (editModel.Delete())
-                    return View("ClientRQKosEditor", editModel.RQKosEditSet);
-                else
-                    return View("ClientRQKosEditor", editModel.RQKosEditStatus);
+                    return View();
+            }
             else
-                return View();
+                throw new System.AccessViolationException(RQResources.Views.Shared.SharedStrings.err_not_authorized);
         }
 
         #endregion

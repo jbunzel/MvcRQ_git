@@ -172,7 +172,11 @@ Namespace RQDAL
             Dim DirNode As System.Xml.XmlNode
 
             For Each DirNode In DirNodes
-                _bmTbl.AddBookmarksRow(WriteTableRow(DirNode, SortCriterion))
+                Try
+                    _bmTbl.AddBookmarksRow(WriteTableRow(DirNode, SortCriterion))
+                Catch ex As Exception
+                    Dim str As String = "TEST"
+                End Try
             Next
             Return _bmTbl
         End Function

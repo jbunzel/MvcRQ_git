@@ -166,11 +166,11 @@ namespace MvcRQ.Models
             oldCB.Load();
             for (var i = 1; i < editCB.count; i++)
             {
-                if (oldCB.ClassBranch.get_Item(i + 1) != null)
+                if (oldCB.ClassBranch.get_Item(i) != null)
                 {
                     SubjClass sc = editCB.get_Item(i);
 
-                    if ((sc.NrOfSubClasses > 0) && (sc.RefRVKSet != oldCB.ClassBranch.get_Item(i + 1).RefRVKSet))
+                    if ((sc.NrOfSubClasses > 0) && (sc.RefRVKSet != oldCB.ClassBranch.get_Item(i).RefRVKSet))
                     {
                         if (!this.Find(sc.ClassID).IsFeasableWith(ref sc))
                             retVal = retVal && false;
@@ -337,23 +337,48 @@ namespace MvcRQ.Models
         public RQKosBranch(IEnumerable<RQKosTransfer> newRQKosBranch)
             : base()
         {
-            SubjClass[] classArray = new SubjClass[newRQKosBranch.Count()];
+            //SubjClass[] classArray = new SubjClass[newRQKosBranch.Count()];
+
+            //for (int i = 0; i < newRQKosBranch.Count(); i++)
+            //{
+            //    classArray[i] = new SubjClass();
+            //    classArray[i].ClassCode = newRQKosBranch.ElementAt(i).ClassCode;
+            //    classArray[i].ClassID = newRQKosBranch.ElementAt(i).ClassID;
+            //    classArray[i].ClassShortTitle = newRQKosBranch.ElementAt(i).ClassName;
+            //    classArray[i].ClassLongTitle = newRQKosBranch.ElementAt(i).ClassTitle;
+            //    classArray[i].NrOfRefLinks = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfDocuments);
+            //    classArray[i].NrOfSubClasses = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfSubclasses);
+            //    classArray[i].ParentClassID = newRQKosBranch.ElementAt(i).ParentID;
+            //    classArray[i].RefRVKSet = newRQKosBranch.ElementAt(i).RVKClassCodes;
+            //    classArray[i].RefRVKClass = newRQKosBranch.ElementAt(i).RVKClassCodes != null ? new RQLib.Utilities.LexicalClass(newRQKosBranch.ElementAt(i).RVKClassCodes) : null;
+            //    classArray[i].ClassDataClient = new RQClassificationDataClient();
+            //}
+            //this.classBranch = new SubjClassBranch(classArray);
+
+            List<SubjClass> classArray = new List<SubjClass>();
 
             for (int i = 0; i < newRQKosBranch.Count(); i++)
             {
-                classArray[i] = new SubjClass();
-                classArray[i].ClassCode = newRQKosBranch.ElementAt(i).ClassCode;
-                classArray[i].ClassID = newRQKosBranch.ElementAt(i).ClassID;
-                classArray[i].ClassShortTitle = newRQKosBranch.ElementAt(i).ClassName;
-                classArray[i].ClassLongTitle = newRQKosBranch.ElementAt(i).ClassTitle;
-                classArray[i].NrOfRefLinks = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfDocuments);
-                classArray[i].NrOfSubClasses = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfSubclasses);
-                classArray[i].ParentClassID = newRQKosBranch.ElementAt(i).ParentID;
-                classArray[i].RefRVKSet = newRQKosBranch.ElementAt(i).RVKClassCodes;
-                classArray[i].RefRVKClass = new RQLib.Utilities.LexicalClass(newRQKosBranch.ElementAt(i).RVKClassCodes);
-                classArray[i].ClassDataClient = new RQClassificationDataClient();
+                if ((!string.IsNullOrEmpty(newRQKosBranch.ElementAt(i).ClassCode))
+                    && (!string.IsNullOrEmpty(newRQKosBranch.ElementAt(i).ClassName))
+                    && (!string.IsNullOrEmpty(newRQKosBranch.ElementAt(i).RVKClassCodes)))
+                {
+                    SubjClass sc = new SubjClass();
+
+                    sc.ClassCode = newRQKosBranch.ElementAt(i).ClassCode;
+                    sc.ClassID = newRQKosBranch.ElementAt(i).ClassID;
+                    sc.ClassShortTitle = newRQKosBranch.ElementAt(i).ClassName;
+                    sc.ClassLongTitle = newRQKosBranch.ElementAt(i).ClassTitle;
+                    sc.NrOfRefLinks = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfDocuments);
+                    sc.NrOfSubClasses = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfSubclasses);
+                    sc.ParentClassID = newRQKosBranch.ElementAt(i).ParentID;
+                    sc.RefRVKSet = newRQKosBranch.ElementAt(i).RVKClassCodes;
+                    sc.RefRVKClass = newRQKosBranch.ElementAt(i).RVKClassCodes != null ? new RQLib.Utilities.LexicalClass(newRQKosBranch.ElementAt(i).RVKClassCodes) : null;
+                    sc.ClassDataClient = new RQClassificationDataClient();
+                    classArray.Add(sc);
+                }
             }
-            this.classBranch = new SubjClassBranch(classArray);
+            this.classBranch = new SubjClassBranch(classArray.ToArray());
         }
 
         public RQKosBranch(SubjClassBranch subjClassBranch)
@@ -406,6 +431,7 @@ namespace MvcRQ.Models
 
                 sc.ClassCode = "NULL";
                 sc.ClassShortTitle = "RQ Classification";
+                sc.RefRVKSet = "A-Z";
                 sc.NrOfSubClasses = 15;
                 sc.NrOfRefLinks = 0;
             }
@@ -746,7 +772,10 @@ namespace MvcRQ.Models
         {
             get
             {
-                return this._isLazy;
+                if (this._class.NrOfSubClasses > 0)
+                    return this._isLazy;
+                else
+                    return false;
             }
             set
             {
@@ -769,15 +798,30 @@ namespace MvcRQ.Models
             }
         }
 
+        //[DataMember]
+        //public bool unselectable
+        //{
+        //    get
+        //    {
+        //        if (this._class.NrOfSubClasses > 0)//(this._class.NrOfClassDocs + this._class.NrOfRefLinks > 0)
+        //            return false;
+        //        else
+        //            return false;
+        //    }
+        //    set
+        //    {
+        //    }
+        //}
+
         [DataMember]
-        public string unselectable
+        public string mode
         {
             get
             {
                 if (this._class.NrOfClassDocs + this._class.NrOfRefLinks > 0)
-                    return "false";
+                    return "TESTMODE";
                 else
-                    return "true";
+                    return "TESTMODE";
             }
             set
             {

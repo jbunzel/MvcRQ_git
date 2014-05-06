@@ -27,8 +27,8 @@
 /*************************************************************************
  * Modifications by Jürgen Bunzel 2011 (jquery.rqdynatree.js)
  * $Revision: 2011-12-08 18:38:00$
- * definition of event type changed in functions reloadChildren, appendAjax
- * to enable structured node keys with substructure separation tag '$'.
+ * definition of event type ("nodeLoaded.dynatree.") changed in functions reloadChildren, 
+ * appendAjax to enable structured node keys with substructure separation tag '$'.
  */
 
 var _canLog = true;
@@ -747,7 +747,7 @@ DynaTreeNode.prototype = {
 				this.makeVisible();
 			}
 			this.tree.activeNode = this;
-			if( opts.persist ){
+			if (opts.persist) {
 				$.cookie(opts.cookieId+"-active", this.data.key, opts.cookie);
 			}
 			this.tree.persistence.activeKey = this.data.key;
@@ -1968,7 +1968,7 @@ DynaTreeStatus.prototype = {
 		}
 	},
 	write: function() {
-//		this._log("DynaTreeStatus: write");
+	    //		this._log("DynaTreeStatus: write");
 		$.cookie(this.cookieId + "-active", ( this.activeKey === null ) ? "" : this.activeKey, this.cookieOpts);
 		$.cookie(this.cookieId + "-focus", ( this.focusedKey === null ) ? "" : this.focusedKey, this.cookieOpts);
 		$.cookie(this.cookieId + "-expand", ( this.expandedKeyList === null ) ? "" : this.expandedKeyList.join(","), this.cookieOpts);
@@ -2062,7 +2062,7 @@ DynaTree.prototype = {
 
 	// member functions
 
-	_load: function(callback) {
+	_load: function (callback) {
 		var $widget = this.$widget;
 		var opts = this.options,
 			self = this;
@@ -2209,7 +2209,7 @@ DynaTree.prototype = {
 	},
 
 	_reloadAjax: function(callback) {
-		// Reload
+	    // Reload
 		var opts = this.options;
 		if( ! opts.initAjax || ! opts.initAjax.url ){
 			throw "tree.reload() requires 'initAjax' mode.";

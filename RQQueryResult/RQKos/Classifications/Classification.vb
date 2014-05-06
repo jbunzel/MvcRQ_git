@@ -35,7 +35,7 @@ Namespace RQKos.Classifications
         Private _narrowerClasses() As SubjClass
         Private _strRefRVKSet As String = ""
 
-
+        Private _disableClassCodeConsistency As Boolean = False
         'Private Enum ValidEnum
         '    invalid
         '    valid
@@ -338,6 +338,18 @@ Namespace RQKos.Classifications
             End Set
         End Property
 
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
+        Public Property DisableClassCodeConsistency() As Boolean
+            Get
+                Return Me._disableClassCodeConsistency
+            End Get
+            Set(ByVal value As Boolean)
+                Me._disableClassCodeConsistency = value
+            End Set
+        End Property
+
+
 #End Region
 
 
@@ -446,7 +458,7 @@ Namespace RQKos.Classifications
 
         Public Function Contains(ByVal thisClass As SubjClass) As Boolean
             If (thisClass.ClassCode <> "") And (New Utilities.ClassSubRange("").LexicalLowerOrEqual(thisClass.ClassCode, Me.ClassCode) = False) Then
-                Return False
+                Return IIf(Me._disableClassCodeConsistency, True, False)
             Else
                 Dim lexClass As Utilities.LexicalClass = Me.RefRVKClass
 
@@ -660,7 +672,26 @@ Namespace RQKos.Classifications
         End Function
 
 
-        Public Function IsValid() As Boolean
+        Public Sub ChangeSubClassCodes(Optional NewMajorClassCode As String = "")
+            Dim ClassCodes As New List(Of String)(Me._arSubjClass.Length - 1)
+            Dim ClassCodePrefixLength As Integer
+
+            If NewMajorClassCode = "" Then NewMajorClassCode = Me._arSubjClass(0).ClassCode
+            For i = 1 To Me._arSubjClass.Length - 1
+                If Not IsNothing(Me._arSubjClass(i)) Then
+                    ClassCodes.Add(Me._arSubjClass(i).ClassCode)
+                End If
+            Next
+            ClassCodePrefixLength = Utilities.StringArrayExtensions.LongestCommonPrefix(ClassCodes.ToArray())
+            For i = 1 To Me._arSubjClass.Length - 1
+                If Not IsNothing(Me._arSubjClass(i)) Then
+                    Me._arSubjClass(i).ClassCode = NewMajorClassCode + Me._arSubjClass(i).ClassCode.Substring(ClassCodePrefixLength)
+                End If
+            Next
+        End Sub
+
+
+        Public Function IsValid(Optional disableClassCodeConsistency As Boolean = False) As Boolean
             Dim MajClass As SubjClass = Me._arSubjClass(0)
             Dim RetValue As Boolean = True
             Dim i As Integer
@@ -685,7 +716,8 @@ Namespace RQKos.Classifications
                             End If
                         End If
                     Next
-
+                    MinClass.DisableClassCodeConsistency = True
+                    MajClass.DisableClassCodeConsistency = True
                     RetValue = RetValue And MinClass.IsValid(MajClass)
                 End If
             Next
@@ -781,247 +813,247 @@ Namespace RQKos.Classifications
     End Class
 
 
-    Public Class SubjClassManager
+    '    Public Class SubjClassManager
 
-#Region "Public Members"
+    '#Region "Public Members"
 
-        Public Enum Classification
-            Shelf
-            RVK
-            JEL
-            undefined
-        End Enum
+    '        Public Enum Classification
+    '            Shelf
+    '            RVK
+    '            JEL
+    '            undefined
+    '        End Enum
 
-#End Region
-
-
-#Region "Private Members"
-
-        Private Shared _mClassBranches As New Collections.Generic.List(Of SubjClassBranch)
-        Private Shared _bPersist As Boolean = True
-        Private Shared _eClassification As Classification = Classification.undefined
-
-#End Region
+    '#End Region
 
 
-#Region "Properties"
+    '#Region "Private Members"
 
-        Public Shared Property Persist() As Boolean
-            Get
-                Return _bPersist
-            End Get
-            Set(ByVal value As Boolean)
-                _bPersist = value
-            End Set
-        End Property
+    '        Private Shared _mClassBranches As New Collections.Generic.List(Of SubjClassBranch)
+    '        Private Shared _bPersist As Boolean = True
+    '        Private Shared _eClassification As Classification = Classification.undefined
+
+    '#End Region
 
 
-        Public Shared ReadOnly Property ClassificationName() As Classification
-            Get
-                Return _eClassification
-            End Get
-        End Property
+    '#Region "Properties"
 
-#End Region
-
-
-#Region "Private Methods"
-
-        'Finds the complete subject class branch of the major subject class with ClassId=majClassID
-        Private Shared Function Find(ByRef majClassID As String) As SubjClassBranch
-            Dim i As Integer = 0
-
-            For i = 0 To _mClassBranches.Count - 1
-                If Not IsNothing(_mClassBranches(i)) Then
-                    If _mClassBranches(i).MajorClassID = majClassID Then
-                        Return _mClassBranches(i)
-                    End If
-                End If
-            Next
-
-            Dim _cb As SubjClassBranch
-
-            _cb = New SubjClassBranch(CStr(majClassID))
-            _cb.Load()
-            For i = 0 To _mClassBranches.Count - 1
-                If IsNothing(_mClassBranches(i)) Then
-                    _mClassBranches(i) = _cb
-                    Return _mClassBranches(i)
-                End If
-            Next
-            _mClassBranches.Add(_cb)
-            Return _mClassBranches(_mClassBranches.Count - 1)
-        End Function
-
-#End Region
+    '        Public Shared Property Persist() As Boolean
+    '            Get
+    '                Return _bPersist
+    '            End Get
+    '            Set(ByVal value As Boolean)
+    '                _bPersist = value
+    '            End Set
+    '        End Property
 
 
-#Region "Constructors"
+    '        Public Shared ReadOnly Property ClassificationName() As Classification
+    '            Get
+    '                Return _eClassification
+    '            End Get
+    '        End Property
 
-        Public Sub New()
-            _mClassBranches = New Collections.Generic.List(Of SubjClassBranch)
-        End Sub
-
-
-        Public Sub New(ByVal ClassificationName As Classification)
-            Me.New()
-            _eClassification = ClassificationName
-        End Sub
-
-#End Region
+    '#End Region
 
 
-#Region "Public Methods"
+    '#Region "Private Methods"
 
-        Public Shared Sub Init(ByRef majClassID As String)
-            Clear()
-            Find(majClassID)
-        End Sub
+    '        Finds the complete subject class branch of the major subject class with ClassId=majClassID
+    '        Private Shared Function Find(ByRef majClassID As String) As SubjClassBranch
+    '            Dim i As Integer = 0
 
+    '            For i = 0 To _mClassBranches.Count - 1
+    '                If Not IsNothing(_mClassBranches(i)) Then
+    '                    If _mClassBranches(i).MajorClassID = majClassID Then
+    '                        Return _mClassBranches(i)
+    '                    End If
+    '                End If
+    '            Next
 
-        Public Shared Sub Clear()
-            Dim i As Integer
+    '            Dim _cb As SubjClassBranch
 
-            For i = 0 To (_mClassBranches.Count - 1)
-                If Not IsNothing(_mClassBranches(i)) Then
-                    _mClassBranches(i).Clear()
-                    _mClassBranches(i) = Nothing
-                End If
-            Next
-        End Sub
+    '            _cb = New SubjClassBranch(CStr(majClassID))
+    '            _cb.Load()
+    '            For i = 0 To _mClassBranches.Count - 1
+    '                If IsNothing(_mClassBranches(i)) Then
+    '                    _mClassBranches(i) = _cb
+    '                    Return _mClassBranches(i)
+    '                End If
+    '            Next
+    '            _mClassBranches.Add(_cb)
+    '            Return _mClassBranches(_mClassBranches.Count - 1)
+    '        End Function
 
-
-        'Gets the minor subject classes as SystematikDataTable of the major subject class with classId=majClassId 
-        Public Shared Function GetMinorClasses(ByRef majClassID As String) As RQDataSet.SystematikDataTable
-            Return Find(majClassID).GetSubClassTable
-        End Function
-
-
-        'Gets the major class with classId=majClassID
-        Public Shared Function GetMajorClass(ByRef majClassID As String) As SubjClass
-            Return Find(majClassID).MajorClass
-        End Function
-
-
-        'Replaces the branch of major subject class with classID=majClassId by an array of minor subject classes given as SystematikDataTable 
-        Public Shared Function Replace(ByRef majClassId As String, ByVal minClassBranch As RQDataSet.SystematikDataTable) As Boolean
-            Dim clb As SubjClassBranch = Find(majClassId)
-            Dim RetValue As Boolean = True
-            Dim i As Integer
-
-            For i = 0 To (minClassBranch.Rows.Count - 1)
-                Dim cb As New SubjClass()
-
-                cb.ClassID = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).ID
-                cb.ParentClassID = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).ParentID
-                cb.ClassCode = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).DDCNumber
-                cb.ClassShortTitle = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).Description
-                cb.ClassLongTitle = "" 'CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).RegensburgDesc
-                cb.RefRVKSet = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).RegensburgSign
-                'If CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).SubClassCount > 0 _
-                '    And (clb.Item(i + 1).RefRVKSet <> cb.RefRVKSet) Then
-                '    If Not Find(cb.ClassID).IsFeasableWith(cb) Then
-                '        cb.RefRVKSet = clb.Item(i + 1).RefRVKSet
-                '        RetValue = False
-                '    End If
-                'End If
-                cb.NrOfSubClasses = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).SubClassCount
-                cb.NrOfClassDocs = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).DocRefCount
-                cb.NrOfRefLinks = CInt(CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).DirRefCount)
-                If Not IsNothing(clb.Item(i + 1)) Then
-                    If CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).SubClassCount > 0 And (clb.Item(i + 1).RefRVKSet <> cb.RefRVKSet) Then
-                        If Not Find(cb.ClassID).IsFeasableWith(cb) Then
-                            cb.RefRVKSet = clb.Item(i + 1).RefRVKSet
-                            RetValue = False
-                        End If
-                    End If
-                    clb.Item(i + 1) = cb
-                Else
-                    clb.Add(cb)
-                End If
-            Next
-            Return RetValue
-        End Function
+    '#End Region
 
 
-        'Updates an array of minor subject classes given as SystematikDataTable of the major subject class with classID=majClassId 
-        Public Shared Sub UpdateMinorClasses(ByRef majClassID As String)
-            If _bPersist Then
-                Find(majClassID).Update()
-            End If
-        End Sub
+    '#Region "Constructors"
+
+    '        Public Sub New()
+    '            _mClassBranches = New Collections.Generic.List(Of SubjClassBranch)
+    '        End Sub
 
 
-        'Deletes the minor subject class with classId=minClassId from the branch of the major subject class with classID=majClassId 
-        Public Shared Sub DeleteMinorClass(ByRef majClassID As String, ByRef minClassID As String)
-        End Sub
+    '        Public Sub New(ByVal ClassificationName As Classification)
+    '            Me.New()
+    '            _eClassification = ClassificationName
+    '        End Sub
+
+    '#End Region
 
 
-        'Appends an empty minor subject class with optional classId=minClassId to the branch of the major subject class with classID=majClassId 
-        Public Shared Function InsertMinorClass(ByRef majClassID As String) As SubjClassBranch
-            Dim cb As SubjClassBranch = Nothing
+    '#Region "Public Methods"
 
-            For Each cb In _mClassBranches
-                If Not IsNothing(cb) Then
-                    If cb.MajorClassID = majClassID Then
-                        cb.Add(New SubjClass())
-                        Exit For
-                    End If
-                End If
-            Next
-            Return cb
-        End Function
+    '        Public Shared Sub Init(ByRef majClassID As String)
+    '            Clear()
+    '            Find(majClassID)
+    '        End Sub
 
 
-        Public Shared Function GetParentClassID(ByRef majClassID As String) As String
-            Dim cb As SubjClassBranch
+    '        Public Shared Sub Clear()
+    '            Dim i As Integer
 
-            For Each cb In _mClassBranches
-                If Not IsNothing(cb) Then
-                    If cb.MajorClassID = majClassID Then
-                        Return cb.Item(0).ParentClassID
-                    End If
-                End If
-            Next
-            Return ""
-        End Function
+    '            For i = 0 To (_mClassBranches.Count - 1)
+    '                If Not IsNothing(_mClassBranches(i)) Then
+    '                    _mClassBranches(i).Clear()
+    '                    _mClassBranches(i) = Nothing
+    '                End If
+    '            Next
+    '        End Sub
 
 
-        Public Shared Function IsValid(ByRef majClassID As String) As Boolean
-            Dim cb As SubjClassBranch
-
-            For Each cb In _mClassBranches
-                If Not IsNothing(cb) Then
-                    If cb.MajorClassID = majClassID Then
-                        Return cb.IsValid
-                    End If
-                End If
-            Next
-            Return False
-        End Function
+    '        Gets the minor subject classes as SystematikDataTable of the major subject class with classId=majClassId 
+    '        Public Shared Function GetMinorClasses(ByRef majClassID As String) As RQDataSet.SystematikDataTable
+    '            Return Find(majClassID).GetSubClassTable
+    '        End Function
 
 
-        Public Shared Function IsValid(ByRef majClassID As String, ByVal minClassBranch As RQDataSet.SystematikDataTable) As Boolean
-            Dim oldClb As SubjClassBranch = Find(majClassID)
-            Dim newClb As New SubjClassBranch(oldClb.Item(0), minClassBranch)
-
-            If newClb.IsValid And Replace(majClassID, minClassBranch) Then
-                Return True
-            End If
-            Return False
-        End Function
+    '        Gets the major class with classId=majClassID
+    '        Public Shared Function GetMajorClass(ByRef majClassID As String) As SubjClass
+    '            Return Find(majClassID).MajorClass
+    '        End Function
 
 
-        Public Shared Function IsValid(ByVal testClassBranch As SubjClassBranch) As Boolean
-            'If testClassBranch.IsValid Then
-            '    Return True
-            'End If
-            'Return False
-            Return IsValid(testClassBranch.MajorClassID, testClassBranch.GetSubClassTable())
-        End Function
+    '        Replaces the branch of major subject class with classID=majClassId by an array of minor subject classes given as SystematikDataTable 
+    '        Public Shared Function Replace(ByRef majClassId As String, ByVal minClassBranch As RQDataSet.SystematikDataTable) As Boolean
+    '            Dim clb As SubjClassBranch = Find(majClassId)
+    '            Dim RetValue As Boolean = True
+    '            Dim i As Integer
 
-#End Region
+    '            For i = 0 To (minClassBranch.Rows.Count - 1)
+    '                Dim cb As New SubjClass()
 
-    End Class
+    '                cb.ClassID = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).ID
+    '                cb.ParentClassID = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).ParentID
+    '                cb.ClassCode = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).DDCNumber
+    '                cb.ClassShortTitle = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).Description
+    '                cb.ClassLongTitle = "" 'CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).RegensburgDesc
+    '                cb.RefRVKSet = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).RegensburgSign
+    '                If CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).SubClassCount > 0 _
+    '                    And (clb.Item(i + 1).RefRVKSet <> cb.RefRVKSet) Then
+    '                    If Not Find(cb.ClassID).IsFeasableWith(cb) Then
+    '                        cb.RefRVKSet = clb.Item(i + 1).RefRVKSet
+    '                        RetValue = False
+    '                    End If
+    '                End If
+    '                cb.NrOfSubClasses = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).SubClassCount
+    '                cb.NrOfClassDocs = CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).DocRefCount
+    '                cb.NrOfRefLinks = CInt(CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).DirRefCount)
+    '                If Not IsNothing(clb.Item(i + 1)) Then
+    '                    If CType(minClassBranch.Rows(i), RQDataSet.SystematikRow).SubClassCount > 0 And (clb.Item(i + 1).RefRVKSet <> cb.RefRVKSet) Then
+    '                        If Not Find(cb.ClassID).IsFeasableWith(cb) Then
+    '                            cb.RefRVKSet = clb.Item(i + 1).RefRVKSet
+    '                            RetValue = False
+    '                        End If
+    '                    End If
+    '                    clb.Item(i + 1) = cb
+    '                Else
+    '                    clb.Add(cb)
+    '                End If
+    '            Next
+    '            Return RetValue
+    '        End Function
+
+
+    '        Updates an array of minor subject classes given as SystematikDataTable of the major subject class with classID=majClassId 
+    '        Public Shared Sub UpdateMinorClasses(ByRef majClassID As String)
+    '            If _bPersist Then
+    '                Find(majClassID).Update()
+    '            End If
+    '        End Sub
+
+
+    '        Deletes the minor subject class with classId=minClassId from the branch of the major subject class with classID=majClassId 
+    '        Public Shared Sub DeleteMinorClass(ByRef majClassID As String, ByRef minClassID As String)
+    '        End Sub
+
+
+    '        Appends an empty minor subject class with optional classId=minClassId to the branch of the major subject class with classID=majClassId 
+    '        Public Shared Function InsertMinorClass(ByRef majClassID As String) As SubjClassBranch
+    '            Dim cb As SubjClassBranch = Nothing
+
+    '            For Each cb In _mClassBranches
+    '                If Not IsNothing(cb) Then
+    '                    If cb.MajorClassID = majClassID Then
+    '                        cb.Add(New SubjClass())
+    '                        Exit For
+    '                    End If
+    '                End If
+    '            Next
+    '            Return cb
+    '        End Function
+
+
+    '        Public Shared Function GetParentClassID(ByRef majClassID As String) As String
+    '            Dim cb As SubjClassBranch
+
+    '            For Each cb In _mClassBranches
+    '                If Not IsNothing(cb) Then
+    '                    If cb.MajorClassID = majClassID Then
+    '                        Return cb.Item(0).ParentClassID
+    '                    End If
+    '                End If
+    '            Next
+    '            Return ""
+    '        End Function
+
+
+    '        Public Shared Function IsValid(ByRef majClassID As String) As Boolean
+    '            Dim cb As SubjClassBranch
+
+    '            For Each cb In _mClassBranches
+    '                If Not IsNothing(cb) Then
+    '                    If cb.MajorClassID = majClassID Then
+    '                        Return cb.IsValid
+    '                    End If
+    '                End If
+    '            Next
+    '            Return False
+    '        End Function
+
+
+    '        Public Shared Function IsValid(ByRef majClassID As String, ByVal minClassBranch As RQDataSet.SystematikDataTable) As Boolean
+    '            Dim oldClb As SubjClassBranch = Find(majClassID)
+    '            Dim newClb As New SubjClassBranch(oldClb.Item(0), minClassBranch)
+
+    '            If newClb.IsValid And Replace(majClassID, minClassBranch) Then
+    '                Return True
+    '            End If
+    '            Return False
+    '        End Function
+
+
+    '        Public Shared Function IsValid(ByVal testClassBranch As SubjClassBranch) As Boolean
+    '            If testClassBranch.IsValid Then
+    '                Return True
+    '            End If
+    '            Return False
+    '            Return IsValid(testClassBranch.MajorClassID, testClassBranch.GetSubClassTable())
+    '        End Function
+
+    '#End Region
+
+    '    End Class
 
 End Namespace

@@ -135,6 +135,9 @@
   <data name="error" xml:space="preserve">
     <value>error</value>
   </data>
+  <data name="err_not_authorized" xml:space="preserve">
+    <value>You are not authorized to execute this function.</value>
+  </data>
   <data name="finish" xml:space="preserve">
     <value>Finalize</value>
   </data>

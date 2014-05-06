@@ -586,4 +586,29 @@ Namespace Utilities
 
     End Class
 
+
+    Public Class StringArrayExtensions
+
+        Public Shared Function LongestCommonPrefix(strs As String()) As Integer
+            Dim prefix As String = ""
+
+            If strs.Length > 0 Then
+                prefix = strs(0)
+                For i = 1 To strs.Length - 1
+                    Dim s As String = strs(i)
+                    Dim j As Integer
+
+                    For j = 0 To Math.Min(prefix.Length(), strs.Length()) - 1
+                        If prefix.Chars(j) <> s.Chars(j) Then
+                            Exit For
+                        End If
+                    Next
+                    prefix = prefix.Substring(0, j)
+                Next
+            End If
+            Return prefix.Length
+        End Function
+
+    End Class
+
 End Namespace
