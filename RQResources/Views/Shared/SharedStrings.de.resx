@@ -216,4 +216,10 @@
   <data name="update" xml:space="preserve">
     <value>Aktualisieren</value>
   </data>
+  <data name="classtree_options" xml:space="preserve">
+    <value>nur Aufstellung</value>
+  </data>
+  <data name="classtree_options_h" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
 </root>

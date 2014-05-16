@@ -121,6 +121,12 @@
   <data name="add_user_form" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>add-user-form.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="classtree_options_form" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>classtree-options-form.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="classtree_options_management" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>classtree-options-management.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="imclude_external_db_form" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>imclude-external-db-form.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

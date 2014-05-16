@@ -79,6 +79,24 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die shelves only ähnelt.
+        /// </summary>
+        public static string classtree_options {
+            get {
+                return ResourceManager.GetString("classtree_options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Options ähnelt.
+        /// </summary>
+        public static string classtree_options_h {
+            get {
+                return ResourceManager.GetString("classtree_options_h", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Copy ähnelt.
         /// </summary>
         public static string copy {

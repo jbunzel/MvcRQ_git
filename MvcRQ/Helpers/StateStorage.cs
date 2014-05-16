@@ -71,5 +71,33 @@ namespace MvcRQ.Helpers
             }
             return query;
         }
+
+        public static Boolean GetClasstreeOptionsState()
+        {
+            state = (ViewState)UserState.Get(UserState.States.ClasstreeOptionsState);
+            if (state == null)
+            {
+                state = new ViewState(UserState.States.ClasstreeOptionsState);
+                state.query = false;
+                state.Save();
+            }
+            return (Boolean)state.query;
+        }
+
+        public static Boolean ChangeClasstreeOptionsState()
+        {
+            state = (ViewState)UserState.Get(UserState.States.ClasstreeOptionsState);
+            if (state == null)
+            {
+                state = new ViewState(UserState.States.ClasstreeOptionsState);
+                state.query = true;
+            }
+            else
+            {
+                state.query = (Boolean)state.query == true ? false : true;
+            }
+            state.Save();
+            return (Boolean)state.query;
+        }
     }
 }

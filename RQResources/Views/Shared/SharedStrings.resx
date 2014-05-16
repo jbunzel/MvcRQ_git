@@ -216,4 +216,10 @@
   <data name="update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="classtree_options" xml:space="preserve">
+    <value>shelves only</value>
+  </data>
+  <data name="classtree_options_h" xml:space="preserve">
+    <value>Options</value>
+  </data>
 </root>

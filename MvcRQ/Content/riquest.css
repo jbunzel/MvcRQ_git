@@ -60,6 +60,7 @@ fieldset {
 }
 
 #content {
+    /* element is affected by resize function */
     background-color: rgb(255, 255, 245);
     padding-bottom: 15px;
     /*border: 1px solid green;*/
@@ -274,42 +275,11 @@ fieldset {
 }
 
 .rq-box {
-    font-size: 0.85em;
     margin-left: 15px;
 }
 
 .rq-box h1 {
     font-size: 0.9em;
-    margin-left: 5px;
-}
-
-.rq-result-box {
-    background-color: green !important;
-}
-
-.content-box { 
-    background-color: red;
-    border-top: 1px solid silver;
-}
-
-.rq-sidebar {
-    overflow: auto;
-    /*border: 1px solid red;*/
-}
-
-.rq-right-sidebar {
-    margin-left: 15px;
-}
-
-.rq-sidebar input[type="text"],
-.rq-sidebar input[type="password"] {
-    width: 80%;
-    margin-bottom: 5px;
-}
-
-.rq-left-sidebar {
-   margin-left: 15px;
-   /*border: 1px solid blue;*/
 }
 
 .rq-settings-panel {
@@ -353,6 +323,46 @@ fieldset {
     width: 1px;
     height: 100px;
 }
+
+/*------------------------------*/
+/*        box displays          */
+/* (affected by resize function */
+/*------------------------------*/
+
+.content-box { 
+    background-color: red;
+    border-top: 1px solid silver;
+}
+
+.rq-result-box {
+    background-color: green !important;
+}
+
+.rq-sidebar {
+    font-size: 0.85em;
+    overflow: auto;
+}
+
+.rq-right-sidebar {
+    margin-left: 15px;
+}
+
+.rq-sidebar input[type="text"],
+.rq-sidebar input[type="password"] {
+    width: 80%;
+    margin-bottom: 5px;
+}
+
+.rq-left-sidebar {
+   margin-left: 15px;
+   /*border: 1px solid blue;*/
+}
+
+.rq-classtree-sidebar {
+    font-size: 0.85em;
+    margin-left: 2px;
+    overflow: auto;
+  
 
 /*-------------*/
 /* state rules */

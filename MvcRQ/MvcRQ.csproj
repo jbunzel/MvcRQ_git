@@ -347,6 +347,8 @@
     <Content Include="Areas\ItemViewer\Skins\pink.flag\jplayer.pink.flag.jpg" />
     <Content Include="Areas\ItemViewer\Skins\pink.flag\jplayer.pink.flag.seeking.gif" />
     <Content Include="Areas\ItemViewer\Skins\pink.flag\jplayer.pink.flag.video.play.png" />
+    <Content Include="Areas\Scripts\classtree-options-form.html" />
+    <Content Include="Areas\Scripts\classtree-options-management.js" />
     <Content Include="Content\font-awesome-4.0.3\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.0.3\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome-4.0.3\fonts\fontawesome-webfont.svg" />
@@ -403,6 +405,7 @@
     <Content Include="Scripts\dynatree-1.2.5\skin\ui.dynatree.css" />
     <Content Include="Scripts\dynatree-1.2.5\skin\vline-rtl.gif" />
     <Content Include="Scripts\dynatree-1.2.5\skin\vline.gif" />
+    <Content Include="Areas\UserSettings\Views\Shared\ClasstreeOptionsView.cshtml" />
     <None Include="Content\riquest.css" />
     <Content Include="Content\pure-0.2.0\pure-min.css" />
     <Content Include="Content\themes\Images\tabseparator.gif" />

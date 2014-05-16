@@ -820,11 +820,10 @@
               </xsl:attribute>
             </xsl:element>
           </td>
-          <!--              
-              <td>
-                <xsl:value-of select="Feld30"/>
-              </td>
--->
+          <!--<td>
+            <xsl:value-of select="SortOrder"/>
+            <xsl:value-of select="Feld30"/>
+          </td>-->
         </tr>
       </table>
     </li>

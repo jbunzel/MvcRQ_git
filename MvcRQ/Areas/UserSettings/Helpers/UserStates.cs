@@ -124,6 +124,7 @@ namespace MvcRQ.Areas.UserSettings
             ItemViewState,
             EditState,
             BrowseViewState,
+            ClasstreeOptionsState,
             GuestIdState
         }
 
@@ -139,6 +140,8 @@ namespace MvcRQ.Areas.UserSettings
                     return "b";
                 case States.GuestIdState:
                     return "u";
+                case States.ClasstreeOptionsState:
+                    return "c";
                 default:
                     return "";
             }

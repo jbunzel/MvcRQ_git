@@ -227,7 +227,10 @@ namespace MvcRQ.Controllers
             else if ((!string.IsNullOrEmpty(verb)) && (verb.ToLower() == "querylist"))
                 return this.Content(TransformModel(GetModel(queryString, UserState.States.ListViewState), verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
             else if ((!string.IsNullOrEmpty(verb)) && (verb.ToLower() == "browselist"))
+            {
+                if (MvcRQ.Helpers.StateStorage.GetClasstreeOptionsState() == true) strSortType = "Regal";
                 return this.Content(TransformModel(GetModel(queryString, UserState.States.BrowseViewState), verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
+            }
             else if (!string.IsNullOrEmpty(serviceId))
             {
                 ViewBag.ServiceType = serviceId;

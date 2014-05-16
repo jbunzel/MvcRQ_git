@@ -21,8 +21,8 @@ function resizeToWindowHeight() {
     $(".content-box").css("min-height", (height - nav) + "px");
     $(".rq-result-box .container").css("max-height", (height - nav + page_navigation) + "px");
     $(".rq-result-box .container").css("min-height", (height - nav + page_navigation) + "px");
-    $(".rq-sidebar, .rq-left-sidebar, .rq-right-sidebar").css("max-height", (height - nav - footer) + "px");
-    $(".rq-sidebar, .rq-left-sidebar, .rq-right-sidebar").css("min-height", (height - nav - footer) + "px");
+    $(".rq-sidebar, .rq-left-sidebar, .rq-right-sidebar, .rq-classtree-sidebar").css("max-height", (height - nav - footer) + "px");
+    $(".rq-sidebar, .rq-left-sidebar, .rq-right-sidebar, .rq-classtree-sidebar").css("min-height", (height - nav - footer) + "px");
 };
 
 /*

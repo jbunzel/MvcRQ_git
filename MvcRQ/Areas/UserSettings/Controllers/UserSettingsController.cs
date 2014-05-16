@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
+using MvcRQ.Helpers;
+
 namespace MvcRQ.Areas.UserSettings.Controllers
 {
     public class UserSettingsController : Controller
@@ -98,6 +100,21 @@ namespace MvcRQ.Areas.UserSettings.Controllers
             }
             return Json(result);
         }
+
+        /// <summary>
+        /// Returns the onlyShelves user settings
+        /// </summary>
+        /// <returns>onlyShelves Settings</returns>
+        public JsonResult GetOnlyShelves()
+        {
+            return Json(StateStorage.GetClasstreeOptionsState());
+        }
+
+        public JsonResult ChangeOnlyShelves()
+        {
+            return Json(StateStorage.ChangeClasstreeOptionsState());
+        }
+
 
     }
 }
