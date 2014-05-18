@@ -822,7 +822,7 @@
           </td>
           <!--<td>
             <xsl:value-of select="SortOrder"/>
-            <xsl:value-of select="Feld30"/>
+            <xsl:value-of select="concat(' - aus: ',Feld30)"/>
           </td>-->
         </tr>
       </table>

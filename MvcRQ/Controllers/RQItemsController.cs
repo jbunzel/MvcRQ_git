@@ -25,124 +25,8 @@ namespace MvcRQ.Controllers
         #region private members
 
         bool bClientEditing = true;
-        bool bUseHttpCache = true;
-        string strSortType = "Fach";
+        RQItemModelRepository modelRepository = new RQItemModelRepository();
 
-        #endregion
-
-        #region private methods
-
-        private RQquery GetQuery(string queryString, UserState.States stateType)
-        {
-            RQquery q = StateStorage.GetQueryFromState(queryString, stateType);
-
-            ViewData["qryStr"] = q.QueryString;
-            return q;
-        }
-        
-        private RQquery GetQuery(string queryString)
-        {
-            UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? UserState.States.BrowseViewState : UserState.States.ListViewState;
-            return GetQuery(queryString, stateType);
-        }
-
-        private RQItemModel GetModel(string queryString, UserState.States stateType, bool forEdit)
-        {
-            RQItemModel rqitemModel = null;
-            RQquery query = this.GetQuery(queryString, stateType);
-
-            if (!forEdit && bUseHttpCache) rqitemModel = CacheManager.Get<RQItemModel>(query.Id.ToString());
-            if (forEdit) query.QueryExternal = "";
-            if ((rqitemModel == null) || (rqitemModel.IsEditable() != forEdit))
-            {
-                if (query.QueryBookmarks == false)
-                    query.QueryBookmarks = true;
-                rqitemModel = new RQItemModel(query, forEdit);
-                if (! forEdit && bUseHttpCache) CacheManager.Add(query.Id.ToString(), rqitemModel);
-            }
-            return rqitemModel;
-        }
-
-        private RQItemModel GetModel(string queryString, UserState.States stateType)
-        {
-            return this.GetModel(queryString, stateType, false);
-        }
-
-        private RQItemModel GetModel(string queryString)
-        {
-            UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? UserState.States.BrowseViewState : UserState.States.ListViewState;
-            return this.GetModel(queryString, stateType, false);
-        }
-
-        private RQItem GetRQItem(string rqitemId, UserState.States stateType, bool forEdit)
-        {
-            try // try to get item to copy from cache
-            {
-                RQItem res = this.GetModel("", stateType, forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
-
-                if (res == null) throw new Exception();
-                return res;
-            }
-            catch
-            {
-                try // try to get item to copy from database
-                {
-                    return this.GetModel("$access$" + rqitemId, stateType, forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
-                }
-                catch
-                {
-                    throw new NotImplementedException("Item with DocNo " + rqitemId + "could not be found.");
-                }
-            }
-        }
-
-        private string TransformItem (RQItem rqItem, RQItem.DisplFormat format)
-        {
-            return rqItem.ConvertToHTML(format);
-        }
-
-        private string TransformModel(RQItemModel model, string format, int fromItem, int toItem)
-        {
-            System.Xml.XmlTextReader r = model.RQItems.ConvertTo(format, fromItem, toItem);
-
-            try
-            {
-                var xTrf = new System.Xml.Xsl.XslCompiledTransform(true);
-                var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
-                var xSet = new System.Xml.Xsl.XsltSettings(true, true);
-                var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
-                var doc = new System.Xml.XmlDocument();
-
-                //TESTDATEI(EZEUGEN)
-                //System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
-                //Doc.Load(r);
-                //Doc.Save("D:\\Users\\Jorge\\Desktop\\MVCTest.xml");
-                //ENDE TESTDATEI 
-                r.MoveToContent();
-                xTrf.Load(Server.MapPath("~/xslt/ViewTransforms/RQResultList2RQSorted_Paging.xslt"),xSet, new System.Xml.XmlUrlResolver());
-                xTrfArg.AddParam("ApplPath", "", "http://" + Request.ServerVariables.Get("HTTP_HOST") + (Request.ApplicationPath.Equals("/") ? "" : Request.ApplicationPath));
-                xTrfArg.AddParam("MyDocsPath", "", "http://" + Request.ServerVariables.Get("HTTP_HOST") + (Request.ApplicationPath.Equals("/") ? "" : Request.ApplicationPath));
-                xTrfArg.AddParam("SortType", "", strSortType);
-                xTrf.Transform(new System.Xml.XPath.XPathDocument(r), xTrfArg, mstr);
-                mstr.BaseStream.Flush();
-                mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-                doc.Load(mstr.BaseStream);
-                //TESTDATEI EZEUGEN
-                //doc.Save("D:\\Users\\Jorge\\Desktop\\MVCTest.xml");
-                //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-                //ENDE TESTDATEI
-                //var rd = new System.Xml.XmlTextReader(mstr.BaseStream);
-                return doc.OuterXml;
-            }
-            catch
-            {
-                // RQItemSet ist leer
-                throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
-
-                //return "";
-            }
-        }
-        
         #endregion
 
         #region public actions
@@ -202,7 +86,7 @@ namespace MvcRQ.Controllers
         [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult RQItemList(string verb, string queryString, string serviceId, string dbname)
         {
-            if (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("Signature: R*"))) strSortType = "Regal";
+            if (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("Signature: R*"))) this.modelRepository.modelParameters.SortType = ModelParameters.SortTypeEnum.ByShelf;
 
             if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "new") || (verb == RQResources.Views.Shared.SharedStrings.add)))
             {
@@ -225,11 +109,11 @@ namespace MvcRQ.Controllers
                     throw new AccessViolationException("Not authorized for this function!");
             }
             else if ((!string.IsNullOrEmpty(verb)) && (verb.ToLower() == "querylist"))
-                return this.Content(TransformModel(GetModel(queryString, UserState.States.ListViewState), verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
+                return this.Content(modelRepository.GetModel(queryString, UserState.States.ListViewState).TransformModel(verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
             else if ((!string.IsNullOrEmpty(verb)) && (verb.ToLower() == "browselist"))
             {
-                if (MvcRQ.Helpers.StateStorage.GetClasstreeOptionsState() == true) strSortType = "Regal";
-                return this.Content(TransformModel(GetModel(queryString, UserState.States.BrowseViewState), verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
+                if (MvcRQ.Helpers.StateStorage.GetClasstreeOptionsState() == true) modelRepository.modelParameters.SortType = ModelParameters.SortTypeEnum.ByShelf;
+                return this.Content(modelRepository.GetModel(queryString, UserState.States.BrowseViewState).TransformModel(verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
             }
             else if (!string.IsNullOrEmpty(serviceId))
             {
@@ -255,11 +139,11 @@ namespace MvcRQ.Controllers
                     default:
                         throw new NotImplementedException("RiQuest data service not implemented for unknown format.");
                 }
-                return View("ServRQItem", GetModel(queryString));
+                return View("ServRQItem", modelRepository.GetModel(queryString));
             }
             else
             {
-                this.GetQuery(queryString);
+                modelRepository.GetQuery(queryString);
                 ViewBag.docNo = HttpContext.Request.QueryString.Get("d") != null ? HttpContext.Request.QueryString.Get("d") : "";
                 ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems ti the database.
                 ViewBag.GetRQItemVerb = "QueryItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
@@ -348,7 +232,7 @@ namespace MvcRQ.Controllers
                 return this.RedirectToRoute("RQItemList", new { dbname = "rqitems" });
             else
             {
-                this.GetQuery(queryString);
+                modelRepository.GetQuery(queryString);
                 ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems ti the database.
                 ViewBag.GetRQItemVerb = "QueryItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
                 return View("Index");
@@ -411,7 +295,7 @@ namespace MvcRQ.Controllers
                         ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.update;
                         ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
                         view = "EditRQItem";
-                        rqitem = this.GetRQItem(rqitemId, UserState.States.EditState, true);
+                        rqitem = modelRepository.GetRQItem(rqitemId, UserState.States.EditState, true);
                     }
                 }
                 else
@@ -432,7 +316,7 @@ namespace MvcRQ.Controllers
                     {
                         ViewBag.EditButton1 = RQResources.Views.Shared.SharedStrings.add;
                         ViewBag.EditButton2 = RQResources.Views.Shared.SharedStrings.cancel;
-                        rqitem = new RQItem(this.GetRQItem(rqitemId, (RQItem.IsExternal(rqitemId) ? UserState.States.ListViewState : UserState.States.EditState), true)._resultItem);
+                        rqitem = new RQItem(modelRepository.GetRQItem(rqitemId, (RQItem.IsExternal(rqitemId) ? UserState.States.ListViewState : UserState.States.EditState), true)._resultItem);
                         rqitem.DocNo = "";
                         rqitem.ID = "";
                         view = "EditRQItem";
@@ -443,31 +327,31 @@ namespace MvcRQ.Controllers
             }
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "queryitem")))
             {
-                rqitem = this.GetRQItem(rqitemId, UserState.States.ListViewState, false);
+                rqitem = modelRepository.GetRQItem(rqitemId, UserState.States.ListViewState, false);
                 if (HttpContext.Request.AcceptTypes.Contains("text/html"))
-                    return this.Content(TransformItem(rqitem, RQItem.DisplFormat.single_item), "text/html", System.Text.Encoding.UTF8);
+                    return this.Content(rqitem.TransformItem(RQItem.DisplFormat.single_item), "text/html", System.Text.Encoding.UTF8);
                 else
                     view = "DisplRQItem";
             }
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "browseitem")))
             {
-                rqitem = this.GetRQItem(rqitemId, UserState.States.BrowseViewState, false);
+                rqitem = modelRepository.GetRQItem(rqitemId, UserState.States.BrowseViewState, false);
                 if (HttpContext.Request.AcceptTypes.Contains("text/html"))
-                    return this.Content(TransformItem(rqitem, RQItem.DisplFormat.single_item), "text/html", System.Text.Encoding.UTF8);
+                    return this.Content(rqitem.TransformItem(RQItem.DisplFormat.single_item), "text/html", System.Text.Encoding.UTF8);
                 else
                     view = "DisplRQItem";
             }
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "edititem")))
             {
                 view = "EditRQItem";
-                rqitem = this.GetRQItem(rqitemId, (RQItem.IsExternal(rqitemId) ? UserState.States.ListViewState : UserState.States.EditState), RQItem.IsExternal(rqitemId) ? false : true);
+                rqitem = modelRepository.GetRQItem(rqitemId, (RQItem.IsExternal(rqitemId) ? UserState.States.ListViewState : UserState.States.EditState), RQItem.IsExternal(rqitemId) ? false : true);
             }
             else
             {
-                rqitem = this.GetRQItem(rqitemId, UserState.States.ItemViewState, false);
+                rqitem = modelRepository.GetRQItem(rqitemId, UserState.States.ItemViewState, false);
                 if (string.IsNullOrEmpty(serviceId))
                 {
-                    this.GetQuery(rqitemId);
+                    modelRepository.GetQuery(rqitemId);
                     ViewBag.docNo = HttpContext.Request.QueryString.Get("d") != null ? HttpContext.Request.QueryString.Get("d") : "";
                     ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems ti the database.
                     ViewBag.GetRQItemVerb = "QueryItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
@@ -538,7 +422,7 @@ namespace MvcRQ.Controllers
                         RQItem rqitem = null;
                         try
                         {
-                            model = GetModel("$access$" + rqitemId, UserState.States.EditState, true);
+                            model = modelRepository.GetModel("$access$" + rqitemId, UserState.States.EditState, true);
                             rqitem = model.RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
                             if ((verb.ToLower() == "update") || (verb == RQResources.Views.Shared.SharedStrings.update))
                                 rqitem.Change(changeRQItem);
@@ -609,7 +493,7 @@ namespace MvcRQ.Controllers
             {
                 try
                 {
-                    RQItem rqitem = GetModel("$access$" + rqitemId, UserState.States.ItemViewState).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
+                    RQItem rqitem = modelRepository.GetModel("$access$" + rqitemId, UserState.States.ItemViewState).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
 
                     return View("ServIndRQItem", rqitem.GetLinkedData(fieldName, System.Convert.ToInt16(subFieldIndex)));
                 }

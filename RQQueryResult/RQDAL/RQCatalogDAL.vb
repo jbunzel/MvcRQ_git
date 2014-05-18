@@ -136,7 +136,7 @@ Namespace RQDAL
                 Me.CatalogQuery(Query.GetQueryCommand(), "Dokumentliste", "Dokumente")
             End If
             If Query.QuerySort <> RQQueryForm.RQquery.SortType.undefined Then
-                Me.SetSortOrder(Query.QuerySort)
+                Me.SetSortField(Query)
             End If
             'Me._catSet.AcceptChanges()
             Return Me._catSet.Tables("Dokumente")
@@ -181,32 +181,50 @@ Namespace RQDAL
         End Function
 
 
-        Private Sub SetSortOrder(ByRef SortCriterion As RQQueryForm.RQquery.SortType)
-            Dim i As Integer = 0
+        Private Sub WriteSortFieldbyClass(index As Integer)
+            Dim strClasses() As String
+            Dim strRVKClasses As String = ""
+            Dim j As Integer
 
-            For i = 0 To Me._catSet.Tables("Dokumente").Rows.Count - 1
+            strClasses = CStr(Me._catSet.Tables("Dokumente").Rows(index).Item("Classification")).Split(";"c)
+            For j = 0 To strClasses.Length - 1
+                If strClasses(j).IndexOf(Globals.ClassCodePrefix) > 0 Then
+                    strRVKClasses += strClasses(j).Substring(strClasses(j).IndexOf(":") + 1).Trim() + ";"
+                End If
+            Next
+            If strRVKClasses <> "" Then
+                Me._catSet.Tables("Dokumente").Rows(index).Item(RQQueryResult.RQResultSet.SortField) = strRVKClasses
+            Else
+                Me._catSet.Tables("Dokumente").Rows(index).Item(RQQueryResult.RQResultSet.SortField) = "ZZ99999"
+            End If
+        End Sub
+
+
+        Private Sub SetSortField(ByRef Query As RQQueryForm.RQquery)
+            Dim i As Integer = 0
+            Dim SortCriterion As RQQueryForm.RQquery.SortType = Query.QuerySort
+
+            For i = Me._catSet.Tables("Dokumente").Rows.Count - 1 To 0 Step -1
                 Select Case SortCriterion
                     Case RQQueryForm.RQquery.SortType.ByTitle
                         Me._catSet.Tables("Dokumente").Rows(i).Item(RQQueryResult.RQResultSet.SortField) = Me._catSet.Tables("Dokumente").Rows(i).Item(SortCriterion)
                     Case RQQueryForm.RQquery.SortType.ByCreationDate
                         Me._catSet.Tables("Dokumente").Rows(i).Item(RQQueryResult.RQResultSet.SortField) = Me._catSet.Tables("Dokumente").Rows(i).Item("CreateTime")
-                    Case RQQueryForm.RQquery.SortType.BySubject
-                        Dim strClasses() As String
-                        Dim strRVKClasses As String = ""
-                        Dim j As Integer
-
+                    Case RQQueryForm.RQquery.SortType.ByShelf
                         If Me._catSet.Tables("Dokumente").Rows(i).Item("Classification").GetType.FullName = "System.String" Then
-                            strClasses = CStr(Me._catSet.Tables("Dokumente").Rows(i).Item("Classification")).Split(";"c)
-                            For j = 0 To strClasses.Length - 1
-                                If strClasses(j).IndexOf(Globals.ClassCodePrefix) > 0 Then
-                                    strRVKClasses += strClasses(j).Substring(strClasses(j).IndexOf(":") + 1).Trim() + ";"
-                                End If
-                            Next
-                            If strRVKClasses <> "" Then
-                                Me._catSet.Tables("Dokumente").Rows(i).Item(RQQueryResult.RQResultSet.SortField) = strRVKClasses
+                            Dim classStr = Me._catSet.Tables("Dokumente").Rows(i).Item("Classification").ToString()
+
+                            If (Not classStr.Substring(0, classStr.IndexOf(";")) = Query.QueryString) Then
+                                Me._catSet.Tables("Dokumente").Rows(i).Delete()
                             Else
-                                Me._catSet.Tables("Dokumente").Rows(i).Item(RQQueryResult.RQResultSet.SortField) = "ZZ99999"
+                                WriteSortFieldbyClass(i)
                             End If
+                        Else
+                            Me._catSet.Tables("Dokumente").Rows(i).Item(RQQueryResult.RQResultSet.SortField) = "ZZ99999"
+                        End If
+                    Case RQQueryForm.RQquery.SortType.BySubject
+                        If Me._catSet.Tables("Dokumente").Rows(i).Item("Classification").GetType.FullName = "System.String" Then
+                            WriteSortFieldbyClass(i)
                         Else
                             Me._catSet.Tables("Dokumente").Rows(i).Item(RQQueryResult.RQResultSet.SortField) = "ZZ99999"
                         End If

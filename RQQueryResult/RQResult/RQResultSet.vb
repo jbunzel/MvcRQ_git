@@ -426,49 +426,6 @@ Namespace RQQueryResult
 
 
         Public Function Update() As Integer
-            'outcommented because of severe flaws recognized on 130714
-            'Dim i As Integer
-            'Dim item As RQResultItem
-            'Dim changed As Boolean = False
-            'Dim retVal As Integer = 0
-
-            'If IsNothing(Me._docTable) Then Me._docTable = Me._docDAL.GetDocumentSet()
-            'For i = 0 To Me._docTable.Rows.Count - 1
-            '    If Not IsNothing(_items(i)) Then
-            '        item = _items(i)
-            '        If item.RQResultItemChanged Then
-            '            If item.RQResultItemType = RQResultItem.RQItemType.docdesc Then
-            '                If i > Me._docTable.Rows.Count - 1 Then Me._docTable.AddDokumenteRow(CType(Me._docDAL.NewRow("RQDataSet", "Dokumente"), RQDataSet.DokumenteRow))
-            '                item.Write(_docTable.Rows(i))
-            '            End If
-            '            If item.RQResultItemType = RQResultItem.RQItemType.bookmark Then
-            '                item.Write(_bmTable.Rows(i - _docTable.Rows.Count))
-            '            End If
-            '            changed = True
-            '        End If
-            '    End If
-            'Next
-            'If changed Then retVal = _docDAL.Update() + _bmDAL.Update
-            'For i = Me._docTable.Rows.Count To Me.count - 1
-            '    If Not IsNothing(_items(i)) Then
-            '        item = _items(i)
-            '        If item.RQResultItemChanged Then
-            '            If item.RQResultItemType = RQResultItem.RQItemType.docdesc Then
-            '                Dim newRow As RQDataSet.DokumenteRow = CType(Me._docDAL.NewRow("RQDataSet", "Dokumente"), RQDataSet.DokumenteRow)
-
-            '                item.Write(newRow)
-            '                retVal += Me._docDAL.AddDokumente(newRow)
-            '                item.ItemDescription.ID = newRow.ID
-            '                item.ItemDescription.DocNo = newRow.DocNo
-            '            End If
-            '            If item.RQResultItemType = RQResultItem.RQItemType.bookmark Then
-            '                not yet implemented
-            '            End If
-            '        End If
-            '    End If
-            'Next
-            'Return retVal
-
             Dim i As Integer
             Dim item As RQResultItem
             Dim changed As Boolean = False

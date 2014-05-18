@@ -35,9 +35,12 @@ namespace MvcRQ.Models
 
         public RQItemModel(RQquery query) : this(query, false) {}
 
-        public RQItemModel(RQquery query, bool forEdit)
+        public RQItemModel(RQquery query, bool forEdit) : this(query, forEdit, new ModelParameters(ModelParameters.SortTypeEnum.BySubject)) { }
+
+        public RQItemModel(RQquery query, bool forEdit, ModelParameters preprocessor)
         {
             RQItems = new RQItemSet(forEdit);
+            RQItems.preprocessor = preprocessor;
             if (query != null)
             {
                 query.QueryFieldList = RQItems.GetDataFieldTable();
@@ -81,6 +84,53 @@ namespace MvcRQ.Models
             }
         }
 
+        public ModelParameters GetListPreprocessor()
+        {
+            return this.RQItems.preprocessor;
+        }
+
+        public string TransformModel(string format, int fromItem, int toItem)
+        {
+            System.Xml.XmlTextReader r = this.RQItems.ConvertTo(format, fromItem, toItem);
+
+            try
+            {
+                var xTrf = new System.Xml.Xsl.XslCompiledTransform(true);
+                var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
+                var xSet = new System.Xml.Xsl.XsltSettings(true, true);
+                var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
+                var doc = new System.Xml.XmlDocument();
+
+                //TESTDATEI(EZEUGEN)
+                //System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
+                //Doc.Load(r);
+                //Doc.Save("D:\\Users\\Jorge\\Desktop\\MVCTest.xml");
+                //ENDE TESTDATEI 
+                r.MoveToContent();
+                xTrf.Load(HttpContext.Current.Server.MapPath("~/xslt/ViewTransforms/RQResultList2RQSorted_Paging.xslt"), xSet, new System.Xml.XmlUrlResolver());
+                xTrfArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
+                xTrfArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
+                xTrfArg.AddParam("SortType", "", this.GetListPreprocessor().SortTypeString());
+                xTrf.Transform(new System.Xml.XPath.XPathDocument(r), xTrfArg, mstr);
+                mstr.BaseStream.Flush();
+                mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+                doc.Load(mstr.BaseStream);
+                //TESTDATEI EZEUGEN
+                //doc.Save("D:\\Users\\Jorge\\Desktop\\MVCTest.xml");
+                //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+                //ENDE TESTDATEI
+                //var rd = new System.Xml.XmlTextReader(mstr.BaseStream);
+                return doc.OuterXml;
+            }
+            catch
+            {
+                // RQItemSet ist leer
+                throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
+
+                //return "";
+            }
+        }
+
         #endregion
     }
 
@@ -92,6 +142,7 @@ namespace MvcRQ.Models
 
         private RQResultSet ItemResultSet;
         private List<RQItem> _rqitemsList = null;
+        private ModelParameters _preprocessor = null;
 
         #endregion
 
@@ -126,6 +177,18 @@ namespace MvcRQ.Models
             }
         }
 
+        public ModelParameters preprocessor
+        {
+            get 
+            {
+                return this._preprocessor;
+            }
+            set 
+            {
+                this._preprocessor = value;
+            }
+        }
+
         [DataMember]
         [XmlElement]
         public List<RQItem> RQItems
@@ -135,17 +198,6 @@ namespace MvcRQ.Models
                 if (this._rqitemsList == null)
                     this.BuildRQItemList();
                 return this._rqitemsList;
-
-                // List<RQItem> li = new List<RQItem>(count);
-
-                // for (int i = 0; i < count; i++)
-                // {
-                //     RQItem rqi = this.GetItem(i);
-
-                //     if (MvcRQ.Helpers.AccessRightsResolver.HasViewAccess(rqi.AccessRights))
-                //         li.Add(rqi);
-                // }
-                //return li;
             }
             set
             {
@@ -1158,11 +1210,143 @@ namespace MvcRQ.Models
             return result;
         }
 
+        public string TransformItem(RQItem.DisplFormat format)
+        {
+            return this.ConvertToHTML(format);
+        }
+
         public static Boolean IsExternal(string docNo)
         {
             return RQResultItem.IsExternalItem(docNo);
         }
 
-        #endregion
+         #endregion
+    }
+
+    public class RQItemModelRepository
+    {
+        private bool bUseHttpCache = true;
+
+        public ModelParameters modelParameters = new ModelParameters(ModelParameters.SortTypeEnum.BySubject);
+        
+        private RQquery GetQuery(string queryString, MvcRQ.Areas.UserSettings.UserState.States stateType)
+        {
+            RQquery q = StateStorage.GetQueryFromState(queryString, stateType);
+
+            q.QuerySort = this.modelParameters.Cast(this.modelParameters.SortType);
+            return q;
+        }
+
+        public RQItemModelRepository()
+        {
+        }
+
+        public RQquery GetQuery(string queryString)
+        {
+            MvcRQ.Areas.UserSettings.UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? MvcRQ.Areas.UserSettings.UserState.States.BrowseViewState : MvcRQ.Areas.UserSettings.UserState.States.ListViewState;
+            return this.GetQuery(queryString, stateType);
+        }
+
+        public RQItemModel GetModel(string queryString, MvcRQ.Areas.UserSettings.UserState.States stateType, bool forEdit)
+        {
+            RQItemModel rqitemModel = null;
+            RQquery query = this.GetQuery(queryString, stateType);
+
+            if (!forEdit && bUseHttpCache) rqitemModel = CacheManager.Get<RQItemModel>(query.Id.ToString());
+            if (forEdit) query.QueryExternal = "";
+            if ((rqitemModel == null) || (rqitemModel.IsEditable() != forEdit))
+            {
+                if (query.QueryBookmarks == false)
+                    query.QueryBookmarks = true;
+                rqitemModel = new RQItemModel(query, forEdit, this.modelParameters);
+                if (!forEdit && bUseHttpCache) CacheManager.Add(query.Id.ToString(), rqitemModel);
+            }
+            return rqitemModel;
+        }
+
+        public RQItemModel GetModel(string queryString, MvcRQ.Areas.UserSettings.UserState.States stateType)
+        {
+            return this.GetModel(queryString, stateType, false);
+        }
+
+        public RQItemModel GetModel(string queryString)
+        {
+            MvcRQ.Areas.UserSettings.UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? MvcRQ.Areas.UserSettings.UserState.States.BrowseViewState : MvcRQ.Areas.UserSettings.UserState.States.ListViewState;
+            return this.GetModel(queryString, stateType, false);
+        }
+
+        public RQItem GetRQItem(string rqitemId, MvcRQ.Areas.UserSettings.UserState.States stateType, bool forEdit)
+        {
+            try // try to get item to copy from cache
+            {
+                RQItem res = this.GetModel("", stateType, forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
+
+                if (res == null) throw new Exception();
+                return res;
+            }
+            catch
+            {
+                try // try to get item to copy from database
+                {
+                    return this.GetModel("$access$" + rqitemId, stateType, forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
+                }
+                catch
+                {
+                    throw new NotImplementedException("Item with DocNo " + rqitemId + "could not be found.");
+                }
+            }
+        }
+    }
+
+    public class ModelParameters
+    {
+        public enum SortTypeEnum
+        {
+            ByTitle,
+            BySubject,
+            ByPublicationDate,
+            ByCreationDate,
+            ByShelf,
+            ByPrimarySubject,
+        }
+
+        public SortTypeEnum SortType {get; set; }
+
+        public ModelParameters(SortTypeEnum sortType)
+        {
+            this.SortType = sortType;
+        }
+        
+        public string SortTypeString()
+        {
+            switch (this.SortType)
+            {
+                case SortTypeEnum.BySubject:
+                    return "Fach";
+                case SortTypeEnum.ByCreationDate:
+                    return "Entstehungsjahr";
+                case SortTypeEnum.ByPublicationDate:
+                    return "Erscheinungsjahr";
+                case SortTypeEnum.ByShelf:
+                    return "Regal";
+                default:
+                    return "";
+            }
+        }
+
+        public RQLib.RQQueryForm.RQquery.SortType Cast(SortTypeEnum sortType)
+        {
+            return (RQLib.RQQueryForm.RQquery.SortType)sortType;
+        }
+        
+        public bool ListCheck(RQItem itemToAdd)
+        {
+            bool retVal = MvcRQ.Helpers.AccessRightsResolver.HasViewAccess(itemToAdd.AccessRights);
+
+            if (this.SortType == SortTypeEnum.ByShelf)
+                retVal = false;
+
+            return retVal;
+        }
     }
 }
