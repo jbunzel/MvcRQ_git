@@ -212,6 +212,7 @@ Namespace RQQueryForm
             ByCreationDate
             ByShelf
             ByPrimarySubject
+            ByShelfClass
             undefined
         End Enum
 

@@ -1308,6 +1308,7 @@ namespace MvcRQ.Models
             ByCreationDate,
             ByShelf,
             ByPrimarySubject,
+            ByShelfClass
         }
 
         public SortTypeEnum SortType {get; set; }
@@ -1327,6 +1328,8 @@ namespace MvcRQ.Models
                     return "Entstehungsjahr";
                 case SortTypeEnum.ByPublicationDate:
                     return "Erscheinungsjahr";
+                case SortTypeEnum.ByShelfClass:
+                    return "Regal";
                 case SortTypeEnum.ByShelf:
                     return "Regal";
                 default:

@@ -210,7 +210,7 @@ Namespace RQDAL
                         Me._catSet.Tables("Dokumente").Rows(i).Item(RQQueryResult.RQResultSet.SortField) = Me._catSet.Tables("Dokumente").Rows(i).Item(SortCriterion)
                     Case RQQueryForm.RQquery.SortType.ByCreationDate
                         Me._catSet.Tables("Dokumente").Rows(i).Item(RQQueryResult.RQResultSet.SortField) = Me._catSet.Tables("Dokumente").Rows(i).Item("CreateTime")
-                    Case RQQueryForm.RQquery.SortType.ByShelf
+                    Case RQQueryForm.RQquery.SortType.ByShelfClass
                         If Me._catSet.Tables("Dokumente").Rows(i).Item("Classification").GetType.FullName = "System.String" Then
                             Dim classStr = Me._catSet.Tables("Dokumente").Rows(i).Item("Classification").ToString()
 

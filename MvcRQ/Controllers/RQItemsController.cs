@@ -112,7 +112,7 @@ namespace MvcRQ.Controllers
                 return this.Content(modelRepository.GetModel(queryString, UserState.States.ListViewState).TransformModel(verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
             else if ((!string.IsNullOrEmpty(verb)) && (verb.ToLower() == "browselist"))
             {
-                if (MvcRQ.Helpers.StateStorage.GetClasstreeOptionsState() == true) modelRepository.modelParameters.SortType = ModelParameters.SortTypeEnum.ByShelf;
+                if (MvcRQ.Helpers.StateStorage.GetClasstreeOptionsState() == true) modelRepository.modelParameters.SortType = ModelParameters.SortTypeEnum.ByShelfClass;
                 return this.Content(modelRepository.GetModel(queryString, UserState.States.BrowseViewState).TransformModel(verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
             }
             else if (!string.IsNullOrEmpty(serviceId))
