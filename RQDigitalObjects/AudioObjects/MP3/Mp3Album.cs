@@ -349,15 +349,22 @@ namespace RQDigitalObjects.AudioObjects.MP3
         /// <param name="search">Suchpattern für die Dateinamen.</param>
         private void ReadAlbumID3(String search)
         {
-            FileInfo[] allFiles = base.m_objectdirectory.GetFiles(search);
-
-            for (int i = 0; i < allFiles.Length; i++)
+            try
             {
-                this.MP3Info.LoadFile(allFiles[i]);
-                if (string.IsNullOrEmpty(this.MP3Info.Filename))
-                    this.MP3Info.Tags["filename"] = allFiles[i].Name; 
-                base.m_elementarray.Add(this.MP3Info.Tags);
+                FileInfo[] allFiles = base.m_objectdirectory.GetFiles(search);
+
+                for (int i = 0; i < allFiles.Length; i++)
+                {
+                    this.MP3Info.LoadFile(allFiles[i]);
+                    if (string.IsNullOrEmpty(this.MP3Info.Filename))
+                        this.MP3Info.Tags["filename"] = allFiles[i].Name;
+                    base.m_elementarray.Add(this.MP3Info.Tags);
+                }
             }
+            catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         private string GetTagValue(int track, string key)
