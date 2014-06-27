@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 02.00	Version 0.2																											begonnen: 140102
 
@@ -79,12 +79,12 @@
 02.1311			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten.
 02.1312			Fehler beim Switch zwischen einzelnem RQItem im Katalog-View & dem korrespondierenden Shelves-View
 
-02.14		ISSUE: KRITISCHE FEHLER
+02.14		ISSUE: KRITISCHE FEHLER																							begonnen: 140316	erledigt: 140627
 02.141			Neuzugänge im bookmark-index erscheinen nicht in der Ergebnisliste.											begonnen: 140316	erledigt: 140316
 02.142			Verknüpfung von SingleItemView zur Systematik-Klasse funktioniert nicht mehr.								begonnen: 140506	erledigt: 140506
-02.143			Repair adding RQItems by attaching digital object directories (ToCs)										begonnen: 140615	erledigt:
-02.1431				Fix error message display (f. e. when do-directory has not been found) 
-02.1432				Fix expected prefix track of item id "dddd_" at m3u file adress	 
+02.143			Repair adding RQItems by attaching digital object directories (ToCs)										begonnen: 140615	erledigt: 140627
+02.1431				Fix error message display (f. e. when do-directory has not been found)									begonnen: 140624	erledigt: 140627
+02.1432				Fix expected prefix track of item id "dddd_" at m3u file adress											begonnen: 140624	erledigt: 140627 
 
 02.99		Sicherung & Veröffentlichung																					begonnen: 131229	erledigt: 
 02.991			Version 0.2.0.0 auf www.riquest.de							(intermediate)									begonnen: 131229	erledigt: 131229

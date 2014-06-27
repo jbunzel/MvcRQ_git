@@ -8,7 +8,6 @@ using System.Web;
 
 namespace RQDigitalObjects
 {
-
     /// <summary>
     /// Zusammenfassungsbeschreibung für DigitalObject
     /// </summary>
@@ -140,5 +139,4 @@ namespace RQDigitalObjects
 #endregion
 
     }
-
 }

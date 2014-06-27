@@ -714,7 +714,8 @@ namespace RQDigitalObjects.AudioObjects.MP3
             for (int i = 0; i < this.ElementCount; i++)
             {
                 result += this.SelectElement(i + 1).DigitalObjectIdentifier(DigitalObject.DOIdentifier.objectname);
-                result += serverDirectory + objectName + "/" + dummyId + this.SelectElement(i + 1).DigitalObjectIdentifier(DigitalObject.DOIdentifier.filename) + "; ";
+                //result += serverDirectory + objectName + "/" + dummyId + this.SelectElement(i + 1).DigitalObjectIdentifier(DigitalObject.DOIdentifier.filename) + "; ";
+                result += serverDirectory + objectName + "/" + this.SelectElement(i + 1).DigitalObjectIdentifier(DigitalObject.DOIdentifier.filename) + "; ";
             }
             return result;
         }

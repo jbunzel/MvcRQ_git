@@ -93,7 +93,7 @@ namespace MvcRQ.Areas.DigitalObjects.Helpers
                 string objectName = GetObjectName(tocString);
 
                 if (toc.Contains("arcmusicmp3") || toc.Contains("arcaudiomp3") )
-                    return new Mp3Album(directories.AudioProjectDirectory + "\\" + objectName.Replace("XXXXX_", ""), tocString.Contains("arcmusicmp3") ? "ArcMusicMP3" : "ArcAudioMP3").BindTo(itemId, ref tocString, ref signatureStr, itemDescriptors);
+                    return new Mp3Album(directories.AudioProjectDirectory + "\\" + objectName.Replace("XXXXX_", ""), toc.Contains("arcmusicmp3") ? "ArcMusicMP3" : "ArcAudioMP3").BindTo(itemId, ref tocString, ref signatureStr, itemDescriptors);
                 if (toc.Contains("myvideo"))
                     return new M4vAlbum(directories.VideoProjectDirectory + "\\" + objectName).BindTo(itemId, ref tocString, ref signatureStr, itemDescriptors);
                 if (toc.Contains("mydocs"))

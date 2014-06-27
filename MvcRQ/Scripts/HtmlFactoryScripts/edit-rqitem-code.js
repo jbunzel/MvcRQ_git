@@ -311,33 +311,19 @@ function attachTOC(e) {
                 var adr = $("#ObjAdress").attr("value");
                 var type = $("form input[name=DigitalObjectType]:checked").val()
                 var url = HostAdress() + "/DigitalObjects/Viewer/TableOfContent/" + adr + "?verb=" + type;
+                var fd = new ajaxLoadingIndicator("#html");
 
-                //debugger;
                 $.ajax({
                     url: url,
                     type: "GET",
                     dataType: "json",
                     success: function (data) {
-                        //debugger;
+                        fd.remove();
                         displayTOC(data.toc);
                     },
-                    error: function (response) {
-                        //debugger;
-                        _myHelper.processServerResponse(response, null, function () {
-                            $("#edit-dialog").html("<p><span class='ui-icon ui-icon-alert' style='float: left; margin: 0 7px 20px 0;'></span><span id='edit-dialog-message'>Das digitale Objekt konnte nicht gefunden oder nicht ausgewertet werden.</span></p>");
-                            $(function () {
-                                $("#edit-dialog").dialog({ title: "Schwerwiegender Fehler !",
-                                    width: 600,
-                                    resizable: false,
-                                    modal: true,
-                                    buttons: {
-                                        OK: function () {
-                                            $(this).dialog("close");
-                                        }
-                                    }
-                                });
-                            });
-                        });
+                    error: function (xhr) {
+                        fd.remove();
+                        _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
                     }
                 });
             },

@@ -75,6 +75,7 @@ fieldset {
 #main {
 }
 
+
 /*--------------*/
 /* module rules */
 /*--------------*/
@@ -174,6 +175,34 @@ fieldset {
     padding-top: 1px;
     padding-bottom: 1px;
     background-color: #c22a09; 
+}
+
+/*--------------*/
+/*    pop-ups   */
+/*--------------*/
+
+#simple-user-info {
+  padding: 15px 0;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  position: relative;
+  color: #00529B;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  filter: alpha(opacity=95); /* IE */
+  -moz-opacity: 0.95; /* Mozilla */
+  opacity: 0.95; /* Opera */
+}
+
+#simple-user-info.error {
+  background-color: darkred;
+  color: white;
+}
+
+#simple-user-info.success {
+  background-color: Lime;
 }
 
 /*--------------*/
@@ -362,7 +391,9 @@ fieldset {
     font-size: 0.85em;
     margin-left: 2px;
     overflow: auto;
-}  
+}
+
+  
 
 /*-------------*/
 /* state rules */
@@ -379,6 +410,7 @@ fieldset {
     left: 0px;
     z-index: 9999;
 }
+
 
 /*-------------*/
 /* theme rules */

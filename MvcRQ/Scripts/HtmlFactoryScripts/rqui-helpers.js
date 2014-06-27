@@ -153,6 +153,7 @@ var _myHelper = {
     /* helper function for processing the server response. Triggers either an error or success message window 
     /* and calls provided functions if neccessary. */
     processServerResponse: function (response, onSuccess, onError) {
+        //debugger;
         if (response.isSuccess) {
             if (response.message) // show message only if available
                 _myHelper.showSuccess(response.message);

@@ -14,7 +14,7 @@ namespace MvcRQ.Areas.DigitalObjects.Controllers
     /// <summary>
     /// TODO: ItemViewer-Funktionalitäten in diesen Controller übertragen.
     /// </summary>
-    public class ViewerController : Controller
+    public class ViewerController : MvcRQ.Controllers.BaseController
     {
         /// <summary>
         /// 
