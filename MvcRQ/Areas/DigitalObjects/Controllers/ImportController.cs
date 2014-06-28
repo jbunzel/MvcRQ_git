@@ -9,7 +9,7 @@ namespace MvcRQ.Areas.DigitalObjects.Controllers
     /// <summary>
     /// 
     /// </summary>
-    public class ImportController : Controller
+    public class ImportController : MvcRQ.Controllers.BaseController
     {
         /// <summary>
         /// 

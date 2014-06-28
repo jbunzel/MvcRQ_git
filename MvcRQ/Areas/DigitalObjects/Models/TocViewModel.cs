@@ -56,19 +56,16 @@ namespace MvcRQ.Areas.DigitalObjects.Models
             switch (objectType)
             {
                 case "mp3Text":
-                    //this.toc = DigitalObjectHelpers.GenerateToc(new Mp3Album(directories.AudioProjectDirectory + "\\" + objectName, objectType), objectName, directories.MusicServerDirectory);
+                case "mp3Music":
                     this.toc = new Mp3Album(directories.AudioProjectDirectory + "\\" + objectName, objectType).GenerateToc(objectName, directories.MusicServerDirectory);
                     break;
                 case "mp3Audio":
-                    //this.toc = DigitalObjectHelpers.GenerateToc(new Mp3Album(directories.AudioProjectDirectory + "\\" + objectName, objectType), objectName, directories.AudioServerDirectory);
                     this.toc = new Mp3Album(directories.AudioProjectDirectory + "\\" + objectName, objectType).GenerateToc(objectName, directories.AudioServerDirectory);
                     break;
                 case "mv4Video":
-                    //this.toc = DigitalObjectHelpers.GenerateToc(new M4vAlbum(directories.VideoProjectDirectory + "\\" + objectName), objectName, directories.VideoServerDirectory);
                     this.toc = new M4vAlbum(directories.VideoProjectDirectory + "\\" + objectName).GenerateToc(objectName, directories.VideoServerDirectory);
                     break;
                 case "pdfDocument":
-                    //this.toc = DigitalObjectHelpers.GenerateToc(new M4vAlbum(directories.VideoProjectDirectory + "\\" + objectName), objectName, directories.VideoServerDirectory);
                     this.toc = new PdfCollection(directories.DocumentProjectDirectory + "\\" + objectName).GenerateToc(objectName, directories.DocumentServerDirectory);
                     break;
                 default:
@@ -76,6 +73,6 @@ namespace MvcRQ.Areas.DigitalObjects.Models
             }
         }
 
-#endregion
+        #endregion
     }
 }

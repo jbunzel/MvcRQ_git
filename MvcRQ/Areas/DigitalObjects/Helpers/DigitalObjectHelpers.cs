@@ -40,31 +40,6 @@ namespace MvcRQ.Areas.DigitalObjects.Helpers
         #region public methods
 
         /// <summary>
-        /// Returns a string encoding the table of content (toc) of the digital object.
-        /// </summary>
-        /// <returns></returns>
-        public static string GenerateToc(StructuredDigitalObject digitalObject, string objectName, string serverDirectory)
-        {
-            string result = "$$TOC$$=";
-            string dummyId = "";
-            string strRegex = @"(?<res>\d{5})_";
-            RegexOptions myRegexOptions = RegexOptions.None;
-            Regex myRegex = new Regex(strRegex, myRegexOptions);
-            Match MyMatch = myRegex.Match(objectName);
-
-            if (!MyMatch.Success)
-                dummyId = "XXXXX_";
-            objectName = dummyId + objectName;
-            digitalObject.Read();
-            for (int i = 0; i < digitalObject.ElementCount; i++)
-            {
-                result += digitalObject.SelectElement(i + 1).DigitalObjectIdentifier(DigitalObject.DOIdentifier.objectname);
-                result += serverDirectory + objectName + "/" + dummyId + digitalObject.SelectElement(i + 1).DigitalObjectIdentifier(DigitalObject.DOIdentifier.filename) + "; ";
-            }
-            return result;
-        }
-
-        /// <summary>
         /// Extracts the primary media-adress from toc And inserts it into the target string.
         /// </summary>
         /// <param name="fromTocString">
@@ -118,7 +93,7 @@ namespace MvcRQ.Areas.DigitalObjects.Helpers
                 string objectName = GetObjectName(tocString);
 
                 if (toc.Contains("arcmusicmp3") || toc.Contains("arcaudiomp3") )
-                    return new Mp3Album(directories.AudioProjectDirectory + "\\" + objectName, tocString.Contains("arcmusicmp3") ? "ArcMusicMP3" : "ArcAudioMP3").BindTo(itemId, ref tocString, ref signatureStr, itemDescriptors);
+                    return new Mp3Album(directories.AudioProjectDirectory + "\\" + objectName.Replace("XXXXX_", ""), toc.Contains("arcmusicmp3") ? "ArcMusicMP3" : "ArcAudioMP3").BindTo(itemId, ref tocString, ref signatureStr, itemDescriptors);
                 if (toc.Contains("myvideo"))
                     return new M4vAlbum(directories.VideoProjectDirectory + "\\" + objectName).BindTo(itemId, ref tocString, ref signatureStr, itemDescriptors);
                 if (toc.Contains("mydocs"))
