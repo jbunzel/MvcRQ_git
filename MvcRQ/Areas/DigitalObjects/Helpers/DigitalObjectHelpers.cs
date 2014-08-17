@@ -12,7 +12,6 @@ using RQDigitalObjects.AudioObjects.MP3;
 using RQDigitalObjects.VideoObjects.M4V;
 using RQDigitalObjects.GraphObjects.PDF;
 
-
 namespace MvcRQ.Areas.DigitalObjects.Helpers
 {
     /// <summary>
@@ -104,5 +103,4 @@ namespace MvcRQ.Areas.DigitalObjects.Helpers
 
         #endregion
     }
-
 }

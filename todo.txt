@@ -56,12 +56,12 @@
 02.111			Lokalisierung der Autorisierungsmodule (Attribute in AccountModels.cs)
 02.112			RQLib-Modul lokalisieren (vor allem Fehlermeldungen)						
 				
-02.12		Editor für Klassifikationstabelle																				begonnen: 140102
+02.12		Editor für Klassifikationstabelle																				begonnen: 140102	erledigt: 140817
 02.121			Check- & Add-Funktionalität für ClassBranch-Editor															begonnnn: 140102	erledigt: 140120
 02.122			Elementare Submit-Funktionalität für ClassBranch-Editor														begonnen: 140102	erledigt: 140126
 02.123			Submit-Funktionalität auf Unterklassen ausdehnen															begonnen: 140407	erledigt: 140409
 02.124			Löschen von Unterklassen																					begonnen: 140322	erledigt: 140405	
-02.125			Veränderungen von Bookmarks in DIR.XML
+02.125			Veränderungen von Bookmarks in DIR.XML																		begonnen: 140817	erledigt: 140817
 02.126			Tabelle Systematik anpassen (Philosophiegeschichte entspr. tats. Aufstellung auf KA setzen)					begonnen: 140427	erledigt: 140430	
 02.127			Unterklassen im DynaTree nach Klassen-Code sortieren														begonnen: 140409	erledigt: 140412
 
@@ -84,13 +84,15 @@
 02.142			Verknüpfung von SingleItemView zur Systematik-Klasse funktioniert nicht mehr.								begonnen: 140506	erledigt: 140506
 02.143			Repair adding RQItems by attaching digital object directories (ToCs)										begonnen: 140615	erledigt: 140627
 02.1431				Fix error message display (f. e. when do-directory has not been found)									begonnen: 140624	erledigt: 140627
-02.1432				Fix expected prefix track of item id "dddd_" at m3u file adress											begonnen: 140624	erledigt: 140627 
+02.1432				Fix expected prefix track of item id "dddd_" at m3u file adress											begonnen: 140624	erledigt: 140627
+02.144			FEHLERVERDACHT: Neueingaben mit PDF-Inhaltsverzeichnissen korrumpieren die Access-Datenbank 
 
 02.99		Sicherung & Veröffentlichung																					begonnen: 131229	erledigt: 
 02.991			Version 0.2.0.0 auf www.riquest.de							(intermediate)									begonnen: 131229	erledigt: 131229
 02.992			Version 0.2.1.0 auf github.com/jbunzel/MvcRQ master 		(intermediate)									begonnen: 140301	erledigt: 140301
 02.993			Version 0.2.1.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen: 140304	erledigt: 140304
-02.994			Version 0.2.2.0 auf github.com/jbunzel/MvcRQ:git.git master													begonnen: 140506	erledigt: 140506
+02.994			Version 0.2.2.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen: 140506	erledigt: 140506
+02.995			Version 0.2.3.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen: 140817	erledigt: 140817
 02.999			Version 0.2.X.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

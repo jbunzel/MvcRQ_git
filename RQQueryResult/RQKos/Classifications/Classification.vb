@@ -685,7 +685,9 @@ Namespace RQKos.Classifications
             ClassCodePrefixLength = Utilities.StringArrayExtensions.LongestCommonPrefix(ClassCodes.ToArray())
             For i = 1 To Me._arSubjClass.Length - 1
                 If Not IsNothing(Me._arSubjClass(i)) Then
-                    Me._arSubjClass(i).ClassCode = NewMajorClassCode + Me._arSubjClass(i).ClassCode.Substring(ClassCodePrefixLength)
+                    If Not Me._arSubjClass(i).ClassCode.StartsWith(NewMajorClassCode) Then
+                        Me._arSubjClass(i).ClassCode = NewMajorClassCode + Me._arSubjClass(i).ClassCode.Substring(ClassCodePrefixLength)
+                    End If
                 End If
             Next
         End Sub

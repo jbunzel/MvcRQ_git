@@ -446,19 +446,19 @@ Namespace RQQueryResult
                 End If
             Next
             'edit of bookmarks not yet implemented
-            'For i = Me._docTable.Rows.Count To Me._docTable.Rows.Count + If(Not IsNothing(Me._bmTable), Me._bmTable.Rows.Count, 0) - 1
-            '    If Not IsNothing(_items(i)) Then
-            '        item = _items(i)
-            '        If item.RQResultItemChanged Then
-            '            If item.RQResultItemType = RQResultItem.RQItemType.bookmark Then
-            '                item.Write(_bmTable.Rows(i - _docTable.Rows.Count))
-            '                changed = True
-            '            Else
-            '                'INTERNAL ERROR: Hier dürfen nur RQItemType.bookmark stehen.
-            '            End If
-            '        End If
-            '    End If
-            'Next
+            For i = Me._docTable.Rows.Count To Me._docTable.Rows.Count + If(Not IsNothing(Me._bmTable), Me._bmTable.Rows.Count, 0) - 1
+                If Not IsNothing(_items(i)) Then
+                    item = _items(i)
+                    If item.RQResultItemChanged Then
+                        If item.RQResultItemType = RQResultItem.RQItemType.bookmark Then
+                            item.Write(_bmTable.Rows(i - _docTable.Rows.Count))
+                            changed = True
+                        Else
+                            'INTERNAL ERROR: Hier dürfen nur RQItemType.bookmark stehen.
+                        End If
+                    End If
+                End If
+            Next
             If changed Then retVal = _docDAL.Update() + _bmDAL.Update
             If retVal = 0 Then
                 For i = Me._docTable.Rows.Count + If(Not IsNothing(Me._bmTable), Me._bmTable.Rows.Count, 0) + If(Not IsNothing(Me._extTable), Me._extTable.Rows.Count, 0) To Me.count - 1

@@ -54,6 +54,19 @@
             Return retVal
         End Function
 
+        ''' <summary>
+        ''' Filters bookmark folders which are classified with would not show up  
+        ''' </summary>
+        ''' <param name="item"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Private Function FilterBookmarkFolders(ByRef item As RQQueryResult.RQResultItem, ByRef classname As String) As Boolean
+            If item.ItemDescription.Feld30.Contains("ZZ999") Then
+                Return False
+            End If
+            Return item.ItemDescription.Classification.Content.Contains(classname) Or (Not item.ItemDescription.Feld30.Contains("ZZ9999"))
+        End Function
+
 #End Region
 
 
@@ -158,6 +171,9 @@
                     Dim arHasThisClassStringIn As New Collections.BitArray(classBranch.count, False)
 
                     If (clClassString.Item(i).StartsWith(Globals.ClassCodePrefix)) Then
+                        If (clClassString.Item(i).Contains("QP")) Then
+                            Dim test As String = "TEST"
+                        End If
                         If classBranch.MajorClass.RefRVKClass.IsInRange(clClassString.Item(i).Remove(0, 8)) Then
                             Dim j As Integer
 
@@ -168,6 +184,7 @@
                                     If SubClass.IsInRange(clClassString.Item(i).Remove(0, 8)) Then
                                         If Not arHasAClassStringIn(j) = True Then
                                             If item.RQResultItemType = RQQueryResult.RQResultItem.RQItemType.bookmark Then
+                                                ''If Not Me.FilterBookmarkFolders(item, clClassString.Item(i).Remove(0, 8)) Then Exit For
                                                 classBranch.Item(j).NrOfRefLinks += CType(1, Short)
                                             Else
                                                 classBranch.Item(j).NrOfClassDocs += CType(1, Short)
@@ -213,6 +230,7 @@
                 Next
                 If bHasNoMinorClassCodes Or bHasMajorClassCodes Then
                     If item.RQResultItemType = RQQueryResult.RQResultItem.RQItemType.bookmark Then
+                        ''If Not Me.FilterBookmarkFolders(item, clClassString.Item(i).Remove(0, 8)) Then Exit For
                         iMajorClassRefCount += 1
                     Else
                         iMajorClassDocCount += 1
