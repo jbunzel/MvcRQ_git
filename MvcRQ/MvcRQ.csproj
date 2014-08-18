@@ -651,7 +651,6 @@
     <Content Include="xml\shelves.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="~db\katalog30.mdb" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\DataManagement\Models\" />
@@ -660,6 +659,7 @@
     <Folder Include="Areas\LinkedDataCalls\Views\Shared\" />
     <Folder Include="Areas\UserManagement\Models\" />
     <Folder Include="Areas\UserManagement\Views\Shared\" />
+    <Folder Include="~db\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
