@@ -10,8 +10,7 @@ using RQDigitalObjects.AudioObjects;
 
 namespace RQDigitalObjects.AudioObjects.MP3
 {
-	
-    /// <summary>
+	    /// <summary>
 	/// Diese Klasse liest und schreibt Verzeichnis, Dateinamen und ID3v1- bzw. 
 	/// ID3v2-Titelinformationen eines MP3-Albums (Verzeichnis mit MP3-Dateien)
 	/// </summary>
@@ -714,7 +713,6 @@ namespace RQDigitalObjects.AudioObjects.MP3
             for (int i = 0; i < this.ElementCount; i++)
             {
                 result += this.SelectElement(i + 1).DigitalObjectIdentifier(DigitalObject.DOIdentifier.objectname);
-                //result += serverDirectory + objectName + "/" + dummyId + this.SelectElement(i + 1).DigitalObjectIdentifier(DigitalObject.DOIdentifier.filename) + "; ";
                 result += serverDirectory + objectName + "/" + this.SelectElement(i + 1).DigitalObjectIdentifier(DigitalObject.DOIdentifier.filename) + "; ";
             }
             return result;
@@ -791,5 +789,4 @@ namespace RQDigitalObjects.AudioObjects.MP3
 #endregion
 
     }
-
 }

@@ -155,4 +155,13 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 
+# =========================
+# Project specific
+# =========================
+
+# Lucene database
+~db/RQLucene/CATALOG/*
+~db/*.mdb
+
+
 
