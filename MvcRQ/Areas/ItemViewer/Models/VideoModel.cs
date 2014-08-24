@@ -33,9 +33,9 @@ namespace MvcRQ.Areas.ItemViewer.Models
         /// <summary>
         /// 
         /// </summary>
-        public VideoModel()
-            :base()
-        { }
+        //public VideoModel()
+        //    :base()
+        //{ }
 
         #endregion
 

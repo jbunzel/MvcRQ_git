@@ -169,6 +169,15 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You are not authorized to access this digital object. ähnelt.
+        /// </summary>
+        public static string itemView_access_denied {
+            get {
+                return ResourceManager.GetString("itemView_access_denied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Home ähnelt.
         /// </summary>
         public static string link_home {

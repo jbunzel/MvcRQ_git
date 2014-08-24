@@ -12,7 +12,7 @@ function renderItemContent() {
         autoplay: true,
         src: docAdr,
         attrs: { attr1: 'attrValue1', attr2: 'attrValue2' },  // object/embed attrs 
-        params: { param1: 'paramValue1', param2: 'paramValue2' }, // object params/embed attrs 
+        params: { param1: '', param2: 'paramValue2' }, // object params/embed attrs 
         caption: false // supress caption text 
     }, function (t, p) {
     }, function (t, d, o, p) {

@@ -30,8 +30,11 @@
 02.07		ItemViewer (Dokument, Video, Audio, Bild)									
 02.071			Aktuellen Track-Titel bei Audio & Video-Playern anzeigen
 02.072			ItemViewer in die DigitalObjects-Area verlagern.
-02.073			Bild-Betrachter							
-02.074			Video-DVD für HTML5 konvertieren
+02.073			Add still image viewer
+02.074			Convert DVD videos to HTML5 video formats							
+02.075			Add access control for digital documents																	begonnen: 140822	erledigt: 140824
+02.076			Add remote access & access control for digital audios										
+02.077			Add remote access & access control for digital videos
 
 02.08		SQLEXPRESS Server aufsetzen
 02.081			Speicherung der Benutzereinstellungen überprüfen				

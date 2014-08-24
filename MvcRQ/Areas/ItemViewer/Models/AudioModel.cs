@@ -37,9 +37,9 @@ namespace MvcRQ.Areas.ItemViewer.Models
         /// <summary>
         /// 
         /// </summary>
-        public AudioModel()
-            :base()
-        { }
+        //public AudioModel()
+        //    :base()
+        //{ }
 
         #endregion
 

@@ -42,8 +42,8 @@ namespace MvcRQ.Areas.ItemViewer.Models
         /// <summary>
         /// 
         /// </summary>
-        public ItemViewerModel()
-        { }
+        //public ItemViewerModel()
+        //{ }
 
         #endregion
 

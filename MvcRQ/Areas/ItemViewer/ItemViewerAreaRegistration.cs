@@ -19,6 +19,11 @@ namespace MvcRQ.Areas.ItemViewer
                 "ItemViewer/{rqitemId}",
                 new { area="ItemViewer", controller="ItemViewer",  action = "Index", rqitemId = UrlParameter.Optional }
             );
+            context.MapRoute(
+                "ItemViewer_access",
+                "ItemAccess/{rqitemId}",
+                new { area = "ItemViewer", controller = "ItemViewer", action = "Access", rqitemId = UrlParameter.Optional }
+            );
         }
     }
 }

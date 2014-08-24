@@ -25,6 +25,21 @@ namespace MvcRQ.Helpers
             return Roles.GetRolesForUser();
         }
 
+        public static string GetUpmostPrivilege()
+        {
+            string[] roles = GetUserRoles();
+            string res = "";
+
+            foreach (string val in roles) {
+                if (val == "Adminitrators") res = "Admin";
+                if (val == "Members") 
+                    if (res != "Admin") res = "Member";
+                if (val == "Guest") 
+                    if ((res != "Admin") && (res != "Member")) res = "Guest";
+            }
+            return res;
+        }
+
         public static string DecodeAccessRights(string code)
         {
             //Access rights (coded syntax) NOTE: FieldLength = 50

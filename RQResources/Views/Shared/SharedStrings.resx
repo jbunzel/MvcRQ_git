@@ -222,4 +222,7 @@
   <data name="classtree_options_h" xml:space="preserve">
     <value>Options</value>
   </data>
+  <data name="itemView_access_denied" xml:space="preserve">
+    <value>You are not authorized to access this digital object.</value>
+  </data>
 </root>

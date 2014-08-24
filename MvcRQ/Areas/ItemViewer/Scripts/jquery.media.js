@@ -25,7 +25,7 @@
  *	 Video: asf, avi, flv, mov, mpg, mpeg, mp4, qt, smil, swf, wmv, 3g2, 3gp
  *	 Audio: aif, aac, au, gsm, mid, midi, mov, mp3, m4a, snd, rm, wav, wma
  *	 Other: bmp, html, pdf, psd, qif, qtif, qti, tif, tiff, xaml
- *
+ *          txt (aaded by jbunzel 140823)
  * Thanks to Mark Hicken and Brent Pedersen for helping me debug this on the Mac!
  * Thanks to Dan Rossi for numerous bug reports and code bits!
  * Thanks to Skye Giordano for several great suggestions!
@@ -196,7 +196,7 @@ $.fn.media.defaults.players = {
 	},
 	iframe: {
 		name:  'iframe',
-		types: 'htm,html,pdf'
+		types: 'htm,html,pdf,txt'
 	},
 	silverlight: {
 		name:  'silverlight',
