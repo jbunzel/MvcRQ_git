@@ -13,6 +13,7 @@ namespace MvcRQ.Areas.ItemViewer.Controllers
     /// </summary>
     public class ItemViewerController : MvcRQ.Controllers.BaseController
     {
+        bool _bRedirectToRemote = false;
 
         /// <summary>
         /// Controller action answering GET http-requests for RQItems
@@ -27,14 +28,9 @@ namespace MvcRQ.Areas.ItemViewer.Controllers
             {
                 ItemViewerModel theModel;
 
-                if ((System.Web.HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST").ToLower() == "localhost") || (System.Web.HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST").ToLower() == "admin-pc"))
-                {
-                    //PRODUCTION-MODE
-                    //theModel = new ItemViewerModel(rqitemId, "http://" + System.Web.HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + "/" + itemAdress);
-                    // DEBUG-MODE Test remote document server
-                    itemAdress = Helpers.AccessControl.AppendAccessRightsCode(itemAdress);
-                    theModel = new ItemViewerModel(rqitemId, "http://mydocs.strands.de/" + itemAdress);
-                }
+                if (    (!_bRedirectToRemote)
+                     && (System.Web.HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST").ToLower() == "localhost") || (System.Web.HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST").ToLower() == "admin-pc"))
+                    theModel = new ItemViewerModel(rqitemId, "http://" + System.Web.HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + "/" + itemAdress);
                 else
                 {
                     itemAdress = Helpers.AccessControl.AppendAccessRightsCode(itemAdress);

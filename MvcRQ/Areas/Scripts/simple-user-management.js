@@ -12,8 +12,6 @@ $(function () {
 
 });
 
-
-
 function UserTableArea() {
 
   var userTable;
@@ -257,7 +255,6 @@ function AddUserArea() {
   }
 }
 
-
 function RoleManagement() {
 
   var roleSelectBox = $(".role-select-box");
@@ -368,7 +365,6 @@ function RoleManagement() {
 }
 
 var _myHtml = {
-
   /* generates a new user table row as jquery element */
   buildUserTableRow: function (user) {
 
@@ -399,7 +395,6 @@ var _myHtml = {
     return userRow.getElem();
 
   }
-
 }
 
 /* User Row Object for generating new rows containing user information */

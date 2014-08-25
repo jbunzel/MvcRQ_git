@@ -60,6 +60,7 @@ namespace MvcRQ.Areas
       var builder = new StringBuilder();
       builder.AppendFormat(_javascriptBlock, ScriptPack.jquery_tablesorter_min);
       builder.AppendFormat(_javascriptBlock, ScriptPack.tablesorter_pager_min);
+      builder.AppendFormat(_javascriptBlock, ScriptPack.rqui_helpers);
 
       builder.AppendFormat(_javascriptBlock, ScriptPack.simple_user_management.Replace("{controllerName}", "UserManagement"));
 
