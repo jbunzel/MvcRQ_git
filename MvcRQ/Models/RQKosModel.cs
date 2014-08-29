@@ -8,7 +8,6 @@ using System.Runtime.Serialization;
 using RQLib.RQKos.Classifications;
 using RQLib.RQQueryForm;
 
-
 namespace MvcRQ.Models
 {
     /// <summary>
@@ -17,7 +16,7 @@ namespace MvcRQ.Models
     [DataContract]
     public class RQKosModel
     {
-        #region "public properties"
+        #region public properties
 
         /// <summary>
         /// RQKosBranch
@@ -27,7 +26,7 @@ namespace MvcRQ.Models
 
         #endregion
 
-        #region "public constructors"
+        #region public constructors
 
         /// <summary>
         /// Constructor of RQKosModel
@@ -50,6 +49,22 @@ namespace MvcRQ.Models
         }
 
         #endregion
+
+        #region public methods
+ 
+        public static string GetActiveDocumentID()
+        {
+            return MvcRQ.Helpers.StateStorage.GetQueryFromState("", Areas.UserSettings.UserState.States.BrowseViewState).DocId;
+        }
+
+        public static string GetActiveModelID()
+        {
+            return "rqc_" + MvcRQ.Helpers.StateStorage.GetQueryFromState("", Areas.UserSettings.UserState.States.BrowseViewState).QueryString;
+        }
+
+
+        #endregion
+
     }
 
     /// <summary>
@@ -246,14 +261,14 @@ namespace MvcRQ.Models
     [XmlInclude(typeof(RQKosItemRQLD))]
     public class RQKosBranch : System.Collections.Generic.IEnumerable<RQKosItemTemplate>
     {
-        #region "private members"
+        #region private members
 
         private SubjClassBranch classBranch;
         private string _service;
 
         #endregion
 
-        #region "public members"
+        #region public members
 
         [DataContract]
         public struct RQKosBranchStatus
@@ -268,7 +283,7 @@ namespace MvcRQ.Models
 
         #endregion
 
-        #region "public properties"
+        #region public properties
 
         public SubjClassBranch ClassBranch
         {
@@ -295,7 +310,7 @@ namespace MvcRQ.Models
 
         #endregion
 
-        #region "public constructors"
+        #region public constructors
 
         public RQKosBranch()
             : base()
@@ -389,7 +404,7 @@ namespace MvcRQ.Models
 
         #endregion
 
-        #region "public methods"
+        #region public methods
 
         public void Add(RQKosItemTemplate item)
         {
@@ -455,7 +470,7 @@ namespace MvcRQ.Models
     /// </summary>
     public class RQKosBranchEnum : IEnumerator<RQKosItemTemplate>
     {
-        #region "private members"
+        #region private members
 
         private RQKosBranch _itemSet;
         private int _curIndex;
@@ -463,7 +478,7 @@ namespace MvcRQ.Models
 
         #endregion
 
-        #region "public constructors"
+        #region public constructors
 
         public RQKosBranchEnum(RQKosBranch kosSet)
         {
@@ -474,7 +489,7 @@ namespace MvcRQ.Models
 
         #endregion
 
-        #region "public methods"
+        #region public methods
 
         public bool MoveNext()
         {
@@ -522,7 +537,7 @@ namespace MvcRQ.Models
     /// </summary>
     public class RQKosTransfer
     {
-        #region "public properties"
+        #region public properties
 
         [DataMember]
         public string ClassID { get; set; }
@@ -550,7 +565,7 @@ namespace MvcRQ.Models
 
         #endregion
 
-        #region "public constructors"
+        #region public constructors
 
         public RQKosTransfer() { }
 
@@ -562,14 +577,13 @@ namespace MvcRQ.Models
     /// </summary>
     abstract public class RQKosItemTemplate
     {
-        #region "private properties"
+        #region private properties
 
-        //internal SubjClass _class { get; set; }
         internal SubjClass _class { get; set; }
 
         #endregion
 
-        #region "public constructors"
+        #region public constructors
 
         public RQKosItemTemplate()
         {
@@ -591,7 +605,7 @@ namespace MvcRQ.Models
     public class RQKosItem
         : RQKosItemTemplate
     {
-        #region "public properties"
+        #region public properties
 
         //[DataMember]
         //public SubjClass classification
@@ -712,7 +726,7 @@ namespace MvcRQ.Models
 
         #endregion
 
-        #region "public constructors"
+        #region public constructors
 
         public RQKosItem()
             : base() { }
@@ -730,14 +744,14 @@ namespace MvcRQ.Models
     public class RQKosItemDT
     : RQKosItemTemplate
     {
-        #region "private members"
+        #region private members
 
         private bool _isLazy = true;
         private string _tooltip = "";
 
         #endregion
 
-        #region "public properties"
+        #region public properties
 
         [DataMember]
         public string title
@@ -854,7 +868,7 @@ namespace MvcRQ.Models
 
         #endregion
 
-        #region "public constructors"
+        #region public constructors
 
         public RQKosItemDT()
             : base() { }
@@ -874,11 +888,11 @@ namespace MvcRQ.Models
     public class RQKosItemRQLD
     : RQKosItemTemplate
     {
-        #region "private members"
+        #region private members
 
         #endregion
 
-        #region "public properties"
+        #region public properties
 
         [DataMember]
         public RQLib.RQLD.RQClassificationGraph RDF
@@ -898,7 +912,7 @@ namespace MvcRQ.Models
 
         #endregion
 
-        #region "public constructors"
+        #region public constructors
 
         public RQKosItemRQLD()
             : base() { }

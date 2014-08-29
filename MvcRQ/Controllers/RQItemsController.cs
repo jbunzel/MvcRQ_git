@@ -143,8 +143,7 @@ namespace MvcRQ.Controllers
             }
             else
             {
-                modelRepository.GetQuery(queryString);
-                ViewBag.docNo = HttpContext.Request.QueryString.Get("d") != null ? HttpContext.Request.QueryString.Get("d") : "";
+                ViewBag.docNo = HttpContext.Request.QueryString.Get("d") != null ? HttpContext.Request.QueryString.Get("d") : modelRepository.GetQuery(queryString).DocId;
                 ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems ti the database.
                 ViewBag.GetRQItemVerb = "QueryItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
                 return View("Index");
@@ -232,7 +231,7 @@ namespace MvcRQ.Controllers
                 return this.RedirectToRoute("RQItemList", new { dbname = "rqitems" });
             else
             {
-                modelRepository.GetQuery(queryString);
+                //modelRepository.GetQuery(queryString);
                 ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems ti the database.
                 ViewBag.GetRQItemVerb = "QueryItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
                 return View("Index");

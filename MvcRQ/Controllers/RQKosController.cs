@@ -9,7 +9,6 @@ using System.Web.UI;
 
 namespace MvcRQ.Controllers
 {
-
     /// <summary>
     /// Controller Class for URLs designating RiQuest Knowledge Organisation System (KOS) objects
     /// </summary>
@@ -36,7 +35,6 @@ namespace MvcRQ.Controllers
             return GetModel(itemID, "");
         }
 
-
         /// <summary>
         /// Returns a collection of RQKosItems pertainig to a given RQKosItemId.
         /// </summary>
@@ -55,37 +53,6 @@ namespace MvcRQ.Controllers
         {
             return new RQKosModel(itemID, serviceId);
         }
-
-        #endregion
-
-        #region "protected methods"
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="filterContext"></param>
-        //protected override void OnException(ExceptionContext filterContext)
-        //{
-        //    if (filterContext.HttpContext.IsCustomErrorEnabled || true)  //IsCustomErrorEnabled always false if client is localhost or client and server IPs identical. True set to override.
-        //    {
-        //        filterContext.ExceptionHandled = true;
-        //        // If this is an ajax request, return the exception in the response            
-        //        if (filterContext.HttpContext.Request.IsAjaxRequest())
-        //        {
-        //            filterContext.HttpContext.Response.StatusCode = 500;
-        //            var json = new JsonResult();
-        //            json.Data = filterContext.Exception.Message + filterContext.Exception.StackTrace;
-        //            json.ExecuteResult(this.ControllerContext);
-        //        }
-        //        else
-        //        {
-        //            ViewData.Model = new System.Web.Mvc.HandleErrorInfo(filterContext.Exception, "ControllerName", "ActionName");
-        //            // Pass a flag to the view to tell it whether or not to show a the stack trace                
-        //            ViewBag.IsCustomErrorEnabled = true; //filterContext.HttpContext.IsCustomErrorEnabled;
-        //            this.View("Error").ExecuteResult(this.ControllerContext);
-        //        }
-        //    }
-        //}
 
         #endregion
 
@@ -135,7 +102,7 @@ namespace MvcRQ.Controllers
                 return View("Index", GetModel(id, verb).RQKosSet);
             else
             {
-                RQKosModel model = GetModel(id);
+                RQKosModel model = GetModel(!string.IsNullOrEmpty(id)? id : RQKosModel.GetActiveModelID());
 
                 ViewBag.locPath = HttpContext.Request.QueryString.Get("p");
                 ViewBag.docNo = HttpContext.Request.QueryString.Get("d");
@@ -146,6 +113,7 @@ namespace MvcRQ.Controllers
                         if (!string.IsNullOrEmpty(cc))
                             model = GetModel(cc.Substring(0, cc.IndexOf('$')));
                     }
+                if (string.IsNullOrEmpty(ViewBag.docNo)) ViewBag.docNo = RQKosModel.GetActiveDocumentID();
                 if (string.IsNullOrEmpty(ViewBag.locPath))
                     ViewBag.locPath = new RQLib.RQKos.Classifications.SubjClass(model.RQKosSet.GetItem(0)._class.ClassID, model.RQKosSet.GetItem(0)._class.ClassDataClient).ClassPath;
                 ViewBag.HasAddPermit = MvcRQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems to the database.

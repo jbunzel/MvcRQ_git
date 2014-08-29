@@ -241,7 +241,7 @@
         <notation>FM</notation>
         <notation>§§RVK§§:LH65829</notation>
       </file>
-      <file DocNo="D48" name="Romanische Kirchen in Köln" type="url" link="http://www.romanische-kirchen-koeln.de/" DateChanged="20071215" comment="&#xD;&#xA;Der seit 1981 bestehende Förderverein Romanische Kirchen Köln e.V. lädt auf diesem virtuellen Rundgang zur Besichtigung der 12 romanischen Kirchen Kölns ein. Der Verein hat die Aufgabe, die Erhaltung und Ausgestaltung der romanischen Kirchen in der Stadt Köln zu fördern. Darüber hinaus widmet sich der Verein der wissenschaftlichen Forschung über die Kölner Kirchen. Er veranstaltet öffentliche Besichtigungen und Führungen und sucht durch Vortragsreihen die Kirchen stärker ins allgemeine Bewusstsein zu rücken. &#xD;&#xA;&#xD;&#xA; &#xD;&#xA;">
+      <file DocNo="D48" name="Romanische Kirchen in Köln" type="url" link="http://www.romanische-kirchen-koeln.de/" DateChanged="20071215" comment="&#xD;&#xA;Der seit 1981 bestehende Förderverein Romanische Kirchen Köln e.V. lädt auf diesem virtuellen Rundgang zur Besichtigung der 12 romanischen Kirchen Kölns ein. Der Verein hat die Aufgabe, die Erhaltung und Ausgestaltung der romanischen Kirchen in der Stadt Köln zu fördern. Darüber hinaus widmet sich der Verein der wissenschaftlichen Forschung über die Kölner Kirchen. Er veranstaltet öffentliche Besichtigungen und Führungen und sucht durch Vortragsreihen die Kirchen stärker ins allgemeine Bewusstsein zu rücken. &#xD;&#xA;&#xD;&#xA; &#xD;&#xA;" Feld30="LK79480;LK79582;LK42470;BS4520;">
         <notation>FK</notation>
         <notation>§§RVK§§:LK79480</notation>
         <notation>FK</notation>
@@ -1672,7 +1672,7 @@
         <notation>FK</notation>
         <notation>§§RVK§§:LK83460</notation>
       </file>
-      <file DocNo="D248" name="Europas Blick auf fremde Religionen in der frühen Neuzeit" type="url" link="http://www.ub.uni-heidelberg.de/allg/benutzung/bereiche/handschriften/goetterbilder2012/Welcome.html" DateChanged="20120625" comment="&#xD;&#xA;Götterbilder und Götzendiener in der Frühen Neuzeit – Europas Blick auf fremde Religionen&#xD;&#xA;&#xD;&#xA;Neben die Konflikte um die verschiedenen innereuropäischen Glaubensrichtungen trat verstärkt seit dem 16. Jahrhundert die Auseinandersetzung mit fremden Religionen: Diese waren nicht nur in Asien, Afrika und Amerika zu finden, sondern auch in der Vergangenheit der Alten Welt. Die Erweiterung des europäischen Blicks in geographischer wie chronologischer Hinsicht führte zugleich zu einem vertieften Bewusstsein von der Identität der eigenen Kultur und ihren historischen Bedingungen. Bei der Formierung dieser Vorstellungen spielten neben Texten von Anfang an auch druckgraphische Bilder, zumeist Buchillustrationen, eine zentrale Rolle. Zudem finden sich in den Sammlungen immer mehr fremde Götterbilder und Kultobjekte.&#xD;&#xA;&#xD;&#xA;Die Virtuelle Ausstellung der Universitätsbibliothek Heidelberg präsentiert die wirkmächtigsten Bilder, die wichtigsten Texte und Überlieferungstraditionen zu den paganen Glaubensvorstellungen, Göttern und Kulten.&#xD;&#xA;Schlagworte: Kulturgeschichte, Religion, Religionsgeschichte, Glaube &lt;Religion&gt;, Glaubensviellfalt, Christentum, Judentum, Islam, Pagane Religionen, Naturreligion, Das Fremde, Götterbild, Kultobjekt, Bibliothek, Druckgraphik,  &#xD;&#xA;">
+      <file DocNo="D248" name="Europas Blick auf fremde Religionen in der frühen Neuzeit" type="url" link="http://www.ub.uni-heidelberg.de/allg/benutzung/bereiche/handschriften/goetterbilder2012/Welcome.html" DateChanged="20120625" comment="&#xD;&#xA;Götterbilder und Götzendiener in der Frühen Neuzeit – Europas Blick auf fremde Religionen&#xD;&#xA;&#xD;&#xA;Neben die Konflikte um die verschiedenen innereuropäischen Glaubensrichtungen trat verstärkt seit dem 16. Jahrhundert die Auseinandersetzung mit fremden Religionen: Diese waren nicht nur in Asien, Afrika und Amerika zu finden, sondern auch in der Vergangenheit der Alten Welt. Die Erweiterung des europäischen Blicks in geographischer wie chronologischer Hinsicht führte zugleich zu einem vertieften Bewusstsein von der Identität der eigenen Kultur und ihren historischen Bedingungen. Bei der Formierung dieser Vorstellungen spielten neben Texten von Anfang an auch druckgraphische Bilder, zumeist Buchillustrationen, eine zentrale Rolle. Zudem finden sich in den Sammlungen immer mehr fremde Götterbilder und Kultobjekte.&#xD;&#xA;&#xD;&#xA;Die Virtuelle Ausstellung der Universitätsbibliothek Heidelberg präsentiert die wirkmächtigsten Bilder, die wichtigsten Texte und Überlieferungstraditionen zu den paganen Glaubensvorstellungen, Göttern und Kulten.&#xD;&#xA;Schlagworte: Kulturgeschichte, Religion, Religionsgeschichte, Glaube &lt;Religion&gt;, Glaubensviellfalt, Christentum, Judentum, Islam, Pagane Religionen, Naturreligion, Das Fremde, Götterbild, Kultobjekt, Bibliothek, Druckgraphik,  &#xD;&#xA;" Feld30="BE3720;">
         <notation>KU</notation>
         <notation>§§RVK§§:BE3720</notation>
       </file>
@@ -6601,7 +6601,7 @@
       </file>
     </filelist>
   </folder>
-  <folder DocNo="D1288" name="Introductory Physics" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fIntroductory+Physics" type="folder" DateChanged="20121111" comment="&#xD;&#xA;">
+  <folder DocNo="D1288" name="Introductory Physics" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fIntroductory+Physics" type="folder" DateChanged="20121111" comment="&#xD;&#xA;" Feld30="UC200;">
     <notation>CKB1</notation>
     <notation>§§RVK§§:UC200</notation>
     <filelist>
@@ -6625,10 +6625,10 @@
         <notation>CKB1</notation>
         <notation>§§RVK§§:UC200</notation>
       </file>
-      <file DocNo="D1293" name="Philosophiae Naturalis" type="url" link="http://www.yaronhadad.com/Site/Philosophi%C3%A6_Naturalis/Entries/2008/9/3_Introduction_to_Lagrangian_Mechanics.html" DateChanged="20110226" comment="&#xD;&#xA;Philosophiae Naturalis, or natural philosophy, is the general name given to all types of natural sciences or philosophy. Namely, the study of everything that is natural. Galileo Galilei was the last scholastic natural philosopher, and his death could consider to be the dusk of natural philosophy and the dawn of the age of specialization. But why separating if you can unite? In this section I will try to present some interesting ideas in natural philosophy, particularly in physics, math and philosophy.&#xD;&#xA;Schlagworte: Philosophie, Philosophie der Naturwissenschaften, Physik, Matehmatik, Blog, Persönliche Webseite&#xD;&#xA;">
+      <file DocNo="D1293" name="Philosophiae Naturalis" type="url" link="http://www.yaronhadad.com/Site/Philosophi%C3%A6_Naturalis/Entries/2008/9/3_Introduction_to_Lagrangian_Mechanics.html" DateChanged="20110226" comment="&#xD;&#xA;Philosophiae Naturalis, or natural philosophy, is the general name given to all types of natural sciences or philosophy. Namely, the study of everything that is natural. Galileo Galilei was the last scholastic natural philosopher, and his death could consider to be the dusk of natural philosophy and the dawn of the age of specialization. But why separating if you can unite? In this section I will try to present some interesting ideas in natural philosophy, particularly in physics, math and philosophy.&#xD;&#xA;Schlagworte: Philosophie, Philosophie der Naturwissenschaften, Physik, Matehmatik, Blog, Persönliche Webseite&#xD;&#xA;" Feld30="UB6000;CC6350;">
         <notation>CKB3</notation>
         <notation>§§RVK§§:UB6000</notation>
-        <notation>KI</notation>
+        <notation>KG</notation>
         <notation>§§RVK§§:CC6350</notation>
       </file>
       <file DocNo="D1294" name="The Scale of the Universe" type="url" link="http://htwins.net/scale/index.html" DateChanged="20110201" comment="&#xD;&#xA;Zoom from the edge of the universe to the quantum foam of spacetime and learn the scale of things along the way.&#xD;&#xA;Schlagworte: Welt, Größenordnungen, Dimensionen, Längenmaß&#xD;&#xA;">
@@ -7251,64 +7251,64 @@
       </file>
     </filelist>
   </folder>
-  <folder DocNo="D1399" name="Monism or Dualism" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fMonism+or+Dualism" type="folder" DateChanged="20121111" comment="">
-    <notation>KG</notation>
+  <folder DocNo="D1399" name="Monism or Dualism" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fMonism+or+Dualism" type="folder" DateChanged="20121111" comment="" Feld30="CC6000;">
+    <notation>KF</notation>
     <notation>§§RVK§§:CC6000</notation>
     <filelist>
-      <file DocNo="D1400" name="A Field Guide to the Philosophy of Mind" type="url" link="http://www.uniroma3.it/kant/field/index.html" DateChanged="20020106" comment="">
-        <notation>KG</notation>
+      <file DocNo="D1400" name="A Field Guide to the Philosophy of Mind" type="url" link="http://www.uniroma3.it/kant/field/index.html" DateChanged="20020106" comment="" Feld30="CC6000;">
+        <notation>KF</notation>
         <notation>§§RVK§§:CC6000</notation>
       </file>
-      <file DocNo="D1401" name="Cohnitz Philosophie des Geistes" type="url" link="http://www.phil-fak.uni-duesseldorf.de/philo/brainwash.htm" DateChanged="20050711" comment=" &#xD;&#xA;In diesem Seminar werden die prominentesten gegenwärtigen Theorien zur Erklärung des menschlichen Bewusstseins vorgestellt und diskutiert. Diese Problematik ist deswegen ein besonders lehrreiches Gebiet der analytischen Philosophie, da hier Probleme der Ontologie, Erkenntnistheorie, Semantik und Wissenschaftstheorie zusammentreffen. ">
-        <notation>KF</notation>
+      <file DocNo="D1401" name="Cohnitz Philosophie des Geistes" type="url" link="http://www.phil-fak.uni-duesseldorf.de/philo/brainwash.htm" DateChanged="20050711" comment=" &#xD;&#xA;In diesem Seminar werden die prominentesten gegenwärtigen Theorien zur Erklärung des menschlichen Bewusstseins vorgestellt und diskutiert. Diese Problematik ist deswegen ein besonders lehrreiches Gebiet der analytischen Philosophie, da hier Probleme der Ontologie, Erkenntnistheorie, Semantik und Wissenschaftstheorie zusammentreffen. " Feld30="CC5500;CC3200;CP4000;">
+        <notation>KI</notation>
         <notation>§§RVK§§:CC5500</notation>
         <notation>KE</notation>
         <notation>§§RVK§§:CC3200</notation>
         <notation>EY</notation>
         <notation>§§RVK§§:CP4000</notation>
       </file>
-      <file DocNo="D1402" name="Determinism and Freedom" type="url" link="http://www.ucl.ac.uk/~uctytho/dfwIntroIndex.htm" DateChanged="20040109" comment="&#xD;&#xA;THE DETERMINISM AND FREEDOM PHILOSOPHY WEBSITE is edited by Ted Honderich. On offer here eventually will be a good selection of the most important pieces of writing on the various subjects in the philosophy of Determinism and Freedom.&#xD;&#xA; &#xD;&#xA;">
-        <notation>KF</notation>
+      <file DocNo="D1402" name="Determinism and Freedom" type="url" link="http://www.ucl.ac.uk/~uctytho/dfwIntroIndex.htm" DateChanged="20040109" comment="&#xD;&#xA;THE DETERMINISM AND FREEDOM PHILOSOPHY WEBSITE is edited by Ted Honderich. On offer here eventually will be a good selection of the most important pieces of writing on the various subjects in the philosophy of Determinism and Freedom.&#xD;&#xA; &#xD;&#xA;" Feld30="CC5500;CC6600;CC7220;CC6020;CP4000;">
+        <notation>KI</notation>
         <notation>§§RVK§§:CC5500</notation>
         <notation>KK</notation>
         <notation>§§RVK§§:CC6600</notation>
         <notation>KO</notation>
         <notation>§§RVK§§:CC7220</notation>
-        <notation>KG</notation>
+        <notation>KF</notation>
         <notation>§§RVK§§:CC6020</notation>
         <notation>EY</notation>
         <notation>§§RVK§§:CP4000</notation>
       </file>
-      <file DocNo="D1403" name="DUALISM" type="url" link="http://www.staffs.ac.uk/schools/sciences/psychology/coursematerials/philpsy/dualism/sld001.htm" DateChanged="20020106" comment="">
-        <notation>KG</notation>
-        <notation>§§RVK§§:CC6000</notation>
-      </file>
-      <file DocNo="D1404" name="Mark Turner" type="url" link="http://www.wam.umd.edu/~mturn/" DateChanged="20011229" comment="">
-        <notation>KG</notation>
-        <notation>§§RVK§§:CC6000</notation>
-      </file>
-      <file DocNo="D1405" name="Philosophical Psychology" type="url" link="http://mechanism.ucsd.edu/~pp/" DateChanged="20040109" comment="&#xD;&#xA;Philosophical Psychology is an interdisciplinary journal devoted to developing and strengthening the links between philosophy and the psychological sciences by publishing original, peer-reviewed contributions that advance these fields of research. In addition to psychologists and philosophers, the journal's international readership and contributors include neuroscientists, linguists, biologists, sociologists and anthropologists, psychiatrists, and computer scientists. &#xD;&#xA;">
+      <file DocNo="D1403" name="DUALISM" type="url" link="http://www.staffs.ac.uk/schools/sciences/psychology/coursematerials/philpsy/dualism/sld001.htm" DateChanged="20020106" comment="" Feld30="CC6000;">
         <notation>KF</notation>
+        <notation>§§RVK§§:CC6000</notation>
+      </file>
+      <file DocNo="D1404" name="Mark Turner" type="url" link="http://www.wam.umd.edu/~mturn/" DateChanged="20011229" comment="" Feld30="CC6000;">
+        <notation>KF</notation>
+        <notation>§§RVK§§:CC6000</notation>
+      </file>
+      <file DocNo="D1405" name="Philosophical Psychology" type="url" link="http://mechanism.ucsd.edu/~pp/" DateChanged="20040109" comment="&#xD;&#xA;Philosophical Psychology is an interdisciplinary journal devoted to developing and strengthening the links between philosophy and the psychological sciences by publishing original, peer-reviewed contributions that advance these fields of research. In addition to psychologists and philosophers, the journal's international readership and contributors include neuroscientists, linguists, biologists, sociologists and anthropologists, psychiatrists, and computer scientists. &#xD;&#xA;" Feld30="CC5500;CC6600;CP4000;">
+        <notation>KI</notation>
         <notation>§§RVK§§:CC5500</notation>
         <notation>KK</notation>
         <notation>§§RVK§§:CC6600</notation>
         <notation>EY</notation>
         <notation>§§RVK§§:CP4000</notation>
       </file>
-      <file DocNo="D1406" name="PSY 3241" type="url" link="http://www.mdx.ac.uk/www/psychology/cog/psy3241/searleconsc.htm" DateChanged="20020413" comment="">
-        <notation>KG</notation>
+      <file DocNo="D1406" name="PSY 3241" type="url" link="http://www.mdx.ac.uk/www/psychology/cog/psy3241/searleconsc.htm" DateChanged="20020413" comment="" Feld30="CC6000;">
+        <notation>KF</notation>
         <notation>§§RVK§§:CC6000</notation>
       </file>
-      <file DocNo="D1407" name="Searles Chinese Box The Chinese Room Argument and Artificial " type="url" link="http://members.aol.com/wutsamada/disserta.html" DateChanged="20020106" comment="">
-        <notation>KG</notation>
+      <file DocNo="D1407" name="Searles Chinese Box The Chinese Room Argument and Artificial" type="url" link="http://members.aol.com/wutsamada/disserta.html" DateChanged="20020106" comment="" Feld30="CC6000;">
+        <notation>KF</notation>
         <notation>§§RVK§§:CC6000</notation>
       </file>
-      <file DocNo="D1408" name="Searles Chinese Room Argument Entry" type="url" link="http://www.uniroma3.it/kant/field/chinese.html" DateChanged="20020106" comment="">
-        <notation>KG</notation>
+      <file DocNo="D1408" name="Searles Chinese Room Argument Entry" type="url" link="http://www.uniroma3.it/kant/field/chinese.html" DateChanged="20020106" comment="" Feld30="CC6000;">
+        <notation>KF</notation>
         <notation>§§RVK§§:CC6000</notation>
       </file>
-      <file DocNo="D1409" name="What" type="url" link="http://www.mayfieldpub.com/lawhead/instructor_resources/ch03/sld001.htm" DateChanged="20020106" comment="">
-        <notation>KG</notation>
+      <file DocNo="D1409" name="What" type="url" link="http://www.mayfieldpub.com/lawhead/instructor_resources/ch03/sld001.htm" DateChanged="20020106" comment="" Feld30="CC6000;">
+        <notation>KF</notation>
         <notation>§§RVK§§:CC6000</notation>
       </file>
     </filelist>
@@ -7795,32 +7795,32 @@
       </file>
     </filelist>
   </folder>
-  <folder DocNo="D1492" name="Philosophy" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fPhilosophy" type="folder" DateChanged="20121111" comment="">
+  <folder DocNo="D1492" name="Philosophy" level="0" link="D%3a%5cUsers%5cPublic%5cMyVLib%5cMy+Virtual+Subject+Library%5c%2fPhilosophy" type="folder" DateChanged="20121111" comment="" Feld30="CB;">
     <notation>KA</notation>
     <notation>§§RVK§§:CB</notation>
     <filelist>
-      <file DocNo="D1493" name="Experimental Philosophy" type="url" link="http://experimentalphilosophy.typepad.com/experimental_philosophy/2004/06/online_experime.html" DateChanged="20041126" comment="&#xD;&#xA;A (We)blog dedicated to interdisciplinary research in legal theory, philosophy, and psychology.">
+      <file DocNo="D1493" name="Experimental Philosophy" type="url" link="http://experimentalphilosophy.typepad.com/experimental_philosophy/2004/06/online_experime.html" DateChanged="20041126" comment="&#xD;&#xA;A (We)blog dedicated to interdisciplinary research in legal theory, philosophy, and psychology." Feld30="CC6600;">
         <notation>KK</notation>
         <notation>§§RVK§§:CC6600</notation>
       </file>
-      <file DocNo="D1494" name="Federlese Philosophie-Podcast" type="url" link="http://federlese.com/" DateChanged="20060514" comment="&#xD;&#xA;Federlese möchte Philosophie wieder zum Klingen bringen. Ausgelesene Texte deutscher Denker werden von der Tübinger Künstlerin Fee vorgelesen und so auf dieser Seite für unsere Ohren versammelt, eine Lese eben, auf deren Sorgfalt der Name »Federlese« – wir hoffen zu Recht – hindeuten möchte. Ungefähr alle zwei Wochen wird der Podcast um eine Lesung erweitert.">
+      <file DocNo="D1494" name="Federlese Philosophie-Podcast" type="url" link="http://federlese.com/" DateChanged="20060514" comment="&#xD;&#xA;Federlese möchte Philosophie wieder zum Klingen bringen. Ausgelesene Texte deutscher Denker werden von der Tübinger Künstlerin Fee vorgelesen und so auf dieser Seite für unsere Ohren versammelt, eine Lese eben, auf deren Sorgfalt der Name »Federlese« – wir hoffen zu Recht – hindeuten möchte. Ungefähr alle zwei Wochen wird der Podcast um eine Lesung erweitert." Feld30="CB5100;">
         <notation>KA</notation>
         <notation>§§RVK§§:CB5100</notation>
       </file>
-      <file DocNo="D1495" name="Johann Georg Hamann Homepage" type="url" link="http://members.aol.com/agrudolph/home.html" DateChanged="20030501" comment="&#xD;&#xA;Neben einer Biografie und zwei Bibliografien, die regelmäßig aktualisiert werden, finden Sie hier einige Schriften und Briefe von Hamann selbst, Dokumente zur Wirkungsgeschichte, Hinweise zu Forschungsliteratur im Internet, Informationen zum Hamann-Kolloquium und einige andere verstreute Kleinigkeiten, die den Umgang mit Hamann angenehm und nützlich machen können.&#xD;&#xA;">
-        <notation>KB59</notation>
+      <file DocNo="D1495" name="Johann Georg Hamann Homepage" type="url" link="http://members.aol.com/agrudolph/home.html" DateChanged="20030501" comment="&#xD;&#xA;Neben einer Biografie und zwei Bibliografien, die regelmäßig aktualisiert werden, finden Sie hier einige Schriften und Briefe von Hamann selbst, Dokumente zur Wirkungsgeschichte, Hinweise zu Forschungsliteratur im Internet, Informationen zum Hamann-Kolloquium und einige andere verstreute Kleinigkeiten, die den Umgang mit Hamann angenehm und nützlich machen können.&#xD;&#xA;" Feld30="CF4014;">
+        <notation>KB559</notation>
         <notation>§§RVK§§:CF4014</notation>
       </file>
-      <file DocNo="D1496" name="Lev Shestov homepage" type="url" link="http://shestov.by.ru/" DateChanged="20040323" comment="&#xD;&#xA;Lev Shestov (1866-1938) is a Russian-Jewish philosopher of existentialism. In France he is well known as Leon Chestov. Variously described as an irrationalist, an anarchist, a religious philosopher, Shestov's themes were initially inspired by Nietzsche until he found a kindred spirit in Kierkegaard. Among his contemporaries he entertained long-standing philosophical friendships with Martin Buber, Edmund Husserl and Nikolai Berdyaev.&#xD;&#xA;">
+      <file DocNo="D1496" name="Lev Shestov homepage" type="url" link="http://shestov.by.ru/" DateChanged="20040323" comment="&#xD;&#xA;Lev Shestov (1866-1938) is a Russian-Jewish philosopher of existentialism. In France he is well known as Leon Chestov. Variously described as an irrationalist, an anarchist, a religious philosopher, Shestov's themes were initially inspired by Nietzsche until he found a kindred spirit in Kierkegaard. Among his contemporaries he entertained long-standing philosophical friendships with Martin Buber, Edmund Husserl and Nikolai Berdyaev.&#xD;&#xA;" Feld30="CI1130;">
         <notation>KB79</notation>
         <notation>§§RVK§§:CI1130</notation>
       </file>
-      <file DocNo="D1497" name="Lexikon der Philosophie" type="url" link="http://www.phillex.de/index.htm" DateChanged="20080920" comment="&#xD;&#xA;Lexikon-Artikel zu vielen philosophischen Fragen&#xD;&#xA;Schlagworte: Philosophie, Lexikon">
+      <file DocNo="D1497" name="Lexikon der Philosophie" type="url" link="http://www.phillex.de/index.htm" DateChanged="20080920" comment="&#xD;&#xA;Lexikon-Artikel zu vielen philosophischen Fragen&#xD;&#xA;Schlagworte: Philosophie, Lexikon" Feld30="CB3500;">
         <notation>KA</notation>
         <notation>§§RVK§§:CB3500</notation>
       </file>
-      <file DocNo="D1498" name="Lexikon des Unendlichen" type="url" link="http://www.unendliches.net/" DateChanged="20070610" comment="&#xD;&#xA;'Zwei Dinge sind unendlich: Das Universum und die menschliche Dummheit. Beim Universum bin ich mir aber noch nicht ganz sicher.'(Albert Einstein). Trotz seines Zweifels hatte Einstein mit der Unendlichkeit des Universums vermutlich Recht. Hinsichtlich der menschlichen Dummheit aber schien er zu irren: Dummheit gilt als Fehlen von Klugheit und endet bei deren völliger Abwesenheit, kann also eigentlich nicht unendlich sein. Auf dieser Website finden Sie dennoch neben vielen anderen Fakten über das Unendliche, Unbegrenzte oder Ewige auch den Existenzbeweis für unendliche Dummheit.&#xD;&#xA;&#xD;&#xA;">
-        <notation>KG</notation>
+      <file DocNo="D1498" name="Lexikon des Unendlichen" type="url" link="http://www.unendliches.net/" DateChanged="20070610" comment="&#xD;&#xA;'Zwei Dinge sind unendlich: Das Universum und die menschliche Dummheit. Beim Universum bin ich mir aber noch nicht ganz sicher.'(Albert Einstein). Trotz seines Zweifels hatte Einstein mit der Unendlichkeit des Universums vermutlich Recht. Hinsichtlich der menschlichen Dummheit aber schien er zu irren: Dummheit gilt als Fehlen von Klugheit und endet bei deren völliger Abwesenheit, kann also eigentlich nicht unendlich sein. Auf dieser Website finden Sie dennoch neben vielen anderen Fakten über das Unendliche, Unbegrenzte oder Ewige auch den Existenzbeweis für unendliche Dummheit.&#xD;&#xA;&#xD;&#xA;" Feld30="CC6020;SK130;US2000;BF1200;">
+        <notation>KF</notation>
         <notation>§§RVK§§:CC6020</notation>
         <notation>BK</notation>
         <notation>§§RVK§§:SK130</notation>
@@ -7829,7 +7829,7 @@
         <notation>KU</notation>
         <notation>§§RVK§§:BF1200</notation>
       </file>
-      <file DocNo="D1499" name="LUDWIK FLECK ZENTRUM - COLLEGIUM HELVETICUM" type="url" link="http://www.ludwikfleck.ethz.ch/index.de.html" DateChanged="20061119" comment="&#xD;&#xA;Das Ludwik Fleck Zentrum ist eine Stätte für die Erforschung des Werks von Ludwik Fleck und ein Ort der Auseinandersetzung mit seinem Leben und Denken. Im Rahmen seiner Möglichkeiten unterstützt und dokumentiert das Zentrum die Aufarbeitung der wissenschaftsgeschichtlichen Bedeutung von Ludwik Fleck.">
+      <file DocNo="D1499" name="LUDWIK FLECK ZENTRUM - COLLEGIUM HELVETICUM" type="url" link="http://www.ludwikfleck.ethz.ch/index.de.html" DateChanged="20061119" comment="&#xD;&#xA;Das Ludwik Fleck Zentrum ist eine Stätte für die Erforschung des Werks von Ludwik Fleck und ein Ort der Auseinandersetzung mit seinem Leben und Denken. Im Rahmen seiner Möglichkeiten unterstützt und dokumentiert das Zentrum die Aufarbeitung der wissenschaftsgeschichtlichen Bedeutung von Ludwik Fleck." Feld30="CC3000;CC3200;CC3700;">
         <notation>KE</notation>
         <notation>§§RVK§§:CC3000</notation>
         <notation>KE</notation>
@@ -7837,43 +7837,43 @@
         <notation>KE</notation>
         <notation>§§RVK§§:CC3700</notation>
       </file>
-      <file DocNo="D1500" name="phainomena" type="url" link="http://www.phainomena.de/blog/" DateChanged="20060514" comment="&#xD;&#xA;Der Web-Blog zur hermeneutischen Philosphie bietet Literatur, Veranstaltungen und andere Neuigkeiten zu Martin Heidegger und seiner Philosophie.&#xD;&#xA;">
+      <file DocNo="D1500" name="phainomena" type="url" link="http://www.phainomena.de/blog/" DateChanged="20060514" comment="&#xD;&#xA;Der Web-Blog zur hermeneutischen Philosphie bietet Literatur, Veranstaltungen und andere Neuigkeiten zu Martin Heidegger und seiner Philosophie.&#xD;&#xA;" Feld30="CI2600;CI1120;">
         <notation>KB79</notation>
         <notation>§§RVK§§:CI2600</notation>
         <notation>KB79</notation>
         <notation>§§RVK§§:CI1120</notation>
       </file>
-      <file DocNo="D1501" name="Philosophische Buecherei" type="url" link="http://buecherei.philo.at/index.htm" DateChanged="20040916" comment="&#xD;&#xA;Diese Sammlung von ausgewählten und kommentierten philosophischen Internet-Adressen soll PhilosophInnen und philosophisch Interessierten eine Grundlage für die Nutzung des Internet bieten. Ein Ziel ist dabei auch die Erleichterung der Vernetzung philosophischer Aktivitäten und akademischer Forschungen.&#xD;&#xA;&#xD;&#xA;">
+      <file DocNo="D1501" name="Philosophische Buecherei" type="url" link="http://buecherei.philo.at/index.htm" DateChanged="20040916" comment="&#xD;&#xA;Diese Sammlung von ausgewählten und kommentierten philosophischen Internet-Adressen soll PhilosophInnen und philosophisch Interessierten eine Grundlage für die Nutzung des Internet bieten. Ein Ziel ist dabei auch die Erleichterung der Vernetzung philosophischer Aktivitäten und akademischer Forschungen.&#xD;&#xA;&#xD;&#xA;" Feld30="CB1200;">
         <notation>KA</notation>
         <notation>§§RVK§§:CB1200</notation>
       </file>
-      <file DocNo="D1502" name="polylog Intercultural Philosophy" type="url" link="http://www.polylog.org/index-en.htm" DateChanged="20011110" comment="">
+      <file DocNo="D1502" name="polylog Intercultural Philosophy" type="url" link="http://www.polylog.org/index-en.htm" DateChanged="20011110" comment="" Feld30="CB;">
         <notation>KA</notation>
         <notation>§§RVK§§:CB</notation>
       </file>
-      <file DocNo="D1503" name="Rafael Capurro" type="url" link="http://www.capurro.de/index.html" DateChanged="20020526" comment="&#xD;&#xA;Rafael Capurro is a lecturer on philosophy and information science. His publications cover a broad range in philosophical anthropology, information and theory and information ethics.">
+      <file DocNo="D1503" name="Rafael Capurro" type="url" link="http://www.capurro.de/index.html" DateChanged="20020526" comment="&#xD;&#xA;Rafael Capurro is a lecturer on philosophy and information science. His publications cover a broad range in philosophical anthropology, information and theory and information ethics." Feld30="CC6500;CC7700;">
         <notation>KK</notation>
         <notation>§§RVK§§:CC6500</notation>
         <notation>KQ</notation>
         <notation>§§RVK§§:CC7700</notation>
       </file>
-      <file DocNo="D1504" name="Robert Nozick" type="url" link="http://www.juliansanchez.com/memorial.html" DateChanged="20040605" comment="&#xD;&#xA;Robert Nozick stood out among contemporary philosophers as a man with a deep passion for grappling with ideas. While probably best known for his radically libertarian political views, Nozick never lapsed into the dogmatism that plagues so many political thinkers. And, indeed, political thinker is far too narrow a label for someone whose intellectual interests ranged over (and beyond!) the entire spectrum of philosophical problems, from the freedom of the will and the nature of consciousness, to scientific method and epistemology.">
+      <file DocNo="D1504" name="Robert Nozick" type="url" link="http://www.juliansanchez.com/memorial.html" DateChanged="20040605" comment="&#xD;&#xA;Robert Nozick stood out among contemporary philosophers as a man with a deep passion for grappling with ideas. While probably best known for his radically libertarian political views, Nozick never lapsed into the dogmatism that plagues so many political thinkers. And, indeed, political thinker is far too narrow a label for someone whose intellectual interests ranged over (and beyond!) the entire spectrum of philosophical problems, from the freedom of the will and the nature of consciousness, to scientific method and epistemology." Feld30="CI6350;">
         <notation>KB79</notation>
         <notation>§§RVK§§:CI6350</notation>
       </file>
-      <file DocNo="D1505" name="Sic Et Non - Online Forum for Philosophy and Culture" type="url" link="http://www.sicetnon.cogito.de//" DateChanged="19991227" comment="">
+      <file DocNo="D1505" name="Sic Et Non - Online Forum for Philosophy and Culture" type="url" link="http://www.sicetnon.cogito.de//" DateChanged="19991227" comment="" Feld30="CB;">
         <notation>KA</notation>
         <notation>§§RVK§§:CB</notation>
       </file>
-      <file DocNo="D1506" name="Stanford Encyclopedia of Philosophy" type="url" link="http://plato.stanford.edu/contents-unabridged.html" DateChanged="20031214" comment="&#xD;&#xA;Principal Editor: Edward N. Zalta. The Metaphysics Research Lab at the Center for the Study of Language and Information, Stanford University. - June 16, 2000. - Stanford, CA, 2000 &#xD;&#xA;Dynamische Enzyklopädie, noch im Aufbau begriffen. Die einzelnen Artikel werden vom jew. Autor ständig aktuell gehalten. [17.06.2000]&#xD;&#xA;Schlagworte: Philosophie, Lexikon, Wörterbuch, Philosophiegeschichte, systematische Philosophie,">
+      <file DocNo="D1506" name="Stanford Encyclopedia of Philosophy" type="url" link="http://plato.stanford.edu/contents-unabridged.html" DateChanged="20031214" comment="&#xD;&#xA;Principal Editor: Edward N. Zalta. The Metaphysics Research Lab at the Center for the Study of Language and Information, Stanford University. - June 16, 2000. - Stanford, CA, 2000 &#xD;&#xA;Dynamische Enzyklopädie, noch im Aufbau begriffen. Die einzelnen Artikel werden vom jew. Autor ständig aktuell gehalten. [17.06.2000]&#xD;&#xA;Schlagworte: Philosophie, Lexikon, Wörterbuch, Philosophiegeschichte, systematische Philosophie," Feld30="CB3500;">
         <notation>KA</notation>
         <notation>§§RVK§§:CB3500</notation>
       </file>
-      <file DocNo="D1507" name="Theorists and Critics  Richard Rorty" type="url" link="http://www.popcultures.com/theorists/rorty.html" DateChanged="20011027" comment="">
+      <file DocNo="D1507" name="Theorists and Critics  Richard Rorty" type="url" link="http://www.popcultures.com/theorists/rorty.html" DateChanged="20011027" comment="" Feld30="CB;">
         <notation>KA</notation>
         <notation>§§RVK§§:CB</notation>
       </file>
-      <file DocNo="D1508" name="UTB Handwörterbuch Philosophie" type="url" link="http://www.philosophie-woerterbuch.de/" DateChanged="20110804" comment="&#xD;&#xA;UTB-Online-Wörterbuch Philosophie ist die Online-Ausgabe des bei UTB erschienenen Handwörterbuchs Philosophie, herausgegeben von Wulff D. Rehfus. Die Nutzung der Website ist kostenlos.&#xD;&#xA;Schlagworte: Philosophie, Lexikon, Wörterbuch, Philosophiegeschichte, systematische Philosophie,&#xD;&#xA;&#xD;&#xA;">
+      <file DocNo="D1508" name="UTB Handwörterbuch Philosophie" type="url" link="http://www.philosophie-woerterbuch.de/" DateChanged="20110804" comment="&#xD;&#xA;UTB-Online-Wörterbuch Philosophie ist die Online-Ausgabe des bei UTB erschienenen Handwörterbuchs Philosophie, herausgegeben von Wulff D. Rehfus. Die Nutzung der Website ist kostenlos.&#xD;&#xA;Schlagworte: Philosophie, Lexikon, Wörterbuch, Philosophiegeschichte, systematische Philosophie,&#xD;&#xA;&#xD;&#xA;" Feld30="CB3500;">
         <notation>KA</notation>
         <notation>§§RVK§§:CB3500</notation>
       </file>

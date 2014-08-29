@@ -126,8 +126,6 @@ namespace MvcRQ.Models
             {
                 // RQItemSet ist leer
                 throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
-
-                //return "";
             }
         }
 
@@ -258,7 +256,6 @@ namespace MvcRQ.Models
             }
             else
                 return this.RQItems.ElementAt(i);
-            //return new RQItem(ItemResultSet.GetItem(i));
         }
 
         public void Update()
@@ -1225,10 +1222,20 @@ namespace MvcRQ.Models
 
     public class RQItemModelRepository
     {
+        #region private members
+
         private bool bUseHttpCache = true;
 
+        #endregion
+
+        #region public members 
+
         public ModelParameters modelParameters = new ModelParameters(ModelParameters.SortTypeEnum.BySubject);
-        
+
+        #endregion
+
+        #region private methods
+
         private RQquery GetQuery(string queryString, MvcRQ.Areas.UserSettings.UserState.States stateType)
         {
             RQquery q = StateStorage.GetQueryFromState(queryString, stateType);
@@ -1237,20 +1244,18 @@ namespace MvcRQ.Models
             return q;
         }
 
-        public RQItemModelRepository()
+        private RQquery GetQuery(string queryString, MvcRQ.Areas.UserSettings.UserState.States stateType, string rqitemId)
         {
+            RQquery q = GetQuery(queryString, stateType);
+
+            q.DocId = rqitemId;
+            StateStorage.PutQueryToState(q, stateType);
+            return q;
         }
 
-        public RQquery GetQuery(string queryString)
-        {
-            MvcRQ.Areas.UserSettings.UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? MvcRQ.Areas.UserSettings.UserState.States.BrowseViewState : MvcRQ.Areas.UserSettings.UserState.States.ListViewState;
-            return this.GetQuery(queryString, stateType);
-        }
-
-        public RQItemModel GetModel(string queryString, MvcRQ.Areas.UserSettings.UserState.States stateType, bool forEdit)
+        private RQItemModel GetModel(RQquery query, bool forEdit)
         {
             RQItemModel rqitemModel = null;
-            RQquery query = this.GetQuery(queryString, stateType);
 
             if (!forEdit && bUseHttpCache) rqitemModel = CacheManager.Get<RQItemModel>(query.Id.ToString());
             if (forEdit) query.QueryExternal = "";
@@ -1262,6 +1267,32 @@ namespace MvcRQ.Models
                 if (!forEdit && bUseHttpCache) CacheManager.Add(query.Id.ToString(), rqitemModel);
             }
             return rqitemModel;
+        }
+
+        #endregion
+
+        #region public constructors
+
+        public RQItemModelRepository()
+        {
+        }
+
+        #endregion
+
+        #region public methods
+
+        public RQquery GetQuery(string queryString)
+        {
+            MvcRQ.Areas.UserSettings.UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? MvcRQ.Areas.UserSettings.UserState.States.BrowseViewState : MvcRQ.Areas.UserSettings.UserState.States.ListViewState;
+            
+            return this.GetQuery(queryString, stateType);
+        }
+
+        public RQItemModel GetModel(string queryString, MvcRQ.Areas.UserSettings.UserState.States stateType, bool forEdit)
+        {
+            RQquery query = this.GetQuery(queryString, stateType);
+
+            return GetModel(query, forEdit);
         }
 
         public RQItemModel GetModel(string queryString, MvcRQ.Areas.UserSettings.UserState.States stateType)
@@ -1279,7 +1310,7 @@ namespace MvcRQ.Models
         {
             try // try to get item to copy from cache
             {
-                RQItem res = this.GetModel("", stateType, forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
+                RQItem res = this.GetModel(GetQuery("", stateType, rqitemId), forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
 
                 if (res == null) throw new Exception();
                 return res;
@@ -1288,7 +1319,9 @@ namespace MvcRQ.Models
             {
                 try // try to get item to copy from database
                 {
-                    return this.GetModel("$access$" + rqitemId, stateType, forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
+                    RQItem res = this.GetModel(GetQuery("$access$" + rqitemId, stateType, rqitemId), forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
+
+                    return res;
                 }
                 catch
                 {
@@ -1296,6 +1329,8 @@ namespace MvcRQ.Models
                 }
             }
         }
+
+        #endregion
     }
 
     public class ModelParameters

@@ -11,7 +11,7 @@ function getOldRQItem(docno) {
 
 function renderHtmlList(data) {
     var optionsValues = "";
-   
+    
     $(".content-box").html(data);
     $(".category").each(function () {
         optionsValues += '<option value="'+$(this).attr("pos") + '">' + $(this).text() + '</option>';
@@ -146,11 +146,16 @@ function callAjax_ResultList(targetUrl) {
         dataType: "html",
         success: function (data) {
             renderHtmlList(data);
+
             if (docNo != "") {
                 setTimeout(function () {
                     getOldRQItem(docNo);
                 }, 1)
-            };
+            }
+            else
+                setTimeout(function () {
+                    getOldRQItem($("div", data).attr("docno"));
+                }, 1)
             fd.remove();
             resizeToWindowHeight();
         },

@@ -1,63 +1,73 @@
+03.00	Version 0.3																											begonnen: 
+
+03.01		Result list
+03.011			Synchronize shelf sort order with classification tree.
+03.012			Generate links to GoogleBooks (or IMDb) in availabilty field.
+03.013			Switch to page containing the active (i. e. opened) RQItem.
+03.014			Show only result documents with access rights for active user.
+03.0141				A: filter access rights when document descriptions are retrieved.
+03.0142				B: filter access rights when result list is generated (not favoured).
+
+03.02		Get book cover images by Library of Congress IDs.
+
+03.03		Exception management
+03.031			Redesign and unify exception management functions.
+03.032			Unify error messages (color, position etc.).
+
+03.04		ItemViewer									
+03.041			Display actual track title for audio & video.
+03.042			Add remote access & access control for digital audios.										
+03.043			Add remote access & access control for digital videos.
+03.044			Move ItemViewer code to digital objects area.
+03.045			Add viewer for still images.
+03.049			Convert DVD videos to HTML5 video formats.							
+
+03.05		Data edit & import functions						
+03.051			Implement import of PDF document directories (with automatic title recognition).
+03.052          Implement data entry of hierarchical digital audio objects. 
+
+03.06		Semantic web interface									
+03.061			Import person data from semantic web (partially implemented for Brecht, Kalendergeschichten).	
+
+03.07		Lokalisation
+03.071			Lokalize user authorization modules (attributes in AccountModels.cs).
+03.072			Localize RQLib module (especially error messages).						
+
+03.08		Implement RSS-Viewer
+
+03.09		JQuery user interface functions
+03.091			Evaluate Ajax Global Event Handlers for generic UI features of Ajax Calls 
+				(f. e. fade out, error messages) 
+
+03.10		Bugs
+03.1001			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.
+03.1002			§§RVK§§:... wird nicht in rq_c-Klassifikationscode umgesetzt (Konnex zu 99.01?)
+03.1003			In der Lucene-Datenbank sind Suchen nach ID oder DocNr nicht möglich (s.a. Konstruktor RQItem(itemId)).
+03.1004			Kein-Treffer-Fehlermeldung wird remote nicht angezeigt.
+03.1005 		Kein-Treffer-Fehlermeldungen erscheinen in API-Seiten als doppelte Alert-Box.		
+03.1006			Lokal & remote verschwindet der Ajax-Wait-Indikator nicht.
+03.1007			IM IE10 werden XML-Resultate bei Web-Services nicht angezeigt. 
+03.1008			Falscher SQL-Connection-String in IndexConfig.xml.
+03.1009			Server-Fehler bei Edition von Adorno "Aufarbeitung der Vergangenheit"
+03.1010			Fehlerhafter Öffnungszustand eines vorher geöffneten DynaTree-Knotens beim Wiederaufruf der Seite.
+03.1011			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten.
+03.1012			Fehler beim Switch zwischen einzelnem RQItem im Katalog-View & dem korrespondierenden Shelves-View
+
+03.99		Sicherung & Veröffentlichung																					begonnen:			erledigt: 
+03.993			Version 0.3.0.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen:			erledigt:
+03.998			Version 0.3.X.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen:			erledigt:
+03.999			Version 0.3.X.0 auf www.riquest.de							(final)											begonnen:			erledigt:
+
 	--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 02.00	Version 0.2																											begonnen: 140102
 
-02.01		Ergebnisanzeige
-02.011			In Ergebnisliste zum aktuellen RQItem scrollen (z.B. auf das 1. RQItem des gewählten Segments)
-				(muss in jquery.pajinate.js eingebaut werden)
-02.012			Detailanzeige einschalten falls nur 1 Element in Ergebnisliste
-02.013			Ergebnisanzeige auf die für den Benutzer freigegebenen Dokumente beschränken
-02.0131				Variante A: Benutzerrechte beim Dokumentretrieval berücksichtigen
-02.0132				Variante B: Benutzerrechte beim Aufbau der ResultList berücksichtigen
-					(im Kontext von 01.12 zunächst verworfen)						
+02.01		Ergebnisanzeige																									begonnen: 140829	erledigt: 140829
+02.012			Detailanzeige einschalten falls nur 1 Element in Ergebnisliste												begonnen: 140827	erledigt: 140829
+02.014			Remember last opened document description in list or browse view & reopen when going back					begonnen: 140829	erledigt: 140829  						
 
-02.02		RSS-Viewer einbinden			
-
-02.03		Semantic Web Interface									
-02.031			Semantic Web Personen-Information 
-				(abgebrochen: s. Brecht, Kalendergeschichten (Links unbeabsichtigt gelöscht))	
-
-02.04		LEER
-
-02.05		Exception-Management
-02.051			Überarbeiten und vereinheitlichen
-02.052			Fehlermeldungen (Farbe, Position)
-
-02.06		JQuery Nutzer-Interface-Funktionen
-02.061			PRÜFEN: Ajax Global Event Handlers für Standard UI-Elemente bei Ajax Calls 
-				(Fade-Out, Fehlermeldungen etc.) 
-
-02.07		ItemViewer (Dokument, Video, Audio, Bild)									
-02.071			Aktuellen Track-Titel bei Audio & Video-Playern anzeigen
-02.072			ItemViewer in die DigitalObjects-Area verlagern.
-02.073			Add still image viewer
-02.074			Convert DVD videos to HTML5 video formats							
+02.07		ItemViewer (Dokument, Video, Audio, Bild)																		begonnen: 140822	erledigt: 140824
 02.075			Add access control for digital documents																	begonnen: 140822	erledigt: 140824
-02.076			Add remote access & access control for digital audios										
-02.077			Add remote access & access control for digital videos
-
-02.08		SQLEXPRESS Server aufsetzen
-02.081			Speicherung der Benutzereinstellungen überprüfen				
-02.082			Auf den Web-Servern (DomainBox, ESC; QualityHosting)
-
-02.09		Editier- & Importfunktionen vervollständigen						
-02.091			Editier- & Importrechte eine Benutzers in der Ergebnisanzeige freischalten	
-02.0911				Zugriffsrechte mit dem Dokument abspeichern 		
-02.0912				Alle Nutzerrollen implementieren (setzt voraus 02.00)
-02.092			Client-Side Editierfunktonen verbessern							
-02.0921				Benutzeroptionen für Rücksprungvarianten
-02.093			Elementare Editier- & Importfunktionen testen 
-02.0931				Import der Weblinks überprüfen
-02.0932                         Bearbeitung von hierarchischen MP3-Digitalen-Objekten. 
-02.0933				Eingangsbearbeitung der MP3-Digitalen-Objekten in die DigitalObjects-Area verlagern.
-02.0934				Import von PDF-Verzeichnissen (mit automatischer Titelerkennung)
-02.094			Editieren des Klassifikationsbaums
-
-02.10		Buch-Cover über Library of Congress-IDs suchen
-
-02.11		Lokalisierung
-02.111			Lokalisierung der Autorisierungsmodule (Attribute in AccountModels.cs)
-02.112			RQLib-Modul lokalisieren (vor allem Fehlermeldungen)						
 				
 02.12		Editor für Klassifikationstabelle																				begonnen: 140102	erledigt: 140817
 02.121			Check- & Add-Funktionalität für ClassBranch-Editor															begonnnn: 140102	erledigt: 140120
@@ -67,20 +77,6 @@
 02.125			Veränderungen von Bookmarks in DIR.XML																		begonnen: 140817	erledigt: 140817
 02.126			Tabelle Systematik anpassen (Philosophiegeschichte entspr. tats. Aufstellung auf KA setzen)					begonnen: 140427	erledigt: 140430	
 02.127			Unterklassen im DynaTree nach Klassen-Code sortieren														begonnen: 140409	erledigt: 140412
-
-02.13		Bugs 0.1 beseitigen
-02.1301			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.
-02.1302			§§RVK§§:... wird nicht in rq_c-Klassifikationscode umgesetzt (Konnex zu 99.01?)
-02.1303			In der Lucene-Datenbank sind Suchen nach ID oder DocNr nicht möglich (s.a. Konstruktor RQItem(itemId)).
-02.1304			Kein-Treffer-Fehlermeldung wird remote nicht angezeigt.
-02.1305 			Kein-Treffer-Fehlermeldungen erscheinen in API-Seiten als doppelte Alert-Box.		
-02.1306			Lokal & remote verschwindet der Ajax-Wait-Indikator nicht.
-02.1307			IM IE10 werden XML-Resultate bei Web-Services nicht angezeigt. 
-02.1308			Falscher SQL-Connection-String in IndexConfig.xml.
-02.1309			Server-Fehler bei Edition von Adorno "Aufarbeitung der Vergangenheit"
-02.1310			Fehlerhafter Öffnungszustand eines vorher geöffneten DynaTree-Knotens beim Wiederaufruf der Seite.
-02.1311			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten.
-02.1312			Fehler beim Switch zwischen einzelnem RQItem im Katalog-View & dem korrespondierenden Shelves-View
 
 02.14		ISSUE: KRITISCHE FEHLER																							begonnen: 140316	erledigt: 140627
 02.141			Neuzugänge im bookmark-index erscheinen nicht in der Ergebnisliste.											begonnen: 140316	erledigt: 140316
@@ -96,7 +92,8 @@
 02.993			Version 0.2.1.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen: 140304	erledigt: 140304
 02.994			Version 0.2.2.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen: 140506	erledigt: 140506
 02.995			Version 0.2.3.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen: 140817	erledigt: 140817
-02.999			Version 0.2.X.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)
+02.998			Version 0.2.4.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen: 140830
+02.999			Version 0.2.4.0 auf www.riquest.de							(final)											begonnen: 140830	
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			

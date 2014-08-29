@@ -72,6 +72,15 @@ namespace MvcRQ.Helpers
             return query;
         }
 
+        public static void PutQueryToState(RQquery query, UserState.States stateType)
+        {
+            state = (ViewState)UserState.Get(stateType);
+            if (state == null)
+                state = new ViewState(stateType);
+            state.query = query;
+            state.Save();
+        }
+
         public static Boolean GetClasstreeOptionsState()
         {
             state = (ViewState)UserState.Get(UserState.States.ClasstreeOptionsState);
