@@ -130,6 +130,15 @@ namespace MvcRQ.Models
         }
 
         #endregion
+
+        #region public static methods
+
+        public static string GetActiveDocumentID(Areas.UserSettings.UserState.States state)
+        {
+            return MvcRQ.Helpers.StateStorage.GetQueryFromState("", state).DocId;
+        }
+
+        #endregion
     }
 
     [DataContract()]
@@ -1090,15 +1099,11 @@ namespace MvcRQ.Models
 
         public void UpdateClassRelation(RQResultSet theResultSet)
         {
-            string oldClass = this._savedFieldValues["Classification"];
+            string oldClass = string.IsNullOrEmpty(this._savedFieldValues["Classification"]) ? ";" : this._savedFieldValues["Classification"];
+            string msg = "";
+            string newClass = this.ClassificationFieldContent;
 
-            if (!string.IsNullOrEmpty(oldClass))
-            {
-                string msg = "";
-                string newClass = this.ClassificationFieldContent;
-
-                theResultSet.UpdateClassRelation(ref oldClass, ref newClass, ref msg);
-            }
+            theResultSet.UpdateClassRelation(ref oldClass, ref newClass, ref msg);
         }
 
         public XmlTextReader ConvertTo(string dataFormat)

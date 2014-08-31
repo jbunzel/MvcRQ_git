@@ -35,15 +35,10 @@ namespace MvcRQ.Areas.ItemViewer.Models
         /// <param name="itemAdr"></param>
         public ItemViewerModel(string itemId, string itemAdr)
         {
+            if (itemAdr.EndsWith(".mht")) itemAdr = itemAdr.Replace(".mht", ".pdf");
             this.viewItem = new RQItem(itemId);
             this.itemAdress = itemAdr;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        //public ItemViewerModel()
-        //{ }
 
         #endregion
 

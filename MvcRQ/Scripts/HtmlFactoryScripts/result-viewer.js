@@ -146,8 +146,7 @@ function callAjax_ResultList(targetUrl) {
         dataType: "html",
         success: function (data) {
             renderHtmlList(data);
-
-            if (docNo != "") {
+            if (docNo != "" && docNo != null) {
                 setTimeout(function () {
                     getOldRQItem(docNo);
                 }, 1)

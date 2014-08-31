@@ -52,6 +52,7 @@
 03.1010			Fehlerhafter Öffnungszustand eines vorher geöffneten DynaTree-Knotens beim Wiederaufruf der Seite.
 03.1011			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten.
 03.1012			Fehler beim Switch zwischen einzelnem RQItem im Katalog-View & dem korrespondierenden Shelves-View
+03.1013			Subfolder tooltips in classification tree contain wrong bookmark counts (s.f.e. musica practica)
 
 03.99		Sicherung & Veröffentlichung																					begonnen:			erledigt: 
 03.993			Version 0.3.0.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen:			erledigt:
