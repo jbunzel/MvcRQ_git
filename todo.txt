@@ -7,8 +7,10 @@
 03.014			Show only result documents with access rights for active user.
 03.0141				A: filter access rights when document descriptions are retrieved.
 03.0142				B: filter access rights when result list is generated (not favoured).
+03.015			Get book cover images by Library of Congress IDs.
 
-03.02		Get book cover images by Library of Congress IDs.
+03.04		Account management
+03.041			Add e-mail confirmation on registration
 
 03.03		Exception management
 03.031			Redesign and unify exception management functions.
@@ -55,13 +57,14 @@
 03.1013			Subfolder tooltips in classification tree contain wrong bookmark counts (s.f.e. musica practica)
 
 03.99		Sicherung & Veröffentlichung																					begonnen:			erledigt: 
+03.991			Version 0.2.4.0 auf www.riquest.de							(final)											begonnen: 140914	erledigt:
 03.993			Version 0.3.0.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen:			erledigt:
 03.998			Version 0.3.X.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen:			erledigt:
 03.999			Version 0.3.X.0 auf www.riquest.de							(final)											begonnen:			erledigt:
 
 	--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-02.00	Version 0.2																											begonnen: 140102
+02.00	Version 0.2																											begonnen: 140102	erledigt: 140914
 
 02.01		Ergebnisanzeige																									begonnen: 140829	erledigt: 140829
 02.012			Detailanzeige einschalten falls nur 1 Element in Ergebnisliste												begonnen: 140827	erledigt: 140829
@@ -87,14 +90,13 @@
 02.1432				Fix expected prefix track of item id "dddd_" at m3u file adress											begonnen: 140624	erledigt: 140627
 02.144			FEHLERVERDACHT: Neueingaben mit PDF-Inhaltsverzeichnissen korrumpieren die Access-Datenbank 
 
-02.99		Sicherung & Veröffentlichung																					begonnen: 131229	erledigt: 
+02.99		Sicherung & Veröffentlichung																					begonnen: 131229	erledigt: 140914 
 02.991			Version 0.2.0.0 auf www.riquest.de							(intermediate)									begonnen: 131229	erledigt: 131229
 02.992			Version 0.2.1.0 auf github.com/jbunzel/MvcRQ master 		(intermediate)									begonnen: 140301	erledigt: 140301
 02.993			Version 0.2.1.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen: 140304	erledigt: 140304
 02.994			Version 0.2.2.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen: 140506	erledigt: 140506
 02.995			Version 0.2.3.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen: 140817	erledigt: 140817
-02.998			Version 0.2.4.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen: 140830
-02.999			Version 0.2.4.0 auf www.riquest.de							(final)											begonnen: 140830	
+02.998			Version 0.2.4.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen: 140830	erledigt: 140914
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			
