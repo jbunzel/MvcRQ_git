@@ -151,10 +151,10 @@
     <value>Home</value>
   </data>
   <data name="link_privacy" xml:space="preserve">
-    <value>Schutz</value>
+    <value>Datenschutz</value>
   </data>
   <data name="link_terms" xml:space="preserve">
-    <value>Nutzung</value>
+    <value>Nutzungsbedingungen</value>
   </data>
   <data name="logoff" xml:space="preserve">
     <value>Abmelden</value>

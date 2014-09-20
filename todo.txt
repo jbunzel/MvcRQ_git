@@ -9,8 +9,8 @@
 03.0142				B: filter access rights when result list is generated (not favoured).
 03.015			Get book cover images by Library of Congress IDs.
 
-03.04		Account management
-03.041			Add e-mail confirmation on registration
+03.02		Account management
+03.021			Add e-mail confirmation on registration
 
 03.03		Exception management
 03.031			Redesign and unify exception management functions.
@@ -39,25 +39,29 @@
 
 03.09		JQuery user interface functions
 03.091			Evaluate Ajax Global Event Handlers for generic UI features of Ajax Calls 
-				(f. e. fade out, error messages) 
+				(f. e. fade out, error messages)
+				
+03.10		Menu
+03.101			Complete all menues 
+03.102			Add links to all pages				 
 
-03.10		Bugs
-03.1001			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.
-03.1002			§§RVK§§:... wird nicht in rq_c-Klassifikationscode umgesetzt (Konnex zu 99.01?)
-03.1003			In der Lucene-Datenbank sind Suchen nach ID oder DocNr nicht möglich (s.a. Konstruktor RQItem(itemId)).
-03.1004			Kein-Treffer-Fehlermeldung wird remote nicht angezeigt.
-03.1005 		Kein-Treffer-Fehlermeldungen erscheinen in API-Seiten als doppelte Alert-Box.		
-03.1006			Lokal & remote verschwindet der Ajax-Wait-Indikator nicht.
-03.1007			IM IE10 werden XML-Resultate bei Web-Services nicht angezeigt. 
-03.1008			Falscher SQL-Connection-String in IndexConfig.xml.
-03.1009			Server-Fehler bei Edition von Adorno "Aufarbeitung der Vergangenheit"
-03.1010			Fehlerhafter Öffnungszustand eines vorher geöffneten DynaTree-Knotens beim Wiederaufruf der Seite.
-03.1011			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten.
-03.1012			Fehler beim Switch zwischen einzelnem RQItem im Katalog-View & dem korrespondierenden Shelves-View
-03.1013			Subfolder tooltips in classification tree contain wrong bookmark counts (s.f.e. musica practica)
+03.90		Bugs
+03.9001			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.
+03.9002			§§RVK§§:... wird nicht in rq_c-Klassifikationscode umgesetzt (Konnex zu 99.01?)
+03.9003			In der Lucene-Datenbank sind Suchen nach ID oder DocNr nicht möglich (s.a. Konstruktor RQItem(itemId)).
+03.9004			Kein-Treffer-Fehlermeldung wird remote nicht angezeigt.
+03.9005 		Kein-Treffer-Fehlermeldungen erscheinen in API-Seiten als doppelte Alert-Box.		
+03.9006			Lokal & remote verschwindet der Ajax-Wait-Indikator nicht.
+03.9007			IM IE10 werden XML-Resultate bei Web-Services nicht angezeigt. 
+03.9008			Falscher SQL-Connection-String in IndexConfig.xml.
+03.9009			Server-Fehler bei Edition von Adorno "Aufarbeitung der Vergangenheit"
+03.9010			Fehlerhafter Öffnungszustand eines vorher geöffneten DynaTree-Knotens beim Wiederaufruf der Seite.
+03.9011			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten.
+03.9012			Fehler beim Switch zwischen einzelnem RQItem im Katalog-View & dem korrespondierenden Shelves-View
+03.9013			Subfolder tooltips in classification tree contain wrong bookmark counts (s.f.e. musica practica)
 
 03.99		Sicherung & Veröffentlichung																					begonnen:			erledigt: 
-03.991			Version 0.2.4.0 auf www.riquest.de							(final)											begonnen: 140914	erledigt:
+03.991			Version 0.2.4.0 auf www.riquest.de							(final)											begonnen: 140914	erledigt: 140914
 03.993			Version 0.3.0.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen:			erledigt:
 03.998			Version 0.3.X.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen:			erledigt:
 03.999			Version 0.3.X.0 auf www.riquest.de							(final)											begonnen:			erledigt:
