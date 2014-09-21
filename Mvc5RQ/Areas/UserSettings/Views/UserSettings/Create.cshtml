@@ -1,0 +1,49 @@
+﻿@model MvcRQ.Areas.UserSettings.Models.QueryOptions
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>QueryOptions</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserId)
+            @Html.ValidationMessageFor(model => model.UserId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SortOptionId, "SortOption")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("SortOptionId", String.Empty)
+            @Html.ValidationMessageFor(model => model.SortOptionId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IncludeExternal)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IncludeExternal)
+            @Html.ValidationMessageFor(model => model.IncludeExternal)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
