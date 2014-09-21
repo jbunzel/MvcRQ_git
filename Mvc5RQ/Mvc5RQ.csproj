@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mvc5RQ</RootNamespace>
     <AssemblyName>Mvc5RQ</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +32,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>App_Data\XmlDocument.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,15 +44,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
@@ -104,6 +109,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -170,6 +176,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\DigitalObjects\DigitalObjectsAreaRegistration.cs" />
+    <Compile Include="Areas\DigitalObjects\Helpers\DigitalObjectHelpers.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -198,21 +206,52 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\MyJsonResult.cs" />
+    <Compile Include="Areas\UserSettings\Controllers\UserSettingsController.cs" />
+    <Compile Include="Areas\UserSettings\Helpers\IUserSettingsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\UserSettings\Helpers\UserSettingsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\UserSettings\Helpers\UserStates.cs" />
+    <Compile Include="Areas\UserSettings\Models\SettingsDBContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\UserSettings\Models\SettingsDBInitializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\UserSettings\Models\SettingsModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\UserSettings\UserSettingsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\RQDSController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RQLDController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AccessRightsResolver.cs" />
+    <Compile Include="Helpers\CacheManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helpers\StateStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helpers\TransformHelper.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\RQItemsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -240,6 +279,54 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Areas\DigitalObjects\Views\Web.config" />
+    <Content Include="Areas\UserSettings\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\UserSettings\Views\Web.config" />
+    <Content Include="xml\dir.xml" />
+    <Content Include="xml\extdblist.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml\IndexConfig.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml\shelves.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml\stdquery.de-DE.xml" />
+    <Content Include="xml\stdquery.xml" />
+    <Content Include="xslt\MODS2RQI.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\RQ2DC.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\rqi2dc.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\rqi2rq.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\RQKos2RDF.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\SRUMARC2MODS.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\ViewTransforms\RQI2ShortTitleView.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\ViewTransforms\RQI2SingleItemView.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\ViewTransforms\RQItemFields.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\ViewTransforms\RQResultList2RQSorted.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xslt\ViewTransforms\RQResultList2RQSorted_Paging.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -251,7 +338,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -267,9 +356,34 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\RQItems\ServRQItem.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <ProjectReference Include="..\dotNetRDF\Libraries\core\dotNetRDF.csproj">
+      <Project>{bfbac159-1e60-4d03-8aca-d34e31eb83bf}</Project>
+      <Name>dotNetRDF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQDigitalObjects\RQDigitalObjects.csproj">
+      <Project>{97cfd688-bbea-47f5-90fc-718dcd1cfd71}</Project>
+      <Name>RQDigitalObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQLinkedData\RQLinkedData.csproj">
+      <Project>{182ed3fc-0121-4a3f-9f79-b8c5782bb755}</Project>
+      <Name>RQLinkedData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQQueryResult\RQLib.vbproj">
+      <Project>{d695eaa6-b358-4c80-82aa-a0aa15ebc5d4}</Project>
+      <Name>RQLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQResources\RQResources.csproj">
+      <Project>{d569e168-0bc3-4c25-8d42-880879831975}</Project>
+      <Name>RQResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQState\RQState.csproj">
+      <Project>{75722e2e-2954-4a8b-96e1-9ac650e3f5b9}</Project>
+      <Name>RQState</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -277,6 +391,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\DigitalObjects\Controllers\" />
+    <Folder Include="Areas\DigitalObjects\Models\" />
+    <Folder Include="Areas\DigitalObjects\Views\Shared\" />
+    <Folder Include="Areas\UserSettings\Views\Shared\" />
+    <Folder Include="Areas\UserSettings\Views\UserSettings\" />
+    <Folder Include="~db\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
