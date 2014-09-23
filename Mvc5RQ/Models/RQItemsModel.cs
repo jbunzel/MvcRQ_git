@@ -577,19 +577,19 @@ namespace Mvc5RQ.Models
             }
         }
 
-        //[DataMember]
-        //[XmlElement]
-        //public RQAuthors AuthorsEntity
-        //{
-        //    get
-        //    {
-        //        return this._resultItem.ItemDescription.Authors;
-        //    }
-        //    set
-        //    {
-        //        this._resultItem.ItemDescription.Authors = value;
-        //    }
-        //}
+        [DataMember]
+        [XmlElement]
+        public RQAuthors AuthorsEntity
+        {
+            get
+            {
+                return this._resultItem.ItemDescription.Authors;
+            }
+            set
+            {
+                this._resultItem.ItemDescription.Authors = value;
+            }
+        }
 
         [DataMember]
         [DataType(DataType.MultilineText)]
@@ -996,19 +996,19 @@ namespace Mvc5RQ.Models
             }
         }
 
-        //[DataMember]
-        //[XmlElement]
-        //public RQClassification Classification
-        //{
-        //    get
-        //    {
-        //        return this._resultItem.ItemDescription.Classification;
-        //    }
-        //    set
-        //    {
-        //        this._resultItem.ItemDescription.Classification = value;
-        //    }
-        //}
+        [DataMember]
+        [XmlElement]
+        public RQClassification Classification
+        {
+            get
+            {
+                return this._resultItem.ItemDescription.Classification;
+            }
+            set
+            {
+                this._resultItem.ItemDescription.Classification = value;
+            }
+        }
 
         [DataMember]
         [DataType(DataType.Text)]
