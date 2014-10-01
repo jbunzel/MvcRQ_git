@@ -258,10 +258,11 @@ namespace Mvc5RQ.Models
         {
             if (this._rqitemsList == null)
             {
-                RQResultItem t1 = ItemResultSet.GetItem(i);
-                RQItem t2 = new RQItem(ItemResultSet.GetItem(i));
+                //RQResultItem t1 = ItemResultSet.GetItem(i);
+                //RQItem t2 = new RQItem(ItemResultSet.GetItem(i));
 
-                return t2;
+                //return t2;
+                return new RQItem(ItemResultSet.GetItem(i));
             }
             else
                 return this.RQItems.ElementAt(i);
@@ -410,6 +411,7 @@ namespace Mvc5RQ.Models
     [XmlRoot]
     public class RQItem
     {
+        
         #region internal members
 
         internal RQResultItem _resultItem { get; set; }
@@ -425,11 +427,11 @@ namespace Mvc5RQ.Models
             short_title
         }
 
-        public enum DataFormat
-        {
-            intern,
-            dc
-        }
+        //public enum DataFormat
+        //{
+        //    intern,
+        //    dc
+        //}
 
         #endregion
 
@@ -1351,13 +1353,35 @@ namespace Mvc5RQ.Models
             ByShelfClass
         }
 
+        public enum FormatEnum
+        {
+            oai_dc,
+            srw_dc,
+            info_ofi,
+            mods,
+            rq,
+            rqi
+        }
+
+        public FormatEnum Format { get; set; }
+
         public SortTypeEnum SortType {get; set; }
 
-        public ModelParameters(SortTypeEnum sortType)
+        public string XmlTransformPath { get; set; }
+
+        public ModelParameters(SortTypeEnum sortType, FormatEnum format)
         {
             this.SortType = sortType;
+            this.Format = format;
+            this.XmlTransformPath = HttpContext.Current.Server.MapPath(this.GetXslTransformFilePath());
         }
-        
+
+        public ModelParameters(SortTypeEnum sortType)
+            : this(sortType, FormatEnum.rqi) {}
+
+        public ModelParameters(FormatEnum format)
+            : this(SortTypeEnum.BySubject, format) { }
+
         public string SortTypeString()
         {
             switch (this.SortType)
@@ -1390,6 +1414,25 @@ namespace Mvc5RQ.Models
                 retVal = false;
 
             return retVal;
+        }
+
+        public string GetXslTransformFilePath()
+        {
+            switch (this.Format)
+            {
+                case FormatEnum.mods:
+                    return "";
+                case FormatEnum.oai_dc:
+                    return "~/xslt/rqi2dc.xslt";
+                case FormatEnum.srw_dc:
+                    return "";
+                case FormatEnum.info_ofi:
+                    return "";
+                case FormatEnum.rq:
+                    return "~/xslt/rqi2rq.xslt";
+                default:
+                    return "";
+            }
         }
     }
 }

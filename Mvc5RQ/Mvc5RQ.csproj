@@ -230,6 +230,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RQLDController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Formatters\XmlCustomFormatter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

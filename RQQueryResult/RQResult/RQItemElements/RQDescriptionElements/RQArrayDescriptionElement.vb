@@ -155,18 +155,6 @@ Namespace RQQueryResult.RQDescriptionElements
         End Function
 
 
-        'Public Function GetItem(ByVal i As Integer) As SubjClass
-        '    If i < count Then
-        '        If Not IsNothing(Me._array(i)) Then
-        '            Return Me._array(i)
-        '        Else
-        '            Return Nothing
-        '        End If
-        '    End If
-        '    Return Nothing
-        'End Function
-
-
         Public Function GetItem(ByVal i As Integer) As RQDescriptionComponent
             If i < count Then
                 If Not IsNothing(Me._array(i)) Then

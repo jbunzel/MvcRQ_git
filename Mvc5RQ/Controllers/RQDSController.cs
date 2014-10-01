@@ -26,24 +26,27 @@ namespace Mvc5RQ.Controllers
         /// <returns></returns>
         [Route("{dbname}/{format}")]
         [HttpGet]
-        public IEnumerable<RQItem> Get(string dbname)
+        public RQItemModel Get(string dbname)
         {
             //if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
             //{
-                RQItemModel model = new Mvc5RQ.Models.RQItemModel(new RQLib.RQQueryForm.RQquery("Bunzel"));
+                RQItemModel model = new Mvc5RQ.Models.RQItemModel(new RQLib.RQQueryForm.RQquery("Bunzel"), false, new ModelParameters(ModelParameters.FormatEnum.oai_dc));
 
             //    return new HtmlActionResult("~/Views/RQItems/ServRQItem.cshtml", model);
             //}
             //else
             //    return this.Content<string>(HttpStatusCode.OK, "", new System.Net.Http.Formatting.XmlMediaTypeFormatter(), "text/html");
-                return model.RQItems;
+                return model;
         }
 
         // GET api/values/5
         [Route("{dbname}/{id:int}/{format}")]
-        public string Get(string dbname, int id)
+        [HttpGet]
+        public RQItem Get(string dbname, int id)
         {
-            return "rqld" + id;
+            RQItemModel model = new Mvc5RQ.Models.RQItemModel(new RQLib.RQQueryForm.RQquery("08100"), false, new ModelParameters(ModelParameters.FormatEnum.oai_dc));
+
+            return model.RQItems.GetItem(0);
         }
 
         // POST api/values

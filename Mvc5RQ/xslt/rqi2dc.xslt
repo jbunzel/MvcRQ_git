@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:rqi="http://schemas.datacontract.org/2004/07/MvcRQ.Models"
+	xmlns:rqi="http://schemas.datacontract.org/2004/07/Mvc5RQ.Models"
 	xmlns:b="http://schemas.datacontract.org/2004/07/RQLib.RQKos.Classifications"
 	xmlns:a="http://schemas.datacontract.org/2004/07/RQLib.RQQueryResult.RQDescriptionElements"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
