@@ -14,21 +14,40 @@ using System.Xml.Serialization;
 
 namespace Mvc5RQ.Formatters
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class XMLCustomFormatter : XmlMediaTypeFormatter
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string XSLTransform { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public XMLCustomFormatter()
         {
             //SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xml"));
             //SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/xml"));
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public override bool CanReadType(Type type)
         {
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public override bool CanWriteType(Type type)
         {
             if ((type == typeof(Mvc5RQ.Models.RQItemModel)) || (type == typeof(Mvc5RQ.Models.RQItem)))
@@ -37,6 +56,15 @@ namespace Mvc5RQ.Formatters
                 return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="value"></param>
+        /// <param name="writeStream"></param>
+        /// <param name="content"></param>
+        /// <param name="transportContext"></param>
+        /// <returns></returns>
         public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
         {
             return Task.Factory.StartNew(() =>
@@ -44,14 +72,22 @@ namespace Mvc5RQ.Formatters
                 if ((type == typeof(Mvc5RQ.Models.RQItemModel)) || (type == typeof(Mvc5RQ.Models.RQItem)))
                 {
                     if (type == typeof(Mvc5RQ.Models.RQItemModel))
-                        XSLTransform = ((Mvc5RQ.Models.RQItemModel)value).RQItems.preprocessor.XmlTransformPath;
+                        XSLTransform = ((Mvc5RQ.Models.RQItemModel)value).RQItems.FormatPreprocessor.XmlTransformPath;
                     else
-                        //XSLTransform = ((Mvc5RQ.Models.RQItem)value).preprocessor.XmlTransformPath;
+                    {
+                        XSLTransform = ((Mvc5RQ.Models.RQItem)value).FormatPreprocessor.XmlTransformPath;
+                    }
                     WriteXML(value, writeStream, content);
                 }
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="writeStream"></param>
+        /// <param name="content"></param>
         public void WriteXML(object value, Stream writeStream, HttpContent content)
         {
             if (value != null)

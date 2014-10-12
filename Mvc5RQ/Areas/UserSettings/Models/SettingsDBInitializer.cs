@@ -6,8 +6,15 @@ using System.Web.Security;
 
 namespace Mvc5RQ.Areas.UserSettings.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SettingsDBInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SettingsDBContext>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         protected override void Seed(SettingsDBContext context)
         {
             var datafields = new List<DataField> 

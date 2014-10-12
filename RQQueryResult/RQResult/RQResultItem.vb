@@ -7,7 +7,7 @@ Imports System.Collections.Specialized
 Imports RQLib.RQDAL
 'Imports RQDigitalObject
 Imports RQLib.RQQueryResult.RQDescriptionElements
-Imports RQLib.RQConverter
+'Imports RQLib.RQConverter
 Imports System.Runtime.Serialization
 
 
@@ -868,7 +868,7 @@ Namespace RQQueryResult
                 Case "info_ofi"
                 Case "mods"
                 Case "oai_dc"
-                    Return New RQLib.RQConverter.RQ2DC(Me).GetReader()
+                    'Return New RQLib.RQConverter.RQ2DC(Me).GetReader()
                 Case "pubmed"
                 Case "srw_dc"
                 Case "rq"

@@ -6,7 +6,7 @@
   <xsl:param name="MyDocsPath" select="''" />
   <xsl:param name="MyVideoPath" select="''" />
   <xsl:param name="MyMusicPath" select="''" />
-  <xsl:param name="SortType" select="'Regal'" />
+  <xsl:param name="SortType" select="'Fach'" />
 
 
   <xsl:template name="ParseSubFields">

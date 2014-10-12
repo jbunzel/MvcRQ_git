@@ -123,8 +123,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Globals.vb" />
-    <Compile Include="RQConverter\GenericConverter.vb" />
-    <Compile Include="RQConverter\RQ2DC.vb" />
     <Compile Include="RQDAL\RQBookmarkDAL.vb" />
     <Compile Include="RQDAL\RQCatalogDAL.vb" />
     <Compile Include="RQDAL\RQLuceneDBI.vb" />
@@ -247,6 +245,9 @@
       <Project>{75722E2E-2954-4A8B-96E1-9AC650E3F5B9}</Project>
       <Name>RQState</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RQConverter\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

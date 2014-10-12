@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" 	
 	xmlns:msxsl="urn:schemas-microsoft-com:xslt" 
-	xmlns:rqi="http://schemas.datacontract.org/2004/07/MvcRQ.Models"
+	xmlns:rqi="http://schemas.datacontract.org/2004/07/Mvc5RQ.Models"
 	xmlns:b="http://schemas.datacontract.org/2004/07/RQLib.RQKos.Classifications" 
   xmlns:bb="http://schemas.datacontract.org/2004/07/RQLib.RQKos.Persons"              
 	xmlns:a="http://schemas.datacontract.org/2004/07/RQLib.RQQueryResult.RQDescriptionElements">

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MvcRQ.Helpers
+namespace Mvc5RQ.Helpers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class CultureHelper
     {
         // Valid cultures
@@ -52,16 +55,29 @@ namespace MvcRQ.Helpers
             return _cultures[0]; // return Default culture
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static string GetCurrentCulture()
         {
             return System.Threading.Thread.CurrentThread.CurrentCulture.Name;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static string GetCurrentNeutralCulture()
         {
             return GetNeutralCulture(System.Threading.Thread.CurrentThread.CurrentCulture.Name);
         }
-          
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static string GetNeutralCulture(string name)
         {
             if (name.Length < 2)
@@ -69,6 +85,5 @@ namespace MvcRQ.Helpers
 
             return name.Substring(0, 2); // Read first two chars only. E.g. "en", "es"
         }
-
     }
 }

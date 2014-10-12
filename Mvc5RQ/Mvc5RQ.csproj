@@ -206,7 +206,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\MyHtml.cs" />
     <Compile Include="Areas\MyJsonResult.cs" />
+    <Compile Include="Areas\Scripts\ScriptPack.Designer.cs">
+      <DependentUpon>ScriptPack.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Areas\UserSettings\Controllers\UserSettingsController.cs" />
     <Compile Include="Areas\UserSettings\Helpers\IUserSettingsService.cs">
       <SubType>Code</SubType>
@@ -226,10 +232,13 @@
     </Compile>
     <Compile Include="Areas\UserSettings\UserSettingsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\RQDSController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RQDSController.cs" />
+    <Compile Include="Controllers\RQItemsController.cs" />
     <Compile Include="Controllers\RQLDController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Formatters\XhtmlCustomFormatter.cs" />
     <Compile Include="Formatters\XmlCustomFormatter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -238,6 +247,8 @@
     <Compile Include="Helpers\CacheManager.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\RouteConstraints.cs" />
     <Compile Include="Helpers\StateStorage.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -249,18 +260,55 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Scripts\HtmlFactoryScripts\ScriptPack.Designer.cs">
+      <DependentUpon>ScriptPack.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Areas\Scripts\add-user-form.html" />
+    <Content Include="Areas\Scripts\classtree-options-form.html" />
+    <Content Include="Areas\Scripts\classtree-options-management.js" />
+    <Content Include="Areas\Scripts\imclude-external-db-form.html" />
+    <Content Include="Areas\Scripts\jquery.tablesorter.min.js" />
+    <Content Include="Areas\Scripts\manage-roles-form.html" />
+    <Content Include="Areas\Scripts\simple-query-options-management.js" />
+    <Content Include="Areas\Scripts\simple-user-management.js" />
+    <Content Include="Areas\Scripts\style.css" />
+    <Content Include="Areas\Scripts\tablesorter-pager-min.js" />
+    <Content Include="Areas\Scripts\tablesorter-pager.js" />
+    <Content Include="Areas\Scripts\tablesorter-style.css" />
+    <Content Include="Areas\Scripts\user-table-area.html" />
+    <Content Include="Content\font-awesome-4.0.3\css\font-awesome.css" />
+    <Content Include="Content\font-awesome-4.0.3\css\font-awesome.min.css" />
+    <Content Include="Content\font-awesome-4.0.3\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\images\main_image.png" />
+    <Content Include="Content\pure-0.2.0\pure-min.css" />
+    <Content Include="Content\riquest.css" />
+    <Content Include="Content\themes\Images\tabseparator.gif" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\animated-overlay.gif" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\jquery-ui-1.10.1.custom.css" />
+    <Content Include="Content\themes\JQuery-UI\smootheness\jquery-ui-1.10.1.custom.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -283,6 +331,107 @@
     <Content Include="Areas\DigitalObjects\Views\Web.config" />
     <Content Include="Areas\UserSettings\Views\_ViewStart.cshtml" />
     <Content Include="Areas\UserSettings\Views\Web.config" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\banner.png" />
+    <Content Include="Images\banner1.jpg" />
+    <Content Include="Images\banner2.gif" />
+    <Content Include="Images\banner3.png" />
+    <Content Include="Images\Banner4.png" />
+    <Content Include="Images\bluepixel.gif" />
+    <Content Include="Images\clearpixel.gif" />
+    <Content Include="Images\icon_abstract.gif" />
+    <Content Include="Images\icon_abstract.jpg" />
+    <Content Include="Images\icon_art.gif" />
+    <Content Include="Images\icon_article.gif" />
+    <Content Include="Images\icon_avm.gif" />
+    <Content Include="Images\icon_books.gif" />
+    <Content Include="Images\icon_cfolder.gif" />
+    <Content Include="Images\icon_contr.gif" />
+    <Content Include="Images\icon_docs.gif" />
+    <Content Include="Images\icon_fulltext.gif" />
+    <Content Include="Images\icon_hand.gif" />
+    <Content Include="Images\icon_itemview.gif" />
+    <Content Include="Images\icon_letters.gif" />
+    <Content Include="Images\icon_listenaudio.gif" />
+    <Content Include="Images\icon_listview.gif" />
+    <Content Include="Images\icon_map.gif" />
+    <Content Include="Images\icon_mmedia.gif" />
+    <Content Include="Images\icon_music.gif" />
+    <Content Include="Images\icon_olr.gif" />
+    <Content Include="Images\icon_per.gif" />
+    <Content Include="Images\icon_pictures.gif" />
+    <Content Include="Images\icon_RQQueryResult_32px.gif" />
+    <Content Include="Images\icon_series.gif" />
+    <Content Include="Images\icon_software.gif" />
+    <Content Include="Images\icon_sound.gif" />
+    <Content Include="Images\icon_users_32px.gif" />
+    <Content Include="Images\icon_webfolder.gif" />
+    <Content Include="Images\icon_websource.gif" />
+    <Content Include="Images\RQEXCollection.jpg" />
+    <Content Include="Images\RQFTCollection.jpg" />
+    <Content Include="Images\RQNLCollection.jpg" />
+    <Content Include="Images\RQOACollection.jpg" />
+    <Content Include="Images\RQOVCollection.jpg" />
+    <Content Include="Images\selpixel.gif" />
+    <Content Include="Scripts\dynatree-1.2.0\jquery.cookie.js" />
+    <Content Include="Scripts\dynatree-1.2.0\jquery.rqdynatree.js" />
+    <Content Include="Scripts\dynatree-1.2.0\skin-vista\icons.gif" />
+    <Content Include="Scripts\dynatree-1.2.0\skin-vista\loading.gif" />
+    <Content Include="Scripts\dynatree-1.2.0\skin-vista\ui.dynatree.css" />
+    <Content Include="Scripts\dynatree-1.2.0\skin\icons.gif" />
+    <Content Include="Scripts\dynatree-1.2.0\skin\loading.gif" />
+    <Content Include="Scripts\dynatree-1.2.0\skin\ui.dynatree.css" />
+    <Content Include="Scripts\dynatree-1.2.0\skin\vline.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\jquery.dynatree.js" />
+    <Content Include="Scripts\dynatree-1.2.5\jquery.dynatree.min.js" />
+    <Content Include="Scripts\dynatree-1.2.5\jquery.rqdynatree.js" />
+    <Content Include="Scripts\dynatree-1.2.5\skin-vista\icons.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\skin-vista\loading.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\skin-vista\ui.dynatree.css" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\icons-rtl.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\icons.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\loading.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\ui.dynatree.css" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\vline-rtl.gif" />
+    <Content Include="Scripts\dynatree-1.2.5\skin\vline.gif" />
+    <Content Include="Scripts\HtmlFactoryScripts\edit-rqitem-code.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\edit-rqitem-style.css" />
+    <Content Include="Scripts\HtmlFactoryScripts\edit-rqkos-code.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\edit-rqkos-style.css" />
+    <Content Include="Scripts\HtmlFactoryScripts\paging-style.css" />
+    <Content Include="Scripts\HtmlFactoryScripts\result-viewer.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\rqui-helpers.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\search-box.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\standard-searches.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\view-rqkos-code.js" />
+    <Content Include="Scripts\HtmlFactoryScripts\view-rqkos-style.css" />
+    <Content Include="Areas\UserSettings\Views\Shared\ClasstreeOptionsView.cshtml" />
+    <Content Include="Areas\UserSettings\Views\Shared\IncludeExternalView.cshtml" />
+    <None Include="Scripts\jquery-1.7.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\JQuery-UI\jquery-ui-1.10.1.custom.js" />
+    <Content Include="Scripts\JQuery-UI\jquery-ui-1.10.1.custom.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.pajinate.js" />
+    <Content Include="Scripts\jquery.pajinate.min.js" />
+    <Content Include="Scripts\jquery.transform.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jsrender.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\modernizr-1.7.js" />
+    <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="xml\dir.xml" />
     <Content Include="xml\extdblist.xml">
       <SubType>Designer</SubType>
@@ -328,17 +477,36 @@
     <Content Include="xslt\ViewTransforms\RQResultList2RQSorted_Paging.xslt">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Content\font-awesome-4.0.3\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\font-awesome-4.0.3\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\font-awesome-4.0.3\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\font-awesome-4.0.3\fonts\FontAwesome.otf" />
+    <Content Include="Content\font-awesome-4.0.3\less\bordered-pulled.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\core.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\fixed-width.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\font-awesome.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\icons.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\larger.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\list.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\mixins.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\path.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\rotated-flipped.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\spinning.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\stacked.less" />
+    <Content Include="Content\font-awesome-4.0.3\less\variables.less" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_bordered-pulled.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_core.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_fixed-width.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_icons.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_larger.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_list.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_mixins.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_path.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_rotated-flipped.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_spinning.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_stacked.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\_variables.scss" />
+    <Content Include="Content\font-awesome-4.0.3\scss\font-awesome.scss" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -349,16 +517,27 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\RQItems\ServRQItem.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\RQItems\EditorTemplates\multilinetext.cshtml" />
+    <Content Include="Views\RQItems\EditorTemplates\rqdescriptor.cshtml" />
+    <Content Include="Views\RQItems\EditorTemplates\text.cshtml" />
+    <Content Include="Views\RQItems\Shared\ClientEditViewer.cshtml" />
+    <Content Include="Views\RQItems\Shared\DisplViewer.cshtml" />
+    <Content Include="Views\RQItems\Shared\EditViewer.cshtml" />
+    <Content Include="Views\RQItems\Shared\JsonViewer.cshtml" />
+    <Content Include="Views\RQItems\Shared\ResultViewer.cshtml" />
+    <Content Include="Views\RQItems\Shared\SearchBoxView.cshtml" />
+    <Content Include="Views\RQItems\Shared\StandardSearchesView.cshtml" />
+    <Content Include="Views\RQItems\Shared\XmlViewer.cshtml" />
+    <Content Include="Views\RQItems\ClientEditor.cshtml" />
+    <Content Include="Views\RQItems\EditRQItem.cshtml" />
+    <Content Include="Views\RQItems\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\dotNetRDF\Libraries\core\dotNetRDF.csproj">
@@ -397,9 +576,18 @@
     <Folder Include="Areas\DigitalObjects\Controllers\" />
     <Folder Include="Areas\DigitalObjects\Models\" />
     <Folder Include="Areas\DigitalObjects\Views\Shared\" />
-    <Folder Include="Areas\UserSettings\Views\Shared\" />
     <Folder Include="Areas\UserSettings\Views\UserSettings\" />
     <Folder Include="~db\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Scripts\ScriptPack.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\HtmlFactoryScripts\ScriptPack.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -5,7 +5,7 @@ Imports System.Xml
 'Imports Modules.RQImport
 Imports RQLib.RQDAL
 Imports RQLib.RQQueryForm
-Imports RQLib.RQConverter
+'Imports RQLib.RQConverter
 Imports System.Runtime.Serialization
 
 Namespace RQQueryResult
@@ -570,7 +570,7 @@ Namespace RQQueryResult
                     Case "info_ofi"
                     Case "mods"
                     Case "oai_dc"
-                        Return New RQ2DC(Me, ServiceType.UNAPI, fromRecord, maxRecords).GetReader()
+                        'Return New RQ2DC(Me, ServiceType.UNAPI, fromRecord, maxRecords).GetReader()
                     Case "pubmed"
                     Case "srw_dc"
                     Case Else

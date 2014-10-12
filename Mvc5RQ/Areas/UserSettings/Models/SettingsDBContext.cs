@@ -12,7 +12,7 @@ namespace Mvc5RQ.Areas.UserSettings.Models
         // code to the Application_Start method in your Global.asax file.
         // Note: this will destroy and re-create your database with every model change.
         // 
-        //System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<MvcRQ.Models.SettingsDBContext>());
+        //System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Mvc5RQ.Models.SettingsDBContext>());
 
         public DbSet<QueryOptions> QueryOptions { get; set; }
 

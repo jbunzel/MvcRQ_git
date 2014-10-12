@@ -42,18 +42,37 @@ namespace Mvc5RQ.Areas.UserSettings
 
       protected QueryOptions GetQueryOptions()
       {
-          MembershipUser user = Membership.GetUser();
-          Guid ui;
           QueryOptions qo;
 
-          if (user == null) 
-              ui = GetGuestId();       // Get the guest user id.
-          else
-            ui = (Guid)user.ProviderUserKey;
-          qo = db.QueryOptions.FirstOrDefault(QueryOptions => QueryOptions.UserId.Equals(ui));
-          if (qo == null)
-          {   // create the default user profile
-              // SortOption so = db.SortOptions.FirstOrDefault(SortOptions => SortOptions.Name.Equals("nach Fach"));
+          try
+          {
+              Guid ui;
+
+              MembershipUser user = Membership.GetUser();
+              if (user == null)
+                  ui = GetGuestId();       // Get the guest user id.
+              else
+                  ui = (Guid)user.ProviderUserKey;
+              qo = db.QueryOptions.FirstOrDefault(QueryOptions => QueryOptions.UserId.Equals(ui));
+              if (qo == null)
+              {   // create the default user profile
+                  // SortOption so = db.SortOptions.FirstOrDefault(SortOptions => SortOptions.Name.Equals("nach Fach"));
+                  SortOption so = GetDefaultSortOption();
+
+                  qo = new QueryOptions
+                  {
+                      IncludeExternal = false,
+                      Databases = new List<Database>(),
+                      DataFields = new List<DataField>(),
+                      SortOptionId = so.SortOptionId,
+                      UserId = ui
+                  };
+                  db.QueryOptions.Add(qo);
+                  db.SaveChanges();
+              }
+          }
+          catch
+          {
               SortOption so = GetDefaultSortOption();
 
               qo = new QueryOptions
@@ -62,10 +81,8 @@ namespace Mvc5RQ.Areas.UserSettings
                   Databases = new List<Database>(),
                   DataFields = new List<DataField>(),
                   SortOptionId = so.SortOptionId,
-                  UserId = ui
+                  UserId = Guid.NewGuid()
               };
-              db.QueryOptions.Add(qo);
-              db.SaveChanges();
           }
           return qo;
       }

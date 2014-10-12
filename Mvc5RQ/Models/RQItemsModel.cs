@@ -17,11 +17,32 @@ using Mvc5RQ.Areas.DigitalObjects.Helpers;
 
 namespace Mvc5RQ.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [DataContract()]
     public class RQItemModel
     {
         #region public properties
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public SortParameter SortPreprocessor
+        {
+            get 
+            {
+                return this.RQItems.SortPreprocessor;
+            }
+            set
+            {
+                this.RQItems.SortPreprocessor = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         [DataMember()]
         public RQItemSet RQItems { get; set; }
 
@@ -29,18 +50,40 @@ namespace Mvc5RQ.Models
 
         #region public constructors
 
+        /// <summary>
+        /// 
+        /// </summary>
         public RQItemModel() : this(false) {}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="forEdit"></param>
         public RQItemModel(bool forEdit) : this(null, forEdit) {}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
         public RQItemModel(RQquery query) : this(query, false) {}
 
-        public RQItemModel(RQquery query, bool forEdit) : this(query, forEdit, new ModelParameters(ModelParameters.SortTypeEnum.BySubject)) { }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="forEdit"></param>
+        public RQItemModel(RQquery query, bool forEdit) : this(query, forEdit, new SortParameter(SortParameter.SortOrderEnum.BySubject)) { }
 
-        public RQItemModel(RQquery query, bool forEdit, ModelParameters preprocessor)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="forEdit"></param>
+        /// <param name="sortPreprocessor"></param>
+        public RQItemModel(RQquery query, bool forEdit, SortParameter sortPreprocessor)
         {
             RQItems = new RQItemSet(forEdit);
-            RQItems.preprocessor = preprocessor;
+            RQItems.SortPreprocessor = sortPreprocessor;
             if (query != null)
             {
                 query.QueryFieldList = RQItems.GetDataFieldTable();
@@ -52,11 +95,20 @@ namespace Mvc5RQ.Models
 
         #region public methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsEditable()
         {
             return this.RQItems.IsEditable();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="newItem"></param>
+        /// <returns></returns>
         public RQItem Add(RQItem newItem)
         {
             RQItem theItem = this.RQItems.Add(newItem);
@@ -72,6 +124,9 @@ namespace Mvc5RQ.Models
             return theItem;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Update()
         {
             try
@@ -84,55 +139,62 @@ namespace Mvc5RQ.Models
             }
         }
 
-        public ModelParameters GetListPreprocessor()
-        {
-            return this.RQItems.preprocessor;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="format"></param>
+        ///// <param name="fromItem"></param>
+        ///// <param name="toItem"></param>
+        ///// <returns></returns>
+        //public string TransformModel(string format, int fromItem, int toItem)
+        //{
+        //    System.Xml.XmlTextReader r = this.RQItems.ConvertTo(format, fromItem, toItem);
 
-        public string TransformModel(string format, int fromItem, int toItem)
-        {
-            System.Xml.XmlTextReader r = this.RQItems.ConvertTo(format, fromItem, toItem);
+        //    try
+        //    {
+        //        var xTrf = new System.Xml.Xsl.XslCompiledTransform(true);
+        //        var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
+        //        var xSet = new System.Xml.Xsl.XsltSettings(true, true);
+        //        var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
+        //        var doc = new System.Xml.XmlDocument();
 
-            try
-            {
-                var xTrf = new System.Xml.Xsl.XslCompiledTransform(true);
-                var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
-                var xSet = new System.Xml.Xsl.XsltSettings(true, true);
-                var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
-                var doc = new System.Xml.XmlDocument();
-
-                //TESTDATEI(EZEUGEN)
-                //System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
-                //Doc.Load(r);
-                //Doc.Save("D:\\Users\\Jorge\\Desktop\\MVCTest.xml");
-                //ENDE TESTDATEI 
-                r.MoveToContent();
-                xTrf.Load(HttpContext.Current.Server.MapPath("~/xslt/ViewTransforms/RQResultList2RQSorted_Paging.xslt"), xSet, new System.Xml.XmlUrlResolver());
-                xTrfArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
-                xTrfArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
-                xTrfArg.AddParam("SortType", "", this.GetListPreprocessor().SortTypeString());
-                xTrf.Transform(new System.Xml.XPath.XPathDocument(r), xTrfArg, mstr);
-                mstr.BaseStream.Flush();
-                mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-                doc.Load(mstr.BaseStream);
-                //TESTDATEI EZEUGEN
-                //doc.Save("D:\\Users\\Jorge\\Desktop\\MVCTest.xml");
-                //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-                //ENDE TESTDATEI
-                //var rd = new System.Xml.XmlTextReader(mstr.BaseStream);
-                return doc.OuterXml;
-            }
-            catch
-            {
-                // RQItemSet ist leer
-                throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
-            }
-        }
+        //        //TESTDATEI(EZEUGEN)
+        //        //System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
+        //        //Doc.Load(r);
+        //        //Doc.Save("D:\\Users\\Jorge\\Desktop\\MVCTest.xml");
+        //        //ENDE TESTDATEI 
+        //        r.MoveToContent();
+        //        xTrf.Load(HttpContext.Current.Server.MapPath("~/xslt/ViewTransforms/RQResultList2RQSorted_Paging.xslt"), xSet, new System.Xml.XmlUrlResolver());
+        //        xTrfArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
+        //        xTrfArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
+        //        xTrfArg.AddParam("SortType", "", this.SortPreprocessor.SortTypeString());
+        //        xTrf.Transform(new System.Xml.XPath.XPathDocument(r), xTrfArg, mstr);
+        //        mstr.BaseStream.Flush();
+        //        mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+        //        doc.Load(mstr.BaseStream);
+        //        //TESTDATEI EZEUGEN
+        //        //doc.Save("D:\\Users\\Jorge\\Desktop\\MVCTest.xml");
+        //        //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+        //        //ENDE TESTDATEI
+        //        //var rd = new System.Xml.XmlTextReader(mstr.BaseStream);
+        //        return doc.OuterXml;
+        //    }
+        //    catch
+        //    {
+        //        // RQItemSet ist leer
+        //        throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
+        //    }
+        //}
 
         #endregion
 
         #region public static methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="state"></param>
+        /// <returns></returns>
         public static string GetActiveDocumentID(Areas.UserSettings.UserState.States state)
         {
             return Mvc5RQ.Helpers.StateStorage.GetQueryFromState("", state).DocId;
@@ -141,6 +203,9 @@ namespace Mvc5RQ.Models
         #endregion
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     [DataContract()]
     [XmlRoot]
     public class RQItemSet : System.Collections.Generic.IEnumerable<RQItem>
@@ -149,7 +214,8 @@ namespace Mvc5RQ.Models
 
         private RQResultSet ItemResultSet;
         private List<RQItem> _rqitemsList = null;
-        private ModelParameters _preprocessor = null;
+        private SortParameter _sortPreprocessor = null;
+        private FormatParameter _formatPreprocessor = null;
 
         #endregion
 
@@ -176,6 +242,9 @@ namespace Mvc5RQ.Models
 
         #region public properties
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int count
         {
             get
@@ -184,18 +253,49 @@ namespace Mvc5RQ.Models
             }
         }
 
-        public ModelParameters preprocessor
+        /// <summary>
+        /// 
+        /// </summary>
+        public SortParameter SortPreprocessor
         {
             get 
             {
-                return this._preprocessor;
+                return _sortPreprocessor;
             }
             set 
             {
-                this._preprocessor = value;
+                _sortPreprocessor = value;
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public FormatParameter FormatPreprocessor
+        {
+            get
+            {
+                try
+                {
+                    _formatPreprocessor = this.GetItem(0).FormatPreprocessor;
+                }
+                catch { }
+                return _formatPreprocessor;
+            }
+            set
+            {
+                _formatPreprocessor = value;
+                try
+                {
+                    this.GetItem(0)._formatPreprocessor = _formatPreprocessor;
+                }
+                catch { }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         [DataMember]
         [XmlElement]
         public List<RQItem> RQItems
@@ -228,12 +328,19 @@ namespace Mvc5RQ.Models
         #endregion
 
         #region public constructors
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="forEdit"></param>
         public RQItemSet(bool forEdit)
         {
             ItemResultSet = new RQResultSet(forEdit);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public RQItemSet()
             : base()
         {
@@ -244,30 +351,48 @@ namespace Mvc5RQ.Models
 
         #region public methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsEditable()
         {
             return this.ItemResultSet.IsEditable();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public RQItem Add(RQItem item)
         {
-            return new RQItem(this.ItemResultSet.CreateItem(item._resultItem));
+            RQItem res =new RQItem(this.ItemResultSet.CreateItem(item._resultItem));
+
+            res.FormatPreprocessor = _formatPreprocessor;
+            return res;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         public RQItem GetItem(int i)
         {
-            if (this._rqitemsList == null)
-            {
-                //RQResultItem t1 = ItemResultSet.GetItem(i);
-                //RQItem t2 = new RQItem(ItemResultSet.GetItem(i));
+            RQItem res;
 
-                //return t2;
-                return new RQItem(ItemResultSet.GetItem(i));
-            }
+            if (this._rqitemsList == null)
+                res = new RQItem(ItemResultSet.GetItem(i));
             else
-                return this.RQItems.ElementAt(i);
+                res = this.RQItems.ElementAt(i);
+            res.FormatPreprocessor = _formatPreprocessor;
+            return res;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Update()
         {
             this.ItemResultSet.Update();
@@ -276,12 +401,19 @@ namespace Mvc5RQ.Models
             this.UpdateClassRelation();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void UpdateClassRelation()
         {
             foreach (RQItem theItem in this.RQItems)
                 theItem.UpdateClassRelation(this.ItemResultSet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool UpdateDigitalObjectToC()
         {
             bool result = false;
@@ -300,6 +432,10 @@ namespace Mvc5RQ.Models
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
         public void Find(RQquery query)
         {
             try
@@ -313,6 +449,13 @@ namespace Mvc5RQ.Models
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="fromRecord"></param>
+        /// <param name="maxRecord"></param>
+        /// <returns></returns>
         public System.Xml.XmlTextReader ConvertTo(string format, int fromRecord, int maxRecord)
         {
             if (format == "rqListHTML" || format == "")
@@ -321,21 +464,38 @@ namespace Mvc5RQ.Models
                 return this.ItemResultSet.ConvertTo(format, fromRecord, maxRecord);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        /// <returns></returns>
         public System.Xml.XmlTextReader ConvertTo(string format)
         {
             return this.ConvertTo(format, 1, 0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public System.Data.DataTable GetDataFieldTable()
         {
             return this.ItemResultSet.GetDataFieldTable();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public System.Collections.Generic.IEnumerator<RQItem> GetEnumerator()
         {
             return new RQItemSetEnum(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return new RQItemSetEnum(this);
@@ -344,6 +504,9 @@ namespace Mvc5RQ.Models
         #endregion
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class RQItemSetEnum : IEnumerator<RQItem>
     {
         #region private members
@@ -356,6 +519,10 @@ namespace Mvc5RQ.Models
 
         #region public constructors
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemSet"></param>
         public RQItemSetEnum(RQItemSet itemSet)
         {
             _itemSet = itemSet;
@@ -367,6 +534,10 @@ namespace Mvc5RQ.Models
 
         #region public methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool MoveNext()
         {
             if (++_curIndex >= _itemSet.count)
@@ -380,6 +551,9 @@ namespace Mvc5RQ.Models
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public RQItem Current
         {
             get
@@ -388,6 +562,9 @@ namespace Mvc5RQ.Models
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         object System.Collections.IEnumerator.Current
         {
             get
@@ -396,6 +573,9 @@ namespace Mvc5RQ.Models
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Reset()
         {
         }
@@ -407,25 +587,28 @@ namespace Mvc5RQ.Models
         #endregion
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     [DataContract()]
     [XmlRoot]
     public class RQItem
     {
-        
         #region internal members
 
         internal RQResultItem _resultItem { get; set; }
         internal StringDictionary _savedFieldValues = new StringDictionary();
+        internal FormatParameter _formatPreprocessor = null;
 
         #endregion
 
         #region public members
 
-        public enum DisplFormat
-        {
-            single_item,
-            short_title
-        }
+        //public enum DisplFormat
+        //{
+        //    single_item,
+        //    short_title
+        //}
 
         //public enum DataFormat
         //{
@@ -505,6 +688,18 @@ namespace Mvc5RQ.Models
         #endregion
 
         #region public properties
+
+        public FormatParameter FormatPreprocessor
+        {
+            get
+            {
+                return _formatPreprocessor;
+            }
+            set
+            {
+                _formatPreprocessor = value;
+            }
+        }
 
         [DataMember]
         [XmlElement]
@@ -1113,51 +1308,51 @@ namespace Mvc5RQ.Models
             return this._resultItem.ConvertTo(dataFormat);
         }
 
-        public string ConvertToHTML(DisplFormat format)
-        {
-            var dSer = new System.Runtime.Serialization.DataContractSerializer(this.GetType());
-            System.IO.MemoryStream ms = new System.IO.MemoryStream();
-            var xTrf = new System.Xml.Xsl.XslCompiledTransform();
-            var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
-            var xSet = new System.Xml.Xsl.XsltSettings(true, true);
-            var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
-            var doc = new System.Xml.XmlDocument();
-            string xsltName = "";
+        //public string ConvertToHTML(DisplFormat format)
+        //{
+        //    var dSer = new System.Runtime.Serialization.DataContractSerializer(this.GetType());
+        //    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+        //    var xTrf = new System.Xml.Xsl.XslCompiledTransform();
+        //    var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
+        //    var xSet = new System.Xml.Xsl.XsltSettings(true, true);
+        //    var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
+        //    var doc = new System.Xml.XmlDocument();
+        //    string xsltName = "";
 
-            switch (format)
-            {
-                case DisplFormat.single_item:
-                    xsltName = "~/xslt/ViewTransforms/RQI2SingleItemView.xslt";
-                    break;
-                case DisplFormat.short_title:
-                    xsltName = "~/xslt/ViewTransforms/RQI2ShortTitleView.xslt";
-                    break;
-                default:
-                    xsltName = "~/xslt/ViewTransforms/RQI2SingleItemView.xslt";
-                    break;
-            }
-            dSer.WriteObject(ms, this);
-            //TESTDATEI(EZEUGEN)
-            //XmlDocument Doc = new XmlDocument();
-            //ms.Seek(0, System.IO.SeekOrigin.Begin);
-            //Doc.Load(ms);
-            //Doc.Save("C:/MVCTest.xml");
-            //ENDE TESTDATEI 
-            System.IO.TextReader tr = new System.IO.StringReader(System.Text.Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
-            xTrf.Load(HttpContext.Current.Server.MapPath(xsltName),xSet, new XmlUrlResolver());
-            xTrfArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
-            xTrfArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
-            xTrfArg.AddExtensionObject("urn:TransformHelper", new TransformHelper.TransformUtils());
-            xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), xTrfArg, mstr);
-            mstr.BaseStream.Flush();
-            mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-            doc.Load(mstr.BaseStream);
-            //TESTDATEI EZEUGEN
-            //doc.Save("C:/MVCTest.xml");
-            //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-            //var rd = new System.Xml.XmlTextReader(mstr.BaseStream);
-            return doc.OuterXml;
-        }
+        //    switch (format)
+        //    {
+        //        case DisplFormat.single_item:
+        //            xsltName = "~/xslt/ViewTransforms/RQI2SingleItemView.xslt";
+        //            break;
+        //        case DisplFormat.short_title:
+        //            xsltName = "~/xslt/ViewTransforms/RQI2ShortTitleView.xslt";
+        //            break;
+        //        default:
+        //            xsltName = "~/xslt/ViewTransforms/RQI2SingleItemView.xslt";
+        //            break;
+        //    }
+        //    dSer.WriteObject(ms, this);
+        //    //TESTDATEI(EZEUGEN)
+        //    //XmlDocument Doc = new XmlDocument();
+        //    //ms.Seek(0, System.IO.SeekOrigin.Begin);
+        //    //Doc.Load(ms);
+        //    //Doc.Save("C:/MVCTest.xml");
+        //    //ENDE TESTDATEI 
+        //    System.IO.TextReader tr = new System.IO.StringReader(System.Text.Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
+        //    xTrf.Load(HttpContext.Current.Server.MapPath(xsltName),xSet, new XmlUrlResolver());
+        //    xTrfArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
+        //    xTrfArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
+        //    xTrfArg.AddExtensionObject("urn:TransformHelper", new TransformHelper.TransformUtils());
+        //    xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), xTrfArg, mstr);
+        //    mstr.BaseStream.Flush();
+        //    mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+        //    doc.Load(mstr.BaseStream);
+        //    //TESTDATEI EZEUGEN
+        //    //doc.Save("C:/MVCTest.xml");
+        //    //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+        //    //var rd = new System.Xml.XmlTextReader(mstr.BaseStream);
+        //    return doc.OuterXml;
+        //}
 
         public Object GetLinkedData(string fieldName, int subFieldIndex)
         {
@@ -1214,10 +1409,10 @@ namespace Mvc5RQ.Models
             return result;
         }
 
-        public string TransformItem(RQItem.DisplFormat format)
-        {
-            return this.ConvertToHTML(format);
-        }
+        //public string TransformItem(RQItem.DisplFormat format)
+        //{
+        //    return this.ConvertToHTML(format);
+        //}
 
         public static Boolean IsExternal(string docNo)
         {
@@ -1227,6 +1422,9 @@ namespace Mvc5RQ.Models
          #endregion
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class RQItemModelRepository
     {
         #region private members
@@ -1237,7 +1435,15 @@ namespace Mvc5RQ.Models
 
         #region public members 
 
-        public ModelParameters modelParameters = new ModelParameters(ModelParameters.SortTypeEnum.BySubject);
+        /// <summary>
+        /// 
+        /// </summary>
+        public SortParameter sortParameter = new SortParameter(SortParameter.SortOrderEnum.BySubject);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public FormatParameter formatParameter = new FormatParameter(FormatParameter.FormatEnum.rqi);
 
         #endregion
 
@@ -1247,7 +1453,7 @@ namespace Mvc5RQ.Models
         {
             RQquery q = StateStorage.GetQueryFromState(queryString, stateType);
 
-            q.QuerySort = this.modelParameters.Cast(this.modelParameters.SortType);
+            q.QuerySort = this.sortParameter.Cast();
             return q;
         }
 
@@ -1270,9 +1476,10 @@ namespace Mvc5RQ.Models
             {
                 if (query.QueryBookmarks == false)
                     query.QueryBookmarks = true;
-                rqitemModel = new RQItemModel(query, forEdit, this.modelParameters);
+                rqitemModel = new RQItemModel(query, forEdit, this.sortParameter);
                 if (!forEdit && bUseHttpCache) CacheManager.Add(query.Id.ToString(), rqitemModel);
             }
+            rqitemModel.RQItems.FormatPreprocessor = this.formatParameter;
             return rqitemModel;
         }
 
@@ -1280,14 +1487,51 @@ namespace Mvc5RQ.Models
 
         #region public constructors
 
+        /// <summary>
+        /// 
+        /// </summary>
         public RQItemModelRepository()
         {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sortParameter"></param>
+        public RQItemModelRepository(SortParameter sortParameter)
+        {
+            this.sortParameter = sortParameter;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="formatParameter"></param>
+        public RQItemModelRepository(FormatParameter formatParameter)
+        {
+            this.formatParameter = formatParameter;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sortParameter"></param>
+        /// <param name="formatParameter"></param>
+        public RQItemModelRepository(SortParameter sortParameter, FormatParameter formatParameter)
+        {
+            this.sortParameter = sortParameter;
+            this.formatParameter = formatParameter;
         }
 
         #endregion
 
         #region public methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queryString"></param>
+        /// <returns></returns>
         public RQquery GetQuery(string queryString)
         {
             Mvc5RQ.Areas.UserSettings.UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? Mvc5RQ.Areas.UserSettings.UserState.States.BrowseViewState : Mvc5RQ.Areas.UserSettings.UserState.States.ListViewState;
@@ -1295,30 +1539,60 @@ namespace Mvc5RQ.Models
             return this.GetQuery(queryString, stateType);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queryString"></param>
+        /// <param name="stateType"></param>
+        /// <param name="forEdit"></param>
+        /// <returns></returns>
         public RQItemModel GetModel(string queryString, Mvc5RQ.Areas.UserSettings.UserState.States stateType, bool forEdit)
         {
+            if (stateType == Mvc5RQ.Areas.UserSettings.UserState.States.undefined)
+                stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? Mvc5RQ.Areas.UserSettings.UserState.States.BrowseViewState : Mvc5RQ.Areas.UserSettings.UserState.States.ListViewState;
             RQquery query = this.GetQuery(queryString, stateType);
 
             return GetModel(query, forEdit);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queryString"></param>
+        /// <param name="stateType"></param>
+        /// <returns></returns>
         public RQItemModel GetModel(string queryString, Mvc5RQ.Areas.UserSettings.UserState.States stateType)
         {
             return this.GetModel(queryString, stateType, false);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queryString"></param>
+        /// <returns></returns>
         public RQItemModel GetModel(string queryString)
         {
-            Mvc5RQ.Areas.UserSettings.UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? Mvc5RQ.Areas.UserSettings.UserState.States.BrowseViewState : Mvc5RQ.Areas.UserSettings.UserState.States.ListViewState;
-            return this.GetModel(queryString, stateType, false);
+            //Mvc5RQ.Areas.UserSettings.UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? Mvc5RQ.Areas.UserSettings.UserState.States.BrowseViewState : Mvc5RQ.Areas.UserSettings.UserState.States.ListViewState;
+
+            //return this.GetModel(queryString, stateType, false);
+            return this.GetModel(queryString, Mvc5RQ.Areas.UserSettings.UserState.States.undefined, false);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rqitemId"></param>
+        /// <param name="stateType"></param>
+        /// <param name="forEdit"></param>
+        /// <returns></returns>
         public RQItem GetRQItem(string rqitemId, Mvc5RQ.Areas.UserSettings.UserState.States stateType, bool forEdit)
         {
             try // try to get item to copy from cache
             {
                 RQItem res = this.GetModel(GetQuery("", stateType, rqitemId), forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
 
+                res._formatPreprocessor = this.formatParameter;
                 if (res == null) throw new Exception();
                 return res;
             }
@@ -1328,6 +1602,7 @@ namespace Mvc5RQ.Models
                 {
                     RQItem res = this.GetModel(GetQuery("$access$" + rqitemId, stateType, rqitemId), forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
 
+                    res._formatPreprocessor = this.formatParameter;
                     return res;
                 }
                 catch
@@ -1337,12 +1612,29 @@ namespace Mvc5RQ.Models
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queryString"></param>
+        /// <returns></returns>
+        public RQItem GetRQItem(string queryString)
+        {
+            Mvc5RQ.Areas.UserSettings.UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? Mvc5RQ.Areas.UserSettings.UserState.States.BrowseViewState : Mvc5RQ.Areas.UserSettings.UserState.States.ListViewState;
+            return this.GetRQItem(queryString, stateType, false);
+        }
+
         #endregion
     }
 
-    public class ModelParameters
+    /// <summary>
+    /// 
+    /// </summary>
+    public class SortParameter
     {
-        public enum SortTypeEnum
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum SortOrderEnum
         {
             ByTitle,
             BySubject,
@@ -1353,6 +1645,79 @@ namespace Mvc5RQ.Models
             ByShelfClass
         }
 
+        private SortOrderEnum _sortOrder;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sortType"></param>
+        public SortParameter(SortOrderEnum sortType)
+        {
+            _sortOrder = sortType;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string SortTypeString()
+        {
+            switch (_sortOrder)
+            {
+                case SortOrderEnum.BySubject:
+                    return "Fach";
+                case SortOrderEnum.ByCreationDate:
+                    return "Entstehungsjahr";
+                case SortOrderEnum.ByPublicationDate:
+                    return "Erscheinungsjahr";
+                case SortOrderEnum.ByShelfClass:
+                    return "Regal";
+                case SortOrderEnum.ByShelf:
+                    return "Regal";
+                default:
+                    return "";
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public RQLib.RQQueryForm.RQquery.SortType Cast()
+        {
+            return (RQLib.RQQueryForm.RQquery.SortType)_sortOrder;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemToAdd"></param>
+        /// <returns></returns>
+        public bool ListCheck(RQItem itemToAdd)
+        {
+            bool retVal = Mvc5RQ.Helpers.AccessRightsResolver.HasViewAccess(itemToAdd.AccessRights);
+
+            if (_sortOrder == SortOrderEnum.ByShelf)
+                retVal = false;
+            return retVal;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class FormatParameter
+    {
+        #region private members
+
+        FormatEnum _format = FormatEnum.undefined;
+        string _xmlTransformPath = "";
+        System.Xml.Xsl.XsltArgumentList _xslTransformArg = null;
+
+        #endregion
+
+        #region public members
+
         public enum FormatEnum
         {
             oai_dc,
@@ -1360,79 +1725,121 @@ namespace Mvc5RQ.Models
             info_ofi,
             mods,
             rq,
-            rqi
+            rqi,
+            rqi_single_item,
+            rqi_short_title,
+            undefined
         }
 
-        public FormatEnum Format { get; set; }
+        #endregion
 
-        public SortTypeEnum SortType {get; set; }
+        #region public properties
 
-        public string XmlTransformPath { get; set; }
-
-        public ModelParameters(SortTypeEnum sortType, FormatEnum format)
+        /// <summary>
+        /// 
+        /// </summary>
+        public FormatEnum Format
         {
-            this.SortType = sortType;
-            this.Format = format;
-            this.XmlTransformPath = HttpContext.Current.Server.MapPath(this.GetXslTransformFilePath());
-        }
-
-        public ModelParameters(SortTypeEnum sortType)
-            : this(sortType, FormatEnum.rqi) {}
-
-        public ModelParameters(FormatEnum format)
-            : this(SortTypeEnum.BySubject, format) { }
-
-        public string SortTypeString()
-        {
-            switch (this.SortType)
+            get
             {
-                case SortTypeEnum.BySubject:
-                    return "Fach";
-                case SortTypeEnum.ByCreationDate:
-                    return "Entstehungsjahr";
-                case SortTypeEnum.ByPublicationDate:
-                    return "Erscheinungsjahr";
-                case SortTypeEnum.ByShelfClass:
-                    return "Regal";
-                case SortTypeEnum.ByShelf:
-                    return "Regal";
-                default:
-                    return "";
+                return _format;
+            }
+            set
+            {
+                _format = value;
+                this.SetXslTransformFilePath();
             }
         }
 
-        public RQLib.RQQueryForm.RQquery.SortType Cast(SortTypeEnum sortType)
+        /// <summary>
+        /// 
+        /// </summary>
+        public string XmlTransformPath
         {
-            return (RQLib.RQQueryForm.RQquery.SortType)sortType;
-        }
-        
-        public bool ListCheck(RQItem itemToAdd)
-        {
-            bool retVal = Mvc5RQ.Helpers.AccessRightsResolver.HasViewAccess(itemToAdd.AccessRights);
-
-            if (this.SortType == SortTypeEnum.ByShelf)
-                retVal = false;
-
-            return retVal;
+            get
+            {
+                return _xmlTransformPath;
+            }
         }
 
-        public string GetXslTransformFilePath()
+        /// <summary>
+        /// 
+        /// </summary>
+        public System.Xml.Xsl.XsltArgumentList XslTransformArg
         {
-            switch (this.Format)
+            get
+            {
+                return _xslTransformArg;
+            }
+        }
+
+        #endregion
+
+        #region private methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private void SetXslTransformFilePath()
+        {
+            switch (_format)
             {
                 case FormatEnum.mods:
-                    return "";
+                    _xmlTransformPath = "";
+                    break;
                 case FormatEnum.oai_dc:
-                    return "~/xslt/rqi2dc.xslt";
+                    _xmlTransformPath = HttpContext.Current.Server.MapPath("~/xslt/rqi2dc.xslt");
+                    break;
                 case FormatEnum.srw_dc:
-                    return "";
+                    _xmlTransformPath = "";
+                    break;
                 case FormatEnum.info_ofi:
-                    return "";
+                    _xmlTransformPath = "";
+                    break;
                 case FormatEnum.rq:
-                    return "~/xslt/rqi2rq.xslt";
+                    _xmlTransformPath = HttpContext.Current.Server.MapPath("~/xslt/rqi2rq.xslt");
+                    break;
+                case FormatEnum.rqi:
+                    _xslTransformArg = new System.Xml.Xsl.XsltArgumentList();
+                    _xslTransformArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
+                    _xslTransformArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
+                    //_xslTransformArg.AddParam("SortType", "", rqItemModel.SortPreprocessor.SortTypeString());
+                    _xmlTransformPath = HttpContext.Current.Server.MapPath("~/xslt/ViewTransforms/RQResultList2RQSorted_Paging.xslt");
+                    break;
+                case FormatEnum.rqi_single_item:
+                    _xslTransformArg = new System.Xml.Xsl.XsltArgumentList();
+                    _xslTransformArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
+                    _xslTransformArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
+                    _xslTransformArg.AddExtensionObject("urn:TransformHelper", new TransformHelper.TransformUtils());
+                    _xmlTransformPath = HttpContext.Current.Server.MapPath("~/xslt/ViewTransforms/RQI2SingleItemView.xslt");
+                    break;
+                case FormatEnum.rqi_short_title:
+                    _xslTransformArg = new System.Xml.Xsl.XsltArgumentList();
+                    _xslTransformArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
+                    _xslTransformArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
+                    _xslTransformArg.AddExtensionObject("urn:TransformHelper", new TransformHelper.TransformUtils());
+                    _xmlTransformPath = HttpContext.Current.Server.MapPath("~/xslt/ViewTransforms/RQI2ShortTitleView.xslt");
+                    break;
                 default:
-                    return "";
+                    _xmlTransformPath = "";
+                    break;
             }
         }
+
+        #endregion
+
+        #region public constructors
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        public FormatParameter(FormatEnum format)
+        {
+            this.Format = format;
+        }
+
+        #endregion
     }
 }

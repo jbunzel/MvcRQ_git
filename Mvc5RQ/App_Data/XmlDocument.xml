@@ -4,6 +4,28 @@
         <name>Mvc5RQ</name>
     </assembly>
     <members>
+        <member name="T:Mvc5RQ.RouteConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.RouteConfig.RegisterRoutes(System.Web.Routing.RouteCollection)">
+            <summary>
+            
+            </summary>
+            <param name="routes"></param>
+        </member>
+        <member name="T:Mvc5RQ.WebApiConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.WebApiConfig.Register(System.Web.Http.HttpConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="config"></param>
+        </member>
         <member name="M:Mvc5RQ.Areas.DigitalObjects.DigitalObjectsAreaRegistration.RegisterArea(System.Web.Mvc.AreaRegistrationContext)">
             <summary>
             
@@ -529,6 +551,375 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:Mvc5RQ.Areas.MyHtml">
+            <summary>
+            Static Html Generator for building the user interface html, javascript and css code.
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Areas.MyHtml.UserTableArea">
+            <summary>
+            Generates the user html table code.
+            </summary>
+            <returns>(recommended) User table html code</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.MyHtml.AddUserForm">
+            <summary>
+            (recommended) Builds the add user form for creating new user accounts.
+            </summary>
+            <returns>(recommended) Add user form html code</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.MyHtml.ManageRolesForm">
+            <summary>
+            Builds the role management form.
+            </summary>
+            <returns>(recommended) Role managment html code</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.MyHtml.UiJavascript">
+            <summary>
+            Required: Builds three javascript blocks containing the tablesorter, pager plugin and the main ui/ajax javascript code.
+            </summary>
+            <returns>(required) Javascript code for generating the user interface.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.MyHtml.QueryOptionsJavascript">
+            <summary>
+            Required: Builds javascript blocks for setting of query option.
+            </summary>
+            <returns>(required) Javascript code for generating the user interface.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.MyHtml.ClasstreeOptionsJavascript">
+            <summary>
+            Required: Builds javascript blocks for setting of classtree options.
+            </summary>
+            <returns>(required) Javascript code for generating the user interface.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.MyHtml.ClasstreeOptionsForm">
+            <summary>
+            Builds the options selection for classtree.
+            </summary>
+            <returns>Classtree option settings html code</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.MyHtml.IncludeExternalDbForm">
+            <summary>
+            Builds the checkbox selection for external database inclusion.
+            </summary>
+            <returns>User search settings html code</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.MyHtml.TableCss">
+            <summary>
+            (optional) Builds a table styling css block. Could be used as starting point for custom styles. Optional, put in head section.
+            </summary>
+            <returns>(optional) A basic css style block for the user table.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.MyHtml.StyleCss">
+            <summary>
+            (recommended) Builds a basic layout style css block. It mainly contains css for the info-message overlay and some form styling.
+            </summary>
+            <returns>(recommended) Basic style css block</returns>
+        </member>
+        <member name="T:Mvc5RQ.Areas.Scripts.ScriptPack">
+            <summary>
+              Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.ResourceManager">
+            <summary>
+              Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.Culture">
+            <summary>
+              Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+              Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.add_user_form">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die &lt;form id=&quot;add-user-form&quot;&gt;
+            &lt;fieldset&gt;
+            	&lt;legend&gt;Add User&lt;/legend&gt;
+            	&lt;!--&lt;div id=&quot;basic-user-info&quot;&gt;--&gt;
+            		&lt;div class=&quot;editor-label&quot;&gt;
+            			&lt;label for=&quot;tbx-add-username&quot;&gt;
+            				Name&lt;/label&gt;
+            		&lt;/div&gt;
+            		&lt;div class=&quot;editor-field&quot;&gt;
+            			&lt;input type=&quot;text&quot; id=&quot;tbx-add-username&quot; placeholder=&quot;e.g. John&quot;/&gt;&lt;/div&gt;
+            		&lt;div class=&quot;editor-label&quot;&gt;
+            			&lt;label for=&quot;tbx-add-password&quot;&gt;
+            				Password&lt;/label&gt;
+            		&lt;/div&gt;
+            		&lt;div class=&quot;editor-field&quot;&gt;
+            			&lt;input type=&quot;password&quot; id=&quot;tbx-add-password&quot; placeholder=&quot;password&quot;/&gt;
+            		&lt;/div&gt;
+            		&lt;div class=&quot;e [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.classtree_options_form">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die &lt;form id=&quot;classtree-options-form&quot; class=&quot;pure-form-aligned&quot;&gt;
+            &lt;fieldset&gt;
+            	&lt;label for=&quot;classtree-options&quot;&gt;
+            		{classtree-options}&lt;/label&gt;
+            	&lt;input id=&quot;classtree-options&quot; type=&quot;checkbox&quot; /&gt;&lt;br/&gt;
+            &lt;!--    &lt;a class=&quot;select-databases&quot; href=&quot;#&quot;&gt;{select-databases}&lt;/a&gt;--&gt;
+            &lt;/fieldset&gt;
+            &lt;/form&gt;
+             ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.classtree_options_management">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die $(function () {
+                var onlyShelvesCheckBox = new AddOnlyShelvesCheckBox();
+                onlyShelvesCheckBox.init(&quot;#classtree-options&quot;);
+                
+                //$(&quot;.select-databases&quot;).on(&quot;click&quot;, selectDatabases);
+            });
+            
+            function AddOnlyShelvesCheckBox() {
+                var checkBox;
+            
+                /* Initialize the only shelves check box and fill it with server data */
+                this.init = function (selector) {
+                    // get check box
+                    checkBox = $(selector);
+                    // init the check box with server data  
+                    $.post(HostAdres [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.imclude_external_db_form">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die &lt;form id=&quot;include-external-db-form&quot; class=&quot;pure-form-aligned&quot;&gt;
+            &lt;fieldset&gt;
+            	&lt;label for=&quot;include-external&quot;&gt;
+            		{include-external}&lt;/label&gt;
+            	&lt;input id=&quot;include-external&quot; type=&quot;checkbox&quot; /&gt;&lt;br/&gt;
+                &lt;a class=&quot;select-databases&quot; href=&quot;#&quot;&gt;{select-databases}&lt;/a&gt;
+            &lt;/fieldset&gt;
+            &lt;/form&gt;
+             ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.jquery_tablesorter_min">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die /*
+            * TableSorter 2.0 - Client-side table sorting with ease!
+            * Version 2.0.28 Minified using http://dean.edwards.name/packer/
+            * Copyright (c) 2007 Christian Bach
+            */
+            
+            !(function ($) { $.extend({ tablesorter: new function () { var g = [], widgets = [], tbl; this.defaults = { cssHeader: &quot;header&quot;, cssAsc: &quot;headerSortUp&quot;, cssDesc: &quot;headerSortDown&quot;, cssChildRow: &quot;expand-child&quot;, sortInitialOrder: &quot;asc&quot;, sortMultiSortKey: &quot;shiftKey&quot;, sortForce: null, sortAppend: null, sortLocaleCompare: false, textExtraction: &quot;simpl [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.manage_roles_form">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die &lt;form id=&quot;manage-roles-form&quot;&gt;
+            &lt;fieldset&gt;
+            	&lt;legend&gt;Manage Roles&lt;/legend&gt;
+            	&lt;div class=&quot;editor-label&quot;&gt;
+            		&lt;label for=&quot;role-name&quot;&gt;
+            			Rolename&lt;/label&gt;&lt;/div&gt;
+            	&lt;div class=&quot;editor-field&quot;&gt;
+            		&lt;input type=&quot;text&quot; id=&quot;role-name&quot; placeholder=&quot;e.g. test&quot; /&gt;&lt;/div&gt;
+            	&lt;input type=&quot;button&quot; id=&quot;btn-add-role&quot; value=&quot;Add Role&quot; /&gt;
+            	&lt;div class=&quot;editor-label&quot;&gt;
+            		All roles&lt;/div&gt;
+            	&lt;div class=&quot;editor-field&quot;&gt;
+            		&lt;select id=&quot;add-user-roles&quot; size=&quot;10&quot; class=&quot;role-select-box&quot;&gt;
+            		&lt;/select&gt;
+            	&lt;/div&gt;
+            	&lt;label for=&quot;allow-populated-role&quot;&gt;
+            		Allow  [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.rqui_helpers">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die var myInterval = false; // this variable will hold the interval and work as a flag
+            var $win = $(window); //jquery win object
+            var dimensions = [$win.width(), $win.height()]; //initial dimensions
+            
+            $(function () {
+                $(window).on(&quot;debouncedresize&quot;, function (event) {
+                    dimensions[0] = $win.width(); //else keep the new dimensions
+                    dimensions[1] = $win.height();
+                    resizeToWindowHeight();
+                });
+            });
+            
+            function resizeToWindowHeight() {
+                var height = dimensions[1] - 60;
+                var  [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.simple_query_options_management">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die $(function () {
+                var includeExternalCheckBox = new AddIncludeExternalCheckBox();
+                includeExternalCheckBox.init(&quot;#include-external&quot;);
+                
+                $(&quot;.select-databases&quot;).on(&quot;click&quot;, selectDatabases);
+            });
+            
+            function AddIncludeExternalCheckBox() {
+                var checkBox;
+            
+                /* Initialize the include external check box and fill it with server data */
+                this.init = function (selector) {
+                    // get check box
+                    checkBox = $(selector);
+                    // init the check box with server data  
+                    [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.simple_user_management">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die 
+            $(function () {
+            
+              var addUserArea = new AddUserArea();
+              addUserArea.init(&quot;.simple-user-table&quot;);
+            
+              var roleMgmt = new RoleManagement();
+              roleMgmt.init();
+            
+              var userTableArea = new UserTableArea();
+              userTableArea.init(&quot;.simple-user-table&quot;);
+            
+            });
+            
+            function UserTableArea() {
+            
+              var userTable;
+            
+              /* Initializes the user table and fills it with server data. */
+              this.init = function (tableSelector) {
+            
+                // get user table
+                userTable = $(tableSelector);
+            
+                // fill the user tabl [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.style">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die /*#simple-user-info {
+              padding: 15px 0;
+              text-align: center;
+              background-repeat: no-repeat;
+              background-position: 10px center;
+              position: relative;
+              color: #00529B;
+              position: fixed;
+              top: 0;
+              width: 100%;
+              filter: alpha(opacity=95);
+              -moz-opacity: 0.95;
+              opacity: 0.95;
+            }
+            
+            #simple-user-info.error {
+              background-color: Yellow;
+            }
+            
+            #simple-user-info.success {
+              background-color: Lime;
+            }*/
+            
+            #add-user-form, #manage-roles-form {
+              display: inline-block;
+            }
+            
+            .select-databases- [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.tablesorter_pager">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die /*
+            * tablesorter pager plugin
+            * updated 1/31/2012
+            */
+            
+            (function ($) {
+              $.extend({ tablesorterPager: new function () {
+            
+                // hide arrows at extremes
+                var pagerArrows = function (c) {
+                  var a = &apos;addClass&apos;, r = &apos;removeClass&apos;, d = c.cssDisabled;
+                  if (c.updateArrows) {
+                    c.container[(c.totalRows &lt; c.size) ? a : r](d);
+                    $(c.cssFirst + &apos;,&apos; + c.cssPrev, c.container)[(c.page === 0) ? a : r](d);
+                    $(c.cssNext + &apos;,&apos; + c.cssLast, c.container)[(c.page === c.totalPages - 1) ? a : r](d);
+             [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.tablesorter_pager_min">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die (function (a) { a.extend({ tablesorterPager: new function () { var b = function (b) { var c = &quot;addClass&quot;, d = &quot;removeClass&quot;, e = b.cssDisabled; if (b.updateArrows) { b.container[b.totalRows &lt; b.size ? c : d](e); a(b.cssFirst + &quot;,&quot; + b.cssPrev, b.container)[b.page === 0 ? c : d](e); a(b.cssNext + &quot;,&quot; + b.cssLast, b.container)[b.page === b.totalPages - 1 ? c : d](e) } }, c = function (c, d) { d.startRow = d.size * d.page + 1; d.endRow = Math.min(d.totalRows, d.size * (d.page + 1)); var e = a(d.cssPageDisplay, [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.tablesorter_style">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die /* tables */
+            .simple-user-table {
+            	background-color: #CDCDCD;
+            	margin:10px 0pt 15px;
+            	width: 100%;
+            	text-align: left;
+            }
+            .simple-user-table thead tr th, .simple-user-table tfoot tr th {
+            	background-color: #e6EEEE !important;
+            	border: 1px solid #FFF;
+            	padding: 4px;
+            }
+            .simple-user-table thead tr .header {
+            	cursor: pointer;
+            }
+            .simple-user-table tbody td {
+            	
+            	padding: 4px;
+            	background-color: #FFF;
+            	vertical-align: top;
+            }
+            .simple-user-table tbody tr.odd td {
+            	background-color:#F0F0F6;
+            }
+            .simple-user-table thead t [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.Scripts.ScriptPack.user_table_area">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die &lt;fieldset class=&quot;simple-user-table-field&quot;&gt;
+            &lt;legend&gt;User Table&lt;/legend&gt;
+            	&lt;table class=&apos;simple-user-table tablesorter&apos;&gt;
+            		&lt;thead&gt;
+            			&lt;tr&gt;
+            				&lt;th class=&quot;user-id&quot;&gt;
+            					ID
+            				&lt;/th&gt;
+            				&lt;th class=&quot;user-name&quot;&gt;
+            					Name
+            				&lt;/th&gt;
+            				&lt;th class=&quot;reg-date&quot;&gt;
+            					Registration
+            				&lt;/th&gt;
+            				&lt;th class=&quot;email&quot;&gt;
+            					E-Mail
+            				&lt;/th&gt;
+            				&lt;th class=&quot;lock-state&quot;&gt;
+            					LockIn/Out
+            				&lt;/th&gt;
+            				&lt;th class=&quot;edit-roles&quot;&gt;
+            					Roles
+            				&lt;/th&gt;
+            				&lt;th class=&quot;action&quot;&gt;
+            					Action
+            				&lt;/th&gt;
+            			&lt;/tr&gt;
+            		&lt;/thead&gt;
+            		&lt;tbody&gt;
+            		&lt;/tbod [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
         <member name="M:Mvc5RQ.Areas.UserSettings.Controllers.UserSettingsController.Initialize(System.Web.Routing.RequestContext)">
             <summary>
             Initialize controller and the settings service
@@ -562,11 +953,495 @@
             Guest Id State Storage
             </summary>
         </member>
-        <member name="M:Mvc5RQ.Controllers.RQDSController.Get(System.String)">
+        <member name="T:Mvc5RQ.Areas.UserSettings.UserState">
             <summary>
-            Returns a list if RQItems
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Areas.UserSettings.UserState.StateTypeKey(Mvc5RQ.Areas.UserSettings.UserState.States)">
+            <summary>
+            
+            </summary>
+            <param name="stateType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.UserSettings.UserState.StateType(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="stateName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.UserSettings.UserState.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Areas.UserSettings.UserState.Save">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Areas.UserSettings.UserState.Get(Mvc5RQ.Areas.UserSettings.UserState.States)">
+            <summary>
+            
+            </summary>
+            <param name="stateType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mvc5RQ.Areas.UserSettings.UserState.States">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mvc5RQ.Areas.UserSettings.UserState.States.ListViewState">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mvc5RQ.Areas.UserSettings.UserState.States.ItemViewState">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mvc5RQ.Areas.UserSettings.UserState.States.EditState">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mvc5RQ.Areas.UserSettings.UserState.States.BrowseViewState">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mvc5RQ.Areas.UserSettings.UserState.States.ClasstreeOptionsState">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mvc5RQ.Areas.UserSettings.UserState.States.GuestIdState">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mvc5RQ.Areas.UserSettings.UserState.States.undefined">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Areas.UserSettings.Models.SettingsDBInitializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Areas.UserSettings.Models.SettingsDBInitializer.Seed(Mvc5RQ.Areas.UserSettings.Models.SettingsDBContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Mvc5RQ.Areas.UserSettings.UserSettingsAreaRegistration.RegisterArea(System.Web.Mvc.AreaRegistrationContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="P:Mvc5RQ.Areas.UserSettings.UserSettingsAreaRegistration.AreaName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Controllers.BaseController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.BaseController.ExecuteCore">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.BaseController.OnException(System.Web.Mvc.ExceptionContext)">
+            <summary>
+            
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+        <member name="T:Mvc5RQ.Controllers.HomeController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.HomeController.Index">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.HomeController.About">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.HomeController.News">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.HomeController.Work">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.HomeController.Terms">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.HomeController.Privacy">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Mvc5RQ.Controllers.RQDSController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQDSController.Get(System.String,System.String,System.String,System.String)">
+            <summary>
+            
             </summary>
             <param name="dbname"></param>
+            <param name="format"></param>
+            <param name="verb"></param>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQDSController.Get(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbname"></param>
+            <param name="id"></param>
+            <param name="format"></param>
+            <param name="verb"></param>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mvc5RQ.Controllers.RQItemsController">
+            <summary>
+            Controller Class for URLs designating RQItem objects
+            </summary>
+            <remarks>
+            The controller supports URLs of type 
+            {serviceId}RQItems/{RQItemId}
+            </remarks>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.RQItemList(System.String,System.String,System.String)">
+            <summary>
+            Controller action answering GET http-requests for RQItems
+            </summary>
+            <remarks>
+            The action reacts to URLs of type "~/RQItems" | "~/{serviceId}/RQItems".
+            The action response is filtered by the ActionFilterAttributes "EnableJson" and "EnableXml":
+            If the GET request contains dataType=application/json | text/json or dataType=application/xml | text/xml 
+            the action response is generated by class "JsonResult2" or "XmlResult" of "MvpRestApiLib".
+            In both cases the client is responsible to render the xml (f. e. by XSLT).
+            Otherwise the action response is transformed to text/html on the server according to the value of parameters "verb" or "serviceId" respectively. 
+            </remarks>
+            <param name="verb">
+            null | New | QueryList | BrowseList.
+            </param>
+            <param name="queryString">
+            </param>
+            <param name="serviceId">
+            Id of requested sercive API:
+            "rqi" = internal RiQuest API (default);
+            "rq" = RiQuest proprietary exchange format;
+            "mods" = Metadata Object Description Format (MODS) API of the Library of Congress (not yet supported);
+            "oai_dc" = Dublin Core(DC) API serving metadata according to the specification of Open Archives Initiative (OAI);
+            "srw_dc" = Dublin Core(DC) API serving metadata according to the specification of the Search / Retrieve Web Service (SRW) (not yet supported);
+            "info_ofi" = OpenURL API (not yet supported);
+            "pubmed" = API serving metadata according to the PubMed metadata scheme (not yet supported).
+            </param>
+            <param name="dbname">
+            "rqitem" | {username} = name of the requested database as indicated by the requested url.
+                Database "rqitem" contains all rqitems of all users, which may be accessed by current user.
+                Database {username} contains all rqitems of the user named {username}, which may be accessed by current user. 
+                
+                NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.  
+            </param>
+            <returns>
+            verb == null: 
+                The action returns the (empty) RQItems/Index view.
+            verb == New: 
+                The action returns an (empty) data entry mask to add a new RQItem.
+            verb == QueryList | BrowseList: 
+                The action returns a collection of RQItems   
+                as */json, */xml or text/html - the latter generated by the XSLT "RQResultList2RQSorted.xslt" - 
+                depending on data types specified in the GET request.
+                If appropriate the query stored in ListView or BrowseView state storage is used. A new query is generated if the query strings 
+                or query options differ.
+            serviceId = rq | rqi | mods | oai_dc | srw_dc | info_ofi | pubmed: 
+                The action returns a collection of RQItems formatted according to the requested service API 
+                as */json, */xml or text/html - the latter generated by the XSLT "RQResultList2RQSorted.xslt" - 
+                depending on data types specified in the GET request. 
+            The returned collection is the result set pertaining to the query set in parameter queryString, the last query stored in the state storage or  
+             - if both are void - to the "recent additions" query. 
+            </returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.RQItemList(System.String,System.String,Mvc5RQ.Models.RQItem)">
+            <summary>
+            Controller action answering POST http-requests to RQItems.
+            </summary>
+            <param name="queryString">
+            Accepted values are character strings conforming to the RiQuest query language. 
+            </param>
+            <param name="newRQItem">
+            </param>
+            <param name="verb">
+            </param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.RQItemRecord(System.String,System.String)">
+            <summary>
+            Controller action answering GET http-requests to {serviceId}/RQItems/{rqitemID}.
+            </summary>
+            <remarks>
+            The action reacts to URLs of type "~/{serviceId}/RQItems/{rqitemID}".
+            The action request is filtered through the ActionFilterAttributes EnableJson and EnableXml:
+            If the client GET request contains dataType=application/json | text/json or dataType=application/xml | text/xml the action response is 
+            generated by class JsonResult2 or XmlResult of MvpRestApiLib. In both cases the client is responsible to render the xml (f. e. by XSLT).
+            Otherwise the action response is tranformed on the server according to the serviceId specified. 
+            </remarks>
+            <param name="verb">
+            verb == QueryItem: requests a single RQItem of a query result list.
+            verb == BrowseItem: requests a single RQItem of a browse result list.
+            verb == Edit: allows editing of a database record.
+            verb == Copy: allows copying of a database record.
+            </param>
+            <param name="serviceId">
+            Id of desired sercive API:
+            "rqi" = internal RiQuest API (default);
+            "rq" = RiQuest proprietary exchange format;
+            "mods" = Metadata Object Description Format (MODS) API of the Library of Congress (not yet supported);
+            "oai_dc" = Dublin Core(DC) API serving metadata according to the specification of Open Archives Initiative (OAI);
+            "srw_dc" = Dublin Core(DC) API serving metadata according to the specification of the Search / Retrieve Web Service (SRW) (not yet supported);
+            "info_ofi" = OpenURL API (not yet supported);
+            "pubmed" = API serving metadata according to the PubMed metadata scheme (not yet supported).
+            </param>
+            <param name="rqitemId">
+            DocNo of RQItem to be returned.
+            </param>
+            <returns>
+            The action returns the single RQItem with DocNo=rqitemID as */json, */xml response or text/html response - the latter formatted according to 
+            SingleRQItemView - depending on data types specified in the GET request.  
+            </returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.UpdateItem(System.String,System.String,Mvc5RQ.Models.RQItem)">
+            <summary>
+            POST /RQItems. Add a new RQItem.
+            </summary>
+            <param name="verb"></param>
+            <param name="rqitemId"></param>
+            <param name="changeRQItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.RQItemDescElement(System.String,System.String,System.String)">
+            <summary>
+            Controller action answering GET http-requests to /RQItems/{rqitemID}/{fieldName}.
+            </summary>
+            <remarks>
+            The action reacts to URLs of type "~/RQItems/{rqitemID}/{fieldName}".
+            The action request is filtered through the ActionFilterAttributes EnableJson and EnableXml:
+            If the client GET request contains dataType=application/json | text/json or dataType=application/xml | text/xml the action response is generated by class JsonResult2 or XmlResult of MvpRestApiLib.
+            In both cases the client is responsible to render the xml (f. e. by XSLT).
+            Otherwise the action response is tranformed on the server according to the XXX-View. 
+            </remarks>
+            <param name="rqitemId">
+            DocNo of RQItem to be used.
+            </param>
+            <param name="fieldName">
+            Name of ItemAplphanumeric string with name of ItemDescElement: f. e. Classification
+            </param>
+            <param name="subFieldIndex">
+            Index of the required subfield of the ItemDescElement.
+            </param>
+            <returns>
+            The action returns the ItemDescElement with FieldName = descElementId of RQItem with DocNo=rqitemId as */json, */xml response or text/html response - the latter formatted according to DescElementView - depending on data types specified in the GET request.  
+            </returns>
+        </member>
+        <member name="T:Mvc5RQ.Formatters.XhtmlCustomFormatter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.XhtmlCustomFormatter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.XhtmlCustomFormatter.#ctor(System.Boolean)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.XhtmlCustomFormatter.CanReadType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.XhtmlCustomFormatter.CanWriteType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.XhtmlCustomFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="value"></param>
+            <param name="writeStream"></param>
+            <param name="content"></param>
+            <param name="transportContext"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Mvc5RQ.Formatters.XhtmlCustomFormatter.IsAsync">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Formatters.XMLCustomFormatter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.XMLCustomFormatter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.XMLCustomFormatter.CanReadType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.XMLCustomFormatter.CanWriteType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.XMLCustomFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="value"></param>
+            <param name="writeStream"></param>
+            <param name="content"></param>
+            <param name="transportContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.XMLCustomFormatter.WriteXML(System.Object,System.IO.Stream,System.Net.Http.HttpContent)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="writeStream"></param>
+            <param name="content"></param>
+        </member>
+        <member name="P:Mvc5RQ.Formatters.XMLCustomFormatter.XSLTransform">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.WebApiApplication">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.WebApiApplication.Application_Start">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.WebApiApplication.Application_PostAuthorizeRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.WebApiApplication.WebApiCalledByApplication">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Mvc5RQ.Helpers.CultureHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Helpers.CultureHelper.GetImplementedCulture(System.String)">
+            <summary>
+            Returns a valid culture name based on "name" parameter. If "name" is not valid, it returns the default culture "en-US"
+            </summary>
+            <param name="name">Culture's name (e.g. en-US)</param>
+        </member>
+        <member name="M:Mvc5RQ.Helpers.CultureHelper.GetDefaultCulture">
+            <summary>
+            Returns default culture name which is the first name decalared (e.g. en-US)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Helpers.CultureHelper.GetCurrentCulture">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Helpers.CultureHelper.GetCurrentNeutralCulture">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Helpers.CultureHelper.GetNeutralCulture(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mvc5RQ.Helpers.IsDBName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Helpers.IsDBName.Match(System.Web.HttpContextBase,System.Web.Routing.Route,System.String,System.Web.Routing.RouteValueDictionary,System.Web.Routing.RouteDirection)">
+            <summary>
+            
+            </summary>
+            <param name="httpContext"></param>
+            <param name="route"></param>
+            <param name="parameterName"></param>
+            <param name="values"></param>
+            <param name="routeDirection"></param>
             <returns></returns>
         </member>
         <member name="T:Mvc5RQ.Helpers.StateStorage">
@@ -590,6 +1465,459 @@
             <returns>
             Actual query.
             </returns>
+        </member>
+        <member name="T:Mvc5RQ.Models.RQItemModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModel.#ctor(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="forEdit"></param>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModel.#ctor(RQLib.RQQueryForm.RQquery)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModel.#ctor(RQLib.RQQueryForm.RQquery,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+            <param name="forEdit"></param>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModel.#ctor(RQLib.RQQueryForm.RQquery,System.Boolean,Mvc5RQ.Models.SortParameter)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+            <param name="forEdit"></param>
+            <param name="sortPreprocessor"></param>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModel.IsEditable">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModel.Add(Mvc5RQ.Models.RQItem)">
+            <summary>
+            
+            </summary>
+            <param name="newItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModel.Update">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModel.GetActiveDocumentID(Mvc5RQ.Areas.UserSettings.UserState.States)">
+            <summary>
+            
+            </summary>
+            <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Mvc5RQ.Models.RQItemModel.SortPreprocessor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Models.RQItemModel.RQItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Models.RQItemSet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.#ctor(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="forEdit"></param>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.IsEditable">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.Add(Mvc5RQ.Models.RQItem)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.GetItem(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.Update">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.UpdateClassRelation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.UpdateDigitalObjectToC">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.Find(RQLib.RQQueryForm.RQquery)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.ConvertTo(System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <param name="fromRecord"></param>
+            <param name="maxRecord"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.ConvertTo(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.GetDataFieldTable">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.GetEnumerator">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSet.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Mvc5RQ.Models.RQItemSet.count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Models.RQItemSet.SortPreprocessor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Models.RQItemSet.FormatPreprocessor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Models.RQItemSet.RQItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Models.RQItemSetEnum">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSetEnum.#ctor(Mvc5RQ.Models.RQItemSet)">
+            <summary>
+            
+            </summary>
+            <param name="itemSet"></param>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSetEnum.MoveNext">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemSetEnum.Reset">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Models.RQItemSetEnum.Current">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Models.RQItemSetEnum.System#Collections#IEnumerator#Current">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Models.RQItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Models.RQItemModelRepository">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mvc5RQ.Models.RQItemModelRepository.sortParameter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mvc5RQ.Models.RQItemModelRepository.formatParameter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModelRepository.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModelRepository.#ctor(Mvc5RQ.Models.SortParameter)">
+            <summary>
+            
+            </summary>
+            <param name="sortParameter"></param>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModelRepository.#ctor(Mvc5RQ.Models.FormatParameter)">
+            <summary>
+            
+            </summary>
+            <param name="formatParameter"></param>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModelRepository.#ctor(Mvc5RQ.Models.SortParameter,Mvc5RQ.Models.FormatParameter)">
+            <summary>
+            
+            </summary>
+            <param name="sortParameter"></param>
+            <param name="formatParameter"></param>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModelRepository.GetQuery(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModelRepository.GetModel(System.String,Mvc5RQ.Areas.UserSettings.UserState.States,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="queryString"></param>
+            <param name="stateType"></param>
+            <param name="forEdit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModelRepository.GetModel(System.String,Mvc5RQ.Areas.UserSettings.UserState.States)">
+            <summary>
+            
+            </summary>
+            <param name="queryString"></param>
+            <param name="stateType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModelRepository.GetModel(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModelRepository.GetRQItem(System.String,Mvc5RQ.Areas.UserSettings.UserState.States,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="rqitemId"></param>
+            <param name="stateType"></param>
+            <param name="forEdit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQItemModelRepository.GetRQItem(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mvc5RQ.Models.SortParameter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.SortParameter.#ctor(Mvc5RQ.Models.SortParameter.SortOrderEnum)">
+            <summary>
+            
+            </summary>
+            <param name="sortType"></param>
+        </member>
+        <member name="M:Mvc5RQ.Models.SortParameter.SortTypeString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.SortParameter.Cast">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.SortParameter.ListCheck(Mvc5RQ.Models.RQItem)">
+            <summary>
+            
+            </summary>
+            <param name="itemToAdd"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mvc5RQ.Models.SortParameter.SortOrderEnum">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Models.FormatParameter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.FormatParameter.SetXslTransformFilePath">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.FormatParameter.#ctor(Mvc5RQ.Models.FormatParameter.FormatEnum)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+        </member>
+        <member name="P:Mvc5RQ.Models.FormatParameter.Format">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Models.FormatParameter.XmlTransformPath">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Models.FormatParameter.XslTransformArg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack">
+            <summary>
+              Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.ResourceManager">
+            <summary>
+              Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.Culture">
+            <summary>
+              Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+              Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.edit_rqitem_code">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die var saveData = null;
+            var verb = getUrlVar(&quot;verb&quot;);
+            var itemId = &quot;&quot;;
+            var compiledTemplate = &quot;&quot;;
+            
+            $(function () {
+                var editForm = new EditForm();
+            
+                compiledTemplate = $.templates($(&quot;#tocTemplate&quot;).html());
+                editForm.init();
+            });
+            
+            function EditForm() {
+                this.init = function () {
+                    if (!$(&quot;.edit-form&quot;))
+                        return;
+                    $(&quot;#btn-submit-item&quot;).click(submitItem);
+                    $(&quot;#btn-reset&quot;).click(reset);
+                    $(&quot;#tocAttach&quot;).click(attachTOC);
+                    if (verb == &quot;edit&quot; [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.edit_rqitem_form">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die &lt;style&gt;
+                .edit-form {
+                    position: relative;
+                }
+            &lt;/style&gt;
+            &lt;div class=&quot;rq-ajax-wait&quot; style=&quot;display: none&quot;&gt;&lt;/div&gt;
+            &lt;form id=&quot;EditForm&quot; class=&quot;edit-form pure-form&quot;&gt;
+            &lt;fieldset&gt;
+            	&lt;legend&gt;Eingabemaske&lt;/legend&gt;
+                    &lt;span class=&quot;editor-label&quot;&gt;
+                        &lt;label for=&quot;ID&quot;&gt;ID: &lt;/label&gt;&lt;span id=&quot;idval&quot;&gt;&lt;/span&gt;
+                        &lt;label for=&quot;DocNo&quot;&gt;Dok-Nr.: &lt;/label&gt;&lt;span id=&quot;doknrval&quot;&gt;&lt;/span&gt;
+                    &lt;/span&gt;
+            		&lt;span class=&quot;editor-label&quot;&gt;&lt;label for=&quot;Title&quot;&gt;Titel&lt;/label&gt;&lt;/span&gt;
+            		&lt;span class=&quot;editor- [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <!-- Ungültiger XML-Kommentar wurde für den Member "P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.edit_rqitem_style" ignoriert -->
+        <member name="P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.rqui_helpers">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die var myInterval = false; // this variable will hold the interval and work as a flag
+            var $win = $(window); //jquery win object
+            var dimensions = [$win.width(), $win.height()]; //initial dimensions
+            
+            $(function () {
+                $(window).on(&quot;debouncedresize&quot;, function (event) {
+                    dimensions[0] = $win.width(); //else keep the new dimensions
+                    dimensions[1] = $win.height();
+                    resizeToWindowHeight();
+                });
+            });
+            
+            function resizeToWindowHeight() {
+                var height = dimensions[1] - 60;
+                var  [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
         </member>
     </members>
 </doc>

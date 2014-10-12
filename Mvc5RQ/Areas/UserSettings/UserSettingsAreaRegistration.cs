@@ -4,6 +4,9 @@ namespace Mvc5RQ.Areas.UserSettings
 {
     public class UserSettingsAreaRegistration : AreaRegistration
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override string AreaName
         {
             get
@@ -12,6 +15,10 @@ namespace Mvc5RQ.Areas.UserSettings
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
