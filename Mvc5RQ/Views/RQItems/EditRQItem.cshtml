@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "RiQuest | Edit";
+}
+<div class="pure-g-r">
+    <div class="pure-u-4-5">
+        <div class="pure-g-r">
+            <div class="pure-u-1-6">
+                <div class="rq-sidebar rq-left-sidebar">
+@*                    @Html.Partial("~/Views/Account/SmallLogOn.cshtml")*@
+                </div>
+            </div>
+            <div class="pure-u-5-6">
+                @Html.Partial("~/Views/RQItems/Shared/EditViewer.cshtml")
+            </div>
+        </div>
+    </div>
+    <div class="pure-u-1-5">
+        <div class="pure-g-r">
+            <div class="pure-u-4-5">
+                 <div class="rq-sidebar rq-classtree-sidebar">
+                 </div>
+            </div>
+            <div class=" pure-u-1-5">
+                <div class="rq-sidebar rq-right-sidebar rq-banner"></div>
+            </div>
+        </div>
+        @Html.Partial("~/Views/Shared/Footer.cshtml")
+    </div>
+</div>

@@ -1,0 +1,418 @@
+﻿/*------------*/
+/* base rules */
+/*------------*/
+body {
+    background-color: Silver;
+    /*font-size: .7em;*/
+    font-size: 100.01%;
+    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
+    /* to center content horizontally*/
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 98%;
+    color: Gray;
+}
+
+a:link,
+a:visited,
+a:active {
+    color: Gray;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: lightgray;
+}
+
+a[disabled="true"],
+a:hover[disabled="true"] {
+    cursor:default;
+    color: gray;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: brandon-grotesque, "Helvetica neue", Arial, sans-serif;
+    color: #797979;
+}
+
+#header h1 {
+    font-size: 2em;
+    text-align: center;
+    line-height: 1.3em;
+    letter-spacing: 1px;
+    word-spacing: 0.25em;
+    margin-top: 1em;
+    margin-bottom: 0px;
+}
+
+fieldset {
+    border: 0;
+}    
+
+/*--------------*/
+/* layout rules */
+/*--------------*/
+#nav {
+    /*border: 1px solid blue;*/
+}
+
+#content {
+    /* element is affected by resize function */
+    background-color: rgb(255, 255, 245);
+    padding-bottom: 15px;
+    /*border: 1px solid green;*/
+} 
+
+#footer {
+    vertical-align: bottom;
+    margin-left: 15px;
+    /*border: 1px solid red;*/
+}
+
+#main {
+}
+
+
+/*--------------*/
+/* module rules */
+/*--------------*/
+
+/*--------------*/
+/*    menus     */
+/*--------------*/
+
+.rq-menu {
+    background-color: rgb(255, 255, 245) !important;
+    color: Gray;
+    font-family: Garamond;
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 1.3em;
+    text-align: right;
+    vertical-align: top;
+    /*border: 1px solid red;*/
+    /*width: inherit;*/
+}
+
+.rq-menu ul {
+    padding-right: 5px;    
+}
+
+.rq-menu li a {
+    background-color: rgb(255, 255, 245);
+    padding-top: 0px;
+    text-decoration: none;
+    color: #797979;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.rq-menu li img {
+    background: url("../content/themes/images/tabseparator.gif") no-repeat;
+    height: 30px;
+    width: 3px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.rq-menu li a:hover,
+.rq-menu li a:active,
+.pure-menu li a:focus {
+    background-color: rgb(255, 255, 245);
+    color: Silver;
+    outline-style: none;
+}
+
+.rq-menu .pure-menu-heading {
+    display: inline;
+}
+
+/*--------------*/
+/*    logos     */
+/*--------------*/
+
+.rq-logo {
+    margin-bottom: 10px;
+    /*margin-top: 10px;*/
+    font-weight: bold;
+    /*border: 1px solid red;*/
+    /*width: inherit;*/
+}
+
+.rq-logo span,
+.rq-logo h1,
+.rq-logo h2 {
+    font-family: Garamond;
+    font-style: italic;
+    color: #797979;
+    line-height: 130%;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline;
+    /*border: 1px solid green;*/
+    height: auto;
+}
+
+.rq-logo h1 {
+    font-size: 32pt;
+    padding-left: 15px;
+}
+
+.rq-logo h2 {
+    font-size: 20pt;
+}
+
+/*--------------*/
+/*   buttons    */
+/*--------------*/
+
+.rq-quick-button {
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    background-color: #c22a09; 
+}
+
+/*--------------*/
+/*    pop-ups   */
+/*--------------*/
+
+#simple-user-info {
+  padding: 15px 0;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  position: relative;
+  color: #00529B;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  filter: alpha(opacity=95); /* IE */
+  -moz-opacity: 0.95; /* Mozilla */
+  opacity: 0.95; /* Opera */
+}
+
+#simple-user-info.error {
+  background-color: darkred;
+  color: white;
+}
+
+#simple-user-info.success {
+  background-color: Lime;
+}
+
+/*--------------*/
+/* result lists */
+/*--------------*/
+
+.category {
+    font-family: Garamond;
+    font-size: 14pt;
+    font-style: italic;
+    color: #a52a2a;
+    line-height: 2em;
+}
+
+.itemlist {
+    /*margin-top: 5px;
+    margin-bottom: 10px;*/
+    font-family: Georgia;
+    font-size: 10pt;
+}
+
+.itemlist .comment {
+     margin-top: 0.2em;
+     margin-bottom: 0.5em;
+}
+
+.singleitem {
+    line-height: 1.1em;
+}
+
+.display-label,
+.singleitem .rq-fieldname {
+    font-family: Verdana;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #005770;
+    padding-right: 10px;
+}
+
+.display-field,
+.singleitem .rq-fieldvalue {
+    font-family: Arial;
+    font-size: 8pt;
+    font-weight: bold;
+    letter-spacing: normal;
+    color: black;
+}
+
+.singleitem .rq-castfielname,
+.singleitem .rq-castfieldvalue {
+    font-family: Arial;
+    font-size: 8pt;
+    letter-spacing: normal;
+    color: #818100;
+    padding-left: 15px;
+}
+
+.singleitem .rq-castfieldvalue {
+    padding-left: 30px;
+}
+
+.singleitem .comment,
+.itemlist .comment {
+    font-family: Arial;
+    font-size: 8pt;
+    color: gray;
+}
+
+.rq-action-bar a {
+    color: teal;
+    font-size: 8pt;
+}
+
+.rq-action-bar a:hover {
+    color: grey;
+}
+
+/*--------------*/
+/* box displays */
+/*--------------*/
+
+.rq-textcontainer{
+    margin: 15px;
+}
+
+.rq-diagnostics {
+    color: darkred;
+    font-size: 0.7em;
+    display: none;
+}
+
+.rq-instructions {
+    font-size: 1em;
+    display: block;
+    text-align: center;
+    margin: 10px;
+    color: black;
+}
+
+#footer .rq-instructions,
+#copyright {
+    font-size: 0.85em;
+}
+
+.rq-box {
+    margin-left: 15px;
+}
+
+.rq-box h1 {
+    font-size: 0.9em;
+}
+
+.rq-settings-panel {
+    font-size: 0.85em;
+}
+
+.rq-settings-panel ul {
+    /*border: 1px solid blue;*/
+    padding-left: 15px;
+    margin-top: 5px;
+}
+
+.rq-settings-panel h3 {
+    font-size: 0.95em;
+    margin-bottom: 0px;
+}
+
+.rq-small-logon label {
+    font-size: 0.9em;
+}
+
+.rq-small-logon > .disabled label,
+.rq-small-logon input:disabled {
+    opacity: 0.3;
+}
+
+.rq-small-logon input[type='submit'],
+.rq-small-logon a {
+    font-size: 8pt;
+} 
+
+.rq-banner {
+    background-image: url("../images/banner4.png");
+    background-size: 100%;
+    min-height: 700px;
+    margin-right: 15%;
+    margin-left: 0px;
+}
+
+.rqbanner img {
+    width: 1px;
+    height: 100px;
+}
+
+/*------------------------------*/
+/*        box displays          */
+/* (affected by resize function */
+/*------------------------------*/
+
+.content-box { 
+    background-color: beige;
+    border-top: 1px solid silver;
+}
+
+.rq-result-box {
+    background-color: beige !important;
+}
+
+.rq-sidebar {
+    font-size: 0.85em;
+    overflow: auto;
+}
+
+.rq-right-sidebar {
+    margin-left: 15px;
+}
+
+.rq-sidebar input[type="text"],
+.rq-sidebar input[type="password"] {
+    width: 80%;
+    margin-bottom: 5px;
+}
+
+.rq-left-sidebar {
+   margin-left: 15px;
+   /*border: 1px solid blue;*/
+}
+
+.rq-classtree-sidebar {
+    font-size: 0.85em;
+    margin-left: 2px;
+    overflow: auto;
+}
+ 
+/*-------------*/
+/* state rules */
+/*-------------*/
+/* style for overlay element used by function ajaxLoader in module ( s.f. rqui-helpers.js) */
+.rq-ajax-wait {
+    background: url("../images/ajax-loader.gif") no-repeat center transparent;
+    opacity: 0.7;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: beige;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+}
+
+/*-------------*/
+/* theme rules */
+/*-------------*/

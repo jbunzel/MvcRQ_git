@@ -1,0 +1,82 @@
+#paging_container {
+  	height: 100%;
+    width: 100%;
+    background-color: transparent;	
+}
+
+.page_navigation , .alt_page_navigation{
+    padding-top: 6px;
+	padding-bottom: 5px;
+    text-align: right;
+    min-height: 20px;
+}
+
+.page_navigation a, .alt_page_navigation a{
+	padding: 3px 5px;
+	margin:2px;
+	color:white;
+	text-decoration:none;
+	font-family: Tahoma;
+	font-size: 12px;
+	background-color: Lightgray;
+}
+
+.paging_info {
+    /*border: 1px solid green;*/
+    margin-top: 4px;
+    float: left;
+}
+
+.info_text {
+    font-family: Tahoma;
+	font-size: 12px;
+    letter-spacing: normal;
+    display: inline;
+    float: left;
+    padding-top: 3px;
+    padding-left: 3px;
+    /*border: 1px solid red;*/
+}
+
+.result_segments {
+    padding-left: 20px;
+}
+
+.result_segments select {
+    background-color: beige;
+    width: 200px;
+    letter-spacing: normal;
+}
+
+.active_page{
+	background-color: white !important;
+	color: black !important;
+    border: 1px solid black;
+}
+
+.ellipse{
+}
+
+.content-box {
+    background-color: transparent;
+    overflow: auto;
+}
+
+.container{
+	float: left;
+	background-color: beige !important;
+    border: 1px solid silver;
+}
+
+li{
+	list-style: none;	
+}
+
+.content, .alt_content{
+	color: black;
+}
+
+.content li, .alt_content li, .content > p{
+	padding: 5px
+}
+

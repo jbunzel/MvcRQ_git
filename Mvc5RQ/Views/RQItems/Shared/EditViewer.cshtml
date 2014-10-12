@@ -1,0 +1,49 @@
+﻿@model Mvc5RQ.Models.RQItem
+@*@Html.ValidationSummary()*@
+@using (Html.BeginForm(Model.DocNo, "RQItems", FormMethod.Post))
+{
+    if (ViewBag.EditButton1 != null) {<input type="submit" name="verb" value="@ViewBag.EditButton1" />}
+    if (ViewBag.EditButton2 != null) {<input type="submit" name="verb" value="@ViewBag.EditButton2" />}
+    if (ViewBag.EditButton3 != null) {<input type="button" name="verb" value="@ViewBag.EditButton3" onclick="location.href='@ViewBag.EditButton3Link'" />}
+    if (ViewBag.EditButton4 != null) {<input type="button" name="verb" value="@ViewBag.EditButton4" onclick="location.href='@ViewBag.EditButton4Link'"/>}
+    <div class="rq-ajax-wait" style="display: none"></div>
+    <fieldset class="edit-form pure-form pure-form-stacked" title="EditForm">
+        @Html.LabelFor(rqitem => rqitem.ID, "ID:")@Html.DisplayFor(rqitem => rqitem.ID)@Html.HiddenFor(rqitem => rqitem.ID)
+        @Html.LabelFor(rqitem => rqitem.DocNo, "Dok-Nr.:") @Html.DisplayFor(rqitem => rqitem.DocNo)@Html.HiddenFor(rqitem => rqitem.DocNo)
+        @Html.EditorFor(rqitem => rqitem.Title, new { label = "Titel", classname = "title" })
+        @Html.EditorFor(rqitem => rqitem.Authors, new { label = "Autoren", classname = "authors" })
+        @Html.EditorFor(rqitem => rqitem.Source, new { label = "Quelle", classname = "source" })
+        @Html.EditorFor(rqitem => rqitem.Edition, new { label = "Ausgabe", classname = "edition" })
+        @Html.EditorFor(rqitem => rqitem.ISDN, new { label = "ISDN", classname = "isdn" })
+        @Html.EditorFor(rqitem => rqitem.Coden, new { label = "Coden", classname = "coden" })
+        @Html.EditorFor(rqitem => rqitem.Institutions, new { label = "Institutionen", classname = "institution" })
+        @Html.EditorFor(rqitem => rqitem.Series, new { label = "Reihe", classname = "series" })
+        @Html.EditorFor(rqitem => rqitem.Locality, new { label = "Ort", classname = "locality" })
+        @Html.EditorFor(rqitem => rqitem.Publisher, new { label = "Verlag", classname = "publisher" })
+        @Html.EditorFor(rqitem => rqitem.PublTime, new { label = "Jahr", classname = "publtime" })
+        @Html.EditorFor(rqitem => rqitem.Volume, new { label = "Band", classname = "volume" })
+        @Html.EditorFor(rqitem => rqitem.Issue, new { label = "Heft", classname = "issue" })
+        @Html.EditorFor(rqitem => rqitem.Pages, new { label = "Format", classname = "pages" })
+        @Html.EditorFor(rqitem => rqitem.Language, new { label = "Sprache", classname = "language" })
+        @Html.EditorFor(rqitem => rqitem.Signature, new { label = "Standort", classname = "signature" })
+        @Html.EditorFor(rqitem => rqitem.DocTypeCode, new { label = "Dokumenttyp-Code", classname = "doctypecode" })
+        @Html.EditorFor(rqitem => rqitem.DocTypeName, new { label = "Dokumenttyp", classname = "publisher" })
+        @Html.EditorFor(rqitem => rqitem.IndexTerms, new { label = "Schlagworte", classname = "indexterms" })
+        @Html.EditorFor(rqitem => rqitem.Subjects, new { label = "Fächer", classname = "subjects" })
+        @Html.EditorFor(rqitem => rqitem.WorkType, new { label = "Gattung", classname = "worktype" })
+        @Html.EditorFor(rqitem => rqitem.AboutLocation, new { label = "Ortsbezug", classname = "aboutlocation" })
+        @Html.EditorFor(rqitem => rqitem.AboutTime, new { label = "Zeitbezug", classname = "abouttime" })
+        @Html.EditorFor(rqitem => rqitem.AboutPersons, new { label = "Personenbezug", classname = "aboutpersons" })
+        @*@Html.EditorFor(rqitem => rqitem.Classification, "rqdescriptor", new { label = "Klassifikation", classname = "classification" })*@
+        @Html.EditorFor(rqitem => rqitem.ClassificationFieldContent, new { label = "Klassifikation", classname = "classification" })
+        @Html.EditorFor(rqitem => rqitem.Abstract, new { label = "Inhaltsbeschreibung", classname = "abstract" })
+        @Html.EditorFor(rqitem => rqitem.CreateLocation, new { label = "Entstehungsort", classname = "createlocation" })
+        @Html.EditorFor(rqitem => rqitem.CreateTime, new { label = "Entstehungszeit", classname = "createtime" })
+        @Html.EditorFor(rqitem => rqitem.Notes, new { label = "Fußnoten", classname = "notes" })
+    </fieldset>
+    if (ViewBag.EditButton1 != null) {<input type="submit" name="verb" value="@ViewBag.EditButton1" />}
+    if (ViewBag.EditButton2 != null) {<input type="submit" name="verb" value="@ViewBag.EditButton2" />}
+    if (ViewBag.EditButton3 != null) {<input type="button" name="verb" value="@ViewBag.EditButton3" onclick="location.href='@ViewBag.EditButton3Link'" />}
+    if (ViewBag.EditButton4 != null) {<input type="button" name="verb" value="@ViewBag.EditButton4" onclick="location.href='@ViewBag.EditButton4Link'"/>}
+}
+@(ViewData["Message"] ?? "")

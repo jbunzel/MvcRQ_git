@@ -1,0 +1,22 @@
+﻿<link href="@Url.Content("~/Scripts/HtmlFactoryScripts/paging-style.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/HtmlFactoryScripts/result-viewer.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/HtmlFactoryScripts/rqui-helpers.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.pajinate.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    var docNo = @Html.Raw(Json.Encode(@ViewBag.docNo));
+    var getrqitemverb = @Html.Raw(Json.Encode(@ViewBag.GetRQItemVerb));
+</script>
+<div id="htmlList" class="rq-result-box">
+    <div id="paging_container" class="pure-g-r container">
+        <div class="rq-ajax-wait" style="display: none"></div>
+        <div class="paging_info">
+            <span class="info_text"></span>
+            <span class="result_segments" style="display: none">
+                <select id="segmentSelector"></select>
+            </span>
+        </div>
+        <div class ="pure-u-1 page_navigation"></div>
+        <div class="pure-u-1 content-box">
+        </div>
+    </div>
+</div>
