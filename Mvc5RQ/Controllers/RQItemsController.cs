@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.Mvc;
 using Mvc5RQ.Models;
-
-using RQLib.RQQueryForm;
 using Mvc5RQ.Areas.UserSettings;
 using Mvc5RQ.Helpers;
 
@@ -106,17 +102,10 @@ namespace Mvc5RQ.Controllers
                 else
                     throw new AccessViolationException("Not authorized for this function!");
             }
-            //else if ((!string.IsNullOrEmpty(verb)) && (verb.ToLower() == "querylist"))
-            //    return this.Content(modelRepository.GetModel(queryString, UserState.States.ListViewState).TransformModel(verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
-            //else if ((!string.IsNullOrEmpty(verb)) && (verb.ToLower() == "browselist"))
-            //{
-            //    if (Helpers.StateStorage.GetClasstreeOptionsState() == true) modelRepository.sortParameter = new SortParameter(SortParameter.SortOrderEnum.ByShelfClass);
-            //    return this.Content(modelRepository.GetModel(queryString, UserState.States.BrowseViewState).TransformModel(verb, 1, 0), "text/html", System.Text.Encoding.UTF8);
-            //}
             else
             {
                 ViewBag.docNo = HttpContext.Request.QueryString.Get("d") != null ? HttpContext.Request.QueryString.Get("d") : modelRepository.GetQuery(queryString).DocId;
-                //ViewBag.HasAddPermit = Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems to the database.
+                ViewBag.HasAddPermit = User.IsInRole("admin"); //Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems to the database.
                 ViewBag.GetRQItemVerb = "QueryItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
                 return View("Index");
             }
@@ -293,22 +282,6 @@ namespace Mvc5RQ.Controllers
                 else
                     throw new AccessViolationException("Not authorized for this function!");
             }
-            //else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "queryitem")))
-            //{
-            //    rqitem = modelRepository.GetRQItem(rqitemId, UserState.States.ListViewState, false);
-            //    if (HttpContext.Request.AcceptTypes.Contains("text/html"))
-            //        return this.Content(rqitem.TransformItem(RQItem.DisplFormat.single_item), "text/html", System.Text.Encoding.UTF8);
-            //    else
-            //        view = "DisplRQItem";
-            //}
-            //else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "browseitem")))
-            //{
-            //    rqitem = modelRepository.GetRQItem(rqitemId, UserState.States.BrowseViewState, false);
-            //    if (HttpContext.Request.AcceptTypes.Contains("text/html"))
-            //        return this.Content(rqitem.TransformItem(RQItem.DisplFormat.single_item), "text/html", System.Text.Encoding.UTF8);
-            //    else
-            //        view = "DisplRQItem";
-            //}
             else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "edititem")))
             {
                 view = "EditRQItem";
@@ -319,7 +292,7 @@ namespace Mvc5RQ.Controllers
                 rqitem = modelRepository.GetRQItem(rqitemId, UserState.States.ItemViewState, false);
                 modelRepository.GetQuery(rqitemId);
                 ViewBag.docNo = HttpContext.Request.QueryString.Get("d") != null ? HttpContext.Request.QueryString.Get("d") : "";
-                //ViewBag.HasAddPermit = Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems to the database.
+                ViewBag.HasAddPermit = User.IsInRole("admin"); //Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems to the database.
                 ViewBag.GetRQItemVerb = "QueryItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
                 return View("Index");
             }
