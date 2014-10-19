@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Web;
 using System.Web.Routing;
-using System.Web.Security;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.Owin;
+using Mvc5RQ.Models;
 
 namespace Mvc5RQ.Helpers
 {
@@ -23,12 +25,17 @@ namespace Mvc5RQ.Helpers
         /// <returns></returns>
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
-            MembershipUser user = Membership.GetUser(values[parameterName].ToString());
+            //ApplicationUserManager um = httpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            //Task<ApplicationUser> au = um.FindByNameAsync(values[parameterName].ToString());
 
-            if (user == null)
-                return String.Compare(values[parameterName].ToString().ToLower(), _match, true) == 0;
-            else
+            //if (au.Result == null)
+            //    return String.Compare(values[parameterName].ToString().ToLower(), _match, true) == 0;
+            //else
+            //    return true;
+            if (values[parameterName].ToString().ToLower() == "rqitems")
                 return true;
+            else
+                return false;
         }
     }
 }

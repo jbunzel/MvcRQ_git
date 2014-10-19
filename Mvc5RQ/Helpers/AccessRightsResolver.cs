@@ -2,44 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Mvc5RQ.Models;
 
 namespace Mvc5RQ.Helpers
 {
     public class AccessRightsResolver
     {
-        private static string GetUser()
-        {
-            try
-            {
-                return Membership.GetUser().UserName;
-            }
-            catch
-            {
-                return "";
-            }
-        }
-        
-        private static string[] GetUserRoles()
-        {
-            return Roles.GetRolesForUser();
-        }
-
-        public static string GetUpmostPrivilege()
-        {
-            string[] roles = GetUserRoles();
-            string res = "";
-
-            foreach (string val in roles) {
-                if (val == "Adminitrators") res = "Admin";
-                if (val == "Members") 
-                    if (res != "Admin") res = "Member";
-                if (val == "Guest") 
-                    if ((res != "Admin") && (res != "Member")) res = "Guest";
-            }
-            return res;
-        }
-
         public static string DecodeAccessRights(string code)
         {
             //Access rights (coded syntax) NOTE: FieldLength = 50
@@ -64,12 +34,7 @@ namespace Mvc5RQ.Helpers
 
         public static bool HasAdminAccess()
         {
-            string[] roles = GetUserRoles();
-
-            if (roles.Contains<string>("Administrators"))
-                return true;
-            else
-                return false;
+            return HttpContext.Current.User.IsInRole("admin");
         }
 
         public static bool HasKosEditAccess()

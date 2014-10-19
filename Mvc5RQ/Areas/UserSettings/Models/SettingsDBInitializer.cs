@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Mvc5RQ.Models;
 
 namespace Mvc5RQ.Areas.UserSettings.Models
 {
@@ -60,9 +63,11 @@ namespace Mvc5RQ.Areas.UserSettings.Models
             sortOptions.ForEach(s => context.SortOptions.Add(s));
             context.SaveChanges();
 
-            if (Membership.GetUser("jbunzel") != null)
+            ApplicationUser primaryUser = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindByName("jbunzel@riquest.de");
+
+            if (primaryUser != null)
             {
-                Guid ui = (Guid)Membership.GetUser("jbunzel").ProviderUserKey;
+                Guid ui = new Guid(primaryUser.Id);
                 var queryOptions = new List<QueryOptions> 
                 { 
                     new QueryOptions { IncludeExternal = true, 

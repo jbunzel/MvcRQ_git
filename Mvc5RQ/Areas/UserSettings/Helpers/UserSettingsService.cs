@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web.Security;
+using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 using System.Web;
-
 using Mvc5RQ.Areas.UserSettings.Models;
 
 namespace Mvc5RQ.Areas.UserSettings
@@ -47,12 +46,12 @@ namespace Mvc5RQ.Areas.UserSettings
           try
           {
               Guid ui;
-
-              MembershipUser user = Membership.GetUser();
-              if (user == null)
+              string userId = HttpContext.Current.User.Identity.GetUserId();           
+              
+              if (userId == null)
                   ui = GetGuestId();       // Get the guest user id.
               else
-                  ui = (Guid)user.ProviderUserKey;
+                  ui = new Guid(userId);  // ui = (Guid)user.ProviderUserKey;
               qo = db.QueryOptions.FirstOrDefault(QueryOptions => QueryOptions.UserId.Equals(ui));
               if (qo == null)
               {   // create the default user profile

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -16,6 +17,8 @@ namespace Mvc5RQ.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public DateTime LastActivityDate { get; set; } 
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

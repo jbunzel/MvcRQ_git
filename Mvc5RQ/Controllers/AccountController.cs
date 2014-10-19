@@ -13,7 +13,7 @@ using Mvc5RQ.Models;
 namespace Mvc5RQ.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         public AccountController()
         {
@@ -69,7 +69,7 @@ namespace Mvc5RQ.Controllers
             {
                 return View(model);
             }
-
+            
             // This doen't count login failures towards lockout only two factor authentication
             // To enable password failures to trigger lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -149,7 +149,7 @@ namespace Mvc5RQ.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, LastActivityDate = DateTime.Now };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

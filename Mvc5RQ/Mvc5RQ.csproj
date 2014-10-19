@@ -250,6 +250,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Helpers\RQAuthorize.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -307,12 +308,14 @@
     <Content Include="Areas\Scripts\user-table-area.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\font-awesome-4.0.3\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.0.3\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome-4.0.3\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\images\main_image.png" />
     <Content Include="Content\pure-0.2.0\pure-min.css" />
     <Content Include="Content\riquest.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\themes\Images\tabseparator.gif" />
     <Content Include="Content\themes\JQuery-UI\smootheness\images\animated-overlay.gif" />
     <Content Include="Content\themes\JQuery-UI\smootheness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -472,6 +475,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="xml\dir.xml" />
     <Content Include="xml\extdblist.xml">
       <SubType>Designer</SubType>
@@ -585,7 +589,6 @@
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />

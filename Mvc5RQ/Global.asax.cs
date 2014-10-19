@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.AspNet.Identity;
 
 namespace Mvc5RQ
 {
@@ -33,9 +34,9 @@ namespace Mvc5RQ
         protected void Application_PostAuthorizeRequest()
         {
             if (WebApiCalledByApplication())
-            {
                 System.Web.HttpContext.Current.SetSessionStateBehavior(System.Web.SessionState.SessionStateBehavior.Required);
-            }
+            else if (User.Identity.IsAuthenticated)
+                Mvc5RQ.Helpers.IdentityHelpers.UpdateLastAccessDate(User.Identity.GetUserId());
         }
 
         /// <summary>
@@ -44,8 +45,7 @@ namespace Mvc5RQ
         /// <returns></returns>
         public static bool WebApiCalledByApplication()
         {
-            return true;
-            //return HttpContext.Current.Request.AppRelativeCurrentExecutionFilePath.StartsWith(@"~/rqi");
+            return (HttpContext.Current.Request.Headers["X-Requested-With"] == "XMLHttpRequest");
         }
     }
 }

@@ -86,7 +86,32 @@ namespace Mvc5RQ
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            // Credentials:
+            var credentialUserName = "renate.bunzel@riquest.de";
+            var sentFrom = "support@riquest.de";
+            var pwd = "quiko";
+
+            // Configure the client:
+            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("smtp.riquest.de");
+            client.Port = 25;
+            client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+
+            // Create the credentials:
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(credentialUserName, pwd);
+
+            client.EnableSsl = false;
+            client.Credentials = credentials;
+
+            // Create the message:
+            var mail = new System.Net.Mail.MailMessage(sentFrom, message.Destination);
+
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+
+            // Send:
+            return client.SendMailAsync(mail);
+            //return Task.FromResult(0);
         }
     }
 
@@ -102,7 +127,7 @@ namespace Mvc5RQ
     // This is useful if you do not want to tear down the database each time you run the application.
     // public class ApplicationDbInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     // This example shows you how to create a new database if the Model changes
-    public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    public class ApplicationDbInitializer :  DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {
@@ -115,9 +140,9 @@ namespace Mvc5RQ
         {
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
-            const string name = "Admin@riquest.de";
-            const string password = "admin";
-            const string roleName = "Admin";
+            const string name = "admin@riquest.de";
+            const string password = "Admin@123456";
+            const string roleName = "admin";
 
             //Create Role Admin if it does not exist
             var role = roleManager.FindByName(roleName);
@@ -131,6 +156,7 @@ namespace Mvc5RQ
             if (user == null)
             {
                 user = new ApplicationUser { UserName = name, Email = name };
+                user.LastActivityDate = System.DateTime.Now;
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }

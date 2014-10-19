@@ -42,9 +42,8 @@ namespace Mvc5RQ.Controllers
 
             if (Request.IsAuthenticated)
             {
-                var name = User.Identity.Name;
-
-                Guid gu = (Guid)System.Web.Security.Membership.GetUser().ProviderUserKey;
+            //    var name = User.Identity.Name;
+            //    Guid gu = (Guid)System.Web.Security.Membership.GetUser().ProviderUserKey;
             }
             //MvpRestApiLib.EnableXmlAttribute.XSLTransform = ""; // Essential, because old string values may have survived in memory. 
             base.ExecuteCore();
