@@ -43,6 +43,13 @@
                         <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu4, "Work", "Home", new { area = "" }, null)</li>
                         <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
                         <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu5, "News", "Home", new { area = "" }, null)</li>
+                        @if (Request.IsAuthenticated && User.IsInRole("admin"))
+                        {
+                            <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
+                            <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu6, "Index", "UserManagement", new { area = "UserManagement" }, null)</li>
+                            <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
+                            <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu7, "Index", "UsersAdmin")</li>
+                        }
                         <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
                         <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu2, "About", "Home", new { area = "" }, null)</li>
                     </ul>

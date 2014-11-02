@@ -225,4 +225,22 @@
   <data name="itemView_access_denied" xml:space="preserve">
     <value>Sie haben keine Zugriffsrechte für dieses digitale Objekt.</value>
   </data>
+  <data name="menu6" xml:space="preserve">
+    <value>Nutzer</value>
+  </data>
+  <data name="menu7" xml:space="preserve">
+    <value>Daten</value>
+  </data>
+  <data name="um_no_roles_defined" xml:space="preserve">
+    <value>Keine Benutzerrollen definiert.</value>
+  </data>
+  <data name="um_no_users_found" xml:space="preserve">
+    <value>Keine Benutzerdaten gefunden.</value>
+  </data>
+  <data name="um_database_store_error" xml:space="preserve">
+    <value>Fehler beim Speichern in der Benutzerdatenbank.</value>
+  </data>
+  <data name="um_invalid_role_name" xml:space="preserve">
+    <value>Ungüliger Bezeichner für Benutzerrolle. </value>
+  </data>
 </root>

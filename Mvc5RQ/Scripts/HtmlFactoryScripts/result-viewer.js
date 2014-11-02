@@ -1,6 +1,9 @@
 ﻿function getResultList() {
-    //callAjax_ResultList(cleanUrl() + "?verb=QueryList");
     callAjax_ResultList(HostAdress() + "/rqds/rqitems/rqi?verb=ListViewState");
+}
+
+function getQueryResultList(queryString) {
+    callAjax_ResultList(HostAdress() + "/rqds/rqitems/rqi?verb=ListViewState&queryString=" + queryString);
 }
 
 function getOldRQItem(docno) {

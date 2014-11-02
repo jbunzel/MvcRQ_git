@@ -149,7 +149,7 @@ namespace Mvc5RQ.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, LastActivityDate = DateTime.Now };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, RegisterDate= DateTime.Now, LastActivityDate = DateTime.Now };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

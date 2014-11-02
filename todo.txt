@@ -46,12 +46,13 @@
 03.102			Add links to all pages	
 
 03.11		Mvc5RQ																											begonnen: 140920	erledigt:
-03.111			Migrate data service (RQDS) to WebApi 2																		begonnen: 140920
-03.112			Migrate linked data service (RQDL) to WebApi 2
-03.113			Migrate RQItem controller GET methods to WebApi 2															begonnen: 141004
-03.114			Migrate RQItem controller PUT methods to WebApi 2 
-03.115			Migrate RQKos controllers to WebApi 2 			 
-03.116			Migrate patron authorization to WebAPI 2
+03.111			Migrate data service (RQDS)																					begonnen: 140920
+03.112			Migrate linked data service (RQDL)
+03.113			Migrate RQItem controller GET																				begonnen: 141004
+03.114			Migrate RQItem controller PUT 
+03.115			Migrate RQKos controllers 			 
+03.116			Migrate patron authorization
+03.117			Migrate UserManager																							begonnen: 141028	erledigt: 141102
 
 03.90		Bugs
 03.9001			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.

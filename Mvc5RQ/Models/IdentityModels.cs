@@ -17,7 +17,7 @@ namespace Mvc5RQ.Models
             // Add custom user claims here
             return userIdentity;
         }
-
+        public DateTime RegisterDate { get; set; }
         public DateTime LastActivityDate { get; set; } 
     }
 

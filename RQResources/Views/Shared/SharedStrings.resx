@@ -225,4 +225,22 @@
   <data name="itemView_access_denied" xml:space="preserve">
     <value>You are not authorized to access this digital object.</value>
   </data>
+  <data name="menu6" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="menu7" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="um_no_roles_defined" xml:space="preserve">
+    <value>No user roles defined.</value>
+  </data>
+  <data name="um_no_users_found" xml:space="preserve">
+    <value>No users found.</value>
+  </data>
+  <data name="um_database_store_error" xml:space="preserve">
+    <value>Error on storing in user database.</value>
+  </data>
+  <data name="um_invalid_role_name" xml:space="preserve">
+    <value>Invalid user role name. </value>
+  </data>
 </root>

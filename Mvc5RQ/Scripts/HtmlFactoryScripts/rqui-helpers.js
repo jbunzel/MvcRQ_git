@@ -80,10 +80,8 @@ function resizeToWindowHeight() {
 
 function ajaxLoadingIndicator(el) {
     this.init = function () {
-        $('.rq-ajax-wait').css("width", $(el).width() - 7);
-        $('.rq-ajax-wait').css("height", $(el).height());
-        //$('.rq-ajax-wait').css("top", $(el).offset().top + 5);
-        //$('.rq-ajax-wait').css("left", $(el).offset().left + 7);
+        $('.rq-ajax-wait').css("width", $(window).width());
+        $('.rq-ajax-wait').css("height", $(window).height());
         $('.rq-ajax-wait').fadeIn(800);
     }
 

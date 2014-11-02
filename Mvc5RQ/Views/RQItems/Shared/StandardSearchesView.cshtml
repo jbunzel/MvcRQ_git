@@ -1,13 +1,12 @@
-﻿<script src="@Url.Content("~/Scripts/HtmlFactoryScripts/standard-searches.js")" type="text/javascript"></script>
-<ul class="standard-searches">
-    <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_recent_additions, "Index", "RQItems", new { queryString = "$recent$" + RQResources.Views.Shared.SharedStrings.sq_recent_additions }, null)</li>
-    <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_digital_documents, "Index", "RQItems", new { queryString = "$digital$" + RQResources.Views.Shared.SharedStrings.sq_digital_documents }, null)</li>
-    <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_video_documents, "Index", "RQItems", new { queryString = "$film$" + RQResources.Views.Shared.SharedStrings.sq_video_documents }, null)</li>
-    <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_digital_video, "Index", "RQItems", new { queryString = "$digitalfilm$" + RQResources.Views.Shared.SharedStrings.sq_digital_video }, null)</li>
-    <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_audio_documents, "Index", "RQItems", new { queryString = "$music$" + RQResources.Views.Shared.SharedStrings.sq_audio_documents }, null)</li>
-    <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_digital_audio, "Index", "RQItems", new { queryString = "$digitalmusic$" + RQResources.Views.Shared.SharedStrings.sq_digital_audio }, null)</li>
-    <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.sq_bookmarks, "Index", "RQItems", new { queryString = "$bookmarks$" + RQResources.Views.Shared.SharedStrings.sq_bookmarks }, null)</li>
-    <li>@Html.ActionLink("View shelves order", "Index", "RQItems", new { queryString = "Signature: R*" }, null)</li>
+﻿<ul class="standard-searches">
+    <li><a href="#" onclick="getQueryResultList('$recent$@RQResources.Views.Shared.SharedStrings.sq_recent_additions');">@RQResources.Views.Shared.SharedStrings.sq_recent_additions</a></li>
+    <li><a href="#" onclick="getQueryResultList('$digital$@RQResources.Views.Shared.SharedStrings.sq_digital_documents');">@RQResources.Views.Shared.SharedStrings.sq_digital_documents</a></li>
+    <li><a href="#" onclick="getQueryResultList('$film$@RQResources.Views.Shared.SharedStrings.sq_video_documents');">@RQResources.Views.Shared.SharedStrings.sq_video_documents</a></li>
+    <li><a href="#" onclick="getQueryResultList('$digitalfilm$@RQResources.Views.Shared.SharedStrings.sq_digital_video');">@RQResources.Views.Shared.SharedStrings.sq_digital_video</a></li>
+    <li><a href="#" onclick="getQueryResultList('$music$@RQResources.Views.Shared.SharedStrings.sq_audio_documents');">@RQResources.Views.Shared.SharedStrings.sq_audio_documents</a></li>
+    <li><a href="#" onclick="getQueryResultList('$digitalmusic$@RQResources.Views.Shared.SharedStrings.sq_digital_audio');">@RQResources.Views.Shared.SharedStrings.sq_digital_audio</a></li>
+    <li><a href="#" onclick="getQueryResultList('$bookmarks$@RQResources.Views.Shared.SharedStrings.sq_bookmarks');">@RQResources.Views.Shared.SharedStrings.sq_bookmarks</a></li>
+    <li><a href="#" onclick="getQueryResultList('Signature: R01');">View shelves order</a></li>
 </ul>
 <ul>
     @if (@ViewBag.HasAddPermit)

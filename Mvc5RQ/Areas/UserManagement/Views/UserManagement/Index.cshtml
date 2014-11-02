@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "UserManagement";
+}
+
+<h2>UserManagement</h2>
+@*html markup*@
+@Mvc5RQ.Areas.UserManagement.BundleConfig.UserTableArea() @*html code for the user table*@
+@Mvc5RQ.Areas.UserManagement.BundleConfig.AddUserForm() @*html code for creating a new user account*@
+@Mvc5RQ.Areas.UserManagement.BundleConfig.ManageRolesForm() @*html code for managing roles*@
+
+@*css*@
+@Mvc5RQ.Areas.UserManagement.BundleConfig.UserManagementCss() @*css styles for user management module*@
+
+@*javascript*@
+@Mvc5RQ.Areas.UserManagement.BundleConfig.UiJavascript() @*required - user interface javascript code including tablesorter, pager and user interface code*@

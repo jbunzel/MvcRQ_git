@@ -221,13 +221,21 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Areas\MyHtml.cs" />
+    <Compile Include="Areas\UserManagement\Controllers\RolesAdminController.cs" />
+    <Compile Include="Areas\UserManagement\Models\AdminViewModel.cs" />
+    <Compile Include="Areas\UserSettings\BundleConfig.cs" />
     <Compile Include="Areas\MyJsonResult.cs" />
-    <Compile Include="Areas\Scripts\ScriptPack.Designer.cs">
-      <DependentUpon>ScriptPack.resx</DependentUpon>
+    <Compile Include="Areas\UserManagement\Controllers\UserManagementController.cs" />
+    <Compile Include="Areas\UserManagement\Helper\AccountValidation.cs" />
+    <Compile Include="Areas\UserManagement\Helper\IUserAccountService.cs" />
+    <Compile Include="Areas\UserManagement\Helper\UserAccountService.cs" />
+    <Compile Include="Areas\UserManagement\BundleConfig.cs" />
+    <Compile Include="Areas\UserManagement\ScriptPack.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>ScriptPack.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\UserManagement\UserManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserSettings\Controllers\UserSettingsController.cs" />
     <Compile Include="Areas\UserSettings\Helpers\IUserSettingsService.cs">
       <SubType>Code</SubType>
@@ -245,11 +253,14 @@
     <Compile Include="Areas\UserSettings\Models\SettingsModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Areas\UserSettings\ScriptPack.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScriptPack.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\UserSettings\UserSettingsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\RolesAdminController.cs" />
-    <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Helpers\RQAuthorize.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -293,19 +304,21 @@
     </Content>
     <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Areas\Scripts\add-user-form.html" />
-    <Content Include="Areas\Scripts\classtree-options-form.html" />
-    <Content Include="Areas\Scripts\classtree-options-management.js" />
-    <Content Include="Areas\Scripts\imclude-external-db-form.html" />
-    <Content Include="Areas\Scripts\jquery.tablesorter.min.js" />
-    <Content Include="Areas\Scripts\manage-roles-form.html" />
-    <Content Include="Areas\Scripts\simple-query-options-management.js" />
-    <Content Include="Areas\Scripts\simple-user-management.js" />
-    <Content Include="Areas\Scripts\style.css" />
-    <Content Include="Areas\Scripts\tablesorter-pager-min.js" />
-    <Content Include="Areas\Scripts\tablesorter-pager.js" />
-    <Content Include="Areas\Scripts\tablesorter-style.css" />
-    <Content Include="Areas\Scripts\user-table-area.html" />
+    <Content Include="Areas\UserSettings\Content\tablesorter-style.css" />
+    <Content Include="Areas\UserManagement\Content\user-management-style.css" />
+    <Content Include="Areas\UserManagement\Views\UserManagement\html\add-user-form.html" />
+    <Content Include="Areas\UserSettings\Views\Shared\html\classtree-options-form.html" />
+    <Content Include="Areas\UserSettings\Scripts\classtree-options-management.js" />
+    <Content Include="Areas\UserSettings\Views\Shared\html\imclude-external-db-form.html" />
+    <Content Include="Areas\UserManagement\Scripts\jquery.tablesorter.min.js" />
+    <Content Include="Areas\UserManagement\Views\UserManagement\html\manage-roles-form.html" />
+    <Content Include="Areas\UserSettings\Scripts\simple-query-options-management.js" />
+    <Content Include="Areas\UserManagement\Scripts\simple-user-management.js" />
+    <Content Include="Areas\UserSettings\Content\style.css" />
+    <Content Include="Areas\UserManagement\Scripts\tablesorter-pager-min.js" />
+    <Content Include="Areas\UserManagement\Scripts\tablesorter-pager.js" />
+    <Content Include="Areas\UserManagement\Content\tablesorter-style.css" />
+    <Content Include="Areas\UserManagement\Views\UserManagement\html\user-table-area.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -413,7 +426,6 @@
     <Content Include="Scripts\HtmlFactoryScripts\result-viewer.js" />
     <Content Include="Scripts\HtmlFactoryScripts\rqui-helpers.js" />
     <Content Include="Scripts\HtmlFactoryScripts\search-box.js" />
-    <Content Include="Scripts\HtmlFactoryScripts\standard-searches.js" />
     <Content Include="Scripts\HtmlFactoryScripts\view-rqkos-code.js" />
     <Content Include="Scripts\HtmlFactoryScripts\view-rqkos-style.css" />
     <Content Include="Areas\UserSettings\Views\Shared\ClasstreeOptionsView.cshtml" />
@@ -441,6 +453,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Areas\UserManagement\Views\web.config" />
+    <Content Include="Areas\UserManagement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\UserManagement\Views\UserManagement\Index.cshtml" />
     <None Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -648,12 +663,18 @@
     <Folder Include="Areas\DigitalObjects\Controllers\" />
     <Folder Include="Areas\DigitalObjects\Models\" />
     <Folder Include="Areas\DigitalObjects\Views\Shared\" />
+    <Folder Include="Areas\UserManagement\Views\Shared\" />
     <Folder Include="Areas\UserSettings\Views\UserSettings\" />
     <Folder Include="Providers\" />
     <Folder Include="~db\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Scripts\ScriptPack.resx">
+    <EmbeddedResource Include="Areas\UserSettings\ScriptPack.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\UserManagement\ScriptPack.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
     </EmbeddedResource>

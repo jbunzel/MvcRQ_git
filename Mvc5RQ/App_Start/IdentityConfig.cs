@@ -156,6 +156,7 @@ namespace Mvc5RQ
             if (user == null)
             {
                 user = new ApplicationUser { UserName = name, Email = name };
+                user.RegisterDate = System.DateTime.Now;
                 user.LastActivityDate = System.DateTime.Now;
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
