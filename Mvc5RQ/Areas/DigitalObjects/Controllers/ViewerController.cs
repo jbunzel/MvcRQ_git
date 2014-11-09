@@ -1,40 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.Mvc;
+using System.Net.Http;
+using System.Web.Http;
+using Microsoft.AspNet.Identity.Owin;
+using Mvc5RQ.Areas.DigitalObjects.Models;
 
-using MvpRestApiLib;
-using RQDigitalObjects;
-using RQDigitalObjects.AudioObjects.MP3;
-
-namespace MvcRQ.Areas.DigitalObjects.Controllers
+namespace Mvc5RQ.Areas.DigitalObjects.Controllers
 {
     /// <summary>
+    /// Riquest Digital Object Service
     /// TODO: ItemViewer-Funktionalitäten in diesen Controller übertragen.
     /// </summary>
-    public class ViewerController : MvcRQ.Controllers.BaseController
+    [RoutePrefix("rqdos")]
+    public class RQDOSController : ApiController
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Index()
+        [Route("{type}/{name}")]
+        [HttpGet]
+        public TocViewModel Get(string type, string name) 
         {
-            return View();
+            return new Mvc5RQ.Areas.DigitalObjects.Models.TocViewModel(name, type);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [EnableJson, EnableXml]
-        [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public ActionResult TableOfContent (string id, string verb)
-        {
-            return View(new MvcRQ.Areas.DigitalObjects.Models.TocViewModel(id, verb));
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <returns></returns>
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <returns></returns>
+        //[HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        //public ActionResult TableOfContent (string id, string verb)
+        //{
+        //    return View(new Mvc5RQ.Areas.DigitalObjects.Models.TocViewModel(id, verb));
+        //}
     }
 }

@@ -21,8 +21,8 @@ namespace Mvc5RQ
         {
             // Web-API-Konfiguration und -Dienste
             // Web-API für die ausschließliche Verwendung von Trägertokenauthentifizierung konfigurieren.
-            config.SuppressDefaultHostAuthentication();
-            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            //config.SuppressDefaultHostAuthentication();
+            //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
             //Web-API Formatter konfigurieren
             config.Formatters.Insert(0, new Mvc5RQ.Formatters.XhtmlCustomFormatter(isAsync:false));
             config.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);

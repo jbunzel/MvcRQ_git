@@ -1592,8 +1592,10 @@ namespace Mvc5RQ.Models
             {
                 RQItem res = this.GetModel(GetQuery("", stateType, rqitemId), forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
 
-                res._formatPreprocessor = this.formatParameter;
-                if (res == null) throw new Exception();
+                if (res == null) 
+                    throw new Exception();
+                else
+                    res._formatPreprocessor = this.formatParameter;
                 return res;
             }
             catch

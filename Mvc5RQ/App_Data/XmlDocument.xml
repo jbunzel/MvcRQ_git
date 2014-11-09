@@ -26,6 +26,12 @@
             </summary>
             <param name="config"></param>
         </member>
+        <member name="T:Mvc5RQ.Areas.DigitalObjects.Controllers.RQDOSController">
+            <summary>
+            Riquest Digital Object Service
+            TODO: ItemViewer-Funktionalitäten in diesen Controller übertragen.
+            </summary>
+        </member>
         <member name="M:Mvc5RQ.Areas.DigitalObjects.DigitalObjectsAreaRegistration.RegisterArea(System.Web.Mvc.AreaRegistrationContext)">
             <summary>
             
@@ -73,6 +79,18 @@
             True if update was successful.
             Updated values in tocString and signatureStr.
             </returns>
+        </member>
+        <member name="T:Mvc5RQ.Areas.DigitalObjects.Models.TocViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.Models.TocViewModel.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="objectName"></param>
+            <param name="objectType"></param>
         </member>
         <member name="M:Mvc5RQ.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
@@ -1268,29 +1286,172 @@
         </member>
         <member name="T:Mvc5RQ.Controllers.RQDSController">
             <summary>
-            
+            Riquest Date Service (RQDS)
             </summary>
         </member>
         <member name="M:Mvc5RQ.Controllers.RQDSController.Get(System.String,System.String,System.String,System.String)">
             <summary>
-            
+            Controller action answering GET web-api-requests for rqitems.
             </summary>
-            <param name="dbname"></param>
-            <param name="format"></param>
-            <param name="verb"></param>
-            <param name="queryString"></param>
-            <returns></returns>
+            <remarks>
+            The action reacts to URLs of type "~/rqds/{dbname}/{format}".
+            </remarks>
+            <param name="dbname">
+            "rqitems" | {user-dbname} 
+                Name of the requested database as indicated by the requested url.
+                Database "rqitems" contains all rqitems of all users, which may be accessed by current user.
+                Database {db-username} contains all rqitems of the user named {username}, which may be accessed by current user. 
+                
+                NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.
+            </param>
+            <param name="format">
+            null | rqi | rq | oai_dc | ...
+            </param>
+            <param name="verb">
+            null | querylist | browselist.
+            </param>
+            <param name="queryString">
+            query string to select the requested rqitems.
+            </param>
+            <returns>
+            The list of requested rqitems according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
+            </returns>
         </member>
         <member name="M:Mvc5RQ.Controllers.RQDSController.Get(System.String,System.String,System.String,System.String,System.String)">
             <summary>
-            
+            Controller action answering GET web-api-requests for single rqitem.
             </summary>
-            <param name="dbname"></param>
-            <param name="id"></param>
-            <param name="format"></param>
-            <param name="verb"></param>
+            <remarks>
+            The action reacts to URLs of type "~/rqds/{dbname}/{id}/{format}".
+            </remarks>
+            <param name="dbname">
+            "rqitems" | {user-dbname} 
+                Name of the requested database as indicated by the requested url.
+                Database "rqitems" contains all rqitems of all users, which may be accessed by current user.
+                Database {db-username} contains all rqitems of the user named {username}, which may be accessed by current user. 
+                
+                NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.
+            </param>
+            <param name="id">
+            Identification number of the requested rqitem.
+            </param>
+            <param name="format">
+            null | rqi | rq | oai_dc | ...
+            </param>
+            <param name="verb">
+            null | querylist | browselist | edititem
+            </param>
             <param name="queryString"></param>
-            <returns></returns>
+            <returns>
+            The requested rqitem according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
+            </returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQDSController.Get(System.String,System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Controller action answering GET web-api-requests for subfields of a single rqitem.
+            </summary>
+            <remarks>
+            The action reacts to URLs of type "~/rqds/{dbname}/{id}/{subfield}/{index:int}/{format?}".
+            </remarks>
+            <param name="dbname">
+            "rqitems" | {user-dbname} 
+                Name of the requested database as indicated by the requested url.
+                Database "rqitems" contains all rqitems of all users, which may be accessed by current user.
+                Database {db-username} contains all rqitems of the user named {username}, which may be accessed by current user. 
+                
+                NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.
+            </param>
+            <param name="id">
+            Identification number of the requested rqitem.
+            </param>
+            <param name="subfield">
+            Name of the requested subfield
+            </param>
+            <param name="index">
+            Index of requested subfield item if subfield is an array. (Default = 0). 
+            </param>
+            <param name="format">
+            null | rqi | rq | oai_dc | ...
+            </param>
+            <param name="verb">
+            null | querylist | browselist | edititem
+            </param>
+            <param name="queryString"></param>
+            <returns>
+            The requested subfield of the requested rqitem according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
+            </returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQDSController.Post(System.String,Mvc5RQ.Models.RQItem)">
+            <summary>
+            Controller action answering PUT web-api-requests to add a single rqitem to database.
+            </summary>
+            <remarks>
+            The action reacts to URLs of type "~/rqds/{dbname}".
+            </remarks>
+            <param name="dbname">
+            "rqitems" | {user-dbname} 
+                Name of the requested database as indicated by the requested url.
+                Database "rqitems" contains all rqitems of all users, which may be accessed by current user.
+                Database {db-username} contains all rqitems of the user named {username}, which may be accessed by current user. 
+                
+                NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.
+            </param>
+            <param name="newRQItem">
+            Rqitem to add to database.
+            </param>
+            <returns>
+            On success the rqitem added to the database according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
+            On error an return message according to the accepted exchange format ({application/json} | {application/xml}).
+            </returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQDSController.Post(System.String,System.String,Mvc5RQ.Models.RQItem)">
+            <summary>
+            Controller action answering PUT web-api-requests to change a single rqitem in the database.
+            </summary>
+            <remarks>
+            The action reacts to URLs of type "~/rqds/{dbname}/{id}".
+            </remarks>
+            <param name="dbname">
+            "rqitems" | {user-dbname} 
+                Name of the requested database as indicated by the requested url.
+                Database "rqitems" contains all rqitems of all users, which may be accessed by current user.
+                Database {db-username} contains all rqitems of the user named {username}, which may be accessed by current user. 
+                
+                NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.
+            </param>
+            <param name="id">
+            Identification number of the rqitem to change.
+            </param>
+            <param name="changeRQItem">
+            Rqitem to change in the database.
+            </param>
+            <returns>
+            On success the rqitem changed in the database according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
+            On error an return message according to the accepted exchange format ({application/json} | {application/xml}).
+            </returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQDSController.Delete(System.String,System.String)">
+            <summary>
+            Controller action answering PUT web-api-requests to delete a single rqitem from the database.
+            </summary>
+            <remarks>
+            The action reacts to URLs of type "~/rqds/{dbname}/delete/{id}".
+            </remarks>
+            <param name="dbname">
+            "rqitems" | {user-dbname} 
+                Name of the requested database as indicated by the requested url.
+                Database "rqitems" contains all rqitems of all users, which may be accessed by current user.
+                Database {db-username} contains all rqitems of the user named {username}, which may be accessed by current user. 
+                
+                NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.
+            </param>
+            <param name="id">
+            Identification number of the rqitem to delete.
+            </param>
+            <returns>
+            On success the rqitem added to the database according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
+            On error an return message according to the accepted exchange format ({application/json} | {application/xml}).
+            </returns>
         </member>
         <member name="T:Mvc5RQ.Controllers.RQItemsController">
             <summary>
@@ -1301,32 +1462,14 @@
             {serviceId}RQItems/{RQItemId}
             </remarks>
         </member>
-        <member name="M:Mvc5RQ.Controllers.RQItemsController.RQItemList(System.String,System.String,System.String)">
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.RQItemList(System.String,System.String)">
             <summary>
             Controller action answering GET http-requests for RQItems
             </summary>
             <remarks>
-            The action reacts to URLs of type "~/RQItems" | "~/{serviceId}/RQItems".
-            The action response is filtered by the ActionFilterAttributes "EnableJson" and "EnableXml":
-            If the GET request contains dataType=application/json | text/json or dataType=application/xml | text/xml 
-            the action response is generated by class "JsonResult2" or "XmlResult" of "MvpRestApiLib".
-            In both cases the client is responsible to render the xml (f. e. by XSLT).
-            Otherwise the action response is transformed to text/html on the server according to the value of parameters "verb" or "serviceId" respectively. 
+            The action reacts to URLs of type "~/RQItems".
             </remarks>
-            <param name="verb">
-            null | New | QueryList | BrowseList.
-            </param>
             <param name="queryString">
-            </param>
-            <param name="serviceId">
-            Id of requested sercive API:
-            "rqi" = internal RiQuest API (default);
-            "rq" = RiQuest proprietary exchange format;
-            "mods" = Metadata Object Description Format (MODS) API of the Library of Congress (not yet supported);
-            "oai_dc" = Dublin Core(DC) API serving metadata according to the specification of Open Archives Initiative (OAI);
-            "srw_dc" = Dublin Core(DC) API serving metadata according to the specification of the Search / Retrieve Web Service (SRW) (not yet supported);
-            "info_ofi" = OpenURL API (not yet supported);
-            "pubmed" = API serving metadata according to the PubMed metadata scheme (not yet supported).
             </param>
             <param name="dbname">
             "rqitem" | {username} = name of the requested database as indicated by the requested url.
@@ -1336,37 +1479,16 @@
                 NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.  
             </param>
             <returns>
-            verb == null: 
-                The action returns the (empty) RQItems/Index view.
-            verb == New: 
-                The action returns an (empty) data entry mask to add a new RQItem.
-            verb == QueryList | BrowseList: 
-                The action returns a collection of RQItems   
-                as */json, */xml or text/html - the latter generated by the XSLT "RQResultList2RQSorted.xslt" - 
-                depending on data types specified in the GET request.
-                If appropriate the query stored in ListView or BrowseView state storage is used. A new query is generated if the query strings 
-                or query options differ.
-            serviceId = rq | rqi | mods | oai_dc | srw_dc | info_ofi | pubmed: 
-                The action returns a collection of RQItems formatted according to the requested service API 
-                as */json, */xml or text/html - the latter generated by the XSLT "RQResultList2RQSorted.xslt" - 
-                depending on data types specified in the GET request. 
-            The returned collection is the result set pertaining to the query set in parameter queryString, the last query stored in the state storage or  
-             - if both are void - to the "recent additions" query. 
+            The standard RQItem Vierwer (Index View)
+            Actual document number (docNo), add item permission of actual user and actual user state are set for evaluation by result-viewer.js script.
             </returns>
         </member>
-        <member name="M:Mvc5RQ.Controllers.RQItemsController.RQItemList(System.String,System.String,Mvc5RQ.Models.RQItem)">
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.Add(System.String)">
             <summary>
-            Controller action answering POST http-requests to RQItems.
+            
             </summary>
-            <param name="queryString">
-            Accepted values are character strings conforming to the RiQuest query language. 
-            </param>
-            <param name="newRQItem">
-            </param>
-            <param name="verb">
-            </param>
-            <returns>
-            </returns>
+            <param name="dbname"></param>
+            <returns></returns>
         </member>
         <member name="M:Mvc5RQ.Controllers.RQItemsController.RQItemRecord(System.String,System.String)">
             <summary>
@@ -1403,13 +1525,25 @@
             SingleRQItemView - depending on data types specified in the GET request.  
             </returns>
         </member>
-        <member name="M:Mvc5RQ.Controllers.RQItemsController.UpdateItem(System.String,System.String,Mvc5RQ.Models.RQItem)">
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.Copy(System.String,System.String)">
             <summary>
-            POST /RQItems. Add a new RQItem.
+            
             </summary>
-            <param name="verb"></param>
-            <param name="rqitemId"></param>
-            <param name="changeRQItem"></param>
+            <param name="dbname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.Edit(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.Delete(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbname"></param>
             <returns></returns>
         </member>
         <member name="M:Mvc5RQ.Controllers.RQItemsController.RQItemDescElement(System.String,System.String,System.String)">
@@ -1592,6 +1726,17 @@
             </summary>
         </member>
         <member name="M:Mvc5RQ.Helpers.IsDBName.Match(System.Web.HttpContextBase,System.Web.Routing.Route,System.String,System.Web.Routing.RouteValueDictionary,System.Web.Routing.RouteDirection)">
+            <summary>
+            
+            </summary>
+            <param name="httpContext"></param>
+            <param name="route"></param>
+            <param name="parameterName"></param>
+            <param name="values"></param>
+            <param name="routeDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Helpers.IsRQItemId.Match(System.Web.HttpContextBase,System.Web.Routing.Route,System.String,System.Web.Routing.RouteValueDictionary,System.Web.Routing.RouteDirection)">
             <summary>
             
             </summary>
@@ -1997,85 +2142,6 @@
             <summary>
             
             </summary>
-        </member>
-        <member name="T:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack">
-            <summary>
-              Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
-            </summary>
-        </member>
-        <member name="P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.ResourceManager">
-            <summary>
-              Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
-            </summary>
-        </member>
-        <member name="P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.Culture">
-            <summary>
-              Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
-              Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
-            </summary>
-        </member>
-        <member name="P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.edit_rqitem_code">
-             <summary>
-               Sucht eine lokalisierte Zeichenfolge, die var saveData = null;
-            var verb = getUrlVar(&quot;verb&quot;);
-            var itemId = &quot;&quot;;
-            var compiledTemplate = &quot;&quot;;
-            
-            $(function () {
-                var editForm = new EditForm();
-            
-                compiledTemplate = $.templates($(&quot;#tocTemplate&quot;).html());
-                editForm.init();
-            });
-            
-            function EditForm() {
-                this.init = function () {
-                    if (!$(&quot;.edit-form&quot;))
-                        return;
-                    $(&quot;#btn-submit-item&quot;).click(submitItem);
-                    $(&quot;#btn-reset&quot;).click(reset);
-                    $(&quot;#tocAttach&quot;).click(attachTOC);
-                    if (verb == &quot;edit&quot; [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-             </summary>
-        </member>
-        <member name="P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.edit_rqitem_form">
-             <summary>
-               Sucht eine lokalisierte Zeichenfolge, die &lt;style&gt;
-                .edit-form {
-                    position: relative;
-                }
-            &lt;/style&gt;
-            &lt;div class=&quot;rq-ajax-wait&quot; style=&quot;display: none&quot;&gt;&lt;/div&gt;
-            &lt;form id=&quot;EditForm&quot; class=&quot;edit-form pure-form&quot;&gt;
-            &lt;fieldset&gt;
-            	&lt;legend&gt;Eingabemaske&lt;/legend&gt;
-                    &lt;span class=&quot;editor-label&quot;&gt;
-                        &lt;label for=&quot;ID&quot;&gt;ID: &lt;/label&gt;&lt;span id=&quot;idval&quot;&gt;&lt;/span&gt;
-                        &lt;label for=&quot;DocNo&quot;&gt;Dok-Nr.: &lt;/label&gt;&lt;span id=&quot;doknrval&quot;&gt;&lt;/span&gt;
-                    &lt;/span&gt;
-            		&lt;span class=&quot;editor-label&quot;&gt;&lt;label for=&quot;Title&quot;&gt;Titel&lt;/label&gt;&lt;/span&gt;
-            		&lt;span class=&quot;editor- [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-             </summary>
-        </member>
-        <!-- Ungültiger XML-Kommentar wurde für den Member "P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.edit_rqitem_style" ignoriert -->
-        <member name="P:Mvc5RQ.Scripts.HtmlFactoryScripts.ScriptPack.rqui_helpers">
-             <summary>
-               Sucht eine lokalisierte Zeichenfolge, die var myInterval = false; // this variable will hold the interval and work as a flag
-            var $win = $(window); //jquery win object
-            var dimensions = [$win.width(), $win.height()]; //initial dimensions
-            
-            $(function () {
-                $(window).on(&quot;debouncedresize&quot;, function (event) {
-                    dimensions[0] = $win.width(); //else keep the new dimensions
-                    dimensions[1] = $win.height();
-                    resizeToWindowHeight();
-                });
-            });
-            
-            function resizeToWindowHeight() {
-                var height = dimensions[1] - 60;
-                var  [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-             </summary>
         </member>
     </members>
 </doc>

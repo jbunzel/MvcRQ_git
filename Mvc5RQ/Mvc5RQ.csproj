@@ -191,8 +191,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\DigitalObjects\Controllers\ViewerController.cs" />
     <Compile Include="Areas\DigitalObjects\DigitalObjectsAreaRegistration.cs" />
     <Compile Include="Areas\DigitalObjects\Helpers\DigitalObjectHelpers.cs" />
+    <Compile Include="Areas\DigitalObjects\Models\TocViewModel.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -290,11 +292,6 @@
     <Compile Include="Models\RQItemsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
-    <Compile Include="Scripts\HtmlFactoryScripts\ScriptPack.Designer.cs">
-      <DependentUpon>ScriptPack.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -419,15 +416,15 @@
     <Content Include="Scripts\dynatree-1.2.5\skin\vline-rtl.gif" />
     <Content Include="Scripts\dynatree-1.2.5\skin\vline.gif" />
     <Content Include="Scripts\HtmlFactoryScripts\edit-rqitem-code.js" />
-    <Content Include="Scripts\HtmlFactoryScripts\edit-rqitem-style.css" />
+    <Content Include="Content\themes\rq-standard\edit-rqitem-style.css" />
     <Content Include="Scripts\HtmlFactoryScripts\edit-rqkos-code.js" />
-    <Content Include="Scripts\HtmlFactoryScripts\edit-rqkos-style.css" />
-    <Content Include="Scripts\HtmlFactoryScripts\paging-style.css" />
+    <Content Include="Content\themes\rq-standard\edit-rqkos-style.css" />
+    <Content Include="Content\themes\rq-standard\paging-style.css" />
     <Content Include="Scripts\HtmlFactoryScripts\result-viewer.js" />
     <Content Include="Scripts\HtmlFactoryScripts\rqui-helpers.js" />
     <Content Include="Scripts\HtmlFactoryScripts\search-box.js" />
     <Content Include="Scripts\HtmlFactoryScripts\view-rqkos-code.js" />
-    <Content Include="Scripts\HtmlFactoryScripts\view-rqkos-style.css" />
+    <Content Include="Content\themes\rq-standard\view-rqkos-style.css" />
     <Content Include="Areas\UserSettings\Views\Shared\ClasstreeOptionsView.cshtml" />
     <Content Include="Areas\UserSettings\Views\Shared\IncludeExternalView.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -456,9 +453,6 @@
     <Content Include="Areas\UserManagement\Views\web.config" />
     <Content Include="Areas\UserManagement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserManagement\Index.cshtml" />
-    <None Include="Scripts\jquery-1.7.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -660,8 +654,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\DigitalObjects\Controllers\" />
-    <Folder Include="Areas\DigitalObjects\Models\" />
     <Folder Include="Areas\DigitalObjects\Views\Shared\" />
     <Folder Include="Areas\UserManagement\Views\Shared\" />
     <Folder Include="Areas\UserSettings\Views\UserSettings\" />
@@ -675,10 +667,6 @@
       <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\UserManagement\ScriptPack.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\HtmlFactoryScripts\ScriptPack.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
     </EmbeddedResource>

@@ -16,12 +16,12 @@ namespace Mvc5RQ.Helpers
             //Not yet implemented.
             //Access rights (decoded syntax) 
             //dbowners=<username>; license=<name>; 
-            //{  view={All   | Administrators | Members | Guests | { <groupname> , <groupname>, ... , <groupname> } | { <username> , <username>, ... , <username> };  
-            //   edit={All   | Administrators | Members | Guests | { <groupname> , <groupname>, ... , <groupname> } | { <username> , <username>, ... , <username> };
-            //   copy={All   | Administrators | Members | Guests | { <groupname> , <groupname>, ... , <groupname> } | { <username> , <username>, ... , <username> };
-            //    delete={All | Administrators | Members | Guests | { <groupname> , <groupname>, ... , <groupname> } | { <username> , <username>, ... , <username> }; }
-            string m = "dbowners=jbunzel; license=GNU; view=All; edit=Administrators; copy=Administrators; delete=Administrators;";
-            string n = "dbowners=jbunzel; license=GNU; view=All; copy=Administrators;";
+            //{  view={all   | admin | patron | partner | guest | { <groupname> , <groupname>, ... , <groupname> } | { <username> , <username>, ... , <username> };  
+            //   edit={all   | admin | patron | partner | guest | { <groupname> , <groupname>, ... , <groupname> } | { <username> , <username>, ... , <username> };
+            //   copy={all   | admin | patron | partner | guest | { <groupname> , <groupname>, ... , <groupname> } | { <username> , <username>, ... , <username> };
+            //   delete={all | admin | patron | partner | guest | { <groupname> , <groupname>, ... , <groupname> } | { <username> , <username>, ... , <username> }; }
+            string m = "dbowners=jbunzel; license=GNU; view=all; edit=admin; copy=admin; delete=admin;";
+            string n = "dbowners=jbunzel; license=GNU; view=all; copy=admin;";
             
             return code == "EXTITEM_AR_CODE" ? n : m;
         }
@@ -65,29 +65,29 @@ namespace Mvc5RQ.Helpers
         public static string ResolveItemAccessRights(string accessRights)
         {
             //string[] roles = GetUserRoles();
-            //string user = GetUser();
-            //string rights;
+            //string user = GetUser()
+            string user = HttpContext.Current.User.Identity.GetUserName();
+            string rights;
 
             //roles = GetUserRoles();
-            //accessRights += " actual=";
-            //rights = accessRights.Substring(accessRights.IndexOf("view=") + "view=".Length);
-            //rights = rights.Substring(0, rights.IndexOf(";"));
-            //if ((rights == "All") || (rights == user) || roles.Contains<string>(rights))
-            //    accessRights += "view";
-            //rights = accessRights.Substring(accessRights.IndexOf("copy=") + "copy=".Length);
-            //rights = rights.Substring(0, rights.IndexOf(";"));
-            //if ((rights == "All") || (rights == user) || roles.Contains<string>(rights))
-            //    accessRights += "-copy";
-            //rights = accessRights.Substring(accessRights.IndexOf("edit=") + "edit=".Length);
-            //rights = rights.Substring(0, rights.IndexOf(";"));
-            //if ((rights == "All") || (rights == user) || roles.Contains<string>(rights))
-            //    accessRights += "-edit";
-            //rights = accessRights.Substring(accessRights.IndexOf("delete=") + "delete=".Length);
-            //rights = rights.Substring(0, rights.IndexOf(";"));
-            //if ((rights == "All") || (rights == user) || roles.Contains<string>(rights))
-            //    accessRights += "-delete";
-            //return accessRights;
-            return "";
+            accessRights += " actual=";
+            rights = accessRights.Substring(accessRights.IndexOf("view=") + "view=".Length);
+            rights = rights.Substring(0, rights.IndexOf(";"));
+            if ((rights == "all") || (rights == user) || HttpContext.Current.User.IsInRole(rights))
+                accessRights += "view";
+            rights = accessRights.Substring(accessRights.IndexOf("copy=") + "copy=".Length);
+            rights = rights.Substring(0, rights.IndexOf(";"));
+            if ((rights == "all") || (rights == user) || HttpContext.Current.User.IsInRole(rights))
+                accessRights += "-copy";
+            rights = accessRights.Substring(accessRights.IndexOf("edit=") + "edit=".Length);
+            rights = rights.Substring(0, rights.IndexOf(";"));
+            if ((rights == "all") || (rights == user) || HttpContext.Current.User.IsInRole(rights))
+                accessRights += "-edit";
+            rights = accessRights.Substring(accessRights.IndexOf("delete=") + "delete=".Length);
+            rights = rights.Substring(0, rights.IndexOf(";"));
+            if ((rights == "all") || (rights == user) || HttpContext.Current.User.IsInRole(rights))
+                accessRights += "-delete";
+            return accessRights;
         }
     }
 }

@@ -20,50 +20,35 @@ namespace Mvc5RQ
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //routes.MapRoute(
-            //    "ServiceRQKosBranch",
-            //    "{serviceId}/rqkos/{id}",
-            //    new { controller = "RQKos", action = "ServiceRQKosBranch", serviceId = UrlParameter.Optional, id = UrlParameter.Optional });
             routes.MapRoute(
                 "RQKosBranch",
                 "rqkos/{id}",
                 new { controller = "RQKos", action = "RQKosBranch", id = UrlParameter.Optional });
-            //routes.MapRoute(
-            //    "ServiceRQItemList",
-            //    "{serviceId}/{dbname}",
-            //    new { controller = "RQItems", action = "RQItemList" },
-            //    new { dbname = new Mvc5RQ.Helpers.IsDBName() }
-            //    );
             routes.MapRoute(
                 "RQItemList",
                 "{dbname}",
                 new { controller = "RQItems", action = "RQItemList" },
-                new { dbname = new Mvc5RQ.Helpers.IsDBName() }
-                );
-            //routes.MapRoute(
-            //    "ServiceRQItemRecord",
-            //    "{serviceId}/{dbname}/{rqitemId}",
-            //    new { controller = "RQItems", action = "RQItemRecord" },
-            //    new { dbname = new Mvc5RQ.Helpers.IsDBName() }
-            //    );
+                new { dbname = new Mvc5RQ.Helpers.IsDBName() });
             routes.MapRoute(
                 "RQItemRecord",
                 "{dbname}/{rqitemId}",
                 new { controller = "RQItems", action = "RQItemRecord" },
-                new { dbname = new Mvc5RQ.Helpers.IsDBName() }
-                );
+                new { dbname = new Mvc5RQ.Helpers.IsDBName(), rqItemId = new Mvc5RQ.Helpers.IsRQItemId() });
             routes.MapRoute(
                 "RQItemSubField",
                 "{dbname}/{rqitemId}/{fieldName}/{subFieldIndex}",
                 new { controller = "RQItems", action = "RQItemDescElement" },
-                new { dbname = new Mvc5RQ.Helpers.IsDBName() }
-                );
+                new { dbname = new Mvc5RQ.Helpers.IsDBName(), rqItemId = new Mvc5RQ.Helpers.IsRQItemId() });
             routes.MapRoute(
                 "RQItemField",
                 "{dbname}/{rqitemId}/{fieldName}",
                 new { controller = "RQItems", action = "RQItemDescElement" },
-                new { dbname = new Mvc5RQ.Helpers.IsDBName() }
-                );
+                new { dbname = new Mvc5RQ.Helpers.IsDBName(), rqItemId = new Mvc5RQ.Helpers.IsRQItemId() });
+            routes.MapRoute(
+                "Database", // Route name
+                "{dbname}/{action}/{rqitemId}", // URL with parameters
+                new { controller = "RQItems", action = "RQItemList", rqitemId = UrlParameter.Optional },
+                new { dbname = new Mvc5RQ.Helpers.IsDBName() });
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters

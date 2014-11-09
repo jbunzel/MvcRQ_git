@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Runtime.Serialization;
 
-using MvcRQ.Areas.DigitalObjects.Helpers;
+using Mvc5RQ.Areas.DigitalObjects.Helpers;
 using RQDigitalObjects;
 using RQDigitalObjects.AudioObjects.MP3;
 using RQDigitalObjects.VideoObjects.M4V;
 using RQDigitalObjects.GraphObjects.PDF;
 
-namespace MvcRQ.Areas.DigitalObjects.Models
+namespace Mvc5RQ.Areas.DigitalObjects.Models
 {
     /// <summary>
     /// 

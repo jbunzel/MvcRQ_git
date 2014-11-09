@@ -275,7 +275,7 @@
             <xsl:if test="contains($rights, 'edit')">
               <xsl:element name="a">
                 <xsl:attribute name="href">
-                  <xsl:value-of select="concat('javascript:call(&quot;rqitems/',rqi:DocNo,'?verb=edit','&quot;)')" />
+                  <xsl:value-of select="concat('javascript:call(&quot;rqitems/edit/',rqi:DocNo,'&quot;)')" />
                 </xsl:attribute>
                 <xsl:attribute name="class">
                   <xsl:value-of select="''" />
@@ -292,7 +292,7 @@
               <xsl:text> | </xsl:text>
               <xsl:element name="a">
                 <xsl:attribute name="href">
-                  <xsl:value-of select="concat('javascript:call(&quot;rqitems/',rqi:DocNo,'?verb=copy','&quot;)')" />
+                  <xsl:value-of select="concat('javascript:call(&quot;rqitems/copy/',rqi:DocNo,'&quot;)')" />
                 </xsl:attribute>
                 <xsl:attribute name="class">
                   <xsl:value-of select="''" />
@@ -309,7 +309,7 @@
               <xsl:text> | </xsl:text>
               <xsl:element name="a">
                 <xsl:attribute name="href">
-                  <xsl:value-of select="concat('javascript:call(&quot;rqitems/',rqi:DocNo,'?verb=delete','&quot;)')" />
+                  <xsl:value-of select="concat('javascript:call(&quot;rqitems/delete/',rqi:DocNo,'&quot;)')" />
                 </xsl:attribute>
                 <xsl:attribute name="class">
                   <xsl:value-of select="''" />

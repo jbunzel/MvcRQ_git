@@ -1,5 +1,5 @@
 ﻿var saveData = null;
-var verb = getUrlVar("verb");
+var verb = null;
 var itemId = "";
 var compiledTemplate = "";
 
@@ -14,21 +14,29 @@ function EditForm() {
     this.init = function () {
         if (!$(".edit-form"))
             return;
-        $("#btn-submit-item").click(submitItem);
-        $("#btn-reset").click(reset);
-        $("#tocAttach").click(attachTOC);
-        if (verb == "edit" || verb == "copy") {
-            itemId = rqitemid(); // (rqitemid < 10000) ? "0" + rqitemid : rqitemid;
-            getItem();
+        else {
+            $("#btn-submit-item").click(submitItem);
+            $("#btn-reset").click(reset);
+            $("#tocAttach").click(attachTOC);
+            verb = edittype();
+            if (verb == "edit" || verb == "copy") {
+                itemId = rqitemid();
+                getItem();
+            }
         }
     }
 
     function getItem() {
-        var url = HostAdress() + "/RQItems/" + itemId + "?verb=" + "edititem";
         var fd = new ajaxLoadingIndicator("#html");
-
-        $.ajax({ dataType: "json",
-            url: url,
+        
+        $.ajax({
+            beforeSend: function (req) {
+                req.setRequestHeader("Accept", "application/json");
+            },
+            url: HostAdress() + "/rqds/rqitems/" + itemId + "/rqi?verb=edititem",
+            type: "GET",
+            data: null,
+            dataType: "json",
             success: function (data) {
                 Data2Form(data);
                 fd.remove();
@@ -38,7 +46,8 @@ function EditForm() {
                     $("#EditDialog").html("<p><span class='ui-icon ui-icon-alert' style='float: left; margin: 0 7px 20px 0;'></span><span id='edit-dialog-message'>Der Editiervorgang kann nicht durchgeführt werden !</span></p>");
                     $(function () {
                         fd.remove();
-                        $("#EditDialog").dialog({ title: "Schwerwiegender Fehler !",
+                        $("#EditDialog").dialog({
+                            title: "Schwerwiegender Fehler !",
                             width: 600,
                             resizable: false,
                             modal: true,
@@ -58,10 +67,13 @@ function EditForm() {
     /* Submits the item to server if all data fields are valid */
     function submitItem(e) {
         var json = JSON.stringify(Form2Data());
-        var url = HostAdress() + "/RQItems/" + ((verb == "edit") ? itemId : "") + "?verb=" + ((verb == "edit") ? "update" : "new");
+        var url = HostAdress() + "/rqds/rqitems" + ((verb == "edit") ? "/" + itemId : ""); // + "?verb=" + ((verb == "edit") ? "update" : "new");
         var fd = new ajaxLoadingIndicator("#html"); 
         
         $.ajax({
+            beforeSend: function (req) {
+                req.setRequestHeader("Accept", "application/json");
+            },
             url: url,
             type: 'POST',
             dataType: 'json',
@@ -110,7 +122,6 @@ function EditForm() {
             },
             error: function (response) {
                 _myHelper.processServerResponse(response, null, function () {
-                    //debugger;
                     $("#EditDialog").html("<p><span class='ui-icon ui-icon-alert' style='float: left; margin: 0 7px 20px 0;'></span><span id='edit-dialog-message'>Beim Speichern des Datensatzes ist der folgende Fehler aufgetreten:</p><p>" + response.responseText.replace(/\+/g, " ") + "</p></span>");
                     $(function () {
                         fd.remove()
@@ -307,13 +318,16 @@ function attachTOC(e) {
         buttons: {
             OK: function () {
                 $(this).dialog("close");
-
-                var adr = $("#ObjAdress").attr("value");
+                debugger;
+                var adr = $("#ObjAdress").prop("value");
                 var type = $("form input[name=DigitalObjectType]:checked").val()
-                var url = HostAdress() + "/DigitalObjects/Viewer/TableOfContent/" + adr + "?verb=" + type;
+                var url = HostAdress() + "/rqdos/" + type + "/" + adr;
                 var fd = new ajaxLoadingIndicator("#html");
 
                 $.ajax({
+                    beforeSend: function (req) {
+                        req.setRequestHeader("Accept", "application/json");
+                    },
                     url: url,
                     type: "GET",
                     dataType: "json",
@@ -326,6 +340,19 @@ function attachTOC(e) {
                         _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
                     }
                 });
+                //$.ajax({
+                //    url: url,
+                //    type: "GET",
+                //    dataType: "json",
+                //    success: function (data) {
+                //        fd.remove();
+                //        displayTOC(data.toc);
+                //    },
+                //    error: function (xhr) {
+                //        fd.remove();
+                //        _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
+                //    }
+                //});
             },
             Cancel: function () {
                 $(this).dialog("close");
