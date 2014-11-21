@@ -1,0 +1,26 @@
+﻿<link href="@Url.Content("~/Scripts/dynatree-1.2.5/skin-vista/ui.dynatree.css")" rel="stylesheet" type="text/css"  /> 
+<link href="@Url.Content("~/Content/themes/rq-standard/view-rqkos-style.css")" rel="stylesheet" type="text/css"  /> 
+<script src="@Url.Content("~/Scripts//JQuery-UI/jquery-ui-1.10.1.custom.min.js")" type="text/javascript"></script> 
+<script src="@Url.Content("~/Scripts/jquery.cookie.js")" type="text/javascript"></script> 
+<script src="@Url.Content("~/Scripts/dynatree-1.2.5/jquery.rqdynatree.js")" type="text/javascript"></script> 
+<script src="@Url.Content("~/Scripts/HtmlFactoryScripts/view-rqkos-code.js")" type="text/javascript"></script> 
+
+<script type="text/javascript">
+    var locPath = @Html.Raw(Json.Encode(@ViewBag.locPath));
+    var docNo = @Html.Raw(Json.Encode(@ViewBag.docNo));
+</script> 
+
+<div class="rq-box">
+    <span id="echoActive" class="rq-diagnostics">-</span>
+    <h1>Fachsystematik
+    @if(ViewBag.AccessRights == "EDITOR") {
+        <span class="rq-action-bar"><a href="javascript:void(0);" onclick="EditActiveNode();"><i class="fa fa-edit"></i> edit</a></span>
+    }
+    </h1>
+    <div class="rq-settings-panel">
+        <h3>@RQResources.Views.Shared.SharedStrings.classtree_options_h</h3>
+        @Html.Partial("~/Areas/UserSettings/Views/Shared/ClasstreeOptionsView.cshtml")
+    </div>
+</div>
+<div id="tree"></div>    
+

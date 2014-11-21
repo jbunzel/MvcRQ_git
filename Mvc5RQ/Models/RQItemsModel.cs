@@ -13,6 +13,7 @@ using RQLib.RQQueryResult.RQDescriptionElements;
 using RQLib.RQQueryForm;
 
 using Mvc5RQ.Helpers;
+using Mvc5RQ.Areas.UserSettings;
 using Mvc5RQ.Areas.DigitalObjects.Helpers;
 
 namespace Mvc5RQ.Models
@@ -139,53 +140,6 @@ namespace Mvc5RQ.Models
             }
         }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="format"></param>
-        ///// <param name="fromItem"></param>
-        ///// <param name="toItem"></param>
-        ///// <returns></returns>
-        //public string TransformModel(string format, int fromItem, int toItem)
-        //{
-        //    System.Xml.XmlTextReader r = this.RQItems.ConvertTo(format, fromItem, toItem);
-
-        //    try
-        //    {
-        //        var xTrf = new System.Xml.Xsl.XslCompiledTransform(true);
-        //        var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
-        //        var xSet = new System.Xml.Xsl.XsltSettings(true, true);
-        //        var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
-        //        var doc = new System.Xml.XmlDocument();
-
-        //        //TESTDATEI(EZEUGEN)
-        //        //System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
-        //        //Doc.Load(r);
-        //        //Doc.Save("D:\\Users\\Jorge\\Desktop\\MVCTest.xml");
-        //        //ENDE TESTDATEI 
-        //        r.MoveToContent();
-        //        xTrf.Load(HttpContext.Current.Server.MapPath("~/xslt/ViewTransforms/RQResultList2RQSorted_Paging.xslt"), xSet, new System.Xml.XmlUrlResolver());
-        //        xTrfArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
-        //        xTrfArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
-        //        xTrfArg.AddParam("SortType", "", this.SortPreprocessor.SortTypeString());
-        //        xTrf.Transform(new System.Xml.XPath.XPathDocument(r), xTrfArg, mstr);
-        //        mstr.BaseStream.Flush();
-        //        mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-        //        doc.Load(mstr.BaseStream);
-        //        //TESTDATEI EZEUGEN
-        //        //doc.Save("D:\\Users\\Jorge\\Desktop\\MVCTest.xml");
-        //        //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-        //        //ENDE TESTDATEI
-        //        //var rd = new System.Xml.XmlTextReader(mstr.BaseStream);
-        //        return doc.OuterXml;
-        //    }
-        //    catch
-        //    {
-        //        // RQItemSet ist leer
-        //        throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
-        //    }
-        //}
-
         #endregion
 
         #region public static methods
@@ -238,6 +192,7 @@ namespace Mvc5RQ.Models
                 this._rqitemsList = li;
             }
         }
+
         #endregion
 
         #region public properties
@@ -580,6 +535,9 @@ namespace Mvc5RQ.Models
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         void IDisposable.Dispose()
         {
         }
@@ -1308,52 +1266,6 @@ namespace Mvc5RQ.Models
             return this._resultItem.ConvertTo(dataFormat);
         }
 
-        //public string ConvertToHTML(DisplFormat format)
-        //{
-        //    var dSer = new System.Runtime.Serialization.DataContractSerializer(this.GetType());
-        //    System.IO.MemoryStream ms = new System.IO.MemoryStream();
-        //    var xTrf = new System.Xml.Xsl.XslCompiledTransform();
-        //    var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
-        //    var xSet = new System.Xml.Xsl.XsltSettings(true, true);
-        //    var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
-        //    var doc = new System.Xml.XmlDocument();
-        //    string xsltName = "";
-
-        //    switch (format)
-        //    {
-        //        case DisplFormat.single_item:
-        //            xsltName = "~/xslt/ViewTransforms/RQI2SingleItemView.xslt";
-        //            break;
-        //        case DisplFormat.short_title:
-        //            xsltName = "~/xslt/ViewTransforms/RQI2ShortTitleView.xslt";
-        //            break;
-        //        default:
-        //            xsltName = "~/xslt/ViewTransforms/RQI2SingleItemView.xslt";
-        //            break;
-        //    }
-        //    dSer.WriteObject(ms, this);
-        //    //TESTDATEI(EZEUGEN)
-        //    //XmlDocument Doc = new XmlDocument();
-        //    //ms.Seek(0, System.IO.SeekOrigin.Begin);
-        //    //Doc.Load(ms);
-        //    //Doc.Save("C:/MVCTest.xml");
-        //    //ENDE TESTDATEI 
-        //    System.IO.TextReader tr = new System.IO.StringReader(System.Text.Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
-        //    xTrf.Load(HttpContext.Current.Server.MapPath(xsltName),xSet, new XmlUrlResolver());
-        //    xTrfArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
-        //    xTrfArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath) + "/");
-        //    xTrfArg.AddExtensionObject("urn:TransformHelper", new TransformHelper.TransformUtils());
-        //    xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), xTrfArg, mstr);
-        //    mstr.BaseStream.Flush();
-        //    mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-        //    doc.Load(mstr.BaseStream);
-        //    //TESTDATEI EZEUGEN
-        //    //doc.Save("C:/MVCTest.xml");
-        //    //mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-        //    //var rd = new System.Xml.XmlTextReader(mstr.BaseStream);
-        //    return doc.OuterXml;
-        //}
-
         public Object GetLinkedData(string fieldName, int subFieldIndex)
         {
             RQDescriptionElement de = this.GetDescriptionElement(fieldName);
@@ -1409,11 +1321,6 @@ namespace Mvc5RQ.Models
             return result;
         }
 
-        //public string TransformItem(RQItem.DisplFormat format)
-        //{
-        //    return this.ConvertToHTML(format);
-        //}
-
         public static Boolean IsExternal(string docNo)
         {
             return RQResultItem.IsExternalItem(docNo);
@@ -1438,12 +1345,12 @@ namespace Mvc5RQ.Models
         /// <summary>
         /// 
         /// </summary>
-        public SortParameter sortParameter = new SortParameter(SortParameter.SortOrderEnum.BySubject);
+        public SortParameter sortParameter = null;
 
         /// <summary>
         /// 
         /// </summary>
-        public FormatParameter formatParameter = new FormatParameter(FormatParameter.FormatEnum.rqi);
+        public FormatParameter formatParameter = null;
 
         #endregion
 
@@ -1492,6 +1399,9 @@ namespace Mvc5RQ.Models
         /// </summary>
         public RQItemModelRepository()
         {
+            formatParameter = new FormatParameter(FormatParameter.FormatEnum.rqi);
+            formatParameter.Owner = this;
+            sortParameter = new SortParameter(SortParameter.SortOrderEnum.BySubject);
         }
 
         /// <summary>
@@ -1500,6 +1410,8 @@ namespace Mvc5RQ.Models
         /// <param name="sortParameter"></param>
         public RQItemModelRepository(SortParameter sortParameter)
         {
+            formatParameter = new FormatParameter(FormatParameter.FormatEnum.rqi);
+            formatParameter.Owner = this;
             this.sortParameter = sortParameter;
         }
 
@@ -1510,6 +1422,8 @@ namespace Mvc5RQ.Models
         public RQItemModelRepository(FormatParameter formatParameter)
         {
             this.formatParameter = formatParameter;
+            formatParameter.Owner = this;
+            sortParameter = new SortParameter(SortParameter.SortOrderEnum.BySubject);
         }
 
         /// <summary>
@@ -1519,8 +1433,9 @@ namespace Mvc5RQ.Models
         /// <param name="formatParameter"></param>
         public RQItemModelRepository(SortParameter sortParameter, FormatParameter formatParameter)
         {
-            this.sortParameter = sortParameter;
             this.formatParameter = formatParameter;
+            formatParameter.Owner = this;
+            this.sortParameter = sortParameter;
         }
 
         #endregion
@@ -1548,10 +1463,13 @@ namespace Mvc5RQ.Models
         /// <returns></returns>
         public RQItemModel GetModel(string queryString, Mvc5RQ.Areas.UserSettings.UserState.States stateType, bool forEdit)
         {
-            if (stateType == Mvc5RQ.Areas.UserSettings.UserState.States.undefined)
-                stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? Mvc5RQ.Areas.UserSettings.UserState.States.BrowseViewState : Mvc5RQ.Areas.UserSettings.UserState.States.ListViewState;
-            RQquery query = this.GetQuery(queryString, stateType);
+            if (stateType == UserState.States.undefined)
+                stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? UserState.States.BrowseViewState : UserState.States.ListViewState;
+            if (stateType == UserState.States.BrowseViewState)
+                if (StateStorage.GetClasstreeOptionsState() == true) 
+                    this.sortParameter = new SortParameter(SortParameter.SortOrderEnum.ByShelfClass);
 
+            RQquery query = this.GetQuery(queryString, stateType);
             return GetModel(query, forEdit);
         }
 
@@ -1573,9 +1491,6 @@ namespace Mvc5RQ.Models
         /// <returns></returns>
         public RQItemModel GetModel(string queryString)
         {
-            //Mvc5RQ.Areas.UserSettings.UserState.States stateType = (!string.IsNullOrEmpty(queryString) && (queryString.StartsWith("$class$") == true)) ? Mvc5RQ.Areas.UserSettings.UserState.States.BrowseViewState : Mvc5RQ.Areas.UserSettings.UserState.States.ListViewState;
-
-            //return this.GetModel(queryString, stateType, false);
             return this.GetModel(queryString, Mvc5RQ.Areas.UserSettings.UserState.States.undefined, false);
         }
 
@@ -1713,7 +1628,7 @@ namespace Mvc5RQ.Models
         #region private members
 
         FormatEnum _format = FormatEnum.undefined;
-        string _xmlTransformPath = "";
+        string _xmlTransformPath = null;
         System.Xml.Xsl.XsltArgumentList _xslTransformArg = null;
 
         #endregion
@@ -1749,9 +1664,10 @@ namespace Mvc5RQ.Models
             set
             {
                 _format = value;
-                this.SetXslTransformFilePath();
             }
         }
+
+        public RQItemModelRepository Owner { get; set; }
 
         /// <summary>
         /// 
@@ -1760,6 +1676,7 @@ namespace Mvc5RQ.Models
         {
             get
             {
+                if (_xmlTransformPath == null) this.SetXslTransformFilePath();
                 return _xmlTransformPath;
             }
         }
@@ -1771,6 +1688,7 @@ namespace Mvc5RQ.Models
         {
             get
             {
+                if (_xmlTransformPath == null) this.SetXslTransformFilePath();
                 return _xslTransformArg;
             }
         }
@@ -1806,7 +1724,7 @@ namespace Mvc5RQ.Models
                     _xslTransformArg = new System.Xml.Xsl.XsltArgumentList();
                     _xslTransformArg.AddParam("ApplPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
                     _xslTransformArg.AddParam("MyDocsPath", "", "http://" + HttpContext.Current.Request.ServerVariables.Get("HTTP_HOST") + (HttpContext.Current.Request.ApplicationPath.Equals("/") ? "" : HttpContext.Current.Request.ApplicationPath));
-                    //_xslTransformArg.AddParam("SortType", "", rqItemModel.SortPreprocessor.SortTypeString());
+                    _xslTransformArg.AddParam("SortType", "", ( this.Owner != null) ? Owner.sortParameter.SortTypeString() : "");
                     _xmlTransformPath = HttpContext.Current.Server.MapPath("~/xslt/ViewTransforms/RQResultList2RQSorted_Paging.xslt");
                     break;
                 case FormatEnum.rqi_single_item:

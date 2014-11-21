@@ -22,6 +22,7 @@ namespace Mvc5RQ.Areas.UserSettings
     public static IHtmlString QueryOptionsJavascript()
     {
         var builder = new StringBuilder();
+        
         builder.AppendFormat(_javascriptBlock, ScriptPack.simple_query_options_management.Replace("{controllerName}","UserSettings"));
         return new HtmlString(builder.ToString());
     }
@@ -33,6 +34,7 @@ namespace Mvc5RQ.Areas.UserSettings
     public static IHtmlString ClasstreeOptionsJavascript()
     {
         var builder = new StringBuilder();
+
         builder.AppendFormat(_javascriptBlock, ScriptPack.classtree_options_management.Replace("{controllerName}", "UserSettings"));
         return new HtmlString(builder.ToString());
     }
@@ -46,7 +48,6 @@ namespace Mvc5RQ.Areas.UserSettings
         string Html = ScriptPack.classtree_options_form;
 
         Html = Html.Replace("{classtree-options}", RQResources.Views.Shared.SharedStrings.classtree_options);
-        //Html = Html.Replace("{select-databases}", RQResources.Views.Shared.SharedStrings.select_databases);
         return new HtmlString(Html);
     }
 
@@ -70,8 +71,8 @@ namespace Mvc5RQ.Areas.UserSettings
     public static IHtmlString TableCss()
     {
         var builder = new StringBuilder();
-        builder.AppendFormat(_styleSheetBlock, ScriptPack.tablesorter_style);
 
+        builder.AppendFormat(_styleSheetBlock, ScriptPack.tablesorter_style);
         return new HtmlString(builder.ToString());
     }
 

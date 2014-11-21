@@ -340,6 +340,39 @@ namespace Mvc5RQ.Controllers
         {
             throw new NotImplementedException("Die Funktion zum Löschen eines Elements aus der Datenbank ist noch nicht verfügbar.");
         }
+                
+        /// <summary>
+        /// Controller action answering GET web-api-requests for rqitems.
+        /// </summary>
+        /// <remarks>
+        /// The action reacts to URLs of type "~/rqds/{dbname}/{format}".
+        /// </remarks>
+        /// <param name="dbname">
+        /// "rqitems" | {user-dbname} 
+        ///     Name of the requested database as indicated by the requested url.
+        ///     Database "rqitems" contains all rqitems of all users, which may be accessed by current user.
+        ///     Database {db-username} contains all rqitems of the user named {username}, which may be accessed by current user. 
+        ///     
+        ///     NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.
+        /// </param>
+        /// <param name="format">
+        /// null | rqi | rq | oai_dc | ...
+        /// </param>
+        /// <param name="verb">
+        /// null | querylist | browselist.
+        /// </param>
+        /// <param name="queryString">
+        /// query string to select the requested rqitems.
+        /// </param>
+        /// <returns>
+        /// The list of requested rqitems according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
+        /// </returns>
+        [Route("rqkos/{id}")]
+        [HttpGet]
+        public RQKosBranch Get(string id, string verb = "")
+        {
+            return new RQKosModel(id, verb).RQKosSet;
+        }
 
         #endregion
     }

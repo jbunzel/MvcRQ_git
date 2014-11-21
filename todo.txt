@@ -50,7 +50,7 @@
 03.112			Migrate linked data service (RQDL)
 03.113			Migrate RQItem controller GET																				begonnen: 141004	erledigt: 141109
 03.114			Migrate RQItem controller PUT 																				begonnen: 141107	erledigt: 141109
-03.115			Migrate RQKos controller GET			 
+03.115			Migrate RQKos controller GET																				begonnen: 141120	erledigt: 141121	 
 03.116			Migrate RQKos controller PUT
 03.117			Migrate UserManager																							begonnen: 141028	erledigt: 141102
 03.118			Migrate patron authorization																				begonnen: 141107	erledigt: 141109

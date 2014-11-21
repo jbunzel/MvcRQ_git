@@ -1,9 +1,12 @@
 ﻿// Javascript code to view RQKOS shelves with DynaTree
 function getRQItemList(node) {
-    var d = HostAdress() + encodeURI("/RQItems?verb=BrowseList&queryString=$class$" + node.data.key.substring(node.data.key.indexOf('$') + 1));
-
+    //var d = HostAdress() + encodeURI("/rqds/rqitems/rqi?verb=BrowseViewState&queryString=$class$" + node.data.key.substring(node.data.key.indexOf('$') + 1));
+    
     $.ajax({
-        url: d,
+        beforeSend: function (req) {
+            req.setRequestHeader("Accept", "application/x-riquest-internal");
+        },
+        url: HostAdress() + encodeURI("/rqds/rqitems/rqi?verb=BrowseViewState&queryString=$class$" + node.data.key.substring(node.data.key.indexOf('$') + 1)),
         type: "GET",
         data: null,
         dataType: "html",
@@ -38,14 +41,17 @@ function getOldRQItem(docno) {
 $(function () {
     // Attach the dynatree widget to an existing <div id="tree"> element 
     // and pass the tree options as an argument to the dynatree() function:
-    var urlbase = document.location.href.substring(0, document.location.href.toLowerCase().toLowerCase().indexOf("rqkos") + 5);
-    
+    // var urlbase = document.location.href.substring(0, document.location.href.toLowerCase().toLowerCase().indexOf("rqkos") + 5);
+    var urlbase = document.location.href.substring(0, document.location.href.toLowerCase().indexOf("rqkos")) + "rqds/rqkos";
+
     $("#tree").dynatree({
         initAjax: {
             url: urlbase + '/0?verb=dt',
+            type: "GET",
             data: {
                 mode: "all"
             },
+            dataType: "json",
         },
         autoFocus: false,
         onLazyRead: function (node) {

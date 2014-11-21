@@ -263,6 +263,7 @@
     <Compile Include="Areas\UserSettings\UserSettingsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RQKosController.cs" />
     <Compile Include="Helpers\RQAuthorize.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -272,7 +273,6 @@
     <Compile Include="Controllers\RQDSController.cs" />
     <Compile Include="Controllers\RQItemsController.cs" />
     <Compile Include="Controllers\RQLDController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Formatters\XhtmlCustomFormatter.cs" />
     <Compile Include="Formatters\XmlCustomFormatter.cs" />
     <Compile Include="Global.asax.cs">
@@ -290,6 +290,7 @@
     <Compile Include="Helpers\TransformHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\RQItemsModel.cs" />
+    <Compile Include="Models\RQKosModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
@@ -622,6 +623,16 @@
     <Content Include="Views\UsersAdmin\Details.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\RQKos\ClientRQKosEditor.cshtml" />
+    <Content Include="Views\RQKos\EditorTemplates\multilinetext.cshtml" />
+    <Content Include="Views\RQKos\EditorTemplates\rqdescriptor.cshtml" />
+    <Content Include="Views\RQKos\EditorTemplates\text.cshtml" />
+    <Content Include="Views\RQKos\Index.cshtml" />
+    <Content Include="Views\RQKos\ServRQKos.cshtml" />
+    <Content Include="Views\RQKos\shared\ClientRQKosEditViewer.cshtml" />
+    <Content Include="Views\RQKos\shared\JsonViewer.cshtml" />
+    <Content Include="Views\RQKos\shared\ShelvesViewer.cshtml" />
+    <Content Include="Views\RQKos\shared\XmlViewer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\dotNetRDF\Libraries\core\dotNetRDF.csproj">

@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "RiQuest | Data Service";
+}
+<div class="pure-g-r">
+    <div class="pure-u-4-5">
+        <div class="pure-g-r">
+            <div class="pure-u-1-6">
+                <div class="rq-sidebar rq-left-sidebar">
+                </div>
+            </div>
+            <div class="pure-u-5-6">
+                <h2>@ViewBag.Message</h2>
+                <p>
+                    You have invoked the Linked Data Service of the RiQuest Personal Digital Library to return RQKos subject classification records.
+                </p>
+                <h3>Service Description</h3>
+                <p>
+                    The RiQuest Linked Data Service (RQLD) is an application programming interface (API) for the Semantic Web. It allows semantic web applications to retrieve data from the RiQuest Personal Digital Library for subsequent processing. 
+                </p>
+                <h4>MIME-Types</h4>
+                <p>
+                    The RiQuest Linked Data Service (RQLD) is intended to be invoked by a HttpRequest call with one of the following accepted mime-types:
+                </p>
+                <il>
+                    <li>text/xml to return RDF/XML</li>
+                    <li>application/xml to return RDF/XML</li>
+                    <li>text/rdf+xml to return RDF/XML</li>
+                    <li>application/rdf+xml to return RDF/XML</li>
+                    <li>text/turtle (not yet implemented) to return RDF/Turtle</li>
+                    <li>application/turtle (not yet implemented) to return RDF/Turtle</li>
+                </il>
+                <h4>RQKos Subject Classification</h4>
+                <p>
+                    RQKos subject classification records describe individual classes of subject classification systems used in the RiQuest Digital Library.
+                </p>
+                <p>
+                    The descriptions are based on the Simple Knowledge Organisation Systems (SKOS) vocabulary. The description of a RQKos subject classification class includes the description of all of its subclasses (if any).
+                </p>
+                <h4>Semantic Web Identifiers</h4>
+                <p>     
+                    Each RQKos subject classification class description is identified by a unique URL of type http://www.riquest.de/rqld/rqkos/{SYSCODE}_{NOTATION}, where 
+                </p>
+                <il>
+                    <li>"http://www.riquest.de/" is the identification base</li>
+                    <li>"rqld" denotes the RiQuest Linked Data Service</li>
+                    <li>"rqkos" denotes the RiQuest Knowledge Organiosation System (RQKos)</li>
+                    <li>"{SYSCODE} = rqc_ | rvk_" denotes one of the supported subject classification systems: "rqc_" = RiQuest Subject Classification or "rkv_" = Regensburger Verbundklassifikation</li>
+                    <li>"{NOTATION}" is a valid notation of an individual class of the respective subject classification system.</li>
+                </il>
+                <p>
+                    If "rqc_{NOTATION}" is ommitted the URL identifies the description of the root of the RiQuest Subject Classification.
+                </p>
+                <p>
+                    If "rqld" is replaced by "rq" the URL is not a valid semantic web identifier. A call to that URL will return an RQKos subject classification class description in the RiQuest internal format (RQ) instead of RDF/XML.
+                </p>
+                <h3>Response Content</h3>
+                <h4>XML</h4>
+                <p> If the RiQuest Linked Data Service had been invoked with accepted mime-types "text/xml" or "application/xml" the following response would have been returned:</p>
+                @Html.Partial("Shared/XmlViewer")
+                <h4>JSON</h4>
+                <p> If the RiQuest Data Service had been invoked with accepted mime-types "text/json" or "application/json" the following response would have been returned:</p>
+                @Html.Partial("Shared/JsonViewer")
+                <h4>HTML</h4>
+                <p> As You have invoked the RiQuest Linked Data Service with accepted mime-types "-/html" the content is also presented here as HTML for Your convenience .</p>
+                <p> If any RQItems are assigned to a RQKos Subject Classification class their descriptions will be displayed here. They are not, however, part of the RQKos Subject Classification class description.</p>
+                <h5>RQ Knowledge Organisation System (RQKos) / RQ Classification (RQC)</h5>
+
+                @Html.Partial("~/Views/RQKos/Shared/ShelvesViewer.cshtml")
+
+                <h5>RQItem List</h5>
+                @Html.Partial("~/Views/RQItems/Shared/ResultViewer.cshtml")
+            </div>
+        </div>
+    </div>
+    <div class="pure-u-1-5">
+        <div class="pure-g-r">
+            <div class="pure-u-4-5">
+                 <div class="rq-sidebar rq-classtree-sidebar">
+                 </div>
+            </div>
+            <div class=" pure-u-1-5">
+                <div class="rq-sidebar rq-right-sidebar rq-banner"></div>
+            </div>
+        </div>
+        @Html.Partial("~/Views/Shared/Footer.cshtml")
+    </div>
+</div>

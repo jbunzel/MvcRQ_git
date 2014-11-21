@@ -1,0 +1,40 @@
+﻿<!-- VIEW-RQKOS--SHELVES-HTML -->
+@*@MvcRQ.Helpers.HtmlFactory.EditRQItemForm()*@ @*html code for creating & editing a RQItem*@
+@{
+    ViewBag.Title = "RiQuest | Shelves";
+}
+<div class="pure-g-r">
+    <div class="pure-u-4-5">
+        <div class="pure-g-r">
+            <div class="pure-u-1-6">
+                <div class="rq-sidebar rq-left-sidebar">
+@*                    @Html.Partial("~/Views/Account/SmallLogOn.cshtml")*@
+                </div>
+            </div>
+            <div class="pure-u-5-6">
+@*                <script src="@Url.Content("~/Scripts/HtmlFactoryScripts/result-viewer.js")" type="text/javascript"></script>*@
+                <script type="text/javascript">
+                    // show default result list on startup
+                    $(document).ready(function () {
+                        resizeToWindowHeight();
+                        //getResultList();
+                    });
+                </script>
+                @Html.Partial("~/Views/RQItems/Shared/ResultViewer.cshtml")
+            </div>
+        </div>
+    </div>
+    <div class="pure-u-1-5">
+        <div class="pure-g-r">
+            <div class="pure-u-4-5">
+                <div class="rq-classtree-sidebar">
+                    @Html.Partial("~/Views/RQKos/Shared/ShelvesViewer.cshtml")
+                </div>
+            </div>
+            <div class=" pure-u-1-5">
+                <div class="rq-sidebar rq-right-sidebar rq-banner"></div>
+            </div>
+        </div>
+        @Html.Partial("~/Views/Shared/Footer.cshtml")
+    </div>
+</div>

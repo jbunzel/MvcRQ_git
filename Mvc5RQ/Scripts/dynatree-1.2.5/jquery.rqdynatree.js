@@ -1577,7 +1577,7 @@ DynaTreeNode.prototype = {
 	/**
 	 * Make sure the node with a given key path is available in the tree.
 	 */
-	_loadKeyPath: function(keyPath, callback) {
+	_loadKeyPath: function (keyPath, callback) {
 		var tree = this.tree;
 		tree.logDebug("%s._loadKeyPath(%s)", this, keyPath);
 		if(keyPath === ""){
@@ -2507,7 +2507,7 @@ DynaTree.prototype = {
 		return dtnode;
 	},
 
-	loadKeyPath: function(keyPath, callback) {
+	loadKeyPath: function (keyPath, callback) {
 		var segList = keyPath.split(this.options.keyPathSeparator);
 		// Remove leading '/'
 		if(segList[0] === ""){

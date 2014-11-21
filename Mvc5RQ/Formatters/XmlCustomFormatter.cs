@@ -29,8 +29,8 @@ namespace Mvc5RQ.Formatters
         /// </summary>
         public XMLCustomFormatter()
         {
-            //SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xml"));
-            //SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/xml"));
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xml"));
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/xml"));
         }
         
         /// <summary>
@@ -73,7 +73,7 @@ namespace Mvc5RQ.Formatters
                 {
                     if (type == typeof(Mvc5RQ.Models.RQItemModel))
                         XSLTransform = ((Mvc5RQ.Models.RQItemModel)value).RQItems.FormatPreprocessor.XmlTransformPath;
-                    else
+                    else if (type == typeof(Mvc5RQ.Models.RQItem))
                     {
                         XSLTransform = ((Mvc5RQ.Models.RQItem)value).FormatPreprocessor.XmlTransformPath;
                     }
