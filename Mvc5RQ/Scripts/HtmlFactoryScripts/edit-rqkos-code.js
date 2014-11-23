@@ -69,7 +69,7 @@ function EditForm() {
     /* Submits the item to server if all data fields are valid */
     this.submit = function (e) {
         var json = JSON.stringify(EditForm2Data());
-        var url = HostAdress() + '/rqkos/' + $('.classid').html() + '?verb=update';
+        var url = HostAdress() + '/rqds/rqkos/update/' + $('.classid').html();
         var fd = new ajaxLoadingIndicator('#html'); 
 
         $.ajax({
@@ -81,7 +81,7 @@ function EditForm() {
             success: function (data, textStatus, jqXHR) {
                 if (data.isSuccess == false) {
                     var msgHtml = HintListHtml(data.hints, data.hints.length);
-
+                    
                     _myHelper.processServerResponse(data, null, function () {
                         $('#EditDialog').html('<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><span id="edit-dialog-message">Der Editiervorgang kann nicht durchgeführt werden !</span></p>' + '<p>' + msgHtml + '</p>');
                         $(function () {
@@ -119,7 +119,7 @@ function EditForm() {
 
     this.check = function () {
         var json = JSON.stringify(EditForm2Data());
-        var url = HostAdress() + '/rqkos/' + $('#EditForm .classid').html() + '?verb=check';
+        var url = HostAdress() + '/rqds/rqkos/check/' + $('#EditForm .classid').html();
         var fd = new ajaxLoadingIndicator('#html'); 
 
         $.ajax({
@@ -167,10 +167,10 @@ function EditForm() {
 
     this.add = function () {
         var json = JSON.stringify(EditForm2Data());
-        var url = HostAdress() + '/rqkos/' + $('.classid').html() + '?verb=new';
+        var url = HostAdress() + '/rqds/rqkos/add/' + $('.classid').html();
         var fd = new ajaxLoadingIndicator('#html');
         var addClassHTML = GetClassTemplateHtml()
-
+        
         addClassHTML = addClassHTML.replace(/§§NEW-ID§§/g, (parseInt($('#EditForm .nrofsubclasses').html()) + 1).toString());
         $('#accordion').append(addClassHTML);
         $('#accordion').accordion('refresh');
@@ -210,7 +210,7 @@ function EditForm() {
                 'JA': function () {
                     $(this).dialog('close');
                     var json = JSON.stringify(EditForm2Data());
-                    var url = HostAdress() + '/rqkos/' + $('.classid').html() + '?verb=delete';
+                    var url = HostAdress() + '/rqds/rqkos/delete/' + $('.classid').html();
                     var fd = new ajaxLoadingIndicator('#html');
 
                     $.ajax({
@@ -246,7 +246,7 @@ function EditForm() {
                             }
                             else {
                                 fd.remove();
-                                _myHelper.showSuccess('Klassendefinition und Mapping erfolgreich gespeichert');
+                                _myHelper.showSuccess('Klassendefinition und Mapping erfolgreich gelöscht');
                                 up();
                             }
                         },
@@ -266,7 +266,7 @@ function EditForm() {
 
     this.up = function () {
         rqkosId = $('.parentid').html();
-        window.open(HostAdress()+ '/RQKos/' + rqkosId + '?verb=' + 'edit', '_self');
+        window.open(HostAdress()+ '/rqkos/edit/' + rqkosId, '_self');
     }
 }
 
@@ -317,20 +317,17 @@ function EditForm2Data() {
 
 function up() {
     rqkosId = $('.parentid').html();
-    window.open(HostAdress() + '/RQKos/' + rqkosId + '?verb=' + 'edit', '_self');
+    window.open(HostAdress() + '/rqkos/edit/' + rqkosId, '_self');
 }
 
 function down(index) {
     rqkosId = $('#ClassID' + index).html();
-    window.open(HostAdress() + '/RQKos/' + rqkosId + '?verb=' + 'edit', '_self');
+    window.open(HostAdress() + '/rqkos/edit/' + rqkosId, '_self');
 }
 
 function GetClassTemplateHtml() {
-    //var len = $('.extraPerson').length;
     var $html = $('.extra-class-template').clone();
-    //$html.find('[name=firstname]')[0].name = "firstname" + len;
-    //$html.find('[name=lastname]')[0].name = "lastname" + len;
-    //$html.find('[name=gender]')[0].name = "gender" + len;
+
     return $html.html();
 }
 
@@ -341,9 +338,9 @@ function getUrlVar(key) {
     return result && unescape(result[1]) || '';
 }
 
-function cancel() {
-    window.location.replace(HostAdress() + '/RQItems?d=' + itemId);
-}
+//function cancel() {
+//    window.location.replace(HostAdress() + '/RQItems?d=' + itemId);
+//}
 
 function reset() {
     var s = parseInt(saveData[0].NrOfSubclasses);

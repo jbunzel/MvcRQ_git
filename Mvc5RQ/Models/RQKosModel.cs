@@ -62,7 +62,6 @@ namespace Mvc5RQ.Models
             return "rqc_" + Mvc5RQ.Helpers.StateStorage.GetQueryFromState("", Areas.UserSettings.UserState.States.BrowseViewState).QueryString;
         }
 
-
         #endregion
 
     }
@@ -271,7 +270,7 @@ namespace Mvc5RQ.Models
         #region public members
 
         [DataContract]
-        public struct RQKosBranchStatus
+        public struct RQKosBranchStatus 
         {
             [DataMember]
             public bool isSuccess;
@@ -352,24 +351,6 @@ namespace Mvc5RQ.Models
         public RQKosBranch(IEnumerable<RQKosTransfer> newRQKosBranch)
             : base()
         {
-            //SubjClass[] classArray = new SubjClass[newRQKosBranch.Count()];
-
-            //for (int i = 0; i < newRQKosBranch.Count(); i++)
-            //{
-            //    classArray[i] = new SubjClass();
-            //    classArray[i].ClassCode = newRQKosBranch.ElementAt(i).ClassCode;
-            //    classArray[i].ClassID = newRQKosBranch.ElementAt(i).ClassID;
-            //    classArray[i].ClassShortTitle = newRQKosBranch.ElementAt(i).ClassName;
-            //    classArray[i].ClassLongTitle = newRQKosBranch.ElementAt(i).ClassTitle;
-            //    classArray[i].NrOfRefLinks = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfDocuments);
-            //    classArray[i].NrOfSubClasses = Convert.ToInt16(newRQKosBranch.ElementAt(i).NrOfSubclasses);
-            //    classArray[i].ParentClassID = newRQKosBranch.ElementAt(i).ParentID;
-            //    classArray[i].RefRVKSet = newRQKosBranch.ElementAt(i).RVKClassCodes;
-            //    classArray[i].RefRVKClass = newRQKosBranch.ElementAt(i).RVKClassCodes != null ? new RQLib.Utilities.LexicalClass(newRQKosBranch.ElementAt(i).RVKClassCodes) : null;
-            //    classArray[i].ClassDataClient = new RQClassificationDataClient();
-            //}
-            //this.classBranch = new SubjClassBranch(classArray);
-
             List<SubjClass> classArray = new List<SubjClass>();
 
             for (int i = 0; i < newRQKosBranch.Count(); i++)

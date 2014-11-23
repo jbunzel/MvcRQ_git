@@ -15,8 +15,8 @@ namespace Mvc5RQ.Areas
 
     public string message { get; set; }
     public bool isSuccess { get; set; }
-
     public object data { get; set; }
+    public object hints { get; set; }
 
     internal static MyJsonResult CreateSuccess(string message)
     {
@@ -44,6 +44,16 @@ namespace Mvc5RQ.Areas
         isSuccess = false,
         data = new { stacktrace = ex.StackTrace }
       };
+    }
+
+    internal static MyJsonResult CreateError(Mvc5RQ.Models.RQKosBranch.RQKosBranchStatus status)
+    {
+        return new MyJsonResult()
+        {
+            message = status.message,
+            isSuccess = false,
+            hints = status.hints,
+        };
     }
   }
 }

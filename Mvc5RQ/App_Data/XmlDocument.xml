@@ -1305,14 +1305,11 @@
             verb == new: The action returns an (empty) data entry mask to add a new RQKosBranch (not yet implemented).
             </returns>
         </member>
-        <member name="M:Mvc5RQ.Controllers.RQKosController.UpdateRQKosBranch(System.String,System.String,System.Collections.Generic.IEnumerable{Mvc5RQ.Models.RQKosTransfer})">
+        <member name="M:Mvc5RQ.Controllers.RQKosController.Edit(System.String)">
             <summary>
-            Controller action answering POST http-requests transfering a single RiQuest Knowledge Organisation System (KOS) Item.
-            TODO: Aktuell in Berarbeitung: Fehlerhaft Anzeige nach delete. 
+            
             </summary>
-            <param name="verb"></param>
             <param name="id"></param>
-            <param name="RQKosTransferBranch"></param>
             <returns></returns>
         </member>
         <member name="T:Mvc5RQ.Controllers.HomeController">
@@ -1527,31 +1524,50 @@
         </member>
         <member name="M:Mvc5RQ.Controllers.RQDSController.Get(System.String,System.String)">
             <summary>
-            Controller action answering GET web-api-requests for rqitems.
+            Controller action answering GET web-api-requests for rqkos.
             </summary>
             <remarks>
-            The action reacts to URLs of type "~/rqds/{dbname}/{format}".
+            The action reacts to URLs of type "~/rqds/rqkos/{id}".
             </remarks>
-            <param name="dbname">
-            "rqitems" | {user-dbname} 
-                Name of the requested database as indicated by the requested url.
-                Database "rqitems" contains all rqitems of all users, which may be accessed by current user.
-                Database {db-username} contains all rqitems of the user named {username}, which may be accessed by current user. 
-                
-                NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.
-            </param>
-            <param name="format">
-            null | rqi | rq | oai_dc | ...
+            <param name="id">
             </param>
             <param name="verb">
-            null | querylist | browselist.
-            </param>
-            <param name="queryString">
-            query string to select the requested rqitems.
             </param>
             <returns>
-            The list of requested rqitems according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
             </returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQDSController.Add(System.String,System.Collections.Generic.IEnumerable{Mvc5RQ.Models.RQKosTransfer})">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="verb"></param>
+            <param name="RQKosTransferBranch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQDSController.Check(System.String,System.Collections.Generic.IEnumerable{Mvc5RQ.Models.RQKosTransfer})">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="RQKosTransferBranch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQDSController.Update(System.String,System.Collections.Generic.IEnumerable{Mvc5RQ.Models.RQKosTransfer})">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="RQKosTransferBranch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQDSController.Delete(System.String,System.Collections.Generic.IEnumerable{Mvc5RQ.Models.RQKosTransfer})">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="RQKosTransferBranch"></param>
+            <returns></returns>
         </member>
         <member name="T:Mvc5RQ.Controllers.RQItemsController">
             <summary>

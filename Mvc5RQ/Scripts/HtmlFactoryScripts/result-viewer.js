@@ -1,5 +1,5 @@
 ﻿function getResultList() {
-    callAjax_ResultList(HostAdress() + "/rqds/rqitems/rqi?verb=ListViewState");
+    callAjax_ResultList(HostAdress() + "/rqds/rqitems/rqi?verb=" + getrqitemverb); //ListViewState");
 }
 
 function getQueryResultList(queryString) {

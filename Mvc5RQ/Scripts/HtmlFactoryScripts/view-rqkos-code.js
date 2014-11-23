@@ -1,7 +1,5 @@
 ﻿// Javascript code to view RQKOS shelves with DynaTree
 function getRQItemList(node) {
-    //var d = HostAdress() + encodeURI("/rqds/rqitems/rqi?verb=BrowseViewState&queryString=$class$" + node.data.key.substring(node.data.key.indexOf('$') + 1));
-    
     $.ajax({
         beforeSend: function (req) {
             req.setRequestHeader("Accept", "application/x-riquest-internal");
@@ -91,7 +89,7 @@ function EditActiveNode() {
     var node = $("#tree").dynatree("getActiveNode");
 
     if (node) {
-        var path = 'rqkos/rqc_' + node.data.key.substr(node.data.key.indexOf('$') + 1).toLowerCase() + '?verb=edit';
+        var path = 'rqkos/edit/rqc_' + node.data.key.substr(node.data.key.indexOf('$') + 1).toLowerCase(); // + '?verb=edit';
 
         window.open(HostAdress() + "/" + path, "_self");
     }

@@ -1,20 +1,13 @@
 ﻿using System;
-//using System.Web;
-//using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-//using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-//using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-//using Microsoft.Owin.Security;
+
 using Mvc5RQ.Models;
 using Mvc5RQ.Helpers;
 using Mvc5RQ.Areas.UserSettings;
-//using System.Threading;
-//using System.Threading.Tasks;
-//using System.IO;
-//using System.Net.Http.Headers;
 
 namespace Mvc5RQ.Controllers
 {
@@ -121,7 +114,7 @@ namespace Mvc5RQ.Controllers
         /// <returns>
         /// The requested rqitem according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
         /// </returns>
-        [Route("{dbname}/{id}/{format}")]
+        [Route("{dbname}/{id:length(5)}/{format}")]
         [HttpGet]
         public RQItem Get(string dbname, string id, string format, string verb = "", string queryString = "")
         {
@@ -190,7 +183,7 @@ namespace Mvc5RQ.Controllers
         /// <returns>
         /// The requested subfield of the requested rqitem according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
         /// </returns>
-        [Route("{dbname}/{id}/{subfield}/{index:int}/{format?}")]
+        [Route("{dbname}/{id:length(5)}/{subfield}/{index:int}/{format?}")]
         [HttpGet]
         public RQItem Get(string dbname, string id, string subfield, int index, string format = "", string verb = "")
         {
@@ -276,7 +269,7 @@ namespace Mvc5RQ.Controllers
         /// On success the rqitem changed in the database according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
         /// On error an return message according to the accepted exchange format ({application/json} | {application/xml}).
         /// </returns>
-        [Route("{dbname}/{id}")]
+        [Route("{dbname}/{id:length(5)}")]
         [HttpPost]
         [RQAuthorize(Roles = "admin, patron")]
         public RQItem Post(string dbname, string id, [FromBody]RQItem changeRQItem)
@@ -334,7 +327,7 @@ namespace Mvc5RQ.Controllers
         /// On success the rqitem added to the database according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
         /// On error an return message according to the accepted exchange format ({application/json} | {application/xml}).
         /// </returns>
-        [Route("{dbname}/delete/{id}")]
+        [Route("{dbname}/delete/{id:length(5)}")]
         [RQAuthorize(Roles = "admin, patron")]
         public void Delete(string dbname, string id)
         {
@@ -342,36 +335,113 @@ namespace Mvc5RQ.Controllers
         }
                 
         /// <summary>
-        /// Controller action answering GET web-api-requests for rqitems.
+        /// Controller action answering GET web-api-requests for rqkos.
         /// </summary>
         /// <remarks>
-        /// The action reacts to URLs of type "~/rqds/{dbname}/{format}".
+        /// The action reacts to URLs of type "~/rqds/rqkos/{id}".
         /// </remarks>
-        /// <param name="dbname">
-        /// "rqitems" | {user-dbname} 
-        ///     Name of the requested database as indicated by the requested url.
-        ///     Database "rqitems" contains all rqitems of all users, which may be accessed by current user.
-        ///     Database {db-username} contains all rqitems of the user named {username}, which may be accessed by current user. 
-        ///     
-        ///     NOTE: The feature is currently not implemented. If implemented, the parameter has to be included in other actions, too.
-        /// </param>
-        /// <param name="format">
-        /// null | rqi | rq | oai_dc | ...
+        /// <param name="id">
         /// </param>
         /// <param name="verb">
-        /// null | querylist | browselist.
-        /// </param>
-        /// <param name="queryString">
-        /// query string to select the requested rqitems.
         /// </param>
         /// <returns>
-        /// The list of requested rqitems according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
         /// </returns>
         [Route("rqkos/{id}")]
         [HttpGet]
         public RQKosBranch Get(string id, string verb = "")
         {
             return new RQKosModel(id, verb).RQKosSet;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="verb"></param>
+        /// <param name="RQKosTransferBranch"></param>
+        /// <returns></returns>
+        [Route("rqkos/add/{id}")]
+        [HttpPost]
+        [RQAuthorize(Roles = "admin, patron")]
+        public RQKosBranch Add(string id, [FromBody]IEnumerable<RQKosTransfer> RQKosTransferBranch)
+        {
+            if (ModelState.IsValid)
+            {
+                RQKosEditModel editModel = new RQKosEditModel(RQKosTransferBranch);
+
+                return editModel.AppendClass();
+            }
+            else
+                throw new Exception("Invalid model.");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="RQKosTransferBranch"></param>
+        /// <returns></returns>
+        [Route("rqkos/check/{id}")]
+        [HttpPost]
+        [RQAuthorize(Roles = "admin, patron")]
+        public RQKosBranch.RQKosBranchStatus Check(string id, [FromBody]IEnumerable<RQKosTransfer> RQKosTransferBranch)
+        {
+            if (ModelState.IsValid)
+            {
+                RQKosEditModel editModel = new RQKosEditModel(RQKosTransferBranch);
+
+                return editModel.IsValid();
+            }
+            else
+                throw new Exception("Invalid model.");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="RQKosTransferBranch"></param>
+        /// <returns></returns>
+        [Route("rqkos/update/{id}")]
+        [HttpPost]
+        [RQAuthorize(Roles = "admin, patron")]
+        public RQKosBranch Update(string id, [FromBody]IEnumerable<RQKosTransfer> RQKosTransferBranch)
+        {
+            if (ModelState.IsValid)
+            {
+                RQKosEditModel editModel = new RQKosEditModel(RQKosTransferBranch);
+
+                if (editModel.Update())
+                    return editModel.RQKosEditSet;
+                else
+                    throw new HttpResponseException(JsonErrorResponse.Create(editModel.RQKosEditStatus));
+            }
+            else
+                throw new Exception("Invalid model.");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="RQKosTransferBranch"></param>
+        /// <returns></returns>
+        [Route("rqkos/delete/{id}")]
+        [HttpPost]
+        [RQAuthorize(Roles = "admin, patron")]
+        public RQKosBranch Delete(string id, [FromBody]IEnumerable<RQKosTransfer> RQKosTransferBranch)
+        {
+            if (ModelState.IsValid)
+            {
+                RQKosEditModel editModel = new RQKosEditModel(RQKosTransferBranch);
+
+                if (editModel.Delete())
+                    return editModel.RQKosEditSet;
+                else
+                    throw new HttpResponseException(JsonErrorResponse.Create(editModel.RQKosEditStatus));
+            }
+            else
+                throw new Exception("Invalid model.");
         }
 
         #endregion

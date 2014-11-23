@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mvc5RQ.Models;
-//using MvpRestApiLib;
 using System.Web.UI;
 
 namespace Mvc5RQ.Controllers
@@ -19,7 +18,7 @@ namespace Mvc5RQ.Controllers
     public class RQKosController : BaseController
     {
 
-        #region "private methods"
+        #region private methods
 
         /// <summary>
         /// Returns the RQKosModel pertainig to a given RQKosItemId. 
@@ -56,7 +55,7 @@ namespace Mvc5RQ.Controllers
 
         #endregion
 
-        #region "public methods"
+        #region public methods
 
         /// <summary>
         /// Controller action answering GET http-requests to a single RiQuest Knowledge Organisation System Branch (RQKosBranch).
@@ -82,142 +81,44 @@ namespace Mvc5RQ.Controllers
         /// verb == check: The action returns a message about the consistency state of RQKosBranch with ID=id as json string.
         /// verb == new: The action returns an (empty) data entry mask to add a new RQKosBranch (not yet implemented).
         /// </returns>
-        //[EnableJson, EnableXml]
         [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult RQKosBranch(string id, string verb)
         {
-            if (Mvc5RQ.Helpers.AccessRightsResolver.HasAddAccess())
-                ViewBag.AccessRights = "EDITOR";
-            if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "edit")))
-            {
-                if (ViewBag.AccessRights == "EDITOR")
+            RQKosModel model = GetModel(!string.IsNullOrEmpty(id) ? id : RQKosModel.GetActiveModelID());
+            
+            if (Mvc5RQ.Helpers.AccessRightsResolver.HasAddAccess()) ViewBag.AccessRights = "EDITOR";
+            ViewBag.locPath = HttpContext.Request.QueryString.Get("p");
+            ViewBag.docNo = HttpContext.Request.QueryString.Get("d");
+            if (string.IsNullOrEmpty(ViewBag.locPath) && string.IsNullOrEmpty(ViewBag.docNo))
+                if (HttpContext.Request.Cookies.Get("dynatree-active") != null)
                 {
-                    ViewBag.RQKosId = id;
-                    return View("ClientRQKosEditor", new RQKosEditModel(id).RQKosEditSet);
+                    string cc = HttpUtility.UrlDecode(HttpContext.Request.Cookies.Get("dynatree-active").Value);
+                    if (!string.IsNullOrEmpty(cc))
+                        model = GetModel(cc.Substring(0, cc.IndexOf('$')));
                 }
-                else
-                    throw new System.AccessViolationException(RQResources.Views.Shared.SharedStrings.err_not_authorized);
-            }
-            else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "dt")))
-                return View("Index", GetModel(id, verb).RQKosSet);
-            else
-            {
-                RQKosModel model = GetModel(!string.IsNullOrEmpty(id)? id : RQKosModel.GetActiveModelID());
-
-                ViewBag.locPath = HttpContext.Request.QueryString.Get("p");
-                ViewBag.docNo = HttpContext.Request.QueryString.Get("d");
-                if (string.IsNullOrEmpty(ViewBag.locPath) && string.IsNullOrEmpty(ViewBag.docNo))
-                    if (HttpContext.Request.Cookies.Get("dynatree-active") != null)
-                    {
-                        string cc = HttpUtility.UrlDecode(HttpContext.Request.Cookies.Get("dynatree-active").Value);
-                        if (!string.IsNullOrEmpty(cc))
-                            model = GetModel(cc.Substring(0, cc.IndexOf('$')));
-                    }
-                if (string.IsNullOrEmpty(ViewBag.docNo)) ViewBag.docNo = RQKosModel.GetActiveDocumentID();
-                if (string.IsNullOrEmpty(ViewBag.locPath))
-                    ViewBag.locPath = new RQLib.RQKos.Classifications.SubjClass(model.RQKosSet.GetItem(0)._class.ClassID, model.RQKosSet.GetItem(0)._class.ClassDataClient).ClassPath;
-                ViewBag.HasAddPermit = Mvc5RQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems to the database.
-                ViewBag.GetRQItemVerb = "BrowseItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
-                return View("Index", model.RQKosSet);
-            }
+            if (string.IsNullOrEmpty(ViewBag.docNo)) ViewBag.docNo = RQKosModel.GetActiveDocumentID();
+            if (string.IsNullOrEmpty(ViewBag.locPath))
+                ViewBag.locPath = new RQLib.RQKos.Classifications.SubjClass(model.RQKosSet.GetItem(0)._class.ClassID, model.RQKosSet.GetItem(0)._class.ClassDataClient).ClassPath;
+            ViewBag.HasAddPermit = Mvc5RQ.Helpers.AccessRightsResolver.HasAddAccess(); // Enable the add new button if user is allowed to add RQItems to the database.
+            ViewBag.GetRQItemVerb = "BrowseItem"; // Tell GetRQItem() in ResultViewer the appropiate verb for saving the user state.
+            return View("Index", model.RQKosSet);
         }
 
         /// <summary>
-        /// Controller action answering GET http-requests to an API servicing a single RiQuest Knowledge Organisation System Branch (RQKosBranch).
+        /// 
         /// </summary>
-        /// <remarks>
-        /// The action reacts to URLs of type "~/{serviceId}/RQKos/rqitemID".
-        /// The action request is filtered through the ActionFilterAttributes EnableJson and EnableXml:
-        /// If the client GET request contains dataType=application/json | text/json or dataType=application/xml | text/xml the action response is generated by class JsonResult2 or XmlResult of MvpRestApiLib.
-        /// In both cases the client is responsible to render the xml (f. e. by XSLT).
-        /// Otherwise the action response is tranformed on the server according to the serviceId specified. 
-        /// </remarks>
-        /// <param name="id">
-        /// A valid ID of a RiQuest Knowledge Organisation System (KOS) Item.
-        /// </param>
-        /// <param name="serviceId">
-        /// Id of the desired service API:
-        /// serviceId == "rq": internal RiQuest API (default);
-        /// serviceId == "rqld": Riquest Linked Data API.
-        /// </param>
-        /// <param name="verb">
-        /// verb == "dt": Controller returns JQuery.DynaTree nodelist format
-        /// </param>
-        /// <returns>
-        /// The action returns a description of the RQKosItem with ID=id as */json, */xml response or text/html response - the latter formatted according to yet undefined - depending on data types specified in the GET request.
-        /// If serviceId=dt the return format is always */json according as required by the JQuery.DynaTree plugin.
-        /// </returns>
-        //[EnableJson, EnableXml]
-        //[HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        //public ActionResult ServiceRQKosBranch(string serviceId, string id, string verb)
-        //{
-        //    if (verb == "dt")
-        //        return View(GetModel(id, verb).RQKosSet);
-        //    else
-        //    {
-        //        RQKosModel model = GetModel(id, serviceId);
-
-        //        if ((ViewBag.locPath == null) || (ViewBag.locPath == ""))
-        //        {
-        //            ViewBag.locPath = new RQLib.RQKos.Classifications.SubjClass(model.RQKosSet.GetItem(0)._class.ClassID, model.RQKosSet.GetItem(0)._class.ClassDataClient).ClassPath;
-        //        }
-        //        if (serviceId != null)
-        //        {
-        //            switch (serviceId)
-        //            {
-        //                case "rqld":
-        //                    EnableXmlAttribute.XSLTransform = "~/xslt/rqkos2rdf.xslt";
-        //                    break;
-        //                case "rq":
-        //                    EnableXmlAttribute.XSLTransform = "";
-        //                    break;
-        //                default:
-        //                    throw new NotImplementedException("RiQuest data service not yet implemented for unknown format.");
-        //            }
-        //        }
-        //        else
-        //            EnableXmlAttribute.XSLTransform = "";
-        //        return View("ServRQKos", model.RQKosSet);
-        //    }
-        //}
-
-        /// <summary>
-        /// Controller action answering POST http-requests transfering a single RiQuest Knowledge Organisation System (KOS) Item.
-        /// TODO: Aktuell in Berarbeitung: Fehlerhaft Anzeige nach delete. 
-        /// </summary>
-        /// <param name="verb"></param>
         /// <param name="id"></param>
-        /// <param name="RQKosTransferBranch"></param>
         /// <returns></returns>
-        //[EnableJson, EnableXml]
-        [HttpPost, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        [ValidateInput(false)]
-        [ActionName("RQKosBranch")]
-        public ActionResult UpdateRQKosBranch(string id, string verb, IEnumerable<RQKosTransfer> RQKosTransferBranch)
+        [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        public ActionResult Edit(string id)
         {
             if (Mvc5RQ.Helpers.AccessRightsResolver.HasAddAccess())
             {
-                RQKosEditModel editModel = new RQKosEditModel(RQKosTransferBranch);
-
-                if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "check")))
-                    return View(editModel.IsValid());
-                else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "new")))
-                    return View("ClientRQKosEditor", editModel.AppendClass());
-                else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "update")))
-                    if (editModel.Update())
-                        return View("ClientRQKosEditor", editModel.RQKosEditSet);
-                    else
-                        return View("ClientRQKosEditor", editModel.RQKosEditStatus);
-                else if ((!string.IsNullOrEmpty(verb)) && ((verb.ToLower() == "delete")))
-                    if (editModel.Delete())
-                        return View("ClientRQKosEditor", editModel.RQKosEditSet);
-                    else
-                        return View("ClientRQKosEditor", editModel.RQKosEditStatus);
-                else
-                    return View();
+                ViewBag.RQKosId = id;
+                return View("ClientRQKosEditor", new RQKosEditModel(id).RQKosEditSet);
             }
             else
-                throw new System.AccessViolationException(RQResources.Views.Shared.SharedStrings.err_not_authorized);
+                throw new AccessViolationException(RQResources.Views.Shared.SharedStrings.err_not_authorized);
         }
 
         #endregion
