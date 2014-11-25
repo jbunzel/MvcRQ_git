@@ -27,6 +27,7 @@ namespace Mvc5RQ
             config.Formatters.Insert(0, new Mvc5RQ.Formatters.XhtmlCustomFormatter(isAsync:false));
             config.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
             config.Formatters.Add(new Mvc5RQ.Formatters.XMLCustomFormatter());
+            config.Formatters.Add(new Mvc5RQ.Formatters.RDFCustomFormatter());
             // Web-API-Routen
             config.MapHttpAttributeRoutes();
 

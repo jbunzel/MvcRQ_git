@@ -11,15 +11,20 @@
     }
 
     $(document).ready(function () {
-        var d = document.location.href;
+        var d = document.location.href.toLowerCase();
+
+        if (d.indexOf("rqitemld") > 0)
+            d = d.replace("rqitems/rqitemld", "rqds/rqitems/").replace("?verb=", "/");
+        else
+            d = d.replace("rqitems/rqitemsld?verb=", "rqds/rqitems/")
         $("#xmlUrl").val(d);
         $("#xmlPostUrl").text(d);
-
         $.ajax({
             url: d,
             type: "GET",
             data: null,
             dataType: "xml",
+            contentType: "application/xml",
             success: function (data) {
                 renderXml(data);
             }

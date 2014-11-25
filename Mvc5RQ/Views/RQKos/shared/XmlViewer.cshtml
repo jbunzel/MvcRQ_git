@@ -16,10 +16,10 @@
     }
 
     $(document).ready(function () {
-        var d = document.location.href;
+        var d = document.location.href.replace("rqkos/RQKosLD", "rqld/rqkos");
         $("#xmlUrl").val(d);
         $("#xmlPostUrl").text(d);
-
+        
         $.ajax({
             url: d,
             type: "GET",
@@ -27,7 +27,11 @@
             dataType: "xml",
             contentType: "application/rdf+xml",
             success: function (data) {
+                debugger;
                 renderXml(data);
+            },
+            error: function (data) {
+                debugger;
             }
         });
 

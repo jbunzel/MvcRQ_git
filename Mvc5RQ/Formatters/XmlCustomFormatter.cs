@@ -19,20 +19,126 @@ namespace Mvc5RQ.Formatters
     /// </summary>
     public class XMLCustomFormatter : XmlMediaTypeFormatter
     {
+        #region private members
+
+        private bool _isAsync = false;
+
+        Func<Type, bool> SupportedType = (type) =>
+        {
+            if (type == typeof(Mvc5RQ.Models.RQItemModel) || type == typeof(Mvc5RQ.Models.RQItem))
+                return true;
+            else
+                return false;
+        };
+
+        #endregion
+
+        #region private methods
+
+        private Task GetWriteTask(Stream writeStream, Mvc5RQ.Models.RQItemModel value)
+        {
+            return new Task(() =>
+                WriteXmlList(value, writeStream));
+        }
+
+        private Task GetWriteTask(Stream writeStream, Mvc5RQ.Models.RQItem value)
+        {
+            return new Task(() =>
+                WriteXmlItem(value, writeStream));
+        }
+
+        private void WriteXmlList(Mvc5RQ.Models.RQItemModel rqItemModel, Stream writeStream)
+        {
+            if (rqItemModel != null)
+            {
+                var dSer = new DataContractSerializer(typeof(Mvc5RQ.Models.RQItemModel));
+
+                try
+                {
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                    var xTrf = new System.Xml.Xsl.XslCompiledTransform();
+                    var xSet = new System.Xml.Xsl.XsltSettings(enableDocumentFunction: true, enableScript: true);
+
+                    dSer.WriteObject(ms, rqItemModel);
+                    System.IO.TextReader tr = new System.IO.StringReader(System.Text.Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
+                    xTrf.Load(rqItemModel.RQItems.FormatPreprocessor.XmlTransformPath, xSet, new System.Xml.XmlUrlResolver());
+                    xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), rqItemModel.RQItems.FormatPreprocessor.XslTransformArg, writeStream);
+                }
+                catch
+                {
+                    throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
+                }
+            }
+        }
+
+        private void WriteXmlItem(Mvc5RQ.Models.RQItem rqItem, Stream writeStream)
+        {
+            if (rqItem != null)
+            {
+                var dSer = new DataContractSerializer(typeof(Mvc5RQ.Models.RQItem));
+
+                try
+                {
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                    var xTrf = new System.Xml.Xsl.XslCompiledTransform();
+                    var xSet = new System.Xml.Xsl.XsltSettings(enableDocumentFunction: true, enableScript: true);
+
+                    dSer.WriteObject(ms, rqItem);
+                    System.IO.TextReader tr = new System.IO.StringReader(System.Text.Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
+                    xTrf.Load(rqItem.FormatPreprocessor.XmlTransformPath, xSet, new System.Xml.XmlUrlResolver());
+                    xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), rqItem.FormatPreprocessor.XslTransformArg, writeStream);
+                }
+                catch
+                {
+                    throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
+                }
+            }
+        }
+
+        #endregion
+
+        #region public properties
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsAsync
+        {
+            get { return _isAsync; }
+            set { _isAsync = value; }
+        }
+
         /// <summary>
         /// 
         /// </summary>
         public string XSLTransform { get; set; }
 
+        #endregion
+
+        #region public constructors
+
         /// <summary>
         /// 
         /// </summary>
         public XMLCustomFormatter()
+            : this(false)
+        { }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public XMLCustomFormatter(bool isAsync)
         {
             SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xml"));
             SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/xml"));
+            IsAsync = isAsync;
+            SupportedEncodings.Add(Encoding.UTF8); // new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
         }
-        
+
+        #endregion
+
+        #region public overrides
+
         /// <summary>
         /// 
         /// </summary>
@@ -67,82 +173,19 @@ namespace Mvc5RQ.Formatters
         /// <returns></returns>
         public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
         {
-            return Task.Factory.StartNew(() =>
-            {
-                if ((type == typeof(Mvc5RQ.Models.RQItemModel)) || (type == typeof(Mvc5RQ.Models.RQItem)))
-                {
-                    if (type == typeof(Mvc5RQ.Models.RQItemModel))
-                        XSLTransform = ((Mvc5RQ.Models.RQItemModel)value).RQItems.FormatPreprocessor.XmlTransformPath;
-                    else if (type == typeof(Mvc5RQ.Models.RQItem))
-                    {
-                        XSLTransform = ((Mvc5RQ.Models.RQItem)value).FormatPreprocessor.XmlTransformPath;
-                    }
-                    WriteXML(value, writeStream, content);
-                }
-            });
+            Task writeTask;
+
+            if (type == typeof(Mvc5RQ.Models.RQItemModel))
+                writeTask = GetWriteTask(writeStream, (Mvc5RQ.Models.RQItemModel)value);
+            else
+                writeTask = GetWriteTask(writeStream, (Mvc5RQ.Models.RQItem)value);
+            if (_isAsync)
+                writeTask.Start();
+            else
+                writeTask.RunSynchronously();
+            return writeTask;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="writeStream"></param>
-        /// <param name="content"></param>
-        public void WriteXML(object value, Stream writeStream, HttpContent content)
-        {
-            if (value != null)
-            {
-                var dataType = value.GetType();
-                // OMAR: For generic types, use DataContractSerializer because 
-                // XMLSerializer cannot serialize generic interface lists or types.
-                if (dataType.IsGenericType || 
-                    dataType.GetCustomAttributes(typeof(DataContractAttribute), true).FirstOrDefault() != null)
-                {
-                    var dSer = new DataContractSerializer(dataType);
-
-                    if ((XSLTransform == null) || (XSLTransform.Length == 0))
-                        dSer.WriteObject(writeStream, value);
-                    else
-                    {
-                        System.IO.MemoryStream ms = new System.IO.MemoryStream();
-                        var xTrf = new System.Xml.Xsl.XslCompiledTransform();
-
-                        dSer.WriteObject(ms, value);
-                        //TESTDATEI(EZEUGEN)
-                        //System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
-                        //ms.Seek(0, System.IO.SeekOrigin.Begin);
-                        //Doc.Load(ms);
-                        //Doc.Save("D:/MVCTest.xml");
-                        //ENDE TESTDATEI 
-                        System.IO.TextReader tr = new System.IO.StringReader(Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
-                        xTrf.Load(XSLTransform);
-                        xTrf.Transform(new System.Xml.XmlTextReader(tr), null, writeStream);
-                    }
-                }
-                else
-                {
-                    var xSer = new XmlSerializer(dataType);
-
-                    if ((XSLTransform == null) || (XSLTransform.Length == 0))
-                        xSer.Serialize(writeStream, value);
-                    else
-                    {
-                        System.IO.MemoryStream ms = new System.IO.MemoryStream();
-                        var xTrf = new System.Xml.Xsl.XslCompiledTransform();
-
-                        xSer.Serialize(ms, value);
-                        //TESTDATEI(EZEUGEN)
-                        //System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
-                        //ms.Seek(0, System.IO.SeekOrigin.Begin);
-                        //Doc.Load(ms);
-                        //Doc.Save("D:/MVCTest.xml");
-                        //ENDE TESTDATEI 
-                        System.IO.TextReader tr = new System.IO.StringReader(Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
-                        xTrf.Load(XSLTransform);
-                        xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), null, writeStream);
-                    }
-                }
-            }
-        }
+        #endregion
     }
 }

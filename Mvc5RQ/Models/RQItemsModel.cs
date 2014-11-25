@@ -29,6 +29,7 @@ namespace Mvc5RQ.Models
         /// <summary>
         /// 
         /// </summary>
+        [XmlIgnore]
         public SortParameter SortPreprocessor
         {
             get 
@@ -647,6 +648,7 @@ namespace Mvc5RQ.Models
 
         #region public properties
 
+        [XmlIgnore]
         public FormatParameter FormatPreprocessor
         {
             get

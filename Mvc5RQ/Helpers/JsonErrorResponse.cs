@@ -19,5 +19,13 @@ namespace Mvc5RQ.Helpers
                 Content = new StringContent(json),
             };
         }
+
+        public static HttpResponseMessage Redirect(string uri)
+        {
+            var ret = new HttpResponseMessage(System.Net.HttpStatusCode.Redirect);
+
+            ret.Headers.Location = new Uri(uri);
+            return ret;
+        }
     }
 }

@@ -75,6 +75,8 @@ namespace Mvc5RQ.Controllers
         [HttpGet]
         public RQItemModel Get(string dbname, string format, string verb = "", string queryString = "")
         {
+            if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
+                throw new HttpResponseException(JsonErrorResponse.Redirect(Request.RequestUri.ToString().Replace("rqds/" + dbname + "/" + format, dbname + "/" + "RQItemsLD?verb=" + format)));
             try 
             {
                 RQItemModelRepository repo = new RQItemModelRepository(new FormatParameter((FormatParameter.FormatEnum)Enum.Parse(typeof(FormatParameter.FormatEnum), format)));
@@ -118,6 +120,9 @@ namespace Mvc5RQ.Controllers
         [HttpGet]
         public RQItem Get(string dbname, string id, string format, string verb = "", string queryString = "")
         {
+            if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
+                throw new HttpResponseException(JsonErrorResponse.Redirect(Request.RequestUri.ToString().Replace("rqds/" + dbname + "/" + id + "/" + format, dbname + "/" + "RQItemLD/" + id + "?verb=" + format)));
+
             UserState.States state;
             bool forEdit;
 

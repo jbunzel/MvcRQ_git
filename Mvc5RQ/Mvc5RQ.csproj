@@ -264,6 +264,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RQKosController.cs" />
+    <Compile Include="Formatters\RDFCustomFormatter.cs" />
     <Compile Include="Helpers\JsonErrorResponse.cs" />
     <Compile Include="Helpers\RQAuthorize.cs" />
     <Compile Include="Models\AdminViewModel.cs" />

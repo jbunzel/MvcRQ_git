@@ -11,9 +11,15 @@
     }
 
     $(document).ready(function () {
-        $("#jsonUrl").val(document.location.href);
-        $("#jsonPostUrl").text(document.location.href);
-        $.getJSON(document.location.href, function (data) {
+        var d = document.location.href.toLowerCase();
+
+        if (d.indexOf("rqitemld") > 0)
+            d = d.replace("rqitems/rqitemld", "rqds/rqitems/").replace("?verb=", "/");
+        else
+            d = d.replace("rqitems/rqitemsld?verb=", "rqds/rqitems/")
+        $("#jsonUrl").val(d);
+        $("#jsonPostUrl").text(d);
+        $.getJSON(d, function (data) {
             renderJson(data);
         });
 

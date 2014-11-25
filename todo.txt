@@ -46,8 +46,8 @@
 03.102			Add links to all pages	
 
 03.11		Mvc5RQ																											begonnen: 140920	erledigt: 
-03.111			Migrate data service (RQDS)																					begonnen: 140920	erledigt: 141123
-03.112			Migrate linked data service (RQDL)																			begonnen:			erledigt:
+03.111			Migrate data service (RQDS)																					begonnen: 140920	erledigt: 141125
+03.112			Migrate linked data service (RQDL)																			begonnen: 141124	erledigt:
 03.113			Migrate RQItem controller GET																				begonnen: 141004	erledigt: 141109
 03.114			Migrate RQItem controller PUT 																				begonnen: 141107	erledigt: 141109
 03.115			Migrate RQKos controller GET																				begonnen: 141120	erledigt: 141121	 

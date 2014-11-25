@@ -220,6 +220,33 @@ namespace Mvc5RQ.Controllers
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="verb"></param>
+        /// <returns></returns>
+        [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        public ActionResult RQItemsLD(string verb)
+        {
+            ViewBag.ServiceType = verb;
+            ViewBag.TextSeg0 = "a list of RQItems";
+            return View("ServRQItem");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="verb"></param>
+        /// <returns></returns>
+        [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        public ActionResult RQItemLD(string id, string verb)
+        {
+            ViewBag.ServiceType = verb;
+            ViewBag.TextSeg0 = "an individual RQItem";
+            return View("ServRQItem");
+        }
+
         #endregion
     }
 }

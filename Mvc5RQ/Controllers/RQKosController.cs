@@ -104,6 +104,19 @@ namespace Mvc5RQ.Controllers
             return View("Index", model.RQKosSet);
         }
 
+        [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        public ActionResult RQKosLD(string id)
+        {
+            RQKosModel model = GetModel(id, "rqld");
+
+            if ((ViewBag.locPath == null) || (ViewBag.locPath == ""))
+            {
+                ViewBag.locPath = new RQLib.RQKos.Classifications.SubjClass(model.RQKosSet.GetItem(0)._class.ClassID, model.RQKosSet.GetItem(0)._class.ClassDataClient).ClassPath;
+            }
+            return View("ServRQKos", model.RQKosSet);
+            //return View("ServRQKos");
+        }
+
         /// <summary>
         /// 
         /// </summary>

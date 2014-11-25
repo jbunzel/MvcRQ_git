@@ -1312,6 +1312,54 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:Mvc5RQ.Formatters.RDFCustomFormatter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.RDFCustomFormatter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.RDFCustomFormatter.CanReadType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.RDFCustomFormatter.CanWriteType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.RDFCustomFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="value"></param>
+            <param name="writeStream"></param>
+            <param name="content"></param>
+            <param name="transportContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Formatters.RDFCustomFormatter.WriteXML(System.Object,System.IO.Stream,System.Net.Http.HttpContent)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="writeStream"></param>
+            <param name="content"></param>
+        </member>
+        <member name="P:Mvc5RQ.Formatters.RDFCustomFormatter.XSLTransform">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Mvc5RQ.Controllers.HomeController">
             <summary>
             
@@ -1686,6 +1734,35 @@
             The action returns the ItemDescElement with FieldName = descElementId of RQItem with DocNo=rqitemId as */json, */xml response or text/html response - the latter formatted according to DescElementView - depending on data types specified in the GET request.  
             </returns>
         </member>
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.RQItemsLD(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="verb"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.RQItemLD(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="verb"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQLDController.Get(System.String)">
+            <summary>
+            Controller action answering GET linked data requests for rqkos.
+            </summary>
+            <remarks>
+            The action reacts to URLs of type "~/rqld/rqkos/{id}".
+            </remarks>
+            <param name="id">
+            </param>
+            <param name="verb">
+            </param>
+            <returns>
+            </returns>
+        </member>
         <member name="T:Mvc5RQ.Formatters.XhtmlCustomFormatter">
             <summary>
             
@@ -1741,6 +1818,11 @@
             
             </summary>
         </member>
+        <member name="M:Mvc5RQ.Formatters.XMLCustomFormatter.#ctor(System.Boolean)">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Mvc5RQ.Formatters.XMLCustomFormatter.CanReadType(System.Type)">
             <summary>
             
@@ -1766,13 +1848,10 @@
             <param name="transportContext"></param>
             <returns></returns>
         </member>
-        <member name="M:Mvc5RQ.Formatters.XMLCustomFormatter.WriteXML(System.Object,System.IO.Stream,System.Net.Http.HttpContent)">
+        <member name="P:Mvc5RQ.Formatters.XMLCustomFormatter.IsAsync">
             <summary>
             
             </summary>
-            <param name="value"></param>
-            <param name="writeStream"></param>
-            <param name="content"></param>
         </member>
         <member name="P:Mvc5RQ.Formatters.XMLCustomFormatter.XSLTransform">
             <summary>
