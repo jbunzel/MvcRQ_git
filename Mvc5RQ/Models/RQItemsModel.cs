@@ -1512,7 +1512,10 @@ namespace Mvc5RQ.Models
                 if (res == null) 
                     throw new Exception();
                 else
+                {
+                    res.LoadLinkedData("Authors");
                     res._formatPreprocessor = this.formatParameter;
+                }
                 return res;
             }
             catch
@@ -1521,6 +1524,7 @@ namespace Mvc5RQ.Models
                 {
                     RQItem res = this.GetModel(GetQuery("$access$" + rqitemId, stateType, rqitemId), forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
 
+                    res.LoadLinkedData("Authors");
                     res._formatPreprocessor = this.formatParameter;
                     return res;
                 }
