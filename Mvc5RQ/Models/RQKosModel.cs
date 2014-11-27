@@ -48,6 +48,12 @@ namespace Mvc5RQ.Models
             RQKosSet.Load();
         }
 
+        public RQKosModel(string itemID, string serviceID, RQKosFormat.FormatEnum format)
+            :this(itemID, serviceID)
+        {
+            RQKosSet.FormatPreprocessor = new RQKosFormat(format);
+        }
+
         #endregion
 
         #region public methods
@@ -260,6 +266,12 @@ namespace Mvc5RQ.Models
     [XmlInclude(typeof(RQKosItemRQLD))]
     public class RQKosBranch : System.Collections.Generic.IEnumerable<RQKosItemTemplate>
     {
+        #region internal members
+
+        internal RQKosFormat _formatPreprocessor = null;
+
+        #endregion
+
         #region private members
 
         private SubjClassBranch classBranch;
@@ -283,6 +295,19 @@ namespace Mvc5RQ.Models
         #endregion
 
         #region public properties
+
+        [XmlIgnore]
+        public RQKosFormat FormatPreprocessor
+        {
+            get
+            {
+                return _formatPreprocessor;
+            }
+            set
+            {
+                _formatPreprocessor = value;
+            }
+        }
 
         public SubjClassBranch ClassBranch
         {
@@ -346,6 +371,13 @@ namespace Mvc5RQ.Models
             }
             else
                 this.classBranch = new SubjClassBranch(ref majClassID);
+        }
+
+        public RQKosBranch(string majClassID, string serviceId, RQKosFormat.FormatEnum format)
+            : this(majClassID, serviceId)
+        {
+            if (this._service == "rqld") 
+                this._formatPreprocessor = new RQKosFormat(format);
         }
 
         public RQKosBranch(IEnumerable<RQKosTransfer> newRQKosBranch)
@@ -904,4 +936,116 @@ namespace Mvc5RQ.Models
 
         #endregion
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class RQKosFormat
+    {
+        #region private members
+
+        FormatEnum _format = FormatEnum.undefined;
+        string _xmlTransformPath = null;
+        System.Xml.Xsl.XsltArgumentList _xslTransformArg = null;
+
+        #endregion
+
+        #region public members
+
+        public enum FormatEnum
+        {
+            rdf,
+            turtle,
+            n3,
+            undefined
+        }
+
+        #endregion
+
+        #region public properties
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public FormatEnum Format
+        {
+            get
+            {
+                return _format;
+            }
+            set
+            {
+                _format = value;
+            }
+        }
+
+        //public RQItemModelRepository Owner { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string XmlTransformPath
+        {
+            get
+            {
+                if (_xmlTransformPath == null) this.SetXslTransformFilePath();
+                return _xmlTransformPath;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public System.Xml.Xsl.XsltArgumentList XslTransformArg
+        {
+            get
+            {
+                if (_xmlTransformPath == null) this.SetXslTransformFilePath();
+                return _xslTransformArg;
+            }
+        }
+
+        #endregion
+
+        #region private methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private void SetXslTransformFilePath()
+        {
+            switch (_format)
+            {
+                case FormatEnum.n3:
+                    _xmlTransformPath = "";
+                    break;
+                case FormatEnum.rdf:
+                    _xmlTransformPath = HttpContext.Current.Server.MapPath("~/xslt/rqkos2rdf.xslt");
+                    break;
+                case FormatEnum.turtle:
+                    _xmlTransformPath = "";
+                    break;
+                default:
+                    _xmlTransformPath = "";
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region public constructors
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        public RQKosFormat(FormatEnum format)
+        {
+            this.Format = format;
+        }
+
+        #endregion
+    }
+
 }

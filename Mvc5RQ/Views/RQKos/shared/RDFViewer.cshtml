@@ -1,4 +1,4 @@
-﻿<script type="text/javascript">
+﻿<script language="JavaScript">
     function prepareForXmlCall() {
         $("#xmlViewer").val("Posting...");
         var url = $("#xmlUrl").val();
@@ -19,19 +19,22 @@
         var d = document.location.href.replace("rqkos/RQKosLD", "rqld/rqkos");
         $("#xmlUrl").val(d);
         $("#xmlPostUrl").text(d);
-        
+
         $.ajax({
+            beforeSend: function (req) {
+                req.setRequestHeader("Accept", "application/rdf+xml");
+            },
             url: d,
             type: "GET",
             data: null,
             dataType: "xml",
             contentType: "application/rdf+xml",
             success: function (data) {
-                debugger;
                 renderXml(data);
             },
             error: function (data) {
-                debugger;
+                var json = JSON.stringify(data);
+                $("#xmlViewer").val(json);
             }
         });
 
@@ -68,16 +71,17 @@
         });
     });
 </script>
-
-<hr />
-<span>Der XmlViewer zeigt die Rückgabe bei Aufruf dieser Web-Adresse mit akzeptierten Typen "text/xml" oder "application/xml" an.</span>
-<p>XML received from: <input id="xmlUrl" type="text" value="" size="50" /></p>
+<h4>RDF</h4>
+<p> If the RiQuest Linked Data Service had been invoked with accepted content header "text/rdf" or "application/rdf+xml" the following response would have been returned:</p>
 <textarea id="xmlViewer" name="code" class="javascript" cols="120" rows="10">
 
 </textarea>
 <br />
+<!--
+<p>XML received from: <input id="xmlUrl" type="text" value="" size="50" /></p>
 Post to:
 <span id="xmlPostUrl"></span>?<input type="text" id="xmlAdditionalQueryString" value="" size="10" />
 <input id="saveXml" type="button" value="Post" />
 <br />
 <input id="deleteXml" type="button" value="Delete" />
+-->

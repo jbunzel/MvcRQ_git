@@ -10,28 +10,70 @@ using Mvc5RQ.Helpers;
 
 namespace Mvc5RQ.Controllers
 {
-    //[Authorize]
     [RoutePrefix("rqld")]
     public class RQLDController : ApiController
     {
-        private string GetClientIp(HttpRequestMessage request)
-        {
-            //if (request.Properties.ContainsKey("MS_HttpContext"))
-            //{
-            //    return ((HttpContextWrapper)request.Properties["MS_HttpContext"]).Request.UserHostAddress;
-            //}
-            //else if (request.Properties.ContainsKey(RemoteEndpointMessageProperty.Name))
-            //{
-            //    RemoteEndpointMessageProperty prop;
-            //    prop = (RemoteEndpointMessageProperty)request.Properties[RemoteEndpointMessageProperty.Name];
-            //    return prop.Address;
-            //}
-            //else
-            //{
-            //    return null;
-            //}
+        #region private methods
 
-            return ((System.Web.HttpContextWrapper)Request.Properties["MS_HttpContext"]).Request.UserHostAddress;
+        private RQKosFormat.FormatEnum GetFormat()
+        {
+            System.Net.Http.Formatting.IContentNegotiator negotiator = this.Configuration.Services.GetContentNegotiator();
+            System.Net.Http.Formatting.ContentNegotiationResult result = negotiator.Negotiate(typeof(RQKosBranch), this.Request, this.Configuration.Formatters);
+            if (result != null)
+            {
+                RQKosFormat.FormatEnum format = RQKosFormat.FormatEnum.undefined;
+                    
+                switch (result.MediaType.MediaType)
+                {
+                    case "application/turtle":
+                        throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotAcceptable));
+                        //format = RQKosFormat.FormatEnum.turtle;
+                        //break;
+                    case "text/turtle":
+                        throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotAcceptable));
+                        //format = RQKosFormat.FormatEnum.turtle;
+                        //break;
+                    case "application/rdf+n3":
+                        throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotAcceptable));
+                        //format = RQKosFormat.FormatEnum.turtle;
+                        //break;
+                    case "text/rdf+n3":
+                        throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotAcceptable));
+                        //format = RQKosFormat.FormatEnum.turtle;
+                        //break;
+                    case "application/rdf+xml":
+                        format = RQKosFormat.FormatEnum.rdf;
+                        break;
+                    case "text/rdf":
+                        format = RQKosFormat.FormatEnum.rdf;
+                        break;
+                    default:
+                        throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotAcceptable));
+                        //format = RQKosFormat.FormatEnum.undefined;
+                        //break;
+                }
+                return format;
+            }
+            else
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotAcceptable));
+        }
+
+        #endregion 
+
+        #region public methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Route("rqkos")]
+        [HttpGet]
+        public RQKosBranch Get()
+        {
+            if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
+                throw new HttpResponseException(JsonErrorResponse.Redirect(Request.RequestUri.ToString().Replace("rqld/rqkos", "rqkos/RQKosLD/0")));
+            else
+                return new RQKosModel(null, "rqld", this.GetFormat()).RQKosSet;
         }
         
         /// <summary>
@@ -53,32 +95,9 @@ namespace Mvc5RQ.Controllers
             if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
                 throw new HttpResponseException(JsonErrorResponse.Redirect(Request.RequestUri.ToString().Replace("rqld/rqkos", "rqkos/RQKosLD")));
             else
-                return new RQKosModel(id, "rqld").RQKosSet;
-
+                return new RQKosModel(id, "rqld", this.GetFormat()).RQKosSet;
         }
 
-        //// GET api/values
-        //[Route("{dbname}")]
-        //[HttpGet]
-        //public IEnumerable<string> Get(string dbname)
-        //{
-        //    //if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
-        //    //    System.Web.HttpContext.Current.Response.Redirect("http://www.riquest.de/rqld/rqkos");
-        //    return new string[] { "rqld1", "rqld2" };
-        //}        // POST api/values
-        
-        //public void Post([FromBody]string value)
-        //{
-        //}
-
-        // PUT api/values/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        // DELETE api/values/5
-        //public void Delete(int id)
-        //{
-        //}
+        #endregion
     }
 }

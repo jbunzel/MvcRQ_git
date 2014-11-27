@@ -19,20 +19,103 @@ namespace Mvc5RQ.Formatters
     /// </summary>
     public class RDFCustomFormatter : XmlMediaTypeFormatter
     {
+        #region private members
+
+        private bool _isAsync = false;
+
+        Func<Type, bool> SupportedType = (type) =>
+        {
+            if (type == typeof(Mvc5RQ.Models.RQKosBranch))
+                return true;
+            else
+                return false;
+        };
+
+        #endregion
+
+        #region private methods
+
+        private Task GetWriteTask(Stream writeStream, Mvc5RQ.Models.RQKosBranch value)
+        {
+            return new Task(() =>
+                WriteRQKos(value, writeStream));
+        }
+
+        private void WriteRQKos(Mvc5RQ.Models.RQKosBranch rqKos, Stream writeStream)
+        {
+            if (rqKos != null)
+            {
+                var dSer = new XmlSerializer(typeof(Mvc5RQ.Models.RQKosBranch));
+
+                try
+                {
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                    var xTrf = new System.Xml.Xsl.XslCompiledTransform();
+                    var xSet = new System.Xml.Xsl.XsltSettings(enableDocumentFunction: true, enableScript: true);
+
+                    dSer.Serialize(ms, rqKos);
+                    //dSer.WriteObject(ms, rqKos);
+                    //TESTDATEI(EZEUGEN)
+                    //System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
+                    //ms.Seek(0, System.IO.SeekOrigin.Begin);
+                    //Doc.Load(ms);
+                    //Doc.Save("D:/MVCTest.xml");
+                    //ENDE TESTDATEI 
+                    System.IO.TextReader tr = new System.IO.StringReader(System.Text.Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
+                    xTrf.Load(rqKos.FormatPreprocessor.XmlTransformPath, xSet, new System.Xml.XmlUrlResolver());
+                    xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), rqKos.FormatPreprocessor.XslTransformArg, writeStream);
+                }
+                catch
+                {
+                    throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
+                }
+            }
+        }
+
+        #endregion
+
+        #region public properties
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsAsync
+        {
+            get { return _isAsync; }
+            set { _isAsync = value; }
+        }
+
         /// <summary>
         /// 
         /// </summary>
         public string XSLTransform { get; set; }
 
+        #endregion
+
+        #region public constructors
+
         /// <summary>
         /// 
         /// </summary>
         public RDFCustomFormatter()
+            : this(false)
+        { }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public RDFCustomFormatter(bool isAsync)
         {
-            SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/rdf"));
             SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/rdf+xml"));
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/rdf+xml"));
+            IsAsync = isAsync;
+            SupportedEncodings.Add(Encoding.UTF8); // new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
         }
-        
+
+        #endregion
+
+        #region public overrides
+
         /// <summary>
         /// 
         /// </summary>
@@ -50,10 +133,7 @@ namespace Mvc5RQ.Formatters
         /// <returns></returns>
         public override bool CanWriteType(Type type)
         {
-            if (type == typeof(Mvc5RQ.Models.RQKosBranch))
-                return true;
-            else
-                return false;
+            return SupportedType(type);
         }
 
         /// <summary>
@@ -67,74 +147,16 @@ namespace Mvc5RQ.Formatters
         /// <returns></returns>
         public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
         {
-            return Task.Factory.StartNew(() =>
-            {
-                XSLTransform = HttpContext.Current.Server.MapPath("~/xslt/RQKos2RDF.xslt");
-                WriteXML(value, writeStream, content);
-            });
+            Task writeTask;
+
+            writeTask = GetWriteTask(writeStream, (Mvc5RQ.Models.RQKosBranch)value);
+            if (_isAsync)
+                writeTask.Start();
+            else
+                writeTask.RunSynchronously();
+            return writeTask;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="writeStream"></param>
-        /// <param name="content"></param>
-        public void WriteXML(object value, Stream writeStream, HttpContent content)
-        {
-            if (value != null)
-            {
-                var dataType = value.GetType();
-                // OMAR: For generic types, use DataContractSerializer because 
-                // XMLSerializer cannot serialize generic interface lists or types.
-                if (dataType.IsGenericType || 
-                    dataType.GetCustomAttributes(typeof(DataContractAttribute), true).FirstOrDefault() != null)
-                {
-                    var dSer = new DataContractSerializer(dataType);
-
-                    if ((XSLTransform == null) || (XSLTransform.Length == 0))
-                        dSer.WriteObject(writeStream, value);
-                    else
-                    {
-                        System.IO.MemoryStream ms = new System.IO.MemoryStream();
-                        var xTrf = new System.Xml.Xsl.XslCompiledTransform();
-
-                        dSer.WriteObject(ms, value);
-                        //TESTDATEI(EZEUGEN)
-                        //System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
-                        //ms.Seek(0, System.IO.SeekOrigin.Begin);
-                        //Doc.Load(ms);
-                        //Doc.Save("D:/MVCTest.xml");
-                        //ENDE TESTDATEI 
-                        System.IO.TextReader tr = new System.IO.StringReader(Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
-                        xTrf.Load(XSLTransform);
-                        xTrf.Transform(new System.Xml.XmlTextReader(tr), null, writeStream);
-                    }
-                }
-                else
-                {
-                    var xSer = new XmlSerializer(dataType);
-
-                    if ((XSLTransform == null) || (XSLTransform.Length == 0))
-                        xSer.Serialize(writeStream, value);
-                    else
-                    {
-                        System.IO.MemoryStream ms = new System.IO.MemoryStream();
-                        var xTrf = new System.Xml.Xsl.XslCompiledTransform();
-
-                        xSer.Serialize(ms, value);
-                        //TESTDATEI(EZEUGEN)
-                        //System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
-                        //ms.Seek(0, System.IO.SeekOrigin.Begin);
-                        //Doc.Load(ms);
-                        //Doc.Save("D:/MVCTest.xml");
-                        //ENDE TESTDATEI 
-                        System.IO.TextReader tr = new System.IO.StringReader(Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position));
-                        xTrf.Load(XSLTransform);
-                        xTrf.Transform(new System.Xml.XPath.XPathDocument(tr), null, writeStream);
-                    }
-                }
-            }
-        }
+        #endregion
     }
 }

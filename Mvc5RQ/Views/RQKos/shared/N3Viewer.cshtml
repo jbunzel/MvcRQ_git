@@ -1,0 +1,84 @@
+﻿<script type="text/javascript">
+    function prepareForJsonCall() {
+        $("#n3Viewer").val("Posting...");
+        var url = $("#n3Url").val();
+        if (url.indexOf("?") < 0)
+            url += "?";
+        else
+            url += "&";
+        url += $("#n3AdditionalQueryString").val();
+        return url;
+    }
+
+    function renderJson(data) {
+        var json = JSON.stringify(data);
+        $("#n3Viewer").val(json);
+    }
+
+    $(document).ready(function () {
+        var d = document.location.href.replace("rqkos/RQKosLD", "rqld/rqkos");
+
+        $("#n3Url").val(d);
+        $("#n3PostUrl").text(d);
+        $.ajax({
+            beforeSend: function (req) {
+                req.setRequestHeader("Accept", "application/rdf+n3");
+            },
+            url: d,
+            type: "GET",
+            data: null,
+            dataType: "json",
+            contentType: "application/rdf+n3",
+            success: function (data) {
+                renderJson(data);
+            },
+            error: function (data) {
+                renderJson(data);
+            }
+        });
+
+        $("#saveN3").click(function () {
+            var json = $("#n3Viewer").val();
+            url = prepareForJsonCall();
+
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                data: json,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    renderJson(data);
+                }
+            });
+        });
+
+        $("#deleteN3").click(function () {
+            prepareForJsonCall();
+            $.ajax({
+                url: document.location.href,
+                type: 'DELETE',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    renderJson(data);
+                }
+            });
+        });
+    });
+</script>
+<h4>N3 Format</h4>
+<p> If the RiQuest Data Service had been invoked with accepted content header "text/rdf+n3" or "application/rdf+n3" the following response would have been returned:</p>
+<textarea id="n3Viewer" name="code" class="javascript" cols="120" rows="10">
+
+</textarea>
+<br />
+<!--
+<p>JSON received from: <input id="n3Url" type="text" value="" size="50" /></p>
+Post to:
+<span id="n3PostUrl"></span>?<input type="text" id="n3AdditionalQueryString" value="" size="10" />
+<input id="saveN3" type="button" value="Post" />
+<br />
+<input id="deleteN3" type="button" value="Delete" />
+-->

@@ -1322,6 +1322,11 @@
             
             </summary>
         </member>
+        <member name="M:Mvc5RQ.Formatters.RDFCustomFormatter.#ctor(System.Boolean)">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Mvc5RQ.Formatters.RDFCustomFormatter.CanReadType(System.Type)">
             <summary>
             
@@ -1347,13 +1352,10 @@
             <param name="transportContext"></param>
             <returns></returns>
         </member>
-        <member name="M:Mvc5RQ.Formatters.RDFCustomFormatter.WriteXML(System.Object,System.IO.Stream,System.Net.Http.HttpContent)">
+        <member name="P:Mvc5RQ.Formatters.RDFCustomFormatter.IsAsync">
             <summary>
             
             </summary>
-            <param name="value"></param>
-            <param name="writeStream"></param>
-            <param name="content"></param>
         </member>
         <member name="P:Mvc5RQ.Formatters.RDFCustomFormatter.XSLTransform">
             <summary>
@@ -1747,6 +1749,12 @@
             </summary>
             <param name="id"></param>
             <param name="verb"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQLDController.Get">
+            <summary>
+            
+            </summary>
             <returns></returns>
         </member>
         <member name="M:Mvc5RQ.Controllers.RQLDController.Get(System.String)">
@@ -2410,6 +2418,38 @@
         <member name="T:Mvc5RQ.Models.RQKosItemRQLD">
             <summary>
             Description of a single subject class in semantic web linked data variant
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Models.RQKosFormat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQKosFormat.SetXslTransformFilePath">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Models.RQKosFormat.#ctor(Mvc5RQ.Models.RQKosFormat.FormatEnum)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+        </member>
+        <member name="P:Mvc5RQ.Models.RQKosFormat.Format">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Models.RQKosFormat.XmlTransformPath">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Models.RQKosFormat.XslTransformArg">
+            <summary>
+            
             </summary>
         </member>
     </members>

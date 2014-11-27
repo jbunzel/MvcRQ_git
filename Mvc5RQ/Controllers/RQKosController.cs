@@ -17,7 +17,6 @@ namespace Mvc5RQ.Controllers
     /// </remarks>
     public class RQKosController : BaseController
     {
-
         #region private methods
 
         /// <summary>
@@ -114,7 +113,6 @@ namespace Mvc5RQ.Controllers
                 ViewBag.locPath = new RQLib.RQKos.Classifications.SubjClass(model.RQKosSet.GetItem(0)._class.ClassID, model.RQKosSet.GetItem(0)._class.ClassDataClient).ClassPath;
             }
             return View("ServRQKos", model.RQKosSet);
-            //return View("ServRQKos");
         }
 
         /// <summary>
