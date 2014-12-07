@@ -223,6 +223,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\LinkedDataCalls\Controllers\LinkedDataCallsController.cs" />
+    <Compile Include="Areas\LinkedDataCalls\Helpers\ILinkedDataService.cs" />
+    <Compile Include="Areas\LinkedDataCalls\Helpers\LinkedDataService.cs" />
+    <Compile Include="Areas\LinkedDataCalls\LinkedDataCallsAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\UserManagement\Models\AdminViewModel.cs" />
     <Compile Include="Areas\UserSettings\BundleConfig.cs" />
@@ -305,6 +309,7 @@
     </Content>
     <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Areas\LinkedDataCalls\Images\molecule-14x15.png" />
     <Content Include="Areas\UserSettings\Content\tablesorter-style.css" />
     <Content Include="Areas\UserManagement\Content\user-management-style.css" />
     <Content Include="Areas\UserManagement\Views\UserManagement\html\add-user-form.html" />
@@ -457,6 +462,7 @@
     <Content Include="Areas\UserManagement\Views\web.config" />
     <Content Include="Areas\UserManagement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserManagement\Index.cshtml" />
+    <Content Include="Areas\LinkedDataCalls\Views\Web.config" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -670,6 +676,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\DigitalObjects\Views\Shared\" />
+    <Folder Include="Areas\LinkedDataCalls\Models\" />
+    <Folder Include="Areas\LinkedDataCalls\Views\Shared\" />
     <Folder Include="Areas\UserManagement\Views\Shared\" />
     <Folder Include="Areas\UserSettings\Views\UserSettings\" />
     <Folder Include="Providers\" />

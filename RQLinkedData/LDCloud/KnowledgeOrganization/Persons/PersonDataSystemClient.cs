@@ -5,7 +5,6 @@ using System.Web;
 using System.Text.RegularExpressions;
 using RQLinkedData.LDCloud;
 
-
 namespace RQLinkedData.LDCloud.KnowledgeOrganization.Persons
 {
     /// <summary>
@@ -14,6 +13,8 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Persons
     public class PersonDataSystemClient
         : LinkedDataClient
     {
+        #region public members
+
         public enum PersonDataSystems
         {
             gnd,
@@ -24,6 +25,7 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Persons
         
         public enum PersonDataPredicates
         {
+            preferred_label,
             date_of_birth,
             place_of_birth,
             date_of_death,
@@ -39,6 +41,18 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Persons
             type,
             unknown,
         }
+
+        #endregion
+
+        #region public constructors
+
+        public PersonDataSystemClient()
+        {
+        }
+
+        #endregion
+
+        #region public static methods
 
         static public string GetURI(PersonDataSystems personDataSystem, string personCode)
         {
@@ -57,34 +71,14 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Persons
         
         static public string GetPredicateURI(PersonDataSystems personDataSystem, PersonDataPredicates predicate)
         {
-            switch (predicate)
+            switch (personDataSystem)
             {
-                case PersonDataPredicates.date_of_birth:
-                    return "http://d-nb.info/standards/elementset/gnd#dateOfBirth";
-                case PersonDataPredicates.date_of_death:
-                    return "http://d-nb.info/standards/elementset/gnd#dateOfDeath";
-                case PersonDataPredicates.familial_relationship:
-                    return "http://d-nb.info/standards/elementset/gnd#familialRelationship";
-                case PersonDataPredicates.gender:
-                    return "http://d-nb.info/standards/elementset/gnd#gender";
-                case PersonDataPredicates.geographic_area:
-                    return "http://d-nb.info/standards/elementset/gnd#geographicAreaCode";
-                case PersonDataPredicates.language:
-                    return "http://d-nb.info/standards/elementset/gnd#languageCode";
-                case PersonDataPredicates.license:
-                    return "";
-                case PersonDataPredicates.place_of_birth:
-                    return "http://d-nb.info/standards/elementset/gnd#placeOfBirth";
-                case PersonDataPredicates.place_of_death:
-                    return "http://d-nb.info/standards/elementset/gnd#placeOfDeath";
-                case PersonDataPredicates.profession_or_occupation:
-                    return "http://d-nb.info/standards/elementset/gnd#professionOrOccupation";
-                case PersonDataPredicates.subject_of_occupation:
-                    return "http://d-nb.info/standards/elementset/gnd#gndSubjectCategory";
-                case PersonDataPredicates.type:
-                    return "";
-                case PersonDataPredicates.version_of:
-                    return "";
+                case PersonDataSystems.gnd:
+                    return GndPersonDataSystemClient.GetPredicateURI(predicate);
+                case PersonDataSystems.rq:
+                    return RqPersonDataSystemClient.GetPredicateURI(predicate);
+                case PersonDataSystems.wikipedia:
+                    return null;
                 default:
                     return "";
             }
@@ -94,6 +88,8 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Persons
         {
             switch (predicate)
             {
+                case PersonDataPredicates.preferred_label:
+                    return "Bezeichnung:";
                 case PersonDataPredicates.date_of_birth:
                     return "Geburtsdatum";
                 case PersonDataPredicates.date_of_death:
@@ -125,30 +121,16 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Persons
             }
         }
 
-        static public PersonDataPredicates GetPredicate(string predicateURI)
+        static public PersonDataPredicates GetPredicate(PersonDataSystems personDataSystem, string predicateURI)
         {
-            switch (predicateURI)
+            switch (personDataSystem)
             {
-                case "http://d-nb.info/standards/elementset/gnd#dateOfBirth":
-                    return PersonDataPredicates.date_of_birth;
-                case "http://d-nb.info/standards/elementset/gnd#dateOfDeath":
-                    return PersonDataPredicates.date_of_death;
-                case "http://d-nb.info/standards/elementset/gnd#familialRelationship":
-                    return PersonDataPredicates.familial_relationship;
-                case "http://d-nb.info/standards/elementset/gnd#gender":
-                    return PersonDataPredicates.gender;
-                case "http://d-nb.info/standards/elementset/gnd#geographicAreaCode":
-                    return PersonDataPredicates.geographic_area;
-                case "http://d-nb.info/standards/elementset/gnd#languageCode":
-                    return PersonDataPredicates.language;
-                case "http://d-nb.info/standards/elementset/gnd#placeOfBirth":
-                    return PersonDataPredicates.place_of_birth;
-                case "http://d-nb.info/standards/elementset/gnd#placeOfDeath":
-                    return PersonDataPredicates.place_of_death;
-                case "http://d-nb.info/standards/elementset/gnd#professionOrOccupation":
-                    return PersonDataPredicates.profession_or_occupation;
-                case "http://d-nb.info/standards/elementset/gnd#gndSubjectCategory":
-                    return PersonDataPredicates.subject_of_occupation;
+                case PersonDataSystems.gnd:
+                    return GndPersonDataSystemClient.GetPredicate(predicateURI);
+                case PersonDataSystems.rq:
+                    return RqPersonDataSystemClient.GetPredicate(personDataSystem,predicateURI); //Methode in RqPersonDataSystemClient AUSBESSERN
+                case PersonDataSystems.wikipedia:
+                    return PersonDataPredicates.unknown;
                 default:
                     return PersonDataPredicates.unknown;
             }
@@ -169,8 +151,25 @@ namespace RQLinkedData.LDCloud.KnowledgeOrganization.Persons
             }
         }
 
-        public PersonDataSystemClient()
+        #endregion
+
+        #region public overridable methods
+
+        public virtual string GetPreferredLabel(string personID)
         {
+            return null;
         }
+
+        public virtual string[] GetPredicates(string personId)
+        {
+            return null;
+        }
+
+        public virtual Dictionary<string, string> GetPredicateObjects(string personId)
+        {
+            return null;
+        }
+
+        #endregion
     }
 }

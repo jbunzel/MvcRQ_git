@@ -42,52 +42,105 @@ function renderXmlList(data, domElementID) {
     $("#" + domElementID).transform({
         xmlstr: xml, 
         xsl: HostAdress() + "/xslt/ViewTransforms/RQI2SingleItemView.xslt", 
-        success: function(){$(".select-predicates").on("click", selectPredicates)}
+        //success: function(){$(".select-predicates").on("click", selectPredicates)}
     });
  }
 
-function selectPredicates(e) {
-    // hide any other select-database-dialog
-    $(".select-databases-dialog").remove();
-    var $clickedLink = $(this);
-    // ask server which external databases the user links to
-    $.post(HostAdress() + "/LinkedDataCalls/GetLinkedDataPredicates/" + $(e.target).attr("id"), {}, function (response) {
-        // on success do...
-        _myHelper.processServerResponse(response, function () {
-            //build select databases dialog
-            var $dlg = $("<div/>").addClass("select-predicates-dialog").hide();
-            var $predicateList = $("<ul />").addClass("predicate-list");
-            var predicateInfo = response.data;
+function selectPredicates(elementId, subjectId) {
+    var $clickedLink = $("#" + elementId);
 
-            for (var i in predicateInfo) {
-                var predicatename = predicateInfo[i].predicatename;
-                var cbxId = "cbx-" + predicatename;
-                //create a list item, checkbox and label for each external database
-                var $li = $("<li />");
-                var $cbx = $("<input type='checkbox' class='cbx-role' />").val(predicatename).attr("checked", predicateInfo[i].included).attr("id", cbxId);
-                var $label = $("<label />").text(predicatename).attr("for", cbxId);
-                // append checkbox and label to list item
-                $li.append($cbx).append($label).appendTo($predicateList);
-            }
-            //append database list to dialog
-            $dlg.append($predicateList);
-            $clickedLink.after($dlg);
-            $dlg.fadeIn();
-            //bind add or remove external database for the created checkboxes
-            $dlg.find(".cbx-role").change(function (e) {
-                e.stopPropagation();
-                
-                var data = {
-                    predicatename: $(this).val(),
-                    included: $(this).is(":checked")
-                };
+    // hide any other select-predicates-dialog
+    $(".select-predicates-dialog").remove();
+    // ask server about available linked data predicates
+    $.ajax({
+        beforeSend: function (req) {
+            req.setRequestHeader("Accept", "application/json");
+        },
+        url: HostAdress() + "/LinkedDataCalls/GetLinkedDataPredicates/" + subjectId,
+        type: "GET",
+        data: null,
+        dataType: "json",
+        success: function (response) {
+            _myHelper.processServerResponse(response, function () {
+                //build select databases dialog
+                var $dlg = $("<div/>").addClass("select-database-dialog").hide();
+                var $predicateList = $("<ul />").addClass("role-list");
+                var predicateInfo = response.data;
+
+                for (var i in predicateInfo) {
+                    var predicatename = predicateInfo[i].predicatename;
+                    var objectvalue = predicateInfo[i].objectvalue;
+                    var cbxId = "cbx-" + predicatename;
+                    //create a list item, checkbox and label for each external database
+                    var $li = $("<li />");
+                    var $cbx = $("<input type='checkbox' class='cbx-role' />").val(predicatename).attr("checked", predicateInfo[i].included).attr("id", cbxId);
+                    var $label = $("<label />").text(predicatename).attr("for", cbxId);
+                    var $value = $("<value />").text(objectvalue);
+                    // append checkbox and label to list item
+                    $li.append($cbx).append($label).append($value).appendTo($predicateList);
+                }
+                //append database list to dialog
+                $dlg.append($predicateList);
+                $clickedLink.after($dlg);
+                $dlg.fadeIn();
+                //bind add or remove external database for the created checkboxes
+                $dlg.find(".cbx-role").change(function (e) {
+                    e.stopPropagation();
+
+                    var data = {
+                        predicatename: $(this).val(),
+                        included: $(this).is(":checked")
+                    };
+                });
+                //hide select-database-dialog on document click but not on a click inside the dialog
+                $dlg.on("click", function (e) { e.stopPropagation() });
+                $(document).one("click", function (e) { $dlg.fadeOut() });
             });
-            //hide select-database-dialog on document click but not on a click inside the dialog
-            $dlg.on("click", function (e) { e.stopPropagation() });
-            $(document).one("click", function (e) { $dlg.fadeOut() });
-        });
+        },
+        error: function (xhr) {
+            _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
+        }
     });
-    return false;
+
+    //$.post(HostAdress() + "/LinkedDataCalls/GetLinkedDataPredicates/" + $(e.target).attr("id"), {}, function (response) {
+    //$.post(HostAdress() + "/LinkedDataCalls/GetLinkedDataPredicates/" + subjectId, {}, function (response) {
+    //    debugger;
+    //    // on success do...
+    //    _myHelper.processServerResponse(response, function () {
+    //        //build select databases dialog
+    //        var $dlg = $("<div/>").addClass("select-predicates-dialog").hide();
+    //        var $predicateList = $("<ul />").addClass("predicate-list");
+    //        var predicateInfo = response.data;
+
+    //        for (var i in predicateInfo) {
+    //            var predicatename = predicateInfo[i].predicatename;
+    //            var cbxId = "cbx-" + predicatename;
+    //            //create a list item, checkbox and label for each external database
+    //            var $li = $("<li />");
+    //            var $cbx = $("<input type='checkbox' class='cbx-role' />").val(predicatename).attr("checked", predicateInfo[i].included).attr("id", cbxId);
+    //            var $label = $("<label />").text(predicatename).attr("for", cbxId);
+    //            // append checkbox and label to list item
+    //            $li.append($cbx).append($label).appendTo($predicateList);
+    //        }
+    //        //append database list to dialog
+    //        $dlg.append($predicateList);
+    //        $clickedLink.after($dlg);
+    //        $dlg.fadeIn();
+    //        //bind add or remove external database for the created checkboxes
+    //        $dlg.find(".cbx-role").change(function (e) {
+    //            e.stopPropagation();
+                
+    //            var data = {
+    //                predicatename: $(this).val(),
+    //                included: $(this).is(":checked")
+    //            };
+    //        });
+    //        //hide select-database-dialog on document click but not on a click inside the dialog
+    //        $dlg.on("click", function (e) { e.stopPropagation() });
+    //        $(document).one("click", function (e) { $dlg.fadeOut() });
+    //    });
+    //});
+    //return false;
 }
 
 function renderFieldContent(data, domElementID) {
@@ -113,7 +166,7 @@ function getRQItem(docno, newDomElementID, oldDomElementID) {
                     renderXmlList(data, newDomElementID);
                 else {
                     renderHtml(data, newDomElementID);
-                    $(".select-predicates").on("click", selectPredicates);
+                    //$(".select-predicates").on("click", selectPredicates);
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {

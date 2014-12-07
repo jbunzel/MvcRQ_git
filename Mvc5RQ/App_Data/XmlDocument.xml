@@ -569,6 +569,23 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:Mvc5RQ.Areas.LinkedDataCalls.Controllers.LinkedDataCallsController.Initialize(System.Web.Routing.RequestContext)">
+            <summary>
+            Initialize controller and the LinkedData service
+            </summary>
+            <param name="requestContext">Current http request context</param>
+        </member>
+        <member name="M:Mvc5RQ.Areas.LinkedDataCalls.Controllers.LinkedDataCallsController.GetLinkedDataPredicates(System.String)">
+            <summary>
+            Returns the includeExternal user LinkedData
+            </summary>
+            <returns>includeExternal LinkedData</returns>
+        </member>
+        <member name="P:Mvc5RQ.Areas.LinkedDataCalls.Controllers.LinkedDataCallsController._LinkedDataService">
+            <summary>
+            The LinkedData service which should be used for any provider interaction
+            </summary>
+        </member>
         <member name="T:Mvc5RQ.Controllers.BaseController">
             <summary>
             

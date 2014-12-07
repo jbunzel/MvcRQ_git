@@ -27,7 +27,7 @@ Namespace RQKos.Persons
 
             If Me.IsLinkedDataEnabled() Then
                 CType(Me.LDGraph, RQPersonGraph).Load(uri)
-                'thePerson.PersonName = CType(Me.LDGraph, RQPersonGraph).GetPrefName(thePerson)
+                'CType(Me.LDGraph, RQPersonGraph).GetPrefName(thePerson)
             End If
         End Sub
 
