@@ -1559,7 +1559,8 @@ namespace Mvc5RQ.Models
                     throw new Exception();
                 else
                 {
-                    res.LoadLinkedData("Authors");
+                    //res.LoadLinkedData("Classification"); disabled because no RVK linked data availale; try with DDC.
+                    //res.LoadLinkedData("Authors"); //disabled because author linked data should be triggered by deliberate user click.
                     res._formatPreprocessor = this.formatParameter;
                 }
                 return res;
@@ -1570,7 +1571,8 @@ namespace Mvc5RQ.Models
                 {
                     RQItem res = this.GetModel(GetQuery("$access$" + rqitemId, stateType, rqitemId), forEdit).RQItems.FirstOrDefault(p => p.DocNo == rqitemId);
 
-                    res.LoadLinkedData("Authors");
+                    //res.LoadLinkedData("Classification"); disabled because no RVK linked data availale; try with DDC.
+                    //res.LoadLinkedData("Authors"); //disabled because author linked data should be triggered by deliberate user click.
                     res._formatPreprocessor = this.formatParameter;
                     return res;
                 }

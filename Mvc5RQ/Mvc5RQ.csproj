@@ -234,6 +234,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\LinkedDataCalls\Controllers\LinkedDataCallsController.cs" />
+    <Compile Include="Areas\LinkedDataCalls\Helpers\ILinkedDataService.cs" />
+    <Compile Include="Areas\LinkedDataCalls\Helpers\LinkedDataService.cs" />
+    <Compile Include="Areas\LinkedDataCalls\LinkedDataCallsAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\UserManagement\Models\AdminViewModel.cs" />
     <Compile Include="Areas\UserSettings\BundleConfig.cs" />
@@ -345,6 +349,7 @@
     <Content Include="Areas\DigitalObjects\Views\Shared\html\item_viewer_bib_info.html" />
     <Content Include="Areas\DigitalObjects\Views\Shared\html\video_player.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Areas\LinkedDataCalls\Images\molecule-14x15.png" />
     <Content Include="Areas\UserSettings\Content\tablesorter-style.css" />
     <Content Include="Areas\UserManagement\Content\user-management-style.css" />
     <Content Include="Areas\UserManagement\Views\UserManagement\html\add-user-form.html" />
@@ -497,11 +502,15 @@
     <Content Include="Areas\UserManagement\Views\web.config" />
     <Content Include="Areas\UserManagement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserManagement\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Areas\DigitalObjects\Views\Viewer\AudioPlayer.cshtml" />
     <Content Include="Areas\DigitalObjects\Views\Viewer\Index.cshtml" />
     <Content Include="Areas\DigitalObjects\Views\Viewer\VideoPlayer.cshtml" />
     <Content Include="Areas\DigitalObjects\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\DigitalObjects\Views\_ViewStart.cshtml" />
+=======
+    <Content Include="Areas\LinkedDataCalls\Views\Web.config" />
+>>>>>>> ccfece5fa0fbbb0424e6ce44fa10416b58d5b7f2
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -714,6 +723,12 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Folder Include="Areas\DigitalObjects\Views\Shared\" />
+    <Folder Include="Areas\LinkedDataCalls\Models\" />
+    <Folder Include="Areas\LinkedDataCalls\Views\Shared\" />
+>>>>>>> ccfece5fa0fbbb0424e6ce44fa10416b58d5b7f2
     <Folder Include="Areas\UserManagement\Views\Shared\" />
     <Folder Include="Areas\UserSettings\Views\UserSettings\" />
     <Folder Include="Providers\" />

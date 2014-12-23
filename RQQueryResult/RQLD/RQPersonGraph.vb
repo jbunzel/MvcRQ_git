@@ -1,4 +1,5 @@
-﻿Imports RQLib.RQKos.Persons
+﻿Imports System.Collections.Generic
+Imports RQLib.RQKos.Persons
 Imports RQLinkedData.LDCloud.KnowledgeOrganization.Persons
 
 Namespace RQLD
@@ -59,15 +60,20 @@ Namespace RQLD
         End Function
 
 
-        Public Function GetPrefName(ByVal thePerson As Person) As Person.PersonName
-            'Return CType(Me._ldClient, ClassificationSystemClient).GetPreferredLabel(theClass.ClassCode)
-            Return Nothing
+        Public Function GetPrefName(ByVal thePerson As Person) As String
+            Return CType(Me._ldClient, GndPersonDataSystemClient).GetPreferredLabel(thePerson.PersonID)
         End Function
 
 
         Public Function GetPredicates(ByVal personID As String) As String()
             Return CType(Me._ldClient, GndPersonDataSystemClient).GetPredicates(personID)
         End Function
+
+
+        Public Function GetPredicateObjects(ByVal personID As String) As Dictionary(Of String, String)
+            Return CType(Me._ldClient, GndPersonDataSystemClient).GetPredicateObjects(personID)
+        End Function
+
 
 #End Region
 

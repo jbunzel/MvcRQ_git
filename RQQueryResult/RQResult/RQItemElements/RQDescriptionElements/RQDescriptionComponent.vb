@@ -105,16 +105,16 @@ Namespace RQQueryResult.RQDescriptionElements
 
         <IgnoreDataMember()> _
         <Xml.Serialization.XmlIgnore()> _
-        Public ReadOnly Property RDFGraph() As RQClassificationGraph
+        Public ReadOnly Property RDFGraph() As RQLDGraph 'RQClassificationGraph(Me)
             Get
                 Try
                     If Not IsNothing(Me.DataClient.LDGraph) Then
                         Return Me.DataClient.LDGraph
                     Else
-                        Return New RQClassificationGraph(Me)
+                        Return New RQLDGraph() 'RQClassificationGraph(Me)
                     End If
                 Catch ex As ArgumentNullException
-                    Return New RQClassificationGraph(Me)
+                    Return New RQLDGraph() 'RQClassificationGraph(Me)
                 End Try
             End Get
         End Property

@@ -28,8 +28,12 @@
 03.051			Implement import of PDF document directories (with automatic title recognition).
 03.052          Implement data entry of hierarchical digital audio objects. 
 
-03.06		Semantic web interface									
-03.061			Import person data from semantic web (partially implemented for Brecht, Kalendergeschichten).	
+03.06		Semantic web interface																							begonnen: 141204	erledigt:	
+03.061			Import person data from semantic web (partially implemented for Stendhal, Rot & Schwarz).					begonnen: 141204	erledigt: 141207
+03.062			Design information po-pup for person-data from semantic web.
+03.063			Implement input- & edit-features for LoD-identifiers (person, keywords, work enttities).
+03.064			Make Lod-identifiers automatically available to all identical entities.
+03.065          Design information pop-ups for all semantic web enabled entities.
 
 03.07		Lokalisation
 03.071			Lokalize user authorization modules (attributes in AccountModels.cs).
@@ -54,6 +58,8 @@
 03.116			Migrate RQKos controller PUT																				begonnen: 141122	erledigt: 141123
 03.117			Migrate UserManager																							begonnen: 141028	erledigt: 141102
 03.118			Migrate patron authorization																				begonnen: 141107	erledigt: 141109
+
+03.12		Database migration
 
 03.90		Bugs
 03.9001			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.

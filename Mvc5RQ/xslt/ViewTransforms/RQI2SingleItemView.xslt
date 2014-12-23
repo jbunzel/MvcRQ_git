@@ -415,6 +415,7 @@
     <xsl:variable name="ID">
       <xsl:value-of select="generate-id()"/>
     </xsl:variable>
+    
     <xsl:element name="span">
       <xsl:element name="a">
         <xsl:attribute name="href">
@@ -424,20 +425,21 @@
           <xsl:text>_blank</xsl:text>
         </xsl:attribute>
         <xsl:attribute name="title">
-          <xsl:value-of select="'Die Beschreibung dieser Klasse anzeigen.'"/>
+          <xsl:value-of select="'Normdatensatz zu dieser Person anzeigen.'"/>
         </xsl:attribute>
         <xsl:value-of select="concat(bb:PersonalName, '; ')"/>
       </xsl:element>
-      <xsl:value-of select="' - '"/>
-      <xsl:value-of select="'('"/>
       <xsl:element name="span">
         <xsl:attribute name="id">
           <xsl:value-of select="$ID"/>
         </xsl:attribute>
         <xsl:element name="a">
           <xsl:attribute name="href">
-            <!--<xsl:value-of
-              select="concat('javascript:selectPredicates(null, &quot;',bb:PersonCode,'&quot;)')" />-->
+            <xsl:text>javascript:selectPredicates('</xsl:text>
+            <xsl:value-of select ="$ID"/>
+            <xsl:text>', '</xsl:text>
+            <xsl:value-of select="bb:PersonCode" />
+            <xsl:text>')</xsl:text>
           </xsl:attribute>
           <xsl:attribute name="id">
             <xsl:value-of select ="bb:PersonCode" />
@@ -445,14 +447,16 @@
           <xsl:attribute name="class">
             <xsl:value-of select ="'select-predicates'" />
           </xsl:attribute>
-          <xsl:attribute name="title">
-            <xsl:value-of select="'Bezeichnung der Person suchen'"/>
-          </xsl:attribute>
-          <xsl:value-of select="'LD-Prädikate...'"/>
+          <img>
+            <xsl:attribute name="title">
+              <xsl:value-of select="'Linked Data zu dieser Person aufrufen.'"/>
+            </xsl:attribute>
+            <xsl:attribute name="src">
+              <xsl:value-of select="concat($ApplPath,'/Areas/LinkedDataCalls/Images/molecule-14x15.png')" />
+            </xsl:attribute>
+          </img>
         </xsl:element>
       </xsl:element>
-      <xsl:value-of select="')'"/>
-      <xsl:value-of select="'; '"/>
     </xsl:element>
   </xsl:template>
 
