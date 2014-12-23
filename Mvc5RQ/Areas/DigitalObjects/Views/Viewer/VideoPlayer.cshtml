@@ -1,0 +1,16 @@
+﻿@model Mvc5RQ.Areas.DigitalObjects.Models.VideoModel
+@*css*@
+<link href="@Url.Content("~/areas/digitalobjects/content/pink.flag/jplayer.pink.flag.css")" rel="stylesheet" type="text/css" />  
+@*javascript*@
+<script src="@Url.Content("~/areas/digitalobjects/Scripts/jquery.jplayer.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/areas/digitalobjects/Scripts/jquery_video_player.js")" type="text/javascript"></script>
+@*@Mvc5RQ.Areas.DigitalObjects.BundleConfig.VideoPlayerJavascript()*@
+@{
+    ViewBag.Title = "RiQuest | Video Player";
+}
+<script type="text/javascript">
+    var docNo = @Html.Raw(Json.Encode(@ViewBag.DocNo));
+    var docAdr = @Html.Raw(Json.Encode(@ViewBag.DocAdr));
+</script>
+@*html markup*@
+@Mvc5RQ.Areas.DigitalObjects.BundleConfig.VideoPlayerHtml()

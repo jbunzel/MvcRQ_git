@@ -1,4 +1,4 @@
-03.00	Version 0.3																											begonnen: 
+03.00	Version 0.3																											begonnen: 140914	erledigt:  
 
 03.01		Result list
 03.011			Synchronize shelf sort order with classification tree.
@@ -20,7 +20,7 @@
 03.041			Display actual track title for audio & video.
 03.042			Add remote access & access control for digital audios.										
 03.043			Add remote access & access control for digital videos.
-03.044			Move ItemViewer code to digital objects area.
+03.044			Move ItemViewer code to digital objects area.																begonnen: 141222	erledigt: 141223
 03.045			Add viewer for still images.
 03.049			Convert DVD videos to HTML5 video formats.							
 

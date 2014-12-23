@@ -10,6 +10,15 @@ namespace Mvc5RQ.Helpers
 {
     public class AccessRightsResolver
     {
+        public static string GetUpmostPrivilege()
+        {
+            string[] roles = { "admin", "patron", "partner", "guest" };
+
+            foreach (string role in roles)
+                if (HttpContext.Current.User.IsInRole(role)) return role;
+            return "";
+        }
+
         public static string DecodeAccessRights(string code)
         {
             //Access rights (coded syntax) NOTE: FieldLength = 50

@@ -1,0 +1,23 @@
+﻿@model Mvc5RQ.Areas.DigitalObjects.Models.AudioModel
+@*css*@
+<link href="@Url.Content("~/areas/digitalobjects/content/blue.monday/jplayer.blue.monday.css")" rel="stylesheet" type="text/css" />  
+@*javascript*@
+<script src="@Url.Content("~/areas/digitalobjects/Scripts/jquery.jplayer.min.js")" type="text/javascript"></script>
+@Mvc5RQ.Areas.DigitalObjects.BundleConfig.AudioPlayerJavascript()@*required - user interface javascript code including tablesorter, pager and user interface code*@
+@{
+    ViewBag.Title = "RiQuest | Audio Player";
+}
+<script type="text/javascript">
+    var docNo = @Html.Raw(Json.Encode(@ViewBag.DocNo));
+    var docAdr = @Html.Raw(Json.Encode(@ViewBag.DocAdr));
+    var playList = @Html.Raw(Json.Encode(Model.PlayList.Tracks));
+</script>
+@*html markup*@
+@{
+    if (ViewBag.DocAdr == "PLAYLIST") {
+        @Mvc5RQ.Areas.DigitalObjects.BundleConfig.AudioPlaylistHtml();
+    }
+    else {
+        @Mvc5RQ.Areas.DigitalObjects.BundleConfig.AudioPlayerHtml();
+    }
+}

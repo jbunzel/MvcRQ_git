@@ -23,9 +23,15 @@ namespace Mvc5RQ.Areas.DigitalObjects
         {
             context.MapRoute(
                 "DigitalObjects_default",
-                "DigitalObjects/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "DigitalObjects/{rqitemId}",
+                new { area = "DigitalObjects", controller = "Viewer", action = "Index", rqitemId = UrlParameter.Optional }
             );
+            
+            //context.MapRoute(
+            //    "DigitalObjects_default",
+            //    "DigitalObjects/{controller}/{action}/{id}",
+            //    new { action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }

@@ -15,7 +15,7 @@
     <AssemblyName>Mvc5RQ</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -192,9 +192,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\DigitalObjects\Controllers\ViewerController.cs" />
+    <Compile Include="Areas\DigitalObjects\Controllers\RQDOSController.cs" />
     <Compile Include="Areas\DigitalObjects\DigitalObjectsAreaRegistration.cs" />
     <Compile Include="Areas\DigitalObjects\Helpers\DigitalObjectHelpers.cs" />
+    <Compile Include="Areas\DigitalObjects\Helpers\AccessControl.cs" />
+    <Compile Include="Areas\DigitalObjects\BundleConfig.cs" />
+    <Compile Include="Areas\DigitalObjects\Models\AudioModel.cs" />
+    <Compile Include="Areas\DigitalObjects\Models\ViewerModel.cs" />
     <Compile Include="Areas\DigitalObjects\Models\TocViewModel.cs" />
+    <Compile Include="Areas\DigitalObjects\Models\VideoModel.cs" />
+    <Compile Include="Areas\DigitalObjects\ScriptPack.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScriptPack.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -304,6 +315,35 @@
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
     </Content>
     <Content Include="App_Data\XmlDocument.xml" />
+    <Content Include="Areas\DigitalObjects\Scripts\jplayer.playlist.js" />
+    <Content Include="Areas\DigitalObjects\Scripts\jplayer.playlist.min.js" />
+    <Content Include="Areas\DigitalObjects\Scripts\jquery.jplayer.inspector.js" />
+    <Content Include="Areas\DigitalObjects\Scripts\jquery.jplayer.js" />
+    <Content Include="Areas\DigitalObjects\Scripts\jquery.jplayer.min.js" />
+    <Content Include="Areas\DigitalObjects\Scripts\jquery.media.js" />
+    <Content Include="Areas\DigitalObjects\Scripts\jquery_audio_player.js" />
+    <Content Include="Areas\DigitalObjects\Scripts\jquery_item_viewer.js" />
+    <Content Include="Areas\DigitalObjects\Scripts\jquery_video_player.js" />
+    <Content Include="Areas\DigitalObjects\Content\blue.monday\jplayer.blue.monday.css" />
+    <Content Include="Areas\DigitalObjects\Content\blue.monday\jplayer.blue.monday.jpg" />
+    <Content Include="Areas\DigitalObjects\Content\blue.monday\jplayer.blue.monday.seeking.gif" />
+    <Content Include="Areas\DigitalObjects\Content\blue.monday\jplayer.blue.monday.video.play.png" />
+    <Content Include="Areas\DigitalObjects\Content\circle.skin\bgr.jpg" />
+    <Content Include="Areas\DigitalObjects\Content\circle.skin\buffer.png" />
+    <Content Include="Areas\DigitalObjects\Content\circle.skin\circle.player.css" />
+    <Content Include="Areas\DigitalObjects\Content\circle.skin\controls.jpg" />
+    <Content Include="Areas\DigitalObjects\Content\circle.skin\progress.png" />
+    <Content Include="Areas\DigitalObjects\Content\circle.skin\progress_sprite.jpg" />
+    <Content Include="Areas\DigitalObjects\Content\pink.flag\jplayer.pink.flag.css" />
+    <Content Include="Areas\DigitalObjects\Content\pink.flag\jplayer.pink.flag.jpg" />
+    <Content Include="Areas\DigitalObjects\Content\pink.flag\jplayer.pink.flag.seeking.gif" />
+    <Content Include="Areas\DigitalObjects\Content\pink.flag\jplayer.pink.flag.video.play.png" />
+    <Content Include="Areas\DigitalObjects\Content\specialstyle.css" />
+    <Content Include="Areas\DigitalObjects\Content\style.css" />
+    <Content Include="Areas\DigitalObjects\Views\Shared\html\audio_player.html" />
+    <Content Include="Areas\DigitalObjects\Views\Shared\html\audio_playlist.html" />
+    <Content Include="Areas\DigitalObjects\Views\Shared\html\item_viewer_bib_info.html" />
+    <Content Include="Areas\DigitalObjects\Views\Shared\html\video_player.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\UserSettings\Content\tablesorter-style.css" />
     <Content Include="Areas\UserManagement\Content\user-management-style.css" />
@@ -457,6 +497,11 @@
     <Content Include="Areas\UserManagement\Views\web.config" />
     <Content Include="Areas\UserManagement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserManagement\Index.cshtml" />
+    <Content Include="Areas\DigitalObjects\Views\Viewer\AudioPlayer.cshtml" />
+    <Content Include="Areas\DigitalObjects\Views\Viewer\Index.cshtml" />
+    <Content Include="Areas\DigitalObjects\Views\Viewer\VideoPlayer.cshtml" />
+    <Content Include="Areas\DigitalObjects\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\DigitalObjects\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -669,13 +714,16 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\DigitalObjects\Views\Shared\" />
     <Folder Include="Areas\UserManagement\Views\Shared\" />
     <Folder Include="Areas\UserSettings\Views\UserSettings\" />
     <Folder Include="Providers\" />
     <Folder Include="~db\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\DigitalObjects\ScriptPack.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\UserSettings\ScriptPack.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -704,7 +752,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50403</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50403/</IISUrl>
+          <IISUrl>http://localhost/Mvc5RQ</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

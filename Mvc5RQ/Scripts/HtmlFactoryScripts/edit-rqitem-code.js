@@ -229,7 +229,6 @@ function reset() {
     $("#AboutTime").val(saveData.AboutTime);
     $("#AboutPersons").val(saveData.AboutPersons);
     $("#ClassificationFieldContent").val(saveData.ClassificationFieldContent);
-    //$("#ClassificationFieldContent").val(saveData.Classification);
     $("#Abstract").val(saveData.Abstract);
     $("#Abstract").val(function () {
         if (saveData.Abstract.indexOf("$$TOC$$") != -1)
@@ -271,7 +270,6 @@ function displayTOC(strWithToc) {
     }
     $(".toc").css("display", "block");
     $("#tocAttach").prop("value", "detach object").attr("title", "Not yet implemented.").attr("disabled", true);
-    //$("#tocList").html($("#tocTemplate").render(tocItemList));
     $("#tocList").html(compiledTemplate.render(tocItemList));
     return strWithToc.substring(0,strWithToc.indexOf("$$TOC$$="));
 }
@@ -318,7 +316,6 @@ function attachTOC(e) {
         buttons: {
             OK: function () {
                 $(this).dialog("close");
-                debugger;
                 var adr = $("#ObjAdress").prop("value");
                 var type = $("form input[name=DigitalObjectType]:checked").val()
                 var url = HostAdress() + "/rqdos/" + type + "/" + adr;
@@ -340,19 +337,6 @@ function attachTOC(e) {
                         _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
                     }
                 });
-                //$.ajax({
-                //    url: url,
-                //    type: "GET",
-                //    dataType: "json",
-                //    success: function (data) {
-                //        fd.remove();
-                //        displayTOC(data.toc);
-                //    },
-                //    error: function (xhr) {
-                //        fd.remove();
-                //        _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
-                //    }
-                //});
             },
             Cancel: function () {
                 $(this).dialog("close");

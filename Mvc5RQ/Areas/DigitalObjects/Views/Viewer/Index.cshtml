@@ -1,0 +1,13 @@
+﻿@model Mvc5RQ.Areas.DigitalObjects.Models.ViewerModel
+@*javascript*@
+<script src="@Url.Content("~/areas/digitalobjects/Scripts/jquery_item_viewer.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/areas/digitalobjects/Scripts/jquery.media.js")" type="text/javascript"></script>
+@*@Mvc5RQ.Areas.DigitalObjects.BundleConfig.ItemViewerJavascript()*@ @*required - user interface javascript code including tablesorter, pager and user interface code*@
+@{
+    ViewBag.Title = "RiQuest | Document Viewer";
+}
+<script type="text/javascript">
+    var docNo = @Html.Raw(Json.Encode(@ViewBag.DocNo));
+    var docAdr = @Html.Raw(Json.Encode(@ViewBag.DocAdr));
+</script>
+@Mvc5RQ.Areas.DigitalObjects.BundleConfig.ItemBibInfo()

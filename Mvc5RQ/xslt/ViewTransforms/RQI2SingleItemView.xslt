@@ -62,7 +62,7 @@
 											<xsl:attribute name="href">
 												<xsl:call-template name="escape-apos">
                           <xsl:with-param name="string"
-                            select = "concat($ApplPath, 'ItemViewer/', $DocNo, '?itemAdress=MyDocs/', substring-after(.,'MyDoc='))"
+                            select = "concat($ApplPath, 'DigitalObjects/', $DocNo, '?digitalObjectAdress=MyDocs/', substring-after(.,'MyDoc='))"
                           />
                         </xsl:call-template>
 											</xsl:attribute>
@@ -83,7 +83,7 @@
 											<xsl:attribute name="href">
 												<xsl:call-template name="escape-apos">
                           <xsl:with-param name="string"
-                            select = "concat($ApplPath, 'ItemViewer/', $DocNo, '?itemAdress=MyMusic/', substring-after(.,'MyMusic='))"
+                            select = "concat($ApplPath, 'DigitalObjects/', $DocNo, '?digitalObjectAdress=MyMusic/', substring-after(.,'MyMusic='))"
                           />
                         </xsl:call-template>
 											</xsl:attribute>
@@ -104,7 +104,7 @@
                       <xsl:attribute name="href">
                         <xsl:call-template name="escape-apos">
                           <xsl:with-param name="string"
-                            select = "concat($ApplPath, 'ItemViewer/', $DocNo, '?itemAdress=MyVideo/', substring-after(.,'MyVideo='))"
+                            select = "concat($ApplPath, 'DigitalObjects/', $DocNo, '?digitalObjectAdress=MyVideo/', substring-after(.,'MyVideo='))"
                           />
                         </xsl:call-template>
                       </xsl:attribute>
@@ -705,7 +705,7 @@
                       </xsl:attribute>
                       <xsl:attribute name="href">
                         <xsl:call-template name = "escape-apos">
-                          <xsl:with-param name="string" select = "concat($ApplPath, 'ItemViewer/', $DocNo, '?itemAdress=MyDocs/', substring-after(.,'MyDoc='))" />
+                          <xsl:with-param name="string" select = "concat($ApplPath, 'DigitalObjects/', $DocNo, '?digitalObjectAdress=MyDocs/', substring-after(.,'MyDoc='))" />
                         </xsl:call-template>
                       </xsl:attribute>
                       <xsl:attribute name="target">
@@ -732,7 +732,7 @@
                       </xsl:attribute>
                       <xsl:attribute name="href">
                         <xsl:call-template name = "escape-apos">
-                          <xsl:with-param name="string" select = "concat($ApplPath, 'ItemViewer/', $DocNo, '?itemAdress=MyVideo/', substring-after(.,'MyVideo='))" />
+                          <xsl:with-param name="string" select = "concat($ApplPath, 'DigitalObjects/', $DocNo, '?digitalObjectAdress=MyVideo/', substring-after(.,'MyVideo='))" />
                         </xsl:call-template>
                       </xsl:attribute>
                       <xsl:attribute name="target">
@@ -761,7 +761,7 @@
                       </xsl:attribute>
                       <xsl:attribute name="href">
                         <xsl:call-template name = "escape-apos">
-                          <xsl:with-param name="string" select = "concat($ApplPath, 'ItemViewer/', $DocNo, '?itemAdress=MyMusic/', substring-after(.,'MyMusic='))" />
+                          <xsl:with-param name="string" select = "concat($ApplPath, 'DigitalObjects/', $DocNo, '?digitalObjectAdress=MyMusic/', substring-after(.,'MyMusic='))" />
                         </xsl:call-template>
                       </xsl:attribute>
                       <xsl:attribute name="target">

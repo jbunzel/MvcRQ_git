@@ -26,6 +26,35 @@
             </summary>
             <param name="config"></param>
         </member>
+        <member name="T:Mvc5RQ.Areas.DigitalObjects.Models.ViewerController">
+            <summary>
+            Controller Class for URLs designating ItemViewer objects
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Controllers.BaseController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.BaseController.ExecuteCore">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.BaseController.OnException(System.Web.Mvc.ExceptionContext)">
+            <summary>
+            
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.Models.ViewerController.Index(System.String,System.String)">
+            <summary>
+            Controller action answering GET http-requests for RQItems
+            </summary>
+            <returns>
+            Standard view
+            </returns>
+        </member>
         <member name="T:Mvc5RQ.Areas.DigitalObjects.Controllers.RQDOSController">
             <summary>
             Riquest Digital Object Service
@@ -80,6 +109,129 @@
             Updated values in tocString and signatureStr.
             </returns>
         </member>
+        <member name="T:Mvc5RQ.Areas.DigitalObjects.BundleConfig">
+            <summary>
+            Static Html Generator for building the user interface html, javascript and css code.
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.BundleConfig.ItemBibInfo">
+            <summary>
+            Generates html-code for bibliographic information area.
+            </summary>
+            <returns>Html-code for bibliographic information area.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.BundleConfig.VideoPlayerHtml">
+            <summary>
+            Generates html-code for JPlayer video player.
+            </summary>
+            <returns>Html-code for JPlayer video player.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.BundleConfig.AudioPlayerHtml">
+            <summary>
+            Generates html-code for JPlayer audio player.
+            </summary>
+            <returns>Html-code for JPlayer audio player.</returns>
+        </member>
+        <!-- Ungültiger XML-Kommentar wurde für den Member "M:Mvc5RQ.Areas.DigitalObjects.BundleConfig.AudioPlaylistHtml" ignoriert -->
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.BundleConfig.ItemViewerJavascript">
+            <summary>
+            Required: Builds three javascript blocks containing the tablesorter, pager plugin and the main ui/ajax javascript code.
+            </summary>
+            <returns>(required) Javascript code for generating the user interface.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.BundleConfig.VideoPlayerJavascript">
+            <summary>
+            Required: Builds three javascript blocks containing the tablesorter, pager plugin and the main ui/ajax javascript code.
+            </summary>
+            <returns>(required) Javascript code for generating the user interface.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.BundleConfig.AudioPlayerJavascript">
+            <summary>
+            Required: Builds three javascript blocks containing the tablesorter, pager plugin and the main ui/ajax javascript code.
+            </summary>
+            <returns>(required) Javascript code for generating the user interface.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.BundleConfig.VideoPlayerSkin">
+            <summary>
+            (optional) Builds a special styling css block. Could be used as starting point for custom styles. Optional, put in head section.
+            </summary>
+            <returns>(optional) A basic css style block for special ui elements.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.BundleConfig.AudioPlayerSkin">
+            <summary>
+            (optional) Builds a special styling css block. Could be used as starting point for custom styles. Optional, put in head section.
+            </summary>
+            <returns>(optional) A basic css style block for special ui elements.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.BundleConfig.SpecialCss">
+            <summary>
+            (optional) Builds a special styling css block. Could be used as starting point for custom styles. Optional, put in head section.
+            </summary>
+            <returns>(optional) A basic css style block for special ui elements.</returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.BundleConfig.StyleCss">
+            <summary>
+            (recommended) Builds a basic layout style css block. It mainly contains css for the info-message overlay and some form styling.
+            </summary>
+            <returns>(recommended) Basic style css block</returns>
+        </member>
+        <member name="T:Mvc5RQ.Areas.DigitalObjects.Models.AudioModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Mvc5RQ.Areas.DigitalObjects.Models.ViewerModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.Models.ViewerModel.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="itemId"></param>
+            <param name="objectAdr"></param>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.Models.ViewerModel.Count">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.Models.ViewerModel.BibInfo">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.Models.ViewerModel.viewItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.Models.ViewerModel.digitalObjectAdress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.Models.AudioModel.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="rqitemId"></param>
+            <param name="M3uURI"></param>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.Models.AudioModel.Count">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.Models.AudioModel.PlayList">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Mvc5RQ.Areas.DigitalObjects.Models.TocViewModel">
             <summary>
             
@@ -91,6 +243,332 @@
             </summary>
             <param name="objectName"></param>
             <param name="objectType"></param>
+        </member>
+        <member name="T:Mvc5RQ.Areas.DigitalObjects.Models.VideoModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mvc5RQ.Areas.DigitalObjects.Models.VideoModel.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="rqitemId"></param>
+            <param name="URI"></param>
+        </member>
+        <member name="T:Mvc5RQ.Areas.DigitalObjects.ScriptPack">
+            <summary>
+              Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.ResourceManager">
+            <summary>
+              Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.Culture">
+            <summary>
+              Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+              Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.audio_player">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die &lt;div id=&quot;viewer_area&quot;&gt;
+            &lt;div id=&quot;jquery_jplayer_1&quot; class=&quot;jp-jplayer&quot;&gt;&lt;/div&gt;
+             &lt;div id=&quot;jp_container_1&quot; class=&quot;jp-audio&quot;&gt;
+               &lt;div class=&quot;jp-type-single&quot;&gt;
+                 &lt;div class=&quot;jp-gui jp-interface&quot;&gt;
+                   &lt;ul class=&quot;jp-controls&quot;&gt;
+                     &lt;li&gt;&lt;a href=&quot;javascript:;&quot; class=&quot;jp-play&quot; tabindex=&quot;1&quot;&gt;play&lt;/a&gt;&lt;/li&gt;
+                     &lt;li&gt;&lt;a href=&quot;javascript:;&quot; class=&quot;jp-pause&quot; tabindex=&quot;1&quot;&gt;pause&lt;/a&gt;&lt;/li&gt;
+                     &lt;li&gt;&lt;a href=&quot;javascript:;&quot; class=&quot;jp-stop&quot; tabindex=&quot;1&quot;&gt;stop&lt;/a&gt;&lt;/li&gt;
+                     &lt;li&gt;&lt;a href=&quot;javascript [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.audio_playlist">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die &lt;div id=&quot;viewer_area&quot;&gt;
+            &lt;div id=&quot;jquery_jplayer_1&quot; class=&quot;jp-jplayer&quot;&gt;&lt;/div&gt;
+             &lt;div id=&quot;jp_container_1&quot; class=&quot;jp-audio&quot;&gt;
+               &lt;div class=&quot;jp-type-single&quot;&gt;
+                 &lt;div class=&quot;jp-gui jp-interface&quot;&gt;
+                   &lt;ul class=&quot;jp-controls&quot;&gt;
+                     &lt;li&gt;&lt;a href=&quot;javascript:;&quot; class=&quot;jp-play&quot; tabindex=&quot;1&quot;&gt;play&lt;/a&gt;&lt;/li&gt;
+                     &lt;li&gt;&lt;a href=&quot;javascript:;&quot; class=&quot;jp-pause&quot; tabindex=&quot;1&quot;&gt;pause&lt;/a&gt;&lt;/li&gt;
+                     &lt;li&gt;&lt;a href=&quot;javascript:;&quot; class=&quot;jp-stop&quot; tabindex=&quot;1&quot;&gt;stop&lt;/a&gt;&lt;/li&gt;
+                     &lt;li&gt;&lt;a href=&quot;javascript [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.item_viewer_bib_info">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die &lt;div id=&quot;viewer_area&quot;&gt;&lt;/div&gt;
+            ähnelt.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.jplayer_blue_monday">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die /*
+             * Skin for jPlayer Plugin (jQuery JavaScript Library)
+             * http://www.jplayer.org
+             *
+             * Skin Name: Blue Monday
+             *
+             * Copyright (c) 2010-2012 Happyworm Ltd
+             * Dual licensed under the MIT and GPL licenses.
+             *  - http://www.opensource.org/licenses/mit-license.php
+             *  - http://www.gnu.org/copyleft/gpl.html
+             *
+             * Author: Silvia Benvenuti
+             * Skin Version: 4.3 (jPlayer 2.2.0)
+             * Date: 19th November 2012
+             */
+            
+            div.jp-audio,
+            div.jp-audio-stream,
+            div.jp-video {
+            
+            	/* Edit the font-size to countera [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.jplayer_pink_flag">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die /*
+             * Skin for jPlayer Plugin (jQuery JavaScript Library)
+             * http://www.jplayer.org
+             *
+             * Skin Name: Pink Flag
+             *
+             * Copyright (c) 2012 Happyworm Ltd
+             * Dual licensed under the MIT and GPL licenses.
+             *  - http://www.opensource.org/licenses/mit-license.php
+             *  - http://www.gnu.org/copyleft/gpl.html
+             *
+             * Author: Silvia Benvenuti
+             * Skin Version: 1.2 (jPlayer 2.2.0)
+             * Date: 22nd October 2012
+             */
+            
+            div.jp-audio,
+            div.jp-audio-stream,
+            div.jp-video {
+            
+            	/* Edit the font-size to counteract inherited font sizing.
+            	  [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <!-- Ungültiger XML-Kommentar wurde für den Member "P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.jplayer_playlist" ignoriert -->
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.jplayer_playlist_min">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die /*
+             * Playlist Object for the jPlayer Plugin
+             * http://www.jplayer.org
+             *
+             * Copyright (c) 2009 - 2013 Happyworm Ltd
+             * Dual licensed under the MIT and GPL licenses.
+             *  - http://www.opensource.org/licenses/mit-license.php
+             *  - http://www.gnu.org/copyleft/gpl.html
+             *
+             * Author: Mark J Panaghiston
+             * Version: 2.3.0
+             * Date: 20th April 2013
+             *
+             * Requires:
+             *  - jQuery 1.7.0+
+             *  - jPlayer 2.3.0+
+             */
+            (function(b,f){jPlayerPlaylist=function(a,c,d){var e=this;this.current=0;this.removing=this.shuffled=this.loo [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.jquery_audio_player">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die $(function () {
+                getRQItem(docNo);
+            });
+            
+            function renderItemContent() {
+                if (docAdr != &quot;PLAYLIST&quot;) {
+                    $(&quot;#jquery_jplayer_1&quot;).jPlayer({
+                        ready: function () {
+                            $(&quot;.jp-title ul li&quot;).text(&quot;&quot;); //TODO: Track-Titel anzeigen
+                            $(this).jPlayer(&quot;setMedia&quot;, {
+                                mp3: docAdr
+                            }).jPlayer(&quot;play&quot;);
+                        },
+                        swfPath: &quot;/js&quot;,
+                        supplied: &quot;mp3&quot;,
+                        errorAlerts: false,
+                        warningAle [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.jquery_item_viewer">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die $(function () {
+                getRQItem(docNo);
+            });
+            
+            function renderItemContent() {
+                var w = $(&apos;#viewer_area&apos;).width();
+                var h = $(&apos;#viewport&apos;).height();
+            
+                $(&apos;#viewer_area&apos;).media({
+                    width: w,
+                    height: h,
+                    autoplay: true,
+                    src: docAdr,
+                    attrs: { attr1: &apos;attrValue1&apos;, attr2: &apos;attrValue2&apos; },  // object/embed attrs 
+                    params: { param1: &apos;&apos;, param2: &apos;paramValue2&apos; }, // object params/embed attrs 
+                    caption: false // supress caption text 
+                }, function [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <!-- Ungültiger XML-Kommentar wurde für den Member "P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.jquery_jplayer" ignoriert -->
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.jquery_jplayer_inspector">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die /*
+            * jPlayerInspector Plugin for jPlayer Plugin for jQuery JavaScript Library
+            * http://www.jplayer.org
+            *
+            * Copyright (c) 2009 - 2013 Happyworm Ltd
+            * Dual licensed under the MIT and GPL licenses.
+            *  - http://www.opensource.org/licenses/mit-license.php
+            *  - http://www.gnu.org/copyleft/gpl.html
+            *
+            * Author: Mark J Panaghiston
+            * Version: 1.0.4
+            * Date: 29th January 2013
+            *
+            * For use with jPlayer Version: 2.2.19+
+            *
+            * Note: Declare inspector instances after jPlayer instances. ie., Other [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.jquery_jplayer_min">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die /*
+             * jPlayer Plugin for jQuery JavaScript Library
+             * http://www.jplayer.org
+             *
+             * Copyright (c) 2009 - 2013 Happyworm Ltd
+             * Dual licensed under the MIT and GPL licenses.
+             *  - http://www.opensource.org/licenses/mit-license.php
+             *  - http://www.gnu.org/copyleft/gpl.html
+             *
+             * Author: Mark J Panaghiston
+             * Version: 2.3.0
+             * Date: 20th April 2013
+             */
+            (function(b,f){&quot;function&quot;===typeof define&amp;&amp;define.amd?define([&quot;jquery&quot;],f):f(b.jQuery)})(this,function(b,f){b.fn.jPlayer=function(a){var c=&quot;string&quot;===typeof a,d [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.jquery_media">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die /*
+            * jQuery Media Plugin for converting elements into rich media content.
+            *
+            * Examples and documentation at: http://malsup.com/jquery/media/
+            * Copyright (c) 2007-2010 M. Alsup
+            * Dual licensed under the MIT and GPL licenses:
+            * http://www.opensource.org/licenses/mit-license.php
+            * http://www.gnu.org/licenses/gpl.html
+            *
+            * @author: M. Alsup
+            * @version: 0.96 (23-MAR-2011)
+            * @requires jQuery v1.1.2 or later
+            * $Id: jquery.media.js 2460 2007-07-23 02:53:15Z malsup $
+            *
+            * Supported Media Pl [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.jquery_video_player">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die $(function () {
+                getRQItem(docNo);
+            });
+            
+            function renderItemContent() {
+                $(&quot;#jquery_jplayer_1&quot;).jPlayer({
+                    ready: function () {
+                        $(this).jPlayer(&quot;setMedia&quot;, {
+                            m4v: docAdr,
+                            ogv: &quot;http://www.jplayer.org/video/ogv/Big_Buck_Bunny_Trailer_480x270.ogv&quot;,
+                            poster: &quot;http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png&quot;
+                        }).jPlayer(&quot;play&quot;);
+                    },
+                    swfPath: &quot;/areas/itemviewer/scripts&quot;,
+                    s [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.specialstyle">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die /* tables */
+            .simple-user-table {
+            	background-color: #CDCDCD;
+            	margin:10px 0pt 15px;
+            	width: 100%;
+            	text-align: left;
+            }
+            .simple-user-table thead tr th, .simple-user-table tfoot tr th {
+            	background-color: #e6EEEE !important;
+            	border: 1px solid #FFF;
+            	padding: 4px;
+            }
+            .simple-user-table thead tr .header {
+            	cursor: pointer;
+            }
+            .simple-user-table tbody td {
+            	
+            	padding: 4px;
+            	background-color: #FFF;
+            	vertical-align: top;
+            }
+            .simple-user-table tbody tr.odd td {
+            	background-color:#F0F0F6;
+            }
+            .simple-user-table thead t [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.style">
+             <summary>
+               Sucht eine lokalisierte Zeichenfolge, die #viewer_area {
+                min-width: 95%;
+                margin: 5px 5px 5px 5px;
+            }
+            
+            .bibinfo {
+                font-family: &apos;Courier New&apos;;
+                line-height: 1.5em;
+                margin: 10px 10px 10px 10px;
+            }
+            
+            #viewport .pure-u-2-3 {
+                min-height: 100%;
+            }
+            
+            .jp-audio {
+                display: table;
+                margin: 0 auto;
+            }
+            
+            
+            
+             ähnelt.
+             </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DigitalObjects.ScriptPack.video_player">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die &lt;div id=&quot;viewer_area&quot;&gt;
+               &lt;div id=&quot;jp_container_1&quot; class=&quot;jp-video jp-video-360p&quot;&gt;
+                   &lt;div class=&quot;jp-type-single&quot;&gt;
+                       &lt;div id=&quot;jquery_jplayer_1&quot; class=&quot;jp-jplayer&quot;&gt;&lt;/div&gt;
+                       &lt;div class=&quot;jp-gui&quot;&gt;
+                           &lt;div class=&quot;jp-video-play&quot;&gt;
+                               &lt;a href=&quot;javascript:;&quot; class=&quot;jp-video-play-icon&quot; tabindex=&quot;1&quot;&gt;play&lt;/a&gt;
+                           &lt;/div&gt;
+                           &lt;div class=&quot;jp-interface&quot;&gt;
+                               &lt;div class=&quot;jp-progress&quot;&gt;
+                                   &lt;div class= [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+            </summary>
         </member>
         <member name="M:Mvc5RQ.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
@@ -568,22 +1046,6 @@
             Initializes a new instance of the <see cref="T:Mvc5RQ.Areas.HelpPage.XmlDocumentationProvider"/> class.
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
-        </member>
-        <member name="T:Mvc5RQ.Controllers.BaseController">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Mvc5RQ.Controllers.BaseController.ExecuteCore">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Mvc5RQ.Controllers.BaseController.OnException(System.Web.Mvc.ExceptionContext)">
-            <summary>
-            
-            </summary>
-            <param name="filterContext"></param>
         </member>
         <member name="M:Mvc5RQ.Areas.UserManagement.Controllers.RolesAdminController.GetAllRoles">
             <summary>
