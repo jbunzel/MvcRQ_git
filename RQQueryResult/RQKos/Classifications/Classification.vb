@@ -252,6 +252,23 @@ Namespace RQKos.Classifications
 
         <IgnoreDataMember()> _
         <Xml.Serialization.XmlIgnore()> _
+        Public ReadOnly Property Classification() As RQClassificationGraph
+            Get
+                Try
+                    If Not IsNothing(Me.DataClient.LDGraph) Then
+                        Return Me.DataClient.LDGraph
+                    Else
+                        Return New RQClassificationGraph(Me)
+                    End If
+                Catch ex As ArgumentNullException
+                    Return New RQClassificationGraph(Me)
+                End Try
+            End Get
+        End Property
+
+
+        <IgnoreDataMember()> _
+        <Xml.Serialization.XmlIgnore()> _
         Public Overrides Property NrOfRefLinks() As Integer
             Get
                 If Me._code <> "" And Me._intID < 0 Then Me.Read()
@@ -337,6 +354,7 @@ Namespace RQKos.Classifications
                 Me.DataClient = value
             End Set
         End Property
+
 
         <IgnoreDataMember()> _
         <Xml.Serialization.XmlIgnore()> _

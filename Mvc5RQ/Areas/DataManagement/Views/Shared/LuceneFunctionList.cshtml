@@ -1,0 +1,62 @@
+﻿<script type="text/javascript">
+    function lucNew() {
+        var url = HostAdress() + "/rqdm/lucene/new";
+        Post(url);
+    }
+
+    function lucDelete() {
+        var url = HostAdress() + "/rqdm/lucene/delete";
+        Post(url);
+    }
+
+    function lucUpdate() {
+        var url = HostAdress() + "/rqdm/lucene/update";
+        Post(url);
+    }
+
+    function lucOptimize() {
+        var url = HostAdress() + "/rqdm/lucene/optimize";
+        Post(url);
+    }
+
+    function Post(url) {
+        var fd = new ajaxLoadingIndicator("#html");
+
+        $.ajax({
+            beforeSend: function (req) {
+                req.setRequestHeader("Accept", "application/json");
+            },
+            url: url,
+            type: 'POST',
+            //dataType: 'json',
+            data: "", //json,
+            contentType: 'application/json; charset=utf-8',
+            success: function (data, textStatus, jqXHR) {
+                fd.remove();
+                var response = {
+                    isSuccess: true,
+                    message: data
+                }
+                _myHelper.processServerResponse(response, function () {
+                });
+            },
+            error: function (response) {
+                fd.remove();
+                _myHelper.processServerResponse(response, null, function () {
+                });
+            }
+        });
+    }
+</script> 
+<div class="rq-ajax-wait" style="display: none"></div>
+<ul class="standard-searches">
+    @if(ViewBag.HasAdminPermit == "true") {
+        <li>@Html.ActionLink(Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_reindex, "New", "Lucene", new { area = "DataManagement" }, new { title = Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_reindex_title, onClick="lucNew(); return false;"  })</li>
+        <li>@Html.ActionLink(Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_optimize, "Optimize", "Lucene", new {area = "DataManagement"}, new { title = Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_optimize_title, onClick="lucOptimize(); return false;" })</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink(Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_reindex, "New", "Lucene", new { area = "DataManagement" }, new { title = Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_reindex_title, disabled="true"  })</li>
+        <li>@Html.ActionLink(Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_optimize, "Optimize", "Lucene", new {area = "DataManagement"}, new { title = Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_lucene_optimize_title, disabled="true" })</li>
+    }        
+</ul>

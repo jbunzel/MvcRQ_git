@@ -913,7 +913,7 @@ namespace Mvc5RQ.Models
             get
             {
                 if ((this._class.ClassID != null) && (this._class.ClassID != "0"))
-                    return (RQLib.RQLD.RQClassificationGraph)this._class.RDFGraph;
+                    return this._class.Classification;
                 else
                     return null;
             }

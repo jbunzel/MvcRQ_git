@@ -115,6 +115,25 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;Article&gt;
+        ///	&lt;Title&gt;Haftungsausschluss&lt;/Title&gt;
+        ///	&lt;Sect1&gt;
+        ///		&lt;Para&gt;
+        ///			Die auf dieser Website zur Verfügung gestellten Informationen wurden nach bestem Wissen und Gewissen überprüft. 
+        ///			Eine Haftung, Garantie und/ oder Gewährleistung für die Aktualität, Richtigkeit und Vollständigkeit der zur Verfügung 
+        ///			gestellten Daten und Informationen wird jedoch ausdrücklich nicht übernommen.
+        ///		&lt;/Para&gt;
+        ///		&lt;Para&gt;
+        ///			Alle Informationen können ohne vorherige Ankündigung gelös [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        public static string disclaimer {
+            get {
+                return ResourceManager.GetString("disclaimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die You are not authorized to execute this function. ähnelt.
         /// </summary>
         public static string err_not_authorized {
@@ -138,6 +157,26 @@ namespace RQResources.Views.Shared {
         public static string error {
             get {
                 return ResourceManager.GetString("error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;FAQList&gt;
+        ///	&lt;FAQItem&gt;
+        ///		&lt;FAQQuestion&gt;
+        ///			What is a Digital Library?
+        ///		&lt;/FAQQuestion&gt;
+        ///		&lt;FAQAnswer&gt;
+        ///			A Digital Library is a focused collection of digital objects, including text, video, and audio, along with methods for access and retrieval, and for selection, organization and maintenance of the collection.&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;(citation from: How to build a digital library, by Ian H. Witten and David Bainbridge)
+        ///		&lt;/FAQAnswer&gt;
+        ///	&lt;/FAQItem&gt;
+        ///	&lt;FAQItem&gt;
+        ///		&lt;FAQ [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        public static string faq {
+            get {
+                return ResourceManager.GetString("faq", resourceCulture);
             }
         }
         
@@ -286,6 +325,27 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &lt;?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;?&gt;
+        ///&lt;Article&gt; 
+        ///  &lt;Title&gt;Privacy Statement &lt;/Title&gt;
+        ///  &lt;Sect1&gt; 
+        ///	 &lt;Title&gt;&lt;/Title&gt;
+        ///	 &lt;Para&gt;RiQuest is committed to protecting your privacy and developing
+        ///		technology that gives you the most powerful and safe online experience. This
+        ///		Statement of Privacy applies to the RiQuest Web site and governs data
+        ///		collection and usage. By using the RiQuest website, you consent to the data
+        ///		practices described in this statement.&lt;/Para&gt;
+        ///  &lt;/Sect1&gt;
+        ///  &lt;Sect1&gt;
+        ///	 &lt;Title&gt; C [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        public static string privacy {
+            get {
+                return ResourceManager.GetString("privacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Query Fields ähnelt.
         /// </summary>
         public static string query_fields_h {
@@ -381,6 +441,24 @@ namespace RQResources.Views.Shared {
         public static string subtitle {
             get {
                 return ResourceManager.GetString("subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &lt;?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;?&gt;
+        ///&lt;Article&gt; 
+        ///  &lt;Title&gt;Terms of Use&lt;/Title&gt;
+        ///  &lt;Sect1&gt; 
+        ///	 &lt;Title&gt;AGREEMENT BETWEEN USER AND RiQuest&lt;/Title&gt;
+        ///	 &lt;Para&gt; The &lt;Emphasis&gt;RiQuest&lt;/Emphasis&gt; Web Site is comprised of various Web pages operated by
+        ///		RiQuest. The RiQuest Web Site is offered to you conditioned on your acceptance
+        ///		without modification of the terms, conditions, and notices contained herein.
+        ///		Your use of the RiQuest Web Site constitutes your agreement to all such terms,
+        ///		conditions, and [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        public static string terms {
+            get {
+                return ResourceManager.GetString("terms", resourceCulture);
             }
         }
         

@@ -380,12 +380,22 @@ namespace Mvc5RQ.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
+        }
+
+        //
+        // POST: /Account/LogOff
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SmallLogOff(LoginViewModel model, string returnUrl)
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToLocal(returnUrl);
         }
 
         //

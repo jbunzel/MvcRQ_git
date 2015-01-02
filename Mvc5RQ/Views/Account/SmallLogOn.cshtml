@@ -5,7 +5,8 @@
     @using Microsoft.AspNet.Identity
     @if (Request.IsAuthenticated)
     {
-        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", model = Model, area = "", returnUrl = HttpContext.Current.Request.RawUrl }))
+        //using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", model = Model, area = "", returnUrl = HttpContext.Current.Request.RawUrl }))
+        using (Html.BeginForm("SmallLogOff", "Account", new { model = Model, area= "", returnUrl = HttpContext.Current.Request.RawUrl }))
         {
             @Html.AntiForgeryToken()
             <fieldset class="disabled">
@@ -30,8 +31,8 @@
                     @Html.LabelFor(m => m.RememberMe)
                 </div>
                 <p>
-                    <a href="javascript:document.getElementById('logoutForm').submit()" class="pure-button pure-button-xsmall">@RQResources.Views.Shared.SharedStrings.logoff</a>
-                    @*<input type="submit" value=@RQResources.Views.Shared.SharedStrings.logoff class="pure-button pure-button-xsmall" />*@
+                    @*<a href="javascript:document.getElementById('logoutForm').submit()" class="pure-button pure-button-xsmall">@RQResources.Views.Shared.SharedStrings.logoff</a>*@
+                    <input type="submit" value=@RQResources.Views.Shared.SharedStrings.logoff class="pure-button pure-button-xsmall" />
                 </p>
             </fieldset>
             <label class="editor-label">Welcome <strong>@User.Identity.Name</strong>!</label>

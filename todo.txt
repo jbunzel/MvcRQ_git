@@ -17,12 +17,14 @@
 03.032			Unify error messages (color, position etc.).
 
 03.04		ItemViewer									
-03.041			Display actual track title for audio & video.
-03.042			Add remote access & access control for digital audios.										
-03.043			Add remote access & access control for digital videos.
+03.041			Display actual track title for audio playlists.																begonnen: 141224	erledigt: 141224
+03.042			Display track title for single audio track.										
+03.043			Display track title for video track.
 03.044			Move ItemViewer code to digital objects area.																begonnen: 141222	erledigt: 141223
 03.045			Add viewer for still images.
 03.049			Convert DVD videos to HTML5 video formats.							
+03.050			Add remote access & access control for digital audios.										
+03.051			Add remote access & access control for digital videos.
 
 03.05		Data edit & import functions						
 03.051			Implement import of PDF document directories (with automatic title recognition).
@@ -45,9 +47,9 @@
 03.091			Evaluate Ajax Global Event Handlers for generic UI features of Ajax Calls 
 				(f. e. fade out, error messages)
 				
-03.10		Menu
-03.101			Complete all menues 
-03.102			Add links to all pages	
+03.10		Menu																											begonnen: 140924	erledigt: 150102
+03.101			Complete all menues																							begonnen: 141228	erledigt: 150102
+03.102			Add links to all pages																						begonnen: 140924	erledigt: 150102	
 
 03.11		Mvc5RQ																											begonnen: 140920	erledigt: 141127
 03.111			Migrate data service (RQDS)																					begonnen: 140920	erledigt: 141125

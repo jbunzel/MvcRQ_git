@@ -11,7 +11,10 @@ function renderItemContent() {
                 poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
             }).jPlayer("play");
         },
-        swfPath: "/areas/itemviewer/scripts",
+        error: function (event) {
+            alert(event.jPlayer.error + " // " + event.jPlayer.error.type);
+        },
+        swfPath: "/areas/digitalobjects/scripts",
         supplied: "m4v, ogv" 
     });
 }

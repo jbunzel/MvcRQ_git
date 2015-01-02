@@ -15,7 +15,7 @@
     <AssemblyName>Mvc5RQ</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -191,6 +191,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\DataManagement\Controllers\DataManagementController.cs" />
+    <Compile Include="Areas\DataManagement\Controllers\RQDMController.cs" />
+    <Compile Include="Areas\DataManagement\DataManagementAreaRegistration.cs" />
+    <Compile Include="Areas\DataManagement\Resources\DataManagement.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataManagement.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\DataManagement\Resources\DataManagement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataManagement.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\DigitalObjects\Controllers\ViewerController.cs" />
     <Compile Include="Areas\DigitalObjects\Controllers\RQDOSController.cs" />
     <Compile Include="Areas\DigitalObjects\DigitalObjectsAreaRegistration.cs" />
@@ -238,6 +251,9 @@
     <Compile Include="Areas\LinkedDataCalls\Helpers\ILinkedDataService.cs" />
     <Compile Include="Areas\LinkedDataCalls\Helpers\LinkedDataService.cs" />
     <Compile Include="Areas\LinkedDataCalls\LinkedDataCallsAreaRegistration.cs" />
+    <Compile Include="Areas\StaticTextPages\Controllers\AboutController.cs" />
+    <Compile Include="Areas\StaticTextPages\Models\StaticTextModel.cs" />
+    <Compile Include="Areas\StaticTextPages\StaticTextPagesAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\UserManagement\Models\AdminViewModel.cs" />
     <Compile Include="Areas\UserSettings\BundleConfig.cs" />
@@ -279,7 +295,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RQKosController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Formatters\RDFCustomFormatter.cs" />
     <Compile Include="Helpers\JsonErrorResponse.cs" />
     <Compile Include="Helpers\RQAuthorize.cs" />
@@ -321,6 +336,7 @@
     <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="Areas\DigitalObjects\Scripts\jplayer.playlist.js" />
     <Content Include="Areas\DigitalObjects\Scripts\jplayer.playlist.min.js" />
+    <Content Include="Areas\DigitalObjects\Scripts\Jplayer.swf" />
     <Content Include="Areas\DigitalObjects\Scripts\jquery.jplayer.inspector.js" />
     <Content Include="Areas\DigitalObjects\Scripts\jquery.jplayer.js" />
     <Content Include="Areas\DigitalObjects\Scripts\jquery.jplayer.min.js" />
@@ -502,15 +518,21 @@
     <Content Include="Areas\UserManagement\Views\web.config" />
     <Content Include="Areas\UserManagement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserManagement\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Areas\DigitalObjects\Views\Viewer\AudioPlayer.cshtml" />
     <Content Include="Areas\DigitalObjects\Views\Viewer\Index.cshtml" />
     <Content Include="Areas\DigitalObjects\Views\Viewer\VideoPlayer.cshtml" />
     <Content Include="Areas\DigitalObjects\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\DigitalObjects\Views\_ViewStart.cshtml" />
-=======
     <Content Include="Areas\LinkedDataCalls\Views\Web.config" />
->>>>>>> ccfece5fa0fbbb0424e6ce44fa10416b58d5b7f2
+    <Content Include="Areas\StaticTextPages\Views\web.config" />
+    <Content Include="Areas\StaticTextPages\Views\Shared\TextViewer.cshtml" />
+    <Content Include="Areas\StaticTextPages\Views\About\StaticText.cshtml" />
+    <Content Include="Areas\StaticTextPages\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\DataManagement\Views\web.config" />
+    <Content Include="Areas\DataManagement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\DataManagement\Views\Shared\LuceneFunctionList.cshtml" />
+    <Content Include="Areas\DataManagement\Views\DataManagement\Index.cshtml" />
+    <Content Include="Areas\DataManagement\Views\Shared\BookmarksFunctionList.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -555,6 +577,7 @@
     </Content>
     <Content Include="xml\stdquery.de-DE.xml" />
     <Content Include="xml\stdquery.xml" />
+    <Content Include="xml\test.html" />
     <Content Include="xslt\MODS2RQI.xslt">
       <SubType>Designer</SubType>
     </Content>
@@ -573,6 +596,8 @@
     <Content Include="xslt\SRUMARC2MODS.xslt">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="xslt\StaticTextTransforms\FAQ.xsl" />
+    <Content Include="xslt\StaticTextTransforms\jbarticle.xsl" />
     <Content Include="xslt\ViewTransforms\RQI2ShortTitleView.xslt">
       <SubType>Designer</SubType>
     </Content>
@@ -723,18 +748,23 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
-    <Folder Include="Areas\DigitalObjects\Views\Shared\" />
+    <Folder Include="Areas\DataManagement\Models\" />
     <Folder Include="Areas\LinkedDataCalls\Models\" />
     <Folder Include="Areas\LinkedDataCalls\Views\Shared\" />
->>>>>>> ccfece5fa0fbbb0424e6ce44fa10416b58d5b7f2
     <Folder Include="Areas\UserManagement\Views\Shared\" />
     <Folder Include="Areas\UserSettings\Views\UserSettings\" />
     <Folder Include="Providers\" />
     <Folder Include="~db\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\DataManagement\Resources\DataManagement.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataManagement.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\DataManagement\Resources\DataManagement.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataManagement.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\DigitalObjects\ScriptPack.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
@@ -767,7 +797,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50403</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Mvc5RQ</IISUrl>
+          <IISUrl>http://localhost:50403/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

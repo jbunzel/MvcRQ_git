@@ -22,16 +22,17 @@ namespace Mvc5RQ.Controllers
             return this.RedirectToRoute("RQItemList", new { dbname = "rqitems" });
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult About()
-        {
-            ViewBag.Title = "RiQuest | " + RQResources.Views.Shared.SharedStrings.menu2; ;
-            ViewBag.HTML = "<p>Über RiQuest</p>";
-            return View("StaticText");
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <returns></returns>
+        //public ActionResult About()
+        //{
+        //    ViewBag.Title = "RiQuest | " + RQResources.Views.Shared.SharedStrings.menu2; ;
+        //    ViewBag.HTML = "<p>Über RiQuest</p>";
+        //    return View("StaticText", new Mvc5RQ.Models.StaticTextModel("faq", "~/xslt/statictexttransforms/faq.xsl"));
+
+        //}
 
         /// <summary>
         /// 
@@ -41,7 +42,7 @@ namespace Mvc5RQ.Controllers
         {
             ViewBag.Title = "RiQuest | " + RQResources.Views.Shared.SharedStrings.menu5;
             ViewBag.HTML = "<p>Nachrichten</p>";
-            return View("StaticText");
+            return View();
         }
 
         /// <summary>
@@ -52,29 +53,29 @@ namespace Mvc5RQ.Controllers
         {
             ViewBag.Title = "Riquest | " + RQResources.Views.Shared.SharedStrings.menu4;
             ViewBag.HTML = "<p>Arbeitsplatz</p>";
-            return View("StaticText");
+            return View();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Terms()
-        {
-            ViewBag.Title = "Riquest | " + RQResources.Views.Shared.SharedStrings.link_terms;
-            ViewBag.HTML = "<p>Nutzungsbedingungen</p>";
-            return View("StaticText");
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <returns></returns>
+        //public ActionResult Terms()
+        //{
+        //    ViewBag.Title = "Riquest | " + RQResources.Views.Shared.SharedStrings.link_terms;
+        //    ViewBag.HTML = "<p>Nutzungsbedingungen</p>";
+        //    return View("StaticText", new Mvc5RQ.Models.StaticTextModel("terms", "~/xslt/statictexttransforms/jbarticle.xsl"));
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Privacy()
-        {
-            ViewBag.Title = "Riquest | " + RQResources.Views.Shared.SharedStrings.link_privacy;
-            ViewBag.HTML = "<p>Datenschutz</p>";
-            return View("StaticText");
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <returns></returns>
+        //public ActionResult Privacy()
+        //{
+        //    ViewBag.Title = "Riquest | " + RQResources.Views.Shared.SharedStrings.link_privacy;
+        //    ViewBag.HTML = "<p>Datenschutz</p>";
+        //    return View("StaticText", new Mvc5RQ.Models.StaticTextModel("privacy", "~/xslt/statictexttransforms/jbarticle.xsl"));
+        //}
     }
 }

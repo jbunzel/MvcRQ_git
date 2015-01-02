@@ -18,18 +18,31 @@ function renderItemContent() {
         });
     }
     else {
-        $.getScript(HostAdress() + "/Areas/ItemViewer/Scripts/jplayer.playlist.js", function (data, textStatus, jqxhr) {
-            var cssSelector = { jPlayer: "#jquery_jplayer_1",
+        $.getScript(HostAdress() + "/areas/digitalobjects/scripts/jplayer.playlist.js", function (data, textStatus, jqxhr) {
+            var cssSelector = {
+                jPlayer: "#jquery_jplayer_1",
                 cssSelectorAncestor: "#jp_container_1"
             };
             var playlist = playList //[]; // Empty playlist
-            var options = { swfPath: "/js",
+            var options = {
+                autoPlay: true,
+                swfPath: "/areas/digitalobjects/scripts",
                 supplied: "mp3"
             };
             var myPlaylist = new jPlayerPlaylist(cssSelector, playlist, options);
 
             $(".jp-title ul li").show();     // TODO: Track-Titel anzeigen
             $(".jp-title ul li").text("");
+            $("#jquery_jplayer_1").bind($.jPlayer.event.play, function (event) {
+                var current = myPlaylist.current; //This is an integer which represents the index of the array object currently being played.
+                var playlist = myPlaylist.playlist //This is an array, which holds each of the set of the items youve defined (e.q. title, mp3, artist etc...)
+
+                $.each(playlist, function(index, object) { //$.each is a jQuery iteration method which lets us iterate over an array(playlist), so we actually look at playlist[index] = object
+                    if(index == current) {   
+                        $(".jp-song-title").html(object.title);
+                    }
+                });
+            });
             myPlaylist.play(0);
         });
     }
