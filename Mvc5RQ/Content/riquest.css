@@ -726,7 +726,7 @@ textarea {
 } 
 
 .rq-banner {
-    background-image: url("../images/banner4.png");
+    /*background-image: url("../images/banner4.png");*/
     background-size: 100%;
     min-height: 700px;
     margin-right: 15%;
@@ -744,12 +744,15 @@ textarea {
 /*------------------------------*/
 
 .content-box { 
-    background-color: beige;
+    background-color: rgb(255, 255, 245);
+    /*background-color: beige;*/
     border-top: 1px solid silver;
+    border-left: 40px solid rgba(155, 243, 195, 0.79);   
 }
 
 .rq-result-box {
-    background-color: beige !important;
+    background-color: rgb(255, 255, 245) !important ;
+    /*background-color: beige !important;*/
 }
 
 .rq-sidebar {
@@ -781,6 +784,7 @@ textarea {
 /*-------------*/
 /* state rules */
 /*-------------*/
+
 /* style for overlay element used by function ajaxLoader in module ( s.f. rqui-helpers.js) */
 .rq-ajax-wait {
     background: url("../images/ajax-loader.gif") no-repeat center transparent;

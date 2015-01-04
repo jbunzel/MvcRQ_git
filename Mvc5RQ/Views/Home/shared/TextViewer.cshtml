@@ -6,7 +6,7 @@
     var docNo = @Html.Raw(Json.Encode(@ViewBag.docNo));
     var getrqitemverb = @Html.Raw(Json.Encode(@ViewBag.GetRQItemVerb));
 </script>*@
-@model Mvc5RQ.Areas.StaticTextPages.Models.StaticTextModel
+@*@model Mvc5RQ.Areas.StaticTextPages.Models.StaticTextModel*@
 
 <div id="htmlList" class="rq-result-box">
     <div id="paging_container" class="pure-g-r container">
@@ -20,7 +20,7 @@
         @*<div class="pure-u-1 page_navigation"></div>*@
         <div class="pure-u-1 content-box">
             <div class="rq-result-box rq-textcontainer">
-                @Html.Raw(Model.TextHtml)
+                @*@Html.Raw(Model.TextHtml)*@
             </div>
         </div>
     </div>

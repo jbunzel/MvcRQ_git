@@ -1,0 +1,405 @@
+﻿/*------------*/
+/* base rules */
+/*------------*/
+
+a:link,
+a:visited,
+a:active {
+    color: #c22a09;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #797979;
+}
+
+.rq-textcontainer h1, 
+.rq-textcontainer h2, 
+.rq-textcontainer h3, 
+.rq-textcontainer h4, 
+.rq-textcontainer h5 {
+    margin: 5px 5px 5px 0px;
+    padding: 5px 5px 5px 0px;
+    font-family: Garamond;
+    color: #797979;
+}
+
+.rq-textcontainer h1 {
+    line-height: 130%;
+    text-align: center;
+    margin-bottom: 0px;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 24pt;
+}
+
+.rq-textcontainer h2 {
+    text-align: left;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 18pt;
+}
+
+.rq-textcontainer h3 {
+    text-align: left;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 14pt;
+    color: #a52a2a;
+}
+
+.rq-textcontainer h4,
+.rq-textcontainer h5 {
+    text-align: left;
+    font-family: georgia;
+    font-size: 13px;
+}
+
+p {
+    margin: 0px 5px 15px 0px;
+    padding: 0px;
+}
+
+/*--------------*/
+/* layout rules */
+/*--------------*/
+div .Normal {
+    padding: 5px 5px 5px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+/*--------------*/
+/* module rules */
+/*--------------*/
+
+/*-------------*/
+/* state rules */
+/*-------------*/
+
+/*-------------*/
+/* theme rules */
+/*-------------*/
+
+.rq-textcontainer ol, 
+.rq-textcontainer ul {
+    margin: 0px 5px 15px 15px;
+    padding: 2px;
+}
+
+.rq-textcontainer ol > .rq-textcontainer li {
+    list-style-type: decimal;
+}
+
+.rq-textcontainer.ul > .rq-textcontainer.li {
+    list-style-type: disc;
+}
+
+input[type=text] {
+    font: 7pt arial;
+    color: maroon;
+    background-color: #fffff5;
+    border-width: medium;
+    border-style: inset;
+    width: 50px;
+}
+
+.search input[type=text] {
+    width: 250px;
+    height: 20px;
+    font: 12pt arial;
+    vertical-align: middle;
+}
+
+input[type=submit] {
+    vertical-align: middle;
+    margin-left: 10px;
+    padding: 3px 3px 3px 3px;
+    font-family: Georgia;
+    font-size: 100.01%;
+    line-height: 140%;
+    color: #797979;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    text-decoration: none;
+    border: solid 2px Silver;
+    background-color: #eeeeee;
+}
+
+.lookup,
+a:link,
+a:visited,
+a:focus,
+a:active {
+    color: Gray;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.lookup:hover,
+a:hover {
+    color: Silver;
+}
+
+.content table, .content th, .content tr, .content td
+/* nur Tabellen der Klasse "content" werden gerahmt, um die Rahmung von Table-Layouts zu verhindern */ {
+    border: solid 1px black;
+    padding: 2px 5px;
+}
+
+/* Allgemeine Klassen */
+/* Allgemeine Klassen  / Textstile */
+
+.accent
+/* Textstil für farblich hervorgehobene Passagen */ {
+    color: Maroon;
+}
+
+.comment
+/* Textstil für Hervorhebungen durch Schriftart */ {
+    /*text-align: right;*/
+    font: 9pt arial;
+    color: #557766;
+}
+
+.smallcomment
+/* kleiner Textstil für Hervorhebungen durch Schriftart */ {
+    font: 7pt arial;
+    text-align: center;
+    color: Gray;
+}
+
+.smallcomment a:hover
+/* spezieller Hover-Stil für smallcomment */ {
+    color: Gray;
+    text-decoration: underline;
+}
+
+.Greek
+/* griechische Schrift */ {
+    font: 12pt symbol;
+    color: #a52a2a;
+}
+
+.reference
+/* Textstil für Referenzen auf Fußnoten etc. */ {
+    font-family: Arial;
+    font-size: 0.8em;
+    color: #770000;
+}
+
+.reference a, .reference a:link, .reference a:visited, .reference a:active {
+    text-decoration: none;
+    color: #770000;
+}
+
+.reference:hover, .reference a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #770000;
+}
+
+.reference img {
+    vertical-align: bottom;
+}
+
+
+/* Allgemeine Klassen / Textfluss-Formatierungen */
+
+.top img
+/* Bildausrichtung vertikal oben */ {
+    vertical-align: top;
+}
+
+.strandbox
+/* Stil für hervorgehobene Kästen im Fließtext */ {
+    margin: 2px 2px 2px 2px;
+    padding: 2px 2px 2px 2px;
+    background-color: #c2cdb1;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: Navy;
+}
+
+
+/* Allgemeine Klassen / Steuerung der Einblendung von refernzierten Textpassagen */
+
+.Linklist
+/* Bei Strands-Anzeige werden Link-Listen am Ende der Seite ausgeblendet.  */ {
+    display: none;
+}
+
+.strand {
+    display: block;
+}
+
+.Linkshow {
+    display: block;
+}
+
+span.Linklist, span.Linkshow {
+    border: dotted 1px blue;
+    background-color: #ffffc0;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+}
+
+span.Linklist *,
+span.Linkshow * {
+    margin: 0;
+    padding: 0;
+}
+
+span.Linkshow:before
+/* s.o. Vermerk bei der Einblendung von Referenzen auf spezielle Textpassagen */ {
+    content: "Siehe oben:";
+}
+
+span.Footnote:before
+/* Kein s.o. Vermerk bei der Anzeige von Fußnoten */ {
+    content: "";
+}
+
+
+/* DTD-Elemente */
+
+div .Motto {
+    margin-top: 0px;
+    margin-bottom: 40px;
+    /* border: solid 1px yellow; Debug border */
+    /*        
+    text-align: right;
+    font: 9pt arial;
+    color: #557766; */
+}
+
+.Motto .Graphic,
+.Motto .Object {
+    text-align: center;
+}
+
+.Motto p,
+.Motto pre {
+    margin-left: 20%;
+    text-align: right;
+    font: 9pt arial;
+    color: #557766;
+}
+
+.Quote {
+    margin-left: 60px;
+    margin-right: 60px;
+    display: block;
+    font-style: italic;
+}
+
+.Motto .Quote {
+    margin: 0;
+    display: inline;
+}
+
+.InlineGraphic img {
+    vertical-align: middle;
+}
+
+.Footnote {
+    font-family: Arial;
+    font-size: 0.9em;
+    font-style: normal;
+    color: #770000;
+}
+
+div .Formel,
+div .Definition,
+div .Satz,
+div .Lemma,
+div .Special {
+    margin: 20px 20px 20px 20px;
+}
+
+.Definition,
+.Satz,
+.Lemma,
+.Special {
+    border: dotted 1px blue;
+    background-color: beige /* #ffffb0 */;
+    /* background-image: url(../../images/selpixel.gif); */
+}
+
+.Definition ul li,
+.Definition * .NumberedItemCount,
+.Satz * .NumberedItemCount,
+.Lemma * .NumberedItemCount,
+.Special * .NumberedItemCount,
+.Definition > *,
+.Satz > *,
+.Lemma > *,
+.Special > * {
+    padding-left: 10px;
+}
+
+.Emphasis,
+.Definition > .NumberedItemCount,
+.Satz > .NumberedItemCount,
+.Lemma > .NumberedItemCount,
+.Figure > .NumberedItemCount,
+.Special > .NumberedItemCount {
+    font-weight: bold;
+}
+
+.Definition > .NumberedItemCount:before {
+    content: "Definition ";
+}
+
+.Satz > .NumberedItemCount:before {
+    content: "Satz ";
+}
+
+.Lemma > .NumberedItemCount:before {
+    content: "Hilfssatz ";
+}
+
+.Figure > .NumberedItemCount:before {
+    content: "Abb. ";
+}
+
+.Special > .NumberedItemCount:before {
+    content: "Special ";
+}
+
+.Definition > .NumberedItemCount:after .Satz > .NumberedItemCount:after,
+.Lemma > .NumberedItemCount:after,
+.Figure > .NumberedItemCount:after; .Special > .NumberedItemCount:after {
+    content: "  ";
+}
+
+.Formel > .NumberedItemCount:before {
+    content: "(";
+}
+
+.Formel > .NumberedItemCount:after {
+    content: ") ";
+}
+
+div .d3graph {
+    width: 150px;
+    height: 375px;
+    padding: 75px 188px 75px 188px;
+    background-color: white;
+}
+
+.frameclass {
+    width: 750px;
+    height: 1080px;
+    margin-left: 50px;
+    padding: 0px 0px 0px 0px;
+    background-color: white;
+}
+
+.MATH {
+    color: Teal;
+}

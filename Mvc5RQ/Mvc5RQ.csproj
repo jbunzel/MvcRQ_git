@@ -366,6 +366,7 @@
     <Content Include="Areas\DigitalObjects\Views\Shared\html\video_player.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\LinkedDataCalls\Images\molecule-14x15.png" />
+    <Content Include="Areas\StaticTextPages\Content\Strands.css" />
     <Content Include="Areas\UserSettings\Content\tablesorter-style.css" />
     <Content Include="Areas\UserManagement\Content\user-management-style.css" />
     <Content Include="Areas\UserManagement\Views\UserManagement\html\add-user-form.html" />
@@ -716,6 +717,9 @@
     <Content Include="Views\RQKos\shared\ShelvesViewer.cshtml" />
     <Content Include="Views\RQKos\shared\RDFViewer.cshtml" />
     <Content Include="Views\RQKos\shared\TurtleViewer.cshtml" />
+    <Content Include="Views\Home\News.cshtml" />
+    <Content Include="Views\Home\shared\TextViewer.cshtml" />
+    <Content Include="Views\Home\Work.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\dotNetRDF\Libraries\core\dotNetRDF.csproj">

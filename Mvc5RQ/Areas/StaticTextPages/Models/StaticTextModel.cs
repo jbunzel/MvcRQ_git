@@ -10,6 +10,7 @@ namespace Mvc5RQ.Areas.StaticTextPages.Models
         #region public properties
 
         public string TextHtml { get; set; }
+        //public string TextTitle { get; set; }
           
         #endregion
 
@@ -18,12 +19,12 @@ namespace Mvc5RQ.Areas.StaticTextPages.Models
         public StaticTextModel (string textResourceName, string xsltAdress)
         {
             var xRdr = System.Xml.Linq.XDocument.Parse((string)(RQResources.Views.Shared.SharedStrings.ResourceManager.GetObject(textResourceName)));
-
             var xTrf = new System.Xml.Xsl.XslCompiledTransform();
             var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
             var xSet = new System.Xml.Xsl.XsltSettings(enableDocumentFunction:true, enableScript:true);
             var mstr = new System.IO.StringWriter(new System.Text.StringBuilder());
 
+            //TextTitle = xRdr.Element("Article").Element("Title").Value.Trim();
             xTrf.Load(HttpContext.Current.Server.MapPath(xsltAdress), xSet, new System.Xml.XmlUrlResolver());
             xTrf.Transform(xRdr.CreateReader(), xTrfArg, mstr);
             this.TextHtml = mstr.ToString();

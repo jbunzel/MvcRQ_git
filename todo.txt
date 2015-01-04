@@ -10,7 +10,8 @@
 03.015			Get book cover images by Library of Congress IDs.
 
 03.02		Account management
-03.021			Add e-mail confirmation on registration
+03.021			Add e-mail confirmation on registration.
+03.022			Redesign and unify account management pages. 
 
 03.03		Exception management
 03.031			Redesign and unify exception management functions.

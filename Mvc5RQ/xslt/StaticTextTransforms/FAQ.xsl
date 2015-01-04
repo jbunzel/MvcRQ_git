@@ -70,7 +70,7 @@
 				</xsl:attribute>
 				<table border="0" cellspacing="0" cellpadding="10">
 					<tr>
-						<td class="comment">
+						<td class="itemlist comment">
 							<xsl:call-template name = "escape-apos">
 								<xsl:with-param name = "string" select = "../FAQAnswer" />
 							</xsl:call-template>

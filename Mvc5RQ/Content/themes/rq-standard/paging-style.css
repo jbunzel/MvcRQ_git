@@ -43,7 +43,8 @@
 }
 
 .result_segments select {
-    background-color: beige;
+    /*background-color: beige;*/
+    background-color: rgb(255, 255, 245);
     width: 200px;
     letter-spacing: normal;
 }
@@ -64,7 +65,8 @@
 
 .container{
 	float: left;
-	background-color: beige !important;
+	/*background-color: beige !important;*/
+    background-color: rgb(255, 255, 245) !important;
     border: 1px solid silver;
 }
 
