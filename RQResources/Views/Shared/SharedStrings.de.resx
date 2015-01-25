@@ -256,4 +256,16 @@
   <data name="terms" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\StaticTexts\terms.de.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="sa_add" xml:space="preserve">
+    <value>Neuen Datensatz eingeben</value>
+  </data>
+  <data name="sa_export" xml:space="preserve">
+    <value>Ergebnisliste exportieren</value>
+  </data>
+  <data name="sa_h" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="da_export" xml:space="preserve">
+    <value>Projekt exportieren </value>
+  </data>
 </root>

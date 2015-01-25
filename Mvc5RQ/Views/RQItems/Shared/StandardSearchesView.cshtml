@@ -8,9 +8,3 @@
     <li><a href="#" onclick="getQueryResultList('$bookmarks$@RQResources.Views.Shared.SharedStrings.sq_bookmarks');">@RQResources.Views.Shared.SharedStrings.sq_bookmarks</a></li>
     <li><a href="#" onclick="getQueryResultList('Signature: R01');">View shelves order</a></li>
 </ul>
-<ul>
-    @if (@ViewBag.HasAddPermit)
-    {   
-        <li>@Html.ActionLink("Add new RQItem", "add", "rqitems");</li>
-    }
-</ul>

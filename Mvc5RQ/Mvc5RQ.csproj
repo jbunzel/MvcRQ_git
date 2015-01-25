@@ -204,6 +204,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataManagement.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Desktop\Controllers\DesktopController.cs" />
+    <Compile Include="Areas\Desktop\Controllers\RQDTController.cs" />
+    <Compile Include="Areas\Desktop\DesktopAreaRegistration.cs" />
+    <Compile Include="Areas\Desktop\Models\DesktopManagers.cs" />
+    <Compile Include="Areas\Desktop\Models\DesktopModels.cs" />
     <Compile Include="Areas\DigitalObjects\Controllers\ViewerController.cs" />
     <Compile Include="Areas\DigitalObjects\Controllers\RQDOSController.cs" />
     <Compile Include="Areas\DigitalObjects\DigitalObjectsAreaRegistration.cs" />
@@ -334,6 +339,7 @@
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
     </Content>
     <Content Include="App_Data\XmlDocument.xml" />
+    <Content Include="Areas\Desktop\Scripts\desktop-viewer.js" />
     <Content Include="Areas\DigitalObjects\Scripts\jplayer.playlist.js" />
     <Content Include="Areas\DigitalObjects\Scripts\jplayer.playlist.min.js" />
     <Content Include="Areas\DigitalObjects\Scripts\Jplayer.swf" />
@@ -534,6 +540,11 @@
     <Content Include="Areas\DataManagement\Views\Shared\LuceneFunctionList.cshtml" />
     <Content Include="Areas\DataManagement\Views\DataManagement\Index.cshtml" />
     <Content Include="Areas\DataManagement\Views\Shared\BookmarksFunctionList.cshtml" />
+    <Content Include="Areas\Desktop\Views\web.config" />
+    <Content Include="Areas\Desktop\Views\Desktop\Index.cshtml" />
+    <Content Include="Areas\Desktop\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Desktop\Views\Shared\DesktopViewer.cshtml" />
+    <Content Include="Areas\Desktop\Views\Shared\ActionsView.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -579,6 +590,7 @@
     <Content Include="xml\stdquery.de-DE.xml" />
     <Content Include="xml\stdquery.xml" />
     <Content Include="xml\test.html" />
+    <Content Include="xslt\DesktopTransforms\DESK2STRAND.xsl" />
     <Content Include="xslt\MODS2RQI.xslt">
       <SubType>Designer</SubType>
     </Content>
@@ -720,32 +732,7 @@
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Home\shared\TextViewer.cshtml" />
     <Content Include="Views\Home\Work.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\dotNetRDF\Libraries\core\dotNetRDF.csproj">
-      <Project>{bfbac159-1e60-4d03-8aca-d34e31eb83bf}</Project>
-      <Name>dotNetRDF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RQDigitalObjects\RQDigitalObjects.csproj">
-      <Project>{97cfd688-bbea-47f5-90fc-718dcd1cfd71}</Project>
-      <Name>RQDigitalObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RQLinkedData\RQLinkedData.csproj">
-      <Project>{182ed3fc-0121-4a3f-9f79-b8c5782bb755}</Project>
-      <Name>RQLinkedData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RQQueryResult\RQLib.vbproj">
-      <Project>{d695eaa6-b358-4c80-82aa-a0aa15ebc5d4}</Project>
-      <Name>RQLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RQResources\RQResources.csproj">
-      <Project>{d569e168-0bc3-4c25-8d42-880879831975}</Project>
-      <Name>RQResources</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RQState\RQState.csproj">
-      <Project>{75722e2e-2954-4a8b-96e1-9ac650e3f5b9}</Project>
-      <Name>RQState</Name>
-    </ProjectReference>
+    <Content Include="Views\RQItems\Shared\StandardActionsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -758,6 +745,7 @@
     <Folder Include="Areas\UserManagement\Views\Shared\" />
     <Folder Include="Areas\UserSettings\Views\UserSettings\" />
     <Folder Include="Providers\" />
+    <Folder Include="xml\zkn\" />
     <Folder Include="~db\" />
   </ItemGroup>
   <ItemGroup>
@@ -782,6 +770,36 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dotNetRDF\Libraries\core\dotNetRDF.csproj">
+      <Project>{bfbac159-1e60-4d03-8aca-d34e31eb83bf}</Project>
+      <Name>dotNetRDF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQDesktop\RQDesktop.csproj">
+      <Project>{170f22c6-6766-4f1c-b2c6-cd2e372d3f8a}</Project>
+      <Name>RQDesktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQDigitalObjects\RQDigitalObjects.csproj">
+      <Project>{97cfd688-bbea-47f5-90fc-718dcd1cfd71}</Project>
+      <Name>RQDigitalObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQLinkedData\RQLinkedData.csproj">
+      <Project>{182ed3fc-0121-4a3f-9f79-b8c5782bb755}</Project>
+      <Name>RQLinkedData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQQueryResult\RQLib.vbproj">
+      <Project>{d695eaa6-b358-4c80-82aa-a0aa15ebc5d4}</Project>
+      <Name>RQLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQResources\RQResources.csproj">
+      <Project>{d569e168-0bc3-4c25-8d42-880879831975}</Project>
+      <Name>RQResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RQState\RQState.csproj">
+      <Project>{75722e2e-2954-4a8b-96e1-9ac650e3f5b9}</Project>
+      <Name>RQState</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -103,6 +103,11 @@
               Sucht eine lokalisierte Zeichenfolge, die Deletes and recreates the Lucene index. ähnelt.
             </summary>
         </member>
+        <member name="T:Mvc5RQ.Areas.Desktop.Controllers.RQDTController">
+            <summary>
+            Riquest Desktop Service (RQDT)
+            </summary>
+        </member>
         <member name="T:Mvc5RQ.Areas.DigitalObjects.Models.ViewerController">
             <summary>
             Controller Class for URLs designating ItemViewer objects
@@ -1942,12 +1947,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Mvc5RQ.Controllers.HomeController.Work">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Mvc5RQ.Controllers.RQDSController">
             <summary>
             Riquest Date Service (RQDS)
@@ -2044,6 +2043,12 @@
             <returns>
             The requested subfield of the requested rqitem according to requested data format ({format}) and accepted exchange format ({application/json} | {application/xml}).
             </returns>
+        </member>
+        <member name="M:Mvc5RQ.Controllers.RQDSController.Export">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Mvc5RQ.Controllers.RQDSController.Post(System.String,Mvc5RQ.Models.RQItem)">
             <summary>

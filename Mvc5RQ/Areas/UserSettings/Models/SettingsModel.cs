@@ -51,4 +51,10 @@ namespace Mvc5RQ.Areas.UserSettings.Models
         public string DocumentServerDirectory = "MyDoc=";
 
     }
+
+    public class DesktopOptions
+    {
+        public static string ZKNFileAdress = @"D:\users\jorge\dokumente\doc projects\contents\mein zettelkasten\zettelkasten.zkn3";
+        public static string StrandsDirectory = @"D:\users\public\myarticles\";
+    }
 }

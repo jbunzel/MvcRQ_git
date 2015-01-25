@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "RiQuest | Home";
+    ViewBag.Title = "RiQuest | Desktop";
 }
 <div class="pure-g-r">
     <div class="pure-u-4-5">
@@ -11,7 +11,7 @@
                     </div>
                     <div class="rq-settings-panel">
                         <h3>@RQResources.Views.Shared.SharedStrings.sa_h</h3>
-                        @Html.Partial("~/Views/RQItems/Shared/StandardActionsView.cshtml")
+                        @Html.Partial("~/areas/desktop/views/shared/actionsview.cshtml")
                     </div>
                 </div>
             </div>
@@ -20,10 +20,10 @@
                     //// show default result list on startup
                     $(document).ready(function () {
                         resizeToWindowHeight();
-                        getResultList();
+                        getDesktopList();
                     });
                 </script>
-                @Html.Partial("~/Views/RQItems/Shared/ResultViewer.cshtml")
+                @Html.Partial("~/areas/desktop/views/shared/DesktopViewer.cshtml")
             </div>
         </div>
     </div>
@@ -31,19 +31,19 @@
         <div class="pure-g-r">
             <div class="pure-u-4-5">
                 <div class="rq-sidebar rq-right-sidebar">
-                    @Html.Partial("~/Views/RQItems/Shared/SearchBoxView.cshtml")
+                    @*@Html.Partial("~/Views/RQItems/Shared/SearchBoxView.cshtml")*@
                     <div class="rq-settings-panel">
                         <h3>@RQResources.Views.Shared.SharedStrings.include_external_h</h3>
-                        @Html.Partial("~/Areas/UserSettings/Views/Shared/IncludeExternalView.cshtml")
+                        @*@Html.Partial("~/Areas/UserSettings/Views/Shared/IncludeExternalView.cshtml")*@
                     </div>
                     <div class="rq-settings-panel">
-                        <h3>@RQResources.Views.Shared.SharedStrings.query_fields_h</h3>
+                        @*<h3>@RQResources.Views.Shared.SharedStrings.query_fields_h</h3>
                         <form>
-                        </form>
+                        </form>*@
                     </div>
                     <div class="rq-settings-panel">
-                        <h3>@RQResources.Views.Shared.SharedStrings.sq_h</h3>
-                        @Html.Partial("~/Views/RQItems/Shared/StandardSearchesView.cshtml")
+                        @*<h3>@RQResources.Views.Shared.SharedStrings.sq_h</h3>
+                        @Html.Partial("~/Views/RQItems/Shared/StandardSearchesView.cshtml")*@
                     </div>
                 </div>
             </div>

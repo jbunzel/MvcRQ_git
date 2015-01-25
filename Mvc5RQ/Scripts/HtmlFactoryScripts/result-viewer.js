@@ -2,6 +2,35 @@
     callAjax_ResultList(HostAdress() + "/rqds/rqitems/rqi?verb=" + getrqitemverb); //ListViewState");
 }
 
+function exportResultList() {
+    var json = ""; //JSON.stringify(Form2Data());
+    var url = HostAdress() + "/rqds/rqitems/export";
+    var fd = new ajaxLoadingIndicator("#html"); 
+        
+    $.ajax({
+        beforeSend: function (req) {
+            req.setRequestHeader("Accept", "application/json");
+        },
+        url: url,
+        type: 'POST',
+        dataType: 'json',
+        data: json,
+        contentType: 'application/json; charset=utf-8',
+        success: function (data, textStatus, jqXHR) {
+            var response = { isSuccess: true,
+                message: (verb == "edit") ? "Der Datensatz wurde aktualisiert." : "Ein neuer Datensatz wurde angelegt."
+            }
+            _myHelper.processServerResponse(response, function () {
+            });
+        },
+        error: function (response) {
+            _myHelper.processServerResponse(response, null, function () {
+            });
+        }
+    });
+    return false;
+}
+
 function getQueryResultList(queryString) {
     callAjax_ResultList(HostAdress() + "/rqds/rqitems/rqi?verb=ListViewState&queryString=" + queryString);
 }

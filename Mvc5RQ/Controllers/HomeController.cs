@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Mvc5RQ.Controllers
 {
     /// <summary>
@@ -44,38 +45,5 @@ namespace Mvc5RQ.Controllers
             ViewBag.HTML = "<p>Nachrichten</p>";
             return View();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Work()
-        {
-            ViewBag.Title = "Riquest | " + RQResources.Views.Shared.SharedStrings.menu4;
-            ViewBag.HTML = "<p>Arbeitsplatz</p>";
-            return View();
-        }
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <returns></returns>
-        //public ActionResult Terms()
-        //{
-        //    ViewBag.Title = "Riquest | " + RQResources.Views.Shared.SharedStrings.link_terms;
-        //    ViewBag.HTML = "<p>Nutzungsbedingungen</p>";
-        //    return View("StaticText", new Mvc5RQ.Models.StaticTextModel("terms", "~/xslt/statictexttransforms/jbarticle.xsl"));
-        //}
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <returns></returns>
-        //public ActionResult Privacy()
-        //{
-        //    ViewBag.Title = "Riquest | " + RQResources.Views.Shared.SharedStrings.link_privacy;
-        //    ViewBag.HTML = "<p>Datenschutz</p>";
-        //    return View("StaticText", new Mvc5RQ.Models.StaticTextModel("privacy", "~/xslt/statictexttransforms/jbarticle.xsl"));
-        //}
     }
 }

@@ -106,6 +106,15 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Export publication project ähnelt.
+        /// </summary>
+        public static string da_export {
+            get {
+                return ResourceManager.GetString("da_export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Delete ähnelt.
         /// </summary>
         public static string delete {
@@ -351,6 +360,33 @@ namespace RQResources.Views.Shared {
         public static string query_fields_h {
             get {
                 return ResourceManager.GetString("query_fields_h", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add record ähnelt.
+        /// </summary>
+        public static string sa_add {
+            get {
+                return ResourceManager.GetString("sa_add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Export result list ähnelt.
+        /// </summary>
+        public static string sa_export {
+            get {
+                return ResourceManager.GetString("sa_export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Actions ähnelt.
+        /// </summary>
+        public static string sa_h {
+            get {
+                return ResourceManager.GetString("sa_h", resourceCulture);
             }
         }
         

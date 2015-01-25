@@ -196,6 +196,23 @@ namespace Mvc5RQ.Controllers
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Route("{dbname}/export")]
+        [HttpPost]
+        public IHttpActionResult Export()
+        {
+            if (ModelState.IsValid)
+            {
+                string test = "";
+                return null;
+            }
+            else
+                throw new Exception("Fehler beim Export.");
+        }
+
+        /// <summary>
         /// Controller action answering PUT web-api-requests to add a single rqitem to database.
         /// </summary>
         /// <remarks>

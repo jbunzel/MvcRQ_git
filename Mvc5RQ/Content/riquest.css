@@ -697,17 +697,22 @@ textarea {
 }
 
 .rq-settings-panel {
-    font-size: 0.85em;
+    font-size: 0.95em;
 }
 
 .rq-settings-panel ul {
     /*border: 1px solid blue;*/
     padding-left: 15px;
-    margin-top: 5px;
+    margin-top: 3px;
+}
+
+.rq-settings-panel li {
+    /*border: 1px solid blue;*/
+    margin-bottom: 5px;
 }
 
 .rq-settings-panel h3 {
-    font-size: 0.95em;
+    font-size: 1.2em;
     margin-bottom: 0px;
 }
 
