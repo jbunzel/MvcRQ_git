@@ -2,8 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:output doctype-public="-//RiQuest Software//DTD JBArticle v1.0 20020724//EN" doctype-system="../dtd/JBArticle/jbarticle.dtd"/>
     
-    <xsl:param name="DeskNr" select="2" />
-    <xsl:param name="SectionName" select="'Einleitung'" />
+    <xsl:param name="ProjectName" />
     
     <xsl:template name="remove-duplicates">
         <xsl:param name="string" />
@@ -278,7 +277,7 @@
     <xsl:template name="WriteBibliography">
         <xsl:variable name="BibNrList">
             <xsl:variable name="RawList">
-                <xsl:for-each select="desktops/desktop[$DeskNr]/bullet[@name=$SectionName]/entry">
+                <xsl:for-each select="desktops/desktop/bullet/entry[../../@name=$ProjectName]">
                 <xsl:variable name="number" select="@id + 1" />
                     <xsl:for-each select="document('zknFile.xml')/zettelkasten/zettel[@nextzettel=$number]">
                         <xsl:if test="author">
@@ -307,28 +306,30 @@
     <xsl:template match="/">
         <xsl:element name="Article">
             <xsl:element name="Title">
-                <xsl:value-of select="desktops/desktop[$DeskNr]/@name" />
+                <xsl:value-of select="$ProjectName" />
             </xsl:element>                
-            <xsl:apply-templates select="desktops/desktop[$DeskNr]/bullet[@name='Einleitung']" />
+            <xsl:apply-templates select="desktops/desktop/bullet[../@name=$ProjectName]" />
             <xsl:call-template name="WriteBibliography"></xsl:call-template>
         </xsl:element>    
     </xsl:template>
     
     <xsl:template match="bullet">
-        <xsl:for-each select="entry">
-            <xsl:variable name="number" select="@id + 1" />
+        <xsl:element name="Sect1">
+            <xsl:attribute name="Id">
+                <xsl:value-of select="@name"/>                
+            </xsl:attribute>
+            <xsl:apply-templates select="entry" />
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="entry">    
+        <xsl:variable name="number" select="@id + 1" />
             
-            <xsl:apply-templates select="document('zknFile.xml')/zettelkasten/zettel[@nextzettel=$number]"/>
-        </xsl:for-each>
+        <xsl:apply-templates select="document('zknFile.xml')/zettelkasten/zettel[@nextzettel=$number]"/>
     </xsl:template>
     
     <xsl:template match="zettel">
-        <xsl:element name="Sect1">
-            <xsl:attribute name="Id">
-                <xsl:value-of select="concat('TC',@ts_created)"/>
-            </xsl:attribute>
-            <xsl:apply-templates />
-        </xsl:element>
+        <xsl:apply-templates />
     </xsl:template> 
     
     <xsl:template match="title">

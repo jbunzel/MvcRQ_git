@@ -36,8 +36,10 @@ namespace Mvc5RQ.Areas.Desktop.Models
             string projectDirectory = "";
             string strandsFilePath = "";
 
-            if (int.TryParse(projectName, out test))
+            if (int.TryParse(projectName, out test)) {
                 _zkn.ProjectList().TryGetValue(projectName, out projectDirectory);
+                projectName = projectDirectory;
+            }
             else
                 projectDirectory = projectName;
             strandsFilePath = Mvc5RQ.Areas.UserSettings.Models.DesktopOptions.StrandsDirectory + "/" + projectDirectory + "/" + projectDirectory + ".xml";

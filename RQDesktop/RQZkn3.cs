@@ -81,14 +81,14 @@ namespace RQDesktop
 
         public XmlDocument ConvertProject(string xsltPath, string projectName)
         {
-            var xTrf = new System.Xml.Xsl.XslCompiledTransform();
+            var xTrf = new System.Xml.Xsl.XslCompiledTransform(true);
             var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
             var xSet = new System.Xml.Xsl.XsltSettings(true, true);
             var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
             var doc = new System.Xml.XmlDocument();
             
             xTrf.Load(CopyXSLTFile(xsltPath), xSet, new XmlUrlResolver());
-            xTrfArg.AddParam("DeskNr", "", projectName);
+            xTrfArg.AddParam("ProjectName", "", projectName);
             xTrf.Transform(_extractPath + "/desktop.xml", xTrfArg, mstr);
             mstr.BaseStream.Flush();
             mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
