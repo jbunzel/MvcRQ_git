@@ -62,12 +62,12 @@
 03.117			Migrate UserManager																							begonnen: 141028	erledigt: 141102
 03.118			Migrate patron authorization																				begonnen: 141107	erledigt: 141109
 
-03.12		Database migration
+03.12		Database migration																								begonnen: 150215	erledigt:
 
 03.13		Implement desktop																								begonnen: 150116	erledigt:																							
 03.131			Implement bibtex interface																					begonnen: 150116	erledigt:
 03.1311				Export																									begonnen: 150116	erledigt:
-03.1312				Import																									begonnen:
+03.1312				Import																									
 03.132			Implement basic connection zkn3-desktop																		begonnen: 150120	erledigt: 150125 
 
 03.90		Bugs

@@ -15,7 +15,7 @@
     <AssemblyName>Mvc5RQ</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -304,6 +304,11 @@
     <Compile Include="Exceptions\RQExceptions.cs" />
     <Compile Include="Formatters\RDFCustomFormatter.cs" />
     <Compile Include="Helpers\RQAuthorize.cs" />
+    <Compile Include="Migrations\201502151631491_Init.cs" />
+    <Compile Include="Migrations\201502151631491_Init.Designer.cs">
+      <DependentUpon>201502151631491_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -335,6 +340,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-Mvc5RQ-20140920020328.mdf" />
+    <Content Include="App_Data\aspnet-Mvc5RQ-20140920020328_log.ldf">
+      <DependentUpon>aspnet-Mvc5RQ-20140920020328.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\ASPNETDB.MDF" />
     <Content Include="App_Data\aspnetdb_log.ldf">
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
@@ -771,6 +780,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ScriptPack.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502151631491_Init.resx">
+      <DependentUpon>201502151631491_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\dotNetRDF\Libraries\core\dotNetRDF.csproj">
@@ -820,7 +832,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50403</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50403/</IISUrl>
+          <IISUrl>http://localhost/Mvc5RQ</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
