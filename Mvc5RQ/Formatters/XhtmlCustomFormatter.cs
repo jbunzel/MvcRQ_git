@@ -8,9 +8,12 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
+using System.Web.Http;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+
+using Mvc5RQ.Exceptions;
 
 namespace Mvc5RQ.Formatters
 {
@@ -64,9 +67,10 @@ namespace Mvc5RQ.Formatters
                     xTrf.Load(rqItemModel.RQItems.FormatPreprocessor.XmlTransformPath, xSet, new System.Xml.XmlUrlResolver());
                     xTrf.Transform(new System.Xml.XPath.XPathDocument(r), rqItemModel.RQItems.FormatPreprocessor.XslTransformArg, writeStream);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
+                    //throw new NotImplementedException("Could not find a RiQuest item with requested document number.");
+                    throw new HttpResponseException(JsonErrorResponse.Create(ex, "Add operation failed."));
                 }
             }
         }

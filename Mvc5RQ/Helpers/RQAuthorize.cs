@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
 using Mvc5RQ.Models;
+using Mvc5RQ.Exceptions;
 
 namespace Mvc5RQ.Helpers
 {
@@ -91,8 +92,8 @@ namespace Mvc5RQ.Helpers
         {
             string message = "Sie sind nicht autorisiert diese Funktion auszuführen.";
 
-            Mvc5RQ.Areas.MyJsonResult UnauthorizedResult = Mvc5RQ.Areas.MyJsonResult.CreateError(message);
-            filterContext.Response = filterContext.Request.CreateResponse<Mvc5RQ.Areas.MyJsonResult>(HttpStatusCode.BadRequest, UnauthorizedResult);
+            MyJsonResult UnauthorizedResult = MyJsonResult.CreateError(message);
+            filterContext.Response = filterContext.Request.CreateResponse<MyJsonResult>(HttpStatusCode.BadRequest, UnauthorizedResult);
         }
     }
 

@@ -103,6 +103,26 @@
               Sucht eine lokalisierte Zeichenfolge, die Deletes and recreates the Lucene index. ähnelt.
             </summary>
         </member>
+        <member name="P:Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_lucenenew_ok">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The Lucene index has been successfully recreated and optimized. ähnelt.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_luceneoptimize_ok">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The Lucene index has been successfully optimized. ähnelt.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_new_err_directory_not_found">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The bookmark directory has not been found. ähnelt.
+            </summary>
+        </member>
+        <member name="P:Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_new_ok">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The bookmark directory has been successfully indexed. ähnelt.
+            </summary>
+        </member>
         <member name="T:Mvc5RQ.Areas.Desktop.Controllers.RQDTController">
             <summary>
             Riquest Desktop Service (RQDT)

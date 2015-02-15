@@ -7,7 +7,6 @@ function getRQItemList(node) {
         url: HostAdress() + encodeURI("/rqds/rqitems/rqi?verb=BrowseViewState&queryString=$class$" + node.data.key.substring(node.data.key.indexOf('$') + 1)),
         type: "GET",
         data: null,
-        dataType: "html",
         success: function (data) {
             renderHtmlList(data);
             if (docNo != "") {
@@ -17,7 +16,8 @@ function getRQItemList(node) {
             }
         },
         error: function (xhr) {
-            alert(xhr.responseText);
+            _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+            });
         }
     });
     $("#echoActive").text("" + node + " (" + node.getKeyPath() + ")");

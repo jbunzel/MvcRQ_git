@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 
 using Mvc5RQ.Helpers;
+using Mvc5RQ.Exceptions;
 
 namespace Mvc5RQ.Areas.UserSettings.Controllers
 {

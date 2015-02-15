@@ -17,14 +17,16 @@ function exportResultList() {
         data: json,
         contentType: 'application/json; charset=utf-8',
         success: function (data, textStatus, jqXHR) {
+            fd.remove();
             var response = { isSuccess: true,
-                message: (verb == "edit") ? "Der Datensatz wurde aktualisiert." : "Ein neuer Datensatz wurde angelegt."
+                             message: "response message to be defined."
             }
             _myHelper.processServerResponse(response, function () {
             });
         },
-        error: function (response) {
-            _myHelper.processServerResponse(response, null, function () {
+        error: function (xhr) {
+            fd.remove();
+            _myHelper.processServerResponse(xhr.responseJSON, null, function () {
             });
         }
     });
@@ -127,7 +129,9 @@ function selectPredicates(elementId, subjectId) {
             });
         },
         error: function (xhr) {
-            _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
+            fd.remove();
+            _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+            });
         }
     });
 
@@ -189,7 +193,6 @@ function getRQItem(docno, newDomElementID, oldDomElementID) {
             url: HostAdress() + "/rqds/rqitems/" + docno + "/rqi?verb=" + getrqitemverb,
             type: "GET",
             data: null,
-            dataType: acceptedType,
             success: function (data) {
                 if (acceptedType == "xml")
                     renderXmlList(data, newDomElementID);
@@ -198,9 +201,10 @@ function getRQItem(docno, newDomElementID, oldDomElementID) {
                     //$(".select-predicates").on("click", selectPredicates);
                 }
             },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '));
-                $("#" + newDomElementID).html("");
+            error: function (xhr) {
+                _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+                    $("#" + newDomElementID).html("");
+                });
             }
         });
     }
@@ -221,6 +225,10 @@ function callAjax(path, domElementID) {
         dataType: "xml",
         success: function (data) {
             renderFieldContent(data, domElementID);
+        },
+        error: function (xhr) {
+            _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+            });
         }
     });
 }
@@ -251,7 +259,8 @@ function callAjax_ResultList(targetUrl) {
         },
         error: function (xhr) {
             fd.remove();
-            _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
+            _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+            });
         }
     });
 }

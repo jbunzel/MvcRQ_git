@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using Mvc5RQ.Exceptions;
 using Mvc5RQ.Areas.Desktop.Models;
 
 namespace Mvc5RQ.Areas.Desktop.Controllers
@@ -13,6 +14,7 @@ namespace Mvc5RQ.Areas.Desktop.Controllers
     /// Riquest Desktop Service (RQDT)
     /// </summary>
     [RoutePrefix("rqdt")]
+    [ExceptionHandling]
     public class RQDTController : ApiController
     {
         #region private members
@@ -70,15 +72,8 @@ namespace Mvc5RQ.Areas.Desktop.Controllers
         [HttpPost]
         public IHttpActionResult Export([FromBody]string projectName)
         {
-            try
-            {
-                DesktopManager.ConvertProject(projectName);
-                return Ok();
-            }
-            catch
-            {
-                throw new Exception("Fehler beim Export.");
-            }
+            DesktopManager.ConvertProject(projectName);
+            return Ok();
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using Mvc5RQ.Models;
 using Mvc5RQ.Areas.UserManagement.Models;
+using Mvc5RQ.Exceptions;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;

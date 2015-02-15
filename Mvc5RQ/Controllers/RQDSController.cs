@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 using Mvc5RQ.Models;
 using Mvc5RQ.Helpers;
+using Mvc5RQ.Exceptions;
 using Mvc5RQ.Areas.UserSettings;
 
 namespace Mvc5RQ.Controllers
@@ -15,6 +16,7 @@ namespace Mvc5RQ.Controllers
     /// Riquest Date Service (RQDS)
     /// </summary>
     [RoutePrefix("rqds")]
+    [ExceptionHandling]
     public class RQDSController : ApiController
     {
         #region public contructors
@@ -77,15 +79,13 @@ namespace Mvc5RQ.Controllers
         {
             if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
                 throw new HttpResponseException(JsonErrorResponse.Redirect(Request.RequestUri.ToString().Replace("rqds/" + dbname + "/" + format, dbname + "/" + "RQItemsLD?verb=" + format)));
-            try 
+            else
             {
+                RQItemModel result;
                 RQItemModelRepository repo = new RQItemModelRepository(new FormatParameter((FormatParameter.FormatEnum)Enum.Parse(typeof(FormatParameter.FormatEnum), format)));
-                
-                return repo.GetModel(queryString, Areas.UserSettings.UserState.StateType(verb));
-            }
-            catch
-            {
-                throw;
+
+                result = repo.GetModel(queryString, Areas.UserSettings.UserState.StateType(verb));
+                return result;
             }
         }
 
@@ -122,37 +122,39 @@ namespace Mvc5RQ.Controllers
         {
             if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
                 throw new HttpResponseException(JsonErrorResponse.Redirect(Request.RequestUri.ToString().Replace("rqds/" + dbname + "/" + id + "/" + format, dbname + "/" + "RQItemLD/" + id + "?verb=" + format)));
-
-            UserState.States state;
-            bool forEdit;
-
-            RQItemModelRepository repo = new RQItemModelRepository(new FormatParameter((FormatParameter.FormatEnum)Enum.Parse(typeof(FormatParameter.FormatEnum), format + ((format == "rqi") ? "_single_item" : ""))));
-            if (!string.IsNullOrEmpty(verb))
-                switch (verb.ToLower())
-                {
-                    case "queryitem":
-                        state = UserState.States.ListViewState;
-                        forEdit = false;
-                        break;
-                    case "browseitem":
-                        state = UserState.States.BrowseViewState;
-                        forEdit = false;
-                        break;
-                    case "edititem":
-                        state = RQItem.IsExternal(id) ? UserState.States.ListViewState : UserState.States.EditState;
-                        forEdit = RQItem.IsExternal(id) ? false : true;
-                        break;
-                    default:
-                        state = UserState.States.ListViewState;
-                        forEdit = false;
-                        break;
-                }
             else
             {
-                state = UserState.States.ListViewState;
-                forEdit = false;
+                UserState.States state;
+                bool forEdit;
+
+                RQItemModelRepository repo = new RQItemModelRepository(new FormatParameter((FormatParameter.FormatEnum)Enum.Parse(typeof(FormatParameter.FormatEnum), format + ((format == "rqi") ? "_single_item" : ""))));
+                if (!string.IsNullOrEmpty(verb))
+                    switch (verb.ToLower())
+                    {
+                        case "queryitem":
+                            state = UserState.States.ListViewState;
+                            forEdit = false;
+                            break;
+                        case "browseitem":
+                            state = UserState.States.BrowseViewState;
+                            forEdit = false;
+                            break;
+                        case "edititem":
+                            state = RQItem.IsExternal(id) ? UserState.States.ListViewState : UserState.States.EditState;
+                            forEdit = RQItem.IsExternal(id) ? false : true;
+                            break;
+                        default:
+                            state = UserState.States.ListViewState;
+                            forEdit = false;
+                            break;
+                    }
+                else
+                {
+                    state = UserState.States.ListViewState;
+                    forEdit = false;
+                }
+                return repo.GetRQItem(id, state, forEdit);
             }
-            return repo.GetRQItem(id, state, forEdit);
         }
 
         /// <summary>
@@ -192,7 +194,7 @@ namespace Mvc5RQ.Controllers
         [HttpGet]
         public RQItem Get(string dbname, string id, string subfield, int index, string format = "", string verb = "")
         {
-            throw new NotImplementedException("");
+            throw new HttpResponseException(JsonErrorResponse.NotImplemented()); 
         }
 
         /// <summary>
@@ -205,11 +207,10 @@ namespace Mvc5RQ.Controllers
         {
             if (ModelState.IsValid)
             {
-                string test = "";
-                return null;
+                throw new HttpResponseException(JsonErrorResponse.NotImplemented());
             }
             else
-                throw new Exception("Fehler beim Export.");
+                throw new HttpResponseException(JsonErrorResponse.InvalidData());
         }
 
         /// <summary>
@@ -241,30 +242,15 @@ namespace Mvc5RQ.Controllers
             if (ModelState.IsValid)
             {
                 RQItem rqitem = null;
+                RQItemModel model = new RQItemModel(true);
 
-                try
-                {
-                    RQItemModel model = new RQItemModel(true);
-                    rqitem = model.Add(newRQItem);
-                    model.Update();
-                }
-                catch (Exception ex)
-                {
-                    string message = "Add operation failed. ";
-                    Exception iex = ex;
-                    while (iex != null)
-                    {
-                        if (!string.IsNullOrEmpty(iex.Message))
-                            message += "\n - " + iex.Message;
-                        iex = iex.InnerException;
-                    }
-                    throw new Exception(message);
-                }
+                rqitem = model.Add(newRQItem);
+                model.Update();
                 CacheManager.Clear();
                 return Get("rqitems",rqitem.DocNo, "rqi", "edititem", "");
             }
             else
-                throw new Exception("Fehler beim Erstellen.");
+                throw new HttpResponseException(JsonErrorResponse.InvalidData());
         }
 
         /// <summary>
@@ -301,31 +287,16 @@ namespace Mvc5RQ.Controllers
                 RQItemModelRepository repo = new RQItemModelRepository((new FormatParameter(FormatParameter.FormatEnum.rqi)));
                 RQItemModel model = null;
                 RQItem rqitem = null;
-                try
-                {
-                    model = repo.GetModel("$access$" + id, UserState.States.EditState, true);
-                    rqitem = model.RQItems.FirstOrDefault(p => p.DocNo == id);
-                    rqitem.Change(changeRQItem);
-                    model.Update();
-                }
-                catch (Exception ex)
-                {
-                    string message = "Update operation failed. ";
-                    Exception iex = ex;
 
-                    while (iex != null)
-                    {
-                        if (!string.IsNullOrEmpty(iex.Message))
-                            message += "\n - " + iex.Message;
-                        iex = iex.InnerException;
-                    }
-                    throw new Exception(message);
-                };
+                model = repo.GetModel("$access$" + id, UserState.States.EditState, true);
+                rqitem = model.RQItems.FirstOrDefault(p => p.DocNo == id);
+                rqitem.Change(changeRQItem);
+                model.Update();
                 CacheManager.Clear();
                 return Get("rqitems",id, "rqi", "edititem", "");
             }
             else
-                throw new Exception("Fehler beim Update.");
+                throw new HttpResponseException(JsonErrorResponse.InvalidData());
         }
 
         /// <summary>
@@ -353,7 +324,7 @@ namespace Mvc5RQ.Controllers
         [RQAuthorize(Roles = "admin, patron")]
         public void Delete(string dbname, string id)
         {
-            throw new NotImplementedException("Die Funktion zum Löschen eines Elements aus der Datenbank ist noch nicht verfügbar.");
+            throw new HttpResponseException(JsonErrorResponse.NotImplemented());
         }
                 
         /// <summary>
@@ -394,7 +365,7 @@ namespace Mvc5RQ.Controllers
                 return editModel.AppendClass();
             }
             else
-                throw new Exception("Invalid model.");
+                throw new HttpResponseException(JsonErrorResponse.InvalidData());
         }
 
         /// <summary>
@@ -415,7 +386,7 @@ namespace Mvc5RQ.Controllers
                 return editModel.IsValid();
             }
             else
-                throw new Exception("Invalid model.");
+                throw new HttpResponseException(JsonErrorResponse.InvalidData());
         }
 
         /// <summary>
@@ -439,7 +410,7 @@ namespace Mvc5RQ.Controllers
                     throw new HttpResponseException(JsonErrorResponse.Create(editModel.RQKosEditStatus));
             }
             else
-                throw new Exception("Invalid model.");
+                throw new HttpResponseException(JsonErrorResponse.InvalidData());
         }
 
         /// <summary>
@@ -463,7 +434,7 @@ namespace Mvc5RQ.Controllers
                     throw new HttpResponseException(JsonErrorResponse.Create(editModel.RQKosEditStatus));
             }
             else
-                throw new Exception("Invalid model.");
+                throw new HttpResponseException(JsonErrorResponse.InvalidData());
         }
 
         #endregion

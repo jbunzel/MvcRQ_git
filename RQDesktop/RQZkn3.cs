@@ -79,21 +79,25 @@ namespace RQDesktop
             return null;
         }
 
-        public XmlDocument ConvertProject(string xsltPath, string projectName)
+        public string ConvertProject(string xsltPath, string projectName)
         {
             var xTrf = new System.Xml.Xsl.XslCompiledTransform(true);
             var xTrfArg = new System.Xml.Xsl.XsltArgumentList();
             var xSet = new System.Xml.Xsl.XsltSettings(true, true);
+            var wSet = new System.Xml.XmlWriterSettings();
             var mstr = new System.Xml.XmlTextWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF8);
+            //var mstr = new System.Xml.XmlTextWriter(xsltPath + "test.xml", System.Text.Encoding.UTF8);
             var doc = new System.Xml.XmlDocument();
-            
+
+            wSet = xTrf.OutputSettings;
             xTrf.Load(CopyXSLTFile(xsltPath), xSet, new XmlUrlResolver());
             xTrfArg.AddParam("ProjectName", "", projectName);
+            mstr.WriteStartDocument();
+            mstr.WriteDocType("Article", "-//RiQuest Software//DTD JBArticle v1.0 20020724//EN", "../dtd/JBArticle/jbarticle.dtd", null);
             xTrf.Transform(_extractPath + "/desktop.xml", xTrfArg, mstr);
             mstr.BaseStream.Flush();
             mstr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-            doc.Load(mstr.BaseStream);
-            return doc;
+            return new StreamReader(mstr.BaseStream).ReadToEnd();
         }
 
         #endregion

@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-//using System.Net.Http;
 using System.Web.Http;
-//using System.Web.Mvc;
+
 using Mvc5RQ.Helpers;
+using Mvc5RQ.Exceptions;
+
 using RQLib.RQDAL;
 
 namespace Mvc5RQ.Areas.DataManagement.Controllers
 {
     [RoutePrefix("rqdm")]
+    [ExceptionHandling]
     public class RQDMController : ApiController
     {
         [HttpPost]
@@ -18,15 +20,8 @@ namespace Mvc5RQ.Areas.DataManagement.Controllers
         [Route("lucene/new")]
         public string LuceneNew()
         {
-            try
-            {
-                new RQLuceneDBI().Reindex();
-            }
-            catch (Exception ex)
-            {
-                throw new AccessViolationException(ex.Message);
-            }
-            return "The Lucene index has been successfully recreated and optimized!";
+            new RQLuceneDBI().Reindex();
+            return Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_lucenenew_ok;
         }
 
         [HttpPost]
@@ -34,15 +29,8 @@ namespace Mvc5RQ.Areas.DataManagement.Controllers
         [Route("lucene/optimize")]
         public string LuceneOptimize()
         {
-            try
-            {
-                new RQLuceneDBI().Optimize();
-            }
-            catch (Exception ex)
-            {
-                throw new AccessViolationException(ex.Message);
-            }
-            return "The Lucene index has been successfully optimized!"; 
+            new RQLuceneDBI().Optimize();
+            return Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_luceneoptimize_ok; 
         }
 
         [HttpPost]
@@ -50,25 +38,18 @@ namespace Mvc5RQ.Areas.DataManagement.Controllers
         [Route("bookmarks/new")]
         public string New()
         {
-            try
-            {
-                string path = "D:\\Users\\Public\\MyVLib\\My Virtual Subject Library\\";
-                string name = "xml/dir.xml";
-                RQBookmarkDAL VLD = new RQBookmarkDAL();
-                System.IO.DirectoryInfo VLDir = new System.IO.DirectoryInfo(path);
+            string path = "D:\\Users\\Public\\MyVLib\\My Virtual Subject Library\\";
+            string name = "xml/dir.xml";
+            RQBookmarkDAL VLD = new RQBookmarkDAL();
+            System.IO.DirectoryInfo VLDir = new System.IO.DirectoryInfo(path);
 
-                if (VLDir.Exists)
-                {
-                    VLD.LoadBookmarks(ref path, ref name);
-                }
-                else
-                    throw new AccessViolationException("Bookmark directory does not exist!");
-            }
-            catch (Exception ex)
+            if (VLDir.Exists)
             {
-                throw new AccessViolationException(ex.Message);
+                VLD.LoadBookmarks(ref path, ref name);
             }
-            return "Bookmark directory has been successfully indexed!";
+            else
+                throw new HttpResponseException(JsonErrorResponse.Create(System.Net.HttpStatusCode.NotFound, Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_new_err_directory_not_found));
+            return Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_new_ok;
         }
     }
 }

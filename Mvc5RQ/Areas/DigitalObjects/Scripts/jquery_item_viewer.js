@@ -45,9 +45,10 @@ function getRQItem(docno) {
                     renderItemContent();
                 }
             },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '));
-                $("#bib_info_area").html("");
+            error: function (xhr) {
+                _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+                    $("#bib_info_area").html("");
+                });
             }
         });
     }

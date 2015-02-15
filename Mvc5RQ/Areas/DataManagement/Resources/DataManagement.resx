@@ -123,6 +123,12 @@
   <data name="dm_bookmarks_reindex_title" xml:space="preserve">
     <value>Saves the old Bookmarks index and creates a new one.</value>
   </data>
+  <data name="dm_lucenenew_ok" xml:space="preserve">
+    <value>The Lucene index has been successfully recreated and optimized.</value>
+  </data>
+  <data name="dm_luceneoptimize_ok" xml:space="preserve">
+    <value>The Lucene index has been successfully optimized.</value>
+  </data>
   <data name="dm_lucene_delete" xml:space="preserve">
     <value>Delete Lucene index</value>
   </data>
@@ -146,5 +152,11 @@
   </data>
   <data name="dm_lucene_reindex_title" xml:space="preserve">
     <value>Deletes and recreates the Lucene index.</value>
+  </data>
+  <data name="dm_new_err_directory_not_found" xml:space="preserve">
+    <value>The bookmark directory has not been found.</value>
+  </data>
+  <data name="dm_new_ok" xml:space="preserve">
+    <value>The bookmark directory has been successfully indexed.</value>
   </data>
 </root>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.ComponentModel.DataAnnotations;
 using System.Xml;
 using System.Xml.Serialization;
@@ -13,6 +14,7 @@ using RQLib.RQQueryResult.RQDescriptionElements;
 using RQLib.RQQueryForm;
 
 using Mvc5RQ.Helpers;
+using Mvc5RQ.Exceptions;
 using Mvc5RQ.Areas.UserSettings;
 using Mvc5RQ.Areas.DigitalObjects.Helpers;
 
@@ -192,6 +194,8 @@ namespace Mvc5RQ.Models
                 }
                 this._rqitemsList = li;
             }
+            else
+                throw new NotFoundException(RQResources.Views.Shared.SharedStrings.err_notfound);
         }
 
         #endregion
@@ -1578,7 +1582,7 @@ namespace Mvc5RQ.Models
                 }
                 catch
                 {
-                    throw new NotImplementedException("Item with DocNo " + rqitemId + "could not be found.");
+                    throw new NotFoundException(RQResources.Views.Shared.SharedStrings.err_notfound);
                 }
             }
         }

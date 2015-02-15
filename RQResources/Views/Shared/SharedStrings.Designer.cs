@@ -143,6 +143,15 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invalid data transmitted. ähnelt.
+        /// </summary>
+        public static string err_invalid_data {
+            get {
+                return ResourceManager.GetString("err_invalid_data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die You are not authorized to execute this function. ähnelt.
         /// </summary>
         public static string err_not_authorized {
@@ -152,7 +161,70 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die An error occurred while processing the request. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Requested item could not be found. ähnelt.
+        /// </summary>
+        public static string err_notfound {
+            get {
+                return ResourceManager.GetString("err_notfound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This method has not yet been implemented. ähnelt.
+        /// </summary>
+        public static string err_notimplemented {
+            get {
+                return ResourceManager.GetString("err_notimplemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Retrieval of data record failed. ähnelt.
+        /// </summary>
+        public static string err_rqds_get_item {
+            get {
+                return ResourceManager.GetString("err_rqds_get_item", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Search request failed. ähnelt.
+        /// </summary>
+        public static string err_rqds_get_list {
+            get {
+                return ResourceManager.GetString("err_rqds_get_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add operation failed. ähnelt.
+        /// </summary>
+        public static string err_rqds_post_add {
+            get {
+                return ResourceManager.GetString("err_rqds_post_add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Update operation failed. ähnelt.
+        /// </summary>
+        public static string err_rqds_post_update {
+            get {
+                return ResourceManager.GetString("err_rqds_post_update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Unidentified error. ähnelt.
+        /// </summary>
+        public static string err_unknown {
+            get {
+                return ResourceManager.GetString("err_unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error on processing the request. ähnelt.
         /// </summary>
         public static string errmessage {
             get {
@@ -161,7 +233,7 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die error ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error ähnelt.
         /// </summary>
         public static string error {
             get {

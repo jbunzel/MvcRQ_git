@@ -28,8 +28,7 @@
             },
             url: url,
             type: 'POST',
-            //dataType: 'json',
-            data: "", //json,
+            data: "",
             contentType: 'application/json; charset=utf-8',
             success: function (data, textStatus, jqXHR) {
                 fd.remove();
@@ -40,9 +39,9 @@
                 _myHelper.processServerResponse(response, function () {
                 });
             },
-            error: function (response) {
+            error: function (xhr) {
                 fd.remove();
-                _myHelper.processServerResponse(response, null, function () {
+                _myHelper.processServerResponse(xhr.responseJSON, null, function () {
                 });
             }
         });

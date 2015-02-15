@@ -262,7 +262,6 @@
     <Compile Include="Areas\UserManagement\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\UserManagement\Models\AdminViewModel.cs" />
     <Compile Include="Areas\UserSettings\BundleConfig.cs" />
-    <Compile Include="Areas\MyJsonResult.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UserManagementController.cs" />
     <Compile Include="Areas\UserManagement\Helper\AccountValidation.cs" />
     <Compile Include="Areas\UserManagement\Helper\IUserAccountService.cs" />
@@ -300,8 +299,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RQKosController.cs" />
+    <Compile Include="Exceptions\JsonErrorResponse.cs" />
+    <Compile Include="Exceptions\MyJsonResult.cs" />
+    <Compile Include="Exceptions\RQExceptions.cs" />
     <Compile Include="Formatters\RDFCustomFormatter.cs" />
-    <Compile Include="Helpers\JsonErrorResponse.cs" />
     <Compile Include="Helpers\RQAuthorize.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />

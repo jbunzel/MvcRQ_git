@@ -41,8 +41,8 @@ function EditForm() {
                 Data2Form(data);
                 fd.remove();
             },
-            error: function (response) {
-                _myHelper.processServerResponse(response, null, function () {
+            error: function (xhr) {
+                _myHelper.processServerResponse(xhr.responseJSON, null, function () {
                     $("#EditDialog").html("<p><span class='ui-icon ui-icon-alert' style='float: left; margin: 0 7px 20px 0;'></span><span id='edit-dialog-message'>Der Editiervorgang kann nicht durchgeführt werden !</span></p>");
                     $(function () {
                         fd.remove();
@@ -120,8 +120,8 @@ function EditForm() {
                     });
                 });
             },
-            error: function (response) {
-                _myHelper.processServerResponse(response, null, function () {
+            error: function (xhr) {
+                _myHelper.processServerResponse(xhr.responseJSON, null, function () {
                     $("#EditDialog").html("<p><span class='ui-icon ui-icon-alert' style='float: left; margin: 0 7px 20px 0;'></span><span id='edit-dialog-message'>Beim Speichern des Datensatzes ist der folgende Fehler aufgetreten:</p><p>" + response.responseText.replace(/\+/g, " ") + "</p></span>");
                     $(function () {
                         fd.remove()
@@ -334,7 +334,8 @@ function attachTOC(e) {
                     },
                     error: function (xhr) {
                         fd.remove();
-                        _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
+                        _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+                        });
                     }
                 });
             },

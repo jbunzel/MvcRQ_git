@@ -13,8 +13,8 @@
 03.021			Add e-mail confirmation on registration.
 03.022			Redesign and unify account management pages. 
 
-03.03		Exception management
-03.031			Redesign and unify exception management functions.
+03.03		Exception management																							begonnen: 150212
+03.031			Redesign and unify exception management functions.															begonnen: 150212	erledigt: 150215
 03.032			Unify error messages (color, position etc.).
 
 03.04		ItemViewer									

@@ -41,7 +41,7 @@ namespace Mvc5RQ.Areas.LinkedDataCalls.Controllers
             //var allPredicates = this._LinkedDataService.GetLinkedDataPredicates(id);
             var allPredicates = this._LinkedDataService.GetLinkedDataDictionary(id);
 
-            var result = new MyJsonResult()
+            var result = new Mvc5RQ.Exceptions.MyJsonResult()
             {
                 data = from predicate in allPredicates
                        select new

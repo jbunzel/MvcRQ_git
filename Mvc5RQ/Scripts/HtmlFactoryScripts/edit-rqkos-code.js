@@ -109,9 +109,10 @@ function EditForm() {
                     _myHelper.showSuccess('Klassendefinition und Mapping erfolgreich gespeichert');
                 }
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function (xhr) {
                 fd.remove();
-                _myHelper.processServerResponse(jqXHR, null, null);
+                _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+                });
             }
         });
         return true;
@@ -157,9 +158,10 @@ function EditForm() {
                     });
                 }
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (xhr) {
                 fd.remove();
-                _myHelper.processServerResponse(jqXHR, null, null);
+                _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+                });
             }
         });
         return true;
@@ -196,8 +198,10 @@ function EditForm() {
                     $('#ClassID' + event.target.id.substr(9) + " + span").html($(this).val());
                 });
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function (xhr) {
                 fd.remove();
+                _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+                });
             }
         });
         return true;
@@ -250,9 +254,10 @@ function EditForm() {
                                 up();
                             }
                         },
-                        error: function (jqXHR, textStatus, errorThrown) {
+                        error: function (xhr) {
                             fd.remove();
-                            _myHelper.processServerResponse(jqXHR, null, null);
+                            _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+                            });
                         }
                     });
                     return true;

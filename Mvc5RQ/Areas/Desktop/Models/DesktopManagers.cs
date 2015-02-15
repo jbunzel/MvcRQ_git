@@ -35,6 +35,7 @@ namespace Mvc5RQ.Areas.Desktop.Models
             int test; 
             string projectDirectory = "";
             string strandsFilePath = "";
+            string doc = "";
 
             if (int.TryParse(projectName, out test)) {
                 _zkn.ProjectList().TryGetValue(projectName, out projectDirectory);
@@ -43,9 +44,9 @@ namespace Mvc5RQ.Areas.Desktop.Models
             else
                 projectDirectory = projectName;
             strandsFilePath = Mvc5RQ.Areas.UserSettings.Models.DesktopOptions.StrandsDirectory + "/" + projectDirectory + "/" + projectDirectory + ".xml";
-            System.Xml.XmlDocument doc = _zkn.ConvertProject(HttpContext.Current.Server.MapPath("~/xslt/DesktopTransforms/DESK2STRAND.xsl"), projectName);
-            if (System.IO.File.Exists(strandsFilePath)) System.IO.File.Delete(strandsFilePath); 
-            doc.Save(strandsFilePath);
+            doc = _zkn.ConvertProject(HttpContext.Current.Server.MapPath("~/xslt/DesktopTransforms/DESK2STRAND.xsl"), projectName);
+            //if (System.IO.File.Exists(strandsFilePath)) System.IO.File.Delete(strandsFilePath); 
+            System.IO.File.WriteAllText(strandsFilePath, doc);
         }
     }
 

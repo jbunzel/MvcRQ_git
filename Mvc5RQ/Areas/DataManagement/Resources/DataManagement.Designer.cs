@@ -149,5 +149,41 @@ namespace Mvc5RQ.Areas.DataManagement.Resources {
                 return ResourceManager.GetString("dm_lucene_reindex_title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The Lucene index has been successfully recreated and optimized. ähnelt.
+        /// </summary>
+        public static string dm_lucenenew_ok {
+            get {
+                return ResourceManager.GetString("dm_lucenenew_ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The Lucene index has been successfully optimized. ähnelt.
+        /// </summary>
+        public static string dm_luceneoptimize_ok {
+            get {
+                return ResourceManager.GetString("dm_luceneoptimize_ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The bookmark directory has not been found. ähnelt.
+        /// </summary>
+        public static string dm_new_err_directory_not_found {
+            get {
+                return ResourceManager.GetString("dm_new_err_directory_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The bookmark directory has been successfully indexed. ähnelt.
+        /// </summary>
+        public static string dm_new_ok {
+            get {
+                return ResourceManager.GetString("dm_new_ok", resourceCulture);
+            }
+        }
     }
 }

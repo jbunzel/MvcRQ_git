@@ -118,10 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="dm_bookmarks_reindex" xml:space="preserve">
-    <value>Bookmarks Index erneuern</value>
+    <value>Webseiten Verzeichnis neu indexieren.</value>
   </data>
   <data name="dm_bookmarks_reindex_title" xml:space="preserve">
-    <value>Sichert den alten Bookmarks Index und legt einen neuen an.</value>
+    <value>Sichert den alten Webseiten Index und legt einen neuen an.</value>
+  </data>
+  <data name="dm_lucenenew_ok" xml:space="preserve">
+    <value>Der Lucene Index wurde erfolgreich neu erstellt und optimiert.</value>
+  </data>
+  <data name="dm_luceneoptimize_ok" xml:space="preserve">
+    <value>Der Lucene Index wurde erfolgreich optimiert.</value>
   </data>
   <data name="dm_lucene_delete" xml:space="preserve">
     <value>Lucene Index löschen</value>
@@ -146,5 +152,11 @@
   </data>
   <data name="dm_lucene_reindex_title" xml:space="preserve">
     <value>Löscht und legt den Lucene Index neu an.</value>
+  </data>
+  <data name="dm_new_err_directory_not_found" xml:space="preserve">
+    <value>Das Webseiten Verzeichnis wurde nicht gefunden.</value>
+  </data>
+  <data name="dm_new_ok" xml:space="preserve">
+    <value>Das Webseiten Verzeichnis wurde erfolgreich indexiert.</value>
   </data>
 </root>

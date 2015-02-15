@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 
 using Mvc5RQ.Models;
-using Mvc5RQ.Helpers;
+using Mvc5RQ.Exceptions;
 
 namespace Mvc5RQ.Controllers
 {

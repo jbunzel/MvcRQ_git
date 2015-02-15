@@ -30,9 +30,9 @@ function exportDesktop() {
             _myHelper.processServerResponse(response, function () {
             });
         },
-        error: function (response) {
+        error: function (xhr) {
             fd.remove();
-            _myHelper.processServerResponse(response, null, function () {
+            _myHelper.processServerResponse(xhr.responseJSON, null, function () {
             });
         }
     });
@@ -56,7 +56,8 @@ function getProjectList(projectNr) {
         },
         error: function (xhr) {
             fd.remove();
-            _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
+            _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+            });
         }
     });
 }
@@ -270,7 +271,8 @@ function callAjax_ResultList(targetUrl) {
         },
         error: function (xhr) {
             fd.remove();
-            _myHelper.showMessage(decodeURIComponent(xhr.responseText).replace(/\+/g, ' '), "error");
+            _myHelper.processServerResponse(xhr.responseJSON, null, function () {
+            });
         }
     });
 }

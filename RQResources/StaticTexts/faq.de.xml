@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FAQList>
+	<FAQItem>
+		<FAQQuestion>
+			Was ist eine Digitale Bibliothek?
+		</FAQQuestion>
+		<FAQAnswer>
+			Eine Digitale Bibliothek ist eine kohärente Sammlung digitaler Objekte, also von digitalen Texten, Videos, Audios, usw., in Verbindung mit Methoden zum Wiederauffinden derselben, zum Zugriff und zur Selektion sowie zur Organisation und Pflege der Sammlung.&lt;br/&gt;&lt;br/&gt;(Aus: How to build a digital library, von Ian H. Witten und David Bainbridge)
+		</FAQAnswer>
+	</FAQItem>
+	<FAQItem>
+		<FAQQuestion>
+			Was ist eine Persönliche Digitale Bibliothek?
+		</FAQQuestion>
+		<FAQAnswer>
+			Eine Persönliche Digitale Bibliothek enthält digitale Objekte, die sich auf die Interessengebiete einer bestimmten Person beziehen.&lt;br/&gt;&lt;br/&gt;Idealerweise ist eine Persönliche Digitale Bibliothek eine sorgfältig zusammengestellte Sammlung von Materialien mit besonders hohem Informationswert für die jeweiligen Interessengebiete.
+		</FAQAnswer>
+	</FAQItem>
+	<FAQItem>
+		<FAQQuestion>
+			Was ist die R¿Quest Digital Library?
+		</FAQQuestion>
+		<FAQAnswer>
+			R¿Quest ist eine Designstudie für eine Persönliche Digitale Bibliothek.&lt;br/&gt;&lt;br/&gt;Registrierte Benutzer können sich damit ihre eigene Persönliche Digitale Bibliothek aufbauen. Sie können den Zugang zum Katalog ihrer Bibliothek und den darin enthaltenen digitalen Objekten für die Allgemeinheit oder einzelne Benutzer öffnen und die von Anderen zur Verfügung gestellten Ressourcen nutzen. Der Zugriff kann auf einzelne Objekte eingeschränkt werden und das Kopieren von Objekten ausschließen.&lt;br/&gt;&lt;br/&gt;Mit der Registrierung verpflichtet sich der Benutzer zur Einhaltung der geltenden Urheberrechtsbestimmungen.&lt;br/&gt;&lt;br/&gt;(Die oben beschriebene Funktionalität ist geplant. Momentan enthält die R¿Quest Digital Library ausschließlich meine eigene digitale Bibliothek.)
+    </FAQAnswer>
+	</FAQItem>
+	<FAQItem>
+		<FAQQuestion>
+			Welche Arten von Materialien sind in der R¿Quest Digital Library enthalten?
+		</FAQQuestion>
+		<FAQAnswer>
+			Die R¿Quest Digital Library ist nicht auf bestimmte Medientypen eingeschränkt. Sie kann u. a. Bücher, Zeitschriften, Zeitschriftenaufsätze, Zeitungsartikel und Zeitungsausschnitte, Video- &amp; Audioaufnahmen, Bilder und Web-Bookmarks enthalten. &lt;br/&gt;&lt;br/&gt;(Der allgemein zugängliche Katalog umfasst gegenwärtig etwa 5.000 Einträge.)
+		</FAQAnswer>
+	</FAQItem>
+	<FAQItem>
+		<FAQQuestion>
+			Wie findet man digitale Objekte in der R¿Quest Digital Library?
+		</FAQQuestion>
+		<FAQAnswer>
+			R¿Quest bietet Möglichkeiten zur Suche und zur fachsystematischen Durchsicht (Browsing) der Sammlungen.&lt;br/&gt;Die Suche findet man im "Katalog"-Menu und das Browsing im "Regale"-Menu.
+		</FAQAnswer>
+	</FAQItem>
+	<FAQItem>
+		<FAQQuestion>
+			Wie sucht man in den Sammlungen der R¿Quest Digital Library?
+		</FAQQuestion>
+		<FAQAnswer>
+			Gehen Sie zum "Katalog"-Menu und geben Sie einen oder zwei Suchbegriffe in die Textbox in der linken Spalte ein. Trennen Sie die Suchbegriffe mit einem Leerzeichen.&lt;br/&gt;&lt;br/&gt;Grundsätzlich werden die Suchbegriffe durch "ODER" verbunden. Um eine "UND"-Suche durchzuführen, stellen Sie ein "+" (ohne Leerzeichen) vor jeden Suchbegriff. Drücken Sie "Go", um die Suche zu starten.&lt;br/&gt;&lt;br/&gt;Es empfiehlt sich, Suchbegriffe grundsätzlich rechts zu trunkieren, indem man "*" (für beliebig viele nachfolgende Zeichen) oder "?" (für genau ein nachfolgendes Zeichen) an den Suchbegriff anhängt. 
+		</FAQAnswer>
+	</FAQItem>
+  <FAQItem>
+    <FAQQuestion>
+      Kann man auch komplexe Suchanfragen in der R¿Quest Digital Library durchführen?
+    </FAQQuestion>
+    <FAQAnswer>
+      Die R¿Quest Digital Library basiert auf der Suchmaschine LUCENE. Es sind daher alle Anfragen möglich, die den Regeln der Suchsprache von LUCENE entsprechen. Gehen Sie zum´"Katalog"-Menu und geben Sie Ihre komplexe Suchanfrage in die Textbox in der linken Spalte ein und drücken Sie "Go", um die Suche zu starten.&lt;br/&gt;&lt;br/&gt;Nähere Erläuterungen zur Suchsprache von LUCENE finden Sie auf der Webseite &lt;a href="http://lucene.apache.org/java/3_0_2/queryparsersyntax.html" &gt; http://lucene.apache.org/java/3_0_2/queryparsersyntax.html &lt;a/&gt;. &lt;br/&gt;&lt;br/&gt;Mit komplexen Suchanfragen können Sie gezielt auch in einzelnen Feldern suchen. Geben Sie dazu den Namen des Suchfeldes und ohne Leerzeichen ":" gefolgt vom jeweiligen Suchbegriff ein. Die Namen der zur Verfügung stehenden Suchfelder finden Sie in jeder Einzel-Titelanzeige bzw. durch Ankreuzen des Kästchens "Suchfelder anzeigen".     
+    </FAQAnswer>
+  </FAQItem>
+
+  <FAQItem>
+		<FAQQuestion>
+			Wie kann man in den Sammlungen der R¿Quest Digital Library browsen?
+		</FAQQuestion>
+		<FAQAnswer>
+			Gehen Sie zum "Regale"-Menu und wählen Sie ein Regal aus dem Klassifikations-Baum in der linken Spalte aus.&lt;br/&gt;&lt;br/&gt;Das "Regale"-Menu ist noch experimentell und enthält nur Einträge, die jüngst dem Katalog hinzugefügt wurden.
+		</FAQAnswer>
+	</FAQItem>
+	<FAQItem>
+		<FAQQuestion>
+			Wie ruft man in der R¿Quest Digital Library direkt digitale Reproduktionen der Dokumente auf?
+		</FAQQuestion>
+		<FAQAnswer>
+			Die R¿Quest Digital Library enthält zahlreiche digitale Volltexte.&lt;br/&gt;&lt;br/&gt;Sie müssen sich nicht registrieren, um digitale Volltexte direkt am Bildschirm aufzurufen, sofern der Zugang nicht durch das Urheberrecht eingeschränkt ist. Klicken sie in der Kurztitelliste auf das "V"-Icon oder in der Einzeltitelanzeige auf die entsprechende Verknüpfung im "Availibilty"-Feld.&lt;br/&gt;&lt;br/&gt;Auch wenn Dokumente dem Urheberrecht unterliegen, können Sie diese direkt aus der R¿Quest Digital Library aufrufen. Sie werden jedoch nur angezeigt, wenn für Ihren Internet-Zugang die erforderlichen Zugangsrechte durch den jeweiligen Rechteinhaber freigeschaltet sind.&lt;br/&gt;&lt;br/&gt;Der Anteil der online zugänglichen Dokumente wird - unter Beachtung der Regelungen des Urheberrechts - kontinuierlich ausgeweitet.
+		</FAQAnswer>
+	</FAQItem>
+	<FAQItem>
+		<FAQQuestion>
+			Kann ich audiovisuelles Material aus der R¿Quest Digital Library benutzen?
+		</FAQQuestion>
+		<FAQAnswer>
+			Audio- und Videodateien sind gegenwärtig nur über mein privates Intranet zugänglich, da die Speicherkapazität meiner Web-Domain zu gering ist.&lt;br/&gt;&lt;br/&gt;Der Anteil der online zugänglichen Audio- und Videoaufnahmen wird - unter Beachtung der Regelungen des Urheberrechts - kontinuierlich ausgeweitet.
+		</FAQAnswer>
+	</FAQItem>
+	<FAQItem>
+		<FAQQuestion>
+			Können externe Datenbanken in die R¿Quest-Suche eingebunden werden?
+		</FAQQuestion>
+		<FAQAnswer>
+			Ja. In Verbindung mit dem R¿Quest-Katalog können alternativ die DFG-Nationallizenzen, der GBV-Verbundkatalog oder OCLC-WorldCat in die Suche eingebunden werden.&lt;br/&gt;&lt;br/&gt;Es gibt zwei Datenbanken zu den DFG-Nationallizenzen, eine für Monographien und eine für Zeitschriftenaufsätze. Sie enthalten Dokumente, für die seitens der Deutschen Forschungsgemeinschaft Lizenzen erworben worden, um den freien Online-Zugang für Studenten und Wissenschaftler in Deutschland zu ermöglichen. Alle darin enthaltenen Dokumente sind daher im Prinzip online zugänglich. Sie müssen sich jedoch ggf. registrieren lassen, um über Ihren Internet-Zugang zugreifen zu können. Die entsprechenden Regularien finden Sie auf &lt;a href="http://www.nationallizenzen.de" target="_NEW"&gt;www.nationallizenzen.de&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;Der GBV-Verbundkatalog bzw. OCLC-WorlCat sind umfassende regionale bzw. weltweite Bibliotheksverbundkatalog. Sie enthalten nur wenige direkt zugängliche digitale Dokumente.
+		</FAQAnswer>
+	</FAQItem>
+	<FAQItem>
+		<FAQQuestion>
+			Welche zusätzlichen Funktionalitäten bietet die R¿Quest Digital Library?
+		</FAQQuestion>
+		<FAQAnswer>
+			Das "arbeitsplatz"- und "mein riquest"- bzw. "ausstellungs"- Menu soll zukünftig Funktionalitäten zur Arbeit mit digitalen Dokumenten und Literaturlisten, sowie für digitale Ausstellungen zur Verfügung stellen.
+		</FAQAnswer>
+	</FAQItem>
+	<FAQItem>
+		<FAQQuestion>
+			Auf welchen Web-Browsern läuft die R¿Quest Digital Library?
+		</FAQQuestion>
+		<FAQAnswer>
+			Die R¿Quest Digital Library ist eine Anwendung unter ASP.NET 2.0. Sie ist für den Microsoft Internet Explorer 8 optimiert.
+		</FAQAnswer>
+	</FAQItem>
+</FAQList>

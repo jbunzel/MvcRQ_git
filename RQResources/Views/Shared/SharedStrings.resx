@@ -130,10 +130,10 @@
     <value>Delete</value>
   </data>
   <data name="errmessage" xml:space="preserve">
-    <value>An error occurred while processing the request.</value>
+    <value>Error on processing the request.</value>
   </data>
   <data name="error" xml:space="preserve">
-    <value>error</value>
+    <value>Error</value>
   </data>
   <data name="err_not_authorized" xml:space="preserve">
     <value>You are not authorized to execute this function.</value>
@@ -267,5 +267,29 @@
   </data>
   <data name="da_export" xml:space="preserve">
     <value>Export publication project</value>
+  </data>
+  <data name="err_invalid_data" xml:space="preserve">
+    <value>Invalid data transmitted.</value>
+  </data>
+  <data name="err_notfound" xml:space="preserve">
+    <value>Requested item could not be found.</value>
+  </data>
+  <data name="err_notimplemented" xml:space="preserve">
+    <value>This method has not yet been implemented.</value>
+  </data>
+  <data name="err_rqds_get_item" xml:space="preserve">
+    <value>Retrieval of data record failed.</value>
+  </data>
+  <data name="err_rqds_get_list" xml:space="preserve">
+    <value>Search request failed.</value>
+  </data>
+  <data name="err_rqds_post_add" xml:space="preserve">
+    <value>Add operation failed.</value>
+  </data>
+  <data name="err_rqds_post_update" xml:space="preserve">
+    <value>Update operation failed.</value>
+  </data>
+  <data name="err_unknown" xml:space="preserve">
+    <value>Unidentified error.</value>
   </data>
 </root>

@@ -268,4 +268,28 @@
   <data name="da_export" xml:space="preserve">
     <value>Projekt exportieren </value>
   </data>
+  <data name="err_invalid_data" xml:space="preserve">
+    <value>Die übergebenen Daten sind unzulässig.</value>
+  </data>
+  <data name="err_notfound" xml:space="preserve">
+    <value>Das angeforderte Objekt konnte nicht gefunden werden.</value>
+  </data>
+  <data name="err_notimplemented" xml:space="preserve">
+    <value>Diese Methode wurde noch nicht implementiert.</value>
+  </data>
+  <data name="err_rqds_get_item" xml:space="preserve">
+    <value>Beim Aufruf des Datensatzes ist ein Fehler aufgetreten.</value>
+  </data>
+  <data name="err_rqds_get_list" xml:space="preserve">
+    <value>Bei der Suchanfrage ist ein Fehler aufgetreten.</value>
+  </data>
+  <data name="err_rqds_post_add" xml:space="preserve">
+    <value>Beim Hinzufügen des Datensatzes ist ein Fehler aufgetreten.</value>
+  </data>
+  <data name="err_rqds_post_update" xml:space="preserve">
+    <value>Beim Aktualisieren des Datensatzes ist ein Fehler aufgetreten.</value>
+  </data>
+  <data name="err_unkown" xml:space="preserve">
+    <value>Es ist ein unidentifzierter Fehler aufgetreten.</value>
+  </data>
 </root>
