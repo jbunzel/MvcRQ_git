@@ -31,7 +31,7 @@ namespace Mvc5RQ
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css",
                       "~/Content/font-awesome-4.0.3/css/font-awesome.css",
-                      "~/Content/pure-0.2.0/pure-min.css",
+                      "~/Content/pure-0.5.0/pure-min.css",
                       "~/Content/riquest.css"));
 
             // Festlegen von EnableOptimizations auf false für Debugzwecke. Weitere Informationen

@@ -15,7 +15,7 @@
     <AssemblyName>Mvc5RQ</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -406,6 +406,42 @@
     <Content Include="Content\font-awesome-4.0.3\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\images\main_image.png" />
     <Content Include="Content\pure-0.2.0\pure-min.css" />
+    <Content Include="Content\pure-0.5.0\base-context-min.css" />
+    <Content Include="Content\pure-0.5.0\base-context.css" />
+    <Content Include="Content\pure-0.5.0\base-min.css" />
+    <Content Include="Content\pure-0.5.0\base.css" />
+    <Content Include="Content\pure-0.5.0\buttons-core-min.css" />
+    <Content Include="Content\pure-0.5.0\buttons-core.css" />
+    <Content Include="Content\pure-0.5.0\buttons-min.css" />
+    <Content Include="Content\pure-0.5.0\buttons.css" />
+    <Content Include="Content\pure-0.5.0\forms-min.css" />
+    <Content Include="Content\pure-0.5.0\forms-nr-min.css" />
+    <Content Include="Content\pure-0.5.0\forms-nr.css" />
+    <Content Include="Content\pure-0.5.0\forms.css" />
+    <Content Include="Content\pure-0.5.0\grids-core-min.css" />
+    <Content Include="Content\pure-0.5.0\grids-core.css" />
+    <Content Include="Content\pure-0.5.0\grids-min.css" />
+    <Content Include="Content\pure-0.5.0\grids-responsive-min.css" />
+    <Content Include="Content\pure-0.5.0\grids-responsive-old-ie-min.css" />
+    <Content Include="Content\pure-0.5.0\grids-responsive-old-ie.css" />
+    <Content Include="Content\pure-0.5.0\grids-responsive.css" />
+    <Content Include="Content\pure-0.5.0\grids-units-min.css" />
+    <Content Include="Content\pure-0.5.0\grids-units.css" />
+    <Content Include="Content\pure-0.5.0\grids.css" />
+    <Content Include="Content\pure-0.5.0\menus-core-min.css" />
+    <Content Include="Content\pure-0.5.0\menus-core.css" />
+    <Content Include="Content\pure-0.5.0\menus-min.css" />
+    <Content Include="Content\pure-0.5.0\menus-nr-min.css" />
+    <Content Include="Content\pure-0.5.0\menus-nr.css" />
+    <Content Include="Content\pure-0.5.0\menus-paginator-min.css" />
+    <Content Include="Content\pure-0.5.0\menus-paginator.css" />
+    <Content Include="Content\pure-0.5.0\menus.css" />
+    <Content Include="Content\pure-0.5.0\pure-min.css" />
+    <Content Include="Content\pure-0.5.0\pure-nr-min.css" />
+    <Content Include="Content\pure-0.5.0\pure-nr.css" />
+    <Content Include="Content\pure-0.5.0\pure.css" />
+    <Content Include="Content\pure-0.5.0\tables-min.css" />
+    <Content Include="Content\pure-0.5.0\tables.css" />
     <Content Include="Content\riquest.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\Images\tabseparator.gif" />
@@ -555,6 +591,10 @@
     <Content Include="Areas\Desktop\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Desktop\Views\Shared\DesktopViewer.cshtml" />
     <Content Include="Areas\Desktop\Views\Shared\ActionsView.cshtml" />
+    <Content Include="Content\pure-0.5.0\bower.json" />
+    <Content Include="Content\pure-0.5.0\HISTORY.md" />
+    <Content Include="Content\pure-0.5.0\LICENSE.md" />
+    <Content Include="Content\pure-0.5.0\README.md" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -832,7 +872,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50403</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Mvc5RQ</IISUrl>
+          <IISUrl>http://localhost:50403/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

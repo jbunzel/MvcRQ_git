@@ -191,12 +191,9 @@ Namespace RQDAL
             If Query.QueryExternal = "004" Then xmlIn = GetXMLContent("http://sru.gbv.de/econis?version=1.1&operation=searchRetrieve&query=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&maximumRecords=100&recordSchema=mods")
             If Query.QueryExternal = "005" Then xmlIn = GetXMLContent("http://sru.gbv.de/zdbdb?version=1.1&operation=searchRetrieve&query=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&maximumRecords=100&recordSchema=mods")
             If Query.QueryExternal = "006" Then xmlIn = GetXMLContent("http://worldcat.org/webservices/catalog/search/opensearch?q=" & GetQueryCQL(Query.QueryString, Query.QueryFieldList) & "&format=atom&cformat=all&start=0&count=100&wskey=yxl6CIVEg0loBC2AzwUR7CDFvBOhqEWu5JkRvdTYnBOfoR1yGQKlE5Fj4QU7yuFWDrh50LsteuhCD1h6")
-            Try
-                xslSettings.EnableScript = False
-                xslResultTransform.Load(Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "xslt/MODS2RQI.xslt"), xslSettings, Nothing)
-                xslResultTransform.Transform(xmlIn, xslTransformArgs, OutXml)
-            Catch ex As Exception
-            End Try
+            xslSettings.EnableScript = False
+            xslResultTransform.Load(Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "xslt/MODS2RQI.xslt"), xslSettings, Nothing)
+            xslResultTransform.Transform(xmlIn, xslTransformArgs, OutXml)
         End Sub
 
 

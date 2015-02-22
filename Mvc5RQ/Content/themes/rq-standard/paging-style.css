@@ -4,14 +4,16 @@
     background-color: transparent;	
 }
 
-.page_navigation , .alt_page_navigation{
+.page_navigation , .alt_page_navigation {
     padding-top: 6px;
 	padding-bottom: 5px;
     text-align: right;
     min-height: 20px;
+    margin-left: auto;
 }
 
-.page_navigation a, .alt_page_navigation a{
+.page_navigation a, .alt_page_navigation a, .ellipse {
+    letter-spacing: 0em !important;
 	padding: 3px 5px;
 	margin:2px;
 	color:white;
@@ -53,9 +55,6 @@
 	background-color: white !important;
 	color: black !important;
     border: 1px solid black;
-}
-
-.ellipse{
 }
 
 .content-box {
