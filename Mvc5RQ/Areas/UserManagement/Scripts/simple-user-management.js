@@ -485,7 +485,21 @@ function UserRowBuilder(user) {
 
 function FormatDateTime(datetime)
 {
-    var month = (datetime.getMonth() + 1) > 9 ? datetime.getMonth() + 1 : "0" + datetime.getMonth() + 1;
+    var monthArray = new Array();
+    monthArray[0] = "Jan";
+    monthArray[1] = "Feb";
+    monthArray[2] = "Mar";
+    monthArray[3] = "Apr";
+    monthArray[4] = "May";
+    monthArray[5] = "Jun";
+    monthArray[6] = "Jul";
+    monthArray[7] = "Aug";
+    monthArray[8] = "Sep";
+    monthArray[9] = "Oct";
+    monthArray[10] = "Nov";
+    monthArray[11] = "Dec";
+
+    var month = monthArray[datetime.getMonth()];
     var date = datetime.getDate() > 9 ? datetime.getDate() : "0" + datetime.getDate();
     var minutes = datetime.getMinutes() > 9 ? datetime.getMinutes() : "0" + datetime.getMinutes();
     var seconds = datetime.getSeconds() > 9 ? datetime.getSeconds() : "0" + datetime.getSeconds();

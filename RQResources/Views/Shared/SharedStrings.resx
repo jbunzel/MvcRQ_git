@@ -292,4 +292,97 @@
   <data name="err_unknown" xml:space="preserve">
     <value>Unidentified error.</value>
   </data>
+  <data name="am_email" xml:space="preserve">
+    <value>EMail</value>
+  </data>
+  <data name="am_password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="am_password_confirm" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="am_password_confirm_error" xml:space="preserve">
+    <value>The password and confirmation password do not match.</value>
+  </data>
+  <data name="am_password_error" xml:space="preserve">
+    <value>The {0} must be at least {2} characters long.</value>
+  </data>
+  <data name="am_password_help" xml:space="preserve">
+    <value>(A valid password must contain at least 6 characters, 1 upper-, 1 lower-case letter, 1 number and 1 special character from the set { ! § $ % &amp; ? }.)</value>
+  </data>
+  <data name="am_register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="am_register_button" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="am_register_text" xml:space="preserve">
+    <value>Create your R¿Quest account.</value>
+  </data>
+  <data name="am_register_confirm_header" xml:space="preserve">
+    <value>Confirm your account</value>
+  </data>
+  <data name="am_register_confirm_text" xml:space="preserve">
+    <value>Please check your email and confirm your registration.</value>
+  </data>
+  <data name="am_login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="am_login_button" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="am_login_error" xml:space="preserve">
+    <value>Invalid login attempt.</value>
+  </data>
+  <data name="am_login_hint1" xml:space="preserve">
+    <value>Register a user account?</value>
+  </data>
+  <data name="am_login_hint2" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="am_login_text" xml:space="preserve">
+    <value>Use your account to log in.</value>
+  </data>
+  <data name="am_register_login_text1" xml:space="preserve">
+    <value>Thank you for confirming your registration. Please  </value>
+  </data>
+  <data name="am_register_login_text2" xml:space="preserve">
+    <value>click here to log in</value>
+  </data>
+  <data name="am_register_logon" xml:space="preserve">
+    <value>Account confirmed</value>
+  </data>
+  <data name="RegisterConfirmMail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\StaticTexts\RegMailText.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="am_forgot_password" xml:space="preserve">
+    <value>Forgot password?</value>
+  </data>
+  <data name="am_reset" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="am_reset_text" xml:space="preserve">
+    <value>Enter your account name and a new password.</value>
+  </data>
+  <data name="am_forgot_password_text" xml:space="preserve">
+    <value>Enter your email. We will send you a new password.</value>
+  </data>
+  <data name="am_forgot_password_confirm" xml:space="preserve">
+    <value>Confirm password reset</value>
+  </data>
+  <data name="am_forgot_password_confirm_text" xml:space="preserve">
+    <value>Please check your email and confirm password reset.</value>
+  </data>
+  <data name="am_reset_button" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="ForgotPasswordMail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\StaticTexts\ForgotPasswordMail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="am_reset_logon" xml:space="preserve">
+    <value>Password reset</value>
+  </data>
+  <data name="am_reset_logon_text1" xml:space="preserve">
+    <value>Your password has been reset. Please </value>
+  </data>
 </root>

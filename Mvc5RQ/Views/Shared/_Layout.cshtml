@@ -45,16 +45,23 @@
                         <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu1, "Index", "Home", new { area = "" }, null)</li>
                         <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
                         <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu3, "Index", "RQKos", new { area = "" }, null)</li>
-                        <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
-                        <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu4, "Index", "Desktop", new { area = "Desktop" }, null)</li>
-                        <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
-                        <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu5, "News", "Home", new { area = "" }, null)</li>
                         @if (Request.IsAuthenticated && User.IsInRole("admin"))
                         {
+                            <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
+                            <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu4, "Index", "Desktop", new { area = "Desktop" }, null)</li>
+                            <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
+                            <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu5, "News", "Home", new { area = "" }, new { @class = "rq-link-disabled", onclick = "javascript:return false;" })</li>
                             <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
                             <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu6, "Index", "UserManagement", new { area = "UserManagement" }, null)</li>
                             <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
                             <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu7, "Index", "DataManagement", new { area = "DataManagement" }, null)</li>
+                        }
+                        else
+                        {
+                            <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
+                            <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu4, "Index", "Desktop", new { area = "Desktop" }, new { @class = "rq-link-disabled", onclick = "javascript:return false;" })</li>
+                            <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
+                            <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu5, "News", "Home", new { area = "" }, new { @class = "rq-link-disabled", onclick = "javascript:return false;" })</li>
                         }
                         <li><img src="@Href("~/images/clearpixel.gif")" alt="" /></li>
                         <li>@Html.ActionLink(RQResources.Views.Shared.SharedStrings.menu2, "Index", "About", new { area = "StaticTextPages" }, null)</li>

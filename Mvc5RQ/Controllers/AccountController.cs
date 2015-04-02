@@ -15,17 +15,16 @@ namespace Mvc5RQ.Controllers
     [Authorize]
     public class AccountController : BaseController
     {
-        public AccountController()
-        {
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
+        #region private members
 
         private ApplicationUserManager _userManager;
+
+        private ApplicationSignInManager _signInManager;
+
+        #endregion
+
+        #region public properties
+
         public ApplicationUserManager UserManager
         {
             get
@@ -38,17 +37,6 @@ namespace Mvc5RQ.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
-
-        private ApplicationSignInManager _signInManager;
-
         public ApplicationSignInManager SignInManager
         {
             get
@@ -56,6 +44,33 @@ namespace Mvc5RQ.Controllers
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
             private set { _signInManager = value; }
+        }
+
+        #endregion
+
+        #region public constructors
+
+        public AccountController()
+        {
+        }
+
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        #endregion
+
+        #region action methods
+
+        //
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
         }
 
         //
@@ -69,22 +84,38 @@ namespace Mvc5RQ.Controllers
             {
                 return View(model);
             }
-            
-            // This doen't count login failures towards lockout only two factor authentication
-            // To enable password failures to trigger lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            else
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                var user = await UserManager.FindByNameAsync(model.Email);
+
+                if (user != null && !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                {
+                    return View("DisplayEmail");
+                }
+
+                //ApplicationUser user = UserManager.FindByEmail(model.Email);
+
+                //if (user != null) 
+                //    if (!string.IsNullOrEmpty(user.Id) && !UserManager.IsEmailConfirmed(user.Id))
+                //        if (!UserManager.IsInRole(user.Id, "Admin"))
+                //            return View("DisplayEmail");
+
+                // This doen't count login failures towards lockout only two factor authentication
+                // To enable password failures to trigger lockout, change to shouldLockout: true
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", RQResources.Views.Shared.SharedStrings.am_login_error);
+                        return View(model);
+                }
             }
         }
 
@@ -137,7 +168,7 @@ namespace Mvc5RQ.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return View(new RegisterViewModel());
         }
 
         //
@@ -155,7 +186,10 @@ namespace Mvc5RQ.Controllers
                 {
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    await UserManager.SendEmailAsync(user.Id, 
+                                                     RQResources.Views.Shared.SharedStrings.am_register_confirm_header, 
+                                                     ((string)(RQResources.Views.Shared.SharedStrings.ResourceManager.GetObject("RegisterConfirmMail"))).Replace("<%Link%>","<a href=\"" + callbackUrl + "\">link</a>").Replace("<%UserName%>", model.Email));
+                    Mvc5RQ.Helpers.EmailClient.Send("jbunzel@riquest.de", "RiQuest Notification: New User registered", model.Email);
                     ViewBag.Link = callbackUrl;
                     return View("DisplayEmail");
                 }
@@ -176,6 +210,7 @@ namespace Mvc5RQ.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
+            Mvc5RQ.Helpers.EmailClient.Send("jbunzel@riquest.de", "RiQuest Notification: New User confirmed", result.Succeeded? UserManager.FindById(userId).Email : "invalid");
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
@@ -205,7 +240,10 @@ namespace Mvc5RQ.Controllers
 
                 var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
+                await UserManager.SendEmailAsync(user.Id, 
+                                                 RQResources.Views.Shared.SharedStrings.am_forgot_password_confirm, 
+                                                 ((string)(RQResources.Views.Shared.SharedStrings.ResourceManager.GetObject("ForgotPasswordMail"))).Replace("<%Link%>", callbackUrl).Replace("<%UserName%>", model.Email));
+                Mvc5RQ.Helpers.EmailClient.Send("jbunzel@riquest.de", "RiQuest Notification: User forgot password", UserManager.FindById(user.Id).Email);
                 ViewBag.Link = callbackUrl;
                 return View("ForgotPasswordConfirmation");
             }
@@ -227,7 +265,7 @@ namespace Mvc5RQ.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            return code == null ? View("Error") : View();
+            return code == null ? View("Error") : View(new ResetPasswordViewModel());
         }
 
         //
@@ -250,6 +288,7 @@ namespace Mvc5RQ.Controllers
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
+                Mvc5RQ.Helpers.EmailClient.Send("jbunzel@riquest.de", "RiQuest Notification: Password reset", result.Succeeded ? UserManager.FindById(user.Id).Email : "invalid");
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);
@@ -406,7 +445,10 @@ namespace Mvc5RQ.Controllers
             return View();
         }
 
+        #endregion
+
         #region Helpers
+
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -463,6 +505,7 @@ namespace Mvc5RQ.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+
         #endregion
     }
 }

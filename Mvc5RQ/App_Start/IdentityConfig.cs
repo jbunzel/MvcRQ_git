@@ -11,6 +11,7 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
 using Mvc5RQ.Models;
+using Mvc5RQ.Helpers;
 
 namespace Mvc5RQ
 {
@@ -85,33 +86,7 @@ namespace Mvc5RQ
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            // Credentials:
-            var credentialUserName = "renate.bunzel@riquest.de";
-            var sentFrom = "support@riquest.de";
-            var pwd = "quiko";
-
-            // Configure the client:
-            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("smtp.riquest.de");
-            client.Port = 25;
-            client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-
-            // Create the credentials:
-            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(credentialUserName, pwd);
-
-            client.EnableSsl = false;
-            client.Credentials = credentials;
-
-            // Create the message:
-            var mail = new System.Net.Mail.MailMessage(sentFrom, message.Destination);
-
-            mail.Subject = message.Subject;
-            mail.Body = message.Body;
-
-            // Send:
-            return client.SendMailAsync(mail);
-            //return Task.FromResult(0);
+            return EmailClient.SendAsync(message.Destination, message.Subject, message.Body);
         }
     }
 

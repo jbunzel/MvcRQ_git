@@ -17,7 +17,7 @@ namespace Mvc5RQ.Areas.DataManagement
             context.MapRoute(
                 "DataManagement_default",
                 "DataManagement/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { area = "DataManagement", controller = "DataManagement", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

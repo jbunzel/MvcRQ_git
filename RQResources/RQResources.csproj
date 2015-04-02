@@ -107,10 +107,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="StaticTexts\ForgotPasswordMail.txt" />
     <None Include="StaticTexts\terms.de.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StaticTexts\privacy.de.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="StaticTexts\RegisterExplanation.de.txt" />
+    <Content Include="StaticTexts\ForgotPasswordMail.de.txt" />
+    <Content Include="StaticTexts\RegMailText.de.txt" />
+    <None Include="StaticTexts\RegMailText.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

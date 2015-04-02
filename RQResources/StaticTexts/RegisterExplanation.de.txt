@@ -1,0 +1,17 @@
+﻿<b>R¿Quest</b> ist die Designstudie für eine Persönliche Digitale Bibliothek. Eine <b>Digitale Bibliothek</b> ist eine kohärente Sammlung digitaler Objekte, also von digitalen Texten, Videos, Audios, usw. Die Objekte sind
+in einer Katalogdatenbank verzeichnet, die Funktionen zur inhaltlichen Erschließung, Organisation und Pflege der Sammlung, sowie zur Recherche und Selektion in den Beständen bereitstellt. Dabei kann die Katalogdatenbank auch 
+Objekte verzeichnen, die nur analog, z. B. als gedruckte Medien oder analoge Tonaufnahmen verfügbar sind. Kennzeichen der Digitalen Bibliothek ist allerdings der direkte digitale Zugang zu einem möglichst großen Teil der 
+Sammlung. Hierfür werden Funktionen zur Anzeige und zur Arbeit mit den digitalen Objekten bereitgestellt.
+<br/><br/>
+Eine <b>Persönliche Digitale Bibliothek</b> enthält digitale Objekte, die sich auf die Interessengebiete einer bestimmten Person beziehen. Idealerweise ist eine Persönliche Digitale Bibliothek eine sorgfältig zusammengestellte 
+Sammlung von Materialien mit besonders hohem Informationswert für die jeweiligen eigenen Interessengebiete.
+<br/><br/>
+Als <b>registrierter Benutzer</b> können Sie sich mit <b>R¿Quest</b> Ihre eigene Persönliche Digitale Bibliothek aufbauen. Sie können den Zugriff auf den Katalog Ihrer Bibliothek und die darin enthaltenen digitalen Objekte für 
+die Allgemeinheit oder einzelne registrierte Benutzer freischalten und die von Anderen zur Verfügung gestellten Ressourcen in Ihre eigene Digitale Bibliothek einbinden. Die Freischaltung kann auf einzelne Objekte eingeschränkt 
+werden und das Kopieren oder Ändern von Objekten bzw. deren Katalogaufnahmen ausschließen. Desweiteren können Sie eine persönliche Arbeitsumgebung zur Arbeit mit den digitalen Objekten Ihrer Bibliothek konfigurieren.
+<br/><br/>
+Mit der Registrierung verpflichten Sie sich zur Einhaltung der geltenden Urheberrechtsbestimmungen. Die Einrichtung eines Benutzerkontos ist kostenfrei.
+<br/><br/>
+(Die oben beschriebenen Funktionalitäten sind geplant. Momentan erhalten registrierte Benutzer lediglich die Möglichkeit, auf für die Allgemeinheit gesperrte Objekte meiner eigenen Persönlichen Digitalen Bibliothek lesend 
+zuzugreifen.)
+<br/><br/>   

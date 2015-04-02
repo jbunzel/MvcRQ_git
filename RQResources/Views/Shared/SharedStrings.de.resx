@@ -292,4 +292,100 @@
   <data name="err_unkown" xml:space="preserve">
     <value>Es ist ein unidentifzierter Fehler aufgetreten.</value>
   </data>
+  <data name="am_email" xml:space="preserve">
+    <value>E-Mail Adresse</value>
+  </data>
+  <data name="am_password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="am_password_confirm" xml:space="preserve">
+    <value>Nochmal eingeben</value>
+  </data>
+  <data name="am_password_confirm_error" xml:space="preserve">
+    <value>Die Wiederholung stimmt mit dem ursprünglichen Passwort nicht überein.</value>
+  </data>
+  <data name="am_password_error" xml:space="preserve">
+    <value>Das {0} muss mindestens  aus {2} Zeichen bestehen.</value>
+  </data>
+  <data name="am_register" xml:space="preserve">
+    <value>Konto eröffnen</value>
+  </data>
+  <data name="am_register_button" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="am_register_text" xml:space="preserve">
+    <value>Eröffnen Sie Ihr R¿Quest Benutzerkonto.</value>
+  </data>
+  <data name="am_password_help" xml:space="preserve">
+    <value>(Ein gültiges Passwort muß mindestens 6 Zeichen, 1 Groß-, 1 Kleinbuchstaben, 1 Ziffer sowie 1  Sonderzeichen aus der Menge { ! § $ % &amp; ? } enthalten.)</value>
+  </data>
+  <data name="am_register_confirm_header" xml:space="preserve">
+    <value>Bestätigung der Kontoeröffnung</value>
+  </data>
+  <data name="am_register_confirm_text" xml:space="preserve">
+    <value>Bitte prüfen Sie Ihre E-Mails und bestätigen Sie die Eröffnung Ihres Benutzerkontos. </value>
+  </data>
+  <data name="RegisterExplanation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\StaticTexts\RegisterExplanation.de.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="am_login" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="am_login_button" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="am_login_error" xml:space="preserve">
+    <value>Ungültiger Anmeldeversuch.</value>
+  </data>
+  <data name="am_login_hint1" xml:space="preserve">
+    <value>Möchten Sie ein Benutzerkonto eröffnen?</value>
+  </data>
+  <data name="am_login_hint2" xml:space="preserve">
+    <value>Haben Sie Ihr Passwort vergessen?</value>
+  </data>
+  <data name="am_login_text" xml:space="preserve">
+    <value>Melden Sie sich mit Ihrem Benutzerkonto an.</value>
+  </data>
+  <data name="am_register_login" xml:space="preserve">
+    <value>Konto bestätigt</value>
+  </data>
+  <data name="am_register_login_text1" xml:space="preserve">
+    <value>Danke für die Bestätigung Ihrer Kontoeröffnung. Bitte </value>
+  </data>
+  <data name="am_register_login_text2" xml:space="preserve">
+    <value>klicken Sie hier, um sich anzumelden</value>
+  </data>
+  <data name="RegisterConfirmMail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\StaticTexts\RegMailText.de.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="am_forgot_password" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+  <data name="am_reset" xml:space="preserve">
+    <value>Passwort zurücksetzen</value>
+  </data>
+  <data name="am_reset_text" xml:space="preserve">
+    <value>Geben Sie den Namen Ihres Benutzerkontos und ein neues Passwort ein.</value>
+  </data>
+  <data name="am_forgot_password_text" xml:space="preserve">
+    <value>Geben Sie Ihre E-Mail Adresse ein. Wir senden Ihnen einen Link, um Ihr Passwort zurückzusetzen.</value>
+  </data>
+  <data name="am_forgot_password_confirm" xml:space="preserve">
+    <value>Zurücksetzen bestätigen</value>
+  </data>
+  <data name="am_forgot_password_confirm_text" xml:space="preserve">
+    <value>Bitte prüfen Sie Ihre E-Mails und bestätigen Sie die Zurücksetzung Ihres Benutzerkontos.</value>
+  </data>
+  <data name="am_reset_button" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+  <data name="ForgotPasswordMail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\StaticTexts\ForgotPasswordMail.de.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="am_reset_logon" xml:space="preserve">
+    <value>Passwort zurückgesetzt</value>
+  </data>
+  <data name="am_reset_logon_text1" xml:space="preserve">
+    <value>Ihr Passwort wurde zurückgesetzt. Bitte </value>
+  </data>
 </root>

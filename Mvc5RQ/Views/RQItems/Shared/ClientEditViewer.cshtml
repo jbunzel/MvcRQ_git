@@ -57,17 +57,17 @@
     	<input type="submit" value="Add Item" id="btn-submit-item" /><input type="button" value="Reset" id="btn-reset" onclick="reset()" /><input type="button" value="Cancel" id="btn-cancel" onclick="cancel()" />
     </fieldset>
 </form>
-<div id="EditDialog" class="edit-dialog" hidden>
+<div id="EditDialog" class="edit-dialog" style="display: none">
 </div>
-<div id="AttachTocDialog" class="attach-toc-dialog" hidden>
-    <p class="instruction">Geben Sie den Typ des digitalen Objekts und den Namen des Unterverzeichnisses ein, in dem das digitale Objekt gespeichert ist.<br/>Das Unterverzeicnhis muss in dem für die Eingangsbearbeitung des betreffenden Objekt-Typs ausgewählten Verzeichnis liegen (s. Auswahl von Optionen).<br />Sie müssen für dieses Verzeichnis Schreibrechte besitzen.</p>
+<div id="AttachTocDialog" class="attach-toc-dialog" style="display: none">
+    <p class="instruction">Geben Sie den Typ des digitalen Objekts und den Namen des Unterverzeichnisses ein, in dem das digitale Objekt gespeichert ist.<br />Das Unterverzeicnhis muss in dem für die Eingangsbearbeitung des betreffenden Objekt-Typs ausgewählten Verzeichnis liegen (s. Auswahl von Optionen).<br />Sie müssen für dieses Verzeichnis Schreibrechte besitzen.</p>
     <span class="editor-label"><label for="ObjAdress">Adresse</label></span>
     <span class="editor-field"><input class="objadress" id="ObjAdress" name="ObjAdress" type="text" /></span>
     <span class="editor-label"><label>Typ</label></span>
     <form class="digital-object-type editor-field" id="DigitalObjectType" action="" method="get">
-        <input type="radio" name="DigitalObjectType" id="Text Audio (mp3)" value="mp3Text"  />Text-Tonaufzeichnung (MP3)<br/>
-        <input type="radio" name="DigitalObjectType" id="Music Audio (mp3)" value="mp3Music" />Musik-Tonaufzeichnung (MP3)<br/>
-        <input type="radio" name="DigitalObjectType" id="Video (m4v)" value="@(DigitalObject.DOType.mv4Video.ToString())">Bildaufzeichnung (M4V)<br /> 
-        <input type="radio" name="DigitalObjectType" id="Document Collection (pdf)" value="@(DigitalObject.DOType.pdfDocument.ToString())">Dokument-Konvolut (PDF)<br /> 
+        <input type="radio" name="DigitalObjectType" id="Text Audio (mp3)" value="mp3Text" />Text-Tonaufzeichnung (MP3)<br />
+        <input type="radio" name="DigitalObjectType" id="Music Audio (mp3)" value="mp3Music" />Musik-Tonaufzeichnung (MP3)<br />
+        <input type="radio" name="DigitalObjectType" id="Video (m4v)" value="@(DigitalObject.DOType.mv4Video.ToString())">Bildaufzeichnung (M4V)<br />
+        <input type="radio" name="DigitalObjectType" id="Document Collection (pdf)" value="@(DigitalObject.DOType.pdfDocument.ToString())">Dokument-Konvolut (PDF)<br />
     </form>
 </div>

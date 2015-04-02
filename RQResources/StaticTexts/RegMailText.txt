@@ -1,0 +1,29 @@
+Hallo,
+
+We are pleased to advise that you have been added as a registered user to the RiQuest Personal Digital Library. 
+
+Please read the following information carefully and be sure to save this message in a safe location for future reference.
+
+You were registered under the user name "<%UserName%>".
+
+Please memorize the password used for your registration. It is only stored as a crypotgraphic hash, and cannot be reconstructed from
+the access system of the RiQuestPersonal Digital Library.
+
+IMPORTANT NOTE: 
+
+It is required, that you complete your verified registration by visiting
+
+<%Link%>
+
+as soon as possible.
+
+If you do not complete your registration within the next 2 days it will expire.
+
+
+Please take the opportunity to visit the website to review its content and take advantage of its features.
+
+Thank you, we appreciate your support.
+
+RiQuest Personal Digital Library
+
+    

@@ -1,0 +1,28 @@
+Hallo,
+
+wir freuen uns, dass Sie sich fuer die RiQuest Personal Digital Library registriert haben. 
+
+Lesen Sie bitte die folgenden Informationen sorgfältig durch und bewahren Sie diese Nachricht an einem sicheren Ort auf, um später darauf zurückgreifen zu können.
+
+Sie haben sich unter dem Namen <%UserName%> angemeldet.
+
+Bitte notieren Sie sich das von Ihnen bei der Registrierung benutze Passwort. Dieses Passwort ist im Zugangssystem der RiQuest Personal Digital Library nur in verschlüsselter
+Form hinterlegt und kann dort nicht rekonstruiert werden. 
+
+WICHTIG: 
+
+Um die Registrierug abzuschliessen müssen Sie baldmöglichst die Webseite
+
+<%Link%>
+
+aufrufen.
+
+Falls Sie die Registrierung nicht innerhalb der nächsten zwei Tage abschliessen, werden Ihre Zugangsdaten gelöscht.
+
+
+Bitte machen Sie intensiven Gebrauch von der RiQuest Personal Digital Library und ihren Möglichkeiten. 
+
+Vielen Dank. Wir wissen Ihr Interesse zu schätzen.
+
+
+RiQuest Personal Digital Library

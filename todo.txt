@@ -9,9 +9,9 @@
 03.0142				B: filter access rights when result list is generated (not favoured).
 03.015			Get book cover images by Library of Congress IDs.
 
-03.02		Account management
-03.021			Add e-mail confirmation on registration.
-03.022			Redesign and unify account management pages. 
+03.02		Account management																								begonnen: 150327	erledigt: 150402
+03.021			Add e-mail confirmation on registration.																	begonnen: 150327	erledigt: 150402
+03.022			Redesign and unify account management pages.																begonnen: 150327	erledigt: 150402
 
 03.03		Exception management																							begonnen: 150212
 03.031			Redesign and unify exception management functions.															begonnen: 150212	erledigt: 150215
@@ -86,6 +86,7 @@
 03.9011			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten.
 03.9012			Fehler beim Switch zwischen einzelnem RQItem im Katalog-View & dem korrespondierenden Shelves-View
 03.9013			Subfolder tooltips in classification tree contain wrong bookmark counts (s.f.e. musica practica)
+03.9014			ItemViewer / Audio: multi track .m3u not sorted according to sorting of ToC. 
 
 03.99		Sicherung & Veröffentlichung																					begonnen: 140914	erledigt: 
 03.991			Version 0.2.4.0 auf www.riquest.de							(final)											begonnen: 140914	erledigt: 140914

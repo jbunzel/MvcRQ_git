@@ -70,6 +70,267 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die EMail ähnelt.
+        /// </summary>
+        public static string am_email {
+            get {
+                return ResourceManager.GetString("am_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Forgot password? ähnelt.
+        /// </summary>
+        public static string am_forgot_password {
+            get {
+                return ResourceManager.GetString("am_forgot_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Confirm password reset ähnelt.
+        /// </summary>
+        public static string am_forgot_password_confirm {
+            get {
+                return ResourceManager.GetString("am_forgot_password_confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please check your email and confirm password reset. ähnelt.
+        /// </summary>
+        public static string am_forgot_password_confirm_text {
+            get {
+                return ResourceManager.GetString("am_forgot_password_confirm_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enter your email. We will send you a new password. ähnelt.
+        /// </summary>
+        public static string am_forgot_password_text {
+            get {
+                return ResourceManager.GetString("am_forgot_password_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
+        /// </summary>
+        public static string am_login {
+            get {
+                return ResourceManager.GetString("am_login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
+        /// </summary>
+        public static string am_login_button {
+            get {
+                return ResourceManager.GetString("am_login_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invalid login attempt. ähnelt.
+        /// </summary>
+        public static string am_login_error {
+            get {
+                return ResourceManager.GetString("am_login_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Register a user account? ähnelt.
+        /// </summary>
+        public static string am_login_hint1 {
+            get {
+                return ResourceManager.GetString("am_login_hint1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Forgot your password? ähnelt.
+        /// </summary>
+        public static string am_login_hint2 {
+            get {
+                return ResourceManager.GetString("am_login_hint2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use your account to log in. ähnelt.
+        /// </summary>
+        public static string am_login_text {
+            get {
+                return ResourceManager.GetString("am_login_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Password ähnelt.
+        /// </summary>
+        public static string am_password {
+            get {
+                return ResourceManager.GetString("am_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Confirm password ähnelt.
+        /// </summary>
+        public static string am_password_confirm {
+            get {
+                return ResourceManager.GetString("am_password_confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The password and confirmation password do not match. ähnelt.
+        /// </summary>
+        public static string am_password_confirm_error {
+            get {
+                return ResourceManager.GetString("am_password_confirm_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The {0} must be at least {2} characters long. ähnelt.
+        /// </summary>
+        public static string am_password_error {
+            get {
+                return ResourceManager.GetString("am_password_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die (A valid password must contain at least 6 characters, 1 upper-, 1 lower-case letter, 1 number and 1 special character from the set { ! § $ % &amp; ? }.) ähnelt.
+        /// </summary>
+        public static string am_password_help {
+            get {
+                return ResourceManager.GetString("am_password_help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Register ähnelt.
+        /// </summary>
+        public static string am_register {
+            get {
+                return ResourceManager.GetString("am_register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Register ähnelt.
+        /// </summary>
+        public static string am_register_button {
+            get {
+                return ResourceManager.GetString("am_register_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Confirm your account ähnelt.
+        /// </summary>
+        public static string am_register_confirm_header {
+            get {
+                return ResourceManager.GetString("am_register_confirm_header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please check your email and confirm your registration. ähnelt.
+        /// </summary>
+        public static string am_register_confirm_text {
+            get {
+                return ResourceManager.GetString("am_register_confirm_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Thank you for confirming your registration. Please   ähnelt.
+        /// </summary>
+        public static string am_register_login_text1 {
+            get {
+                return ResourceManager.GetString("am_register_login_text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die click here to log in ähnelt.
+        /// </summary>
+        public static string am_register_login_text2 {
+            get {
+                return ResourceManager.GetString("am_register_login_text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Account confirmed ähnelt.
+        /// </summary>
+        public static string am_register_logon {
+            get {
+                return ResourceManager.GetString("am_register_logon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create your R¿Quest account. ähnelt.
+        /// </summary>
+        public static string am_register_text {
+            get {
+                return ResourceManager.GetString("am_register_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Reset password ähnelt.
+        /// </summary>
+        public static string am_reset {
+            get {
+                return ResourceManager.GetString("am_reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Reset ähnelt.
+        /// </summary>
+        public static string am_reset_button {
+            get {
+                return ResourceManager.GetString("am_reset_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Password reset ähnelt.
+        /// </summary>
+        public static string am_reset_logon {
+            get {
+                return ResourceManager.GetString("am_reset_logon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your password has been reset. Please  ähnelt.
+        /// </summary>
+        public static string am_reset_logon_text1 {
+            get {
+                return ResourceManager.GetString("am_reset_logon_text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enter your account name and a new password. ähnelt.
+        /// </summary>
+        public static string am_reset_text {
+            get {
+                return ResourceManager.GetString("am_reset_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cancel ähnelt.
         /// </summary>
         public static string cancel {
@@ -271,6 +532,31 @@ namespace RQResources.Views.Shared {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hallo,
+        ///
+        ///you receive this message because you forgot your password to the RiQuest Personal Digital Library.  
+        ///
+        ///If that is the case, please read the following information carefully. Otherwise neglect this mail.
+        ///
+        ///You have registered an account with the RiQuest Personal Digital Library under the name &lt;%UserName%&gt;.
+        ///
+        ///To set a new password for this account click
+        ///
+        ///&lt;%Link%&gt;
+        ///
+        ///In case of problems contact mailto:support@riquest.de
+        ///
+        ///
+        ///RiQuest Personal Digital Library
+        /// ähnelt.
+        /// </summary>
+        public static string ForgotPasswordMail {
+            get {
+                return ResourceManager.GetString("ForgotPasswordMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Include ähnelt.
         /// </summary>
         public static string include_external {
@@ -432,6 +718,26 @@ namespace RQResources.Views.Shared {
         public static string query_fields_h {
             get {
                 return ResourceManager.GetString("query_fields_h", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hallo,
+        ///
+        ///We are pleased to advise that you have been added as a registered user to the RiQuest Personal Digital Library. 
+        ///
+        ///Please read the following information carefully and be sure to save this message in a safe location for future reference.
+        ///
+        ///You were registered under the user name &quot;&lt;%UserName%&gt;&quot;.
+        ///
+        ///Please memorize the password used for your registration. It is only stored as a crypotgraphic hash, and cannot be reconstructed from
+        ///the access system of the RiQuestPersonal Digital Library.
+        ///
+        ///IMPORTA [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        public static string RegisterConfirmMail {
+            get {
+                return ResourceManager.GetString("RegisterConfirmMail", resourceCulture);
             }
         }
         

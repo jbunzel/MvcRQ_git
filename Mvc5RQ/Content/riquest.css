@@ -129,6 +129,12 @@ fieldset {
     display: inline;
 }
 
+.rq-menu-disabled {
+    color: red !important;
+    pointer-events: none;
+    cursor: default;
+}
+
 /*--------------*/
 /*    logos     */
 /*--------------*/
@@ -164,9 +170,9 @@ fieldset {
     font-size: 20pt;
 }
 
-/*--------------*/
-/*   buttons    */
-/*--------------*/
+/*----------------------*/
+/*    buttons & links   */
+/*----------------------*/
 
 .rq-quick-button {
     padding-left: 2px;
@@ -176,10 +182,28 @@ fieldset {
     background-color: #c22a09; 
 }
 
+.rq-link-disabled {
+    color: lightgray !important;
+    cursor: default !important;
+}
+
+
 /*--------------*/
 /*     forms    */
 /*--------------*/
 
+.form-group {
+    margin-left: 55px;
+}
+
+.rq-form-explanation {
+    font-size: .9em;
+}
+
+.rq-form-field-comments {
+    text-align: right;
+    font-size: .7em;
+}
 
 /*--------------*/
 /*    pop-ups   */
@@ -289,11 +313,11 @@ fieldset {
 /*--------------*/
 
 .rq-textcontainer{
-    margin: 15px;
+    margin: 15px 15px 15px 50px;
 }
 
 .rq-formcontainer{
-    margin: 30px;
+    margin: 30px 0px 30px 30px;
 }
 
 .rq-diagnostics {
@@ -388,8 +412,9 @@ fieldset {
     background-image: -webkit-linear-gradient(left, rgba(155, 243, 195, 0.79) 0%, rgba(155, 243, 195, 0.79) 40px, rgb(255, 255, 245) 40px, rgb(255, 255, 245) 100%);
     /* Proposed W3C Markup */ 
     background-image: linear-gradient(left, rgba(155, 243, 195, 0.79) 0%, rgba(155, 243, 195, 0.79) 40px, rgb(255, 255, 245) 40px, rgb(255, 255, 245) 100%);  
-    border-top: 1px solid silver;
-    border-bottom: 1px solid silver;
+    /*border-top: 1px solid silver;
+    border-bottom: 1px solid silver;*/
+    border: 1px solid silver;
 }
 
 .rq-result-box {
