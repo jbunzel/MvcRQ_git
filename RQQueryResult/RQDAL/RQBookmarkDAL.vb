@@ -375,7 +375,7 @@ Namespace RQDAL
                     iIndex = 1
                 End If
                 xmlWriter.WriteStartElement("file")
-                xmlWriter.WriteAttributeString("DocNo", "D" + CStr(iItemCount))
+                xmlWriter.WriteAttributeString("DocNo", "D" + iItemCount.ToString("D4"))
                 iItemCount += 1
                 'strTemp = LCase(Left(objFileItem.FullName, InStrRev(objFileItem.FullName, ".", -1, CompareMethod.Text) - 1)) + ".gif"
                 'If File.Exists(strTemp) Then
@@ -413,7 +413,7 @@ Namespace RQDAL
             For Each objFolderItem In objFolder.GetDirectories()
                 If InStr(1, objFolderItem.Name, "$COPY$", CompareMethod.Text) = 0 Then
                     xmlWriter.WriteStartElement("folder")
-                    xmlWriter.WriteAttributeString("DocNo", "D" + CStr(iItemCount))
+                    xmlWriter.WriteAttributeString("DocNo", "D" + iItemCount.ToString("D4"))
                     iItemCount += 1
                     xmlWriter.WriteAttributeString("name", objFolderItem.Name)
                     xmlWriter.WriteAttributeString("level", CStr(iLevel))
@@ -451,7 +451,7 @@ Namespace RQDAL
                             iIndex = 1
                         End If
                         xmlWriter.WriteStartElement("file")
-                        xmlWriter.WriteAttributeString("DocNo", "D" + CStr(iItemCount))
+                        xmlWriter.WriteAttributeString("DocNo", "D" + iItemCount.ToString("D4"))
                         iItemCount += 1
                         ExtractFileData(xmlWriter, objFolderItem.FullName + "/" + Left(objFolderItem.Name, InStrRev(objFolderItem.Name, "$$COPY$$", -1, CompareMethod.Text) - 1) + ".htm", Left(objFolderItem.Name, InStrRev(objFolderItem.Name, "$$COPY$$", -1, CompareMethod.Text) - 1) + ".htm")
                         xmlWriter.WriteAttributeString("DateChanged", objFolderItem.LastWriteTime.Date.ToString("yyyyMMdd"))

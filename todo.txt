@@ -63,13 +63,13 @@
 04.9011			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten.
 04.9012			Fehler beim Switch zwischen einzelnem RQItem im Katalog-View & dem korrespondierenden Shelves-View
 04.9013			Subfolder tooltips in classification tree contain wrong bookmark counts (s.f.e. musica practica)
-04.9014			ItemViewer / Audio: multi track .m3u not sorted according to sorting of ToC. 
+04.9014			ItemViewer / Audio: multi track .m3u not sorted according to sorting of ToC.								begonnen: 150509	erledigt: 150509 
+04.9015			RQItems of type folder do not expand to details view														begonnen: 150509	erledigt: 150509
 
-04.99		Sicherung & Veröffentlichung																					begonnen:			erledigt:
-04.991			Version 0.3.0.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen:			erledigt:
+04.99		Sicherung & Veröffentlichung																					begonnen: 150509	erledigt:
+04.991			Version 0.3.0.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen: 150509	erledigt: 150509
 04.992			Version 0.4.X.0 auf github.com/jbunzel/MvcRQ_git.git dev													begonnen:			erledigt:
 04.997			Version 0.4.X.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen:			erledigt:
-04.998			Version 0.4.x.0 auf riquest.azurewebseites.net				(final)											begonnen:			erledigt:
 04.999			Version 0.4.x.0 auf www.riquest.de							(final)											begonnen:			erledigt: 
 
 	--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

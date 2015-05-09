@@ -6,27 +6,26 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 
 using RQDigitalObjects;
-using RQDigitalObjects.AudioObjects; 
+using RQDigitalObjects.AudioObjects;
 
 namespace RQDigitalObjects.AudioObjects.MP3
 {
-	    /// <summary>
-	/// Diese Klasse liest und schreibt Verzeichnis, Dateinamen und ID3v1- bzw. 
-	/// ID3v2-Titelinformationen eines MP3-Albums (Verzeichnis mit MP3-Dateien)
-	/// </summary>
-	public class Mp3Album : StructuredDigitalObject
-	{
-        
-#region genre array
+    /// <summary>
+    /// Diese Klasse liest und schreibt Verzeichnis, Dateinamen und ID3v1- bzw. 
+    /// ID3v2-Titelinformationen eines MP3-Albums (Verzeichnis mit MP3-Dateien)
+    /// </summary>
+    public class Mp3Album : StructuredDigitalObject
+    {
+        #region genre array
 
-		/// <summary>
-		/// Dieses Array dient der Zuordnung des Genre-Bytes aus
-		/// den Dateiinformationen zu einem Klarnamen. Es enthält
-		/// die Genrenamen im Wortlaut der Spezifikation plus WinAmp-
-		/// Erweiterungen, einzusehen unter http://www.id3.org/id3v2-00.txt,
-		/// Abschnitt A3.
-		/// </summary>
-		private static String[] m_genreArray = {
+        /// <summary>
+        /// Dieses Array dient der Zuordnung des Genre-Bytes aus
+        /// den Dateiinformationen zu einem Klarnamen. Es enthält
+        /// die Genrenamen im Wortlaut der Spezifikation plus WinAmp-
+        /// Erweiterungen, einzusehen unter http://www.id3.org/id3v2-00.txt,
+        /// Abschnitt A3.
+        /// </summary>
+        private static String[] m_genreArray = {
 											"Blues",
 											"Classic Rock",
 											"Country",
@@ -154,162 +153,159 @@ namespace RQDigitalObjects.AudioObjects.MP3
 											"Euro-House",
 											"Dance Hall",
 										};
-#endregion
+        #endregion
 
+        #region private members
 
-#region private members
-
-		private ID3v2Info MP3Info;
-		private String m_filename;
-		private String m_title;
-		private String m_artist;
-		private String m_composer;
-		private String m_album;
-		private String m_year;
-		private String m_comment;
-		private byte m_genre;
-		private String m_track;
-		private bool m_containsID3tags;
+        private ID3v2Info MP3Info;
+        private String m_filename;
+        private String m_title;
+        private String m_artist;
+        private String m_composer;
+        private String m_album;
+        private String m_year;
+        private String m_comment;
+        private byte m_genre;
+        private String m_track;
+        private bool m_containsID3tags;
 
         private string albumDocNr;
         private int actlTrack = 0;
 
-#endregion
+        #endregion
 
+        #region public properties
 
-#region public properties
-
-		/// <summary>
-		/// Gibt an, ob das MP3-Album ID3v1-Informationen beinhaltet. 
+        /// <summary>
+        /// Gibt an, ob das MP3-Album ID3v1-Informationen beinhaltet. 
         /// Dieses Attribut ist ReadOnly.
-		/// </summary>
-		public bool ContainsID3Tags
-		{
-			get
-			{
-				return this.m_containsID3tags;
-			}
-		}
+        /// </summary>
+        public bool ContainsID3Tags
+        {
+            get
+            {
+                return this.m_containsID3tags;
+            }
+        }
 
-		/// <summary>
-		/// Titel des MP3-Albums (aus den ID3v1-Informationen).
-		/// </summary>
-		public String Title
-		{
-			get
-			{
-				if (m_title != MP3Info.Title)
-				{
-					m_title = MP3Info.Title;
-				}
-				return m_title;
-			}
-		}
+        /// <summary>
+        /// Titel des MP3-Albums (aus den ID3v1-Informationen).
+        /// </summary>
+        public String Title
+        {
+            get
+            {
+                if (m_title != MP3Info.Title)
+                {
+                    m_title = MP3Info.Title;
+                }
+                return m_title;
+            }
+        }
 
-		/// <summary>
-		/// Name des Komponisten aus den ID3v2-Informationen.
-		/// </summary>
-		public String Composer
-		{
-			get
-			{
-				if (m_composer != MP3Info.Composer)
-				{
-					m_composer = MP3Info.Composer;
-				}
-				return m_artist;
-			}
-		}
+        /// <summary>
+        /// Name des Komponisten aus den ID3v2-Informationen.
+        /// </summary>
+        public String Composer
+        {
+            get
+            {
+                if (m_composer != MP3Info.Composer)
+                {
+                    m_composer = MP3Info.Composer;
+                }
+                return m_artist;
+            }
+        }
 
-		/// <summary>
-		/// Name des Künstler aus den ID3v1-Informationen.
-		/// </summary>
-		public String Artist
-		{
-			get
-			{
-				if (m_artist != MP3Info.Artist)
-				{
-					m_artist = MP3Info.Artist;
-				}
-				return m_artist;
-			}
-		}
+        /// <summary>
+        /// Name des Künstler aus den ID3v1-Informationen.
+        /// </summary>
+        public String Artist
+        {
+            get
+            {
+                if (m_artist != MP3Info.Artist)
+                {
+                    m_artist = MP3Info.Artist;
+                }
+                return m_artist;
+            }
+        }
 
-		/// <summary>
-		/// Name des Albums aus den ID3v1-Informationen.
-		/// </summary>
-		public String Album
-		{
-			get
-			{
-				if (m_album != MP3Info.Album)
-				{
-					m_album = MP3Info.Album;
-				}
-				return m_album;
-			}
-		}
+        /// <summary>
+        /// Name des Albums aus den ID3v1-Informationen.
+        /// </summary>
+        public String Album
+        {
+            get
+            {
+                if (m_album != MP3Info.Album)
+                {
+                    m_album = MP3Info.Album;
+                }
+                return m_album;
+            }
+        }
 
-		/// <summary>
-		/// Erscheinungsjahr aus den ID3v1-Informationen.
-		/// </summary>
-		public String Year
-		{
-			get
-			{
-				if (m_year != MP3Info.Year)
-				{
-					m_year = MP3Info.Year;
-				}
-				return m_year;
-			}
-		}
+        /// <summary>
+        /// Erscheinungsjahr aus den ID3v1-Informationen.
+        /// </summary>
+        public String Year
+        {
+            get
+            {
+                if (m_year != MP3Info.Year)
+                {
+                    m_year = MP3Info.Year;
+                }
+                return m_year;
+            }
+        }
 
-		/// <summary>
-		/// Kommentar aus den ID3v1-Informationen.
-		/// </summary>
-		public String Comment
-		{
-			get
-			{
-				return m_comment;
-			}
-		}
+        /// <summary>
+        /// Kommentar aus den ID3v1-Informationen.
+        /// </summary>
+        public String Comment
+        {
+            get
+            {
+                return m_comment;
+            }
+        }
 
-		/// <summary>
-		/// Genre aus den ID3v1-Informationen.
-		/// </summary>
-		public String Genre
-		{
-			//Intern wird im File nur ein Byte-Wert als Genre-Info
-			//gespeichert. Die Übersetzung in Klarnamen erfolgt mit einer
-			//internen Hash-Tabelle.
-			get
-			{
-				return ""; //GetGenre(m_genre);
-			}
-		}
+        /// <summary>
+        /// Genre aus den ID3v1-Informationen.
+        /// </summary>
+        public String Genre
+        {
+            //Intern wird im File nur ein Byte-Wert als Genre-Info
+            //gespeichert. Die Übersetzung in Klarnamen erfolgt mit einer
+            //internen Hash-Tabelle.
+            get
+            {
+                return ""; //GetGenre(m_genre);
+            }
+        }
 
-		/// <summary>
-		/// CD-Track-Nummer aus den ID3v1-Informationen.
-		/// </summary>
-		public String Track
-		{
-			get
-			{
-				if (m_track != MP3Info.Track)
-				{
-					m_track = MP3Info.Track;
-				}
-				return m_track;
-			}
-		}
+        /// <summary>
+        /// CD-Track-Nummer aus den ID3v1-Informationen.
+        /// </summary>
+        public String Track
+        {
+            get
+            {
+                if (m_track != MP3Info.Track)
+                {
+                    m_track = MP3Info.Track;
+                }
+                return m_track;
+            }
+        }
 
-#endregion
+        #endregion
 
-
-#region public constructors
+        #region public constructors
 
         /// <summary>
         /// Constructs a MP3-Album
@@ -323,23 +319,22 @@ namespace RQDigitalObjects.AudioObjects.MP3
         /// </param>
         public Mp3Album(string sourcePath, string targetFolder)
             : base(sourcePath, targetFolder)
-		{
-			MP3Info = new ID3v2Info();
-			//this.m_albumdirectory = new DirectoryInfo(path);
-		}
+        {
+            MP3Info = new ID3v2Info();
+            //this.m_albumdirectory = new DirectoryInfo(path);
+        }
 
-#endregion
+        #endregion
 
+        #region private methods
 
-#region private methods
-
-		private void SaveTrackID3(String path)
-		{
-			//m_filename = path;
-			//this.MP3Info.SaveFile(path);
-			//ucID3v1.SaveFile(path);
-			//this.ReadTrackID3(path);
-		}
+        private void SaveTrackID3(String path)
+        {
+            //m_filename = path;
+            //this.MP3Info.SaveFile(path);
+            //ucID3v1.SaveFile(path);
+            //this.ReadTrackID3(path);
+        }
 
         /// <summary>
         /// Liest alle im Album-Verzeichnis enthaltenen Dateien, die dem Suchmuster entsprechen,
@@ -360,10 +355,26 @@ namespace RQDigitalObjects.AudioObjects.MP3
                     base.m_elementarray.Add(this.MP3Info.Tags);
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 throw new Exception(ex.Message);
             }
 
+        }
+
+        private void SortElementArray(string tocString)
+        {
+            string[] tocElements = tocString.Split(';');
+            ArrayList sortedElementArray = new ArrayList();
+
+            for (int i = 0; i < tocElements.Length - 1; i++)
+                for (int j = 1; j <= this.m_elementarray.Count; j++)
+                    if (tocElements[i].Contains(GetTagValue(j, "filename")))
+                    {
+                        sortedElementArray.Insert(i, this.m_elementarray[j - 1]);
+                        break;
+                    }
+            this.m_elementarray = sortedElementArray;
         }
 
         private string GetTagValue(int track, string key)
@@ -583,10 +594,9 @@ namespace RQDigitalObjects.AudioObjects.MP3
                 return this.m_localContainer + "/" + this.albumDocNr + "_" + base.m_olddirectoryname + "/" + "TRACK" + (this.actlTrack).ToString() + ".m3u";
         }
 
-#endregion
+        #endregion
 
-
-#region public methods
+        #region public overrides
 
         /// <summary>
         /// Reads the digital object from its source folder into memory
@@ -595,6 +605,10 @@ namespace RQDigitalObjects.AudioObjects.MP3
         {
             ReadAlbumID3("*.mp3");
         }
+
+        #endregion
+
+        #region public methods
 
         /// <summary>
         /// Binds mp3 album to RQItem  
@@ -623,6 +637,7 @@ namespace RQDigitalObjects.AudioObjects.MP3
             if (tocString.Contains("XXXXX_"))
             {
                 this.Read();
+                this.SortElementArray(tocString);
                 if (this.ElementCount > 0)
                 {
                     bool[] includeElements = new bool[this.ElementCount];
@@ -730,30 +745,31 @@ namespace RQDigitalObjects.AudioObjects.MP3
             switch (elementName)
             {
                 case "Title":
-                    if (this.actlTrack == 0) 
+                    if (this.actlTrack == 0)
                         descr = this.GetTagValue(0, "Album");
                     else
-                        descr = this.GetTagValue(this.actlTrack,"Title");
+                        descr = this.GetTagValue(this.actlTrack, "Title");
                     break;
                 case "Authors":
                     string autStr = this.GetTagValue(this.actlTrack, "Artist");
                     string comStr = this.GetTagValue(this.actlTrack, "Composer");
 
-                    if (autStr != "") {
+                    if (autStr != "")
+                    {
                         if ((this.GetTagValue(this.actlTrack, "Accompaniment") != "") && (autStr.Contains(this.GetTagValue(this.actlTrack, "Accompaniment"))))
-                            autStr = autStr.Replace(this.GetTagValue(this.actlTrack, "Accompaniment"),"");
+                            autStr = autStr.Replace(this.GetTagValue(this.actlTrack, "Accompaniment"), "");
                         descr += autStr;
                     }
                     if (comStr != "")
-                        if (! autStr.Contains(comStr))
+                        if (!autStr.Contains(comStr))
                             descr += comStr + "; ";
-                    comStr = this.GetTagValue(this.actlTrack,"Lyricist");
+                    comStr = this.GetTagValue(this.actlTrack, "Lyricist");
                     if (comStr != "")
-                        if (! autStr.Contains(comStr))
+                        if (!autStr.Contains(comStr))
                             descr += comStr + "; ";
-                    comStr = this.GetTagValue(this.actlTrack,"Conductor");
+                    comStr = this.GetTagValue(this.actlTrack, "Conductor");
                     if (comStr != "")
-                        if (! autStr.Contains(comStr))
+                        if (!autStr.Contains(comStr))
                             descr += comStr + "; ";
                     break;
                 case "Institutions":
@@ -781,12 +797,12 @@ namespace RQDigitalObjects.AudioObjects.MP3
                 case "CreateTime":
                     descr = this.GetTagValue(this.actlTrack, "DateRecorded");
                     break;
-                    
+
             }
             return descr;
         }
 
-#endregion
+        #endregion
 
     }
 }
