@@ -94,6 +94,7 @@ publish/
 
 # Publish Web Output
 *.Publish.xml
+Properties/PublishProfiles/
 
 # NuGet Packages Directory
 ## TODO: If you have NuGet Package Restore enabled, uncomment the next line

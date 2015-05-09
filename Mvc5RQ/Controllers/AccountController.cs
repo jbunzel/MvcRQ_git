@@ -89,9 +89,8 @@ namespace Mvc5RQ.Controllers
                 var user = await UserManager.FindByNameAsync(model.Email);
 
                 if (user != null && !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                {
-                    return View("DisplayEmail");
-                }
+                    if (!UserManager.IsInRole(user.Id, "admin"))
+                        return View("DisplayEmail");
 
                 //ApplicationUser user = UserManager.FindByEmail(model.Email);
 

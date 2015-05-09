@@ -1,53 +1,96 @@
-03.00	Version 0.3																											begonnen: 140914	erledigt:  
+04.00	Version 0.4																											begonnen: 150405	erledigt:  
 
-03.01		Result list
-03.011			Synchronize shelf sort order with classification tree.
-03.012			Generate links to GoogleBooks (or IMDb) in availabilty field.
-03.013			Switch to page containing the active (i. e. opened) RQItem.
-03.014			Show only result documents with access rights for active user.
-03.0141				A: filter access rights when document descriptions are retrieved.
-03.0142				B: filter access rights when result list is generated (not favoured).
-03.015			Get book cover images by Library of Congress IDs.
+04.01		Result list
+04.011			Synchronize shelf sort order with classification tree.
+04.012			Generate links to GoogleBooks (or IMDb) in availabilty field.
+04.013			Switch to page containing the active (i. e. opened) RQItem.
+04.014			Show only result documents with access rights for active user.
+04.0141				A: filter access rights when document descriptions are retrieved.
+04.0142				B: filter access rights when result list is generated (not favoured).
+04.015			Get book cover images by Library of Congress IDs.
+
+04.02		Exception management																							
+04.021			Unify error messages (color, position etc.).
+
+04.03		ItemViewer									
+04.031			Display track title for single audio track.										
+04.032			Display track title for video track.
+04.033			Add viewer for still images.
+04.034			Convert DVD videos to HTML5 video formats.							
+04.035			Add remote access & access control for digital audios.										
+04.036			Add remote access & access control for digital videos.
+
+04.04		Data edit & import functions						
+04.041			Implement import of PDF document directories (with automatic title recognition).
+04.042          Implement data entry of hierarchical digital audio objects. 
+
+04.05		Semantic web interface																								
+04.051			Design information po-pup for person-data from semantic web.
+04.052			Implement input- & edit-features for LoD-identifiers (person, keywords, work enttities).
+04.053			Make Lod-identifiers automatically available to all identical entities.
+04.054          Design information pop-ups for all semantic web enabled entities.
+
+04.06		Lokalisation
+04.061			Lokalize user authorization modules (attributes in AccountModels.cs).
+04.062			Localize RQLib module (especially error messages).						
+
+04.07		Implement RSS-Viewer
+
+04.08		JQuery user interface functions
+04.081			Evaluate Ajax Global Event Handlers for generic UI features of Ajax Calls 
+				(f. e. fade out, error messages)
+				
+04.09		Implement desktop																																															
+04.091			Implement bibtex interface																					
+04.0911				Export																									
+04.0912				Import																									
+
+04.10		Responsive css-design															
+
+04.80		ISSUE: Critical Bugs
+
+04.90		Bugs
+04.9001			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.
+04.9002			§§RVK§§:... wird nicht in rq_c-Klassifikationscode umgesetzt (Konnex zu 99.01?)
+04.9003			In der Lucene-Datenbank sind Suchen nach ID oder DocNr nicht möglich (s.a. Konstruktor RQItem(itemId)).
+04.9004			Kein-Treffer-Fehlermeldung wird remote nicht angezeigt.
+04.9005 		Kein-Treffer-Fehlermeldungen erscheinen in API-Seiten als doppelte Alert-Box.		
+04.9006			Lokal & remote verschwindet der Ajax-Wait-Indikator nicht.
+04.9007			IM IE10 werden XML-Resultate bei Web-Services nicht angezeigt. 
+04.9008			Falscher SQL-Connection-String in IndexConfig.xml.
+04.9009			Server-Fehler bei Edition von Adorno "Aufarbeitung der Vergangenheit"
+04.9010			Fehlerhafter Öffnungszustand eines vorher geöffneten DynaTree-Knotens beim Wiederaufruf der Seite.
+04.9011			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten.
+04.9012			Fehler beim Switch zwischen einzelnem RQItem im Katalog-View & dem korrespondierenden Shelves-View
+04.9013			Subfolder tooltips in classification tree contain wrong bookmark counts (s.f.e. musica practica)
+04.9014			ItemViewer / Audio: multi track .m3u not sorted according to sorting of ToC. 
+
+04.99		Sicherung & Veröffentlichung																					begonnen:			erledigt:
+04.991			Version 0.3.0.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen:			erledigt:
+04.992			Version 0.4.X.0 auf github.com/jbunzel/MvcRQ_git.git dev													begonnen:			erledigt:
+04.997			Version 0.4.X.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen:			erledigt:
+04.998			Version 0.4.x.0 auf riquest.azurewebseites.net				(final)											begonnen:			erledigt:
+04.999			Version 0.4.x.0 auf www.riquest.de							(final)											begonnen:			erledigt: 
+
+	--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+03.00	Version 0.3																											begonnen: 140914	erledigt: 150404  
 
 03.02		Account management																								begonnen: 150327	erledigt: 150402
 03.021			Add e-mail confirmation on registration.																	begonnen: 150327	erledigt: 150402
 03.022			Redesign and unify account management pages.																begonnen: 150327	erledigt: 150402
 
-03.03		Exception management																							begonnen: 150212
+03.03		Exception management																							begonnen: 150212	erledigt: 150215
 03.031			Redesign and unify exception management functions.															begonnen: 150212	erledigt: 150215
 03.032			Unify error messages (color, position etc.).
 
-03.04		ItemViewer									
+03.04		ItemViewer																										begonnen: 141222	erledigt: 141224									
 03.041			Display actual track title for audio playlists.																begonnen: 141224	erledigt: 141224
-03.042			Display track title for single audio track.										
-03.043			Display track title for video track.
 03.044			Move ItemViewer code to digital objects area.																begonnen: 141222	erledigt: 141223
-03.045			Add viewer for still images.
-03.049			Convert DVD videos to HTML5 video formats.							
-03.050			Add remote access & access control for digital audios.										
-03.051			Add remote access & access control for digital videos.
 
-03.05		Data edit & import functions						
-03.051			Implement import of PDF document directories (with automatic title recognition).
-03.052          Implement data entry of hierarchical digital audio objects. 
-
-03.06		Semantic web interface																							begonnen: 141204	erledigt:	
+03.06		Semantic web interface																							begonnen: 141204	erledigt: 141207	
 03.061			Import person data from semantic web (partially implemented for Stendhal, Rot & Schwarz).					begonnen: 141204	erledigt: 141207
-03.062			Design information po-pup for person-data from semantic web.
-03.063			Implement input- & edit-features for LoD-identifiers (person, keywords, work enttities).
-03.064			Make Lod-identifiers automatically available to all identical entities.
-03.065          Design information pop-ups for all semantic web enabled entities.
 
-03.07		Lokalisation
-03.071			Lokalize user authorization modules (attributes in AccountModels.cs).
-03.072			Localize RQLib module (especially error messages).						
-
-03.08		Implement RSS-Viewer
-
-03.09		JQuery user interface functions
-03.091			Evaluate Ajax Global Event Handlers for generic UI features of Ajax Calls 
-				(f. e. fade out, error messages)
-				
 03.10		Menu																											begonnen: 140924	erledigt: 150102
 03.101			Complete all menues																							begonnen: 141228	erledigt: 150102
 03.102			Add links to all pages																						begonnen: 140924	erledigt: 150102	
@@ -64,35 +107,15 @@
 
 03.12		Database migration																								begonnen: 150215	erledigt: 150215
 
-03.13		Implement desktop																								begonnen: 150116	erledigt:																							
-03.131			Implement bibtex interface																					begonnen: 150116	erledigt:
-03.1311				Export																									begonnen: 150116	erledigt:
-03.1312				Import																									
+03.13		Implement desktop																								begonnen: 150116	erledigt: 150125																							
 03.132			Implement basic connection zkn3-desktop																		begonnen: 150120	erledigt: 150125 
 
 03.14		Elementary responsive css-design																				begonnen: 150220	erledigt: 150222
 
-03.90		Bugs
-03.9001			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.
-03.9002			§§RVK§§:... wird nicht in rq_c-Klassifikationscode umgesetzt (Konnex zu 99.01?)
-03.9003			In der Lucene-Datenbank sind Suchen nach ID oder DocNr nicht möglich (s.a. Konstruktor RQItem(itemId)).
-03.9004			Kein-Treffer-Fehlermeldung wird remote nicht angezeigt.
-03.9005 		Kein-Treffer-Fehlermeldungen erscheinen in API-Seiten als doppelte Alert-Box.		
-03.9006			Lokal & remote verschwindet der Ajax-Wait-Indikator nicht.
-03.9007			IM IE10 werden XML-Resultate bei Web-Services nicht angezeigt. 
-03.9008			Falscher SQL-Connection-String in IndexConfig.xml.
-03.9009			Server-Fehler bei Edition von Adorno "Aufarbeitung der Vergangenheit"
-03.9010			Fehlerhafter Öffnungszustand eines vorher geöffneten DynaTree-Knotens beim Wiederaufruf der Seite.
-03.9011			Namenszusätze (z.B. jr.) werden (z.B. bei casts; s. cavalleria rusticana) abgeschnitten.
-03.9012			Fehler beim Switch zwischen einzelnem RQItem im Katalog-View & dem korrespondierenden Shelves-View
-03.9013			Subfolder tooltips in classification tree contain wrong bookmark counts (s.f.e. musica practica)
-03.9014			ItemViewer / Audio: multi track .m3u not sorted according to sorting of ToC. 
-
-03.99		Sicherung & Veröffentlichung																					begonnen: 140914	erledigt: 
+03.99		Sicherung & Veröffentlichung																					begonnen: 140914	erledigt: 150405
 03.991			Version 0.2.4.0 auf www.riquest.de							(final)											begonnen: 140914	erledigt: 140914
-03.993			Version 0.3.0.0 auf github.com/jbunzel/MvcRQ_git.git master													begonnen:			erledigt:
-03.998			Version 0.3.X.0 auf github.com/jbunzel/MvcRQ_git.git master	(final)											begonnen:			erledigt:
-03.999			Version 0.3.X.0 auf www.riquest.de							(final)											begonnen:			erledigt:
+03.990			Version 0.3.0.0 auf riquest.azurewebseites.net				(final)											begonnen: 150404	erledigt: 150404
+03.999			Version 0.3.0.0 auf www.riquest.de							(final)											begonnen: 150405	erledigt: 150405
 
 	--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
