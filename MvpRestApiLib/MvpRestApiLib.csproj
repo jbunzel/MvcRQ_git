@@ -91,12 +91,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnableXmlAttribute.cs" />
-    <Compile Include="HttpStatusCodeResult.cs" />
-    <Compile Include="JsonResult2.cs" />
-    <Compile Include="EnableJsonAttribute.cs" />
-    <Compile Include="XmlResult.cs" />
-    <Compile Include="XmlValueProviderFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

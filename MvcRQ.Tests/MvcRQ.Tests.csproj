@@ -110,12 +110,6 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvcRQ\MvcRQ.csproj">
-      <Project>{38e21c0e-05d3-4bf1-8890-3dba7aaf69c8}</Project>
-      <Name>MvcRQ</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
