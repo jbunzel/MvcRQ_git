@@ -11,6 +11,7 @@
 
 04.02		Exception management																							
 04.021			Unify error messages (color, position etc.).
+04.022			Install custom pages for 404, 405 errors
 
 04.03		ItemViewer									
 04.031			Display track title for single audio track.										
@@ -43,20 +44,23 @@
 04.09		Implement desktop																																															
 04.091			Implement bibtex interface																					
 04.0911				Export																									
-04.0912				Import																									
+04.0912				Import		
 
 04.10		Responsive css-design															
+
+04.11		Incorporate new RQLucene Module																					begonnen: 150610	erledigt: 150628	
+04.111			Implement indexing of DateTime fields																		begonnen: 150628	erledigt: 150628
 
 04.80		ISSUE: Critical Bugs
 
 04.90		Bugs
-04.9001			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.
+04.9001			Fehler in der Prozedur RQArrayDescriptionElement SUB BuildClassCodeArray.									begonnen: 150510	erledigt: 150510
 04.9002			§§RVK§§:... wird nicht in rq_c-Klassifikationscode umgesetzt (Konnex zu 99.01?)
 04.9003			In der Lucene-Datenbank sind Suchen nach ID oder DocNr nicht möglich (s.a. Konstruktor RQItem(itemId)).
-04.9004			Kein-Treffer-Fehlermeldung wird remote nicht angezeigt.
-04.9005 		Kein-Treffer-Fehlermeldungen erscheinen in API-Seiten als doppelte Alert-Box.		
-04.9006			Lokal & remote verschwindet der Ajax-Wait-Indikator nicht.
-04.9007			IM IE10 werden XML-Resultate bei Web-Services nicht angezeigt. 
+04.9004			Kein-Treffer-Fehlermeldung wird remote nicht angezeigt.														begonnen: 150510	erledigt: 150510
+04.9005 		Kein-Treffer-Fehlermeldungen erscheinen in API-Seiten als doppelte Alert-Box.								begonnen: 150510	erledigt: 150510		
+04.9006			Lokal & remote verschwindet der Ajax-Wait-Indikator nicht.													begonnen: 150510	erledigt: 150510
+04.9007			IM IE10 werden XML-Resultate bei Web-Services nicht angezeigt.												begonnen: 150510	erledigt: 150510 
 04.9008			Falscher SQL-Connection-String in IndexConfig.xml.
 04.9009			Server-Fehler bei Edition von Adorno "Aufarbeitung der Vergangenheit"
 04.9010			Fehlerhafter Öffnungszustand eines vorher geöffneten DynaTree-Knotens beim Wiederaufruf der Seite.

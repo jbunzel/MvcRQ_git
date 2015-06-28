@@ -1,7 +1,9 @@
 ﻿Imports Microsoft.VisualBasic
 Imports System.Data
 Imports System.Xml
+Imports System.Web
 
+Imports RQLucene
 Imports RQLib.Utilities
 
 
@@ -22,7 +24,7 @@ Namespace RQDAL
 
 #Region "Private Members"
         Private _catOleDBI As RQOleDBI
-        Private _catRQLuceneDBI As RQLuceneDBI
+        Private _catRQLuceneDBI As RQLuceneAPI
         Private _catDoc As New XmlDocument()
         Private _catSet As New RQDataSet
         Private _catFieldList As New DataTable
@@ -79,7 +81,19 @@ Namespace RQDAL
 #Region "Public Constructors"
 
         Public Sub New()
-            Me._catRQLuceneDBI = New RQLuceneDBI()
+            Dim doc As XmlDocument = New XmlDocument()
+            Dim icg As XmlNodeList
+
+            doc.Load(RQLib.glbIndexConfigPath)
+            icg = doc.SelectNodes("/indexConfiguration/*[@name='" + RQLib.glbIndexProjectName + "']")
+
+            If IsNothing(icg(0).Attributes("indexFolderPath")) Then
+                Dim ifp As XmlAttribute = doc.CreateAttribute("indexFolderPath")
+
+                ifp.Value = HttpContext.Current.Server.MapPath(icg(0).Attributes("indexFolderUrl").Value)
+                icg(0).Attributes.Append(ifp)
+            End If
+            Me._catRQLuceneDBI = New RQLuceneAPI(icg)
             Me._catOleDBI = New RQOleDBI()
             Me.GetCatalogFieldTable()
         End Sub
@@ -124,7 +138,23 @@ Namespace RQDAL
             Me._catSet.DataSetName = DSName
             Me._catSet.Namespace = ""
             Me._catSet.Prefix = ""
-            Me._catRQLuceneDBI.Fill(Query, Me._catSet, TableName)
+
+            Dim qryFields() As String = New String(0) {}
+            Dim i, j As Integer
+
+            For j = 0 To Query.QueryFieldList.Rows.Count - 1
+                If Query.QueryFieldList.Rows.Item(j).Item("searchfield") = True Then
+                    qryFields(i) = Query.QueryFieldList.Rows(j).Item("fieldname")
+                    i = i + 1
+                    Array.Resize(qryFields, i + 1)
+                End If
+            Next
+            If i > 0 Then
+                Array.Resize(qryFields, i)
+                Me._catRQLuceneDBI.Fill(Query.GetQueryCommand(RQLib.RQQueryForm.RQquery.QuerySyntax.Lucene), qryFields, Me._catSet, TableName)
+            Else
+                Me._catRQLuceneDBI.Fill(Query.QueryString, Me._catSet, TableName)
+            End If
         End Sub
 
 

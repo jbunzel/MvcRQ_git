@@ -7,7 +7,8 @@ Imports System.Web
 Public Module Globals
 
 #Region "Public Members"
-
+    Public glbIndexConfigPath As String = IO.Path.Combine(HttpRuntime.AppDomainAppPath, "xml/indexConfig.xml")
+    Public glbIndexProjectName As String = "ProjectA"
     Public glbDataSrc As String = Path.Combine(HttpRuntime.AppDomainAppPath, "~db/katalog30.mdb")
     Public glbVLDirPath As String = "xml/dir.xml"
     Public glbVLDirSrc As String = Path.Combine(HttpRuntime.AppDomainAppPath, glbVLDirPath)

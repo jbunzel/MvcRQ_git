@@ -2321,6 +2321,14 @@
             <param name="verb"></param>
             <returns></returns>
         </member>
+        <member name="M:Mvc5RQ.Controllers.RQItemsController.RQLDError(System.String,System.String)">
+            <summary>
+            Shows an error page, when RQDS is called with MIME type 'text/html' and an exception occurs.  
+            </summary>
+            <param name="id"></param>
+            <param name="verb"></param>
+            <returns></returns>
+        </member>
         <member name="M:Mvc5RQ.Controllers.RQLDController.Get">
             <summary>
             

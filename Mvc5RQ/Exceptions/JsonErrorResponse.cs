@@ -15,6 +15,14 @@ namespace Mvc5RQ.Exceptions
             return ret;
         }
 
+        public static HttpResponseMessage RedirectToErrorPage(string uri, Exception ex)
+        {
+            var ret = new HttpResponseMessage(System.Net.HttpStatusCode.Redirect);
+
+            ret.Headers.Location = new Uri(uri + "?exception=" + ex.Message);
+            return ret;
+        }
+
         public static HttpResponseMessage Create(Mvc5RQ.Models.RQKosBranch.RQKosBranchStatus status)
         {
             MyJsonResult json = MyJsonResult.CreateError(status);

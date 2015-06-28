@@ -20,7 +20,7 @@ namespace Mvc5RQ.Areas.DataManagement.Controllers
         [Route("lucene/new")]
         public string LuceneNew()
         {
-            new RQLuceneDBI().Reindex();
+            RQLib.Utilities.DatabaseManagement.Reindex();
             return Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_lucenenew_ok;
         }
 
@@ -29,7 +29,7 @@ namespace Mvc5RQ.Areas.DataManagement.Controllers
         [Route("lucene/optimize")]
         public string LuceneOptimize()
         {
-            new RQLuceneDBI().Optimize();
+            RQLib.Utilities.DatabaseManagement.Optimize();
             return Mvc5RQ.Areas.DataManagement.Resources.DataManagement.dm_luceneoptimize_ok; 
         }
 

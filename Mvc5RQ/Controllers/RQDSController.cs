@@ -77,15 +77,27 @@ namespace Mvc5RQ.Controllers
         [HttpGet]
         public RQItemModel Get(string dbname, string format, string verb = "", string queryString = "")
         {
-            if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
-                throw new HttpResponseException(JsonErrorResponse.Redirect(Request.RequestUri.ToString().Replace("rqds/" + dbname + "/" + format, dbname + "/" + "RQItemsLD?verb=" + format)));
-            else
+            try
             {
-                RQItemModel result;
-                RQItemModelRepository repo = new RQItemModelRepository(new FormatParameter((FormatParameter.FormatEnum)Enum.Parse(typeof(FormatParameter.FormatEnum), format)));
+                FormatParameter.FormatEnum fmt = (FormatParameter.FormatEnum)Enum.Parse(typeof(FormatParameter.FormatEnum), format);
 
-                result = repo.GetModel(queryString, Areas.UserSettings.UserState.StateType(verb));
-                return result;
+                if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
+                    throw new HttpResponseException(JsonErrorResponse.Redirect(Request.RequestUri.ToString().Replace("rqds/" + dbname + "/" + format, dbname + "/" + "RQItemsLD?verb=" + format)));
+                else
+                {
+                    RQItemModel result;
+                    RQItemModelRepository repo = new RQItemModelRepository(new FormatParameter((FormatParameter.FormatEnum)Enum.Parse(typeof(FormatParameter.FormatEnum), format)));
+
+                    result = repo.GetModel(queryString, Areas.UserSettings.UserState.StateType(verb));
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
+                    throw new HttpResponseException(JsonErrorResponse.RedirectToErrorPage(Request.RequestUri.ToString().Replace("rqds/" + dbname + "/" + format, dbname + "/" + "RQLDError"), ex));
+                else
+                    throw new HttpResponseException(JsonErrorResponse.InvalidData());
             }
         }
 
@@ -120,40 +132,52 @@ namespace Mvc5RQ.Controllers
         [HttpGet]
         public RQItem Get(string dbname, string id, string format, string verb = "", string queryString = "")
         {
-            if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
-                throw new HttpResponseException(JsonErrorResponse.Redirect(Request.RequestUri.ToString().Replace("rqds/" + dbname + "/" + id + "/" + format, dbname + "/" + "RQItemLD/" + id + "?verb=" + format)));
-            else
+            try
             {
-                UserState.States state;
-                bool forEdit;
+                FormatParameter.FormatEnum fmt = (FormatParameter.FormatEnum)Enum.Parse(typeof(FormatParameter.FormatEnum), format);
 
-                RQItemModelRepository repo = new RQItemModelRepository(new FormatParameter((FormatParameter.FormatEnum)Enum.Parse(typeof(FormatParameter.FormatEnum), format + ((format == "rqi") ? "_single_item" : ""))));
-                if (!string.IsNullOrEmpty(verb))
-                    switch (verb.ToLower())
-                    {
-                        case "queryitem":
-                            state = UserState.States.ListViewState;
-                            forEdit = false;
-                            break;
-                        case "browseitem":
-                            state = UserState.States.BrowseViewState;
-                            forEdit = false;
-                            break;
-                        case "edititem":
-                            state = RQItem.IsExternal(id) ? UserState.States.ListViewState : UserState.States.EditState;
-                            forEdit = RQItem.IsExternal(id) ? false : true;
-                            break;
-                        default:
-                            state = UserState.States.ListViewState;
-                            forEdit = false;
-                            break;
-                    }
+                if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
+                    throw new HttpResponseException(JsonErrorResponse.Redirect(Request.RequestUri.ToString().Replace("rqds/" + dbname + "/" + id + "/" + format, dbname + "/" + "RQItemLD/" + id + "?verb=" + format)));
                 else
                 {
-                    state = UserState.States.ListViewState;
-                    forEdit = false;
+                    UserState.States state;
+                    bool forEdit;
+
+                    RQItemModelRepository repo = new RQItemModelRepository(new FormatParameter((FormatParameter.FormatEnum)Enum.Parse(typeof(FormatParameter.FormatEnum), format + ((format == "rqi") ? "_single_item" : ""))));
+                    if (!string.IsNullOrEmpty(verb))
+                        switch (verb.ToLower())
+                        {
+                            case "queryitem":
+                                state = UserState.States.ListViewState;
+                                forEdit = false;
+                                break;
+                            case "browseitem":
+                                state = UserState.States.BrowseViewState;
+                                forEdit = false;
+                                break;
+                            case "edititem":
+                                state = RQItem.IsExternal(id) ? UserState.States.ListViewState : UserState.States.EditState;
+                                forEdit = RQItem.IsExternal(id) ? false : true;
+                                break;
+                            default:
+                                state = UserState.States.ListViewState;
+                                forEdit = false;
+                                break;
+                        }
+                    else
+                    {
+                        state = UserState.States.ListViewState;
+                        forEdit = false;
+                    }
+                    return repo.GetRQItem(id, state, forEdit);
                 }
-                return repo.GetRQItem(id, state, forEdit);
+            }
+            catch (Exception ex)
+            {
+                if (System.Web.HttpContext.Current.Request.Headers.Get("Accept").ToLower().Contains("text/html"))
+                    throw new HttpResponseException(JsonErrorResponse.RedirectToErrorPage(Request.RequestUri.ToString().Replace("rqds/" + dbname + "/" + id + "/" + format, dbname + "/" + "RQLDError"), ex));
+                else
+                    throw new HttpResponseException(JsonErrorResponse.InvalidData());
             }
         }
 

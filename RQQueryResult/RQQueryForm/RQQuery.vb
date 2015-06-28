@@ -526,7 +526,7 @@ Namespace RQQueryForm
                         If String.IsNullOrEmpty(Me.QueryString) Then
                             Throw New ArgumentOutOfRangeException("Query string missing. A query string is required for query type 'recent'.")
                         Else
-                            GetQueryCommand = "Feld31:[" + Lucene.Net.Documents.DateField.DateToString(System.DateTime.Now.Date.AddMonths(-1)) + " TO " + Lucene.Net.Documents.DateField.DateToString(System.DateTime.Now.Date.AddDays(+1)) + "]"
+                            GetQueryCommand = "Feld31:[" + RQLucene.Utilities.DateToString(System.DateTime.Now.Date.AddMonths(-1)) + " TO " + RQLucene.Utilities.DateToString(System.DateTime.Now.Date.AddDays(+1)) + "]"
                         End If
                     Else
                         If String.IsNullOrEmpty(Me.QueryString) Then

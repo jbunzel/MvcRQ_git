@@ -109,6 +109,7 @@ Namespace RQDAL
 
             doc.Load(IO.Path.Combine(HttpRuntime.AppDomainAppPath, "xml/indexConfig.xml"))
             IndexConfigNodes = doc.SelectNodes("/indexConfiguration/*" + xpath)
+
         End Sub
 
 #End Region

@@ -247,6 +247,18 @@ namespace Mvc5RQ.Controllers
             return View("ServRQItem");
         }
 
+        /// <summary>
+        /// Shows an error page, when RQDS is called with MIME type 'text/html' and an exception occurs.  
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="verb"></param>
+        /// <returns></returns>
+        [HttpGet, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        public ActionResult RQLDError(string id, string exception)
+        {
+            throw new NotImplementedException(exception);
+        }
+
         #endregion
     }
 }

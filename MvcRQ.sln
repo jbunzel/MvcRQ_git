@@ -56,6 +56,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc5RQ.Tests", "Mvc5RQ.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RQDesktop", "RQDesktop\RQDesktop.csproj", "{170F22C6-6766-4F1C-B2C6-CD2E372D3F8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RQLucene", "..\..\..\Dokumente\Visual Studio 2013\Projects\RQLucene\RQLucene\RQLucene.csproj", "{A17F538E-4276-491B-9FAB-8613DDB935E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Azure|Any CPU = Azure|Any CPU
@@ -313,6 +315,30 @@ Global
 		{170F22C6-6766-4F1C-B2C6-CD2E372D3F8A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{170F22C6-6766-4F1C-B2C6-CD2E372D3F8A}.Release|x64.ActiveCfg = Release|Any CPU
 		{170F22C6-6766-4F1C-B2C6-CD2E372D3F8A}.Release|x86.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Azure|Any CPU.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Azure|Any CPU.Build.0 = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Azure|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Azure|Mixed Platforms.Build.0 = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Azure|x64.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Azure|x86.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.ECS|Any CPU.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.ECS|Any CPU.Build.0 = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.ECS|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.ECS|Mixed Platforms.Build.0 = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.ECS|x64.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.ECS|x86.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Release|x64.ActiveCfg = Release|Any CPU
+		{A17F538E-4276-491B-9FAB-8613DDB935E7}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

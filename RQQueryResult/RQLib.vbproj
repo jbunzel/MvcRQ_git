@@ -13,9 +13,10 @@
     <AssemblyName>RQLib</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,6 +26,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>RQLib.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,6 +36,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>RQLib.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -56,6 +59,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Azure|AnyCPU'">
     <DefineTrace>true</DefineTrace>
@@ -66,6 +70,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -75,10 +80,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Lucene.Net, Version=2.3.2.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -105,8 +106,6 @@
     <Compile Include="Globals.vb" />
     <Compile Include="RQDAL\RQBookmarkDAL.vb" />
     <Compile Include="RQDAL\RQCatalogDAL.vb" />
-    <Compile Include="RQDAL\RQLuceneDBI.vb" />
-    <Compile Include="RQDAL\RQLuceneIndexer\OleDBIndexer.vb" />
     <Compile Include="RQDAL\RQOleDBI.vb" />
     <Compile Include="RQDAL\RQWebServiceDAL.vb" />
     <Compile Include="RQKos\Classifications\Classification.vb" />
@@ -119,11 +118,6 @@
     <Compile Include="RQLD\RQClassificationGraph.vb" />
     <Compile Include="RQLD\RQLDGraph.vb" />
     <Compile Include="RQLD\RQPersonGraph.vb" />
-    <Compile Include="RQLucene\Indexer.vb" />
-    <Compile Include="RQLucene\Searcher.vb" />
-    <Compile Include="RQLucene\StrandsDoc.vb" />
-    <Compile Include="RQDAL\RQLuceneIndexer\UpdateIndexer.vb" />
-    <Compile Include="RQLucene\Utilities.vb" />
     <Compile Include="RQQueryForm\RQQuery.vb" />
     <Compile Include="RQResult\RQBookmarkSet.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -160,6 +154,7 @@
     </Compile>
     <Compile Include="RQResult\RQItemElements\RQDescriptionElements\RQTitle.vb" />
     <Compile Include="RQResult\RQResultSet.vb" />
+    <Compile Include="Utlities\DatabaseManagement.vb" />
     <Compile Include="Utlities\lexicalclass.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +210,10 @@
     <Content Include="Lib\Lucene.Net.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Dokumente\Visual Studio 2013\Projects\RQLucene\RQLucene\RQLucene.csproj">
+      <Project>{a17f538e-4276-491b-9fab-8613ddb935e7}</Project>
+      <Name>RQLucene</Name>
+    </ProjectReference>
     <ProjectReference Include="..\dotNetRDF\Libraries\core\dotNetRDF.csproj">
       <Project>{BFBAC159-1E60-4D03-8ACA-D34E31EB83BF}</Project>
       <Name>dotNetRDF</Name>
